@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint . --fix --max-warnings=0",
+    "format": "prettier . --write",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -45,7 +46,5 @@
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "4.7.4"
   },
-  "lint-staged": {
-    "*.{js, jsx, ts, tsx}": ["eslint --cache --fix", "prettier --write"]
-  }
+  "lint-staged": {}
 }

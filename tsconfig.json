@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.path.json",
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -13,34 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@apis/*": ["apis/*"],
-      "@apis": ["apis"],
-      "@assets/*": ["assets/*"],
-      "@assets": ["assets"],
-      "@components/*": ["components/*"],
-      "@components": ["components"],
-      "@configs/*": ["configs/*"],
-      "@configs": ["configs"],
-      "@constants/*": ["constants/*"],
-      "@constants": ["constants"],
-      "@containers/*": ["containers/*"],
-      "@containers": ["containers"],
-      "@hooks/*": ["hooks/*"],
-      "@hooks": ["hooks"],
-      "@pages/*": ["pages/*"],
-      "@pages": ["pages"],
-      "@styles/*": ["styles/*"],
-      "@styles": ["styles"],
-      "@themes/*": ["themes/*"],
-      "@themes": ["themes"],
-      "@types/*": ["types/*"],
-      "@types": ["types"],
-      "@utils/*": ["utils/*"],
-      "@utils": ["utils"]
-    }
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

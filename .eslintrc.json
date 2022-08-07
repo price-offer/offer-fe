@@ -8,7 +8,6 @@
       }
     }
   ],
-  "plugins": ["prettier"],
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
@@ -27,9 +26,8 @@
     "sort-keys": ["error", "desc"],
     "no-unused-vars": [
       "error",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }
     ],
-    "prettier/prettier": ["error"],
     "no-use-before-define": "off",
     "no-redeclare": "off",
     "react/button-has-type": ["error"],

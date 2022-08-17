@@ -23,7 +23,7 @@
     "func-style": ["error", "expression"],
     "no-console": "error",
     "no-empty": "error",
-    "sort-keys": ["error", "desc"],
+    "sort-keys": ["error", "asc"],
     "no-use-before-define": "off",
     "no-redeclare": "off",
     "react/button-has-type": ["error"],

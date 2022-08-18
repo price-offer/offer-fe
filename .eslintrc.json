@@ -46,6 +46,13 @@
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/member-ordering": "error",
     "@typescript-eslint/method-signature-style": ["error", "method"],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      }
+    ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/type-annotation-spacing": "error",

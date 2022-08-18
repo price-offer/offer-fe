@@ -23,11 +23,11 @@ type GreyScaleColorKeys =
 type DimColorKeys = 'opacity50' | 'opacity70'
 
 export interface Colors {
-  background: ThemeItem<BackgroundColorKeys>
-  brand: ThemeItem<BrandColorKeys>
-  action: ThemeItem<ActionColorKeys>
-  greyScale: ThemeItem<GreyScaleColorKeys>
-  dim: ThemeItem<DimColorKeys>
+  background: ThemeItem<BackgroundColorKeys, string>
+  brand: ThemeItem<BrandColorKeys, string>
+  action: ThemeItem<ActionColorKeys, string>
+  greyScale: ThemeItem<GreyScaleColorKeys, string>
+  dim: ThemeItem<DimColorKeys, string>
 }
 
 export const colors: Colors = {

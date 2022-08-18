@@ -2,7 +2,7 @@ import type { ThemeItem } from '@types'
 
 type MediaQueryKeys = 'desktop' | 'tablet' | 'mobile'
 
-export type MediaQuery = ThemeItem<MediaQueryKeys>
+export type MediaQuery = ThemeItem<MediaQueryKeys, string>
 
 export const mediaQuery: MediaQuery = {
   desktop: '1920px',

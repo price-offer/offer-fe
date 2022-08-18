@@ -2,7 +2,7 @@ import type { ThemeItem } from '@types'
 
 type RadiusKeys = 'round04' | 'round08' | 'round12' | 'round16'
 
-export type Radius = ThemeItem<RadiusKeys>
+export type Radius = ThemeItem<RadiusKeys, string>
 
 export const radius: Radius = {
   round04: '4px',

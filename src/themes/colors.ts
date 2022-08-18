@@ -8,8 +8,18 @@ type BackgroundColorKeys =
   | 'primary'
   | 'primaryWeak'
   | 'white'
+type BackgroundColorValues =
+  | '#FAFAFA'
+  | '#F6F6F7'
+  | '#F3F3F3'
+  | '#EDEEEF'
+  | '#FF6E59'
+  | '#FFF0EE'
+  | '#FFFFFF'
 type BrandColorKeys = 'primary' | 'primaryWeak' | 'sub' | 'subWeak'
+type BrandColorValues = '#FF6E59' | '#FFECE9' | '#673CE6' | '#E1D8FA'
 type ActionColorKeys = 'success' | 'error'
+type ActionColorValues = '#4AB783' | '#F36140'
 type GreyScaleColorKeys =
   | 'white'
   | 'grey05'
@@ -20,14 +30,25 @@ type GreyScaleColorKeys =
   | 'grey70'
   | 'grey90'
   | 'black'
+type GreyScaleColorValues =
+  | '#FFFFFF'
+  | '#F6F6F7'
+  | '#E8E8EA'
+  | '#D1D3D6'
+  | '#C6C8CC'
+  | '#929399'
+  | '#65646A'
+  | '#2F2E36'
+  | '#000000'
 type DimColorKeys = 'opacity50' | 'opacity70'
+type DimColorValues = '#00000080' | '#000000B2'
 
 export interface Colors {
-  background: ThemeItem<BackgroundColorKeys, string>
-  brand: ThemeItem<BrandColorKeys, string>
-  action: ThemeItem<ActionColorKeys, string>
-  greyScale: ThemeItem<GreyScaleColorKeys, string>
-  dim: ThemeItem<DimColorKeys, string>
+  background: ThemeItem<BackgroundColorKeys, BackgroundColorValues>
+  brand: ThemeItem<BrandColorKeys, BrandColorValues>
+  action: ThemeItem<ActionColorKeys, ActionColorValues>
+  greyScale: ThemeItem<GreyScaleColorKeys, GreyScaleColorValues>
+  dim: ThemeItem<DimColorKeys, DimColorValues>
 }
 
 export const colors: Colors = {

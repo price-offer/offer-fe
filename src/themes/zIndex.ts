@@ -1,10 +1,11 @@
 import type { ThemeItem } from '@types'
 
 type ZIndexKeys = 'modal' | 'selectbox'
+type ZIndexValues = 200 | 300
 
-export type ZIndex = ThemeItem<ZIndexKeys, number>
+export type ZIndex = ThemeItem<ZIndexKeys, ZIndexValues>
 
 export const zIndex: ZIndex = {
-  modal: 200,
-  selectbox: 100
+  modal: 300,
+  selectbox: 200
 }

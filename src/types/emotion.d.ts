@@ -1,8 +1,9 @@
 import '@emotion/react'
-import type { Colors, MediaQuery, Radius } from '@themes'
+import type { Border, Colors, MediaQuery, Radius } from '@themes'
 
 declare module '@emotion/react' {
   export interface Theme {
+    border: Border
     colors: Colors
     mediaQuery: MediaQuery
     radius: Radius

@@ -1,12 +1,12 @@
 import type { ThemeItem } from '@types'
 
-type MediaQueryKeys = 'desktop' | 'tablet' | 'mobile'
-type MediaQueryValues = '1920px' | '360px' | '768px'
+type MediaQueryKeys = keyof typeof mediaQuery
+type MediaQueryValues = typeof mediaQuery[MediaQueryKeys]
 
 export type MediaQuery = ThemeItem<MediaQueryKeys, MediaQueryValues>
 
-export const mediaQuery: MediaQuery = {
+export const mediaQuery = {
   desktop: '1920px',
   mobile: '360px',
   tablet: '768px'
-}
+} as const

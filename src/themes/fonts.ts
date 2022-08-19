@@ -2,6 +2,7 @@ import type { ThemeItem } from '@types'
 
 type FontStyleKeys = 'bold' | 'medium' | 'regular' | 'long'
 type FontStyle = ThemeItem<FontStyleKeys, string>
+
 export interface Fonts {
   body01: Omit<FontStyle, 'long'>
   body02: FontStyle
@@ -15,26 +16,32 @@ export interface Fonts {
 
 export const fonts: Fonts = {
   body01: {
-    bold: 'font: bold 16px/24px pretendard; letter-spacing: -0.6%;',
-    medium: 'font: medium 16px/24px pretendard; letter-spacing: -0.6%;',
-    regular: 'font: regular 16px/24px pretendard; letter-spacing: -0.6%;'
+    bold: 'font-size: 16px; font-weight: bold; line-height: 24px; letter-spacing: -0.6%;',
+    medium:
+      'font-size: 16px; font-weight: medium; line-height: 24px; letter-spacing: -0.6%;',
+    regular:
+      'font-size: 16px; font-weight: regular; line-height: 24px; letter-spacing: -0.6%;'
   },
   body02: {
-    bold: 'font: bold 14px/24px pretendard;',
-    long: 'font: regular 14px/26px pretendard; letter-spacing: -0.4%; ',
-    medium: 'font: med 14px/20px pretendard;',
-    regular: 'font: regular 14px/14px pretendard; letter-spacing: -0.4%; '
+    bold: 'font-size: 14px; font-weight: bold; line-height: 24px; letter-spacing: -0.6%;',
+    long: 'font-size: 14px; font-weight: regular; line-height: 26px; letter-spacing: -0.4%;',
+    medium: 'font-size: 14px; font-weight: medium; line-height: 20px;',
+    regular:
+      'font-size: 14px; font-weight: regular; line-height: 14px; letter-spacing: -0.4%;'
   },
-  caption: 'font: bold 100px pretendard; letter-spacing: -0.3%;',
-  display01: 'font: bold 36px/40px pretendard; letter-spacing: -0.6%;',
+  caption:
+    'font-size: 12px; font-weight: bold; line-height: 16px; letter-spacing: -0.3%;',
+  display01:
+    'font-size: 36px; font-weight: bold; line-height: 40px; letter-spacing: -0.6%;',
   display02: {
-    bold: 'font: bold 28px/28px pretendard;',
-    medium: 'font: medium 28px/28px pretendard;'
+    bold: 'font-size: 28px; font-weight: bold; line-height: 28px;',
+    medium: 'font-size: 28px; font-weight: medium; line-height: 28px;'
   },
-  headline01: 'font: bold 24px/32px pretendard;',
-  headline02: 'font: bold 20px/28px pretendard;',
+  headline01: 'font-size: 24px; font-weight: bold; line-height: 32px;',
+  headline02: 'font-size: 20px; font-weight: bold; line-height: 28px;',
   subtitle01: {
-    bold: 'font: bold 18px/22px pretendar; letter-spacing: -0.6%',
-    medium: 'font: medium 18px/22px pretendar; letter-spacing: -0.4%'
+    bold: 'font-size: 18px; font-weight: bold; line-height: 22px; letter-spacing: -0.6%;',
+    medium:
+      'font-size: 18px; font-weight: medium; line-height: 22px; letter-spacing: -0.4%;'
   }
-}
+} as const

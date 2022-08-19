@@ -1,11 +1,11 @@
 import type { ThemeItem } from '@types'
 
-type BorderKeys = 'line' | 'height'
-type BorderValues = '1px' | '8px'
+type BorderKeys = keyof typeof border
+type BorderValues = typeof border[BorderKeys]
 
 export type Border = ThemeItem<BorderKeys, BorderValues>
 
-export const border: Border = {
+export const border = {
   height: '8px',
   line: '1px'
-}
+} as const

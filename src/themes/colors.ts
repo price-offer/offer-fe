@@ -1,47 +1,15 @@
 import type { ThemeItem } from '@types'
 
-type BackgroundColorKeys =
-  | 'grey01'
-  | 'grey02'
-  | 'grey03'
-  | 'grey04'
-  | 'primary'
-  | 'primaryWeak'
-  | 'white'
-type BackgroundColorValues =
-  | '#FAFAFA'
-  | '#F6F6F7'
-  | '#F3F3F3'
-  | '#EDEEEF'
-  | '#FF6E59'
-  | '#FFF0EE'
-  | '#FFFFFF'
-type BrandColorKeys = 'primary' | 'primaryWeak' | 'sub' | 'subWeak'
-type BrandColorValues = '#FF6E59' | '#FFECE9' | '#673CE6' | '#E1D8FA'
-type ActionColorKeys = 'success' | 'error'
-type ActionColorValues = '#4AB783' | '#F36140'
-type GreyScaleColorKeys =
-  | 'white'
-  | 'grey05'
-  | 'grey10'
-  | 'grey20'
-  | 'grey30'
-  | 'grey50'
-  | 'grey70'
-  | 'grey90'
-  | 'black'
-type GreyScaleColorValues =
-  | '#FFFFFF'
-  | '#F6F6F7'
-  | '#E8E8EA'
-  | '#D1D3D6'
-  | '#C6C8CC'
-  | '#929399'
-  | '#65646A'
-  | '#2F2E36'
-  | '#000000'
-type DimColorKeys = 'opacity50' | 'opacity70'
-type DimColorValues = '#00000080' | '#000000B2'
+type BackgroundColorKeys = keyof typeof colors.background
+type BackgroundColorValues = typeof colors.background[BackgroundColorKeys]
+type BrandColorKeys = keyof typeof colors.brand
+type BrandColorValues = typeof colors.brand[BrandColorKeys]
+type ActionColorKeys = keyof typeof colors.action
+type ActionColorValues = typeof colors.action[ActionColorKeys]
+type GreyScaleColorKeys = keyof typeof colors.greyScale
+type GreyScaleColorValues = typeof colors.greyScale[GreyScaleColorKeys]
+type DimColorKeys = keyof typeof colors.dim
+type DimColorValues = typeof colors.dim[DimColorKeys]
 
 export interface Colors {
   background: ThemeItem<BackgroundColorKeys, BackgroundColorValues>
@@ -51,7 +19,7 @@ export interface Colors {
   dim: ThemeItem<DimColorKeys, DimColorValues>
 }
 
-export const colors: Colors = {
+export const colors = {
   action: {
     error: '#F36140',
     success: '#4AB783'
@@ -86,4 +54,4 @@ export const colors: Colors = {
     grey90: '#2F2E36',
     white: '#FFFFFF'
   }
-}
+} as const

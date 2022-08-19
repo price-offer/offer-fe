@@ -4,8 +4,8 @@
     "paths": {
       "@apis/*": ["apis/*"],
       "@apis": ["apis"],
-      "@assets/*": ["assets/*"],
-      "@assets": ["assets"],
+      "@assets/*": ["../public/assets/*"],
+      "@assets": ["../public/assets"],
       "@components/*": ["components/*"],
       "@components": ["components"],
       "@configs/*": ["configs/*"],

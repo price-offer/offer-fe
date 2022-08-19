@@ -1,1 +1,1 @@
-export type ThemeItem<T, K> = { [key in T]: K }
+export type ThemeOption<T, K> = { [key in T]: K }

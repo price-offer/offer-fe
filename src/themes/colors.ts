@@ -1,4 +1,4 @@
-import type { ThemeItem } from '@types'
+import type { ThemeOption } from '@types'
 
 type BackgroundColorKeys = keyof typeof colors.background
 type BackgroundColorValues = typeof colors.background[BackgroundColorKeys]
@@ -12,11 +12,11 @@ type DimColorKeys = keyof typeof colors.dim
 type DimColorValues = typeof colors.dim[DimColorKeys]
 
 export interface Colors {
-  background: ThemeItem<BackgroundColorKeys, BackgroundColorValues>
-  brand: ThemeItem<BrandColorKeys, BrandColorValues>
-  action: ThemeItem<ActionColorKeys, ActionColorValues>
-  greyScale: ThemeItem<GreyScaleColorKeys, GreyScaleColorValues>
-  dim: ThemeItem<DimColorKeys, DimColorValues>
+  background: ThemeOption<BackgroundColorKeys, BackgroundColorValues>
+  brand: ThemeOption<BrandColorKeys, BrandColorValues>
+  action: ThemeOption<ActionColorKeys, ActionColorValues>
+  greyScale: ThemeOption<GreyScaleColorKeys, GreyScaleColorValues>
+  dim: ThemeOption<DimColorKeys, DimColorValues>
 }
 
 export const colors = {

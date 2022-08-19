@@ -1,9 +1,9 @@
-import type { ThemeItem } from '@types'
+import type { ThemeOption } from '@types'
 
 type BorderKeys = keyof typeof border
 type BorderValues = typeof border[BorderKeys]
 
-export type Border = ThemeItem<BorderKeys, BorderValues>
+export type Border = ThemeOption<BorderKeys, BorderValues>
 
 export const border = {
   height: '8px',

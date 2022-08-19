@@ -1,7 +1,7 @@
-import type { ThemeItem } from '@types'
+import type { ThemeOption } from '@types'
 
 type FontStyleKeys = 'bold' | 'medium' | 'regular' | 'long'
-type FontStyle = ThemeItem<FontStyleKeys, string>
+type FontStyle = ThemeOption<FontStyleKeys, string>
 
 export interface Fonts {
   body01: Omit<FontStyle, 'long'>

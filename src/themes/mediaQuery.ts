@@ -1,9 +1,9 @@
-import type { ThemeItem } from '@types'
+import type { ThemeOption } from '@types'
 
 type MediaQueryKeys = keyof typeof mediaQuery
 type MediaQueryValues = typeof mediaQuery[MediaQueryKeys]
 
-export type MediaQuery = ThemeItem<MediaQueryKeys, MediaQueryValues>
+export type MediaQuery = ThemeOption<MediaQueryKeys, MediaQueryValues>
 
 export const mediaQuery = {
   desktop: '1920px',

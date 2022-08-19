@@ -1,9 +1,9 @@
-import type { ThemeItem } from '@types'
+import type { ThemeOption } from '@types'
 
 type ZIndexKeys = keyof typeof zIndex
 type ZIndexValues = typeof zIndex[ZIndexKeys]
 
-export type ZIndex = ThemeItem<ZIndexKeys, ZIndexValues>
+export type ZIndex = ThemeOption<ZIndexKeys, ZIndexValues>
 
 export const zIndex = {
   modal: 300,

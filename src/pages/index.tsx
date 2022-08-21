@@ -1,4 +1,3 @@
-// import * as imag from '/public/assets/images/category_appliance.png'
 import { IMAGE } from '@constants'
 import Image from 'next/image'
 import type { NextPage } from 'next'

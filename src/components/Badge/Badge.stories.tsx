@@ -7,4 +7,13 @@ export default {
   title: 'Component/Badge'
 } as ComponentMeta<typeof Badge>
 
-export const Primary: ComponentStory<typeof Badge> = () => <Badge></Badge>
+const Template: ComponentStory<typeof Badge> = args => <Badge {...args} />
+
+export const Gray = Template.bind({})
+Gray.args = { children: 'Badge', colorScheme: 'gray' }
+
+export const Orange = Template.bind({})
+Orange.args = { children: 'Badge', colorScheme: 'orange' }
+
+export const Purple = Template.bind({})
+Purple.args = { children: 'Badge', colorScheme: 'purple' }

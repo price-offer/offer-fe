@@ -6,8 +6,8 @@ type BrandColorKeys = keyof typeof colors.brand
 type BrandColorValues = typeof colors.brand[BrandColorKeys]
 type ActionColorKeys = keyof typeof colors.action
 type ActionColorValues = typeof colors.action[ActionColorKeys]
-type GreyScaleColorKeys = keyof typeof colors.greyScale
-type GreyScaleColorValues = typeof colors.greyScale[GreyScaleColorKeys]
+type GrayScaleColorKeys = keyof typeof colors.grayScale
+type GrayScaleColorValues = typeof colors.grayScale[GrayScaleColorKeys]
 type DimColorKeys = keyof typeof colors.dim
 type DimColorValues = typeof colors.dim[DimColorKeys]
 
@@ -15,7 +15,7 @@ export interface Colors {
   background: ThemeOption<BackgroundColorKeys, BackgroundColorValues>
   brand: ThemeOption<BrandColorKeys, BrandColorValues>
   action: ThemeOption<ActionColorKeys, ActionColorValues>
-  greyScale: ThemeOption<GreyScaleColorKeys, GreyScaleColorValues>
+  grayScale: ThemeOption<GrayScaleColorKeys, GrayScaleColorValues>
   dim: ThemeOption<DimColorKeys, DimColorValues>
 }
 
@@ -25,10 +25,10 @@ export const colors = {
     success: '#4AB783'
   },
   background: {
-    grey01: '#FAFAFA',
-    grey02: '#F6F6F7',
-    grey03: '#F3F3F3',
-    grey04: '#EDEEEF',
+    gray01: '#FAFAFA',
+    gray02: '#F6F6F7',
+    gray03: '#F3F3F3',
+    gray04: '#EDEEEF',
     primary: '#FF6E59',
     primaryWeak: '#FFF0EE',
     white: '#FFFFFF'
@@ -43,15 +43,15 @@ export const colors = {
     opacity50: '#00000080',
     opacity70: '#000000B2'
   },
-  greyScale: {
+  grayScale: {
     black: '#000000',
-    grey05: '#F6F6F7',
-    grey10: '#E8E8EA',
-    grey20: '#D1D3D6',
-    grey30: '#C6C8CC',
-    grey50: '#929399',
-    grey70: '#65646A',
-    grey90: '#2F2E36',
+    gray05: '#F6F6F7',
+    gray10: '#E8E8EA',
+    gray20: '#D1D3D6',
+    gray30: '#C6C8CC',
+    gray50: '#929399',
+    gray70: '#65646A',
+    gray90: '#2F2E36',
     white: '#FFFFFF'
   }
 } as const

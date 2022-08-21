@@ -24,7 +24,6 @@
     "no-console": "error",
     "no-empty": "error",
     "sort-keys": ["error", "asc"],
-    "no-use-before-define": "off",
     "no-redeclare": "off",
     "react/button-has-type": ["error"],
     "react/jsx-sort-props": [
@@ -58,7 +57,6 @@
     "@typescript-eslint/type-annotation-spacing": "error",
     "@typescript-eslint/no-confusing-void-expression": "error",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/no-redeclare": "error",
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/no-duplicate-imports": "error",

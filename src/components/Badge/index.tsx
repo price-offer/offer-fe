@@ -8,7 +8,7 @@ interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 type StyledBadgeProps = Pick<BadgeProps, 'colorScheme'>
-type ApplyColorScheme = (
+type ApplyPropsOnBadge = (
   colorScheme: BadgeColorScheme,
   colors: Colors
 ) => string
@@ -25,7 +25,7 @@ export const Badge = ({
   )
 }
 
-const applyColorScheme: ApplyColorScheme = (colorScheme, colors) => {
+const applyPropsOnBadge: ApplyPropsOnBadge = (colorScheme, colors) => {
   switch (colorScheme) {
     case 'gray':
       return `
@@ -54,5 +54,5 @@ const StyledBadge = styled.div<StyledBadgeProps>`
   padding: 2px 6px;
   text-align: center;
   ${({ colorScheme, theme }): string =>
-    applyColorScheme(colorScheme, theme.colors)};
+    applyPropsOnBadge(colorScheme, theme.colors)};
 `

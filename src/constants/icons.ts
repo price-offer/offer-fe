@@ -1,5 +1,6 @@
 import ARROW_LEFT_24 from '/public/icons/arrow_left_24.svg'
 import ARROW_UP_24 from '/public/icons/arrow_up_24.svg'
+import AVATAR from '/public/icons/avatar.svg'
 import BOX_16 from '/public/icons/box_16.svg'
 import CAMERA_16 from '/public/icons/camera_16.svg'
 import CAMERA_24 from '/public/icons/camera_24.svg'
@@ -52,6 +53,7 @@ import TRIANGLE_DOWN_16 from '/public/icons/triangle_down_16.svg'
 export const ICON = {
   ARROW_LEFT_24,
   ARROW_UP_24,
+  AVATAR,
   BOX_16,
   CAMERA_16,
   CAMERA_24,

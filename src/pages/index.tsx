@@ -1,8 +1,9 @@
+import { IMAGE } from '@constants'
+import Image from 'next/image'
 import type { NextPage } from 'next'
-import { Text } from '@components'
 
 const Home: NextPage = () => {
-  return <Text />
+  return <Image alt="imag" src={IMAGE.CATEGORY_CAR} />
 }
 
 export default Home

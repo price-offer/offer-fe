@@ -6,6 +6,6 @@ type BorderValues = typeof border[BorderKeys]
 export type Border = ThemeOption<BorderKeys, BorderValues>
 
 export const border = {
-  height: '8px',
-  line: '1px'
+  bold: '8px',
+  regular: '1px'
 } as const

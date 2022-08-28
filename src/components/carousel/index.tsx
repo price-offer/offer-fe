@@ -72,16 +72,15 @@ const Carousel = ({ images, isArrow }: CarouselProps) => {
         moveLeft()
       }
     }
-    // const imageInterval = setInterval(() => {
-    //   moveRight()
-    // }, 3000)
-    // return () => {
-    //   clearInterval(imageInterval)
-    // }
-  }, [mouseUpClientX])
+    const imageInterval = setInterval(() => {
+      moveRight()
+    }, 5000)
+    return () => {
+      clearInterval(imageInterval)
+    }
+  }, [mouseUpClientX, translateValue])
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     <StyledCarouselContainer>
       <StyledSlider
         cursorOn={cursorOn}
@@ -106,7 +105,6 @@ const Carousel = ({ images, isArrow }: CarouselProps) => {
       </StyledSlider>
       <StyledDotBox>
         {images.map(image => {
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
           return (
             <StyledDot
               key={image.id}
@@ -116,10 +114,7 @@ const Carousel = ({ images, isArrow }: CarouselProps) => {
               }}></StyledDot>
           )
         })}
-        {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-        <StyledCurrentDot
-          className=""
-          imageIndex={translateValue / 70}></StyledCurrentDot>
+        <StyledCurrentDot imageIndex={translateValue / 70}></StyledCurrentDot>
       </StyledDotBox>
     </StyledCarouselContainer>
   )

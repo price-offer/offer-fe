@@ -1,4 +1,4 @@
-import Carousel from '@components/carousel'
+import Carousel from '@components/Carousel'
 import { IMAGE } from '@constants'
 import type { NextPage } from 'next'
 

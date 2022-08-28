@@ -72,13 +72,7 @@ const Carousel = ({ images, isArrow }: CarouselProps) => {
         moveLeft()
       }
     }
-    const imageInterval = setInterval(() => {
-      moveRight()
-    }, 5000)
-    return () => {
-      clearInterval(imageInterval)
-    }
-  }, [mouseUpClientX, translateValue])
+  }, [mouseUpClientX])
 
   return (
     <StyledCarouselContainer>

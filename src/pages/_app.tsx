@@ -1,13 +1,12 @@
 import type { AppProps } from 'next/app'
+import { OfferStyleProvider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { theme } from '@themes'
-import { ThemeProvider } from '@emotion/react'
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
-    <ThemeProvider theme={theme}>
+    <OfferStyleProvider>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </OfferStyleProvider>
   )
 }
 

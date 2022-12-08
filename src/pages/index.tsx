@@ -1,9 +1,12 @@
-import { IMAGE } from '@constants'
-import Image from 'next/image'
+import { Badge } from '@offer-ui/react'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
-  return <Image alt="imag" src={IMAGE.CATEGORY_CAR} />
+  return (
+    <div>
+      <Badge colorType="gray">Badge</Badge>
+    </div>
+  )
 }
 
 export default Home

@@ -15,4 +15,4 @@ const HomeBanner = (): ReactElement => {
     </>
   )
 }
-export default HomeBanner
+export { HomeBanner }

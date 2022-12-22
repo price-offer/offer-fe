@@ -26,4 +26,4 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
     </>
   )
 }
-export default CategorySlider
+export { CategorySlider }

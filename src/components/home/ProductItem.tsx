@@ -28,4 +28,4 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
     </>
   )
 }
-export default ProductItem
+export { ProductItem }

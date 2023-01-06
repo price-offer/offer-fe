@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { noop } from '@utils/common'
+import { noop } from '@utils'
 
 interface TabsActionContextProps {
   currentTabIndex: number

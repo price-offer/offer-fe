@@ -22,8 +22,8 @@ const Template: Story<TabsProps> = args => (
       </Tabs.List>
       <Tabs.Panels>
         <Tabs.Panel>HeadLess Tabs Content 1</Tabs.Panel>
-        <Tabs.Panel>HeadLess Tabs Content 1</Tabs.Panel>
-        <Tabs.Panel>HeadLess Tabs Content 1</Tabs.Panel>
+        <Tabs.Panel>HeadLess Tabs Content 2</Tabs.Panel>
+        <Tabs.Panel>HeadLess Tabs Content 3</Tabs.Panel>
       </Tabs.Panels>
     </Tabs>
   </div>

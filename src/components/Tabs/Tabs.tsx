@@ -19,7 +19,7 @@ export const Tabs = ({
   const [currentTabIndex, setCurrentTabIndex] =
     useState<number>(defaultTabIndex)
 
-  const tabsControlValue = useMemo(
+  const tabsActionValue = useMemo(
     () => ({
       currentTabIndex,
       handleSetCurrentTabIndex: (newTabIndex: number): void => {
@@ -37,7 +37,7 @@ export const Tabs = ({
   }, [])
 
   return (
-    <TabsActionContext.Provider value={tabsControlValue}>
+    <TabsActionContext.Provider value={tabsActionValue}>
       {children}
     </TabsActionContext.Provider>
   )

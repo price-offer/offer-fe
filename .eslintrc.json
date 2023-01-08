@@ -8,6 +8,8 @@
       }
     }
   ],
+
+  "plugins": ["eslint-plugin-import"],
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
@@ -19,12 +21,38 @@
     "plugin:testing-library/react"
   ],
   "rules": {
-    "sort-imports": ["error", { "ignoreCase": true }],
     "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
     "default-case-last": "error",
     "func-style": ["error", "expression"],
     "no-console": "error",
     "no-empty": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", ["parent", "sibling"], "index"],
+        "pathGroups": [
+          {
+            "pattern": "next",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "sort-keys": ["error", "asc"],
     "no-redeclare": "off",
     "react/button-has-type": ["error"],

@@ -1,6 +1,6 @@
 import type { MouseEventHandler, ReactElement, ReactNode } from 'react'
-import { TabsActionContext } from './TabsActionContext'
 import { useContext } from 'react'
+import { TabsActionContext } from './TabsActionContext'
 
 interface TabProps {
   children: ReactNode

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import type { ReactElement } from 'react'
 import { Tab } from './Tab'
 import { Tabs } from './Tabs'
 import type { TabsProps } from './Tabs'
-import userEvent from '@testing-library/user-event'
 
 const DummyTabs = ({
   defaultTabIndex

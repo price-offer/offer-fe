@@ -1,7 +1,7 @@
-import type { ReactElement, ReactNode } from 'react'
 import styled from '@emotion/styled'
-import { TabsActionContext } from './TabsActionContext'
+import type { ReactElement, ReactNode } from 'react'
 import { useContext } from 'react'
+import { TabsActionContext } from './TabsActionContext'
 
 interface TabPanelProps {
   children: ReactNode

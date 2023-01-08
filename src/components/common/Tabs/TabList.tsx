@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react'
-import { childrenMap } from '@utils'
 import { cloneElement } from 'react'
+import { childrenMap } from '@utils'
 
 interface TabListProps {
   children: ReactNode

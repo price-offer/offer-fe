@@ -7,18 +7,19 @@ import {
 import type { ReactElement, ReactNode } from 'react'
 import Image from 'next/image'
 import styled from '@emotion/styled'
+import type { StyledProps } from '@types'
 
 export interface ModalProps {
   isOpen?: boolean
-  height?: string
   hasLogo?: boolean
-  title: string
+  title: ReactNode
   description?: string
   primaryButtonText?: string
   ghostButtonText?: string
   children?: ReactNode
   onClose(): void
 }
+type StyledLogoContainerProps = StyledProps<ModalProps, 'hasLogo'>
 
 export const Modal = ({
   isOpen = false,
@@ -32,29 +33,29 @@ export const Modal = ({
 }: ModalProps): ReactElement => {
   return (
     <StyledModalContainer isOpen={isOpen} onClose={onClose}>
-      <StyledTopWrapper>
+      <StyledHeader>
         {hasLogo && (
-          <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
+          <StyledLogoContainer hasLogo={hasLogo}>
+            <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
+          </StyledLogoContainer>
         )}
         <StyledCloseButton colorType="gray30" icon="close" onClick={onClose} />
-      </StyledTopWrapper>
-      <StyledContentWrapper hasLogo={hasLogo}>
         <Text styleType="headline01B" tag="p">
           {title}
         </Text>
         <StyledDescription styleType="body01R" tag="p">
           {description}
         </StyledDescription>
-      </StyledContentWrapper>
-      {children}
-      <StyledButtonWrapper>
+      </StyledHeader>
+      <div>{children}</div>
+      <StyledFooter>
         {primaryButtonText && <Button size="large">{primaryButtonText}</Button>}
         {ghostButtonText && (
           <Button size="large" styleType="ghost">
             {ghostButtonText}
           </Button>
         )}
-      </StyledButtonWrapper>
+      </StyledFooter>
     </StyledModalContainer>
   )
 }
@@ -70,29 +71,28 @@ const StyledModalContainer = styled(ModalContainer)`
     width: 320px;
   }
 `
-const StyledTopWrapper = styled.div`
+const StyledHeader = styled.div`
   display: flex;
   position: relative;
-  justify-content: center;
-`
-const StyledContentWrapper = styled.div<{ hasLogo: boolean }>`
-  display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 4px;
-  text-align: center;
   margin-bottom: 32px;
-  margin-top: ${({ hasLogo }): string => (hasLogo ? '24px' : '36px')};
+  text-align: center;
+`
+const StyledLogoContainer = styled.div<StyledLogoContainerProps>`
+  margin-bottom: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
 `
 const StyledCloseButton = styled(IconButton)`
   position: absolute;
   right: 0;
   top: 0;
 `
-const StyledButtonWrapper = styled.div`
+const StyledDescription = styled(Text)`
+  color: ${({ theme }): string => theme.colors.grayScale.gray70};
+`
+const StyledFooter = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-`
-const StyledDescription = styled(Text)`
-  color: ${({ theme }): string => theme.colors.grayScale.gray70};
 `

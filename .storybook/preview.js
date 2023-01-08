@@ -1,6 +1,7 @@
 import { theme } from '@themes'
-import { ThemeProvider } from "@emotion/react"
-import * as NextImage from "next/image";
+import { ThemeProvider } from '@emotion/react'
+import { GlobalStyle } from '../src/styles'
+import * as NextImage from 'next/image'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -15,13 +16,14 @@ export const parameters = {
 export const decorators = [
   Story => (
     <ThemeProvider theme={theme}>
-      <Story/>
+      <GlobalStyle />
+      <Story />
     </ThemeProvider>
   )
 ]
 
-const OriginalNextImage = NextImage.default;
-Object.defineProperty(NextImage, "default", {
+const OriginalNextImage = NextImage.default
+Object.defineProperty(NextImage, 'default', {
   configurable: true,
-  value: (props) => <OriginalNextImage {...props} unoptimized />,
-});
+  value: props => <OriginalNextImage {...props} unoptimized />
+})

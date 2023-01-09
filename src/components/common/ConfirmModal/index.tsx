@@ -1,5 +1,6 @@
 import {
   Button,
+  Icon,
   IconButton,
   Modal as ModalContainer,
   Text
@@ -9,45 +10,47 @@ import Image from 'next/image'
 import styled from '@emotion/styled'
 import type { StyledProps } from '@types'
 
-export interface ModalProps {
+export interface ConfirmModalProps {
   isOpen?: boolean
   hasLogo?: boolean
   title: ReactNode
   description?: string
-  primaryButtonText?: string
-  ghostButtonText?: string
+  primaryButtonText?: ReactNode
+  hasCheckIcon?: boolean
+  ghostButtonText?: ReactNode
   children?: ReactNode
   onClose(): void
 }
-type StyledLogoContainerProps = StyledProps<ModalProps, 'hasLogo'>
+type StyledTitleProps = StyledProps<ConfirmModalProps, 'hasLogo'>
 
-export const Modal = ({
+export const ConfirmModal = ({
   isOpen = false,
   onClose,
   hasLogo = false,
   title,
+  hasCheckIcon = false,
   description = '',
   primaryButtonText = '',
   ghostButtonText = '',
   children
-}: ModalProps): ReactElement => {
+}: ConfirmModalProps): ReactElement => {
   return (
     <StyledModalContainer isOpen={isOpen} onClose={onClose}>
       <StyledHeader>
         {hasLogo && (
-          <StyledLogoContainer hasLogo={hasLogo}>
-            <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
-          </StyledLogoContainer>
+          <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
         )}
         <StyledCloseButton colorType="gray30" icon="close" onClick={onClose} />
-        <Text styleType="headline01B" tag="p">
+        <StyledTitle hasLogo={hasLogo} styleType="headline01B" tag="p">
           {title}
-        </Text>
+        </StyledTitle>
         <StyledDescription styleType="body01R" tag="p">
           {description}
         </StyledDescription>
       </StyledHeader>
-      <div>{children}</div>
+      <StyledBody>
+        {hasCheckIcon && <StyledIcon color="white" size={82} type="check" />}
+      </StyledBody>
       <StyledFooter>
         {primaryButtonText && <Button size="large">{primaryButtonText}</Button>}
         {ghostButtonText && (
@@ -55,6 +58,7 @@ export const Modal = ({
             {ghostButtonText}
           </Button>
         )}
+        {children}
       </StyledFooter>
     </StyledModalContainer>
   )
@@ -77,22 +81,32 @@ const StyledHeader = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 4px;
-  margin-bottom: 32px;
   text-align: center;
-`
-const StyledLogoContainer = styled.div<StyledLogoContainerProps>`
-  margin-bottom: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
 `
 const StyledCloseButton = styled(IconButton)`
   position: absolute;
   right: 0;
   top: 0;
 `
+const StyledTitle = styled(Text)<StyledTitleProps>`
+  margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
+`
 const StyledDescription = styled(Text)`
   color: ${({ theme }): string => theme.colors.grayScale.gray70};
+`
+const StyledBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const StyledIcon = styled(Icon)`
+  margin-top: 42px;
+  background-color: ${({ theme }): string => theme.colors.grayScale.gray20};
+  border-radius: 100px;
 `
 const StyledFooter = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-top: 32px;
 `

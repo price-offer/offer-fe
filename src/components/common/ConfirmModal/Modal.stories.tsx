@@ -1,14 +1,14 @@
 import type { Meta, Story } from '@storybook/react'
-import { Modal } from './index'
-import type { ModalProps } from './index'
+import { ConfirmModal } from './index'
+import type { ConfirmModalProps } from './index'
 import { useState } from 'react'
 
 export default {
-  component: Modal,
-  title: 'Components/Common/Modal'
-} as Meta<ModalProps>
+  component: ConfirmModal,
+  title: 'Components/Common/ConfirmModal'
+} as Meta<ConfirmModalProps>
 
-const Template: Story<ModalProps> = args => {
+const Template: Story<ConfirmModalProps> = args => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
@@ -20,7 +20,7 @@ const Template: Story<ModalProps> = args => {
         }}>
         click
       </button>
-      <Modal
+      <ConfirmModal
         {...args}
         isOpen={isOpen}
         onClose={(): void => {

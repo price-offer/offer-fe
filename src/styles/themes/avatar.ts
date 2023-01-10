@@ -6,40 +6,24 @@ type AvatarValues = typeof avatar[AvatarKeys]
 export type Avatar = ThemeOption<AvatarKeys, AvatarValues>
 
 export const avatar = {
-  image: {
-    large: {
-      height: '55px',
-      width: '55px'
-    },
-    medium: {
-      height: '40px',
-      width: '40px'
-    },
-    small: {
-      height: '23px',
-      width: '23px'
-    },
-    xsmall: {
-      height: '16px',
-      width: '16px'
-    }
-  },
-  wrapper: {
-    large: {
-      height: '112px',
-      width: '112px'
-    },
-    medium: {
-      height: '80px',
-      width: '80px'
-    },
-    small: {
-      height: '46px',
-      width: '46px'
-    },
-    xsmall: {
-      height: '32px',
-      width: '32px'
-    }
-  }
+  large: `width: 112px; height: 112px; 
+  & > img {
+    width: 55px;
+    height: 55px;
+  }`,
+  medium: `width: 80px; height: 80px;
+  & > img {
+    width: 40px;
+    height: 40px;
+  }`,
+  small: `width: 46px; height: 46px;
+  & > img {
+    width: 23px;
+    height: 23px;
+  }`,
+  xsmall: `width: 32px; height: 32px;
+  & > img {
+    width: 16px;
+    height: 16px;
+  }`
 } as const

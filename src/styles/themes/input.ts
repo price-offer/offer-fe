@@ -45,7 +45,8 @@ export const input = {
   },
   default: {
     large: {
-      default: `&>input: {
+      default: `
+        &>input: {
             margin: 8px 0;
             width: 328px;
             height: 54px;
@@ -61,7 +62,8 @@ export const input = {
                 'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
             }
         }`,
-      isPrice: `&>input: {
+      isPrice: `
+        &>input: {
             margin: 8px 0;
             width: 328px;
             height: 54px;
@@ -80,7 +82,8 @@ export const input = {
     },
 
     small: {
-      default: `&>input: {
+      default: `
+        &>input: {
             margin: 8px 0;
             width: 328px;
             height: 40px;
@@ -96,12 +99,13 @@ export const input = {
                 'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #4AB783;'
             }
         }`,
-      isPrice: `&>input: {
+      isPrice: `
+        &>input: {
             margin: 8px 0;
             width: 328px;
             height: 54px;
             border: none;
-            padding: 16px 35px 16px 12px;
+            padding: 10px 35px 10px 12px;
             &::placeholder{
                 'font-size: 14px; font-weight: 500; line-height: 20px; color: #929399;',
             }

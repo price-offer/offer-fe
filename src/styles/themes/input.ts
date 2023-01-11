@@ -45,47 +45,77 @@ export const input = {
   },
   default: {
     large: {
-      alertText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #929399;',
-      errorText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #F36140;',
-      inputSize: {
-        height: '54px',
-        width: '328px'
-      },
-      labelText:
-        'font-size: 16px; font-weight: 500; line-height: 24px; letter-spacing: -0.1px; color: #65646A;',
-      placeholderText:
-        'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #929399;',
-      priceText:
-        'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
-      successText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #4AB783;'
+      default: `&>input: {
+            margin: 8px 0;
+            width: 328px;
+            height: 54px;
+            border: none;
+            padding: 16px 12px 16px 12px;
+            &::placeholder{
+                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #929399;',
+            }
+            $:hover{
+                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+            }
+            $:focus{
+                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+            }
+        }`,
+      isPrice: `&>input: {
+            margin: 8px 0;
+            width: 328px;
+            height: 54px;
+            border: none;
+            padding: 16px 35px 16px 12px;
+            &::placeholder{
+                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #929399;',
+            }
+            $:hover{
+                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+            }
+            $:focus{
+                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+            }
+        }`
     },
 
     small: {
-      alertText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #929399;',
-      errorText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #F36140;',
-      inputSize: {
-        height: '40px',
-        width: '328px'
-      },
-      labelText:
-        'font-size: 16px; font-weight: 500; line-height: 24px; letter-spacing: -0.1px; color: #65646A;',
-      placeholderText:
-        'font-size: 14px; font-weight: 500; line-height: 20px; color: #929399;',
-      priceText:
-        'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
-      successText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #4AB783;'
+      default: `&>input: {
+            margin: 8px 0;
+            width: 328px;
+            height: 40px;
+            border: none;
+            padding: 10px 12px 10px 12px;
+            &::placeholder{
+                'font-size: 14px; font-weight: 500; line-height: 20px; color: #929399;',
+            }
+            $:hover{
+                'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
+            }
+            $:focus{
+                'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #4AB783;'
+            }
+        }`,
+      isPrice: `&>input: {
+            margin: 8px 0;
+            width: 328px;
+            height: 54px;
+            border: none;
+            padding: 16px 35px 16px 12px;
+            &::placeholder{
+                'font-size: 14px; font-weight: 500; line-height: 20px; color: #929399;',
+            }
+            $:hover{
+                'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
+            }
+            $:focus{
+                'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
+            }
+        }`
     }
   },
   edit: {
     large: {
-      alertText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #929399;',
       input: `
         &>input: {
             width: 714px;
@@ -104,9 +134,8 @@ export const input = {
     },
 
     small: {
-      alertText:
-        'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #929399;',
-      input: `&>input: {
+      input: `
+        &>input: {
             width: 360px;
             height: 36px;
 

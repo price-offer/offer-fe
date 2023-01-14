@@ -18,7 +18,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
     <>
       <ProductItemWrapper>
         <ProductImgWrapper>
-          <Image
+          <ProductImg
             key={productItem.title}
             alt={`productName-${productItem.title}`}
             src={productItem.imageUrl}
@@ -44,9 +44,25 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
 }
 export { ProductItem }
 
+const ProductImg = styled(Image)`
+  width: 100%;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    height: 166px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    height: 160px;
+  }
+`
+
 const ProductImgWrapper = styled.div`
   max-width: 276px;
   position: relative;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    max-width: 166px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    max-width: 160px;
+  }
 `
 const ProductItemWrapper = styled.div``
 
@@ -54,14 +70,6 @@ const ProductItemTitle = styled.div`
   ${({ theme }): string => theme.fonts.body02R}
   margin-top: 8px;
   margin-bottom: 2px;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    ${({ theme }): string => theme.fonts.subtitle01B}
-    margin-top: 40px;
-    margin-bottom: 20px;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    margin-bottom: 16px;
-  }
 `
 const ProductItemStartPrice = styled.span`
   ${({ theme }): string => theme.fonts.body02M};

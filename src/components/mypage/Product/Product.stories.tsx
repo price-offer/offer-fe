@@ -7,7 +7,7 @@ import type { ProductStatusKeys } from '@constants/app'
 export default {
   argTypes: {},
   component: Product,
-  title: 'Components/Product'
+  title: 'Components/MyPage/Product'
 } as Meta<ProductProps>
 
 const Template: Story<ProductProps> = args => <Product {...args} />

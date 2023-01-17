@@ -5,7 +5,7 @@ import type { ProfileBoxProps } from './index'
 export default {
   argTypes: {},
   component: ProfileBox,
-  title: 'Components/ProfileBox'
+  title: 'Components/MyPage/ProfileBox'
 } as Meta<ProfileBoxProps>
 
 const Template: Story<ProfileBoxProps> = args => <ProfileBox {...args} />

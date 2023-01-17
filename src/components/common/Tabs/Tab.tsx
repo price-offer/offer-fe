@@ -1,22 +1,28 @@
-import type { MouseEventHandler, ReactElement, ReactNode } from 'react'
+import type {
+  MouseEvent,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode
+} from 'react'
 import { useContext } from 'react'
 import { TabsActionContext } from './TabsActionContext'
-
 interface TabProps {
   children: ReactNode
   index?: number
+  onClick?(e?: MouseEvent<HTMLButtonElement>, index?: number): void
 }
-export const Tab = ({ children, index }: TabProps): ReactElement => {
+export const Tab = ({ children, index, onClick }: TabProps): ReactElement => {
   const { currentTabIndex, handleSetCurrentTabIndex } =
     useContext(TabsActionContext)
   const isCurrentTab = index === currentTabIndex
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
     if (typeof index === 'undefined') {
       return
     }
 
     handleSetCurrentTabIndex(index)
+    onClick?.(e, index)
   }
 
   return (

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import type { ReactElement } from 'react'
-import React from 'react'
+import { Fragment } from 'react'
 import type { ProductProps } from '../Product'
 import { Product } from '../Product'
 import type { ProductStatusKeys } from '@constants'
@@ -22,15 +22,14 @@ export const ProductList = ({
   return (
     <ul className={className}>
       {products.map(product => (
-        <>
+        <Fragment key={product.id}>
           <Product
             {...product}
-            key={product.id}
             status={status}
             onChangeStatus={onChangeProductStatus}
           />
           <StyledDivider />
-        </>
+        </Fragment>
       ))}
     </ul>
   )

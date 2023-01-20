@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import {
   Button,
   Icon,
@@ -5,9 +6,8 @@ import {
   Modal as ModalContainer,
   Text
 } from '@offer-ui/react'
-import type { ReactElement, ReactNode } from 'react'
 import Image from 'next/image'
-import styled from '@emotion/styled'
+import type { ReactElement, ReactNode } from 'react'
 import type { StyledProps } from '@types'
 
 export interface ConfirmModalProps {
@@ -92,7 +92,7 @@ const StyledTitle = styled(Text)<StyledTitleProps>`
   margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
 `
 const StyledDescription = styled(Text)`
-  color: ${({ theme }): string => theme.colors.grayScale.gray70};
+  color: ${({ theme }): string => theme.colors.grayScale70};
 `
 const StyledBody = styled.div`
   display: flex;
@@ -101,7 +101,7 @@ const StyledBody = styled.div`
 `
 const StyledIcon = styled(Icon)`
   margin-top: 42px;
-  background-color: ${({ theme }): string => theme.colors.grayScale.gray20};
+  background-color: ${({ theme }): string => theme.colors.grayScale20};
   border-radius: 100px;
 `
 const StyledFooter = styled.div`

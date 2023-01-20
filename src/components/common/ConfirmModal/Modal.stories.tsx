@@ -1,7 +1,7 @@
 import type { Meta, Story } from '@storybook/react'
+import { useState } from 'react'
 import { ConfirmModal } from './index'
 import type { ConfirmModalProps } from './index'
-import { useState } from 'react'
 
 export default {
   component: ConfirmModal,

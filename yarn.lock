@@ -1815,10 +1815,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@offer-ui/react@^0.1.13":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.13.tgz#77d28881def0c84832b925e81fa5f6e0e64b6eaa"
-  integrity sha512-aNjlcoaQ/ZAbQrS+iYZk7+n41CrlMejmt/2k/NbKODJ2L3DaWrqEkW1IdHbWJEqMALMpzfRzPny+E5VG64unYg==
+"@offer-ui/react@^0.1.14":
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.14.tgz#74d0fa19d53f1de3d17ee264c591429e2f42015a"
+  integrity sha512-rlKZhiGrqYqNb4aTcF4HbsZoL3X2jv3dDoPl27HAg3dj3bPtgWdkWH7El6kvnqXoe1k1uFwu4ETiFwNocErSbw==
 
 "@pkgr/utils@^2.3.1":
   version "2.3.1"

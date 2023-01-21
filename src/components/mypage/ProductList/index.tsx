@@ -42,7 +42,7 @@ const StyledDivider = styled.div`
     ${theme.mediaQuery.tablet} {
       display: block;
       height: 8px;
-      background: ${theme.colors.background.gray02};
+      background: ${theme.colors.bgGray02};
     }
   `}
 `

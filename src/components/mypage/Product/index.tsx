@@ -3,7 +3,6 @@ import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { Image, SelectBox, Icon, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import type { ProductStatusKeys } from '@constants'
-import { colors } from '@styles'
 import { toLocaleCurrency } from '@utils'
 
 export interface ProductProps {
@@ -55,7 +54,7 @@ export const Product = ({
         <StyledProductInfoWrapper>
           <StyledPrice>시작가: {toLocaleCurrency(price)}원</StyledPrice>
           <StyledFavoriteWrapper>
-            <Icon color={colors.grayScale.gray50} size={14} type="heart" />
+            <Icon color="grayScale50" size={14} type="heart" />
             <Text styleType="body02R">{favorite}</Text>
           </StyledFavoriteWrapper>
           <StyledDate styleType="body02R">{date}</StyledDate>
@@ -151,7 +150,7 @@ const StyledPrice = styled.span`
 
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.caption01M};
-      color: ${theme.colors.grayScale.gray50};
+      color: ${theme.colors.grayScale50};
     }
   `}
 `
@@ -162,7 +161,7 @@ const StyledFavoriteWrapper = styled.div`
     justify-content: center;
     gap: 2px;
     width: 100px;
-    color: ${theme.colors.grayScale.gray50};
+    color: ${theme.colors.grayScale50};
 
     ${theme.mediaQuery.tablet} {
       display: none;
@@ -172,7 +171,7 @@ const StyledFavoriteWrapper = styled.div`
 const StyledDate = styled(Text)`
   ${({ theme }): string => `
     display: inline-block;
-    color: ${theme.colors.grayScale.gray50};
+    color: ${theme.colors.grayScale50};
 
     ${theme.mediaQuery.tablet} {
       display: none;

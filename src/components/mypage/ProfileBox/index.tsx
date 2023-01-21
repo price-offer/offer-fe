@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { Avatar, Badge, Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { theme } from '@styles/themes'
 
 export interface ProfileBoxProps {
   profileImg: string
@@ -21,12 +20,10 @@ export const ProfileBox = ({
   CountOfReview = 0,
   CountOfFavoriteProducts = 0
 }: ProfileBoxProps): ReactElement => {
-  const iconColor = theme.colors.grayScale.gray30
-
   return (
     <StyledContainer>
       <StyledSettingsButton>
-        <Icon color={iconColor} size={24} type="setting" />
+        <Icon color="grayScale30" size={24} type="setting" />
       </StyledSettingsButton>
       <StyledProfileWrapper>
         <StyledUserWrapper>
@@ -39,28 +36,28 @@ export const ProfileBox = ({
         <StyledUserProductWrapper>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
-              <Icon color={iconColor} size={16} type="store" />
+              <Icon color="grayScale30" size={16} type="store" />
               <Text styleType="caption01M">판매중</Text>
             </StyledUserProductTitleWrapper>
             <Text styleType="caption01M">{CountOfOnSaleProducts}개</Text>
           </StyledUserProductRow>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
-              <Icon color={iconColor} size={16} type="checkCircle" />
+              <Icon color="grayScale30" size={16} type="checkCircle" />
               <Text styleType="caption01M">거래완료</Text>
             </StyledUserProductTitleWrapper>
             <Text styleType="caption01M">{CountOfCompletedProducts}개</Text>
           </StyledUserProductRow>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
-              <Icon color={iconColor} size={16} type="smile" />
+              <Icon color="grayScale30" size={16} type="smile" />
               <Text styleType="caption01M">거래후기</Text>
             </StyledUserProductTitleWrapper>
             <Text styleType="caption01M">{CountOfReview}개</Text>
           </StyledUserProductRow>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
-              <Icon color={iconColor} size={16} type="heart" />
+              <Icon color="grayScale30" size={16} type="heart" />
               <Text styleType="caption01M">관심상품</Text>
             </StyledUserProductTitleWrapper>
             <Text styleType="caption01M">{CountOfFavoriteProducts}개</Text>
@@ -76,7 +73,7 @@ const StyledContainer = styled.div`
     position: relative;
     width: 276px;
     padding: 26px;
-    border: 1px solid ${theme.colors.grayScale.gray10};
+    border: 1px solid ${theme.colors.grayScale10};
     border-radius: 8px;
 
     ${theme.mediaQuery.tablet} {
@@ -162,6 +159,7 @@ const StyledNickName = styled.span`
     word-break: break-word;
 
     ${theme.mediaQuery.tablet} {
+      text-align: left;
       ${theme.fonts.subtitle01B};
     }
 
@@ -173,7 +171,7 @@ const StyledNickName = styled.span`
 const StyledUserProductWrapper = styled.div`
   ${({ theme }): string => `
     display: grid;
-    background-color: ${theme.colors.background.gray01};
+    background-color: ${theme.colors.bgGray01};
     gap: 16px;
     padding: 16px 20px;
 

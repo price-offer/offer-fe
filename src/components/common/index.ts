@@ -1,2 +1,2 @@
 export * from './Tabs'
-export * from './Modal'
+export * from './ConfirmModal'

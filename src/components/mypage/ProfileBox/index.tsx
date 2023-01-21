@@ -10,6 +10,7 @@ export interface ProfileBoxProps {
   CountOfCompletedProducts: number
   CountOfReview: number
   CountOfFavoriteProducts: number
+  className?: string
 }
 export const ProfileBox = ({
   profileImg = '',
@@ -18,10 +19,11 @@ export const ProfileBox = ({
   CountOfOnSaleProducts = 0,
   CountOfCompletedProducts = 0,
   CountOfReview = 0,
-  CountOfFavoriteProducts = 0
+  CountOfFavoriteProducts = 0,
+  className
 }: ProfileBoxProps): ReactElement => {
   return (
-    <StyledContainer>
+    <StyledContainer className={className}>
       <StyledSettingsButton>
         <Icon color="grayScale30" size={24} type="setting" />
       </StyledSettingsButton>

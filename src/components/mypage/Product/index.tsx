@@ -13,6 +13,7 @@ export interface ProductProps {
   price: number
   favorite: number
   date: string
+  className?: string
   onChangeStatus(id: number, status: ProductStatusKeys): void
 }
 
@@ -35,6 +36,7 @@ export const Product = ({
   price = 0,
   favorite,
   date,
+  className,
   onChangeStatus
 }: ProductProps): ReactElement => {
   const handleChangeStatus: SelectOnChangeHandler = item => {
@@ -42,7 +44,7 @@ export const Product = ({
   }
 
   return (
-    <StyledProductWrapper>
+    <StyledProductWrapper className={className}>
       <StyledProductImg alt={`product${id}-img`} src={imgUrl} />
       <StyledSelectBox
         items={STATUS_OPTIONS}

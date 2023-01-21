@@ -1,2 +1,2 @@
-export * from './theme'
+export * from './offer'
 export * from './app'

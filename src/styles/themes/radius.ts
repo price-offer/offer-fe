@@ -1,9 +1,4 @@
-import type { ThemeOption } from '@types'
-
-type RadiusKeys = keyof typeof radius
-type RadiusValues = typeof radius[RadiusKeys]
-
-export type Radius = ThemeOption<RadiusKeys, RadiusValues>
+export type Radius = typeof radius
 
 export const radius = {
   round100: '100px',

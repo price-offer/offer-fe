@@ -1,4 +1,4 @@
-import { toLocaleCurrency } from './format'
+import { toLocaleCurrency } from '.'
 
 describe('format/toLocaleCurrency', () => {
   it('숫자를 넣어 호출 하는 경우, 한국의 화폐 단위로 반환해야 합니다.', () => {

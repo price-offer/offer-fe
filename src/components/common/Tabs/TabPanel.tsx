@@ -6,14 +6,20 @@ import { TabsActionContext } from './TabsActionContext'
 interface TabPanelProps {
   children: ReactNode
   index?: number
+  className?: string
 }
-export const TabPanel = ({ index, children }: TabPanelProps): ReactElement => {
+export const TabPanel = ({
+  index,
+  children,
+  className
+}: TabPanelProps): ReactElement => {
   const { currentTabIndex } = useContext(TabsActionContext)
   const isCurrentTab = index === currentTabIndex
 
   return (
     <StyledPanel
       aria-labelledby={`tab-${index}`}
+      className={className}
       id={`tabpanel-${index}`}
       isCurrentTab={isCurrentTab}
       role="tabpanel"

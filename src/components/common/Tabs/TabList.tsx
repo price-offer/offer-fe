@@ -4,10 +4,14 @@ import { childrenMap } from '@utils'
 
 interface TabListProps {
   children: ReactNode
+  className?: string
 }
-export const TabList = ({ children }: TabListProps): ReactElement => {
+export const TabList = ({
+  children,
+  className
+}: TabListProps): ReactElement => {
   return (
-    <div role="tablist">
+    <div className={className} role="tablist">
       {childrenMap(children, (child, index) =>
         cloneElement(child, {
           index

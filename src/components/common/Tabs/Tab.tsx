@@ -9,9 +9,15 @@ import { TabsActionContext } from './TabsActionContext'
 interface TabProps {
   children: ReactNode
   index?: number
+  className?: string
   onClick?(e?: MouseEvent<HTMLButtonElement>, index?: number): void
 }
-export const Tab = ({ children, index, onClick }: TabProps): ReactElement => {
+export const Tab = ({
+  children,
+  index,
+  className,
+  onClick
+}: TabProps): ReactElement => {
   const { currentTabIndex, handleSetCurrentTabIndex } =
     useContext(TabsActionContext)
   const isCurrentTab = index === currentTabIndex
@@ -29,6 +35,7 @@ export const Tab = ({ children, index, onClick }: TabProps): ReactElement => {
     <button
       aria-controls={`tabpanel-${index}`}
       aria-selected={isCurrentTab}
+      className={className}
       id={`tab-${index}`}
       role="tab"
       tabIndex={index ? -1 : undefined}

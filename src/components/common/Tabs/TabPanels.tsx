@@ -4,10 +4,14 @@ import { childrenMap } from '@utils'
 
 interface TabPanelsProps {
   children: ReactNode
+  className?: string
 }
-export const TabPanels = ({ children }: TabPanelsProps): ReactElement => {
+export const TabPanels = ({
+  children,
+  className
+}: TabPanelsProps): ReactElement => {
   return (
-    <div>
+    <div className={className}>
       {childrenMap(children, (child, index) =>
         cloneElement(child, {
           index

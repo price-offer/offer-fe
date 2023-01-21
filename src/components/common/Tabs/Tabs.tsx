@@ -14,6 +14,7 @@ export interface TabsProps {
 export const Tabs = ({
   children,
   onChange,
+  className,
   defaultTabIndex = 0
 }: TabsProps): ReactElement => {
   const [currentTabIndex, setCurrentTabIndex] =
@@ -38,7 +39,7 @@ export const Tabs = ({
 
   return (
     <TabsActionContext.Provider value={tabsActionValue}>
-      {children}
+      <div className={className}>{children}</div>
     </TabsActionContext.Provider>
   )
 }

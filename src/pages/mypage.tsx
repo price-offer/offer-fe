@@ -110,7 +110,7 @@ const MyPage = (): ReactElement => {
       <StyledUserProductsWrapper>
         <StyledSearchOptionsWrapper>
           <StyledStatusButtonListWrapper>
-            <StyledStatusButtonWrapper>
+            <StyledStatusButtonLabel>
               <StyledCircle isCurrent={isSellStatus} />
               <StyledStatusButton
                 isCurrent={isSellStatus}
@@ -123,8 +123,8 @@ const MyPage = (): ReactElement => {
               <StyledText color="grayScale50">
                 {getProductsLength('sell')}
               </StyledText>
-            </StyledStatusButtonWrapper>
-            <StyledStatusButtonWrapper>
+            </StyledStatusButtonLabel>
+            <StyledStatusButtonLabel>
               <StyledCircle isCurrent={isSoldOutStatus} />
               <StyledStatusButton
                 isCurrent={isSoldOutStatus}
@@ -135,7 +135,7 @@ const MyPage = (): ReactElement => {
                 <StyledText isCurrent={isSoldOutStatus}>거래완료</StyledText>
               </StyledStatusButton>
               <StyledText>{getProductsLength('soldOut')}</StyledText>
-            </StyledStatusButtonWrapper>
+            </StyledStatusButtonLabel>
           </StyledStatusButtonListWrapper>
           <SelectBox
             colorType="none"
@@ -189,7 +189,7 @@ const StyledStatusButtonListWrapper = styled.div`
   display: flex;
   gap: 22px;
 `
-const StyledStatusButtonWrapper = styled.div`
+const StyledStatusButtonLabel = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;

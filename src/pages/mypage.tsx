@@ -219,11 +219,7 @@ const StyledStatusButton = styled.button<{ isCurrent: boolean }>`
   `}
 `
 const StyledText = styled.span<{ isCurrent?: boolean; color?: ColorKeys }>`
-  ${({ theme, isCurrent, color }): string => {
-    console.log(
-      color ? color : isCurrent ? theme.colors.black : theme.colors.grayScale50
-    )
-    return `
+  ${({ theme, isCurrent, color }): string => `
     ${theme.fonts.subtitle01B};
     color: ${
       color
@@ -236,8 +232,7 @@ const StyledText = styled.span<{ isCurrent?: boolean; color?: ColorKeys }>`
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.body02B};
     }
-  `
-  }}
+  `}
 `
 const StyledUserProductsWrapper = styled.div`
   ${({ theme }): string => `

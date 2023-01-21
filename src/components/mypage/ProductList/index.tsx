@@ -22,14 +22,14 @@ export const ProductList = ({
 }: ProductListProps): ReactElement => {
   return (
     <ul className={className}>
-      {products.map(product => (
+      {products.map((product, index) => (
         <Fragment key={product.id}>
           <Product
             {...product}
             status={status}
             onChangeStatus={onChangeProductStatus}
           />
-          <StyledDivider size="bold" />
+          {index !== products.length - 1 && <StyledDivider size="bold" />}
         </Fragment>
       ))}
     </ul>

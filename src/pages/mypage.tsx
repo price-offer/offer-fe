@@ -182,7 +182,11 @@ const StyledSearchOptionsWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    border-bottom: 1px solid ${theme.colors.grayScale10}
+    border-bottom: 1px solid ${theme.colors.grayScale10};
+
+    ${theme.mediaQuery.tablet} {
+      padding: 16px;
+    }
   `}
 `
 const StyledStatusButtonListWrapper = styled.div`

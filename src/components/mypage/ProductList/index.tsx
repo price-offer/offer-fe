@@ -1,11 +1,12 @@
 import styled from '@emotion/styled'
+import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import type { ProductProps } from '../Product'
 import { Product } from '../Product'
 import type { ProductStatusKeys } from '@constants'
 
-type ProductItem = Omit<ProductProps, 'onChangeStatus' | 'status'>
+export type ProductItem = Omit<ProductProps, 'onChangeStatus'>
 export interface ProductListProps {
   className?: string
   products: ProductItem[]
@@ -28,21 +29,19 @@ export const ProductList = ({
             status={status}
             onChangeStatus={onChangeProductStatus}
           />
-          <StyledDivider />
+          <StyledDivider size="bold" />
         </Fragment>
       ))}
     </ul>
   )
 }
 
-const StyledDivider = styled.div`
+const StyledDivider = styled(Divider)`
   ${({ theme }): string => `
     display: none;
 
     ${theme.mediaQuery.tablet} {
       display: block;
-      height: 8px;
-      background: ${theme.colors.bgGray02};
     }
   `}
 `

@@ -72,12 +72,14 @@ const StyledContainer = styled.div`
   ${({ theme }): string => `
     position: relative;
     width: 276px;
+    height: 388px;
     padding: 26px;
     border: 1px solid ${theme.colors.grayScale10};
     border-radius: 8px;
 
     ${theme.mediaQuery.tablet} {
       width: 100%;
+      height: auto;
       padding: 20px 24px;
       border: none;
     }

@@ -14,15 +14,11 @@ export const selectBox = {
     }`,
     isEmpty: `
         div:nth-of-type(1){ //triggerWrapper
-          height: 40px;
-          padding: 12px 10px;
           border-radius: 6px;
           ${fonts.body02M};
           color: #929399;
         }
         div:nth-of-type(2){ //StyledOptionsWrapper
-          height: 40px;
-          padding: 12px 10px;
           border-radius: 6px;
           ${fonts.body02M};
           top: 48px;
@@ -31,12 +27,10 @@ export const selectBox = {
   small: {
     default: `
       div:nth-of-type(1){ //triggerWrapper
-
         border-radius: 4px;
         ${fonts.body02B};
       }
       div:nth-of-type(2){ //StyledOptionsWrapper
-
         border-radius: 4px;
         ${fonts.body02B};
         top: 40px;

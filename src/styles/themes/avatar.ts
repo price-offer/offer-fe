@@ -1,9 +1,4 @@
-import type { ThemeOption } from '@types'
-
-type AvatarKeys = keyof typeof avatar
-type AvatarValues = typeof avatar[AvatarKeys]
-
-export type Avatar = ThemeOption<AvatarKeys, AvatarValues>
+export type Avatar = typeof avatar
 
 export const avatar = {
   large: `

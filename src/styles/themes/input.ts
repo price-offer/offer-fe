@@ -1,9 +1,6 @@
-import type { ThemeOption } from '@types'
+import { fonts } from './fonts'
 
-type InputKeys = keyof typeof input
-type InputValues = typeof input[InputKeys]
-
-export type Input = ThemeOption<InputKeys, InputValues>
+export type Input = typeof input
 
 export const input = {
   chat: {
@@ -14,13 +11,13 @@ export const input = {
             padding: 12px 60px 12px 20px;
 
             &::placeholder{
-                font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #929399;
+               ${fonts.body01R} color: #929399;
             }
             $:hover{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #2F2E36;
+                ${fonts.body01R} color: #2F2E36;
             }
             &:focus{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body01R} color: #2F2E36;'
             }
         }
     }`,
@@ -32,13 +29,13 @@ export const input = {
             padding: 10px 52px 10px 12px;
 
             &::placeholder{
-                'font-size: 14px; font-weight: normal; line-height: 20px; letter-spacing: -0.1px; color: #929399;
+                ${fonts.body02R} color: #929399;
             }
             $:hover{
-                'font-size: 14px; font-weight: normal; line-height: 20px; letter-spacing: -0.1px; color: #2F2E36;
+                ${fonts.body02R} color: #2F2E36;
             }
             $:focus{
-                'font-size: 14px; font-weight: normal; line-height: 20px; letter-spacing: -0.1px; color: #2F2E36;
+                ${fonts.body02R} color: #2F2E36;
             }
         },
     `
@@ -53,13 +50,13 @@ export const input = {
             border: none;
             padding: 16px 12px 16px 12px;
             &::placeholder{
-                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #929399;',
+                ${fonts.subtitle01M} color: #929399;
             }
             $:hover{
-                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+                ${fonts.subtitle01M} color: #2F2E36;
             }
             $:focus{
-                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+                ${fonts.subtitle01M} color: #2F2E36;
             }
         }`,
       isPrice: `
@@ -70,13 +67,13 @@ export const input = {
             border: none;
             padding: 16px 35px 16px 12px;
             &::placeholder{
-                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #929399;',
+                ${fonts.subtitle01M} color: #929399;
             }
             $:hover{
-                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+                ${fonts.subtitle01M} color: #2F2E36;
             }
             $:focus{
-                'font-size: 18px; font-weight: 500; line-height: 22px; letter-spacing: -0.05px; color: #2F2E36;',
+                ${fonts.subtitle01M} color: #2F2E36;
             }
         }`
     },
@@ -90,13 +87,13 @@ export const input = {
             border: none;
             padding: 10px 12px 10px 12px;
             &::placeholder{
-                'font-size: 14px; font-weight: 500; line-height: 20px; color: #929399;',
+                ${fonts.body02M} color: #929399;
             }
             $:hover{
-                'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
+                ${fonts.body02M} color: #2F2E36;
             }
             $:focus{
-                'font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.05px; color: #4AB783;'
+                ${fonts.caption01M} color: #4AB783;
             }
         }`,
       isPrice: `
@@ -107,13 +104,13 @@ export const input = {
             border: none;
             padding: 10px 35px 10px 12px;
             &::placeholder{
-                'font-size: 14px; font-weight: 500; line-height: 20px; color: #929399;',
+                ${fonts.body02M} color: #929399;
             }
             $:hover{
-                'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
+                ${fonts.body02M}  color: #2F2E36;
             }
             $:focus{
-                'font-size: 14px; font-weight: 500; line-height: 20px;, color: #2F2E36;',
+                ${fonts.body02M} color: #2F2E36;
             }
         }`
     }
@@ -126,13 +123,13 @@ export const input = {
             height: 36px;
 
             &::placeholder{
-                'font-size: 28px; font-weight: 500; line-height: 28px; color: #929399;',
+                ${fonts.display02M} color: #929399;
             }
             $:hover{
-                'font-size: 28px; font-weight: 500; line-height: 28px; letter-spacing: -0.05px; color: #2F2E36;'
+                ${fonts.display02M} color: #2F2E36;
             }
             $:focus{
-                'font-size: 28px; font-weight: 500; line-height: 28px; letter-spacing: -0.05px; color: #2F2E36;'
+                ${fonts.display02M} color: #2F2E36;
             }
         },`
     },
@@ -144,13 +141,13 @@ export const input = {
             height: 36px;
 
             &::placeholder{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #929399;',
+                ${fonts.body01R} color: #929399;
             }
             $:hover{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body01R} color: #2F2E36;
             }
             $:focus{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body01R} color: #2F2E36;
             }
         },`
     }
@@ -163,15 +160,15 @@ export const input = {
             height: 56px;
 
             &::placeholder{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #929399;',
+                ${fonts.body01R} color: #929399;
             }
 
             $:hover{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body01R} color: #2F2E36;
             }
 
             $:focus{
-                'font-size: 16px; font-weight: normal; line-height: 24px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body01R} color: #2F2E36;
             }
         }
     `,
@@ -182,15 +179,15 @@ export const input = {
             height: 40px;
 
             &::placeholder{
-                'font-size: 14px; font-weight: normal; line-height: 20px; letter-spacing: -0.1px; color: #929399;',
+                ${fonts.body02R} color: #929399;,
             }
 
             $:hover{
-                'font-size: 14px; font-weight: normal; line-height: 20px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body02R} color: #2F2E36;
             }
 
             $:focus{
-                'font-size: 14px; font-weight: normal; line-height: 20px; letter-spacing: -0.1px; color: #2F2E36;'
+                ${fonts.body02R} color: #2F2E36;
             }
         }
     `

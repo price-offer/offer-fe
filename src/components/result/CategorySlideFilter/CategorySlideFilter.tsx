@@ -25,25 +25,29 @@ const CategorySlideFilter = ({
       <div>
         <CateGoryBox>
           <ArrowBox>
-            <IconButton
-              colorType="white"
-              icon="arrowLeft"
-              shape="rounded"
-              size="small"
-              style={{
-                filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))'
-              }}
-            />
-            <IconButton
-              colorType="white"
-              icon="arrowLeft"
-              shape="rounded"
-              size="small"
-              style={{
-                filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))',
-                transform: 'scaleX(-1)'
-              }}
-            />
+            <RightArrowWrapper>
+              <Arrow
+                colorType="white"
+                icon="arrowLeft"
+                shape="rounded"
+                size="small"
+                style={{
+                  filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))'
+                }}
+              />
+            </RightArrowWrapper>
+            <LeftArrowWrapper>
+              <Arrow
+                colorType="white"
+                icon="arrowLeft"
+                shape="rounded"
+                size="small"
+                style={{
+                  filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))',
+                  transform: 'scaleX(-1)'
+                }}
+              />
+            </LeftArrowWrapper>
           </ArrowBox>
           {cateGoryList.map(cateGory => (
             <CategoryItem key={cateGory.title} selected={cateGory.selected}>
@@ -63,9 +67,10 @@ const CategoryHeaderWrapper = styled.div`
   display: flex;
 `
 const CategoryHeader = styled.div`
-  ${({ theme }): string => theme.fonts.headline02B}
+  ${({ theme }): string => theme.fonts.display02B}
   margin-top: 42px;
   margin-bottom: 22px;
+  gap: 8px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     ${({ theme }): string => theme.fonts.subtitle01B}
     margin-top: 40px;
@@ -78,6 +83,7 @@ const CategoryHeader = styled.div`
 
 const CategoryHeaderResultCount = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
+  color:${({ theme }): string => theme.colors.grayScale.gray50};
   margin-top: 42px;
   margin-bottom: 22px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -106,6 +112,29 @@ const ArrowBox = styled.div`
   display: flex;
   justify-content: space-between;
 `
+
+const RightArrowWrapper = styled.div`
+  width: 68px;
+  height: 28px;
+  background: linear-gradient(
+    450deg,
+    #ffffff 38.82%,
+    rgba(255, 255, 255, 0) 100%
+  );
+`
+
+const LeftArrowWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 68px;
+  height: 28px;
+  background: linear-gradient(
+    270deg,
+    #ffffff 38.82%,
+    rgba(255, 255, 255, 0) 100%
+  );
+`
+const Arrow = styled(IconButton)``
 
 const CategoryItem = styled.div<CategoryItemProps>`
   padding: 4px 16px;

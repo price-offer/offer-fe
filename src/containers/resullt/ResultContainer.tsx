@@ -4,6 +4,7 @@ import { ProductList } from '@components/home/ProductList'
 
 import type { ReactElement } from 'react'
 
+import { SelectBox } from '@offer-ui/react'
 import styled from '@emotion/styled'
 
 CategorySlideFilter
@@ -102,6 +103,73 @@ const ResultContainer = (): ReactElement => {
     <Layout>
       <HomeWrapper>
         <CategorySlideFilter cateGoryList={cateGoryList} searchResult="###" />
+        <SelectWrapper>
+          <SelectBox
+            colorType="light"
+            items={[
+              {
+                text: '직거래/택배거래',
+                value: '0'
+              },
+              {
+                text: '직거래',
+                value: '1'
+              },
+              {
+                text: '택배거래',
+                value: '2'
+              }
+            ]}
+            placeholder="거래방식"
+            value=""
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onChange={(): void => {}}>
+            dadfasds
+          </SelectBox>
+          <SelectBox
+            colorType="light"
+            items={[
+              {
+                text: '직거래/택배거래',
+                value: '0'
+              },
+              {
+                text: '직거래',
+                value: '1'
+              },
+              {
+                text: '택배거래',
+                value: '2'
+              }
+            ]}
+            placeholder="가격"
+            value=""
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onChange={(): void => {}}></SelectBox>
+          <SelectBox
+            colorType="none"
+            items={[
+              {
+                text: '직거래/택배거래',
+                value: '0'
+              },
+              {
+                text: '직거래',
+                value: '1'
+              },
+              {
+                text: '택배거래',
+                value: '2'
+              }
+            ]}
+            placeholder="높은 가격순"
+            value=""
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onChange={(): void => {}}>
+            dadfasds
+          </SelectBox>
+        </SelectWrapper>
+
         <ProductList productList={productList} />
       </HomeWrapper>
     </Layout>
@@ -120,5 +188,10 @@ const Layout = styled.div`
   border: solid;
   width: 100%;
   margin-top: 68px;
+`
+
+const SelectWrapper = styled.div`
+  display: flex;
+  margin-top: 25px;
 `
 export { ResultContainer }

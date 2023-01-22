@@ -1,70 +1,55 @@
-import type { ThemeOption } from '@types'
-
-type SelectBoxKeys = keyof typeof selectBox
-type SelectBoxValues = typeof selectBox[SelectBoxKeys]
-
-export type SelectBox = ThemeOption<SelectBoxKeys, SelectBoxValues>
+import { fonts } from './fonts'
+export type SelectBox = typeof selectBox
 
 export const selectBox = {
   medium: {
     default: `
-      div:nth-child(1){ //triggerWrapper
-        height: 40px;
-        padding: 12px 10px;
+      div:nth-of-type(1){ //triggerWrapper
         border-radius: 6px;
-        font-size: 14px; font-weight: 500; line-height: 20px;
+        ${fonts.body02M};
       }
-      div:nth-child(2){ //StyledOptionsWrapper
-        height: 40px;
-        padding: 12px 10px;
+      div:nth-of-type(2){ //StyledOptionsWrapper
         border-radius: 6px;
-        font-size: 14px; font-weight: 500; line-height: 20px;
         top: 48px;
     }`,
     isEmpty: `
-        div:nth-child(1){ //triggerWrapper
+        div:nth-of-type(1){ //triggerWrapper
           height: 40px;
           padding: 12px 10px;
           border-radius: 6px;
-          font-size: 14px; font-weight: 500; line-height: 20px;
+          ${fonts.body02M};
           color: #929399;
         }
-        div:nth-child(2){ //StyledOptionsWrapper
+        div:nth-of-type(2){ //StyledOptionsWrapper
           height: 40px;
           padding: 12px 10px;
           border-radius: 6px;
-          font-size: 14px; font-weight: 500; line-height: 20px;
+          ${fonts.body02M};
           top: 48px;
       }`
   },
   small: {
     default: `
-      div:nth-child(1){ //triggerWrapper
-        height: 32px;
-        padding: 4px 8px;
+      div:nth-of-type(1){ //triggerWrapper
+
         border-radius: 4px;
-        font-size: 14px; font-weight: bold; line-height: 24px; letter-spacing: -0.1px;
+        ${fonts.body02B};
       }
-      div:nth-child(2){ //StyledOptionsWrapper
-        height: 32px;
-        padding: 4px 8px;
+      div:nth-of-type(2){ //StyledOptionsWrapper
+
         border-radius: 4px;
-        font-size: 14px; font-weight: bold; line-height: 24px; letter-spacing: -0.1px;
+        ${fonts.body02B};
         top: 40px;
     }`,
     isEmpty: `
-        div:nth-child(1){ //triggerWrapper
-          height: 32px;
-          padding: 4px 8px;
+        div:nth-of-type(1){ //triggerWrapper
           border-radius: 4px;
-          font-size: 14px; font-weight: bold; line-height: 24px; letter-spacing: -0.1px;
+          ${fonts.body02B};
           color: #929399;
         }
-        div:nth-child(2){ //StyledOptionsWrapper
-          height: 32px;
-          padding: 4px 8px;
+        div:nth-of-type(2){ //StyledOptionsWrapper
           border-radius: 4px;
-          font-size: 14px; font-weight: bold; line-height: 24px; letter-spacing: -0.1px;
+          ${fonts.body02B};
           top: 40px;
       }`
   }

@@ -1,9 +1,4 @@
-import type { ThemeOption } from '@types'
-
-type CTAButtonKeys = keyof typeof ctaButton
-type CTAButtonValues = typeof ctaButton[CTAButtonKeys]
-
-export type CTAButton = ThemeOption<CTAButtonKeys, CTAButtonValues>
+export type CtaButton = typeof ctaButton
 
 export const ctaButton = {
   large: `{

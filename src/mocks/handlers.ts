@@ -1,10 +1,5 @@
 import { rest } from 'msw'
-import {
-  myProfile,
-  memberProfileList,
-  updateArticleStatus,
-  articles
-} from './fixture'
+import { myProfile, memberProfileList, articles } from './fixture'
 import type { Articles, MemberProfile, MyProfile } from '@types'
 
 export const handlers = [
@@ -41,7 +36,9 @@ export const handlers = [
   rest.patch('/articles/:articleId', async (req, res, ctx) => {
     const id = req.params.articleId as string
     const { tradeStatus } = await req.json()
-    updateArticleStatus(Number(id), tradeStatus)
+    articles.elements = articles.elements.map(article =>
+      article.id === Number(id) ? { ...article, tradeStatus } : article
+    )
 
     return res(ctx.status(200))
   }),

@@ -1,4 +1,4 @@
-import type { MyProfile, MemberProfile, Articles, TradeStatus } from '@types'
+import type { MyProfile, MemberProfile, Articles } from '@types'
 
 export const myProfile: MyProfile = {
   member: {
@@ -41,15 +41,6 @@ export const memberProfileList: MemberProfileList = {
     sellingArticleCount: 0,
     reviewCount: 0
   }
-}
-
-export const updateArticleStatus = (
-  articleId: number,
-  tradeStatus: TradeStatus
-): void => {
-  articles.elements = articles.elements.map(article =>
-    article.id === articleId ? { ...article, tradeStatus } : article
-  )
 }
 
 export const articles: Articles = {

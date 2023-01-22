@@ -1,25 +1,18 @@
 import styled from '@emotion/styled'
 import { Avatar, Badge, Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import type { MyProfile } from '@types'
 
-export interface ProfileBoxProps {
-  profileImg: string
-  nickName: string
-  level: string
-  CountOfOnSaleProducts: number
-  CountOfCompletedProducts: number
-  CountOfReview: number
-  CountOfFavoriteProducts: number
+export interface ProfileBoxProps extends MyProfile {
   className?: string
 }
+
 export const ProfileBox = ({
-  profileImg = '',
-  nickName = '',
-  level = '1',
-  CountOfOnSaleProducts = 0,
-  CountOfCompletedProducts = 0,
-  CountOfReview = 0,
-  CountOfFavoriteProducts = 0,
+  member,
+  sellingArticleCount,
+  likedArticleCount,
+  offerCount,
+  reviewCount,
   className
 }: ProfileBoxProps): ReactElement => {
   return (
@@ -29,10 +22,10 @@ export const ProfileBox = ({
       </StyledSettingsButton>
       <StyledProfileWrapper>
         <StyledUserWrapper>
-          <StyledAvatar alt="avatar" src={profileImg} />
+          <StyledAvatar alt="avatar" src={member.profileImageUrl} />
           <StyledNickNameRow>
-            <StyledNickName>{nickName}</StyledNickName>
-            <Badge colorType="orange">Lv.{level}</Badge>
+            <StyledNickName>{member.nickname}</StyledNickName>
+            <Badge colorType="orange">Lv.{member.offerLevel}</Badge>
           </StyledNickNameRow>
         </StyledUserWrapper>
         <StyledUserProductWrapper>
@@ -41,28 +34,28 @@ export const ProfileBox = ({
               <Icon color="grayScale30" size={16} type="store" />
               <Text styleType="caption01M">판매중</Text>
             </StyledUserProductTitleWrapper>
-            <Text styleType="caption01M">{CountOfOnSaleProducts}개</Text>
+            <Text styleType="caption01M">{sellingArticleCount}개</Text>
           </StyledUserProductRow>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="checkCircle" />
               <Text styleType="caption01M">거래완료</Text>
             </StyledUserProductTitleWrapper>
-            <Text styleType="caption01M">{CountOfCompletedProducts}개</Text>
+            <Text styleType="caption01M">{offerCount}개</Text>
           </StyledUserProductRow>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="smile" />
               <Text styleType="caption01M">거래후기</Text>
             </StyledUserProductTitleWrapper>
-            <Text styleType="caption01M">{CountOfReview}개</Text>
+            <Text styleType="caption01M">{reviewCount}개</Text>
           </StyledUserProductRow>
           <StyledUserProductRow>
             <StyledUserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="heart" />
               <Text styleType="caption01M">관심상품</Text>
             </StyledUserProductTitleWrapper>
-            <Text styleType="caption01M">{CountOfFavoriteProducts}개</Text>
+            <Text styleType="caption01M">{likedArticleCount}개</Text>
           </StyledUserProductRow>
         </StyledUserProductWrapper>
       </StyledProfileWrapper>

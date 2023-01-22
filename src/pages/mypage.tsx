@@ -8,6 +8,7 @@ import type { ProductItem } from '@components'
 import { ProfileBox, ProductList } from '@components'
 import type { ProductStatusKeys } from '@constants'
 import { useIsomorphicLayoutEffect } from '@hooks'
+import { myProfile } from '@mocks/fixture'
 
 /** API Fixture */
 const sortItems = [
@@ -24,15 +25,6 @@ const sortItems = [
     value: 'lowPrice'
   }
 ]
-const userFixture = {
-  CountOfCompletedProducts: 0,
-  CountOfFavoriteProducts: 0,
-  CountOfOnSaleProducts: 0,
-  CountOfReview: 0,
-  level: '1',
-  nickName: '닉네임',
-  profileImg: ''
-}
 let productsFixture = Array.from({ length: 15 }, () => 0).map((_, index) => {
   return {
     date: '2023.01.17',
@@ -105,7 +97,7 @@ const MyPage = (): ReactElement => {
 
   return (
     <StyledContentWrapper>
-      <ProfileBox {...userFixture} />
+      <ProfileBox {...myProfile} />
       <StyledDivider size="bold" />
       <StyledUserProductsWrapper>
         <StyledSearchOptionsWrapper>

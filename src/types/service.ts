@@ -81,7 +81,7 @@ export interface PageInfo {
   isLastPage: boolean
 }
 
-/** offer */
+/** Offer */
 export interface Offer {
   offer: OfferInfo
   offerCountOfCurrentMember: number

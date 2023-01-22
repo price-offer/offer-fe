@@ -29,7 +29,7 @@ export const handlers = [
   }),
 
   /**
-   * 상품 판매 상태 변경 (patch, tradeStatus의 code 전달, response X, status code)
+   * 상품 판매 상태 변경
    * /articles/{articleId}
    * body: {
    *   tradeStatus: {

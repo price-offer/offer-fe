@@ -6,6 +6,7 @@ import { fonts } from './fonts'
 import { input } from './input'
 import { mediaQuery } from './mediaQuery'
 import { radius } from './radius'
+import { selectBox } from './selectBox'
 import { zIndex } from './zIndex'
 
 export const theme = {
@@ -17,5 +18,6 @@ export const theme = {
   input,
   mediaQuery,
   radius,
+  selectBox,
   zIndex
 }

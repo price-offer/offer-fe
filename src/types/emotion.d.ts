@@ -8,6 +8,7 @@ import type {
   Input,
   MediaQuery,
   Radius,
+  SelectBox,
   ZIndex
 } from '@themes'
 
@@ -22,5 +23,6 @@ declare module '@emotion/react' {
     avatar: Avatar
     input: Input
     ctaButton: CTAButton
+    selectBox: SelectBox
   }
 }

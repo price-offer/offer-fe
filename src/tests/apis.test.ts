@@ -50,7 +50,8 @@ describe('/apis', async () => {
     expect(res).toStrictEqual(articles)
   })
 
-  it('updateProductTradeStatus() - 함수 호출 시, articleId가 1인 게시글의 tradeStatus가 거래완료로 변경되어야 합니다.', async () => {
+  // NOTE: 실제 api에 사용되고 있는 데이터를 수정하고 있어 skip 처리 하였습니다. api 사용 형태만 확인해주세요!
+  it.skip('updateProductTradeStatus() - 함수 호출 시, articleId가 1인 게시글의 tradeStatus가 거래완료로 변경되어야 합니다.', async () => {
     // Given
     const articleId = '4'
     const tradeStatus: TradeStatus = {
@@ -59,7 +60,7 @@ describe('/apis', async () => {
     }
     // When
     await updateProductTradeStatus(articleId, tradeStatus)
-    const res = articles.elements[0] // API Fixture로 대체중
+    const res = articles.elements[0]
 
     // Then
     expect(res.tradeStatus).toStrictEqual(tradeStatus)

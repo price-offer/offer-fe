@@ -9,6 +9,10 @@ export const avatar = {
   large: `
     width: 112px;
     height: 112px;
+    & img {
+      width: 112px;
+      height: 112px;
+    }
     & svg {
       width: 55px;
       height: 55px;
@@ -16,6 +20,10 @@ export const avatar = {
   medium: `
     width: 80px;
     height: 80px;
+    & img {
+      width: 80px;
+      height: 80px;
+    }
     & svg {
       width: 40px;
       height: 40px;
@@ -23,6 +31,10 @@ export const avatar = {
   small: `
     width: 46px;
     height: 46px;
+    & img {
+      width: 46px;
+      height: 46px;
+    }
     & svg {
       width: 23px;
       height: 23px;
@@ -30,6 +42,10 @@ export const avatar = {
   xsmall: `
     width: 32px;
     height: 32px;
+    & img {
+      width: 32px;
+      height: 32px;
+    }
     & svg {
       width: 16px;
       height: 16px;

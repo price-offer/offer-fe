@@ -15,12 +15,12 @@ export const input = {
                 color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.body01R}
-                color: ${colors.grayScale90};'
+                ${fonts.body01R};
+                color: ${colors.grayScale90};
             }
             &:focus{
-                ${fonts.body01R}
-                color: ${colors.grayScale90};'
+                ${fonts.body01R};
+                color: ${colors.grayScale90};
             }
         }
     }`,
@@ -61,11 +61,11 @@ export const input = {
             }
             $:hover{
                 ${fonts.subtitle01M};
-                color:${colors.grayScale90}
+                color:${colors.grayScale90};
             }
             $:focus{
                 ${fonts.subtitle01M};
-                color:${colors.grayScale90}
+                color:${colors.grayScale90};
             }
         }`,
       isPrice: `

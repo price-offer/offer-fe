@@ -57,7 +57,10 @@ export const articles: Articles = {
       },
       createdDate: '2021-12-10T14:25:30',
       modifiedDate: '2021-12-10T14:25:30',
-      isLiked: false
+      isLiked: false,
+      likeCount: 0,
+      isReviewed: false,
+      sellerNickName: 'hypeboy'
     },
     {
       id: 2,
@@ -71,7 +74,10 @@ export const articles: Articles = {
       },
       createdDate: '2021-12-10T14:23:53',
       modifiedDate: '2021-12-10T14:23:53',
-      isLiked: false
+      isLiked: false,
+      likeCount: 0,
+      isReviewed: false,
+      sellerNickName: 'hypeboy'
     }
   ],
   pageInfo: {

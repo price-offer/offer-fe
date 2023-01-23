@@ -28,8 +28,8 @@ export const BuyTypeProduct = (props: BuyTypeProductProps): ReactElement => {
   const isOfferType = activityType === 'offer'
 
   return (
-    <StyledContainer>
-      <StyledProductWrapper className={className}>
+    <StyledContainer className={className}>
+      <StyledProductWrapper>
         <StyledProductImg alt={`product${id}-img`} src={mainImageUrl} />
         <StyledProductMetaWrapper>
           <StyledSellerName styleType="body02R">

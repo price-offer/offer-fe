@@ -36,8 +36,8 @@ export const SellTypeProduct = (props: SellTypeProductProps): ReactElement => {
   }
 
   return (
-    <StyledContainer>
-      <StyledProductWrapper className={className} hasToken={hasToken}>
+    <StyledContainer className={className}>
+      <StyledProductWrapper hasToken={hasToken}>
         <StyledProductImg alt={`product${id}-img`} src={mainImageUrl} />
         {hasToken ? (
           <StyledSelectBox

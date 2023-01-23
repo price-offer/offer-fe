@@ -7,7 +7,6 @@ export const input = {
     large: `
         &>input: {
             height: 48px;
-            width: 639px;
             padding: 12px 60px 12px 20px;
 
             &::placeholder{
@@ -28,7 +27,6 @@ export const input = {
     small: `
         &>input: {
             height: 40px;
-            width: 328px;
             padding: 10px 52px 10px 12px;
 
             &::placeholder{
@@ -51,7 +49,6 @@ export const input = {
       default: `
         &>input: {
             margin: 8px 0;
-            width: 328px;
             height: 54px;
             border: none;
             padding: 16px 12px 16px 12px;
@@ -71,7 +68,6 @@ export const input = {
       isPrice: `
         &>input: {
             margin: 8px 0;
-            width: 328px;
             height: 54px;
             border: none;
             padding: 16px 35px 16px 12px;
@@ -94,7 +90,6 @@ export const input = {
       default: `
         &>input: {
             margin: 8px 0;
-            width: 328px;
             height: 40px;
             border: none;
             padding: 10px 12px 10px 12px;
@@ -114,7 +109,6 @@ export const input = {
       isPrice: `
         &>input: {
             margin: 8px 0;
-            width: 328px;
             height: 54px;
             border: none;
             padding: 10px 35px 10px 12px;
@@ -137,7 +131,6 @@ export const input = {
     large: {
       input: `
         &>input: {
-            width: 714px;
             height: 36px;
 
             &::placeholder{
@@ -158,7 +151,6 @@ export const input = {
     small: {
       input: `
         &>input: {
-            width: 360px;
             height: 36px;
 
             &::placeholder{
@@ -180,7 +172,6 @@ export const input = {
     large: `
         &>input:{
             padding: 18px 12px 18px 43px;
-            width: 360px;
             height: 56px;
 
             &::placeholder{
@@ -202,7 +193,6 @@ export const input = {
     small: `
         &>input:{
             padding: 10px 12px 10px 43px;
-            width: 328px;
             height: 40px;
 
             &::placeholder{

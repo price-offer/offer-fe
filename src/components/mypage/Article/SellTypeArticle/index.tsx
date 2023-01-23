@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { Image, SelectBox, Icon, Text, Button } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { TRADE_STATUS_OPTIONS } from '@constants'
+import { TRADE_STATUS } from '@constants'
 import type { ArticlesElement, TradeStatus } from '@types'
 import { toLocaleCurrency } from '@utils'
 
@@ -41,7 +41,7 @@ export const SellTypeArticle = (props: SellTypeArticleProps): ReactElement => {
         <StyledProductImg alt={`product${id}-img`} src={mainImageUrl} />
         {hasToken ? (
           <StyledSelectBox
-            items={TRADE_STATUS_OPTIONS}
+            items={TRADE_STATUS}
             value={tradeStatus.code}
             onChange={handleChangeTradeStatus}
           />

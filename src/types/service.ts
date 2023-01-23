@@ -71,6 +71,9 @@ export interface ArticlesElement {
   createdDate: string
   modifiedDate: string
   isLiked: boolean
+  likeCount: number
+  isReviewed: boolean
+  sellerNickName: string
 }
 export interface PageInfo {
   currentPageNumber: number

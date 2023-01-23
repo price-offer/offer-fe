@@ -2,18 +2,18 @@ import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import type { SellTypeProductProps } from './index'
-import { SellTypeProduct } from './index'
+import type { SellTypeArticleProps } from './index'
+import { SellTypeArticle } from './index'
 import { TRADE_STATUS_OPTIONS } from '@constants'
 import type { TradeStatus } from '@types'
 
 export default {
   argTypes: {},
-  component: SellTypeProduct,
-  title: 'Components/MyPage/Product/SellTypeProduct'
-} as Meta<SellTypeProductProps>
+  component: SellTypeArticle,
+  title: 'Components/MyPage/Article/SellTypeArticle'
+} as Meta<SellTypeArticleProps>
 
-const Template: Story<SellTypeProductProps> = args => {
+const Template: Story<SellTypeArticleProps> = args => {
   const [tradeStatus, setTradeStatus] = useState<TradeStatus>(
     TRADE_STATUS_OPTIONS[0]
   )
@@ -33,16 +33,16 @@ const Template: Story<SellTypeProductProps> = args => {
         </button>
       </div>
       <Text styleType="subtitle01B">내 사용자</Text>
-      <SellTypeProduct {...args} hasToken tradeStatus={tradeStatus} />
-      <SellTypeProduct
+      <SellTypeArticle {...args} hasToken tradeStatus={tradeStatus} />
+      <SellTypeArticle
         {...args}
         hasToken
         isReviewed
         tradeStatus={tradeStatus}
       />
       <Text styleType="subtitle01B">타 사용자</Text>
-      <SellTypeProduct {...args} hasToken={false} tradeStatus={tradeStatus} />
-      <SellTypeProduct {...args} hasToken={false} tradeStatus={tradeStatus} />
+      <SellTypeArticle {...args} hasToken={false} tradeStatus={tradeStatus} />
+      <SellTypeArticle {...args} hasToken={false} tradeStatus={tradeStatus} />
     </>
   )
 }

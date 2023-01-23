@@ -2,23 +2,23 @@ import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import { SellTypeProductList } from './index'
-import type { SellTypeProductListProps } from './index'
+import { SellTypeArticleList } from './index'
+import type { SellTypeArticleListProps } from './index'
 import { TRADE_STATUS_OPTIONS } from '@constants'
 import type { ArticlesElement, TradeStatus, TradeStatusCode } from '@types'
 
 export default {
   argTypes: {},
-  component: SellTypeProductList,
-  title: 'Components/MyPage/ProductList/SellTypeProductList'
-} as Meta<SellTypeProductListProps>
+  component: SellTypeArticleList,
+  title: 'Components/MyPage/ArticleList/SellTypeArticleList'
+} as Meta<SellTypeArticleListProps>
 
-const Template: Story<SellTypeProductListProps> = args => {
+const Template: Story<SellTypeArticleListProps> = args => {
   const [token, setToken] = useState<boolean>(false)
   const [tradeStatus, setTradeStatus] = useState<TradeStatus>(
     TRADE_STATUS_OPTIONS[0]
   )
-  const products = getProducts(tradeStatus.code)
+  const articles = getArticles(tradeStatus.code)
 
   return (
     <>
@@ -45,12 +45,12 @@ const Template: Story<SellTypeProductListProps> = args => {
       <div>
         <Text styleType="subtitle01B">{tradeStatus.name}</Text>
       </div>
-      <SellTypeProductList {...args} hasToken={token} products={products} />
+      <SellTypeArticleList {...args} articles={articles} hasToken={token} />
     </>
   )
 }
 
-const getProducts = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
+const getArticles = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
   const isOnSale = tradeStatusCode === 4
   const tradeStatus = isOnSale
     ? TRADE_STATUS_OPTIONS[0]
@@ -75,7 +75,7 @@ const getProducts = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
 export const Primary = Template.bind({})
 Primary.args = {
   hasToken: true,
-  products: [],
+  articles: [],
   onChangeTradeStatus: (id: number, status: TradeStatus): void => {
     action('onChangeTradeStatus')(id, status)
   }

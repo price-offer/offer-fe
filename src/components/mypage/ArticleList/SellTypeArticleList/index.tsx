@@ -1,33 +1,33 @@
 import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
-import { SellTypeProduct } from '../../Product'
+import { SellTypeArticle } from '../../Article'
 import type { ArticlesElement, TradeStatus } from '@types'
 
-export interface SellTypeProductListProps {
-  products: ArticlesElement[]
+export interface SellTypeArticleListProps {
+  articles: ArticlesElement[]
   className?: string
   hasToken: boolean
   onChangeTradeStatus(productId: number, status: TradeStatus): void
 }
 
-export const SellTypeProductList = ({
-  products,
+export const SellTypeArticleList = ({
+  articles,
   hasToken,
   onChangeTradeStatus,
   className
-}: SellTypeProductListProps): ReactElement => {
+}: SellTypeArticleListProps): ReactElement => {
   return (
     <ul className={className}>
-      {products.map((product, index) => {
+      {articles.map((article, index) => {
         return (
-          <Fragment key={product.id}>
-            <SellTypeProduct
-              {...product}
+          <Fragment key={article.id}>
+            <SellTypeArticle
+              {...article}
               hasToken={hasToken}
               onChangeTradeStatus={onChangeTradeStatus}
             />
-            {index !== products.length - 1 && <Divider size="bold" />}
+            {index !== articles.length - 1 && <Divider size="bold" />}
           </Fragment>
         )
       })}

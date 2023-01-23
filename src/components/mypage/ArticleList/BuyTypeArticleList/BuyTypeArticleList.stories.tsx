@@ -1,19 +1,19 @@
 import { Text } from '@offer-ui/react'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import { BuyTypeProductList } from './index'
-import type { BuyTypeProductListProps } from './index'
+import { BuyTypeArticleList } from './index'
+import type { BuyTypeArticleListProps } from './index'
 import type { TradeBuyActivityType } from '@constants/app'
 import { TRADE_ACTIVITY_TYPE } from '@constants/app'
 import type { ArticlesElement } from '@types'
 
 export default {
   argTypes: {},
-  component: BuyTypeProductList,
-  title: 'Components/MyPage/ProductList/BuyTypeProductList'
-} as Meta<BuyTypeProductListProps>
+  component: BuyTypeArticleList,
+  title: 'Components/MyPage/ArticleList/BuyTypeArticleList'
+} as Meta<BuyTypeArticleListProps>
 
-const products: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
+const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
   (_, index) => ({
     id: index,
     mainImageUrl: '',
@@ -33,7 +33,7 @@ const products: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
   })
 )
 
-const Template: Story<BuyTypeProductListProps> = args => {
+const Template: Story<BuyTypeArticleListProps> = args => {
   const [activityType, setActivityType] =
     useState<TradeBuyActivityType>('offer')
 
@@ -50,12 +50,12 @@ const Template: Story<BuyTypeProductListProps> = args => {
           {TRADE_ACTIVITY_TYPE.buy[activityType]}
         </Text>
       </div>
-      <BuyTypeProductList {...args} activityType={activityType} />
+      <BuyTypeArticleList {...args} activityType={activityType} />
     </>
   )
 }
 export const Primary = Template.bind({})
 Primary.args = {
   activityType: 'offer',
-  products
+  articles
 }

@@ -7,7 +7,7 @@ import type { ArticlesElement, TradeStatus } from '@types'
 import { toLocaleCurrency } from '@utils'
 
 // NOTE: ArticlesElement 타입에 없어서 임시로 추가한 부분 : likeCount, review, sellerName
-export interface SellTypeProductProps extends ArticlesElement {
+export interface SellTypeArticleProps extends ArticlesElement {
   // 내 사용자 프로필, 타 사용자 프로필 구분
   hasToken: boolean
   className?: string
@@ -15,7 +15,7 @@ export interface SellTypeProductProps extends ArticlesElement {
   onChangeTradeStatus(productId: number, status: TradeStatus): void
 }
 
-export const SellTypeProduct = (props: SellTypeProductProps): ReactElement => {
+export const SellTypeArticle = (props: SellTypeArticleProps): ReactElement => {
   const {
     className,
     id,

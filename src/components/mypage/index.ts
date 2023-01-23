@@ -1,3 +1,3 @@
-export * from './Product'
-export * from './ProductList'
+export * from './Article'
+export * from './ArticleList'
 export * from './ProfileBox'

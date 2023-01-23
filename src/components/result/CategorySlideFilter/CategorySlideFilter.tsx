@@ -1,6 +1,6 @@
+import styled from '@emotion/styled'
 import { IconButton } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import styled from '@emotion/styled'
 
 interface CategorySliderProps {
   cateGoryList: {
@@ -25,29 +25,12 @@ const CategorySlideFilter = ({
       <div>
         <CateGoryBox>
           <ArrowBox>
-            <RightArrowWrapper>
-              <Arrow
-                colorType="white"
-                icon="arrowLeft"
-                shape="rounded"
-                size="small"
-                style={{
-                  filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))'
-                }}
-              />
-            </RightArrowWrapper>
             <LeftArrowWrapper>
-              <Arrow
-                colorType="white"
-                icon="arrowLeft"
-                shape="rounded"
-                size="small"
-                style={{
-                  filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))',
-                  transform: 'scaleX(-1)'
-                }}
-              />
+              <LeftArrow color="black" icon="arrowLeft" size={16} />
             </LeftArrowWrapper>
+            <RightArrowWrapper>
+              <RightArrow color="black" icon="arrowLeft" size={16} />
+            </RightArrowWrapper>
           </ArrowBox>
           {cateGoryList.map(cateGory => (
             <CategoryItem key={cateGory.title} selected={cateGory.selected}>
@@ -83,7 +66,7 @@ const CategoryHeader = styled.div`
 
 const CategoryHeaderResultCount = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
-  color:${({ theme }): string => theme.colors.grayScale.gray50};
+  color:${({ theme }): string => theme.colors.grayScale50};
   margin-top: 42px;
   margin-bottom: 22px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -113,7 +96,24 @@ const ArrowBox = styled.div`
   justify-content: space-between;
 `
 
-const RightArrowWrapper = styled.div`
+const RightArrow = styled(IconButton)`
+  background-color: ${({ theme }): string => theme.colors.white};
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+  transform: scaleX(-1);
+`
+
+const LeftArrow = styled(IconButton)`
+  background-color: ${({ theme }): string => theme.colors.white};
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+`
+
+const LeftArrowWrapper = styled.div`
   width: 68px;
   height: 28px;
   background: linear-gradient(
@@ -123,7 +123,7 @@ const RightArrowWrapper = styled.div`
   );
 `
 
-const LeftArrowWrapper = styled.div`
+const RightArrowWrapper = styled.div`
   display: flex;
   justify-content: end;
   width: 68px;
@@ -134,23 +134,18 @@ const LeftArrowWrapper = styled.div`
     rgba(255, 255, 255, 0) 100%
   );
 `
-const Arrow = styled(IconButton)``
 
 const CategoryItem = styled.div<CategoryItemProps>`
   padding: 4px 16px;
   border-radius: 4px;
   ${({ selected, theme }): string => `
-  background-color:${
-    selected ? theme.colors.grayScale.black : theme.colors.background.gray02
-  };
+  background-color:${selected ? theme.colors.black : theme.colors.bgGray02};
   `};
 `
 const CateGoryName = styled.div<CategoryItemProps>`
   ${({ theme }): string => theme.fonts.body02M}
   ${({ selected, theme }): string => `
-  color:${
-    selected ? theme.colors.background.white : theme.colors.grayScale.gray70
-  };
+  color:${selected ? theme.colors.white : theme.colors.grayScale70};
   `};
   width: max-content;
   margin-top: 1px;

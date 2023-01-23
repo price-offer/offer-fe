@@ -1,6 +1,6 @@
+import styled from '@emotion/styled'
 import { IconButton, Image } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import styled from '@emotion/styled'
 
 interface CategorySliderProps {
   imageList: {
@@ -17,25 +17,8 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
       <div>
         <CateGoryBox>
           <ArrowBox>
-            <IconButton
-              colorType="white"
-              icon="arrowLeft"
-              shape="rounded"
-              size="small"
-              style={{
-                filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))'
-              }}
-            />
-            <IconButton
-              colorType="white"
-              icon="arrowLeft"
-              shape="rounded"
-              size="small"
-              style={{
-                filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))',
-                transform: 'scaleX(-1)'
-              }}
-            />
+            <LeftArrow color="black" icon="arrowLeft" size={16} />
+            <RightArrow color="black" icon="arrowLeft" size={16} />
           </ArrowBox>
           {imageList.map(cateGory => (
             <CategoryItem key={cateGory.title}>
@@ -87,6 +70,23 @@ const ArrowBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+`
+
+const LeftArrow = styled(IconButton)`
+  background-color: ${({ theme }): string => theme.colors.white};
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+`
+
+const RightArrow = styled(IconButton)`
+  background-color: ${({ theme }): string => theme.colors.white};
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+  transform: scaleX(-1);
 `
 
 const CategoryItem = styled.div`

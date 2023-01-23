@@ -1,7 +1,7 @@
+import styled from '@emotion/styled'
 import { Image, ToggleButton } from '@offer-ui/react'
 
 import type { ReactElement } from 'react'
-import styled from '@emotion/styled'
 
 interface ProductItemProps {
   productItem: {
@@ -24,14 +24,11 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
             src={productItem.imageUrl}
             style={{ maxWidth: '276px' }}
           />
-          <ToggleButton
-            colorType="gray30"
+          <HeartButton
             icon="heart"
-            shape="rounded"
-            size="medium"
-            style={{ bottom: '20px', position: 'absolute', right: '10px' }}
-            styleType="fill"
-            toggleColorType="primary"></ToggleButton>
+            size={16}
+            toggleColor="brandPrimary"
+            toggleIcon="heartFill"></HeartButton>
         </ProductImgWrapper>
         <ProductItemTitle>{productItem.title}</ProductItemTitle>
         <ProductItemStartPrice>시작가</ProductItemStartPrice>
@@ -54,6 +51,16 @@ const ProductImg = styled(Image)`
   }
 `
 
+const HeartButton = styled(ToggleButton)`
+  position: absolute;
+  background-color: ${({ theme }): string => theme.colors.white};
+  width: 25px;
+  height: 24px;
+  border-radius: 100%;
+  bottom: 12px;
+  right: 12px;
+`
+
 const ProductImgWrapper = styled.div`
   max-width: 276px;
   position: relative;
@@ -73,7 +80,7 @@ const ProductItemTitle = styled.div`
 `
 const ProductItemStartPrice = styled.span`
   ${({ theme }): string => theme.fonts.body02M};
-  color: ${({ theme }): string => theme.colors.grayScale.gray70};
+  color: ${({ theme }): string => theme.colors.grayScale70};
 `
 
 const ProductItemPrice = styled.span`
@@ -82,5 +89,5 @@ const ProductItemPrice = styled.span`
 
 const ProductItemAddress = styled.div`
   ${({ theme }): string => theme.fonts.caption01M}
-  color:${({ theme }): string => theme.colors.grayScale.gray50}
+  color:${({ theme }): string => theme.colors.grayScale50}
 `

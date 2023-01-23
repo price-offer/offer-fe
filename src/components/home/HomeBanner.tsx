@@ -1,7 +1,6 @@
+import styled from '@emotion/styled'
 import { Badge, Button } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-
-import styled from '@emotion/styled'
 
 const HomeBanner = (): ReactElement => {
   return (
@@ -131,8 +130,8 @@ const BannerRightTextWrapper = styled.div`
   }
 `
 const BannerRightNewBadge = styled(Badge)`
-  background-color: ${({ theme }): string => theme.colors.brand.primary};
-  color: ${({ theme }): string => theme.colors.grayScale.gray05};
+  background-color: ${({ theme }): string => theme.colors.bgPrimary};
+  color: ${({ theme }): string => theme.colors.grayScale05};
   height: 24px;
   width: 41px;
   padding-top: 3px;
@@ -143,7 +142,7 @@ const BannerRightNewBadge = styled(Badge)`
 
 const BannerRightText1 = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
-  color:${({ theme }): string => theme.colors.grayScale.white};
+  color:${({ theme }): string => theme.colors.white};
   border-bottom: solid;
   ${({ theme }): string => theme.mediaQuery.mobile} {
     ${({ theme }): string => theme.fonts.subtitle01B}

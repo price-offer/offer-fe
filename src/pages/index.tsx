@@ -1,6 +1,5 @@
-import { HomeContainer } from '@containers/home/HomeContainer'
-
 import type { NextPage } from 'next'
+import { HomeContainer } from '@containers/home/HomeContainer'
 
 const Home: NextPage = () => {
   return (

@@ -1,11 +1,8 @@
-import { CategorySlideFilter } from '@components/result/CategorySlideFilter/CategorySlideFilter'
-
-import { ProductList } from '@components/home/ProductList'
-
-import type { ReactElement } from 'react'
-
-import { SelectBox } from '@offer-ui/react'
 import styled from '@emotion/styled'
+import { SelectBox } from '@offer-ui/react'
+import type { ReactElement } from 'react'
+import { ProductList } from '@components/home/ProductList'
+import { CategorySlideFilter } from '@components/result/CategorySlideFilter/CategorySlideFilter'
 
 CategorySlideFilter
 const ResultContainer = (): ReactElement => {
@@ -104,7 +101,7 @@ const ResultContainer = (): ReactElement => {
       <HomeWrapper>
         <CategorySlideFilter cateGoryList={cateGoryList} searchResult="###" />
         <SelectWrapper>
-          <SelectBox
+          {/* <SelectBox
             colorType="light"
             items={[
               {
@@ -167,7 +164,7 @@ const ResultContainer = (): ReactElement => {
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             onChange={(): void => {}}>
             dadfasds
-          </SelectBox>
+          </SelectBox> */}
         </SelectWrapper>
 
         <ProductList productList={productList} />

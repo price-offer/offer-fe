@@ -1,11 +1,9 @@
+import styled from '@emotion/styled'
+import type { ReactElement } from 'react'
+import { ProductList } from '../../components/home/ProductList'
+import { IMAGE } from '../../constants/images'
 import { CategorySlider } from '@components/home/CategorySlider/CategorySlider'
 import { HomeBanner } from '@components/home/HomeBanner'
-import { IMAGE } from '../../constants/images'
-import { ProductList } from '../../components/home/ProductList'
-
-import type { ReactElement } from 'react'
-
-import styled from '@emotion/styled'
 
 const HomeContainer = (): ReactElement => {
   //여기서 데이터 패칭

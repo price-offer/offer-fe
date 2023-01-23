@@ -84,7 +84,7 @@ export const input = {
                 color:${colors.grayScale90};
             }
             $:focus{
-                ${fonts.subtitle01M}
+                ${fonts.subtitle01M};
                 color:${colors.grayScale90};
             }
         }`

@@ -1,5 +1,5 @@
+import { colors } from './colors'
 import { fonts } from './fonts'
-
 export type Input = typeof input
 
 export const input = {
@@ -11,13 +11,16 @@ export const input = {
             padding: 12px 60px 12px 20px;
 
             &::placeholder{
-               ${fonts.body01R} color: #929399;
+               ${fonts.body01R};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.body01R} color: #2F2E36;
+                ${fonts.body01R}
+                color: ${colors.grayScale90};'
             }
             &:focus{
-                ${fonts.body01R} color: #2F2E36;'
+                ${fonts.body01R}
+                color: ${colors.grayScale90};'
             }
         }
     }`,
@@ -29,13 +32,16 @@ export const input = {
             padding: 10px 52px 10px 12px;
 
             &::placeholder{
-                ${fonts.body02R} color: #929399;
+                ${fonts.body02R};
+                 color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.body02R} color: #2F2E36;
+                ${fonts.body02R};
+                 color: ${colors.grayScale90};
             }
             $:focus{
-                ${fonts.body02R} color: #2F2E36;
+                ${fonts.body02R};
+                color: ${colors.grayScale90};
             }
         },
     `
@@ -50,13 +56,16 @@ export const input = {
             border: none;
             padding: 16px 12px 16px 12px;
             &::placeholder{
-                ${fonts.subtitle01M} color: #929399;
+                ${fonts.subtitle01M};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.subtitle01M} color: #2F2E36;
+                ${fonts.subtitle01M};
+                color:${colors.grayScale90}
             }
             $:focus{
-                ${fonts.subtitle01M} color: #2F2E36;
+                ${fonts.subtitle01M};
+                color:${colors.grayScale90}
             }
         }`,
       isPrice: `
@@ -67,13 +76,16 @@ export const input = {
             border: none;
             padding: 16px 35px 16px 12px;
             &::placeholder{
-                ${fonts.subtitle01M} color: #929399;
+                ${fonts.subtitle01M};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.subtitle01M} color: #2F2E36;
+                ${fonts.subtitle01M};
+                color:${colors.grayScale90};
             }
             $:focus{
-                ${fonts.subtitle01M} color: #2F2E36;
+                ${fonts.subtitle01M}
+                color:${colors.grayScale90};
             }
         }`
     },
@@ -87,13 +99,16 @@ export const input = {
             border: none;
             padding: 10px 12px 10px 12px;
             &::placeholder{
-                ${fonts.body02M} color: #929399;
+                ${fonts.body02M};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.body02M} color: #2F2E36;
+                ${fonts.body02M};
+                color:${colors.grayScale90};
             }
             $:focus{
-                ${fonts.caption01M} color: #4AB783;
+                ${fonts.caption01M};
+                color:${colors.actSuccess};
             }
         }`,
       isPrice: `
@@ -104,13 +119,16 @@ export const input = {
             border: none;
             padding: 10px 35px 10px 12px;
             &::placeholder{
-                ${fonts.body02M} color: #929399;
+                ${fonts.body02M};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.body02M}  color: #2F2E36;
+                ${fonts.body02M};
+                color:${colors.grayScale90};
             }
             $:focus{
-                ${fonts.body02M} color: #2F2E36;
+                ${fonts.body02M};
+                color:${colors.grayScale90};
             }
         }`
     }
@@ -123,13 +141,16 @@ export const input = {
             height: 36px;
 
             &::placeholder{
-                ${fonts.display02M} color: #929399;
+                ${fonts.display02M};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.display02M} color: #2F2E36;
+                ${fonts.display02M};
+                color:${colors.grayScale90};
             }
             $:focus{
-                ${fonts.display02M} color: #2F2E36;
+                ${fonts.display02M};
+                color:${colors.grayScale90};
             }
         },`
     },
@@ -141,13 +162,16 @@ export const input = {
             height: 36px;
 
             &::placeholder{
-                ${fonts.body01R} color: #929399;
+                ${fonts.body01R};
+                color: ${colors.grayScale50};
             }
             $:hover{
-                ${fonts.body01R} color: #2F2E36;
+                ${fonts.body01R};
+                color:${colors.grayScale90};
             }
             $:focus{
-                ${fonts.body01R} color: #2F2E36;
+                ${fonts.body01R};
+                color:${colors.grayScale90};
             }
         },`
     }
@@ -160,15 +184,18 @@ export const input = {
             height: 56px;
 
             &::placeholder{
-                ${fonts.body01R} color: #929399;
+                ${fonts.body01R};
+                color: ${colors.grayScale50};
             }
 
             $:hover{
-                ${fonts.body01R} color: #2F2E36;
+                ${fonts.body01R};
+                color:${colors.grayScale90};
             }
 
             $:focus{
-                ${fonts.body01R} color: #2F2E36;
+                ${fonts.body01R};
+                color:${colors.grayScale90};
             }
         }
     `,
@@ -179,15 +206,18 @@ export const input = {
             height: 40px;
 
             &::placeholder{
-                ${fonts.body02R} color: #929399;,
+                ${fonts.body02R};
+                color: ${colors.grayScale50};
             }
 
             $:hover{
-                ${fonts.body02R} color: #2F2E36;
+                ${fonts.body02R};
+                color:${colors.grayScale90};
             }
 
             $:focus{
-                ${fonts.body02R} color: #2F2E36;
+                ${fonts.body02R};
+                color:${colors.grayScale90};
             }
         }
     `

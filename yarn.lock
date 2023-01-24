@@ -1837,10 +1837,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@offer-ui/react@^0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.18.tgz#7493eec7aad8a62b15c382d745a829b8e80f752a"
-  integrity sha512-hmNup14TMg/rid8Tgw7UuQh7C5RXiiZptq1qYvYu4l+CD6oFjh6NaRGJB49sqwDO7oNNhfwnQ0OxJTDnrFTH5g==
+"@offer-ui/react@^0.1.22":
+  version "0.1.22"
+  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.22.tgz#bbecbf104ea2bb33c95db04eaa59ee164ab59618"
+  integrity sha512-w1GbhmUORB8Nk7dLCisJ5ql+TVc5sdVXwt8+bZlxUttdONV0BkV1tanjKmTs+nSADUZFvlTQq2VZieR+siYXtg==
 
 "@open-draft/until@^1.0.3":
   version "1.0.3"

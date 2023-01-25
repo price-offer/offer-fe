@@ -46,12 +46,14 @@ export const BuyTypeArticle = (props: BuyTypeArticleProps): ReactElement => {
         </StyledProductMetaWrapper>
       </StyledProductWrapper>
       {isOfferType ? (
-        <StyledReviewButton
-          isReviewed={isReviewed}
-          size="small"
-          styleType="outline">
-          {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
-        </StyledReviewButton>
+        <StyledReviewButtonWrapper>
+          <StyledReviewButton
+            isReviewed={isReviewed}
+            size="small"
+            styleType="outline">
+            {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
+          </StyledReviewButton>
+        </StyledReviewButtonWrapper>
       ) : (
         <StyledLikeButton color="grayScale90" size="small" styleType="outline">
           관심 {likeCount}
@@ -81,7 +83,7 @@ const StyledProductWrapper = styled.div`
     grid-template-columns: 90px 1fr;
     align-items: center;
     gap: 16px;
-    padding: 20px;
+    padding: 20px 0 20px 20px;
 
     ${theme.mediaQuery.tablet} {
       grid-template-columns: 68px 1fr;
@@ -137,7 +139,7 @@ const StyledProductMetaWrapper = styled.div`
 const StyledProductName = styled(Text)`
   ${({ theme }): string => `
     text-align: center;
-    max-width: 245px;
+    width: 150px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -158,7 +160,6 @@ const StyledProductInfoWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
-    min-width: 450px;
     justify-content: space-around;
     gap: 12px;
 
@@ -181,6 +182,10 @@ const StyledPrice = styled.span`
 `
 const StyledTradeStatusName = styled(Text)`
   ${({ theme }): string => `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
     color: ${theme.colors.grayScale50};
 
     ${theme.mediaQuery.tablet} {
@@ -200,21 +205,38 @@ const StyledDate = styled(Text)`
     }
   `}
 `
+const StyledReviewButtonWrapper = styled.div`
+  ${({ theme }): string => `
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    align-items: flex-end;
+
+    ${theme.mediaQuery.tablet} {
+      display: flex;
+      align-items: center;
+    }
+  `}
+`
 const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
   ${({ theme, isReviewed }): string => `
     color: ${isReviewed ? theme.colors.grayScale70 : theme.colors.brandPrimary};
+    margin-right: 20px;
 
     ${theme.mediaQuery.tablet} {
+      width: 100%;
       border: none;
       border-top: 1px solid ${theme.colors.grayScale10};
       border-radius: 0;
-      padding: 20px;
+      padding: 20px 0;
+      margin-right: 0;
     }
   `}
 `
 const StyledLikeButton = styled(Button)`
   ${({ theme }): string => `
     color: ${theme.colors.grayScale90};
+    margin-right: 20px;
 
     ${theme.mediaQuery.tablet} {
       display: none;

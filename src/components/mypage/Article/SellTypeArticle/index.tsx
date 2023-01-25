@@ -66,12 +66,14 @@ export const SellTypeArticle = (props: SellTypeArticleProps): ReactElement => {
         </StyledProductMetaWrapper>
       </StyledProductWrapper>
       {hasToken && isSoldOut && (
-        <StyledReviewButton
-          isReviewed={isReviewed}
-          size="small"
-          styleType="outline">
-          {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
-        </StyledReviewButton>
+        <StyledReviewButtonWrapper>
+          <StyledReviewButton
+            isReviewed={isReviewed}
+            size="small"
+            styleType="outline">
+            {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
+          </StyledReviewButton>
+        </StyledReviewButtonWrapper>
       )}
     </StyledContainer>
   )
@@ -97,7 +99,7 @@ const StyledProductWrapper = styled.div<{ hasToken: boolean }>`
     grid-template-columns: ${hasToken ? '90px 90px 1fr' : '90px 1fr'};
     align-items: center;
     gap: 16px;
-    padding: 20px;
+    padding: 20px 0 20px 20px;
 
     ${theme.mediaQuery.tablet} {
       grid-template-columns: 68px 1fr 90px;
@@ -137,6 +139,7 @@ const StyledProductMetaWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
+    justify-content: space-around;
     order: 3;
 
     ${theme.mediaQuery.tablet} {
@@ -150,7 +153,7 @@ const StyledProductMetaWrapper = styled.div`
 const StyledProductName = styled(Text)`
   ${({ theme }): string => `
     text-align: center;
-    width: 314px;
+    width: 150px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -169,7 +172,6 @@ const StyledProductName = styled(Text)`
 const StyledProductInfoWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: space-around;
     gap: 12px;
@@ -218,15 +220,31 @@ const StyledDate = styled(Text)<{ hasToken: boolean }>`
     }
   `}
 `
-const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
-  ${({ theme, isReviewed }): string => `
-    color: ${isReviewed ? theme.colors.brandPrimary : theme.colors.grayScale70};
+const StyledReviewButtonWrapper = styled.div`
+  ${({ theme }): string => `
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    align-items: flex-end;
 
     ${theme.mediaQuery.tablet} {
+      display: flex;
+      align-items: center;
+    }
+  `}
+`
+const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
+  ${({ theme, isReviewed }): string => `
+    color: ${isReviewed ? theme.colors.grayScale70 : theme.colors.brandPrimary};
+    margin-right: 20px;
+
+    ${theme.mediaQuery.tablet} {
+      width: 100%;
       border: none;
       border-top: 1px solid ${theme.colors.grayScale10};
       border-radius: 0;
-      padding: 20px;
+      padding: 20px 0;
+      margin-right: 0;
     }
   `}
 `

@@ -48,16 +48,12 @@ const ProductListWrapper = styled.div`
   ${({ theme }): string => theme.mediaQuery.tablet} {
     justify-content: center;
     grid-template-columns: repeat(4, minmax(10%, 166px));
-    padding-left: 24px;
-    padding-right: 24px;
     row-gap: 18px;
     column-gap: 20px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     justify-content: center;
     grid-template-columns: repeat(2, minmax(10%, 160px));
-    padding-left: 16px;
-    padding-right: 16px;
     row-gap: 8px;
     column-gap: 20px;
   }

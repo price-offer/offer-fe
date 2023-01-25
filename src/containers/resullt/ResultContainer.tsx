@@ -1,11 +1,21 @@
 import styled from '@emotion/styled'
-import { SelectBox } from '@offer-ui/react'
+import { useMedia } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import { useEffect, useState } from 'react'
 import { ProductList } from '@components/home/ProductList'
+import { ResultHeader } from '@components/result/CategoryHeader'
 import { CategorySlideFilter } from '@components/result/CategorySlideFilter/CategorySlideFilter'
-
-CategorySlideFilter
+import { FilterSelect } from '@components/result/FilterSelect'
 const ResultContainer = (): ReactElement => {
+  const { desktop } = useMedia()
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    if (desktop) setIsDesktop(true)
+    else {
+      setIsDesktop(false)
+    }
+  }, [desktop])
   //여기서 데이터 패칭
   const cateGoryList = [
     {
@@ -99,74 +109,9 @@ const ResultContainer = (): ReactElement => {
   return (
     <Layout>
       <HomeWrapper>
-        <CategorySlideFilter cateGoryList={cateGoryList} searchResult="###" />
-        <SelectWrapper>
-          {/* <SelectBox
-            colorType="light"
-            items={[
-              {
-                text: '직거래/택배거래',
-                value: '0'
-              },
-              {
-                text: '직거래',
-                value: '1'
-              },
-              {
-                text: '택배거래',
-                value: '2'
-              }
-            ]}
-            placeholder="거래방식"
-            value=""
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={(): void => {}}>
-            dadfasds
-          </SelectBox>
-          <SelectBox
-            colorType="light"
-            items={[
-              {
-                text: '직거래/택배거래',
-                value: '0'
-              },
-              {
-                text: '직거래',
-                value: '1'
-              },
-              {
-                text: '택배거래',
-                value: '2'
-              }
-            ]}
-            placeholder="가격"
-            value=""
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={(): void => {}}></SelectBox>
-          <SelectBox
-            colorType="none"
-            items={[
-              {
-                text: '직거래/택배거래',
-                value: '0'
-              },
-              {
-                text: '직거래',
-                value: '1'
-              },
-              {
-                text: '택배거래',
-                value: '2'
-              }
-            ]}
-            placeholder="높은 가격순"
-            value=""
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={(): void => {}}>
-            dadfasds
-          </SelectBox> */}
-        </SelectWrapper>
-
+        <ResultHeader searchResult="###"></ResultHeader>
+        {isDesktop && <CategorySlideFilter cateGoryList={cateGoryList} />}
+        <FilterSelect></FilterSelect>
         <ProductList productList={productList} />
       </HomeWrapper>
     </Layout>
@@ -177,6 +122,14 @@ const HomeWrapper = styled.div`
   border: solid;
   max-width: 1200px;
   width: 100%;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 `
 
 const Layout = styled.div`
@@ -187,8 +140,4 @@ const Layout = styled.div`
   margin-top: 68px;
 `
 
-const SelectWrapper = styled.div`
-  display: flex;
-  margin-top: 25px;
-`
 export { ResultContainer }

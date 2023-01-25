@@ -15,7 +15,7 @@ export default {
 
 const Template: Story<SellTypeArticleListProps> = args => {
   const [token, setToken] = useState<boolean>(false)
-  const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[0])
+  const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[1])
   const articles = getArticles(tradeStatus.code)
 
   return (
@@ -31,12 +31,12 @@ const Template: Story<SellTypeArticleListProps> = args => {
       <div>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[0])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
           판매중
         </button>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[2])}>
           거래완료
         </button>
       </div>
@@ -50,7 +50,7 @@ const Template: Story<SellTypeArticleListProps> = args => {
 
 const getArticles = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
   const isOnSale = tradeStatusCode === 4
-  const tradeStatus = isOnSale ? TRADE_STATUS[0] : TRADE_STATUS[1]
+  const tradeStatus = isOnSale ? TRADE_STATUS[1] : TRADE_STATUS[2]
 
   return Array.from({ length: 10 }, () => 0).map((_, index) => ({
     id: index,

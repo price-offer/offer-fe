@@ -1,15 +1,15 @@
 import type { Meta, Story } from '@storybook/react'
-import { ReviewTypeArticle } from './index'
-import type { ReviewTypeArticleProps } from './index'
+import { ReviewTabArticle } from './index'
+import type { ReviewTabArticleProps } from './index'
 
 export default {
   argTypes: {},
-  component: ReviewTypeArticle,
-  title: 'Components/MyPage/Article/ReviewTypeArticle'
-} as Meta<ReviewTypeArticleProps>
+  component: ReviewTabArticle,
+  title: 'Components/MyPage/Article/ReviewTabArticle'
+} as Meta<ReviewTabArticleProps>
 
-const Template: Story<ReviewTypeArticleProps> = args => (
-  <ReviewTypeArticle {...args} />
+const Template: Story<ReviewTabArticleProps> = args => (
+  <ReviewTabArticle {...args} />
 )
 export const Primary = Template.bind({})
 Primary.args = {

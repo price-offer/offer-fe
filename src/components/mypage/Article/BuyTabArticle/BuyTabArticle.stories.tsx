@@ -1,22 +1,22 @@
 import { Text } from '@offer-ui/react'
 import type { Meta, Story } from '@storybook/react'
-import type { BuyTypeArticleProps } from './index'
-import { BuyTypeArticle } from './index'
+import type { BuyTabArticleProps } from './index'
+import { BuyTabArticle } from './index'
 
 export default {
   argTypes: {},
-  component: BuyTypeArticle,
-  title: 'Components/MyPage/Article/BuyTypeArticle'
-} as Meta<BuyTypeArticleProps>
+  component: BuyTabArticle,
+  title: 'Components/MyPage/Article/BuyTabArticle'
+} as Meta<BuyTabArticleProps>
 
-const Template: Story<BuyTypeArticleProps> = args => {
+const Template: Story<BuyTabArticleProps> = args => {
   return (
     <>
       <Text styleType="subtitle01B">가격제안</Text>
-      <BuyTypeArticle {...args} activityType="offer" isReviewed={false} />
-      <BuyTypeArticle {...args} activityType="offer" />
+      <BuyTabArticle {...args} activityType="offer" isReviewed={false} />
+      <BuyTabArticle {...args} activityType="offer" />
       <Text styleType="subtitle01B">관심상품</Text>
-      <BuyTypeArticle {...args} />
+      <BuyTabArticle {...args} />
     </>
   )
 }

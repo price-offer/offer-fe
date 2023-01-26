@@ -2,18 +2,18 @@ import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import { SellTypeArticleList } from './index'
-import type { SellTypeArticleListProps } from './index'
+import { SellTabArticleList } from './index'
+import type { SellTabArticleListProps } from './index'
 import { TRADE_STATUS } from '@constants'
 import type { ArticlesElement, TradeStatus, TradeStatusCode } from '@types'
 
 export default {
   argTypes: {},
-  component: SellTypeArticleList,
-  title: 'Components/MyPage/ArticleList/SellTypeArticleList'
-} as Meta<SellTypeArticleListProps>
+  component: SellTabArticleList,
+  title: 'Components/MyPage/ArticleList/SellTabArticleList'
+} as Meta<SellTabArticleListProps>
 
-const Template: Story<SellTypeArticleListProps> = args => {
+const Template: Story<SellTabArticleListProps> = args => {
   const [token, setToken] = useState<boolean>(false)
   const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[1])
   const articles = getArticles(tradeStatus.code)
@@ -43,7 +43,7 @@ const Template: Story<SellTypeArticleListProps> = args => {
       <div>
         <Text styleType="subtitle01B">{tradeStatus.name}</Text>
       </div>
-      <SellTypeArticleList {...args} articles={articles} hasToken={token} />
+      <SellTabArticleList {...args} articles={articles} hasToken={token} />
     </>
   )
 }

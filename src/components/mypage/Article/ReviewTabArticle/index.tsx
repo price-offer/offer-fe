@@ -24,17 +24,17 @@ const iconMeta = {
   }
 } as { [key in number]: IconMeta }
 
-export interface ReviewTypeArticleProps extends ReviewsElement {
+export interface ReviewTabArticleProps extends ReviewsElement {
   className?: string
 }
-export const ReviewTypeArticle = ({
+export const ReviewTabArticle = ({
   reviewer,
   article,
   score,
   content,
   createdDate,
   className
-}: ReviewTypeArticleProps): ReactElement => {
+}: ReviewTabArticleProps): ReactElement => {
   return (
     <StyledWrapper className={className}>
       <StyledAvatar alt="avatar" src={reviewer.profileImageUrl} />

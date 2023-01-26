@@ -4,7 +4,7 @@ import type { ColorKeys } from '@offer-ui/react'
 import { Divider, SelectBox } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import { ProfileBox, Tabs, Tab, SellTypeArticleList } from '@components'
+import { ProfileBox, Tabs, Tab, SellTabArticleList } from '@components'
 import { TRADE_STATUS } from '@constants'
 import { myProfile } from '@mocks/fixture'
 import type { ArticlesElement, TradeStatusCode } from '@types'
@@ -89,7 +89,7 @@ export const SellPageContent = (): ReactElement => {
             />
           </StyledSearchOptionsWrapper>
           <StyledProductListWrapper>
-            <SellTypeArticleList
+            <SellTabArticleList
               articles={articles}
               hasToken={hasToken}
               onChangeTradeStatus={noop}

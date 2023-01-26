@@ -1,3 +1,3 @@
-export * from './BuyTypeArticle'
-export * from './SellTypeArticle'
-export * from './ReviewTypeArticle'
+export * from './BuyTabArticle'
+export * from './SellTabArticle'
+export * from './ReviewTabArticle'

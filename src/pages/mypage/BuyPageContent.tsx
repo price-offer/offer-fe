@@ -4,7 +4,7 @@ import type { ColorKeys } from '@offer-ui/react'
 import { Divider, SelectBox } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import { ProfileBox, Tabs, Tab, BuyTypeArticleList } from '@components'
+import { ProfileBox, Tabs, Tab, BuyTabArticleList } from '@components'
 import type { TradeBuyActivityType } from '@constants'
 import { TRADE_STATUS, TRADE_ACTIVITY_TYPE } from '@constants'
 import { myProfile } from '@mocks/fixture'
@@ -92,7 +92,7 @@ export const BuyPageContent = (): ReactElement => {
             />
           </StyledSearchOptionsWrapper>
           <StyledProductListWrapper>
-            <BuyTypeArticleList
+            <BuyTabArticleList
               activityType={
                 tradeBuyActivityList[tabIndex][0] as TradeBuyActivityType
               }

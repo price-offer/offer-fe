@@ -1,17 +1,17 @@
 import { Text } from '@offer-ui/react'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import { BuyTypeArticleList } from './index'
-import type { BuyTypeArticleListProps } from './index'
+import { BuyTabArticleList } from './index'
+import type { BuyTabArticleListProps } from './index'
 import type { TradeBuyActivityType } from '@constants/app'
 import { TRADE_ACTIVITY_TYPE } from '@constants/app'
 import type { ArticlesElement } from '@types'
 
 export default {
   argTypes: {},
-  component: BuyTypeArticleList,
-  title: 'Components/MyPage/ArticleList/BuyTypeArticleList'
-} as Meta<BuyTypeArticleListProps>
+  component: BuyTabArticleList,
+  title: 'Components/MyPage/ArticleList/BuyTabArticleList'
+} as Meta<BuyTabArticleListProps>
 
 const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
   (_, index) => ({
@@ -33,7 +33,7 @@ const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
   })
 )
 
-const Template: Story<BuyTypeArticleListProps> = args => {
+const Template: Story<BuyTabArticleListProps> = args => {
   const [activityType, setActivityType] =
     useState<TradeBuyActivityType>('offer')
 
@@ -50,7 +50,7 @@ const Template: Story<BuyTypeArticleListProps> = args => {
           {TRADE_ACTIVITY_TYPE.buy[activityType]}
         </Text>
       </div>
-      <BuyTypeArticleList {...args} activityType={activityType} />
+      <BuyTabArticleList {...args} activityType={activityType} />
     </>
   )
 }

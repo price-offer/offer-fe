@@ -2,40 +2,40 @@ import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import type { SellTabArticleProps } from './index'
-import { SellTabArticle } from './index'
+import type { SaleTabArticleProps } from './index'
+import { SaleTabArticle } from './index'
 import { TRADE_STATUS } from '@constants'
 import type { TradeStatus } from '@types'
 
 export default {
   argTypes: {},
-  component: SellTabArticle,
-  title: 'Components/MyPage/Article/SellTabArticle'
-} as Meta<SellTabArticleProps>
+  component: SaleTabArticle,
+  title: 'Components/MyPage/Article/SaleTabArticle'
+} as Meta<SaleTabArticleProps>
 
-const Template: Story<SellTabArticleProps> = args => {
-  const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[0])
+const Template: Story<SaleTabArticleProps> = args => {
+  const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[1])
 
   return (
     <>
       <div>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[0])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
           판매중
         </button>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[2])}>
           거래 완료
         </button>
       </div>
       <Text styleType="subtitle01B">내 사용자</Text>
-      <SellTabArticle {...args} hasToken tradeStatus={tradeStatus} />
-      <SellTabArticle {...args} hasToken isReviewed tradeStatus={tradeStatus} />
+      <SaleTabArticle {...args} hasToken tradeStatus={tradeStatus} />
+      <SaleTabArticle {...args} hasToken isReviewed tradeStatus={tradeStatus} />
       <Text styleType="subtitle01B">타 사용자</Text>
-      <SellTabArticle {...args} hasToken={false} tradeStatus={tradeStatus} />
-      <SellTabArticle {...args} hasToken={false} tradeStatus={tradeStatus} />
+      <SaleTabArticle {...args} hasToken={false} tradeStatus={tradeStatus} />
+      <SaleTabArticle {...args} hasToken={false} tradeStatus={tradeStatus} />
     </>
   )
 }
@@ -48,7 +48,7 @@ Primary.args = {
   title: '상품 이름 상품 이름',
   price: 36500,
   tradeArea: '서울시 강남구',
-  tradeStatus: TRADE_STATUS[0],
+  tradeStatus: TRADE_STATUS[1],
   createdDate: '2021-12-10T14:25:30',
   modifiedDate: '2021-12-10T14:25:30',
   isLiked: false,

@@ -3,7 +3,7 @@ import { Text, Divider } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
 import { BuyPageContent } from './BuyPageContent'
-import { SellPageContent } from './SellPageContent'
+import { SalePageContent } from './SalePageContent'
 import { Tabs, Tab } from '@components'
 import type { TradeActivityType, TradeActivityName } from '@constants'
 
@@ -13,7 +13,7 @@ interface PageTab {
 }
 const pageTabs: PageTab[] = [
   {
-    code: 'sell',
+    code: 'sale',
     name: '판매'
   },
   {
@@ -60,7 +60,7 @@ const MyPage = (): ReactElement => {
         <StyledLayout>
           <StyledTabPanels>
             <Tabs.Panel>
-              <SellPageContent />
+              <SalePageContent />
             </Tabs.Panel>
             <Tabs.Panel>
               <BuyPageContent />

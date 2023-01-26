@@ -1,3 +1,3 @@
 export * from './BuyTabArticle'
-export * from './SellTabArticle'
+export * from './SaleTabArticle'
 export * from './ReviewTabArticle'

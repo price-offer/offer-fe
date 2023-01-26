@@ -14,6 +14,6 @@ export type MatchMediaQuery = {
 }
 export const matchMediaQuery: MatchMediaQuery = {
   desktop: '(max-width: 1920px)',
-  mobile: '(max-width: 699px)',
-  tablet: '(max-width: 1023px)'
+  tablet: '(max-width: 1023px)',
+  mobile: '(max-width: 699px)'
 }

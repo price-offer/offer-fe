@@ -22,6 +22,8 @@ export const useResponsive = <T, K extends keyof T>(
   responsiveCase: ResponsiveCase<T, K>,
   matchMediaQuery: MatchMediaQueryParams = defaultMatchMediaQuery
 ): T[K] => {
+  const [responsiveValue, setResponsiveValue] = useState<T[K]>()
+
   const getDevice = useCallback(
     (queries: MatchMediaQuery): Device => {
       const defaultDevice: Device = 'desktop'
@@ -45,10 +47,6 @@ export const useResponsive = <T, K extends keyof T>(
     [responsiveCase]
   )
 
-  const [currentDevice, setCurrentDevice] = useState<Device>(
-    getDevice(matchMediaQuery)
-  )
-
   useEffect(() => {
     const matchMedia = (Object.keys(matchMediaQuery) as Device[]).map(
       device => {
@@ -58,7 +56,7 @@ export const useResponsive = <T, K extends keyof T>(
     )
 
     const handleChange = (): void => {
-      setCurrentDevice(getDevice(matchMediaQuery))
+      setResponsiveValue(responsiveCase[getDevice(matchMediaQuery)])
     }
 
     handleChange()
@@ -72,7 +70,7 @@ export const useResponsive = <T, K extends keyof T>(
         media.removeEventListener('change', handleChange)
       })
     }
-  }, [matchMediaQuery, getDevice])
+  }, [getDevice, responsiveCase, matchMediaQuery])
 
-  return responsiveCase[currentDevice] as T[K]
+  return responsiveValue as T[K]
 }

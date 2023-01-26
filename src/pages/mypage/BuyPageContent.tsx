@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import styled from '@emotion/styled'
 import type { ColorKeys } from '@offer-ui/react'
 import { Divider, SelectBox } from '@offer-ui/react'
@@ -60,8 +59,8 @@ export const BuyPageContent = (): ReactElement => {
         <ProfileBox {...myProfile} />
         <StyledDivider size="bold" />
         <StyledUserProductsWrapper>
-          <StyledSearchOptionsWrapper>
-            <Tabs>
+          <Tabs>
+            <StyledSearchOptionsWrapper>
               <StyledTabsList>
                 {tradeBuyActivityList.map((tradeBuyActivity, index) => {
                   const isCurrent = tabIndex === index
@@ -83,22 +82,32 @@ export const BuyPageContent = (): ReactElement => {
                   )
                 })}
               </StyledTabsList>
-            </Tabs>
-            <SelectBox
-              colorType="none"
-              items={sortItems}
-              value="recently"
-              onChange={noop}
-            />
-          </StyledSearchOptionsWrapper>
-          <StyledProductListWrapper>
-            <BuyTabArticleList
-              activityType={
-                tradeBuyActivityList[tabIndex][0] as TradeBuyActivityType
-              }
-              articles={articles}
-            />
-          </StyledProductListWrapper>
+              <SelectBox
+                colorType="none"
+                items={sortItems}
+                value="recently"
+                onChange={noop}
+              />
+            </StyledSearchOptionsWrapper>
+            <StyledProductListPanels>
+              <Tabs.Panel>
+                <BuyTabArticleList
+                  activityType={
+                    tradeBuyActivityList[tabIndex][0] as TradeBuyActivityType
+                  }
+                  articles={articles}
+                />
+              </Tabs.Panel>
+              <Tabs.Panel>
+                <BuyTabArticleList
+                  activityType={
+                    tradeBuyActivityList[tabIndex][0] as TradeBuyActivityType
+                  }
+                  articles={articles}
+                />
+              </Tabs.Panel>
+            </StyledProductListPanels>
+          </Tabs>
         </StyledUserProductsWrapper>
       </StyledContentWrapper>
     </div>
@@ -196,7 +205,7 @@ const StyledUserProductsWrapper = styled.div`
     }
   `}
 `
-const StyledProductListWrapper = styled.div`
+const StyledProductListPanels = styled(Tabs.Panels)`
   ${({ theme }): string => `
     height: 780px;
     overflow-y: scroll;

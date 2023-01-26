@@ -59,8 +59,8 @@ export const SalePageContent = (): ReactElement => {
         <ProfileBox {...myProfile} />
         <StyledDivider size="bold" />
         <StyledUserProductsWrapper>
-          <StyledSearchOptionsWrapper>
-            <Tabs>
+          <Tabs>
+            <StyledSearchOptionsWrapper>
               <StyledTabsList>
                 {tradeStatusList.map((tradeStatus, index) => {
                   const isCurrent = tabIndex === index
@@ -80,21 +80,30 @@ export const SalePageContent = (): ReactElement => {
                   )
                 })}
               </StyledTabsList>
-            </Tabs>
-            <SelectBox
-              colorType="none"
-              items={sortItems}
-              value="recently"
-              onChange={noop}
-            />
-          </StyledSearchOptionsWrapper>
-          <StyledProductListWrapper>
-            <SaleTabArticleList
-              articles={articles}
-              hasToken={hasToken}
-              onChangeTradeStatus={noop}
-            />
-          </StyledProductListWrapper>
+              <SelectBox
+                colorType="none"
+                items={sortItems}
+                value="recently"
+                onChange={noop}
+              />
+            </StyledSearchOptionsWrapper>
+            <StyledProductListPanels>
+              <Tabs.Panel>
+                <SaleTabArticleList
+                  articles={articles}
+                  hasToken={hasToken}
+                  onChangeTradeStatus={noop}
+                />
+              </Tabs.Panel>
+              <Tabs.Panel>
+                <SaleTabArticleList
+                  articles={articles}
+                  hasToken={hasToken}
+                  onChangeTradeStatus={noop}
+                />
+              </Tabs.Panel>
+            </StyledProductListPanels>
+          </Tabs>
         </StyledUserProductsWrapper>
       </StyledContentWrapper>
     </div>
@@ -192,7 +201,7 @@ const StyledUserProductsWrapper = styled.div`
     }
   `}
 `
-const StyledProductListWrapper = styled.div`
+const StyledProductListPanels = styled(Tabs.Panels)`
   ${({ theme }): string => `
     height: 780px;
     overflow-y: scroll;

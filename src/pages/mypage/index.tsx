@@ -3,6 +3,7 @@ import { Text, Divider } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
 import { BuyPageContent } from './BuyPageContent'
+import { ReviewPageContent } from './ReviewPageContent'
 import { SalePageContent } from './SalePageContent'
 import { Tabs, Tab } from '@components'
 import type { TradeActivityType, TradeActivityName } from '@constants'
@@ -65,7 +66,9 @@ const MyPage = (): ReactElement => {
             <Tabs.Panel>
               <BuyPageContent />
             </Tabs.Panel>
-            <Tabs.Panel>후기</Tabs.Panel>
+            <Tabs.Panel>
+              <ReviewPageContent />
+            </Tabs.Panel>
           </StyledTabPanels>
         </StyledLayout>
       </Tabs>
@@ -100,6 +103,7 @@ const StyledTab = styled(Tab)<{ isSelected: boolean }>`
     border: none;
     cursor: pointer;
     ${theme.fonts.subtitle01B};
+    user-select: none;
 
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.body01B};

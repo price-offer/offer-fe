@@ -72,5 +72,5 @@ export const useResponsive = <T, K extends keyof T>(
     }
   }, [getDevice, responsiveCase, matchMediaQuery])
 
-  return responsiveValue as T[K]
+  return (responsiveValue as T[K]) || responsiveCase.desktop
 }

@@ -27,8 +27,6 @@ const BannerWrapper = styled.div`
   display: flex;
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding-left: 24px;
-    padding-right: 24px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     flex-direction: column;

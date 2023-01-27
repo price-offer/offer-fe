@@ -119,7 +119,6 @@ const ResultContainer = (): ReactElement => {
 }
 
 const HomeWrapper = styled.div`
-  border: solid;
   max-width: 1200px;
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -135,7 +134,6 @@ const HomeWrapper = styled.div`
 const Layout = styled.div`
   display: flex;
   justify-content: center;
-  border: solid;
   width: 100%;
   margin-top: 68px;
 `

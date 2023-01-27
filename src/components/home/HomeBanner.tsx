@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Badge, Button } from '@offer-ui/react'
+import { Button } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 
 const HomeBanner = (): ReactElement => {
@@ -13,7 +13,7 @@ const HomeBanner = (): ReactElement => {
         </BannerLeft>
         <BannerRight>
           <BannerRightTextWrapper>
-            <BannerRightNewBadge colorType="orange">New</BannerRightNewBadge>
+            <BannerRightNewBadge>New</BannerRightNewBadge>
             <BannerRightText1>오늘의 새로운 상품</BannerRightText1>
           </BannerRightTextWrapper>
         </BannerRight>
@@ -129,12 +129,15 @@ const BannerRightTextWrapper = styled.div`
     align-items: center;
   }
 `
-const BannerRightNewBadge = styled(Badge)`
+const BannerRightNewBadge = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({ theme }): string => theme.fonts.caption01M};
   background-color: ${({ theme }): string => theme.colors.bgPrimary};
   color: ${({ theme }): string => theme.colors.grayScale05};
   height: 24px;
   width: 41px;
-  padding-top: 3px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     width: 40px;
   }

@@ -59,7 +59,6 @@ const CateGoryBox = styled.div`
   max-width: 1200px;
   width: 100%;
   height: 118px;
-  border: solid;
   overflow: hidden;
 `
 

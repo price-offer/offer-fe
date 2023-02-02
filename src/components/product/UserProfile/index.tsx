@@ -4,31 +4,23 @@ import type { ReactElement } from 'react'
 import { TRANSACTION_TYPE, USER } from '@constants'
 import type { TransactionType } from '@types'
 
-export type UserProfileProps = {
+export interface UserProfileProps {
   image?: string
   nickName: string
   location: string
+  type: 'offer' | 'basic'
   level: number
-} & ProfileTypeProps
-interface OfferProfileProps {
-  type?: 'offer'
-  date: string
-  transactionType: TransactionType
+  date?: string
+  transactionType?: TransactionType
 }
-interface BasicProfileProps {
-  type?: 'basic'
-  date: never
-  transactionType: never
-}
-type ProfileTypeProps = OfferProfileProps | BasicProfileProps
 
 export const UserProfile = ({
   nickName,
   image = '',
   location,
   level,
-  date,
-  transactionType,
+  date = '',
+  transactionType = 'all',
   type = 'basic'
 }: UserProfileProps): ReactElement => {
   const isOfferProfile = type === 'offer'

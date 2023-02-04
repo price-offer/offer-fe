@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
-import { IconButton, Image } from '@offer-ui/react'
+import { IconButton, Image, useMedia } from '@offer-ui/react'
+import { useState, useEffect } from 'react'
 import type { ReactElement } from 'react'
 
 interface CategorySliderProps {
@@ -11,22 +12,32 @@ interface CategorySliderProps {
 }
 
 const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
+  const { desktop } = useMedia()
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    if (desktop) setIsDesktop(true)
+    else {
+      setIsDesktop(false)
+    }
+  }, [desktop])
   return (
     <>
       <CategoryHeader>카테고리</CategoryHeader>
       <div>
         <CateGoryBox>
-          <ArrowBox>
-            <LeftArrow color="black" icon="arrowLeft" size={16} />
-            <RightArrow color="black" icon="arrowLeft" size={16} />
-          </ArrowBox>
+          {isDesktop && (
+            <ArrowBox>
+              <LeftArrow color="black" icon="arrowLeft" size={16} />
+              <RightArrow color="black" icon="arrowLeft" size={16} />
+            </ArrowBox>
+          )}
           {imageList.map(cateGory => (
             <CategoryItem key={cateGory.title}>
-              <Image
+              <CategoryImg
                 key={cateGory.title}
                 alt={`category-${cateGory.title}`}
                 src={cateGory.imageUrl}
-                style={{ borderRadius: '12px', height: '86px', width: '108px' }}
               />
               <CateGoryName> {cateGory.title}</CateGoryName>
             </CategoryItem>
@@ -60,6 +71,15 @@ const CateGoryBox = styled.div`
   width: 100%;
   height: 118px;
   overflow: hidden;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    gap: 18px;
+    height: 112px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    gap: 12px;
+    height: 88px;
+    max-width: none;
+  }
 `
 
 const ArrowBox = styled.div`
@@ -92,8 +112,37 @@ const CategoryItem = styled.div`
   max-width: 108px;
   width: 100%;
   height: 118px;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    width: 84px;
+    height: 112px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    height: 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`
+const CategoryImg = styled(Image)`
+  border-radius: 12px;
+  height: 86px;
+  width: 108px;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    height: 80px;
+    width: 80px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    height: 60px;
+    width: 60px;
+  }
 `
 const CateGoryName = styled.div`
   margin-top: 12px;
   text-align: center;
+  ${({ theme }): string => theme.fonts.body02M}
+  color: ${({ theme }): string => theme.fonts.caption01M}
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    width: 72px;
+    ${({ theme }): string => theme.fonts.caption01M}
+  }
 `

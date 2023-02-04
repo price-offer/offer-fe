@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { IconButton, Image, useMedia } from '@offer-ui/react'
-import { useState, useEffect } from 'react'
-import type { ReactElement } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import type { ReactElement, MouseEventHandler } from 'react'
 
 interface CategorySliderProps {
   imageList: {
@@ -12,28 +12,106 @@ interface CategorySliderProps {
 }
 
 const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const containerMaxWidth = containerRef.current?.scrollWidth
+  const [isDrag, setIsDrag] = useState(false)
+  const [startX, setStartX] = useState<number>(0)
   const { desktop } = useMedia()
   const [isDesktop, setIsDesktop] = useState(false)
-
+  const isFirstCategory = containerRef.current?.scrollLeft === 0
+  const isLastCategory = containerMaxWidth === startX
   useEffect(() => {
     if (desktop) setIsDesktop(true)
     else {
       setIsDesktop(false)
     }
   }, [desktop])
+
+  const onDragStart: MouseEventHandler<HTMLDivElement> = event => {
+    if (!containerRef || !containerRef.current) {
+      return
+    }
+    event.preventDefault()
+    setIsDrag(true)
+    setStartX(event.pageX + containerRef.current.scrollLeft)
+  }
+
+  const onDragEnd = useCallback((): void => {
+    setIsDrag(false)
+  }, [])
+
+  const handleLeftArrowClick = useCallback((): void => {
+    if (!containerRef || !containerRef.current) {
+      return
+    }
+    containerRef.current.scrollLeft = 0
+    setStartX(0)
+  }, [])
+  const handleRightArrowClick = useCallback((): void => {
+    if (!containerRef || !containerRef.current) {
+      return
+    }
+    containerRef.current.scrollLeft += 300
+    setStartX(startX + 300)
+  }, [startX])
+  const onDragMove: MouseEventHandler<HTMLDivElement> = useCallback(
+    event => {
+      if (!containerRef || !containerRef.current) {
+        return
+      }
+      if (isDrag) {
+        const { scrollWidth, clientWidth, scrollLeft } = containerRef.current
+        containerRef.current.scrollLeft = startX - event.pageX
+        if (scrollLeft === 0) {
+          setStartX(event.pageX)
+        } else if (scrollWidth <= clientWidth + scrollLeft) {
+          setStartX(event.pageX + scrollLeft)
+        }
+      }
+    },
+    [isDrag, startX]
+  )
+
   return (
     <>
       <CategoryHeader>카테고리</CategoryHeader>
-      <div>
-        <CateGoryBox>
+      <CateGoryWrapper>
+        <CateGoryBox
+          ref={containerRef}
+          onMouseDown={onDragStart}
+          onMouseLeave={onDragEnd}
+          onMouseMove={isDrag ? onDragMove : undefined}
+          onMouseUp={onDragEnd}>
           {isDesktop && (
             <ArrowBox>
-              <LeftArrow color="black" icon="arrowLeft" size={16} />
-              <RightArrow color="black" icon="arrowLeft" size={16} />
+              {isFirstCategory ? (
+                <div />
+              ) : (
+                <LeftArrow
+                  color="black"
+                  icon="arrowLeft"
+                  size={16}
+                  onClick={handleLeftArrowClick}
+                />
+              )}
+              {isLastCategory ? (
+                <div />
+              ) : (
+                <RightArrow
+                  color="black"
+                  icon="arrowLeft"
+                  size={16}
+                  onClick={handleRightArrowClick}
+                />
+              )}
             </ArrowBox>
           )}
           {imageList.map(cateGory => (
-            <CategoryItem key={cateGory.title}>
+            <CategoryItem
+              key={cateGory.title}
+              onClick={(): void => {
+                alert(cateGory.title)
+              }}>
               <CategoryImg
                 key={cateGory.title}
                 alt={`category-${cateGory.title}`}
@@ -43,7 +121,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
             </CategoryItem>
           ))}
         </CateGoryBox>
-      </div>
+      </CateGoryWrapper>
     </>
   )
 }
@@ -63,14 +141,22 @@ const CategoryHeader = styled.div`
   }
 `
 
+const CateGoryWrapper = styled.div`
+  overflow: hidden;
+  position: relative;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+  }
+`
+
 const CateGoryBox = styled.div`
   display: flex;
-  position: relative;
   gap: 12px;
   max-width: 1200px;
   width: 100%;
   height: 118px;
-  overflow: hidden;
+  overflow: scroll;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     gap: 18px;
     height: 112px;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { IconButton, Image, useMedia } from '@offer-ui/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import type { ReactElement, MouseEventHandler } from 'react'
+import type { ReactElement, TouchEventHandler } from 'react'
 
 interface CategorySliderProps {
   imageList: {
@@ -11,15 +11,20 @@ interface CategorySliderProps {
   }[]
 }
 
+interface CateGoryBoxWrapperProps {
+  isMoveFromArrowButton: number
+}
+
 const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const containerMaxWidth = containerRef.current?.scrollWidth
+  const containerScrollLeft: any = containerRef.current?.scrollLeft
   const [isDrag, setIsDrag] = useState(false)
   const [startX, setStartX] = useState<number>(0)
   const { desktop } = useMedia()
   const [isDesktop, setIsDesktop] = useState(false)
+  const [isMoveFromArrowButton, setIsMoveArrowButton] = useState<number>(0)
   const isFirstCategory = containerRef.current?.scrollLeft === 0
-  const isLastCategory = containerMaxWidth === startX
+  const isLastCategory = containerScrollLeft >= 107
   useEffect(() => {
     if (desktop) setIsDesktop(true)
     else {
@@ -27,13 +32,12 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
     }
   }, [desktop])
 
-  const onDragStart: MouseEventHandler<HTMLDivElement> = event => {
+  const onDragStart: TouchEventHandler<HTMLDivElement> = e => {
     if (!containerRef || !containerRef.current) {
       return
     }
-    event.preventDefault()
     setIsDrag(true)
-    setStartX(event.pageX + containerRef.current.scrollLeft)
+    setStartX(e.touches[0].clientX + containerRef.current.scrollLeft)
   }
 
   const onDragEnd = useCallback((): void => {
@@ -46,26 +50,29 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
     }
     containerRef.current.scrollLeft = 0
     setStartX(0)
+    setIsMoveArrowButton(containerRef.current.scrollLeft)
   }, [])
   const handleRightArrowClick = useCallback((): void => {
     if (!containerRef || !containerRef.current) {
       return
     }
-    containerRef.current.scrollLeft += 300
-    setStartX(startX + 300)
-  }, [startX])
-  const onDragMove: MouseEventHandler<HTMLDivElement> = useCallback(
-    event => {
+    containerRef.current.scrollLeft += 200
+    setStartX(200)
+    setIsMoveArrowButton(containerRef.current.scrollLeft)
+  }, [])
+  const onDragMove: TouchEventHandler<HTMLDivElement> = useCallback(
+    e => {
       if (!containerRef || !containerRef.current) {
         return
       }
       if (isDrag) {
         const { scrollWidth, clientWidth, scrollLeft } = containerRef.current
-        containerRef.current.scrollLeft = startX - event.pageX
+
+        containerRef.current.scrollLeft = startX - e.touches[0].clientX
         if (scrollLeft === 0) {
-          setStartX(event.pageX)
+          setStartX(e.touches[0].clientX)
         } else if (scrollWidth <= clientWidth + scrollLeft) {
-          setStartX(event.pageX + scrollLeft)
+          setStartX(e.touches[0].clientX + scrollLeft)
         }
       }
     },
@@ -78,10 +85,10 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
       <CateGoryWrapper>
         <CateGoryBox
           ref={containerRef}
-          onMouseDown={onDragStart}
-          onMouseLeave={onDragEnd}
-          onMouseMove={isDrag ? onDragMove : undefined}
-          onMouseUp={onDragEnd}>
+          onMouseUp={onDragEnd}
+          onTouchEnd={onDragEnd}
+          onTouchMove={isDrag ? onDragMove : undefined}
+          onTouchStart={onDragStart}>
           {isDesktop && (
             <ArrowBox>
               {isFirstCategory ? (
@@ -106,20 +113,22 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
               )}
             </ArrowBox>
           )}
-          {imageList.map(cateGory => (
-            <CategoryItem
-              key={cateGory.title}
-              onClick={(): void => {
-                alert(cateGory.title)
-              }}>
-              <CategoryImg
+          <CateGoryBoxWrapper isMoveFromArrowButton={isMoveFromArrowButton}>
+            {imageList.map(cateGory => (
+              <CategoryItem
                 key={cateGory.title}
-                alt={`category-${cateGory.title}`}
-                src={cateGory.imageUrl}
-              />
-              <CateGoryName> {cateGory.title}</CateGoryName>
-            </CategoryItem>
-          ))}
+                onClick={(): void => {
+                  alert(cateGory.title)
+                }}>
+                <CategoryImg
+                  key={cateGory.title}
+                  alt={`category-${cateGory.title}`}
+                  src={cateGory.imageUrl}
+                />
+                <CateGoryName> {cateGory.title}</CateGoryName>
+              </CategoryItem>
+            ))}
+          </CateGoryBoxWrapper>
         </CateGoryBox>
       </CateGoryWrapper>
     </>
@@ -144,27 +153,52 @@ const CategoryHeader = styled.div`
 const CateGoryWrapper = styled.div`
   overflow: hidden;
   position: relative;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
   }
-`
 
+  div::-webkit-scrollbar {
+    display: none;
+  }
+
+  div {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+`
+const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
+  display: flex;
+  gap: 12px;
+  max-width: 1200px;
+  width: 100%;
+  height: 118px;
+  transition: 0.1s;
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    transform: ${({ isMoveFromArrowButton }): string =>
+      `translateX(-${isMoveFromArrowButton}px)`};
+  }
+`
 const CateGoryBox = styled.div`
   display: flex;
   gap: 12px;
   max-width: 1200px;
   width: 100%;
   height: 118px;
-  overflow: scroll;
+  overflow: hidden;
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+  }
   ${({ theme }): string => theme.mediaQuery.tablet} {
     gap: 18px;
     height: 112px;
+    overflow: scroll;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     gap: 12px;
     height: 88px;
     max-width: none;
+    overflow: scroll;
   }
 `
 
@@ -175,6 +209,7 @@ const ArrowBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  z-index: 999;
 `
 
 const LeftArrow = styled(IconButton)`
@@ -198,6 +233,8 @@ const CategoryItem = styled.div`
   max-width: 108px;
   width: 100%;
   height: 118px;
+  transition: 0.5s;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
     width: 84px;
     height: 112px;
@@ -227,6 +264,9 @@ const CateGoryName = styled.div`
   text-align: center;
   ${({ theme }): string => theme.fonts.body02M}
   color: ${({ theme }): string => theme.fonts.caption01M}
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    width: 84px;
+  }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     width: 72px;
     ${({ theme }): string => theme.fonts.caption01M}

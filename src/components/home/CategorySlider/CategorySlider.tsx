@@ -17,14 +17,14 @@ interface CateGoryBoxWrapperProps {
 
 const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const containerScrollLeft: any = containerRef.current?.scrollLeft
   const [isDrag, setIsDrag] = useState(false)
   const [startX, setStartX] = useState<number>(0)
   const { desktop } = useMedia()
   const [isDesktop, setIsDesktop] = useState(false)
+  const [isLast, setIsLast] = useState<boolean>(false)
   const [isMoveFromArrowButton, setIsMoveArrowButton] = useState<number>(0)
   const isFirstCategory = containerRef.current?.scrollLeft === 0
-  const isLastCategory = containerScrollLeft >= 107
+
   useEffect(() => {
     if (desktop) setIsDesktop(true)
     else {
@@ -33,7 +33,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
   }, [desktop])
 
   const onDragStart: TouchEventHandler<HTMLDivElement> = e => {
-    if (!containerRef || !containerRef.current) {
+    if (!containerRef || !containerRef.current || desktop) {
       return
     }
     setIsDrag(true)
@@ -45,21 +45,22 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
   }, [])
 
   const handleLeftArrowClick = useCallback((): void => {
-    if (!containerRef || !containerRef.current) {
+    if (!containerRef || !containerRef.current || isDrag) {
       return
     }
     containerRef.current.scrollLeft = 0
-    setStartX(0)
     setIsMoveArrowButton(containerRef.current.scrollLeft)
-  }, [])
+    setIsLast(false)
+  }, [isDrag])
+
   const handleRightArrowClick = useCallback((): void => {
-    if (!containerRef || !containerRef.current) {
+    if (!containerRef || !containerRef.current || isDrag) {
       return
     }
     containerRef.current.scrollLeft += 200
-    setStartX(200)
     setIsMoveArrowButton(containerRef.current.scrollLeft)
-  }, [])
+    setIsLast(true)
+  }, [isDrag])
   const onDragMove: TouchEventHandler<HTMLDivElement> = useCallback(
     e => {
       if (!containerRef || !containerRef.current) {
@@ -67,7 +68,6 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
       }
       if (isDrag) {
         const { scrollWidth, clientWidth, scrollLeft } = containerRef.current
-
         containerRef.current.scrollLeft = startX - e.touches[0].clientX
         if (scrollLeft === 0) {
           setStartX(e.touches[0].clientX)
@@ -101,7 +101,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
                   onClick={handleLeftArrowClick}
                 />
               )}
-              {isLastCategory ? (
+              {isLast ? (
                 <div />
               ) : (
                 <RightArrow

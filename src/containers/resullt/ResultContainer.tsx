@@ -70,43 +70,103 @@ const ResultContainer = (): ReactElement => {
     }
   ]
 
-  const productList = [
-    {
-      address: 'string1',
-      imageUrl: 'string1',
-      price: 'string1',
-      title: 'string1',
-      url: 'string1'
-    },
-    {
-      address: 'string2',
-      imageUrl: 'string2',
-      price: 'string2',
-      title: 'string2',
-      url: 'string2'
-    },
-    {
-      address: 'string3',
-      imageUrl: 'string3',
-      price: 'string3',
-      title: 'string3',
-      url: 'string3'
-    },
-    {
-      address: 'string4',
-      imageUrl: 'string4',
-      price: 'string4',
-      title: 'string4',
-      url: 'string4'
-    },
-    {
-      address: 'string5',
-      imageUrl: 'string5',
-      price: 'string5',
-      title: 'string5',
-      url: 'string5'
+  const apiRes = {
+    elements: [
+      {
+        id: 5,
+        mainImageUrl: 'string',
+        title: 'string',
+        price: 8000,
+        tradeArea: '서울시 강남구',
+        tradeStatus: {
+          code: 4,
+          name: '판매중'
+        },
+        createdDate: '2021-12-10T14:23:53',
+        modifiedDate: '2021-12-10T14:23:53',
+        isLiked: false,
+        likeCount: 0,
+        isReviewed: false,
+        sellerNickName: 'hypeboy'
+      },
+      {
+        id: 4,
+        mainImageUrl: 'string',
+        title: 'string',
+        price: 8000,
+        tradeArea: '서울시 강남구',
+        tradeStatus: {
+          code: 4,
+          name: '판매중'
+        },
+        createdDate: '2021-12-10T14:23:53',
+        modifiedDate: '2021-12-10T14:23:53',
+        isLiked: false,
+        likeCount: 0,
+        isReviewed: false,
+        sellerNickName: 'hypeboy'
+      },
+      {
+        id: 3,
+        mainImageUrl: 'string',
+        title: 'string',
+        price: 8000,
+        tradeArea: '서울시 강남구',
+        tradeStatus: {
+          code: 4,
+          name: '판매중'
+        },
+        createdDate: '2021-12-10T14:23:53',
+        modifiedDate: '2021-12-10T14:23:53',
+        isLiked: false,
+        likeCount: 0,
+        isReviewed: false,
+        sellerNickName: 'hypeboy'
+      },
+      {
+        id: 2,
+        mainImageUrl: 'string',
+        title: 'string',
+        price: 36500,
+        tradeArea: '서울시 강남구',
+        tradeStatus: {
+          code: 4,
+          name: '판매중'
+        },
+        createdDate: '2021-12-10T14:25:30',
+        modifiedDate: '2021-12-10T14:25:30',
+        isLiked: false,
+        likeCount: 0,
+        isReviewed: false,
+        sellerNickName: 'hypeboy'
+      },
+      {
+        id: 1,
+        mainImageUrl: 'string',
+        title: 'string',
+        price: 8000,
+        tradeArea: '서울시 강남구',
+        tradeStatus: {
+          code: 4,
+          name: '판매중'
+        },
+        createdDate: '2021-12-10T14:23:53',
+        modifiedDate: '2021-12-10T14:23:53',
+        isLiked: false,
+        likeCount: 0,
+        isReviewed: false,
+        sellerNickName: 'hypeboy'
+      }
+    ],
+    pageInfo: {
+      currentPageNumber: 1,
+      lastPageNumber: 1,
+      sizePerPage: 2,
+      totalElementCount: 2,
+      isFirstPage: true,
+      isLastPage: true
     }
-  ]
+  }
 
   const { checkFilterList, onCheckItem } = useCategoryFilterList(cateGoryList)
   return (
@@ -120,7 +180,7 @@ const ResultContainer = (): ReactElement => {
           />
         )}
         <FilterSelect></FilterSelect>
-        <ProductList productList={productList} />
+        <ProductList productList={apiRes.elements} />
       </HomeWrapper>
     </Layout>
   )

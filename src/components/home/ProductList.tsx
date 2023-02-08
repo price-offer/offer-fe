@@ -4,11 +4,21 @@ import { ProductItem } from './ProductItem'
 
 interface ProductListProps {
   productList: {
-    imageUrl: string
-    price: string
+    id: number
+    mainImageUrl: string
     title: string
-    url: string
-    address: string
+    price: number
+    tradeArea: string
+    tradeStatus: {
+      code: number
+      name: string
+    }
+    createdDate: string
+    modifiedDate: string
+    isLiked: boolean
+    likeCount: number
+    isReviewed: boolean
+    sellerNickName: string
   }[]
 }
 
@@ -18,7 +28,7 @@ const ProductList = ({ productList }: ProductListProps): ReactElement => {
       <NewProductTitle>새로운 상품</NewProductTitle>
       <ProductListWrapper>
         {productList.map(item => (
-          <ProductItem key={item.title} productItem={item}></ProductItem>
+          <ProductItem key={item.id} productItem={item}></ProductItem>
         ))}
       </ProductListWrapper>
     </>

@@ -5,11 +5,21 @@ import type { ReactElement } from 'react'
 
 interface ProductItemProps {
   productItem: {
+    id: number
+    mainImageUrl: string
     title: string
-    url: string
-    imageUrl: string
-    price: string
-    address: string
+    price: number
+    tradeArea: string
+    tradeStatus: {
+      code: number
+      name: string
+    }
+    createdDate: string
+    modifiedDate: string
+    isLiked: boolean
+    likeCount: number
+    isReviewed: boolean
+    sellerNickName: string
   }
 }
 
@@ -19,9 +29,9 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
       <ProductItemWrapper>
         <ProductImgWrapper>
           <ProductImg
-            key={productItem.title}
+            key={productItem.id}
             alt={`productName-${productItem.title}`}
-            src={productItem.imageUrl}
+            src={productItem.mainImageUrl}
             style={{ maxWidth: '276px' }}
           />
           <HeartButton
@@ -33,8 +43,10 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
         <ProductItemTitle>{productItem.title}</ProductItemTitle>
         <ProductItemStartPrice>시작가</ProductItemStartPrice>
         &nbsp;
-        <ProductItemPrice>{productItem.price}원</ProductItemPrice>
-        <ProductItemAddress>동작구 사당동 방금전</ProductItemAddress>
+        <ProductItemPrice>
+          {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+        </ProductItemPrice>
+        <ProductItemAddress>{productItem.tradeArea} 방금전</ProductItemAddress>
       </ProductItemWrapper>
     </>
   )

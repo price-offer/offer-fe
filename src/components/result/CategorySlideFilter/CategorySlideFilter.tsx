@@ -224,6 +224,7 @@ const CategoryItem = styled.div<CategoryItemProps>`
   padding: 4px 16px;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
   ${({ selected, theme }): string => `
   background-color:${selected ? theme.colors.black : theme.colors.bgGray02};
   `};

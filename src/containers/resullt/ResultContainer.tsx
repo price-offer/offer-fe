@@ -6,6 +6,8 @@ import { ProductList } from '@components/home/ProductList'
 import { ResultHeader } from '@components/result/CategoryHeader'
 import { CategorySlideFilter } from '@components/result/CategorySlideFilter/CategorySlideFilter'
 import { FilterSelect } from '@components/result/FilterSelect'
+import useCategoryFilterList from '@hooks/useCategoryFilterList'
+
 const ResultContainer = (): ReactElement => {
   const { desktop } = useMedia()
   const [isDesktop, setIsDesktop] = useState(false)
@@ -70,47 +72,53 @@ const ResultContainer = (): ReactElement => {
 
   const productList = [
     {
-      address: 'string',
-      imageUrl: 'string',
-      price: 'string',
-      title: 'string',
-      url: 'string'
+      address: 'string1',
+      imageUrl: 'string1',
+      price: 'string1',
+      title: 'string1',
+      url: 'string1'
     },
     {
-      address: 'string',
-      imageUrl: 'string',
-      price: 'string',
-      title: 'string',
-      url: 'string'
+      address: 'string2',
+      imageUrl: 'string2',
+      price: 'string2',
+      title: 'string2',
+      url: 'string2'
     },
     {
-      address: 'string',
-      imageUrl: 'string',
-      price: 'string',
-      title: 'string',
-      url: 'string'
+      address: 'string3',
+      imageUrl: 'string3',
+      price: 'string3',
+      title: 'string3',
+      url: 'string3'
     },
     {
-      address: 'string',
-      imageUrl: 'string',
-      price: 'string',
-      title: 'string',
-      url: 'string'
+      address: 'string4',
+      imageUrl: 'string4',
+      price: 'string4',
+      title: 'string4',
+      url: 'string4'
     },
     {
-      address: 'string',
-      imageUrl: 'string',
-      price: 'string',
-      title: 'string',
-      url: 'string'
+      address: 'string5',
+      imageUrl: 'string5',
+      price: 'string5',
+      title: 'string5',
+      url: 'string5'
     }
   ]
 
+  const { checkFilterList, onCheckItem } = useCategoryFilterList(cateGoryList)
   return (
     <Layout>
       <HomeWrapper>
         <ResultHeader searchResult="###"></ResultHeader>
-        {isDesktop && <CategorySlideFilter cateGoryList={cateGoryList} />}
+        {isDesktop && (
+          <CategorySlideFilter
+            cateGoryList={checkFilterList}
+            onCategoryClick={onCheckItem}
+          />
+        )}
         <FilterSelect></FilterSelect>
         <ProductList productList={productList} />
       </HomeWrapper>

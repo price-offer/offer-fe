@@ -59,6 +59,9 @@ const ProductImg = styled(Image)`
     height: 166px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
+    height: 200px;
+  }
+  @media (max-width: 510px) {
     height: 160px;
   }
 `
@@ -80,6 +83,9 @@ const ProductImgWrapper = styled.div`
     max-width: 166px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
+    max-width: 200px;
+  }
+  @media (max-width: 510px) {
     max-width: 160px;
   }
 `

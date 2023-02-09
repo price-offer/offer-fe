@@ -63,6 +63,13 @@ const ProductListWrapper = styled.div`
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     justify-content: center;
+    grid-template-columns: repeat(2, minmax(30%, 200px));
+    row-gap: 15px;
+    column-gap: 50px;
+  }
+
+  @media (max-width: 510px) {
+    justify-content: center;
     grid-template-columns: repeat(2, minmax(10%, 160px));
     row-gap: 8px;
     column-gap: 20px;

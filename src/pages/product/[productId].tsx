@@ -3,10 +3,12 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { PriceOfferCard } from '@components/product-detail/PriceOfferCard'
+import {
+  ProductField,
+  UserProfile,
+  PriceOfferCard
+} from '@components/product-detail'
 import type { Offer } from '@components/product-detail/PriceOfferCard'
-import { ProductField } from '@components/product-detail/ProductField'
-import { UserProfile } from '@components/product-detail/UserProfile'
 
 const IMAGES_MOCK = [
   {

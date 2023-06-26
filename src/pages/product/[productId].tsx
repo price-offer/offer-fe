@@ -181,6 +181,45 @@ const CATEGORIES_MOCK = [
   { label: '거래 방식', value: '직거래' },
   { label: '거래 지역', value: '동작구 사당동' }
 ]
+const PRODUCT_MOCK = {
+  id: 2,
+  author: {
+    id: 1,
+    email: 'shinyojeong@naver.com',
+    offerLevel: 1,
+    nickname: '효정',
+    profileImageUrl: 'https://picsum.photos/200/300',
+    address: '서울시 고백구 행복동'
+  },
+  title: '제목입니다.',
+  content:
+    '인텔리전스랩스는 다양한 게임 정보를 활용해 ‘빅데이터’, ‘머신러닝·딥러닝’, ‘인공지능(AI)’ 기술과 공학적 사고를 통해 솔루션을 만들고 게임 사용자와 넥슨 구성원이 사용할 서비스를 제공하는 조직입니다. * UI/UX 디자이너는 인텔리전스랩스 UX실에 소속되어 유저 인사이트 기반으로 서비스가 성장하도록 돕습니다.',
+  category: {
+    code: 7,
+    name: '유아도서'
+  },
+  tradeStatus: {
+    code: 4,
+    name: '판매중'
+  },
+  tradeArea: '서울시 강남구',
+  productStatus: {
+    code: 2,
+    name: '새상품'
+  },
+  tradeMethod: {
+    code: 4,
+    name: '택배거래'
+  },
+  quantity: 5,
+  price: 36500,
+  mainImageUrl: 'https://picsum.photos/200/300',
+  createdDate: '2021-12-10T15:01:30',
+  modifiedDate: '2021-12-10T15:01:30',
+  likeCount: 0,
+  viewCount: 1,
+  isLiked: false
+}
 
 const ProductDetailPage = (): ReactElement => {
   return (
@@ -211,7 +250,7 @@ const ProductDetailPage = (): ReactElement => {
               제품명
             </ProductName>
             <Text styleType="display01B" tag="p">
-              50000
+              {PRODUCT_MOCK.price}
               <Text styleType="subtitle01M">원</Text>
             </Text>
           </div>
@@ -224,19 +263,15 @@ const ProductDetailPage = (): ReactElement => {
               ))}
             </TransactionContainer>
             <Text styleType="body02R" tag="p">
-              인텔리전스랩스는 다양한 게임 정보를 활용해 ‘빅데이터’,
-              ‘머신러닝·딥러닝’, ‘인공지능(AI)’ 기술과 공학적 사고를 통해
-              솔루션을 만들고 게임 사용자와 넥슨 구성원이 사용할 서비스를
-              제공하는 조직입니다. * UI/UX 디자이너는 인텔리전스랩스 UX실에
-              소속되어 유저 인사이트 기반으로 서비스가 성장하도록 돕습니다.
+              {PRODUCT_MOCK.title}
             </Text>
           </div>
           <ProfileDivider gap={16} />
           <UserProfile
-            image="https://picsum.photos/200/300"
+            image={PRODUCT_MOCK.author.profileImageUrl}
             level={1}
-            location="관악구 봉천동"
-            nickName="신효정"
+            location={PRODUCT_MOCK.author.address}
+            nickName={PRODUCT_MOCK.author.nickname}
             type="basic"
           />
         </div>

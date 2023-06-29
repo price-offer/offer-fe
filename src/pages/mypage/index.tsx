@@ -9,21 +9,33 @@ import { Tabs, Tab } from '@components'
 import type { TradeActivityType, TradeActivityName } from '@constants'
 
 interface PageTab {
-  code: TradeActivityType
-  name: TradeActivityName
+  tab: {
+    code: TradeActivityType
+    name: TradeActivityName
+  }
+  panel(): ReactElement
 }
 const pageTabs: PageTab[] = [
   {
-    code: 'sale',
-    name: '판매'
+    tab: {
+      code: 'sale',
+      name: '판매'
+    },
+    panel: SalePageContent
   },
   {
-    code: 'buy',
-    name: '구매'
+    tab: {
+      code: 'buy',
+      name: '구매'
+    },
+    panel: BuyPageContent
   },
   {
-    code: 'review',
-    name: '후기'
+    tab: {
+      code: 'review',
+      name: '후기'
+    },
+    panel: ReviewPageContent
   }
 ]
 
@@ -43,16 +55,15 @@ const MyPage = (): ReactElement => {
         닉네임님의 거래 활동
       </StyledUserName>
       <Divider />
-
       <Tabs>
         <StyledLayout>
           <Tabs.List>
-            {pageTabs.map((_page, index) => (
+            {pageTabs.map(({ tab }, index) => (
               <StyledTab
-                key={_page.code}
+                key={`${tab.code}-tab`}
                 isSelected={pageIndex === index}
                 onClick={handleTabClick}>
-                {_page.name}
+                {tab.name}
               </StyledTab>
             ))}
           </Tabs.List>
@@ -60,15 +71,9 @@ const MyPage = (): ReactElement => {
         <Divider />
         <StyledLayout>
           <StyledTabPanels>
-            <Tabs.Panel>
-              <SalePageContent />
-            </Tabs.Panel>
-            <Tabs.Panel>
-              <BuyPageContent />
-            </Tabs.Panel>
-            <Tabs.Panel>
-              <ReviewPageContent />
-            </Tabs.Panel>
+            {pageTabs.map(({ tab, panel }) => (
+              <Tabs.Panel key={`${tab.code}-panel`}>{panel()}</Tabs.Panel>
+            ))}
           </StyledTabPanels>
         </StyledLayout>
       </Tabs>
@@ -88,6 +93,10 @@ const StyledUserName = styled(Text)`
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.body01B};
       margin: 16px auto;
+    }
+
+    ${theme.mediaQuery.mobile} {
+      margin-left: 16px;
     }
   `}
 `

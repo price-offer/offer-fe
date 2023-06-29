@@ -2,8 +2,9 @@
 import styled from '@emotion/styled'
 import type { ColorKeys } from '@offer-ui/react'
 import { Divider, SelectBox } from '@offer-ui/react'
-import type { ReactElement, MouseEvent } from 'react'
-import { useState } from 'react'
+import type { ReactElement } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import { getOnSaleArticles } from '@apis'
 import { ProfileBox, Tabs, Tab, SaleTabArticleList } from '@components'
 import { TRADE_STATUS } from '@constants'
 import { myProfile } from '@mocks/fixture'
@@ -19,94 +20,78 @@ const sortItems = [
 
 const tradeStatusList = TRADE_STATUS.filter(item => item.code !== 2)
 
-const getArticles = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
-  const isOnSale = tradeStatusCode === 4
-  const tradeStatus = isOnSale ? tradeStatusList[0] : tradeStatusList[1]
-
-  return Array.from({ length: 10 }, () => 0).map((_, index) => ({
-    id: index,
-    mainImageUrl: '',
-    title: `${tradeStatus.name}인 상품`,
-    price: 36500,
-    tradeArea: '서울시 강남구',
-    tradeStatus,
-    createdDate: '2023.01.25',
-    modifiedDate: '2023.01.25',
-    isLiked: false,
-    likeCount: 0,
-    isReviewed: !!(index % 2 !== 0),
-    sellerNickName: 'hypeboy'
-  }))
-}
-
 export const SalePageContent = (): ReactElement => {
   const hasToken = true
-  const [tabIndex, setTabIndex] = useState<number>(0)
-  const [articles, setArticles] = useState<ArticlesElement[]>(getArticles(4))
+  const [tradeStatusCode, setTradeStatusCode] = useState<TradeStatusCode>(4)
+  const [articles, setArticles] = useState<ArticlesElement[]>([])
 
-  const handleTabClick = (
-    e: MouseEvent<HTMLDivElement>,
-    index: number
-  ): void => {
-    const isSell = index === 0
-    setTabIndex(index)
-    setArticles(isSell ? getArticles(4) : getArticles(8))
+  const fetchArticles = useCallback(async (): Promise<void> => {
+    const res = await getOnSaleArticles('sonny', tradeStatusCode)
+    setArticles(res.elements)
+  }, [tradeStatusCode])
+
+  const handleTabClick = (newTradeStatusCode: TradeStatusCode) => () => {
+    setTradeStatusCode(newTradeStatusCode)
   }
 
-  return (
-    <div>
-      <StyledContentWrapper>
-        <ProfileBox {...myProfile} />
-        <StyledDivider size="bold" />
-        <StyledUserProductsWrapper>
-          <Tabs>
-            <StyledSearchOptionsWrapper>
-              <StyledTabsList>
-                {tradeStatusList.map((tradeStatus, index) => {
-                  const isCurrent = tabIndex === index
+  useEffect(() => {
+    fetchArticles()
+  }, [fetchArticles])
 
-                  return (
-                    <StyledTab key={tradeStatus.code} onClick={handleTabClick}>
-                      <StyledStatusButtonLabel>
-                        <StyledCircle isCurrent={isCurrent} />
-                        <StyledStatusButton isCurrent={isCurrent} type="button">
-                          <StyledText isCurrent={isCurrent}>
-                            {tradeStatus.name}
-                          </StyledText>
-                        </StyledStatusButton>
-                        <StyledText color="grayScale50">1</StyledText>
-                      </StyledStatusButtonLabel>
-                    </StyledTab>
-                  )
-                })}
-              </StyledTabsList>
-              <SelectBox
-                colorType="none"
-                items={sortItems}
-                value="recently"
-                onChange={noop}
+  return (
+    <StyledContentWrapper>
+      <ProfileBox {...myProfile} />
+      <StyledDivider size="bold" />
+      <StyledUserProductsWrapper>
+        <Tabs>
+          <StyledSearchOptionsWrapper>
+            <StyledTabsList>
+              {tradeStatusList.map(tradeStatus => {
+                const isCurrent = tradeStatus.code === tradeStatusCode
+
+                return (
+                  <StyledTab
+                    key={tradeStatus.code}
+                    onClick={handleTabClick(tradeStatus.code)}>
+                    <StyledStatusButtonLabel>
+                      <StyledCircle isCurrent={isCurrent} />
+                      <StyledStatusButton isCurrent={isCurrent}>
+                        <StyledText isCurrent={isCurrent}>
+                          {tradeStatus.name}
+                        </StyledText>
+                      </StyledStatusButton>
+                      <StyledText color="grayScale50">1</StyledText>
+                    </StyledStatusButtonLabel>
+                  </StyledTab>
+                )
+              })}
+            </StyledTabsList>
+            <SelectBox
+              colorType="none"
+              items={sortItems}
+              value="recently"
+              onChange={noop}
+            />
+          </StyledSearchOptionsWrapper>
+          <StyledProductListPanels>
+            <Tabs.Panel>
+              <SaleTabArticleList
+                articles={articles}
+                hasToken={hasToken}
+                onChangeTradeStatus={noop}
               />
-            </StyledSearchOptionsWrapper>
-            <StyledProductListPanels>
-              <Tabs.Panel>
-                <SaleTabArticleList
-                  articles={articles}
-                  hasToken={hasToken}
-                  onChangeTradeStatus={noop}
-                />
-              </Tabs.Panel>
-              <Tabs.Panel>
-                <SaleTabArticleList
-                  articles={articles}
-                  hasToken={hasToken}
-                  onChangeTradeStatus={noop}
-                />
-              </Tabs.Panel>
-            </StyledProductListPanels>
-          </Tabs>
-        </StyledUserProductsWrapper>
-      </StyledContentWrapper>
-    </div>
+            </Tabs.Panel>
+            <Tabs.Panel>
+              <SaleTabArticleList
+                articles={articles}
+                hasToken={hasToken}
+                onChangeTradeStatus={noop}
+              />
+            </Tabs.Panel>
+          </StyledProductListPanels>
+        </Tabs>
+      </StyledUserProductsWrapper>
+    </StyledContentWrapper>
   )
 }
 

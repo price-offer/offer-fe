@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 import type { ReactElement } from 'react'
 
-interface ResultHeaderProp {
+interface Props {
   searchResult: string
 }
 
-const ResultHeader = ({ searchResult }: ResultHeaderProp): ReactElement => {
+const ResultHeader = ({ searchResult }: Props): ReactElement => {
   return (
     <CategoryHeaderWrapper>
       <CategoryHeader>&quot;{searchResult}&quot;의 검색결과</CategoryHeader>

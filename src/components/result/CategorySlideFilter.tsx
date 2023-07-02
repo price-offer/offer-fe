@@ -3,12 +3,13 @@ import { IconButton, useMedia } from '@offer-ui/react'
 import { useRef, useState, useCallback, useEffect } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 
-interface CategorySliderProps {
+interface Props {
   cateGoryList: {
     selected: boolean
-    title: string
+    code: string
+    name: string
   }[]
-  onCategoryClick(title: any): void
+  onCategoryClick(name: string): void
 }
 interface CategoryItemProps {
   selected: boolean
@@ -20,7 +21,7 @@ interface CateGoryItemWrapperProps {
 const CategorySlideFilter = ({
   cateGoryList,
   onCategoryClick
-}: CategorySliderProps): ReactElement => {
+}: Props): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [isDrag, setIsDrag] = useState(false)
   const [startX, setStartX] = useState<number>(0)
@@ -30,8 +31,8 @@ const CategorySlideFilter = ({
   const [moveDistanceFromArrow, setMoveDistanceFromArrow] = useState<number>(0)
   const isFirstCategory = containerRef.current?.scrollLeft === 0
 
-  const handleCategoryClick = (title: string): void => {
-    onCategoryClick(title)
+  const handleCategoryClick = (name: string): void => {
+    onCategoryClick(name)
   }
   useEffect(() => {
     if (desktop) setIsDesktop(true)
@@ -68,6 +69,7 @@ const CategorySlideFilter = ({
     setMoveDistanceFromArrow(containerRef.current.scrollLeft)
     setIsLast(true)
   }, [isDrag])
+
   const onDragMove: TouchEventHandler<HTMLDivElement> = useCallback(
     e => {
       if (!containerRef || !containerRef.current) {
@@ -121,13 +123,13 @@ const CategorySlideFilter = ({
           <CateGoryItemWrapper moveDistanceFromArrow={moveDistanceFromArrow}>
             {cateGoryList.map(cateGory => (
               <CategoryItem
-                key={cateGory.title}
+                key={cateGory.name}
                 selected={cateGory.selected}
                 onClick={(): void => {
-                  handleCategoryClick(cateGory.title)
+                  handleCategoryClick(cateGory.name)
                 }}>
                 <CateGoryName selected={cateGory.selected}>
-                  {cateGory.title}
+                  {cateGory.name}
                 </CateGoryName>
               </CategoryItem>
             ))}

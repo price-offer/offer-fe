@@ -5,9 +5,10 @@ import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import { ProductList } from '@components/home/ProductList'
 import { ResultHeader } from '@components/result/CategoryHeader'
-import { CategorySlideFilter } from '@components/result/CategorySlideFilter/CategorySlideFilter'
+import { CategorySlideFilter } from '@components/result/CategorySlideFilter'
 import { FilterSelect } from '@components/result/FilterSelect'
 import useCategoryFilterList from '@hooks/useCategoryFilterList'
+import useSelectBoxFilter from '@hooks/useSelectBoxFilter'
 
 const Result: NextPage = () => {
   const { desktop } = useMedia()
@@ -19,57 +20,6 @@ const Result: NextPage = () => {
       setIsDesktop(false)
     }
   }, [desktop])
-
-  const cateGoryList = [
-    {
-      selected: true,
-      title: '전체'
-    },
-    {
-      selected: false,
-      title: '남성패션/잡화'
-    },
-    {
-      selected: false,
-      title: '여성패션/잡화'
-    },
-    {
-      selected: false,
-      title: '게임'
-    },
-    {
-      selected: false,
-      title: '스포츠/레저'
-    },
-    {
-      selected: false,
-      title: '장난감/취미'
-    },
-    {
-      selected: false,
-      title: '디지털기기'
-    },
-    {
-      selected: false,
-      title: '자동차/공구'
-    },
-    {
-      selected: false,
-      title: '생활가전'
-    },
-    {
-      selected: false,
-      title: '가구/인테리어'
-    },
-    {
-      selected: false,
-      title: '도서/티켓/음반'
-    },
-    {
-      selected: false,
-      title: '반려동물'
-    }
-  ]
 
   const apiRes = {
     elements: [
@@ -169,7 +119,21 @@ const Result: NextPage = () => {
     }
   }
 
-  const { checkFilterList, onCheckItem } = useCategoryFilterList(cateGoryList)
+  const {
+    checkFilterList,
+    onCheckItem,
+    selectedCategoryValue,
+    handleChangeCategorySelect
+  } = useCategoryFilterList()
+
+  const {
+    tradePeriodItems,
+    sortPriceItems,
+    selectedTradePeriodValue,
+    selectedSortPriceValue,
+    handleChangeTradePeriodSelect,
+    handleChangeSortPriceSelect
+  } = useSelectBoxFilter()
 
   return (
     <div>
@@ -182,7 +146,16 @@ const Result: NextPage = () => {
               onCategoryClick={onCheckItem}
             />
           )}
-          <FilterSelect></FilterSelect>
+          <FilterSelect
+            categoryItems={checkFilterList}
+            handleChangeCategory={handleChangeCategorySelect}
+            handleChangeSortPrice={handleChangeSortPriceSelect}
+            handleChangeTradePeriod={handleChangeTradePeriodSelect}
+            selectedCategoryValue={selectedCategoryValue}
+            selectedSortPriceValue={selectedSortPriceValue}
+            selectedTradePeriodValue={selectedTradePeriodValue}
+            sortPriceItems={sortPriceItems}
+            tradePeriodItems={tradePeriodItems}></FilterSelect>
           <ProductList productList={apiRes.elements} />
         </ResultWrapper>
       </Layout>

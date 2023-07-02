@@ -1,10 +1,41 @@
 import styled from '@emotion/styled'
 import { SelectBox, useMedia } from '@offer-ui/react'
+import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { PriceDialog } from './PriceDialog'
 
-const FilterSelect = (): ReactElement => {
+interface Props {
+  categoryItems: {
+    code: string
+    name: string
+    selected: boolean
+  }[]
+  tradePeriodItems: {
+    code: string
+    name: string
+  }[]
+  sortPriceItems: {
+    code: string
+    name: string
+  }[]
+  selectedCategoryValue: string
+  selectedTradePeriodValue: string
+  selectedSortPriceValue: string
+  handleChangeSortPrice: SelectOnChangeHandler
+  handleChangeCategory: SelectOnChangeHandler
+  handleChangeTradePeriod: SelectOnChangeHandler
+}
+
+const FilterSelect = ({
+  categoryItems,
+  sortPriceItems,
+  tradePeriodItems,
+  selectedCategoryValue,
+  handleChangeSortPrice,
+  handleChangeCategory,
+  handleChangeTradePeriod
+}: Props): ReactElement => {
   const { tablet, mobile } = useMedia()
 
   const [disDesktop, setDIsDesktop] = useState(false)
@@ -23,104 +54,29 @@ const FilterSelect = (): ReactElement => {
           {disDesktop ? (
             <CategorySelect
               colorType="dark"
-              items={[
-                {
-                  code: true,
-                  name: '전체'
-                },
-                {
-                  code: false,
-                  name: '남성패션/잡화'
-                },
-                {
-                  code: false,
-                  name: '여성패션/잡화'
-                },
-                {
-                  code: false,
-                  name: '게임'
-                },
-                {
-                  code: false,
-                  name: '스포츠/레저'
-                },
-                {
-                  code: false,
-                  name: '장난감/취미'
-                },
-                {
-                  code: false,
-                  name: '디지털기기'
-                },
-                {
-                  code: false,
-                  name: '자동차/공구'
-                },
-                {
-                  code: false,
-                  name: '생활가전'
-                },
-                {
-                  code: false,
-                  name: '가구/인테리어'
-                },
-                {
-                  code: false,
-                  name: '도서/티켓/음반'
-                },
-                {
-                  code: false,
-                  name: '반려동물'
-                }
-              ]}
+              items={categoryItems}
               placeholder="전체"
-              // eslint-disable-next-line @typescript-eslint/no-empty-function
-              onChange={(): void => {}}></CategorySelect>
+              value={selectedCategoryValue}
+              onChange={handleChangeCategory}></CategorySelect>
           ) : (
             <></>
           )}
           <TradePeriodSelect
             colorType="light"
-            items={[
-              {
-                code: '직거래/택배거래',
-                name: '직거래/택배거래'
-              },
-              {
-                code: '직거래',
-                name: '직거래'
-              },
-              {
-                code: '직거래/택배거래',
-                name: '직거래/택배거래'
-              }
-            ]}
+            items={tradePeriodItems}
             placeholder="거래방식"
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={(): void => {}}></TradePeriodSelect>
+            onChange={handleChangeTradePeriod}></TradePeriodSelect>
           <PriceDialog></PriceDialog>
         </LeftSelectWrapper>
         <RightSelectWrapper>
           {disDesktop && <ProductCount>전체 999개</ProductCount>}
           <PriceFilterSelect
             colorType="none"
-            items={[
-              {
-                code: '높은 가격순',
-                name: '높은 가격순'
-              },
-              {
-                code: '낮은 가격순',
-                name: '낮은 가격순'
-              },
-              {
-                code: '최신순',
-                name: '최신순'
-              }
-            ]}
+            items={sortPriceItems}
             placeholder="높은 가격순"
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={(): void => {}}></PriceFilterSelect>
+            onChange={handleChangeSortPrice}></PriceFilterSelect>
         </RightSelectWrapper>
       </SelectWrapper>
     </>

@@ -15,6 +15,7 @@ const FilterSelect = (): ReactElement => {
       setDIsDesktop(false)
     }
   }, [tablet, mobile])
+
   return (
     <>
       <SelectWrapper>

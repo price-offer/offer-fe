@@ -1,4 +1,5 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
+import type { ChangeEventHandler } from 'react'
 import { useState } from 'react'
 
 interface SelectItemsType {
@@ -11,8 +12,13 @@ interface ReturnType {
   sortPriceItems: SelectItemsType[]
   selectedTradePeriodValue: string
   selectedSortPriceValue: string
-  handleChangeTradePeriodSelect: SelectOnChangeHandler
-  handleChangeSortPriceSelect: SelectOnChangeHandler
+  minPriceValue: string
+  maxPriceValue: string
+  handleTradePeriodSelectChange: SelectOnChangeHandler
+  handleSortPriceSelectChange: SelectOnChangeHandler
+  handleMinPriceInputChange: ChangeEventHandler
+  handleMaxPriceInputChange: ChangeEventHandler
+  handlePriceApplyClick(): void
 }
 
 const tradePeriodItems = [
@@ -48,22 +54,37 @@ const sortPriceItems = [
 const useSelectBoxFilter = (): ReturnType => {
   const [selectedTradePeriodValue, setSelectedTradePeriodValue] =
     useState<string>('')
-
   const [selectedSortPriceValue, setSelectedSortPriceValue] =
     useState<string>('')
+  const [minPriceValue, setMinPriceValue] = useState<string>('')
+  const [maxPriceValue, setMaxPriceValue] = useState<string>('')
 
-  const handleChangeTradePeriodSelect: SelectOnChangeHandler<{
+  const handleTradePeriodSelectChange: SelectOnChangeHandler<{
     code: string
     name: string
   }> = item => {
     setSelectedTradePeriodValue(item.code)
   }
 
-  const handleChangeSortPriceSelect: SelectOnChangeHandler<{
+  const handleSortPriceSelectChange: SelectOnChangeHandler<{
     code: string
     name: string
   }> = item => {
     setSelectedSortPriceValue(item.code)
+  }
+
+  const handleMinPriceInputChange: ChangeEventHandler<HTMLInputElement> = e => {
+    const inputValue = e.target.value
+    setMinPriceValue(inputValue)
+  }
+
+  const handleMaxPriceInputChange: ChangeEventHandler<HTMLInputElement> = e => {
+    const inputValue = e.target.value
+    setMaxPriceValue(inputValue)
+  }
+
+  const handlePriceApplyClick = (): void => {
+    //필터적용
   }
 
   return {
@@ -71,8 +92,13 @@ const useSelectBoxFilter = (): ReturnType => {
     sortPriceItems,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    handleChangeTradePeriodSelect,
-    handleChangeSortPriceSelect
+    minPriceValue,
+    maxPriceValue,
+    handleTradePeriodSelectChange,
+    handleSortPriceSelectChange,
+    handleMinPriceInputChange,
+    handleMaxPriceInputChange,
+    handlePriceApplyClick
   }
 }
 

@@ -123,7 +123,7 @@ const Result: NextPage = () => {
     checkFilterList,
     onCheckItem,
     selectedCategoryValue,
-    handleChangeCategorySelect
+    handleCategorySelectChange
   } = useCategoryFilterList()
 
   const {
@@ -131,8 +131,13 @@ const Result: NextPage = () => {
     sortPriceItems,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    handleChangeTradePeriodSelect,
-    handleChangeSortPriceSelect
+    minPriceValue,
+    maxPriceValue,
+    handleTradePeriodSelectChange,
+    handleSortPriceSelectChange,
+    handleMinPriceInputChange,
+    handleMaxPriceInputChange,
+    handlePriceApplyClick
   } = useSelectBoxFilter()
 
   return (
@@ -148,9 +153,14 @@ const Result: NextPage = () => {
           )}
           <FilterSelect
             categoryItems={checkFilterList}
-            handleChangeCategory={handleChangeCategorySelect}
-            handleChangeSortPrice={handleChangeSortPriceSelect}
-            handleChangeTradePeriod={handleChangeTradePeriodSelect}
+            handleCategoryChange={handleCategorySelectChange}
+            handleMaxPriceInputChange={handleMaxPriceInputChange}
+            handleMinPriceInputChange={handleMinPriceInputChange}
+            handlePriceApplyClick={handlePriceApplyClick}
+            handleSortPriceChange={handleSortPriceSelectChange}
+            handleTradePeriodChange={handleTradePeriodSelectChange}
+            maxPriceValue={maxPriceValue}
+            minPriceValue={minPriceValue}
             selectedCategoryValue={selectedCategoryValue}
             selectedSortPriceValue={selectedSortPriceValue}
             selectedTradePeriodValue={selectedTradePeriodValue}

@@ -9,7 +9,7 @@ interface CheckItemType {
 
 interface ReturnType {
   selectedCategoryValue: string
-  handleChangeCategorySelect: SelectOnChangeHandler
+  handleCategorySelectChange: SelectOnChangeHandler
   checkFilterList: CheckItemType[]
   onCheckItem(name: string): void
 }
@@ -100,7 +100,7 @@ const useCategoryFilterList = (): ReturnType => {
       })
     )
   }
-  const handleChangeCategorySelect: SelectOnChangeHandler<{
+  const handleCategorySelectChange: SelectOnChangeHandler<{
     code: string
     name: string
   }> = item => {
@@ -112,7 +112,7 @@ const useCategoryFilterList = (): ReturnType => {
     onCheckItem,
     checkFilterList: list,
     selectedCategoryValue,
-    handleChangeCategorySelect
+    handleCategorySelectChange
   }
 }
 

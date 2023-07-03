@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { SelectBox, useMedia } from '@offer-ui/react'
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useEffect, useState } from 'react'
-import type { ReactElement } from 'react'
+import type { ReactElement, ChangeEventHandler } from 'react'
 import { PriceDialog } from './PriceDialog'
 
 interface Props {
@@ -22,9 +22,14 @@ interface Props {
   selectedCategoryValue: string
   selectedTradePeriodValue: string
   selectedSortPriceValue: string
-  handleChangeSortPrice: SelectOnChangeHandler
-  handleChangeCategory: SelectOnChangeHandler
-  handleChangeTradePeriod: SelectOnChangeHandler
+  minPriceValue: string
+  maxPriceValue: string
+  handleSortPriceChange: SelectOnChangeHandler
+  handleCategoryChange: SelectOnChangeHandler
+  handleTradePeriodChange: SelectOnChangeHandler
+  handleMinPriceInputChange: ChangeEventHandler
+  handleMaxPriceInputChange: ChangeEventHandler
+  handlePriceApplyClick(): void
 }
 
 const FilterSelect = ({
@@ -32,9 +37,14 @@ const FilterSelect = ({
   sortPriceItems,
   tradePeriodItems,
   selectedCategoryValue,
-  handleChangeSortPrice,
-  handleChangeCategory,
-  handleChangeTradePeriod
+  minPriceValue,
+  maxPriceValue,
+  handleSortPriceChange,
+  handleCategoryChange,
+  handleTradePeriodChange,
+  handleMinPriceInputChange,
+  handleMaxPriceInputChange,
+  handlePriceApplyClick
 }: Props): ReactElement => {
   const { tablet, mobile } = useMedia()
 
@@ -57,7 +67,7 @@ const FilterSelect = ({
               items={categoryItems}
               placeholder="전체"
               value={selectedCategoryValue}
-              onChange={handleChangeCategory}></CategorySelect>
+              onChange={handleCategoryChange}></CategorySelect>
           ) : (
             <></>
           )}
@@ -65,9 +75,13 @@ const FilterSelect = ({
             colorType="light"
             items={tradePeriodItems}
             placeholder="거래방식"
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={handleChangeTradePeriod}></TradePeriodSelect>
-          <PriceDialog></PriceDialog>
+            onChange={handleTradePeriodChange}></TradePeriodSelect>
+          <PriceDialog
+            handleMaxPriceInputChange={handleMaxPriceInputChange}
+            handleMinPriceInputChange={handleMinPriceInputChange}
+            handlePriceApplyClick={handlePriceApplyClick}
+            maxPriceValue={maxPriceValue}
+            minPriceValue={minPriceValue}></PriceDialog>
         </LeftSelectWrapper>
         <RightSelectWrapper>
           {disDesktop && <ProductCount>전체 999개</ProductCount>}
@@ -75,8 +89,7 @@ const FilterSelect = ({
             colorType="none"
             items={sortPriceItems}
             placeholder="높은 가격순"
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={handleChangeSortPrice}></PriceFilterSelect>
+            onChange={handleSortPriceChange}></PriceFilterSelect>
         </RightSelectWrapper>
       </SelectWrapper>
     </>

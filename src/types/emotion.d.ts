@@ -1,5 +1,16 @@
 import '@emotion/react'
-import type { Border, Colors, Fonts, MediaQuery, Radius, ZIndex } from '@themes'
+import type {
+  Avatar,
+  Border,
+  Colors,
+  CTAButton,
+  Fonts,
+  Input,
+  MediaQuery,
+  Radius,
+  SelectBox,
+  ZIndex
+} from '@themes'
 
 declare module '@emotion/react' {
   export interface Theme {
@@ -9,5 +20,9 @@ declare module '@emotion/react' {
     mediaQuery: MediaQuery
     radius: Radius
     zIndex: ZIndex
+    avatar: Avatar
+    input: Input
+    ctaButton: CTAButton
+    selectBox: SelectBox
   }
 }

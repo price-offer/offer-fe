@@ -1,3 +1,4 @@
+import { colors } from './colors'
 import { fonts } from './fonts'
 export type SelectBox = typeof selectBox
 
@@ -16,7 +17,7 @@ export const selectBox = {
         div:nth-of-type(1){ //triggerWrapper
           border-radius: 6px;
           ${fonts.body02M};
-          color: #929399;
+          color: ${colors.grayScale50};
         }
         div:nth-of-type(2){ //StyledOptionsWrapper
           border-radius: 6px;
@@ -39,7 +40,7 @@ export const selectBox = {
         div:nth-of-type(1){ //triggerWrapper
           border-radius: 4px;
           ${fonts.body02B};
-          color: #929399;
+          color: ${colors.grayScale50};
         }
         div:nth-of-type(2){ //StyledOptionsWrapper
           border-radius: 4px;

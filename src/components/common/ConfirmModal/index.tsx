@@ -27,7 +27,7 @@ export const ConfirmModal = ({
   isOpen = false,
   onClose,
   hasLogo = false,
-  title,
+  // title,
   hasCheckIcon = false,
   description = '',
   primaryButtonText = '',
@@ -40,9 +40,13 @@ export const ConfirmModal = ({
         {hasLogo && (
           <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
         )}
-        <StyledCloseButton colorType="gray30" icon="close" onClick={onClose} />
+        <StyledCloseButton
+          // colorType="gray30"
+          icon="close"
+          onClick={onClose}
+        />
         <StyledTitle hasLogo={hasLogo} styleType="headline01B" tag="p">
-          {title}
+          {/* {title} */}
         </StyledTitle>
         <StyledDescription styleType="body01R" tag="p">
           {description}

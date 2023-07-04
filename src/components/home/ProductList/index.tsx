@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import type { ReactElement } from 'react'
-import { ProductItem } from './ProductItem'
+import { ProductItem } from '../ProductItem'
 
 interface ProductListProps {
   productList: {

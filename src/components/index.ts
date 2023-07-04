@@ -1,2 +1,5 @@
 export * from './common'
+export * from './home'
 export * from './mypage'
+export * from './product'
+export * from './result'

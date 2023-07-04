@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { ProductList } from '../components/home/ProductList'
 import { IMAGE } from '../constants/images'
-import { CategorySlider } from '@components/home/CategorySlider/CategorySlider'
+import { CategorySlider } from '@components/home/CategorySlider'
 import { HomeBanner } from '@components/home/HomeBanner'
 
 const Home: NextPage = () => {

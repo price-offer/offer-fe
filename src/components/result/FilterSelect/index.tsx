@@ -3,7 +3,7 @@ import { SelectBox, useMedia } from '@offer-ui/react'
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useEffect, useState } from 'react'
 import type { ReactElement, ChangeEventHandler } from 'react'
-import { PriceDialog } from './PriceDialog'
+import { PriceDialog } from '../PriceDialog'
 
 interface Props {
   categoryItems: {

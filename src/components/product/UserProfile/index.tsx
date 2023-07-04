@@ -1,9 +1,14 @@
 import styled from '@emotion/styled'
 import { Avatar, Badge, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { TRANSACTION_TYPE, USER } from '@constants'
-import type { TransactionType } from '@types'
 
+export const TRANSACTION_TYPE = {
+  all: '직거래/택배거래',
+  direct: '직거래',
+  parcel: '택배거래'
+} as const
+
+type TransactionType = keyof typeof TRANSACTION_TYPE
 export interface UserProfileProps {
   image?: string
   nickName: string
@@ -34,7 +39,7 @@ export const UserProfile = ({
             {nickName}
           </Text>
           <Badge colorType="orange">
-            {USER.level}
+            Lv.
             {level}
           </Badge>
         </StyledUserName>

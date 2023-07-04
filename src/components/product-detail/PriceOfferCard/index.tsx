@@ -3,7 +3,12 @@ import { Button, Divider, ToggleButton, SelectBox, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { UserProfile } from '../UserProfile'
-import type { TRANSACTION_TYPE } from '@constants'
+
+export const TRANSACTION_TYPE = {
+  all: '직거래/택배거래',
+  direct: '직거래',
+  parcel: '택배거래'
+} as const
 
 export interface PriceOfferCardProps {
   offerList: Offer[]

@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import {
   Button,
   Icon,
-  IconButton,
+  // IconButton,
   Modal as ModalContainer,
   Text
 } from '@offer-ui/react'
@@ -40,11 +40,7 @@ export const ConfirmModal = ({
         {hasLogo && (
           <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
         )}
-        <StyledCloseButton
-          // colorType="gray30"
-          icon="close"
-          onClick={onClose}
-        />
+        {/* <StyledCloseButton color="gray30" icon="close" onClick={onClose} /> */}
         <StyledTitle hasLogo={hasLogo} styleType="headline01B" tag="p">
           {/* {title} */}
         </StyledTitle>
@@ -87,11 +83,11 @@ const StyledHeader = styled.div`
   gap: 4px;
   text-align: center;
 `
-const StyledCloseButton = styled(IconButton)`
-  position: absolute;
-  right: 0;
-  top: 0;
-`
+// const StyledCloseButton = styled(IconButton)`
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+// `
 const StyledTitle = styled(Text)<StyledTitleProps>`
   margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
 `

@@ -1,6 +1,3 @@
 export * from './icons'
 export * from './images'
 export * from './app'
-export * from './offer'
-export * from './user'
-export * from './app'

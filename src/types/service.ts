@@ -173,10 +173,10 @@ export interface ReviewInfo {
   content: string
   createdDate: string
 }
-interface ReviewsElement {
+export interface ReviewsElement {
   id: number
   reviewer: Reviewer
-  article: Article
+  article: ReviewArticle
   score: number
   content: string
   isWritingAvailableFromCurrentMember?: boolean
@@ -188,7 +188,7 @@ export interface Reviewer {
   nickname: string
   offerLevel: number
 }
-export interface Article {
+export interface ReviewArticle {
   id: number
   title: string
 }

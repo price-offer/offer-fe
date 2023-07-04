@@ -13,9 +13,7 @@ export const getMyProfile = async (): Promise<AxiosResponse<MyProfile>> => {
   return res.data
 }
 
-export const getProfile = async (
-  memberId: string
-): Promise<AxiosResponse<MemberProfile>> => {
+export const getProfile = async (memberId: string): Promise<MemberProfile> => {
   const res = await axios.get(`/members/${memberId}`)
   return res.data
 }
@@ -32,7 +30,7 @@ export const updateProductTradeStatus = async (
 export const getOnSaleArticles = async (
   memberId: string,
   tradeStatusCode: TradeStatusCode
-): Promise<AxiosResponse<Articles>> => {
+): Promise<Articles> => {
   const res = await axios.get(
     `/articles?memberId=${memberId}&tradeStatusCode=${tradeStatusCode}`
   )

@@ -7,8 +7,8 @@ import { ProductList } from '@components/home/ProductList'
 import { ResultHeader } from '@components/result/CategoryHeader'
 import { CategorySlideFilter } from '@components/result/CategorySlideFilter'
 import { FilterSelect } from '@components/result/FilterSelect'
-import useCategoryFilterList from '@hooks/useCategoryFilterList'
-import useSelectBoxFilter from '@hooks/useSelectBoxFilter'
+import useCategoryFilterList from '@hooks/result/useCategoryFilterList'
+import useSelectBoxFilter from '@hooks/result/useSelectBoxFilter'
 
 const Result: NextPage = () => {
   const { desktop } = useMedia()

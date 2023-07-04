@@ -1,68 +1,25 @@
 import styled from '@emotion/styled'
+import { useMedia } from '@offer-ui/react'
 import type { NextPage } from 'next'
-import { ProductList } from '../components/home/ProductList'
-import { IMAGE } from '../constants/images'
-import { CategorySlider } from '@components/home/CategorySlider/CategorySlider'
-import { HomeBanner } from '@components/home/HomeBanner'
 
-const Home: NextPage = () => {
-  const cateGoryList = [
-    {
-      imageUrl: `${IMAGE.CATEGORY_MAN_GOODS_PC}`,
-      title: '남성패션/잡화',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_WOMAN_GOODS_PC}`,
-      title: '여성패션/잡화',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_GAME_PC}`,
-      title: '게임',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_SPORTS_PC}`,
-      title: '스포츠/레저',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_TOY_PC}`,
-      title: '장난감/취미',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_DIGITAL_DIVICE_PC}`,
-      title: '디지털기기',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_CAR_PC}`,
-      title: '자동차/공구',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_APPLIANCE_PC}`,
-      title: '생활가전',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_DIGITAL_FURNITURE_PC}`,
-      title: '가구/인테리어',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_BOOK_PC}`,
-      title: '도서/티켓/음반',
-      url: 'string'
-    },
-    {
-      imageUrl: `${IMAGE.CATEGORY_ECT_PC}`,
-      title: '더보기',
-      url: 'string'
+import { useEffect, useState } from 'react'
+import { ProductList } from '@components/home/ProductList'
+import { ResultHeader } from '@components/result/CategoryHeader'
+import { CategorySlideFilter } from '@components/result/CategorySlideFilter'
+import { FilterSelect } from '@components/result/FilterSelect'
+import useCategoryFilterList from '@hooks/result/useCategoryFilterList'
+import useSelectBoxFilter from '@hooks/result/useSelectBoxFilter'
+
+const Result: NextPage = () => {
+  const { desktop } = useMedia()
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    if (desktop) setIsDesktop(true)
+    else {
+      setIsDesktop(false)
     }
-  ]
+  }, [desktop])
 
   const apiRes = {
     elements: [
@@ -162,18 +119,61 @@ const Home: NextPage = () => {
     }
   }
 
+  const {
+    checkFilterList,
+    onCheckItem,
+    selectedCategoryValue,
+    handleCategorySelectChange
+  } = useCategoryFilterList()
+
+  const {
+    tradePeriodItems,
+    sortPriceItems,
+    selectedTradePeriodValue,
+    selectedSortPriceValue,
+    minPriceValue,
+    maxPriceValue,
+    handleTradePeriodSelectChange,
+    handleSortPriceSelectChange,
+    handleMinPriceInputChange,
+    handleMaxPriceInputChange,
+    handlePriceApplyClick
+  } = useSelectBoxFilter()
+
   return (
-    <Layout>
-      <HomeWrapper>
-        <HomeBanner />
-        <CategorySlider imageList={cateGoryList} />
-        <ProductList productList={apiRes.elements} />
-      </HomeWrapper>
-    </Layout>
+    <div>
+      <Layout>
+        <ResultWrapper>
+          <ResultHeader searchResult="###"></ResultHeader>
+          {isDesktop && (
+            <CategorySlideFilter
+              cateGoryList={checkFilterList}
+              onCategoryClick={onCheckItem}
+            />
+          )}
+          <FilterSelect
+            categoryItems={checkFilterList}
+            handleCategoryChange={handleCategorySelectChange}
+            handleMaxPriceInputChange={handleMaxPriceInputChange}
+            handleMinPriceInputChange={handleMinPriceInputChange}
+            handlePriceApplyClick={handlePriceApplyClick}
+            handleSortPriceChange={handleSortPriceSelectChange}
+            handleTradePeriodChange={handleTradePeriodSelectChange}
+            maxPriceValue={maxPriceValue}
+            minPriceValue={minPriceValue}
+            selectedCategoryValue={selectedCategoryValue}
+            selectedSortPriceValue={selectedSortPriceValue}
+            selectedTradePeriodValue={selectedTradePeriodValue}
+            sortPriceItems={sortPriceItems}
+            tradePeriodItems={tradePeriodItems}></FilterSelect>
+          <ProductList productList={apiRes.elements} />
+        </ResultWrapper>
+      </Layout>
+    </div>
   )
 }
 
-const HomeWrapper = styled.div`
+const ResultWrapper = styled.div`
   max-width: 1200px;
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -193,4 +193,4 @@ const Layout = styled.div`
   margin-top: 68px;
 `
 
-export default Home
+export default Result

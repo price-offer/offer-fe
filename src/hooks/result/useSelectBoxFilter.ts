@@ -2,12 +2,12 @@ import type { SelectOnChangeHandler } from '@offer-ui/react'
 import type { ChangeEventHandler } from 'react'
 import { useState } from 'react'
 
-interface SelectItemsType {
+type SelectItemsType = {
   code: string
   name: string
 }
 
-interface ReturnType {
+type ReturnType = {
   tradePeriodItems: SelectItemsType[]
   sortPriceItems: SelectItemsType[]
   selectedTradePeriodValue: string

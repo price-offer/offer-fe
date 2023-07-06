@@ -3,9 +3,9 @@ import { Avatar, Badge, Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import type { MyProfile } from '@types'
 
-export interface ProfileBoxProps extends MyProfile {
+export type ProfileBoxProps = {
   className?: string
-}
+} & MyProfile
 
 export const ProfileBox = ({
   member,

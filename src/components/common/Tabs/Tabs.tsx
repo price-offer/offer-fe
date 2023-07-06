@@ -5,7 +5,7 @@ import { TabPanel } from './TabPanel'
 import { TabPanels } from './TabPanels'
 import { TabsActionContext } from './TabsActionContext'
 
-export interface TabsProps {
+export type TabsProps = {
   children: ReactNode
   defaultTabIndex?: number
   className?: string

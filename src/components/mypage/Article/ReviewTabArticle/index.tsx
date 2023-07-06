@@ -5,7 +5,7 @@ import type { ReactElement } from 'react'
 import React from 'react'
 import type { ReviewsElement } from '@types'
 
-interface IconMeta {
+type IconMeta = {
   type: IconType
   text: string
 }
@@ -24,9 +24,9 @@ const iconMeta = {
   }
 } as { [key in number]: IconMeta }
 
-export interface ReviewTabArticleProps extends ReviewsElement {
+export type ReviewTabArticleProps = {
   className?: string
-}
+} & ReviewsElement
 export const ReviewTabArticle = ({
   reviewer,
   article,

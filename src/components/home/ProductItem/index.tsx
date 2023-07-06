@@ -3,7 +3,7 @@ import { Image, ToggleButton } from '@offer-ui/react'
 
 import type { ReactElement } from 'react'
 
-interface ProductItemProps {
+type ProductItemProps = {
   productItem: {
     id: number
     mainImageUrl: string

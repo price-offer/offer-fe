@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import type { Device, MatchMediaQuery } from '@styles'
 import { matchMediaQuery as defaultMatchMediaQuery } from '@styles'
 
-interface ResponsiveCase<T, K extends keyof T> {
+type ResponsiveCase<T, K extends keyof T> = {
   desktop: T[K]
   mobile?: T[K]
   tablet?: T[K]

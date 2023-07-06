@@ -1,14 +1,14 @@
-import { css } from '@emotion/react'
-import type { SerializedStyles } from '@emotion/react'
-import styled from '@emotion/styled'
-import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
-import type { ReactElement } from 'react'
 import {
   ProductField,
   UserProfile,
   PriceOfferCard
 } from '@components/product-detail'
 import type { Offer } from '@components/product-detail/PriceOfferCard'
+import { css } from '@emotion/react'
+import type { SerializedStyles } from '@emotion/react'
+import styled from '@emotion/styled'
+import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
+import type { ReactElement } from 'react'
 
 const IMAGES_MOCK = [
   {

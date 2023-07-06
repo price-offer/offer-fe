@@ -13,7 +13,7 @@ import type {
 } from '@themes'
 
 declare module '@emotion/react' {
-  export interface Theme {
+  export type Theme = {
     border: Border
     colors: Colors
     fonts: Fonts

@@ -1,13 +1,13 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useState } from 'react'
 
-interface CheckItemType {
+type CheckItemType = {
   code: string
   name: string
   selected: boolean
 }
 
-interface ReturnType {
+type ReturnType = {
   selectedCategoryValue: string
   handleCategorySelectChange: SelectOnChangeHandler
   checkFilterList: CheckItemType[]

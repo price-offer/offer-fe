@@ -3,7 +3,7 @@ import type { ReactElement, ReactNode } from 'react'
 import { useContext } from 'react'
 import { TabsActionContext } from './TabsActionContext'
 
-interface TabPanelProps {
+type TabPanelProps = {
   children: ReactNode
   index?: number
   className?: string

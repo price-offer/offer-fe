@@ -10,12 +10,12 @@ export const TRANSACTION_TYPE = {
   parcel: '택배거래'
 } as const
 
-export interface PriceOfferCardProps {
+export type PriceOfferCardProps = {
   offerList: Offer[]
   likeCount: number
   isLike: boolean
 }
-export interface Offer {
+export type Offer = {
   id: number
   name: string
   level: number

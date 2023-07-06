@@ -3,7 +3,7 @@ import { Divider, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import type { StyledProps } from '@types'
 
-export interface ProductFieldProps {
+export type ProductFieldProps = {
   label: string
   value: string
   height?: number

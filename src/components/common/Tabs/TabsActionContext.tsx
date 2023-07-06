@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 import { noop } from '@utils'
 
-interface TabsActionContextProps {
+type TabsActionContextProps = {
   currentTabIndex: number
   handleSetCurrentTabIndex(tabIndex: number): void
 }

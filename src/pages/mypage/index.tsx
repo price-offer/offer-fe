@@ -8,7 +8,7 @@ import { SalePageContent } from './SalePageContent'
 import { Tabs, Tab } from '@components'
 import type { TradeActivityType, TradeActivityName } from '@constants'
 
-interface PageTab {
+type PageTab = {
   tab: {
     code: TradeActivityType
     name: TradeActivityName

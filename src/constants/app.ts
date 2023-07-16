@@ -11,8 +11,8 @@ export type TradeActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE>
 export type TradeActivityName = '판매' | '구매' | '후기'
 
 /** 나의 거래 활동 - 판매 */
-export type TradeSellActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['sell']>
-export type TradeSellActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['sell']>
+export type TradeSaleActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['sale']>
+export type TradeSaleActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['sale']>
 
 /** 나의 거래 활동 - 구매 */
 export type TradeBuyActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['buy']>
@@ -27,8 +27,8 @@ export type TradeReviewActivityName = ValueOf<
 >
 
 export const TRADE_ACTIVITY_TYPE = {
-  sell: {
-    sell: '판매중',
+  sale: {
+    sale: '판매중',
     soldOut: '거래완료'
   },
   buy: {

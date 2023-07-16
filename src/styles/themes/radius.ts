@@ -5,5 +5,6 @@ export const radius = {
   round12: '12px',
   round16: '16px',
   round4: '4px',
-  round8: '8px'
+  round8: '8px',
+  round6: '6px'
 } as const

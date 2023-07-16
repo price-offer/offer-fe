@@ -3,7 +3,7 @@ import type {
   Avatar,
   Border,
   Colors,
-  CTAButton,
+  CtaButton,
   Fonts,
   Input,
   MediaQuery,
@@ -13,7 +13,8 @@ import type {
 } from '@themes'
 
 declare module '@emotion/react' {
-  export type Theme = {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  export interface Theme {
     border: Border
     colors: Colors
     fonts: Fonts
@@ -22,7 +23,7 @@ declare module '@emotion/react' {
     zIndex: ZIndex
     avatar: Avatar
     input: Input
-    ctaButton: CTAButton
+    ctaButton: CtaButton
     selectBox: SelectBox
   }
 }

@@ -1,17 +1,17 @@
 /** Member */
-export interface MemberProfile {
+export type MemberProfile = {
   member: Member
   sellingArticleCount: number
   reviewCount: number
 }
-export interface MyProfile {
+export type MyProfile = {
   member: Member
   sellingArticleCount: number
   likedArticleCount: number
   offerCount: number
   reviewCount: number
 }
-export interface Member {
+export type Member = {
   id: number
   offerLevel: number
   nickname: string
@@ -20,7 +20,7 @@ export interface Member {
 }
 
 /** Article */
-export interface Article {
+export type Article = {
   id: number
   author: Author
   title: string
@@ -39,11 +39,11 @@ export interface Article {
   viewCount: number
   isLiked: boolean
 }
-export interface Articles {
+export type Articles = {
   elements: ArticlesElement[]
   pageInfo: PageInfo
 }
-export interface Author {
+export type Author = {
   id: number
   email: string
   offerLevel: number
@@ -51,20 +51,20 @@ export interface Author {
   profileImageUrl: string
   address: string
 }
-export interface Option {
+export type Option = {
   code: number
   name: string
 }
 /** Trade Status */
-export interface TradeStatusOnReserve {
+export type TradeStatusOnReserve = {
   code: 2
   name: '예약중'
 }
-export interface TradeStatusOnSale {
+export type TradeStatusOnSale = {
   code: 4
   name: '판매중'
 }
-export interface TradeStatusOnSoldOut {
+export type TradeStatusOnSoldOut = {
   code: 8
   name: '거래완료'
 }
@@ -76,15 +76,15 @@ export type TradeStatus =
   | TradeStatusOnSoldOut
 
 /** Trade Method */
-export interface TradeMethodOnDirect {
+export type TradeMethodOnDirect = {
   code: 2
   name: '직거래'
 }
-export interface TradeMethodOnDelivery {
+export type TradeMethodOnDelivery = {
   code: 4
   name: '택배거래'
 }
-export interface TradeMethodOnAny {
+export type TradeMethodOnAny = {
   code: 8
   name: '상관없음'
 }
@@ -96,11 +96,11 @@ export type TradeMethod =
   | TradeMethodOnAny
 
 /** Product Status */
-export interface ProductStatusOnNew {
+export type ProductStatusOnNew = {
   code: 2
   name: '새상품'
 }
-export interface ProductStatusOnOld {
+export type ProductStatusOnOld = {
   code: 4
   name: '중고상품'
 }
@@ -108,7 +108,7 @@ export type ProductStatusCode = 2 | 4
 export type ProductStatusName = '새상품' | '중고상품'
 export type ProductStatus = ProductStatusOnNew | ProductStatusOnOld
 
-export interface ArticlesElement {
+export type ArticlesElement = {
   id: number
   mainImageUrl: string
   title: string
@@ -122,7 +122,7 @@ export interface ArticlesElement {
   isReviewed: boolean
   sellerNickName: string
 }
-export interface PageInfo {
+export type PageInfo = {
   currentPageNumber: number
   lastPageNumber: number
   sizePerPage: number
@@ -132,23 +132,23 @@ export interface PageInfo {
 }
 
 /** Offer */
-export interface Offer {
+export type Offer = {
   offer: OfferInfo
   offerCountOfCurrentMember: number
 }
-export interface Offers {
+export type Offers = {
   elements: OfferInfo[]
   pageInfo: PageInfo
   offerCountOfCurrentMember: number
 }
-export interface Offerer {
+export type Offerer = {
   id: number
   nickname: string
   address: string
   offerLevel: number
   profileImageUrl: string
 }
-export interface OfferInfo {
+export type OfferInfo = {
   id: number
   offerer: Offerer
   articleId: number
@@ -158,14 +158,14 @@ export interface OfferInfo {
 }
 
 /** Review */
-export interface Review {
+export type Review = {
   review: ReviewInfo
 }
-export interface Reviews {
+export type Reviews = {
   elements: ReviewsElement[]
   pageInfo: PageInfo
 }
-export interface ReviewInfo {
+export type ReviewInfo = {
   id: number
   reviewer: Reviewer
   article: Article
@@ -173,7 +173,7 @@ export interface ReviewInfo {
   content: string
   createdDate: string
 }
-export interface ReviewsElement {
+export type ReviewsElement = {
   id: number
   reviewer: Reviewer
   article: ReviewArticle
@@ -182,13 +182,13 @@ export interface ReviewsElement {
   isWritingAvailableFromCurrentMember?: boolean
   createdDate: string
 }
-export interface Reviewer {
+export type Reviewer = {
   id: number
   profileImageUrl: string
   nickname: string
   offerLevel: number
 }
-export interface ReviewArticle {
+export type ReviewArticle = {
   id: number
   title: string
 }

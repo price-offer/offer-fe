@@ -9,7 +9,7 @@ export const TRANSACTION_TYPE = {
 } as const
 
 type TransactionType = keyof typeof TRANSACTION_TYPE
-export interface UserProfileProps {
+export type UserProfileProps = {
   image?: string
   nickName: string
   location: string

@@ -5,7 +5,7 @@ import { BuyTabArticle } from '../../Article'
 import type { TradeBuyActivityType } from '@constants'
 import type { ArticlesElement } from '@types'
 
-export interface BuyTabArticleListProps {
+export type BuyTabArticleListProps = {
   activityType: TradeBuyActivityType
   articles: ArticlesElement[]
   className?: string

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { ReactElement } from 'react'
 
-interface Props {
+type Props = {
   searchResult: string
 }
 

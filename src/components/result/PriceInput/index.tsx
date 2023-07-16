@@ -3,7 +3,7 @@ import { Input, Button, useMedia, Divider } from '@offer-ui/react'
 import type { Dispatch, ReactElement, SetStateAction } from 'react'
 import { useState, useEffect } from 'react'
 
-interface PriceInputProps {
+type PriceInputProps = {
   isOpen: boolean
   onClose: Dispatch<SetStateAction<boolean>>
 }

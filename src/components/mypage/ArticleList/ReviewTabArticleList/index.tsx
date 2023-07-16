@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { ReviewTabArticle } from '@components/mypage/Article'
 import type { ReviewsElement } from '@types'
 
-export interface ReviewTabArticleListProps {
+export type ReviewTabArticleListProps = {
   reviews: ReviewsElement[]
   className?: string
 }

@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import type { ReactElement } from 'react'
 import { ProductItem } from '../ProductItem'
 
-interface ProductListProps {
+type ProductListProps = {
   productList: {
     id: number
     mainImageUrl: string

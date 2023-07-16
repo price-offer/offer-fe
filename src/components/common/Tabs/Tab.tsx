@@ -7,7 +7,7 @@ import type {
 } from 'react'
 import { useContext } from 'react'
 import { TabsActionContext } from './TabsActionContext'
-interface TabProps {
+type TabProps = {
   children: ReactNode
   index?: number
   className?: string

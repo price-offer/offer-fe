@@ -3,7 +3,7 @@ import { Icon, useMedia, Divider, Input, Button } from '@offer-ui/react'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState, useEffect } from 'react'
 
-interface Props {
+type Props = {
   minPriceValue: string
   maxPriceValue: string
   handleMinPriceInputChange: ChangeEventHandler

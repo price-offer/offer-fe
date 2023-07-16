@@ -3,7 +3,7 @@ import { IconButton, useMedia } from '@offer-ui/react'
 import { useRef, useState, useCallback, useEffect } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 
-interface Props {
+type Props = {
   cateGoryList: {
     selected: boolean
     code: string
@@ -11,11 +11,11 @@ interface Props {
   }[]
   onCategoryClick(name: string): void
 }
-interface CategoryItemProps {
+type CategoryItemProps = {
   selected: boolean
 }
 
-interface CateGoryItemWrapperProps {
+type CateGoryItemWrapperProps = {
   moveDistanceFromArrow: number
 }
 const CategorySlideFilter = ({

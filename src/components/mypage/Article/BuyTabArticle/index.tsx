@@ -5,11 +5,11 @@ import type { TradeBuyActivityType } from '@constants'
 import type { ArticlesElement } from '@types'
 import { toLocaleCurrency } from '@utils'
 
-export interface BuyTabArticleProps extends ArticlesElement {
+export type BuyTabArticleProps = {
   // 구매 활동 타입
   activityType: TradeBuyActivityType
   className?: string
-}
+} & ArticlesElement
 
 export const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
   const {

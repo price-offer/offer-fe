@@ -3,7 +3,7 @@ import { IconButton, Image, useMedia } from '@offer-ui/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 
-interface CategorySliderProps {
+type CategorySliderProps = {
   imageList: {
     title: string
     url: string
@@ -11,7 +11,7 @@ interface CategorySliderProps {
   }[]
 }
 
-interface CateGoryBoxWrapperProps {
+type CateGoryBoxWrapperProps = {
   isMoveFromArrowButton: number
 }
 

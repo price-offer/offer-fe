@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { PriceDialog } from '../PriceDialog'
 
-interface Props {
+type Props = {
   categoryItems: {
     code: string
     name: string

@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { SaleTabArticle } from '../../Article'
 import type { ArticlesElement, TradeStatus } from '@types'
 
-export interface SaleTabArticleListProps {
+export type SaleTabArticleListProps = {
   articles: ArticlesElement[]
   className?: string
   hasToken: boolean

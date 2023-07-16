@@ -60,29 +60,29 @@ const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
 export { PriceInput }
 
 const StyledDIM = styled.div`
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: ${({ theme }): number => theme.zIndex.modal};
   width: 100vw;
   height: 100vh;
-  z-index: ${({ theme }): number => theme.zIndex.modal};
   background-color: ${({ theme }): string => theme.colors.dimOpacity50};
+  justify-content: center;
+  align-items: center;
 `
 
 const PriceDialogDesktop = styled.div`
   position: absolute;
-  width: 344px;
-  height: 164px;
-  background-color: ${({ theme }): string => theme.colors.white};
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
   top: 38px;
   left: 1px;
-  padding: 16px 12px;
   z-index: 999;
+  width: 344px;
+  height: 164px;
+  padding: 16px 12px;
+  background-color: ${({ theme }): string => theme.colors.white};
+  box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
+  border-radius: 4px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     position: relative;
     width: 320px;
@@ -134,8 +134,8 @@ const CancelButton = styled(Button)`
   height: 32px;
 `
 const ApplyButton = styled(Button)`
+  height: 32px;
   background-color: ${({ theme }): string => theme.colors.black};
   max-width: 65px;
-  height: 32px;
   border-radius: 4px;
 `

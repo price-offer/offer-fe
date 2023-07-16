@@ -144,6 +144,7 @@ export { CategorySlideFilter }
 const CateGoryBoxWrapper = styled.div`
   overflow: hidden;
   position: relative;
+
   div::-webkit-scrollbar {
     display: none;
   }
@@ -155,11 +156,11 @@ const CateGoryBoxWrapper = styled.div`
 `
 const CateGoryBox = styled.div`
   display: flex;
-  gap: 8px;
-  max-width: 1200px;
+  overflow: hidden;
   width: 100%;
   height: 28px;
-  overflow: hidden;
+  gap: 8px;
+  max-width: 1200px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     overflow: scroll;
   }
@@ -181,45 +182,37 @@ const CateGoryItemWrapper = styled.div<CateGoryItemWrapperProps>`
 const RightArrowWrapper = styled.div`
   display: flex;
   position: absolute;
-  justify-content: end;
+  right: 0;
+  z-index: 99;
   width: 68px;
   height: 28px;
-  background: linear-gradient(
-    270deg,
-    #ffffff 38.82%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  z-index: 99;
-  right: 0;
+  justify-content: end;
+  background: linear-gradient(270deg, #fff 38.82%, rgb(255 255 255 / 0%) 100%);
 `
 
 const RightArrow = styled(IconButton)`
-  background-color: ${({ theme }): string => theme.colors.white};
   position: absolute;
   width: 24px;
   height: 24px;
+  background-color: ${({ theme }): string => theme.colors.white};
   border-radius: 100%;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
   transform: scaleX(-1);
 `
 const LeftArrowWrapper = styled.div`
   position: absolute;
+  z-index: 99;
   width: 68px;
   height: 28px;
-  background: linear-gradient(
-    450deg,
-    #ffffff 38.82%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  z-index: 99;
+  background: linear-gradient(450deg, #fff 38.82%, rgb(255 255 255 / 0%) 100%);
 `
 
 const LeftArrow = styled(IconButton)`
-  background-color: ${({ theme }): string => theme.colors.white};
   width: 24px;
   height: 24px;
+  background-color: ${({ theme }): string => theme.colors.white};
   border-radius: 100%;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
 `
 
 const CategoryItem = styled.div<CategoryItemProps>`

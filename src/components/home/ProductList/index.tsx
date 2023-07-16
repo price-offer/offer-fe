@@ -68,7 +68,7 @@ const ProductListWrapper = styled.div`
     column-gap: 50px;
   }
 
-  @media (max-width: 510px) {
+  @media (width <= 510px) {
     justify-content: center;
     grid-template-columns: repeat(2, minmax(10%, 160px));
     row-gap: 8px;

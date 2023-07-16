@@ -26,8 +26,6 @@ export { HomeBanner }
 const BannerWrapper = styled.div`
   display: flex;
   width: 100%;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-  }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     flex-direction: column;
     padding: 0;
@@ -37,22 +35,18 @@ const BannerWrapper = styled.div`
 const BannerLeft = styled.div`
   width: 100%;
   height: 321px;
+  padding: 45px 0 27px 34px;
   background-color: #f6f6f7;
-  padding: 45px 0px 27px 34px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding: 30px 0px 18px 20px;
     height: 215px;
-  }
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding-bottom: 18px;
-    height: 215px;
+    padding: 30px 0 18px 20px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     display: flex;
+    height: 240px;
+    padding: 45px 0 0;
     flex-direction: column;
     align-items: center;
-    padding: 45px 0px 0px 0px;
-    height: 240px;
   }
 `
 
@@ -97,22 +91,18 @@ const BannerLeftSellButton = styled(Button)`
 const BannerRight = styled.div`
   width: 100%;
   height: 321px;
-  background-color: #000000;
-  padding: 34px 0px 0px 51px;
+  padding: 34px 0 0 51px;
+  background-color: #000;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding: 24px 0px 18px 33px;
     height: 215px;
-  }
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding: 24px 0px 18px 33px;
-    height: 215px;
+    padding: 24px 0 18px 33px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     display: flex;
+    height: 240px;
+    padding: 13px 0 0;
     flex-direction: column;
     align-items: center;
-    padding: 13px 0px 0px 0px;
-    height: 240px;
   }
 `
 const BannerRightTextWrapper = styled.div`

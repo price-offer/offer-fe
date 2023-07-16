@@ -102,8 +102,8 @@ const SelectWrapper = styled.div`
   margin-top: 25px;
   justify-content: space-between;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    margin-top: 25px;
     display: block;
+    margin-top: 25px;
     justify-content: none;
   }
 `

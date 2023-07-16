@@ -33,7 +33,6 @@ const CategoryHeader = styled.div`
     margin-bottom: 16px;
   }
 `
-
 const CategoryHeaderResultCount = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
   color:${({ theme }): string => theme.colors.grayScale50};
@@ -41,7 +40,5 @@ const CategoryHeaderResultCount = styled.div`
   margin-bottom: 22px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     display: none;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
   }
 `

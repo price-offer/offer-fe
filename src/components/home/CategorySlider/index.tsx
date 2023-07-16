@@ -154,11 +154,6 @@ const CateGoryWrapper = styled.div`
   overflow: hidden;
   position: relative;
 
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-  }
-
   div::-webkit-scrollbar {
     display: none;
   }
@@ -182,50 +177,48 @@ const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
 `
 const CateGoryBox = styled.div`
   display: flex;
-  gap: 12px;
-  max-width: 1200px;
+  overflow: hidden;
   width: 100%;
   height: 118px;
-  overflow: hidden;
-  ${({ theme }): string => theme.mediaQuery.desktop} {
-  }
+  gap: 12px;
+  max-width: 1200px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    gap: 18px;
-    height: 112px;
     overflow: scroll;
+    height: 112px;
+    gap: 18px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    gap: 12px;
-    height: 88px;
-    max-width: none;
     overflow: scroll;
+    height: 88px;
+    gap: 12px;
+    max-width: none;
   }
 `
 
 const ArrowBox = styled.div`
-  width: 100%;
-  position: absolute;
-  align-self: center;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  position: absolute;
   z-index: 999;
+  width: 100%;
+  margin-bottom: 30px;
+  align-self: center;
+  justify-content: space-between;
 `
 
 const LeftArrow = styled(IconButton)`
-  background-color: ${({ theme }): string => theme.colors.white};
   width: 24px;
   height: 24px;
+  background-color: ${({ theme }): string => theme.colors.white};
   border-radius: 100%;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
 `
 
 const RightArrow = styled(IconButton)`
-  background-color: ${({ theme }): string => theme.colors.white};
   width: 24px;
   height: 24px;
+  background-color: ${({ theme }): string => theme.colors.white};
   border-radius: 100%;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
   transform: scaleX(-1);
 `
 
@@ -240,23 +233,23 @@ const CategoryItem = styled.div`
     height: 112px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    height: 88px;
     display: flex;
+    height: 88px;
     flex-direction: column;
     align-items: center;
   }
 `
 const CategoryImg = styled(Image)`
-  border-radius: 12px;
-  height: 86px;
   width: 108px;
+  height: 86px;
+  border-radius: 12px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    height: 80px;
     width: 80px;
+    height: 80px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    height: 60px;
     width: 60px;
+    height: 60px;
   }
 `
 const CateGoryName = styled.div`

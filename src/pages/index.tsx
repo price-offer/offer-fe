@@ -177,12 +177,12 @@ const HomeWrapper = styled.div`
   max-width: 1200px;
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding-left: 24px;
     padding-right: 24px;
+    padding-left: 24px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    padding-left: 16px;
     padding-right: 16px;
+    padding-left: 16px;
   }
 `
 

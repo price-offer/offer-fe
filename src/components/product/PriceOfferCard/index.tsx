@@ -4,7 +4,7 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { UserProfile } from '../UserProfile'
 
-export const TRANSACTION_TYPE = {
+const TRANSACTION_TYPE = {
   all: '직거래/택배거래',
   direct: '직거래',
   parcel: '택배거래'
@@ -145,19 +145,19 @@ const StyledOfferPriceCardWrapper = styled.div`
 
 const StyledOfferListBox = styled.div`
   display: flex;
+  overflow: scroll;
+  height: 100%;
   flex-direction: column;
   gap: 8px;
-  height: 100%;
-  overflow: scroll;
 `
 
 const StyledOfferTitle = styled(Text)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
-      ${theme.fonts.subtitle02B};
+      ${theme.fonts.subtitle01B};
     }
     ${theme.mediaQuery.mobile} {
-      ${theme.fonts.subtitle02B};
+      ${theme.fonts.subtitle01B};
     }`}
 `
 
@@ -194,10 +194,10 @@ const StyledDivider = styled(Divider)`
 
 const StyledBlankCard = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 20px 0;
-  align-items: center;
   height: 120px;
+  padding: 20px 0;
+  justify-content: center;
+  align-items: center;
 `
 const StyledOffer = styled.div`
   display: flex;
@@ -205,7 +205,7 @@ const StyledOffer = styled.div`
   align-items: center;
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
-  border-radius: ${({ theme }): string => theme.border.radius06};
+  border-radius: ${({ theme }): string => theme.radius.round6};
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {

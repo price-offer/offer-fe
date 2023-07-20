@@ -82,12 +82,14 @@ export const ResetCSS = css`
   mark,
   audio,
   video {
+    vertical-align: baseline;
+
     margin: 0;
     padding: 0;
     border: 0;
+
     font: inherit;
     font-size: 100%;
-    vertical-align: baseline;
   }
 
   /* HTML5 display-role reset for older browsers */
@@ -128,7 +130,7 @@ export const ResetCSS = css`
   }
 
   table {
-    border-collapse: collapse;
     border-spacing: 0;
+    border-collapse: collapse;
   }
 `

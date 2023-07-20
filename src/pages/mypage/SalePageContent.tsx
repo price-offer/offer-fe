@@ -125,12 +125,14 @@ const StyledTabsList = styled(Tabs.List)`
   gap: 22px;
 `
 const StyledTab = styled(Tab)`
-  background: transparent;
   border: none;
+
+  background: transparent;
 `
 const StyledStatusButtonLabel = styled.label`
   display: flex;
   align-items: center;
+
   cursor: pointer;
 `
 const StyledCircle = styled.span<{ isCurrent: boolean }>`

@@ -23,6 +23,7 @@ const CategoryHeader = styled.div`
   ${({ theme }): string => theme.fonts.display02B}
   margin-top: 42px;
   margin-bottom: 22px;
+
   gap: 8px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     ${({ theme }): string => theme.fonts.subtitle01B}
@@ -36,6 +37,7 @@ const CategoryHeader = styled.div`
 const CategoryHeaderResultCount = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
   color:${({ theme }): string => theme.colors.grayScale50};
+
   margin-top: 42px;
   margin-bottom: 22px;
   ${({ theme }): string => theme.mediaQuery.tablet} {

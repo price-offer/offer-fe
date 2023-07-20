@@ -69,15 +69,18 @@ const HeartButton = styled(ToggleButton)`
   position: absolute;
   right: 12px;
   bottom: 12px;
+
   width: 25px;
   height: 24px;
-  background-color: ${({ theme }): string => theme.colors.white};
   border-radius: 100%;
+
+  background-color: ${({ theme }): string => theme.colors.white};
 `
 
 const ProductImgWrapper = styled.div`
-  max-width: 276px;
   position: relative;
+
+  max-width: 276px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     max-width: 166px;
   }

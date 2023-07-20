@@ -54,24 +54,28 @@ const ProductListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: 31px;
+
   column-gap: 28px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    justify-content: center;
     grid-template-columns: repeat(4, minmax(10%, 166px));
     row-gap: 18px;
+    justify-content: center;
+
     column-gap: 20px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    justify-content: center;
     grid-template-columns: repeat(2, minmax(30%, 200px));
     row-gap: 15px;
+    justify-content: center;
+
     column-gap: 50px;
   }
 
   @media (width <= 510px) {
-    justify-content: center;
     grid-template-columns: repeat(2, minmax(10%, 160px));
     row-gap: 8px;
+    justify-content: center;
+
     column-gap: 20px;
   }
 `

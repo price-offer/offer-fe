@@ -145,10 +145,11 @@ const StyledOfferPriceCardWrapper = styled.div`
 
 const StyledOfferListBox = styled.div`
   display: flex;
-  overflow: scroll;
-  height: 100%;
   flex-direction: column;
   gap: 8px;
+  overflow: scroll;
+
+  height: 100%;
 `
 
 const StyledOfferTitle = styled(Text)`
@@ -164,6 +165,7 @@ const StyledOfferTitle = styled(Text)`
 const StyledCardHeader = styled.div`
   display: flex;
   justify-content: space-between;
+
   padding: 20px;
 
   ${({ theme }): string => `
@@ -194,15 +196,17 @@ const StyledDivider = styled(Divider)`
 
 const StyledBlankCard = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 120px;
   padding: 20px 0;
-  justify-content: center;
-  align-items: center;
 `
 const StyledOffer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
   border-radius: ${({ theme }): string => theme.radius.round6};
@@ -238,6 +242,7 @@ const StyledCardBody = styled.div`
 const StyledCardFooter = styled.div`
   display: flex;
   gap: 8px;
+
   padding: 20px;
 
   ${({ theme }): string => `
@@ -270,9 +275,11 @@ const StyledLikeButton = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4px;
+
   width: 96px;
   height: 64px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
+
   cursor: pointer;
 
   ${({ theme }): string => `

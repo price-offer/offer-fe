@@ -174,8 +174,8 @@ const Home: NextPage = () => {
 }
 
 const HomeWrapper = styled.div`
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     padding-right: 24px;
     padding-left: 24px;
@@ -189,6 +189,7 @@ const HomeWrapper = styled.div`
 const Layout = styled.div`
   display: flex;
   justify-content: center;
+
   width: 100%;
   margin-top: 68px;
 `

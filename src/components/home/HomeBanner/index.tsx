@@ -25,9 +25,11 @@ export { HomeBanner }
 
 const BannerWrapper = styled.div`
   display: flex;
+
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.mobile} {
     flex-direction: column;
+
     padding: 0;
   }
 `
@@ -36,6 +38,7 @@ const BannerLeft = styled.div`
   width: 100%;
   height: 321px;
   padding: 45px 0 27px 34px;
+
   background-color: #f6f6f7;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 215px;
@@ -43,10 +46,11 @@ const BannerLeft = styled.div`
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     display: flex;
-    height: 240px;
-    padding: 45px 0 0;
     flex-direction: column;
     align-items: center;
+
+    height: 240px;
+    padding: 45px 0 0;
   }
 `
 
@@ -92,6 +96,7 @@ const BannerRight = styled.div`
   width: 100%;
   height: 321px;
   padding: 34px 0 0 51px;
+
   background-color: #000;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 215px;
@@ -99,10 +104,11 @@ const BannerRight = styled.div`
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     display: flex;
-    height: 240px;
-    padding: 13px 0 0;
     flex-direction: column;
     align-items: center;
+
+    height: 240px;
+    padding: 13px 0 0;
   }
 `
 const BannerRightTextWrapper = styled.div`
@@ -112,8 +118,8 @@ const BannerRightTextWrapper = styled.div`
     gap: 13px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    gap: 13px;
     flex-direction: column;
+    gap: 13px;
     align-items: center;
   }
 `
@@ -121,9 +127,12 @@ const BannerRightNewBadge = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   ${({ theme }): string => theme.fonts.caption01M};
   background-color: ${({ theme }): string => theme.colors.bgPrimary};
+
   color: ${({ theme }): string => theme.colors.grayScale05};
+
   height: 24px;
   width: 41px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -134,6 +143,7 @@ const BannerRightNewBadge = styled.div`
 const BannerRightText1 = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
   color:${({ theme }): string => theme.colors.white};
+
   border-bottom: solid;
   ${({ theme }): string => theme.mediaQuery.mobile} {
     ${({ theme }): string => theme.fonts.subtitle01B}

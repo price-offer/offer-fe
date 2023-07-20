@@ -2,7 +2,7 @@ import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import type { SaleTabArticleProps } from './index'
+import type { SaleTabArticleProps } from './types'
 import { SaleTabArticle } from './index'
 import { TRADE_STATUS } from '@constants'
 import type { TradeStatus } from '@types'
@@ -10,7 +10,7 @@ import type { TradeStatus } from '@types'
 export default {
   argTypes: {},
   component: SaleTabArticle,
-  title: 'Components/MyPage/Article/SaleTabArticle'
+  title: 'MyPage/Article/SaleTabArticle'
 } as Meta<SaleTabArticleProps>
 
 const Template: Story<SaleTabArticleProps> = args => {

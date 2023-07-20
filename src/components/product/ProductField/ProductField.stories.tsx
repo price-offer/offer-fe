@@ -1,10 +1,10 @@
 import type { Meta, Story } from '@storybook/react'
+import type { ProductFieldProps } from './types'
 import { ProductField } from './index'
-import type { ProductFieldProps } from './index'
 
 export default {
   component: ProductField,
-  title: 'Components/ProductDetail/ProductField'
+  title: 'ProductDetail/ProductField'
 } as Meta<ProductFieldProps>
 
 const Template: Story<ProductFieldProps> = args => <ProductField {...args} />

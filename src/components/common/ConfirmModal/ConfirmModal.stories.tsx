@@ -5,7 +5,7 @@ import { ConfirmModal } from './index'
 
 export default {
   component: ConfirmModal,
-  title: 'Components/Common/ConfirmModal'
+  title: 'Common/ConfirmModal'
 } as Meta<ConfirmModalProps>
 
 const Template: Story<ConfirmModalProps> = args => {

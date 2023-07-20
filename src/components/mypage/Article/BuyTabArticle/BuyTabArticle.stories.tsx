@@ -1,12 +1,12 @@
 import { Text } from '@offer-ui/react'
 import type { Meta, Story } from '@storybook/react'
-import type { BuyTabArticleProps } from './index'
+import type { BuyTabArticleProps } from './types'
 import { BuyTabArticle } from './index'
 
 export default {
   argTypes: {},
   component: BuyTabArticle,
-  title: 'Components/MyPage/Article/BuyTabArticle'
+  title: 'MyPage/Article/BuyTabArticle'
 } as Meta<BuyTabArticleProps>
 
 const Template: Story<BuyTabArticleProps> = args => {

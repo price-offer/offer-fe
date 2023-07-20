@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { ProductField, UserProfile, PriceOfferCard } from '@components/product'
-import type { Offer } from '@components/product/PriceOfferCard'
+import type { Offer } from '@components/product/PriceOfferCard/types'
 
 const IMAGES_MOCK = [
   {

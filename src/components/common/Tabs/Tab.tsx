@@ -1,18 +1,9 @@
-import styled from '@emotion/styled'
-import type {
-  MouseEvent,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode
-} from 'react'
+import type { MouseEventHandler, ReactElement } from 'react'
 import { useContext } from 'react'
+import { StyledTab } from './styled'
 import { TabsActionContext } from './TabsActionContext'
-type TabProps = {
-  children: ReactNode
-  index?: number
-  className?: string
-  onClick?(e: MouseEvent<HTMLDivElement>, index: number): void
-}
+import type { TabProps } from './types'
+
 export const Tab = ({
   children,
   index,
@@ -45,7 +36,3 @@ export const Tab = ({
     </StyledTab>
   )
 }
-
-const StyledTab = styled.div`
-  display: inline-block;
-`

@@ -1,13 +1,9 @@
-import styled from '@emotion/styled'
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { useContext } from 'react'
+import { StyledPanel } from './styled'
 import { TabsActionContext } from './TabsActionContext'
+import type { TabPanelProps } from './types'
 
-type TabPanelProps = {
-  children: ReactNode
-  index?: number
-  className?: string
-}
 export const TabPanel = ({
   index,
   children,
@@ -28,7 +24,3 @@ export const TabPanel = ({
     </StyledPanel>
   )
 }
-
-const StyledPanel = styled.div<{ isCurrentTab: boolean }>`
-  ${({ isCurrentTab }): string => `display:${isCurrentTab ? 'unset' : 'none'};`}
-`

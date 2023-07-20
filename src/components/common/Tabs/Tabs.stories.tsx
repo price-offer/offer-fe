@@ -1,6 +1,6 @@
 import type { Meta, Story } from '@storybook/react'
+import type { TabsProps } from './types'
 import { Tab, Tabs } from './index'
-import type { TabsProps } from './index'
 
 export default {
   argTypes: {

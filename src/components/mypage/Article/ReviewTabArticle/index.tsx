@@ -1,32 +1,22 @@
-import styled from '@emotion/styled'
-import type { IconType } from '@offer-ui/react'
-import { Avatar, Text, Icon, Badge } from '@offer-ui/react'
+import { Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import React from 'react'
-import type { ReviewsElement } from '@types'
+import {
+  StyledWrapper,
+  StyledContentWrapper,
+  StyledMeta,
+  StyledAvatar,
+  StyledNickNameWrapper,
+  StyledNickName,
+  StyledBadge,
+  StyledArticleTitle,
+  StyledContentHeader,
+  StyledScoreWrapper,
+  StyledContent
+} from './styled'
+import type { ReviewTabArticleProps } from './types'
+import { ICON_META } from './types'
 
-type IconMeta = {
-  type: IconType
-  text: string
-}
-const iconMeta = {
-  0: {
-    type: 'sadFill',
-    text: '별로에요'
-  },
-  1: {
-    type: 'mehFill',
-    text: '보통이에요'
-  },
-  2: {
-    type: 'smileFill',
-    text: '좋아요'
-  }
-} as { [key in number]: IconMeta }
-
-export type ReviewTabArticleProps = {
-  className?: string
-} & ReviewsElement
 export const ReviewTabArticle = ({
   reviewer,
   article,
@@ -58,9 +48,9 @@ export const ReviewTabArticle = ({
           </StyledArticleTitle>
         </StyledContentHeader>
         <StyledScoreWrapper>
-          <Icon color="brandPrimary" size={24} type={iconMeta[score].type} />
+          <Icon color="brandPrimary" size={24} type={ICON_META[score].type} />
           <Text color="brandPrimary" styleType="body02M">
-            {iconMeta[score].text}
+            {ICON_META[score].text}
           </Text>
         </StyledScoreWrapper>
         <StyledContent styleType="body02R">{content}</StyledContent>
@@ -68,82 +58,3 @@ export const ReviewTabArticle = ({
     </StyledWrapper>
   )
 }
-
-const StyledWrapper = styled.li`
-  ${({ theme }): string => `
-    display: flex;
-    padding: 24px;
-    gap: 8px;
-
-    ${theme.mediaQuery.tablet} {
-      padding 16px 24px;
-    }
-
-    ${theme.mediaQuery.mobile} {
-      padding: 16px;
-    }
-  `}
-`
-const StyledContentWrapper = styled.div`
-  flex: 1;
-`
-const StyledMeta = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-const StyledAvatar = styled(Avatar)`
-  min-width: 46px;
-`
-const StyledNickNameWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`
-const StyledNickName = styled(Text)`
-  ${({ theme }): string => `
-    display: inline-block;
-    max-width: 350px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    word-break: break-word;
-
-    ${theme.mediaQuery.mobile} {
-      max-width: 180px;
-    }
-  `}
-`
-const StyledBadge = styled(Badge)`
-  margin-left: 4px;
-`
-const StyledArticleTitle = styled(Text)`
-  ${({ theme }): string => `
-    display: block;
-    margin-top: 4px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    word-break: break-word;
-
-    ${theme.mediaQuery.tablet} {
-      max-width: 500px;
-    }
-
-    ${theme.mediaQuery.mobile} {
-      max-width: 250px;
-    }
-  `}
-`
-const StyledContentHeader = styled.div`
-  margin-bottom: 10px;
-`
-const StyledScoreWrapper = styled.div`
-  display: flex;
-  gap: 4px;
-  align-items: center;
-`
-const StyledContent = styled(Text)`
-  display: block;
-
-  margin-top: 6px;
-`

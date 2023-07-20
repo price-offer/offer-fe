@@ -1,9 +1,19 @@
-import styled from '@emotion/styled'
-import type { ColorKeys } from '@offer-ui/react'
-import { Divider } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import { ProfileBox, Tabs, Tab, ReviewTabArticleList } from '@components'
+import {
+  StyledContentWrapper,
+  StyledSearchOptionsWrapper,
+  StyledTabsList,
+  StyledTab,
+  StyledStatusButtonLabel,
+  StyledCircle,
+  StyledStatusButton,
+  StyledText,
+  StyledUserProductsWrapper,
+  StyledProductListPanels,
+  StyledDivider
+} from './styled'
+import { ProfileBox, Tabs, ReviewTabArticleList } from '@components'
 import { TRADE_ACTIVITY_TYPE } from '@constants'
 import { myProfile } from '@mocks/fixture'
 import type { ReviewsElement } from '@types'
@@ -90,114 +100,3 @@ export const ReviewPageContent = (): ReactElement => {
     </div>
   )
 }
-
-const StyledContentWrapper = styled.div`
-  ${({ theme }): string => `
-    display: flex;
-    gap: 32px;
-
-    ${theme.mediaQuery.tablet} {
-      position: relative;
-      flex-direction: column;
-      gap: 0;
-    }
-  `}
-`
-const StyledSearchOptionsWrapper = styled.div`
-  ${({ theme }): string => `
-    padding: 20px;
-    border-bottom: 1px solid ${theme.colors.grayScale10};
-
-    ${theme.mediaQuery.tablet} {
-      padding: 16px;
-    }
-  `}
-`
-const StyledTabsList = styled(Tabs.List)`
-  display: flex;
-  gap: 22px;
-`
-const StyledTab = styled(Tab)`
-  border: none;
-
-  background: transparent;
-`
-const StyledStatusButtonLabel = styled.label`
-  display: flex;
-  align-items: center;
-
-  cursor: pointer;
-`
-const StyledCircle = styled.span<{ isCurrent: boolean }>`
-  ${({ theme, isCurrent }): string => `
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 100%;
-    background-color: ${
-      isCurrent ? theme.colors.brandPrimary : theme.colors.grayScale50
-    };
-  `}
-`
-const StyledStatusButton = styled.button<{ isCurrent: boolean }>`
-  ${({ theme }): string => `
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin: 0 4px 0 8px;
-    cursor: pointer;
-
-    ${theme.mediaQuery.tablet} {
-      margin: 0 4px;
-    }
-  `}
-`
-const StyledText = styled.span<{ isCurrent?: boolean; color?: ColorKeys }>`
-  ${({ theme, isCurrent, color }): string => `
-    ${theme.fonts.subtitle01B};
-    color: ${
-      color
-        ? theme.colors[color]
-        : isCurrent
-        ? theme.colors.black
-        : theme.colors.grayScale50
-    };
-
-    ${theme.mediaQuery.tablet} {
-      ${theme.fonts.body02B};
-    }
-  `}
-`
-const StyledUserProductsWrapper = styled.div`
-  ${({ theme }): string => `
-    width: 892px;
-    height: 855px;
-    border: 1px solid ${theme.colors.grayScale10};
-    border-bottom: none;
-
-    ${theme.mediaQuery.tablet} {
-      width: auto;
-      border: none;
-    }
-  `}
-`
-const StyledProductListPanels = styled(Tabs.Panels)`
-  ${({ theme }): string => `
-    height: 780px;
-    overflow-y: scroll;
-
-    ${theme.mediaQuery.tablet} {
-      height: auto;
-      overflow-y: unset;
-    }
-  `}
-`
-const StyledDivider = styled(Divider)`
-  ${({ theme }): string => `
-    display: none;
-
-    ${theme.mediaQuery.tablet} {
-      display: block;
-    }
-  `}
-`

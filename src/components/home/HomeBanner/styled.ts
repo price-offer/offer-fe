@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Button } from '@offer-ui/react'
 
-export const BannerWrapper = styled.div`
+const BannerWrapper = styled.div`
   display: flex;
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -12,7 +12,7 @@ export const BannerWrapper = styled.div`
   }
 `
 
-export const BannerLeft = styled.div`
+const BannerLeft = styled.div`
   width: 100%;
   height: 321px;
   background-color: #f6f6f7;
@@ -34,7 +34,7 @@ export const BannerLeft = styled.div`
   }
 `
 
-export const BannerLeftText1 = styled.div`
+const BannerLeftText1 = styled.div`
   ${({ theme }): string => theme.fonts.subtitle01B}
   ${({ theme }): string => theme.mediaQuery.tablet} {
     ${({ theme }): string => theme.fonts.body01R}
@@ -43,7 +43,7 @@ export const BannerLeftText1 = styled.div`
     ${({ theme }): string => theme.fonts.body01R}
   }
 `
-export const BannerLeftText2 = styled.div`
+const BannerLeftText2 = styled.div`
   ${({ theme }): string => theme.fonts.display02B}
   margin-top: 8px;
   margin-bottom: 127px;
@@ -59,7 +59,7 @@ export const BannerLeftText2 = styled.div`
   }
 `
 
-export const BannerLeftSellButton = styled(Button)`
+const BannerLeftSellButton = styled(Button)`
   max-width: 224px;
   height: 64px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -72,7 +72,7 @@ export const BannerLeftSellButton = styled(Button)`
   }
 `
 
-export const BannerRight = styled.div`
+const BannerRight = styled.div`
   width: 100%;
   height: 321px;
   background-color: #000000;
@@ -93,7 +93,7 @@ export const BannerRight = styled.div`
     height: 240px;
   }
 `
-export const BannerRightTextWrapper = styled.div`
+const BannerRightTextWrapper = styled.div`
   display: flex;
   gap: 17px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -105,7 +105,7 @@ export const BannerRightTextWrapper = styled.div`
     align-items: center;
   }
 `
-export const BannerRightNewBadge = styled.div`
+const BannerRightNewBadge = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,7 +119,7 @@ export const BannerRightNewBadge = styled.div`
   }
 `
 
-export const BannerRightText1 = styled.div`
+const BannerRightText1 = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
   color:${({ theme }): string => theme.colors.white};
   border-bottom: solid;
@@ -127,3 +127,15 @@ export const BannerRightText1 = styled.div`
     ${({ theme }): string => theme.fonts.subtitle01B}
   }
 `
+
+export const Styled = {
+  BannerWrapper,
+  BannerLeft,
+  BannerLeftText1,
+  BannerLeftText2,
+  BannerLeftSellButton,
+  BannerRight,
+  BannerRightTextWrapper,
+  BannerRightNewBadge,
+  BannerRightText1
+}

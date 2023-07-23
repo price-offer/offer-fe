@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const NewProductTitle = styled.div`
+const NewProductTitle = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
   margin-top: 52px;
   margin-bottom: 22px;
@@ -14,7 +14,7 @@ export const NewProductTitle = styled.div`
   }
 `
 
-export const ProductListWrapper = styled.div`
+const ProductListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: 31px;
@@ -39,3 +39,8 @@ export const ProductListWrapper = styled.div`
     column-gap: 20px;
   }
 `
+
+export const Styled = {
+  NewProductTitle,
+  ProductListWrapper
+}

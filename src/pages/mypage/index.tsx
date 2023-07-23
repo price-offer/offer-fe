@@ -8,6 +8,7 @@ import {
   ReviewPageContent,
   BuyPageContent
 } from '@components/mypage'
+
 import type { TradeActivityType, TradeActivityName } from '@constants'
 
 type PageTab = {

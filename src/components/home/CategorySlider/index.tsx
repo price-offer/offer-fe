@@ -1,18 +1,7 @@
 import { useMedia } from '@offer-ui/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
-import {
-  CategoryHeader,
-  CateGoryWrapper,
-  CateGoryBoxWrapper,
-  CateGoryBox,
-  ArrowBox,
-  LeftArrow,
-  RightArrow,
-  CategoryItem,
-  CategoryImg,
-  CateGoryName
-} from './styled'
+import { Styled } from './styled'
 import type { CategorySliderProps } from './types'
 
 const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
@@ -81,20 +70,20 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
 
   return (
     <>
-      <CategoryHeader>카테고리</CategoryHeader>
-      <CateGoryWrapper>
-        <CateGoryBox
+      <Styled.CategoryHeader>카테고리</Styled.CategoryHeader>
+      <Styled.CateGoryWrapper>
+        <Styled.CateGoryBox
           ref={containerRef}
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
           onTouchMove={isDrag ? onDragMove : undefined}
           onTouchStart={onDragStart}>
           {isDesktop && (
-            <ArrowBox>
+            <Styled.ArrowBox>
               {isFirstCategory ? (
                 <div />
               ) : (
-                <LeftArrow
+                <Styled.LeftArrow
                   color="black"
                   icon="arrowLeft"
                   size={16}
@@ -104,34 +93,35 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
               {isLast ? (
                 <div />
               ) : (
-                <RightArrow
+                <Styled.RightArrow
                   color="black"
                   icon="arrowLeft"
                   size={16}
                   onClick={handleRightArrowClick}
                 />
               )}
-            </ArrowBox>
+            </Styled.ArrowBox>
           )}
-          <CateGoryBoxWrapper isMoveFromArrowButton={isMoveFromArrowButton}>
+          <Styled.CateGoryBoxWrapper
+            isMoveFromArrowButton={isMoveFromArrowButton}>
             {imageList.map(cateGory => (
-              <CategoryItem
+              <Styled.CategoryItem
                 key={cateGory.title}
                 onClick={(): void => {
                   alert(cateGory.title)
                 }}>
-                <CategoryImg
+                <Styled.CategoryImg
                   key={cateGory.title}
                   alt={`category-${cateGory.title}`}
                   src={cateGory.imageUrl}
                 />
-                <CateGoryName> {cateGory.title}</CateGoryName>
-              </CategoryItem>
+                <Styled.CateGoryName> {cateGory.title}</Styled.CateGoryName>
+              </Styled.CategoryItem>
             ))}
-          </CateGoryBoxWrapper>
-        </CateGoryBox>
-      </CateGoryWrapper>
+          </Styled.CateGoryBoxWrapper>
+        </Styled.CateGoryBox>
+      </Styled.CateGoryWrapper>
     </>
   )
 }
-export { CategorySlider }
+export { CategorySlider, CategorySliderProps }

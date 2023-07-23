@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Image, ToggleButton } from '@offer-ui/react'
 
-export const ProductImg = styled(Image)`
+const ProductImg = styled(Image)`
   width: 100%;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 166px;
@@ -14,7 +14,7 @@ export const ProductImg = styled(Image)`
   }
 `
 
-export const HeartButton = styled(ToggleButton)`
+const HeartButton = styled(ToggleButton)`
   position: absolute;
   background-color: ${({ theme }): string => theme.colors.white};
   width: 25px;
@@ -24,7 +24,7 @@ export const HeartButton = styled(ToggleButton)`
   right: 12px;
 `
 
-export const ProductImgWrapper = styled.div`
+const ProductImgWrapper = styled.div`
   max-width: 276px;
   position: relative;
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -37,23 +37,34 @@ export const ProductImgWrapper = styled.div`
     max-width: 160px;
   }
 `
-export const ProductItemWrapper = styled.div``
+const ProductItemWrapper = styled.div``
 
-export const ProductItemTitle = styled.div`
+const ProductItemTitle = styled.div`
   ${({ theme }): string => theme.fonts.body02R}
   margin-top: 8px;
   margin-bottom: 2px;
 `
-export const ProductItemStartPrice = styled.span`
+const ProductItemStartPrice = styled.span`
   ${({ theme }): string => theme.fonts.body02M};
   color: ${({ theme }): string => theme.colors.grayScale70};
 `
 
-export const ProductItemPrice = styled.span`
+const ProductItemPrice = styled.span`
   ${({ theme }): string => theme.fonts.body01B}
 `
 
-export const ProductItemAddress = styled.div`
+const ProductItemAddress = styled.div`
   ${({ theme }): string => theme.fonts.caption01M}
   color:${({ theme }): string => theme.colors.grayScale50}
 `
+
+export const Styled = {
+  ProductImg,
+  HeartButton,
+  ProductImgWrapper,
+  ProductItemWrapper,
+  ProductItemTitle,
+  ProductItemStartPrice,
+  ProductItemPrice,
+  ProductItemAddress
+}

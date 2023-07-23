@@ -138,3 +138,16 @@ export const CateGoryName = styled.div`
     ${({ theme }): string => theme.fonts.caption01M}
   }
 `
+
+export const Styled = {
+  CategoryHeader,
+  CateGoryWrapper,
+  CateGoryBoxWrapper,
+  CateGoryBox,
+  ArrowBox,
+  LeftArrow,
+  RightArrow,
+  CategoryItem,
+  CategoryImg,
+  CateGoryName
+}

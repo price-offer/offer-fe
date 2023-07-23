@@ -1,32 +1,26 @@
 import type { ReactElement } from 'react'
-import {
-  BannerWrapper,
-  BannerLeft,
-  BannerLeftText1,
-  BannerLeftText2,
-  BannerLeftSellButton,
-  BannerRight,
-  BannerRightTextWrapper,
-  BannerRightNewBadge,
-  BannerRightText1
-} from './styled'
+import { Styled } from './styled'
 
 const HomeBanner = (): ReactElement => {
   return (
     <>
-      <BannerWrapper>
-        <BannerLeft>
-          <BannerLeftText1>처치곤란한 물건이 있다면?</BannerLeftText1>
-          <BannerLeftText2>Offer에 올려보세요!</BannerLeftText2>
-          <BannerLeftSellButton>판매하기</BannerLeftSellButton>
-        </BannerLeft>
-        <BannerRight>
-          <BannerRightTextWrapper>
-            <BannerRightNewBadge>New</BannerRightNewBadge>
-            <BannerRightText1>오늘의 새로운 상품</BannerRightText1>
-          </BannerRightTextWrapper>
-        </BannerRight>
-      </BannerWrapper>
+      <Styled.BannerWrapper>
+        <Styled.BannerLeft>
+          <Styled.BannerLeftText1>
+            처치곤란한 물건이 있다면?
+          </Styled.BannerLeftText1>
+          <Styled.BannerLeftText2>Offer에 올려보세요!</Styled.BannerLeftText2>
+          <Styled.BannerLeftSellButton>판매하기</Styled.BannerLeftSellButton>
+        </Styled.BannerLeft>
+        <Styled.BannerRight>
+          <Styled.BannerRightTextWrapper>
+            <Styled.BannerRightNewBadge>New</Styled.BannerRightNewBadge>
+            <Styled.BannerRightText1>
+              오늘의 새로운 상품
+            </Styled.BannerRightText1>
+          </Styled.BannerRightTextWrapper>
+        </Styled.BannerRight>
+      </Styled.BannerWrapper>
     </>
   )
 }

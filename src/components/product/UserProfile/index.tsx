@@ -1,10 +1,10 @@
 import { Avatar, Badge, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { StyledUserProfile, StyledProfileText, StyledUserName } from './styled'
+import { Styled } from './styled'
 import type { UserProfileProps } from './types'
 import { TRANSACTION_TYPE } from './types'
 
-export const UserProfile = ({
+const UserProfile = ({
   nickName,
   image = '',
   location,
@@ -16,10 +16,10 @@ export const UserProfile = ({
   const isOfferProfile = type === 'offer'
 
   return (
-    <StyledUserProfile>
+    <Styled.UserProfile>
       <Avatar alt={`user-profile`} src={image} />
-      <StyledProfileText>
-        <StyledUserName>
+      <Styled.ProfileText>
+        <Styled.UserName>
           <Text styleType="body02B" tag="p">
             {nickName}
           </Text>
@@ -27,7 +27,7 @@ export const UserProfile = ({
             Lv.
             {level}
           </Badge>
-        </StyledUserName>
+        </Styled.UserName>
         <Text color="grayScale70" styleType="caption01M" tag="p">
           {location}
           {isOfferProfile && ` · ${TRANSACTION_TYPE[transactionType]}`}
@@ -37,7 +37,9 @@ export const UserProfile = ({
             {date}
           </Text>
         )}
-      </StyledProfileText>
-    </StyledUserProfile>
+      </Styled.ProfileText>
+    </Styled.UserProfile>
   )
 }
+
+export { UserProfile, UserProfileProps }

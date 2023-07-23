@@ -1,17 +1,23 @@
 import styled from '@emotion/styled'
 
-export const StyledUserProfile = styled.div`
+const UserProfile = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
 `
-export const StyledProfileText = styled.div`
+const ProfileText = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
 `
-export const StyledUserName = styled.div`
+const UserName = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
 `
+
+export const Styled = {
+  UserProfile,
+  ProfileText,
+  UserName
+}

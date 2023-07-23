@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { Button, Divider, Text } from '@offer-ui/react'
+import { Button, Divider as DividerComponent, Text } from '@offer-ui/react'
 
-export const StyledOfferPriceCardWrapper = styled.div`
+const OfferPriceCardWrapper = styled.div`
   ${({ theme }): string => {
     const { colors, radius, mediaQuery } = theme
 
@@ -25,7 +25,7 @@ export const StyledOfferPriceCardWrapper = styled.div`
   }}
 `
 
-export const StyledOfferListBox = styled.div`
+const OfferListBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -33,7 +33,7 @@ export const StyledOfferListBox = styled.div`
   overflow: scroll;
 `
 
-export const StyledOfferTitle = styled(Text)`
+const OfferTitle = styled(Text)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.subtitle02B};
@@ -43,7 +43,7 @@ export const StyledOfferTitle = styled(Text)`
     }`}
 `
 
-export const StyledCardHeader = styled.div`
+const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -58,12 +58,12 @@ export const StyledCardHeader = styled.div`
   `}
 `
 
-export const StyledCardTitle = styled.div`
+const CardTitle = styled.div`
   display: flex;
   gap: 8px;
 `
 
-export const StyledDivider = styled(Divider)`
+const Divider = styled(DividerComponent)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
       display: none;
@@ -74,14 +74,14 @@ export const StyledDivider = styled(Divider)`
   `}
 `
 
-export const StyledBlankCard = styled.div`
+const BlankCard = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px 0;
   align-items: center;
   height: 120px;
 `
-export const StyledOffer = styled.div`
+const Offer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,7 +102,7 @@ export const StyledOffer = styled.div`
   `}
 `
 
-export const StyledCardBody = styled.div`
+const CardBody = styled.div`
   padding: 20px 16px;
   height: 564px;
 
@@ -117,7 +117,7 @@ export const StyledCardBody = styled.div`
     }
   `}
 `
-export const StyledCardFooter = styled.div`
+const CardFooter = styled.div`
   display: flex;
   gap: 8px;
   padding: 20px;
@@ -136,7 +136,7 @@ export const StyledCardFooter = styled.div`
   `}
 `
 
-export const StyledMessageButton = styled(Button)`
+const MessageButton = styled(Button)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
       width: 100%;
@@ -147,7 +147,7 @@ export const StyledMessageButton = styled(Button)`
     }
   `}
 `
-export const StyledLikeButton = styled.div`
+const LikeButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,3 +170,18 @@ export const StyledLikeButton = styled.div`
     }
   `}
 `
+
+export const Styled = {
+  OfferPriceCardWrapper,
+  OfferListBox,
+  OfferTitle,
+  CardHeader,
+  CardTitle,
+  Divider,
+  BlankCard,
+  Offer,
+  CardBody,
+  CardFooter,
+  MessageButton,
+  LikeButton
+}

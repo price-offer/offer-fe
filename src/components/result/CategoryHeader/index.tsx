@@ -1,17 +1,15 @@
 import type { ReactElement } from 'react'
-import {
-  CategoryHeaderWrapper,
-  CategoryHeader,
-  CategoryHeaderResultCount
-} from './styled'
-import type { SearchHeaderProps } from './types'
+import { Styled } from './styled'
+import type { ResultHeaderProps } from './types'
 
-const ResultHeader = ({ searchResult }: SearchHeaderProps): ReactElement => {
+const ResultHeader = ({ searchResult }: ResultHeaderProps): ReactElement => {
   return (
-    <CategoryHeaderWrapper>
-      <CategoryHeader>&quot;{searchResult}&quot;의 검색결과</CategoryHeader>
-      <CategoryHeaderResultCount>999개</CategoryHeaderResultCount>
-    </CategoryHeaderWrapper>
+    <Styled.CategoryHeaderWrapper>
+      <Styled.CategoryHeader>
+        &quot;{searchResult}&quot;의 검색결과
+      </Styled.CategoryHeader>
+      <Styled.CategoryHeaderResultCount>999개</Styled.CategoryHeaderResultCount>
+    </Styled.CategoryHeaderWrapper>
   )
 }
-export { ResultHeader }
+export { ResultHeader, ResultHeaderProps }

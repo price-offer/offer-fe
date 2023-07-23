@@ -2,15 +2,7 @@ import { useMedia } from '@offer-ui/react'
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { PriceDialog } from '../PriceDialog'
-import {
-  SelectWrapper,
-  LeftSelectWrapper,
-  CategorySelect,
-  TradePeriodSelect,
-  RightSelectWrapper,
-  PriceFilterSelect,
-  ProductCount
-} from './styled'
+import { Styled } from './styled'
 import type { FilterSelectProps } from './types'
 
 const FilterSelect = ({
@@ -40,40 +32,40 @@ const FilterSelect = ({
 
   return (
     <>
-      <SelectWrapper>
-        <LeftSelectWrapper>
+      <Styled.SelectWrapper>
+        <Styled.LeftSelectWrapper>
           {disDesktop ? (
-            <CategorySelect
+            <Styled.CategorySelect
               colorType="dark"
               items={categoryItems}
               placeholder="전체"
               value={selectedCategoryValue}
-              onChange={handleCategoryChange}></CategorySelect>
+              onChange={handleCategoryChange}></Styled.CategorySelect>
           ) : (
             <></>
           )}
-          <TradePeriodSelect
+          <Styled.TradePeriodSelect
             colorType="light"
             items={tradePeriodItems}
             placeholder="거래방식"
-            onChange={handleTradePeriodChange}></TradePeriodSelect>
+            onChange={handleTradePeriodChange}></Styled.TradePeriodSelect>
           <PriceDialog
             handleMaxPriceInputChange={handleMaxPriceInputChange}
             handleMinPriceInputChange={handleMinPriceInputChange}
             handlePriceApplyClick={handlePriceApplyClick}
             maxPriceValue={maxPriceValue}
             minPriceValue={minPriceValue}></PriceDialog>
-        </LeftSelectWrapper>
-        <RightSelectWrapper>
-          {disDesktop && <ProductCount>전체 999개</ProductCount>}
-          <PriceFilterSelect
+        </Styled.LeftSelectWrapper>
+        <Styled.RightSelectWrapper>
+          {disDesktop && <Styled.ProductCount>전체 999개</Styled.ProductCount>}
+          <Styled.PriceFilterSelect
             colorType="none"
             items={sortPriceItems}
             placeholder="높은 가격순"
-            onChange={handleSortPriceChange}></PriceFilterSelect>
-        </RightSelectWrapper>
-      </SelectWrapper>
+            onChange={handleSortPriceChange}></Styled.PriceFilterSelect>
+        </Styled.RightSelectWrapper>
+      </Styled.SelectWrapper>
     </>
   )
 }
-export { FilterSelect }
+export { FilterSelect, FilterSelectProps }

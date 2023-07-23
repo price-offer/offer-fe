@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
-export const CategoryHeaderWrapper = styled.div`
+const CategoryHeaderWrapper = styled.div`
   display: flex;
   gap: 8px;
 `
-export const CategoryHeader = styled.div`
+const CategoryHeader = styled.div`
   ${({ theme }): string => theme.fonts.display02B}
   margin-top: 42px;
   margin-bottom: 22px;
@@ -19,7 +19,7 @@ export const CategoryHeader = styled.div`
   }
 `
 
-export const CategoryHeaderResultCount = styled.div`
+const CategoryHeaderResultCount = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
   color:${({ theme }): string => theme.colors.grayScale50};
   margin-top: 42px;
@@ -30,3 +30,9 @@ export const CategoryHeaderResultCount = styled.div`
   ${({ theme }): string => theme.mediaQuery.mobile} {
   }
 `
+
+export const Styled = {
+  CategoryHeaderWrapper,
+  CategoryHeader,
+  CategoryHeaderResultCount
+}

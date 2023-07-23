@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { SelectBox } from '@offer-ui/react'
 
-export const SelectWrapper = styled.div`
+const SelectWrapper = styled.div`
   display: flex;
   margin-top: 25px;
   justify-content: space-between;
@@ -12,18 +12,18 @@ export const SelectWrapper = styled.div`
   }
 `
 
-export const LeftSelectWrapper = styled.div`
+const LeftSelectWrapper = styled.div`
   display: flex;
   gap: 8px;
 `
-export const CategorySelect = styled(SelectBox)`
+const CategorySelect = styled(SelectBox)`
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
     }
   }
 `
-export const TradePeriodSelect = styled(SelectBox)`
+const TradePeriodSelect = styled(SelectBox)`
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
@@ -31,7 +31,7 @@ export const TradePeriodSelect = styled(SelectBox)`
   }
 `
 
-export const RightSelectWrapper = styled.div`
+const RightSelectWrapper = styled.div`
   ${({ theme }): string => theme.mediaQuery.tablet} {
     display: flex;
     align-items: center;
@@ -39,7 +39,7 @@ export const RightSelectWrapper = styled.div`
     margin-top: 10px;
   }
 `
-export const PriceFilterSelect = styled(SelectBox)`
+const PriceFilterSelect = styled(SelectBox)`
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
@@ -47,7 +47,17 @@ export const PriceFilterSelect = styled(SelectBox)`
   }
 `
 
-export const ProductCount = styled.div`
+const ProductCount = styled.div`
   margin-right: auto;
   ${({ theme }): string => theme.fonts.body01B}
 `
+
+export const Styled = {
+  SelectWrapper,
+  LeftSelectWrapper,
+  CategorySelect,
+  TradePeriodSelect,
+  RightSelectWrapper,
+  PriceFilterSelect,
+  ProductCount
+}

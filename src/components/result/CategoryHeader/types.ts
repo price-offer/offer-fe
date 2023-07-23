@@ -1,3 +1,3 @@
-export type SearchHeaderProps = {
+export type ResultHeaderProps = {
   searchResult: string
 }

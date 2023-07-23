@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Input, Button } from '@offer-ui/react'
 
-export const StyledDIM = styled.div`
+const Dim = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@ export const StyledDIM = styled.div`
   background-color: ${({ theme }): string => theme.colors.dimOpacity50};
 `
 
-export const PriceDialogDesktop = styled.div`
+const PriceDialogDesktop = styled.div`
   position: absolute;
   width: 344px;
   height: 164px;
@@ -36,18 +36,18 @@ export const PriceDialogDesktop = styled.div`
   }
 `
 
-export const Price = styled.div`
+const Price = styled.div`
   ${({ theme }): string => theme.fonts.body01B};
 `
 
-export const InputWrapper = styled.div`
+const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 12px;
 `
 
-export const MinimumInput = styled(Input)`
+const MinimumInput = styled(Input)`
   max-width: 148px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     max-width: 136px;
@@ -57,7 +57,7 @@ export const MinimumInput = styled(Input)`
   }
 `
 
-export const MaximumInput = styled(Input)`
+const MaximumInput = styled(Input)`
   max-width: 148px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     max-width: 136px;
@@ -67,20 +67,32 @@ export const MaximumInput = styled(Input)`
   }
 `
 
-export const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
   justify-content: right;
   margin-top: 12px;
 `
 
-export const CancelButton = styled(Button)`
+const CancelButton = styled(Button)`
   max-width: 65px;
   height: 32px;
 `
 
-export const ApplyButton = styled(Button)`
+const ApplyButton = styled(Button)`
   background-color: ${({ theme }): string => theme.colors.black};
   max-width: 65px;
   height: 32px;
   border-radius: 4px;
 `
+
+export const Styled = {
+  Dim,
+  PriceDialogDesktop,
+  Price,
+  InputWrapper,
+  MinimumInput,
+  MaximumInput,
+  ButtonWrapper,
+  CancelButton,
+  ApplyButton
+}

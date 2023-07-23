@@ -1,17 +1,7 @@
 import { useMedia, Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState, useEffect } from 'react'
-import {
-  StyledDIM,
-  PriceDialogDesktop,
-  Price,
-  InputWrapper,
-  MinimumInput,
-  MaximumInput,
-  ButtonWrapper,
-  CancelButton,
-  ApplyButton
-} from './styled'
+import { Styled } from './styled'
 import type { PriceInputProps } from './types'
 
 const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
@@ -27,41 +17,55 @@ const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
   }
   return dialogIsOpen ? (
     desktop ? (
-      <PriceDialogDesktop>
-        <Price>가격</Price>
-        <InputWrapper>
-          <MinimumInput isPrice placeholder="최소 금액"></MinimumInput>~
-          <MaximumInput isPrice placeholder="최대 금액"></MaximumInput>
-        </InputWrapper>
+      <Styled.PriceDialogDesktop>
+        <Styled.Price>가격</Styled.Price>
+        <Styled.InputWrapper>
+          <Styled.MinimumInput
+            isPrice
+            placeholder="최소 금액"></Styled.MinimumInput>
+          ~
+          <Styled.MaximumInput
+            isPrice
+            placeholder="최대 금액"></Styled.MaximumInput>
+        </Styled.InputWrapper>
         <Divider direction="horizontal" />
-        <ButtonWrapper>
-          <CancelButton styleType="ghost" onClick={handleCancelClick}>
+        <Styled.ButtonWrapper>
+          <Styled.CancelButton styleType="ghost" onClick={handleCancelClick}>
             취소
-          </CancelButton>
-          <ApplyButton styleType="solidPrimary">적용하기</ApplyButton>
-        </ButtonWrapper>
-      </PriceDialogDesktop>
+          </Styled.CancelButton>
+          <Styled.ApplyButton styleType="solidPrimary">
+            적용하기
+          </Styled.ApplyButton>
+        </Styled.ButtonWrapper>
+      </Styled.PriceDialogDesktop>
     ) : (
-      <StyledDIM>
-        <PriceDialogDesktop>
-          <Price>가격</Price>
-          <InputWrapper>
-            <MinimumInput isPrice placeholder="최소 금액"></MinimumInput>~
-            <MaximumInput isPrice placeholder="최대 금액"></MaximumInput>
-          </InputWrapper>
+      <Styled.Dim>
+        <Styled.PriceDialogDesktop>
+          <Styled.Price>가격</Styled.Price>
+          <Styled.InputWrapper>
+            <Styled.MinimumInput
+              isPrice
+              placeholder="최소 금액"></Styled.MinimumInput>
+            ~
+            <Styled.MaximumInput
+              isPrice
+              placeholder="최대 금액"></Styled.MaximumInput>
+          </Styled.InputWrapper>
           <Divider direction="horizontal" />
-          <ButtonWrapper>
-            <CancelButton styleType="ghost" onClick={handleCancelClick}>
+          <Styled.ButtonWrapper>
+            <Styled.CancelButton styleType="ghost" onClick={handleCancelClick}>
               취소
-            </CancelButton>
-            <ApplyButton styleType="solidPrimary">적용하기</ApplyButton>
-          </ButtonWrapper>
-        </PriceDialogDesktop>
-      </StyledDIM>
+            </Styled.CancelButton>
+            <Styled.ApplyButton styleType="solidPrimary">
+              적용하기
+            </Styled.ApplyButton>
+          </Styled.ButtonWrapper>
+        </Styled.PriceDialogDesktop>
+      </Styled.Dim>
     )
   ) : (
     <></>
   )
 }
 
-export { PriceInput }
+export { PriceInput, PriceInputProps }

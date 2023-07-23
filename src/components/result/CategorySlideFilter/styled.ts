@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { IconButton } from '@offer-ui/react'
 import type { CateGoryItemWrapperProps, CategoryItemProps } from './types'
 
-export const CateGoryBoxWrapper = styled.div`
+const CateGoryBoxWrapper = styled.div`
   overflow: hidden;
   position: relative;
   div::-webkit-scrollbar {
@@ -14,7 +14,7 @@ export const CateGoryBoxWrapper = styled.div`
     scrollbar-width: none; /* Firefox */
   }
 `
-export const CateGoryBox = styled.div`
+const CateGoryBox = styled.div`
   display: flex;
   gap: 8px;
   max-width: 1200px;
@@ -29,7 +29,7 @@ export const CateGoryBox = styled.div`
   }
 `
 
-export const CateGoryItemWrapper = styled.div<CateGoryItemWrapperProps>`
+const CateGoryItemWrapper = styled.div<CateGoryItemWrapperProps>`
   display: flex;
   gap: 10px;
   width: 100%;
@@ -39,7 +39,7 @@ export const CateGoryItemWrapper = styled.div<CateGoryItemWrapperProps>`
     `translateX(-${moveDistanceFromArrow}px)`};
 `
 
-export const RightArrowWrapper = styled.div`
+const RightArrowWrapper = styled.div`
   display: flex;
   position: absolute;
   justify-content: end;
@@ -54,7 +54,7 @@ export const RightArrowWrapper = styled.div`
   right: 0;
 `
 
-export const RightArrow = styled(IconButton)`
+const RightArrow = styled(IconButton)`
   background-color: ${({ theme }): string => theme.colors.white};
   position: absolute;
   width: 24px;
@@ -63,7 +63,7 @@ export const RightArrow = styled(IconButton)`
   filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
   transform: scaleX(-1);
 `
-export const LeftArrowWrapper = styled.div`
+const LeftArrowWrapper = styled.div`
   position: absolute;
   width: 68px;
   height: 28px;
@@ -75,7 +75,7 @@ export const LeftArrowWrapper = styled.div`
   z-index: 99;
 `
 
-export const LeftArrow = styled(IconButton)`
+const LeftArrow = styled(IconButton)`
   background-color: ${({ theme }): string => theme.colors.white};
   width: 24px;
   height: 24px;
@@ -83,7 +83,7 @@ export const LeftArrow = styled(IconButton)`
   filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
 `
 
-export const CategoryItem = styled.div<CategoryItemProps>`
+const CategoryItem = styled.div<CategoryItemProps>`
   padding: 4px 16px;
   border: none;
   border-radius: 4px;
@@ -93,7 +93,7 @@ export const CategoryItem = styled.div<CategoryItemProps>`
   `};
   z-index: 999;
 `
-export const CateGoryName = styled.div<CategoryItemProps>`
+const CateGoryName = styled.div<CategoryItemProps>`
   ${({ theme }): string => theme.fonts.body02M}
   ${({ selected, theme }): string => `
   color:${selected ? theme.colors.white : theme.colors.grayScale70};
@@ -101,3 +101,15 @@ export const CateGoryName = styled.div<CategoryItemProps>`
   width: max-content;
   margin-top: 1px;
 `
+
+export const Styled = {
+  CateGoryBoxWrapper,
+  CateGoryBox,
+  CateGoryItemWrapper,
+  RightArrowWrapper,
+  RightArrow,
+  LeftArrowWrapper,
+  LeftArrow,
+  CategoryItem,
+  CateGoryName
+}

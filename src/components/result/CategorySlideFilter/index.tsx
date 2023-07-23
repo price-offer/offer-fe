@@ -1,17 +1,7 @@
 import { useMedia } from '@offer-ui/react'
 import { useRef, useState, useCallback, useEffect } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
-import {
-  CateGoryBoxWrapper,
-  CateGoryBox,
-  CateGoryItemWrapper,
-  RightArrowWrapper,
-  RightArrow,
-  LeftArrowWrapper,
-  LeftArrow,
-  CategoryItem,
-  CateGoryName
-} from './styled'
+import { Styled } from './styled'
 import type { CategorySlideFilterProps } from './types'
 
 const CategorySlideFilter = ({
@@ -85,8 +75,8 @@ const CategorySlideFilter = ({
   )
   return (
     <>
-      <CateGoryBoxWrapper>
-        <CateGoryBox
+      <Styled.CateGoryBoxWrapper>
+        <Styled.CateGoryBox
           ref={containerRef}
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
@@ -95,44 +85,45 @@ const CategorySlideFilter = ({
           {isFirstCategory ? (
             <div />
           ) : (
-            <LeftArrowWrapper>
-              <LeftArrow
+            <Styled.LeftArrowWrapper>
+              <Styled.LeftArrow
                 color="black"
                 icon="arrowLeft"
                 size={16}
                 onClick={handleLeftArrowClick}
               />
-            </LeftArrowWrapper>
+            </Styled.LeftArrowWrapper>
           )}
           {isLast ? (
             <div />
           ) : (
-            <RightArrowWrapper>
-              <RightArrow
+            <Styled.RightArrowWrapper>
+              <Styled.RightArrow
                 color="black"
                 icon="arrowLeft"
                 size={16}
                 onClick={handleRightArrowClick}
               />
-            </RightArrowWrapper>
+            </Styled.RightArrowWrapper>
           )}
-          <CateGoryItemWrapper moveDistanceFromArrow={moveDistanceFromArrow}>
+          <Styled.CateGoryItemWrapper
+            moveDistanceFromArrow={moveDistanceFromArrow}>
             {cateGoryList.map(cateGory => (
-              <CategoryItem
+              <Styled.CategoryItem
                 key={cateGory.name}
                 selected={cateGory.selected}
                 onClick={(): void => {
                   handleCategoryClick(cateGory.name)
                 }}>
-                <CateGoryName selected={cateGory.selected}>
+                <Styled.CateGoryName selected={cateGory.selected}>
                   {cateGory.name}
-                </CateGoryName>
-              </CategoryItem>
+                </Styled.CateGoryName>
+              </Styled.CategoryItem>
             ))}
-          </CateGoryItemWrapper>
-        </CateGoryBox>
-      </CateGoryBoxWrapper>
+          </Styled.CateGoryItemWrapper>
+        </Styled.CateGoryBox>
+      </Styled.CateGoryBoxWrapper>
     </>
   )
 }
-export { CategorySlideFilter }
+export { CategorySlideFilter, CategorySlideFilterProps }

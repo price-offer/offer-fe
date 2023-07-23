@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import { useContext } from 'react'
-import { StyledPanel } from './styled'
+import { Styled } from './styled'
 import { TabsActionContext } from './TabsActionContext'
 import type { TabPanelProps } from './types'
 
@@ -13,7 +13,7 @@ export const TabPanel = ({
   const isCurrentTab = index === currentTabIndex
 
   return (
-    <StyledPanel
+    <Styled.Panel
       aria-labelledby={`tab-${index}`}
       className={className}
       id={`tabpanel-${index}`}
@@ -21,6 +21,6 @@ export const TabPanel = ({
       role="tabpanel"
       tabIndex={0}>
       {children}
-    </StyledPanel>
+    </Styled.Panel>
   )
 }

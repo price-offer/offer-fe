@@ -1,9 +1,14 @@
 import styled from '@emotion/styled'
 
-export const StyledTab = styled.div`
+const Tab = styled.div`
   display: inline-block;
 `
 
-export const StyledPanel = styled.div<{ isCurrentTab: boolean }>`
+const Panel = styled.div<{ isCurrentTab: boolean }>`
   ${({ isCurrentTab }): string => `display:${isCurrentTab ? 'unset' : 'none'};`}
 `
+
+export const Styled = {
+  Tab,
+  Panel
+}

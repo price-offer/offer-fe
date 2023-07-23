@@ -1,6 +1,6 @@
 import type { MouseEventHandler, ReactElement } from 'react'
 import { useContext } from 'react'
-import { StyledTab } from './styled'
+import { Styled } from './styled'
 import { TabsActionContext } from './TabsActionContext'
 import type { TabProps } from './types'
 
@@ -24,7 +24,7 @@ export const Tab = ({
   }
 
   return (
-    <StyledTab
+    <Styled.Tab
       aria-controls={`tabpanel-${index}`}
       aria-selected={isCurrentTab}
       className={className}
@@ -33,6 +33,6 @@ export const Tab = ({
       tabIndex={index ? -1 : undefined}
       onClick={handleClick}>
       <span>{children}</span>
-    </StyledTab>
+    </Styled.Tab>
   )
 }

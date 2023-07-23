@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
 import {
-  Icon,
+  Icon as IconComponent,
   // IconButton,
-  Modal as ModalContainer,
+  Modal,
   Text
 } from '@offer-ui/react'
 import type { StyledTitleProps } from './types'
 
-export const StyledModalContainer = styled(ModalContainer)`
+const ModalContainer = styled(Modal)`
   width: 400px;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -18,7 +18,8 @@ export const StyledModalContainer = styled(ModalContainer)`
     width: 320px;
   }
 `
-export const StyledHeader = styled.div`
+
+const Header = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -26,30 +27,46 @@ export const StyledHeader = styled.div`
   gap: 4px;
   text-align: center;
 `
-// export const StyledCloseButton = styled(IconButton)`
+
+//  const CloseButton = styled(IconButton)`
 //   position: absolute;
 //   right: 0;
 //   top: 0;
 // `
-export const StyledTitle = styled(Text)<StyledTitleProps>`
+
+const Title = styled(Text)<StyledTitleProps>`
   margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
 `
-export const StyledDescription = styled(Text)`
+
+const Description = styled(Text)`
   color: ${({ theme }): string => theme.colors.grayScale70};
 `
-export const StyledBody = styled.div`
+
+const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `
-export const StyledIcon = styled(Icon)`
+
+const Icon = styled(IconComponent)`
   margin-top: 42px;
   background-color: ${({ theme }): string => theme.colors.grayScale20};
   border-radius: 100px;
 `
-export const StyledFooter = styled.div`
+
+const Footer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
   margin-top: 32px;
 `
+
+export const Styled = {
+  ModalContainer,
+  Header,
+  Title,
+  Description,
+  Body,
+  Icon,
+  Footer
+}

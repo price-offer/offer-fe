@@ -1,3 +1,3 @@
-export * from './offer'
-export * from './app'
+export * from '../@types/offer'
+export * from '../@types/app'
 export * from './service'

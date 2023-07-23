@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Image, Text, Button } from '@offer-ui/react'
 
-export const StyledContainer = styled.li`
+export const Container = styled.li`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ export const StyledContainer = styled.li`
     }
   `}
 `
-export const StyledProductWrapper = styled.div`
+export const ProductWrapper = styled.div`
   ${({ theme }): string => `
     display: grid;
     flex: 1;
@@ -35,7 +35,7 @@ export const StyledProductWrapper = styled.div`
     }
   `}
 `
-export const StyledProductImg = styled(Image)`
+export const ProductImg = styled(Image)`
   ${({ theme }): string => `
     width: 90px;
     height: 90px;
@@ -46,7 +46,7 @@ export const StyledProductImg = styled(Image)`
     }
   `}
 `
-export const StyledSellerName = styled(Text)`
+export const SellerName = styled(Text)`
   ${({ theme }): string => `
     text-align: center;
     color: ${theme.colors.grayScale70};
@@ -62,7 +62,7 @@ export const StyledSellerName = styled(Text)`
 `}
 `
 
-export const StyledProductMetaWrapper = styled.div`
+export const ProductMetaWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -74,7 +74,7 @@ export const StyledProductMetaWrapper = styled.div`
     }
   `}
 `
-export const StyledProductName = styled(Text)`
+export const ProductName = styled(Text)`
   ${({ theme }): string => `
     text-align: center;
     width: 150px;
@@ -94,7 +94,7 @@ export const StyledProductName = styled(Text)`
     }
   `}
 `
-export const StyledProductInfoWrapper = styled.div`
+export const ProductInfoWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -108,7 +108,7 @@ export const StyledProductInfoWrapper = styled.div`
     }
 `}
 `
-export const StyledPrice = styled.span`
+export const Price = styled.span`
   ${({ theme }): string => `
     ${theme.fonts.body02R};
 
@@ -118,7 +118,7 @@ export const StyledPrice = styled.span`
     }
   `}
 `
-export const StyledTradeStatusName = styled(Text)`
+export const TradeStatusName = styled(Text)`
   ${({ theme }): string => `
     display: flex;
     flex-direction: column;
@@ -131,7 +131,7 @@ export const StyledTradeStatusName = styled(Text)`
     }
   `}
 `
-export const StyledDate = styled(Text)`
+export const Date = styled(Text)`
   ${({ theme }): string => `
     display: inline-block;
     color: ${theme.colors.grayScale50};
@@ -143,7 +143,7 @@ export const StyledDate = styled(Text)`
     }
   `}
 `
-export const StyledReviewButtonWrapper = styled.div`
+export const ReviewButtonWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     flex-direction: column;
@@ -156,7 +156,7 @@ export const StyledReviewButtonWrapper = styled.div`
     }
   `}
 `
-export const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
+export const ReviewButton = styled(Button)<{ isReviewed: boolean }>`
   ${({ theme, isReviewed }): string => `
     color: ${isReviewed ? theme.colors.grayScale70 : theme.colors.brandPrimary};
     margin-right: 20px;
@@ -171,7 +171,7 @@ export const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
     }
   `}
 `
-export const StyledLikeButton = styled(Button)`
+export const LikeButton = styled(Button)`
   ${({ theme }): string => `
     color: ${theme.colors.grayScale90};
     margin-right: 20px;
@@ -181,3 +181,19 @@ export const StyledLikeButton = styled(Button)`
     }
   `}
 `
+
+export const Styled = {
+  Container,
+  ProductWrapper,
+  ProductImg,
+  SellerName,
+  ProductMetaWrapper,
+  ProductName,
+  ProductInfoWrapper,
+  Price,
+  TradeStatusName,
+  Date,
+  ReviewButtonWrapper,
+  ReviewButton,
+  LikeButton
+}

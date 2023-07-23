@@ -1,18 +1,6 @@
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import {
-  StyledContentWrapper,
-  StyledSearchOptionsWrapper,
-  StyledTabsList,
-  StyledTab,
-  StyledStatusButtonLabel,
-  StyledCircle,
-  StyledStatusButton,
-  StyledText,
-  StyledUserProductsWrapper,
-  StyledProductListPanels,
-  StyledDivider
-} from './styled'
+import { Styled } from './styled'
 import { ProfileBox, Tabs, ReviewTabArticleList } from '@components'
 import { TRADE_ACTIVITY_TYPE } from '@constants'
 import { myProfile } from '@mocks/fixture'
@@ -55,35 +43,37 @@ export const ReviewPageContent = (): ReactElement => {
 
   return (
     <div>
-      <StyledContentWrapper>
+      <Styled.ContentWrapper>
         <ProfileBox {...myProfile} />
-        <StyledDivider size="bold" />
-        <StyledUserProductsWrapper>
+        <Styled.Divider size="bold" />
+        <Styled.UserProductsWrapper>
           <Tabs>
-            <StyledSearchOptionsWrapper>
-              <StyledTabsList>
+            <Styled.SearchOptionsWrapper>
+              <Styled.TabsList>
                 {tradeReviewActivityList.map((tradeReviewActivity, index) => {
                   const isCurrent = tabIndex === index
 
                   return (
-                    <StyledTab
+                    <Styled.Tab
                       key={tradeReviewActivity[0]}
                       onClick={handleTabClick}>
-                      <StyledStatusButtonLabel>
-                        <StyledCircle isCurrent={isCurrent} />
-                        <StyledStatusButton isCurrent={isCurrent} type="button">
-                          <StyledText isCurrent={isCurrent}>
+                      <Styled.StatusButtonLabel>
+                        <Styled.Circle isCurrent={isCurrent} />
+                        <Styled.StatusButton
+                          isCurrent={isCurrent}
+                          type="button">
+                          <Styled.Text isCurrent={isCurrent}>
                             {tradeReviewActivity[1]}
-                          </StyledText>
-                        </StyledStatusButton>
-                        <StyledText color="grayScale50">1</StyledText>
-                      </StyledStatusButtonLabel>
-                    </StyledTab>
+                          </Styled.Text>
+                        </Styled.StatusButton>
+                        <Styled.Text color="grayScale50">1</Styled.Text>
+                      </Styled.StatusButtonLabel>
+                    </Styled.Tab>
                   )
                 })}
-              </StyledTabsList>
-            </StyledSearchOptionsWrapper>
-            <StyledProductListPanels>
+              </Styled.TabsList>
+            </Styled.SearchOptionsWrapper>
+            <Styled.ProductListPanels>
               <Tabs.Panel>
                 <ReviewTabArticleList reviews={reviews} />
               </Tabs.Panel>
@@ -93,10 +83,10 @@ export const ReviewPageContent = (): ReactElement => {
               <Tabs.Panel>
                 <ReviewTabArticleList reviews={reviews} />
               </Tabs.Panel>
-            </StyledProductListPanels>
+            </Styled.ProductListPanels>
           </Tabs>
-        </StyledUserProductsWrapper>
-      </StyledContentWrapper>
+        </Styled.UserProductsWrapper>
+      </Styled.ContentWrapper>
     </div>
   )
 }

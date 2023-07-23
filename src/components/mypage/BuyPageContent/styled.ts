@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import type { ColorKeys } from '@offer-ui/react'
-import { Divider } from '@offer-ui/react'
-import { Tabs, Tab } from '@components'
+import { Divider as DividerComponent } from '@offer-ui/react'
+import { Tabs, Tab as TabComponent } from '@components'
 
-export const StyledContentWrapper = styled.div`
+const ContentWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     gap: 32px;
@@ -15,7 +15,7 @@ export const StyledContentWrapper = styled.div`
     }
   `}
 `
-export const StyledSearchOptionsWrapper = styled.div`
+const SearchOptionsWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -28,20 +28,20 @@ export const StyledSearchOptionsWrapper = styled.div`
     }
   `}
 `
-export const StyledTabsList = styled(Tabs.List)`
+const TabsList = styled(Tabs.List)`
   display: flex;
   gap: 22px;
 `
-export const StyledTab = styled(Tab)`
+const Tab = styled(TabComponent)`
   background: transparent;
   border: none;
 `
-export const StyledStatusButtonLabel = styled.label`
+const StatusButtonLabel = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
 `
-export const StyledCircle = styled.span<{ isCurrent: boolean }>`
+const Circle = styled.span<{ isCurrent: boolean }>`
   ${({ theme, isCurrent }): string => `
     content: '';
     width: 6px;
@@ -52,7 +52,7 @@ export const StyledCircle = styled.span<{ isCurrent: boolean }>`
     };
   `}
 `
-export const StyledStatusButton = styled.button<{ isCurrent: boolean }>`
+const StatusButton = styled.button<{ isCurrent: boolean }>`
   ${({ theme }): string => `
     border: none;
     background: transparent;
@@ -65,7 +65,7 @@ export const StyledStatusButton = styled.button<{ isCurrent: boolean }>`
     }
   `}
 `
-export const StyledText = styled.span<{
+const Text = styled.span<{
   isCurrent?: boolean
   color?: ColorKeys
 }>`
@@ -84,7 +84,7 @@ export const StyledText = styled.span<{
     }
   `}
 `
-export const StyledUserProductsWrapper = styled.div`
+const UserProductsWrapper = styled.div`
   ${({ theme }): string => `
     width: 892px;
     height: 855px;
@@ -97,7 +97,7 @@ export const StyledUserProductsWrapper = styled.div`
     }
   `}
 `
-export const StyledProductListPanels = styled(Tabs.Panels)`
+const ProductListPanels = styled(Tabs.Panels)`
   ${({ theme }): string => `
     height: 780px;
     overflow-y: scroll;
@@ -108,7 +108,7 @@ export const StyledProductListPanels = styled(Tabs.Panels)`
     }
   `}
 `
-export const StyledDivider = styled(Divider)`
+const Divider = styled(DividerComponent)`
   ${({ theme }): string => `
     display: none;
 
@@ -117,3 +117,17 @@ export const StyledDivider = styled(Divider)`
     }
   `}
 `
+
+export const Styled = {
+  ContentWrapper,
+  SearchOptionsWrapper,
+  TabsList,
+  Tab,
+  StatusButtonLabel,
+  Circle,
+  StatusButton,
+  Text,
+  UserProductsWrapper,
+  ProductListPanels,
+  Divider
+}

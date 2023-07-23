@@ -1,20 +1,7 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { Icon, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import {
-  StyledContainer,
-  StyledProductWrapper,
-  StyledProductImg,
-  StyledSelectBox,
-  StyledProductMetaWrapper,
-  StyledProductName,
-  StyledProductInfoWrapper,
-  StyledPrice,
-  StyledFavoriteWrapper,
-  StyledDate,
-  StyledReviewButtonWrapper,
-  StyledReviewButton
-} from './styled'
+import { Styled } from './styled'
 import type { SaleTabArticleProps } from './types'
 import { TRADE_STATUS } from '@constants'
 import type { TradeStatus } from '@types'
@@ -41,45 +28,45 @@ export const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
   }
 
   return (
-    <StyledContainer className={className}>
-      <StyledProductWrapper hasToken={hasToken}>
-        <StyledProductImg alt={`product${id}-img`} src={mainImageUrl} />
+    <Styled.Container className={className}>
+      <Styled.ProductWrapper hasToken={hasToken}>
+        <Styled.ProductImg alt={`product${id}-img`} src={mainImageUrl} />
         {hasToken ? (
-          <StyledSelectBox
+          <Styled.SelectBox
             items={TRADE_STATUS}
             value={tradeStatus.code}
             onChange={handleChangeTradeStatus}
           />
         ) : (
-          <StyledFavoriteWrapper isOnlyOther>
+          <Styled.FavoriteWrapper isOnlyOther>
             <Icon color="grayScale50" size={14} type="heart" />
             <Text styleType="body02R">{likeCount}</Text>
-          </StyledFavoriteWrapper>
+          </Styled.FavoriteWrapper>
         )}
-        <StyledProductMetaWrapper>
-          <StyledProductName styleType="body02M">{title}</StyledProductName>
-          <StyledProductInfoWrapper>
-            <StyledPrice>시작가: {toLocaleCurrency(price)}원</StyledPrice>
-            <StyledFavoriteWrapper isOnlyOther={false}>
+        <Styled.ProductMetaWrapper>
+          <Styled.ProductName styleType="body02M">{title}</Styled.ProductName>
+          <Styled.ProductInfoWrapper>
+            <Styled.Price>시작가: {toLocaleCurrency(price)}원</Styled.Price>
+            <Styled.FavoriteWrapper isOnlyOther={false}>
               <Icon color="grayScale50" size={14} type="heart" />
               <Text styleType="body02R">{likeCount}</Text>
-            </StyledFavoriteWrapper>
-            <StyledDate hasToken={hasToken} styleType="body02R">
+            </Styled.FavoriteWrapper>
+            <Styled.Date hasToken={hasToken} styleType="body02R">
               {modifiedDate}
-            </StyledDate>
-          </StyledProductInfoWrapper>
-        </StyledProductMetaWrapper>
-      </StyledProductWrapper>
+            </Styled.Date>
+          </Styled.ProductInfoWrapper>
+        </Styled.ProductMetaWrapper>
+      </Styled.ProductWrapper>
       {hasToken && isSoldOut && (
-        <StyledReviewButtonWrapper>
-          <StyledReviewButton
+        <Styled.ReviewButtonWrapper>
+          <Styled.ReviewButton
             isReviewed={isReviewed}
             size="small"
             styleType="outline">
             {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
-          </StyledReviewButton>
-        </StyledReviewButtonWrapper>
+          </Styled.ReviewButton>
+        </Styled.ReviewButtonWrapper>
       )}
-    </StyledContainer>
+    </Styled.Container>
   )
 }

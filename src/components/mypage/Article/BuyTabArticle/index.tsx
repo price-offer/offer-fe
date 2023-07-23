@@ -1,19 +1,5 @@
 import type { ReactElement } from 'react'
-import {
-  StyledContainer,
-  StyledProductWrapper,
-  StyledProductImg,
-  StyledSellerName,
-  StyledProductMetaWrapper,
-  StyledProductName,
-  StyledProductInfoWrapper,
-  StyledPrice,
-  StyledTradeStatusName,
-  StyledDate,
-  StyledReviewButtonWrapper,
-  StyledReviewButton,
-  StyledLikeButton
-} from './styled'
+import { Styled } from './styled'
 
 import type { BuyTabArticleProps } from './types'
 import { toLocaleCurrency } from '@utils'
@@ -35,37 +21,37 @@ export const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
   const isOfferType = activityType === 'offer'
 
   return (
-    <StyledContainer className={className}>
-      <StyledProductWrapper>
-        <StyledProductImg alt={`product${id}-img`} src={mainImageUrl} />
-        <StyledProductMetaWrapper>
-          <StyledSellerName styleType="body02R">
+    <Styled.Container className={className}>
+      <Styled.ProductWrapper>
+        <Styled.ProductImg alt={`product${id}-img`} src={mainImageUrl} />
+        <Styled.ProductMetaWrapper>
+          <Styled.SellerName styleType="body02R">
             {sellerNickName}
-          </StyledSellerName>
-          <StyledProductName styleType="body02M">{title}</StyledProductName>
-          <StyledProductInfoWrapper>
-            <StyledPrice>시작가: {toLocaleCurrency(price)}원</StyledPrice>
-            <StyledTradeStatusName styleType="body02R">
+          </Styled.SellerName>
+          <Styled.ProductName styleType="body02M">{title}</Styled.ProductName>
+          <Styled.ProductInfoWrapper>
+            <Styled.Price>시작가: {toLocaleCurrency(price)}원</Styled.Price>
+            <Styled.TradeStatusName styleType="body02R">
               {tradeStatus.name}
-            </StyledTradeStatusName>
-            <StyledDate styleType="body02R">{modifiedDate}</StyledDate>
-          </StyledProductInfoWrapper>
-        </StyledProductMetaWrapper>
-      </StyledProductWrapper>
+            </Styled.TradeStatusName>
+            <Styled.Date styleType="body02R">{modifiedDate}</Styled.Date>
+          </Styled.ProductInfoWrapper>
+        </Styled.ProductMetaWrapper>
+      </Styled.ProductWrapper>
       {isOfferType ? (
-        <StyledReviewButtonWrapper>
-          <StyledReviewButton
+        <Styled.ReviewButtonWrapper>
+          <Styled.ReviewButton
             isReviewed={isReviewed}
             size="small"
             styleType="outline">
             {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
-          </StyledReviewButton>
-        </StyledReviewButtonWrapper>
+          </Styled.ReviewButton>
+        </Styled.ReviewButtonWrapper>
       ) : (
-        <StyledLikeButton color="grayScale90" size="small" styleType="outline">
+        <Styled.LikeButton color="grayScale90" size="small" styleType="outline">
           관심 {likeCount}
-        </StyledLikeButton>
+        </Styled.LikeButton>
       )}
-    </StyledContainer>
+    </Styled.Container>
   )
 }

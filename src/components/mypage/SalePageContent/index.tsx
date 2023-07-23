@@ -1,19 +1,7 @@
 import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useEffect, useState, useCallback } from 'react'
-import {
-  StyledContentWrapper,
-  StyledSearchOptionsWrapper,
-  StyledTabsList,
-  StyledTab,
-  StyledStatusButtonLabel,
-  StyledCircle,
-  StyledStatusButton,
-  StyledText,
-  StyledUserProductsWrapper,
-  StyledProductListPanels,
-  StyledDivider
-} from './styled'
+import { Styled } from './styled'
 import { getOnSaleArticles } from '@apis'
 import { ProfileBox, Tabs, SaleTabArticleList } from '@components'
 import { TRADE_STATUS } from '@constants'
@@ -49,41 +37,41 @@ export const SalePageContent = (): ReactElement => {
   }, [fetchArticles])
 
   return (
-    <StyledContentWrapper>
+    <Styled.ContentWrapper>
       <ProfileBox {...myProfile} />
-      <StyledDivider size="bold" />
-      <StyledUserProductsWrapper>
+      <Styled.Divider size="bold" />
+      <Styled.UserProductsWrapper>
         <Tabs>
-          <StyledSearchOptionsWrapper>
-            <StyledTabsList>
+          <Styled.SearchOptionsWrapper>
+            <Styled.TabsList>
               {tradeStatusList.map(tradeStatus => {
                 const isCurrent = tradeStatus.code === tradeStatusCode
 
                 return (
-                  <StyledTab
+                  <Styled.Tab
                     key={tradeStatus.code}
                     onClick={handleTabClick(tradeStatus.code)}>
-                    <StyledStatusButtonLabel>
-                      <StyledCircle isCurrent={isCurrent} />
-                      <StyledStatusButton isCurrent={isCurrent}>
-                        <StyledText isCurrent={isCurrent}>
+                    <Styled.StatusButtonLabel>
+                      <Styled.Circle isCurrent={isCurrent} />
+                      <Styled.StatusButton isCurrent={isCurrent}>
+                        <Styled.Text isCurrent={isCurrent}>
                           {tradeStatus.name}
-                        </StyledText>
-                      </StyledStatusButton>
-                      <StyledText color="grayScale50">1</StyledText>
-                    </StyledStatusButtonLabel>
-                  </StyledTab>
+                        </Styled.Text>
+                      </Styled.StatusButton>
+                      <Styled.Text color="grayScale50">1</Styled.Text>
+                    </Styled.StatusButtonLabel>
+                  </Styled.Tab>
                 )
               })}
-            </StyledTabsList>
+            </Styled.TabsList>
             <SelectBox
               colorType="none"
               items={sortItems}
               value="recently"
               onChange={noop}
             />
-          </StyledSearchOptionsWrapper>
-          <StyledProductListPanels>
+          </Styled.SearchOptionsWrapper>
+          <Styled.ProductListPanels>
             <Tabs.Panel>
               <SaleTabArticleList
                 articles={articles}
@@ -98,9 +86,9 @@ export const SalePageContent = (): ReactElement => {
                 onChangeTradeStatus={noop}
               />
             </Tabs.Panel>
-          </StyledProductListPanels>
+          </Styled.ProductListPanels>
         </Tabs>
-      </StyledUserProductsWrapper>
-    </StyledContentWrapper>
+      </Styled.UserProductsWrapper>
+    </Styled.ContentWrapper>
   )
 }

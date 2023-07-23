@@ -1,7 +1,11 @@
 import styled from '@emotion/styled'
-import { Avatar, Text, Badge } from '@offer-ui/react'
+import {
+  Avatar as AvatarComponent,
+  Text,
+  Badge as BadgeComponent
+} from '@offer-ui/react'
 
-export const StyledWrapper = styled.li`
+const Wrapper = styled.li`
   ${({ theme }): string => `
     display: flex;
     padding: 24px;
@@ -16,22 +20,27 @@ export const StyledWrapper = styled.li`
     }
   `}
 `
-export const StyledContentWrapper = styled.div`
+
+const ContentWrapper = styled.div`
   flex: 1;
 `
-export const StyledMeta = styled.div`
+
+const Meta = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `
-export const StyledAvatar = styled(Avatar)`
+
+const Avatar = styled(AvatarComponent)`
   min-width: 46px;
 `
-export const StyledNickNameWrapper = styled.div`
+
+const NickNameWrapper = styled.div`
   display: flex;
   align-items: center;
 `
-export const StyledNickName = styled(Text)`
+
+const NickName = styled(Text)`
   ${({ theme }): string => `
     display: inline-block;
     max-width: 350px;
@@ -45,10 +54,12 @@ export const StyledNickName = styled(Text)`
     }
   `}
 `
-export const StyledBadge = styled(Badge)`
+
+const Badge = styled(BadgeComponent)`
   margin-left: 4px;
 `
-export const StyledArticleTitle = styled(Text)`
+
+const ArticleTitle = styled(Text)`
   ${({ theme }): string => `
     display: block;
     margin-top: 4px;
@@ -66,15 +77,32 @@ export const StyledArticleTitle = styled(Text)`
     }
   `}
 `
-export const StyledContentHeader = styled.div`
+
+const ContentHeader = styled.div`
   margin-bottom: 10px;
 `
-export const StyledScoreWrapper = styled.div`
+
+const ScoreWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
 `
-export const StyledContent = styled(Text)`
+
+const Content = styled(Text)`
   display: block;
   margin-top: 6px;
 `
+
+export const Styled = {
+  Wrapper,
+  ContentWrapper,
+  Meta,
+  Avatar,
+  NickNameWrapper,
+  NickName,
+  Badge,
+  ArticleTitle,
+  ContentHeader,
+  ScoreWrapper,
+  Content
+}

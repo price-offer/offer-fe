@@ -1,7 +1,12 @@
 import styled from '@emotion/styled'
-import { Image, SelectBox, Text, Button } from '@offer-ui/react'
+import {
+  Image,
+  SelectBox as SelectBoxComponent,
+  Text,
+  Button
+} from '@offer-ui/react'
 
-export const StyledContainer = styled.li`
+const Container = styled.li`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -14,7 +19,7 @@ export const StyledContainer = styled.li`
     }
   `}
 `
-export const StyledProductWrapper = styled.div<{ hasToken: boolean }>`
+const ProductWrapper = styled.div<{ hasToken: boolean }>`
   ${({ theme, hasToken }): string => `
     display: grid;
     flex: 1;
@@ -35,7 +40,7 @@ export const StyledProductWrapper = styled.div<{ hasToken: boolean }>`
     }
   `}
 `
-export const StyledProductImg = styled(Image)`
+const ProductImg = styled(Image)`
   ${({ theme }): string => `
     width: 90px;
     height: 90px;
@@ -47,7 +52,7 @@ export const StyledProductImg = styled(Image)`
     }
   `}
 `
-export const StyledSelectBox = styled(SelectBox)`
+const SelectBox = styled(SelectBoxComponent)`
   ${({ theme }): string => `
     order: 2;
 
@@ -57,7 +62,7 @@ export const StyledSelectBox = styled(SelectBox)`
   `}
 `
 
-export const StyledProductMetaWrapper = styled.div`
+const ProductMetaWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -72,7 +77,7 @@ export const StyledProductMetaWrapper = styled.div`
     }
   `}
 `
-export const StyledProductName = styled(Text)`
+const ProductName = styled(Text)`
   ${({ theme }): string => `
     text-align: center;
     width: 150px;
@@ -91,7 +96,7 @@ export const StyledProductName = styled(Text)`
     }
   `}
 `
-export const StyledProductInfoWrapper = styled.div`
+const ProductInfoWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -105,7 +110,7 @@ export const StyledProductInfoWrapper = styled.div`
     }
 `}
 `
-export const StyledPrice = styled.span`
+const Price = styled.span`
   ${({ theme }): string => `
     ${theme.fonts.body02R};
 
@@ -115,7 +120,7 @@ export const StyledPrice = styled.span`
     }
   `}
 `
-export const StyledFavoriteWrapper = styled.div<{ isOnlyOther: boolean }>`
+const FavoriteWrapper = styled.div<{ isOnlyOther: boolean }>`
   ${({ theme, isOnlyOther }): string => `
     display: ${isOnlyOther ? 'none' : 'flex'};
     align-items: center;
@@ -130,7 +135,7 @@ export const StyledFavoriteWrapper = styled.div<{ isOnlyOther: boolean }>`
     }
   `}
 `
-export const StyledDate = styled(Text)<{ hasToken: boolean }>`
+const Date = styled(Text)<{ hasToken: boolean }>`
   ${({ theme, hasToken }): string => `
     display: inline-block;
     color: ${theme.colors.grayScale50};
@@ -142,7 +147,7 @@ export const StyledDate = styled(Text)<{ hasToken: boolean }>`
     }
   `}
 `
-export const StyledReviewButtonWrapper = styled.div`
+const ReviewButtonWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     flex-direction: column;
@@ -155,7 +160,7 @@ export const StyledReviewButtonWrapper = styled.div`
     }
   `}
 `
-export const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
+const ReviewButton = styled(Button)<{ isReviewed: boolean }>`
   ${({ theme, isReviewed }): string => `
     color: ${isReviewed ? theme.colors.grayScale70 : theme.colors.brandPrimary};
     margin-right: 20px;
@@ -170,3 +175,18 @@ export const StyledReviewButton = styled(Button)<{ isReviewed: boolean }>`
     }
   `}
 `
+
+export const Styled = {
+  Container,
+  ProductWrapper,
+  ProductImg,
+  SelectBox,
+  ProductMetaWrapper,
+  ProductName,
+  ProductInfoWrapper,
+  Price,
+  FavoriteWrapper,
+  Date,
+  ReviewButtonWrapper,
+  ReviewButton
+}

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { Avatar } from '@offer-ui/react'
+import { Avatar as AvatarComponent } from '@offer-ui/react'
 
-export const StyledContainer = styled.div`
+const Container = styled.div`
   ${({ theme }): string => `
     position: relative;
     width: 276px;
@@ -22,7 +22,7 @@ export const StyledContainer = styled.div`
     }
   `}
 `
-export const StyledSettingsButton = styled.button`
+const SettingsButton = styled.button`
   ${({ theme }): string => `
     float: right;
     cursor: pointer;
@@ -36,7 +36,7 @@ export const StyledSettingsButton = styled.button`
   `}
 `
 
-export const StyledProfileWrapper = styled.div`
+const ProfileWrapper = styled.div`
   ${({ theme }): string => `
     margin-top: 28px;
 
@@ -45,7 +45,7 @@ export const StyledProfileWrapper = styled.div`
     }
   `}
 `
-export const StyledAvatar = styled(Avatar)`
+const Avatar = styled(AvatarComponent)`
   ${({ theme }): string => `
     ${theme.avatar.medium};
 
@@ -54,7 +54,7 @@ export const StyledAvatar = styled(Avatar)`
     }
   `}
 `
-export const StyledUserWrapper = styled.div`
+const UserWrapper = styled.div`
   ${({ theme }): string => `
     display: flex;
     flex-direction: column;
@@ -68,7 +68,7 @@ export const StyledUserWrapper = styled.div`
     }
 `}
 `
-export const StyledNickNameRow = styled.div`
+const NickNameRow = styled.div`
   ${({ theme }): string => `
   display: flex;
   gap: 4px;
@@ -83,7 +83,7 @@ export const StyledNickNameRow = styled.div`
   }
 `}
 `
-export const StyledNickName = styled.span`
+const NickName = styled.span`
   ${({ theme }): string => `
     ${theme.fonts.headline02B};
     width: 180px;
@@ -103,7 +103,7 @@ export const StyledNickName = styled.span`
     }
   `}
 `
-export const StyledUserProductWrapper = styled.div`
+const UserProductWrapper = styled.div`
   ${({ theme }): string => `
     display: grid;
     background-color: ${theme.colors.bgGray01};
@@ -125,7 +125,7 @@ export const StyledUserProductWrapper = styled.div`
     }
   `}
 `
-export const StyledUserProductRow = styled.div`
+const UserProductRow = styled.div`
   ${({ theme }): string => `
     display: flex;
     align-items: center;
@@ -140,8 +140,21 @@ export const StyledUserProductRow = styled.div`
     }
   `}
 `
-export const StyledUserProductTitleWrapper = styled.p`
+const UserProductTitleWrapper = styled.p`
   display: flex;
   align-items: center;
   gap: 8px;
 `
+
+export const Styled = {
+  Container,
+  SettingsButton,
+  ProfileWrapper,
+  Avatar,
+  UserWrapper,
+  NickNameRow,
+  NickName,
+  UserProductWrapper,
+  UserProductRow,
+  UserProductTitleWrapper
+}

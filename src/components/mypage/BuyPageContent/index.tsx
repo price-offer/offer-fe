@@ -1,19 +1,7 @@
 import { SelectBox } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import {
-  StyledContentWrapper,
-  StyledSearchOptionsWrapper,
-  StyledTabsList,
-  StyledTab,
-  StyledStatusButtonLabel,
-  StyledCircle,
-  StyledStatusButton,
-  StyledText,
-  StyledUserProductsWrapper,
-  StyledProductListPanels,
-  StyledDivider
-} from './styled'
+import { Styled } from './styled'
 import { sortItems } from './types'
 import { ProfileBox, Tabs, BuyTabArticleList } from '@components'
 import type { TradeBuyActivityType } from '@constants'
@@ -60,41 +48,43 @@ export const BuyPageContent = (): ReactElement => {
 
   return (
     <div>
-      <StyledContentWrapper>
+      <Styled.ContentWrapper>
         <ProfileBox {...myProfile} />
-        <StyledDivider size="bold" />
-        <StyledUserProductsWrapper>
+        <Styled.Divider size="bold" />
+        <Styled.UserProductsWrapper>
           <Tabs>
-            <StyledSearchOptionsWrapper>
-              <StyledTabsList>
+            <Styled.SearchOptionsWrapper>
+              <Styled.TabsList>
                 {tradeBuyActivityList.map((tradeBuyActivity, index) => {
                   const isCurrent = tabIndex === index
 
                   return (
-                    <StyledTab
+                    <Styled.Tab
                       key={tradeBuyActivity[0]}
                       onClick={handleTabClick}>
-                      <StyledStatusButtonLabel>
-                        <StyledCircle isCurrent={isCurrent} />
-                        <StyledStatusButton isCurrent={isCurrent} type="button">
-                          <StyledText isCurrent={isCurrent}>
+                      <Styled.StatusButtonLabel>
+                        <Styled.Circle isCurrent={isCurrent} />
+                        <Styled.StatusButton
+                          isCurrent={isCurrent}
+                          type="button">
+                          <Styled.Text isCurrent={isCurrent}>
                             {tradeBuyActivity[1]}
-                          </StyledText>
-                        </StyledStatusButton>
-                        <StyledText color="grayScale50">1</StyledText>
-                      </StyledStatusButtonLabel>
-                    </StyledTab>
+                          </Styled.Text>
+                        </Styled.StatusButton>
+                        <Styled.Text color="grayScale50">1</Styled.Text>
+                      </Styled.StatusButtonLabel>
+                    </Styled.Tab>
                   )
                 })}
-              </StyledTabsList>
+              </Styled.TabsList>
               <SelectBox
                 colorType="none"
                 items={sortItems}
                 value="recently"
                 onChange={noop}
               />
-            </StyledSearchOptionsWrapper>
-            <StyledProductListPanels>
+            </Styled.SearchOptionsWrapper>
+            <Styled.ProductListPanels>
               <Tabs.Panel>
                 <BuyTabArticleList
                   activityType={
@@ -111,10 +101,10 @@ export const BuyPageContent = (): ReactElement => {
                   articles={articles}
                 />
               </Tabs.Panel>
-            </StyledProductListPanels>
+            </Styled.ProductListPanels>
           </Tabs>
-        </StyledUserProductsWrapper>
-      </StyledContentWrapper>
+        </Styled.UserProductsWrapper>
+      </Styled.ContentWrapper>
     </div>
   )
 }

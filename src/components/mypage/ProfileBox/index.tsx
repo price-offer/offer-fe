@@ -3,7 +3,7 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProfileBoxProps } from './types'
 
-export const ProfileBox = ({
+const ProfileBox = ({
   member,
   sellingArticleCount,
   likedArticleCount,
@@ -58,3 +58,5 @@ export const ProfileBox = ({
     </Styled.Container>
   )
 }
+
+export { ProfileBox, ProfileBoxProps }

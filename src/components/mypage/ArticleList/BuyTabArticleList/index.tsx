@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { BuyTabArticle } from '../../Article'
 import type { BuyTabArticleListProps } from './types'
 
-export const BuyTabArticleList = ({
+const BuyTabArticleList = ({
   activityType,
   articles,
   className
@@ -22,3 +22,5 @@ export const BuyTabArticleList = ({
     </ul>
   )
 }
+
+export { BuyTabArticleList, BuyTabArticleListProps }

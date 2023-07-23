@@ -35,7 +35,7 @@ const getArticles = (): ArticlesElement[] => {
   })
 }
 
-export const BuyPageContent = (): ReactElement => {
+const BuyPageContent = (): ReactElement => {
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [articles] = useState<ArticlesElement[]>(getArticles())
 
@@ -108,3 +108,5 @@ export const BuyPageContent = (): ReactElement => {
     </div>
   )
 }
+
+export { BuyPageContent }

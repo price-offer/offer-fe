@@ -7,7 +7,7 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ConfirmModalProps } from './types'
 
-export const ConfirmModal = ({
+const ConfirmModal = ({
   isOpen = false,
   onClose,
   hasLogo = false,
@@ -47,3 +47,5 @@ export const ConfirmModal = ({
     </Styled.ModalContainer>
   )
 }
+
+export { ConfirmModalProps, ConfirmModal }

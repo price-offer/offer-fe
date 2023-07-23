@@ -4,7 +4,7 @@ import { Styled } from './styled'
 import { TabsActionContext } from './TabsActionContext'
 import type { TabPanelProps } from './types'
 
-export const TabPanel = ({
+const TabPanel = ({
   index,
   children,
   className
@@ -24,3 +24,5 @@ export const TabPanel = ({
     </Styled.Panel>
   )
 }
+
+export { TabPanelProps, TabPanel }

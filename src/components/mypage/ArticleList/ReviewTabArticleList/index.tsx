@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import type { ReviewTabArticleListProps } from './types'
 import { ReviewTabArticle } from '@components/mypage'
 
-export const ReviewTabArticleList = ({
+const ReviewTabArticleList = ({
   reviews,
   className
 }: ReviewTabArticleListProps): ReactElement => {
@@ -19,3 +19,5 @@ export const ReviewTabArticleList = ({
     </ul>
   )
 }
+
+export { ReviewTabArticleList, ReviewTabArticleListProps }

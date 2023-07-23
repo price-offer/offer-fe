@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { SaleTabArticle } from '../../Article'
 import type { SaleTabArticleListProps } from './types'
 
-export const SaleTabArticleList = ({
+const SaleTabArticleList = ({
   articles,
   hasToken,
   onChangeTradeStatus,
@@ -27,3 +27,5 @@ export const SaleTabArticleList = ({
     </ul>
   )
 }
+
+export { SaleTabArticleList, SaleTabArticleListProps }

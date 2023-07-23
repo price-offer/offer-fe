@@ -4,7 +4,7 @@ import { Styled } from './styled'
 import type { BuyTabArticleProps } from './types'
 import { toLocaleCurrency } from '@utils'
 
-export const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
+const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
   const {
     activityType,
     className,
@@ -55,3 +55,5 @@ export const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
     </Styled.Container>
   )
 }
+
+export { BuyTabArticle, BuyTabArticleProps }

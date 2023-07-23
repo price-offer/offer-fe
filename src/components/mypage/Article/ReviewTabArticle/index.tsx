@@ -5,7 +5,7 @@ import { Styled } from './styled'
 import type { ReviewTabArticleProps } from './types'
 import { ICON_META } from './types'
 
-export const ReviewTabArticle = ({
+const ReviewTabArticle = ({
   reviewer,
   article,
   score,
@@ -46,3 +46,5 @@ export const ReviewTabArticle = ({
     </Styled.Wrapper>
   )
 }
+
+export { ReviewTabArticle, ReviewTabArticleProps }

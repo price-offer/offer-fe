@@ -7,7 +7,7 @@ import { TRADE_STATUS } from '@constants'
 import type { TradeStatus } from '@types'
 import { toLocaleCurrency } from '@utils'
 
-export const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
+const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
   const {
     className,
     id,
@@ -70,3 +70,5 @@ export const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
     </Styled.Container>
   )
 }
+
+export { SaleTabArticle, SaleTabArticleProps }

@@ -4,7 +4,7 @@ import { Styled } from './styled'
 import { TabsActionContext } from './TabsActionContext'
 import type { TabProps } from './types'
 
-export const Tab = ({
+const Tab = ({
   children,
   index,
   className,
@@ -36,3 +36,5 @@ export const Tab = ({
     </Styled.Tab>
   )
 }
+
+export { Tab, TabProps }

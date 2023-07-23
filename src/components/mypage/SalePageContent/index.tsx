@@ -18,7 +18,7 @@ const sortItems = [
 
 const tradeStatusList = TRADE_STATUS.filter(item => item.code !== 2)
 
-export const SalePageContent = (): ReactElement => {
+const SalePageContent = (): ReactElement => {
   const hasToken = true
   const [tradeStatusCode, setTradeStatusCode] = useState<TradeStatusCode>(4)
   const [articles, setArticles] = useState<ArticlesElement[]>([])
@@ -92,3 +92,5 @@ export const SalePageContent = (): ReactElement => {
     </Styled.ContentWrapper>
   )
 }
+
+export { SalePageContent }

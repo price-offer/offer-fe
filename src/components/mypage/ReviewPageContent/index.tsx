@@ -30,7 +30,7 @@ const getReviews = (): ReviewsElement[] => {
   })
 }
 
-export const ReviewPageContent = (): ReactElement => {
+const ReviewPageContent = (): ReactElement => {
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [reviews] = useState<ReviewsElement[]>(getReviews())
 
@@ -90,3 +90,5 @@ export const ReviewPageContent = (): ReactElement => {
     </div>
   )
 }
+
+export { ReviewPageContent }

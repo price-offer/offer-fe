@@ -6,7 +6,7 @@ import { TabPanels } from './TabPanels'
 import { TabsActionContext } from './TabsActionContext'
 import type { TabsProps } from './types'
 
-export const Tabs = ({
+const Tabs = ({
   children,
   onChange,
   className,
@@ -42,3 +42,5 @@ export const Tabs = ({
 Tabs.List = TabList
 Tabs.Panels = TabPanels
 Tabs.Panel = TabPanel
+
+export { Tabs, TabsProps }

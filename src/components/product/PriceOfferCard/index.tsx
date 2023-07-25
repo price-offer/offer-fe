@@ -204,8 +204,8 @@ const StyledBlankCard = styled.div`
 `
 const StyledOffer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
@@ -225,8 +225,8 @@ const StyledOffer = styled.div`
 `
 
 const StyledCardBody = styled.div`
-  padding: 20px 16px;
   height: 564px;
+  padding: 20px 16px;
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
@@ -272,9 +272,9 @@ const StyledMessageButton = styled(Button)`
 `
 const StyledLikeButton = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
+  align-items: center;
+  justify-content: center;
 
   width: 96px;
   height: 64px;

@@ -125,26 +125,27 @@ const BannerRightTextWrapper = styled.div`
 `
 const BannerRightNewBadge = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  ${({ theme }): string => theme.fonts.caption01M};
+  width: 41px;
+  height: 24px;
+
   background-color: ${({ theme }): string => theme.colors.bgPrimary};
 
   color: ${({ theme }): string => theme.colors.grayScale05};
 
-  height: 24px;
-  width: 41px;
+  ${({ theme }): string => theme.fonts.caption01M};
   ${({ theme }): string => theme.mediaQuery.tablet} {
     width: 40px;
   }
 `
 
 const BannerRightText1 = styled.div`
-  ${({ theme }): string => theme.fonts.headline02B}
-  color:${({ theme }): string => theme.colors.white};
-
   border-bottom: solid;
+
+  color: ${({ theme }): string => theme.colors.white};
+  ${({ theme }): string => theme.fonts.headline02B}
   ${({ theme }): string => theme.mediaQuery.mobile} {
     ${({ theme }): string => theme.fonts.subtitle01B}
   }

@@ -95,8 +95,7 @@ const CategorySlideFilter = ({
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
           onTouchMove={isDrag ? onDragMove : undefined}
-          onTouchStart={onDragStart}
-        >
+          onTouchStart={onDragStart}>
           {isFirstCategory ? (
             <div />
           ) : (
@@ -128,8 +127,7 @@ const CategorySlideFilter = ({
                 selected={cateGory.selected}
                 onClick={(): void => {
                   handleCategoryClick(cateGory.name)
-                }}
-              >
+                }}>
                 <CateGoryName selected={cateGory.selected}>
                   {cateGory.name}
                 </CateGoryName>
@@ -231,6 +229,8 @@ const LeftArrow = styled(IconButton)`
 `
 
 const CategoryItem = styled.div<CategoryItemProps>`
+  z-index: 999;
+
   padding: 4px 16px;
   border: none;
   border-radius: 4px;
@@ -240,7 +240,6 @@ const CategoryItem = styled.div<CategoryItemProps>`
   ${({ selected, theme }): string => `
   background-color:${selected ? theme.colors.black : theme.colors.bgGray02};
   `};
-  z-index: 999;
 `
 const CateGoryName = styled.div<CategoryItemProps>`
   ${({ theme }): string => theme.fonts.body02M}

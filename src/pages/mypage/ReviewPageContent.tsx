@@ -58,8 +58,7 @@ export const ReviewPageContent = (): ReactElement => {
                   return (
                     <StyledTab
                       key={tradeReviewActivity[0]}
-                      onClick={handleTabClick}
-                    >
+                      onClick={handleTabClick}>
                       <StyledStatusButtonLabel>
                         <StyledCircle isCurrent={isCurrent} />
                         <StyledStatusButton isCurrent={isCurrent} type="button">

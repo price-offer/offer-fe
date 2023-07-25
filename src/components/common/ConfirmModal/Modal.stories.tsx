@@ -17,8 +17,7 @@ const Template: Story<ConfirmModalProps> = args => {
         type="button"
         onClick={(): void => {
           setIsOpen(true)
-        }}
-      >
+        }}>
         click
       </button>
       <ConfirmModal

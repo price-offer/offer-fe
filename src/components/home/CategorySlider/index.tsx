@@ -88,8 +88,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
           onTouchMove={isDrag ? onDragMove : undefined}
-          onTouchStart={onDragStart}
-        >
+          onTouchStart={onDragStart}>
           {isDesktop && (
             <ArrowBox>
               {isFirstCategory ? (
@@ -120,8 +119,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
                 key={cateGory.title}
                 onClick={(): void => {
                   alert(cateGory.title)
-                }}
-              >
+                }}>
                 <CategoryImg
                   key={cateGory.title}
                   alt={`category-${cateGory.title}`}

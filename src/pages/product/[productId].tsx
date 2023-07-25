@@ -1,14 +1,10 @@
-import {
-  ProductField,
-  UserProfile,
-  PriceOfferCard
-} from '@components/product-detail'
-import type { Offer } from '@components/product-detail/PriceOfferCard'
 import { css } from '@emotion/react'
 import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import { ProductField, UserProfile, PriceOfferCard } from '@components/product'
+import type { Offer } from '@components/product/PriceOfferCard'
 
 const IMAGES_MOCK = [
   {
@@ -301,9 +297,9 @@ const Layout = styled.div`
   display: flex;
   gap: 35px;
 
-  margin: 25px auto 15px;
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
+  margin: 25px auto 15px;
 
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {

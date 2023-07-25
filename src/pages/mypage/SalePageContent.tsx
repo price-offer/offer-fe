@@ -52,7 +52,8 @@ export const SalePageContent = (): ReactElement => {
                 return (
                   <StyledTab
                     key={tradeStatus.code}
-                    onClick={handleTabClick(tradeStatus.code)}>
+                    onClick={handleTabClick(tradeStatus.code)}
+                  >
                     <StyledStatusButtonLabel>
                       <StyledCircle isCurrent={isCurrent} />
                       <StyledStatusButton isCurrent={isCurrent}>

@@ -95,7 +95,8 @@ const CategorySlideFilter = ({
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
           onTouchMove={isDrag ? onDragMove : undefined}
-          onTouchStart={onDragStart}>
+          onTouchStart={onDragStart}
+        >
           {isFirstCategory ? (
             <div />
           ) : (
@@ -127,7 +128,8 @@ const CategorySlideFilter = ({
                 selected={cateGory.selected}
                 onClick={(): void => {
                   handleCategoryClick(cateGory.name)
-                }}>
+                }}
+              >
                 <CateGoryName selected={cateGory.selected}>
                   {cateGory.name}
                 </CateGoryName>

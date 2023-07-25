@@ -37,7 +37,8 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           icon="heart"
           size={16}
           toggleColor="brandPrimary"
-          toggleIcon="heartFill"></HeartButton>
+          toggleIcon="heartFill"
+        ></HeartButton>
       </ProductImgWrapper>
       <ProductItemTitle>{productItem.title}</ProductItemTitle>
       <ProductItemStartPrice>시작가</ProductItemStartPrice>

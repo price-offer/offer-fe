@@ -50,7 +50,8 @@ export const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
           <StyledReviewButton
             isReviewed={isReviewed}
             size="small"
-            styleType="outline">
+            styleType="outline"
+          >
             {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
           </StyledReviewButton>
         </StyledReviewButtonWrapper>

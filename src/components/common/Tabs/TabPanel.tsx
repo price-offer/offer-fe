@@ -23,7 +23,8 @@ export const TabPanel = ({
       id={`tabpanel-${index}`}
       isCurrentTab={isCurrentTab}
       role="tabpanel"
-      tabIndex={0}>
+      tabIndex={0}
+    >
       {children}
     </StyledPanel>
   )

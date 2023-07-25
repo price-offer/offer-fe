@@ -40,7 +40,8 @@ export const Tab = ({
       id={`tab-${index}`}
       role="tab"
       tabIndex={index ? -1 : undefined}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       <span>{children}</span>
     </StyledTab>
   )

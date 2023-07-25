@@ -165,7 +165,8 @@ const Result: NextPage = () => {
             selectedSortPriceValue={selectedSortPriceValue}
             selectedTradePeriodValue={selectedTradePeriodValue}
             sortPriceItems={sortPriceItems}
-            tradePeriodItems={tradePeriodItems}></FilterSelect>
+            tradePeriodItems={tradePeriodItems}
+          ></FilterSelect>
           <ProductList productList={apiRes.elements} />
         </ResultWrapper>
       </Layout>

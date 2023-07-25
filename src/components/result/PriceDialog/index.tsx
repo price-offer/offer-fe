@@ -34,7 +34,8 @@ const PriceDialog = ({
         <PriceDialogWrapper
           onClick={(): void => {
             setIsOpen(!isOpen)
-          }}>
+          }}
+        >
           <div>가격</div>
           <PriceArrowDown type="chevronDown"></PriceArrowDown>
         </PriceDialogWrapper>
@@ -48,13 +49,15 @@ const PriceDialog = ({
                   isPrice
                   placeholder="최소 금액"
                   value={minPriceValue}
-                  onChange={handleMinPriceInputChange}></MinimumInput>
+                  onChange={handleMinPriceInputChange}
+                ></MinimumInput>
                 ~
                 <MaximumInput
                   isPrice
                   placeholder="최대 금액"
                   value={maxPriceValue}
-                  onChange={handleMaxPriceInputChange}></MaximumInput>
+                  onChange={handleMaxPriceInputChange}
+                ></MaximumInput>
               </InputWrapper>
               <Divider direction="horizontal" />
               <ButtonWrapper>
@@ -63,7 +66,8 @@ const PriceDialog = ({
                 </CancelButton>
                 <ApplyButton
                   styleType="solidPrimary"
-                  onClick={handlePriceApplyClick}>
+                  onClick={handlePriceApplyClick}
+                >
                   적용하기
                 </ApplyButton>
               </ButtonWrapper>

@@ -67,7 +67,8 @@ const FilterSelect = ({
               items={categoryItems}
               placeholder="전체"
               value={selectedCategoryValue}
-              onChange={handleCategoryChange}></CategorySelect>
+              onChange={handleCategoryChange}
+            ></CategorySelect>
           ) : (
             <></>
           )}
@@ -75,13 +76,15 @@ const FilterSelect = ({
             colorType="light"
             items={tradePeriodItems}
             placeholder="거래방식"
-            onChange={handleTradePeriodChange}></TradePeriodSelect>
+            onChange={handleTradePeriodChange}
+          ></TradePeriodSelect>
           <PriceDialog
             handleMaxPriceInputChange={handleMaxPriceInputChange}
             handleMinPriceInputChange={handleMinPriceInputChange}
             handlePriceApplyClick={handlePriceApplyClick}
             maxPriceValue={maxPriceValue}
-            minPriceValue={minPriceValue}></PriceDialog>
+            minPriceValue={minPriceValue}
+          ></PriceDialog>
         </LeftSelectWrapper>
         <RightSelectWrapper>
           {disDesktop && <ProductCount>전체 999개</ProductCount>}
@@ -89,7 +92,8 @@ const FilterSelect = ({
             colorType="none"
             items={sortPriceItems}
             placeholder="높은 가격순"
-            onChange={handleSortPriceChange}></PriceFilterSelect>
+            onChange={handleSortPriceChange}
+          ></PriceFilterSelect>
         </RightSelectWrapper>
       </SelectWrapper>
     </>

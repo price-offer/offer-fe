@@ -8,8 +8,7 @@
       }
     }
   ],
-
-  "plugins": ["eslint-plugin-import"],
+  "plugins": ["eslint-plugin-import", "prettier"],
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
@@ -17,10 +16,12 @@
     "next",
     "next/core-web-vitals",
     "plugin:prettier/recommended",
+    "prettier",
     "plugin:jest-dom/recommended",
     "plugin:testing-library/react"
   ],
   "rules": {
+    "prettier/prettier": ["error"],
     "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
     "default-case-last": "error",
     "func-style": ["error", "expression"],

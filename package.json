@@ -10,11 +10,11 @@
     "storybook": "start-storybook -s public -p 6006",
     "build-storybook": "build-storybook",
     "test": "vitest run",
-    "prettier": "prettier '**/*.{json,yaml,md,js,jsx,ts,tsx}' --write",
+    "prettier": "prettier '**/*.{json,js,jsx,ts,tsx}' --write",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
     "prepare": "husky install",
-    "stylelint": "stylelint './**/*.{js,jsx,ts,tsx}' --fix"
+    "stylelint": "stylelint './src/**/*.{js,jsx,ts,tsx}' --fix"
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",

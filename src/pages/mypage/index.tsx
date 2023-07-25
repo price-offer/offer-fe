@@ -62,7 +62,8 @@ const MyPage = (): ReactElement => {
               <StyledTab
                 key={`${tab.code}-tab`}
                 isSelected={pageIndex === index}
-                onClick={handleTabClick}>
+                onClick={handleTabClick}
+              >
                 {tab.name}
               </StyledTab>
             ))}

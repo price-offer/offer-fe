@@ -59,7 +59,7 @@
     "jsdom": "^20.0.3",
     "lint-staged": "^13.0.3",
     "msw": "^0.49.3",
-    "prettier": "^2.7.1",
+    "prettier": "2.7.1",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "4.7.4",
     "vite-tsconfig-paths": "^4.0.3",
@@ -68,5 +68,6 @@
   "lint-staged": {},
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }

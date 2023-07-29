@@ -7,12 +7,15 @@ import {
 import { myProfile, memberProfileList, articles } from '@mocks/fixture'
 import type { TradeStatus } from '@types'
 
-describe('/apis', async () => {
+describe('/apis', () => {
   it('getMyProfile() - 함수 호출 시, 내 프로필 정보를 받아옵니다.', async () => {
+    const { server } = await import('../mocks/server')
+    server.listen({ onUnhandledRequest: 'bypass' })
+
     // Given, When
     const res = await getMyProfile()
-
     // Then
+
     expect(res).toStrictEqual(myProfile)
   })
 

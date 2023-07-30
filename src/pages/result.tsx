@@ -174,21 +174,22 @@ const Result: NextPage = () => {
 }
 
 const ResultWrapper = styled.div`
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding-left: 24px;
     padding-right: 24px;
+    padding-left: 24px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    padding-left: 16px;
     padding-right: 16px;
+    padding-left: 16px;
   }
 `
 
 const Layout = styled.div`
   display: flex;
   justify-content: center;
+
   width: 100%;
   margin-top: 68px;
 `

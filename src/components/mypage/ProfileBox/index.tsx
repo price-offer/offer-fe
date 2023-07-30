@@ -204,6 +204,6 @@ const StyledUserProductRow = styled.div`
 `
 const StyledUserProductTitleWrapper = styled.p`
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 `

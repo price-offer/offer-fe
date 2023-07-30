@@ -9,9 +9,9 @@ const globalStyle = css`
   }
 
   body {
-    font-family: Pretendard;
-    font-weight: normal;
     color: ${colors.grayScale90};
+    font-weight: normal;
+    font-family: Pretendard, serif;
   }
 `
 

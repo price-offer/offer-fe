@@ -151,13 +151,8 @@ const CategoryHeader = styled.div`
 `
 
 const CateGoryWrapper = styled.div`
-  overflow: hidden;
   position: relative;
-
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-  }
+  overflow: hidden;
 
   div::-webkit-scrollbar {
     display: none;
@@ -171,9 +166,11 @@ const CateGoryWrapper = styled.div`
 const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
   display: flex;
   gap: 12px;
-  max-width: 1200px;
+
   width: 100%;
+  max-width: 1200px;
   height: 118px;
+
   transition: 0.1s;
   ${({ theme }): string => theme.mediaQuery.desktop} {
     transform: ${({ isMoveFromArrowButton }): string =>
@@ -183,56 +180,64 @@ const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
 const CateGoryBox = styled.div`
   display: flex;
   gap: 12px;
-  max-width: 1200px;
-  width: 100%;
-  height: 118px;
   overflow: hidden;
-  ${({ theme }): string => theme.mediaQuery.desktop} {
-  }
+
+  width: 100%;
+  max-width: 1200px;
+  height: 118px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     gap: 18px;
-    height: 112px;
     overflow: scroll;
+
+    height: 112px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     gap: 12px;
-    height: 88px;
-    max-width: none;
     overflow: scroll;
+
+    max-width: none;
+    height: 88px;
   }
 `
 
 const ArrowBox = styled.div`
-  width: 100%;
   position: absolute;
-  align-self: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
   z-index: 999;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 30px;
 `
 
 const LeftArrow = styled(IconButton)`
-  background-color: ${({ theme }): string => theme.colors.white};
   width: 24px;
   height: 24px;
   border-radius: 100%;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+
+  background-color: ${({ theme }): string => theme.colors.white};
+
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
 `
 
 const RightArrow = styled(IconButton)`
-  background-color: ${({ theme }): string => theme.colors.white};
   width: 24px;
   height: 24px;
   border-radius: 100%;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25));
+
+  background-color: ${({ theme }): string => theme.colors.white};
+
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
+
   transform: scaleX(-1);
 `
 
 const CategoryItem = styled.div`
-  max-width: 108px;
   width: 100%;
+  max-width: 108px;
   height: 118px;
+
   transition: 0.5s;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -240,27 +245,29 @@ const CategoryItem = styled.div`
     height: 112px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    height: 88px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    height: 88px;
   }
 `
 const CategoryImg = styled(Image)`
-  border-radius: 12px;
-  height: 86px;
   width: 108px;
+  height: 86px;
+  border-radius: 12px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    height: 80px;
     width: 80px;
+    height: 80px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    height: 60px;
     width: 60px;
+    height: 60px;
   }
 `
 const CateGoryName = styled.div`
   margin-top: 12px;
+
   text-align: center;
   ${({ theme }): string => theme.fonts.body02M}
   color: ${({ theme }): string => theme.fonts.caption01M}

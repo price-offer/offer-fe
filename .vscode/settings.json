@@ -1,0 +1,16 @@
+{
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "typescriptreact",
+    "typescript",
+    "javascript",
+    "javascriptreact"
+  ],
+  "stylelint.configFile": ".stylelintrc.json",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "cSpell.words": ["stylelint"]
+}

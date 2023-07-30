@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from '@jest/types'
+
+const config: Config.InitialOptions = {
   clearMocks: true,
 
   collectCoverage: false,
@@ -7,16 +9,7 @@ module.exports = {
 
   coverageProvider: 'v8',
 
-  moduleFileExtensions: [
-    'js',
-    'mjs',
-    'cjs',
-    'jsx',
-    'ts',
-    'tsx',
-    'json',
-    'node'
-  ],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
 
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -44,5 +37,9 @@ module.exports = {
 
   testMatch: ['<rootDir>/**/*.test.(js|jsx|ts|tsx)'],
 
-  transformIgnorePatterns: ['<rootDir>/node_modules/']
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect']
 }
+
+export default config

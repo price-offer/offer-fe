@@ -4,7 +4,6 @@ import type { ReactElement } from 'react'
 import { Tab } from './Tab'
 import { Tabs } from './Tabs'
 import type { TabsProps } from './Tabs'
-import '@testing-library/jest-dom'
 
 const DummyTabs = ({
   defaultTabIndex

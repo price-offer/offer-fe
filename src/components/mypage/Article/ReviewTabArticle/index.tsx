@@ -139,10 +139,11 @@ const StyledContentHeader = styled.div`
 `
 const StyledScoreWrapper = styled.div`
   display: flex;
-  align-items: center;
   gap: 4px;
+  align-items: center;
 `
 const StyledContent = styled(Text)`
   display: block;
+
   margin-top: 6px;
 `

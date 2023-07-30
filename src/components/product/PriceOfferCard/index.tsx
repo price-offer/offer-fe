@@ -4,7 +4,7 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { UserProfile } from '../UserProfile'
 
-export const TRANSACTION_TYPE = {
+const TRANSACTION_TYPE = {
   all: '직거래/택배거래',
   direct: '직거래',
   parcel: '택배거래'
@@ -147,23 +147,25 @@ const StyledOfferListBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 100%;
   overflow: scroll;
+
+  height: 100%;
 `
 
 const StyledOfferTitle = styled(Text)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
-      ${theme.fonts.subtitle02B};
+      ${theme.fonts.subtitle01B};
     }
     ${theme.mediaQuery.mobile} {
-      ${theme.fonts.subtitle02B};
+      ${theme.fonts.subtitle01B};
     }`}
 `
 
 const StyledCardHeader = styled.div`
   display: flex;
   justify-content: space-between;
+
   padding: 20px;
 
   ${({ theme }): string => `
@@ -194,18 +196,20 @@ const StyledDivider = styled(Divider)`
 
 const StyledBlankCard = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 20px 0;
   align-items: center;
+  justify-content: center;
+
   height: 120px;
+  padding: 20px 0;
 `
 const StyledOffer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
-  border-radius: ${({ theme }): string => theme.border.radius06};
+  border-radius: ${({ theme }): string => theme.radius.round6};
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
@@ -221,8 +225,8 @@ const StyledOffer = styled.div`
 `
 
 const StyledCardBody = styled.div`
-  padding: 20px 16px;
   height: 564px;
+  padding: 20px 16px;
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
@@ -238,6 +242,7 @@ const StyledCardBody = styled.div`
 const StyledCardFooter = styled.div`
   display: flex;
   gap: 8px;
+
   padding: 20px;
 
   ${({ theme }): string => `
@@ -267,12 +272,14 @@ const StyledMessageButton = styled(Button)`
 `
 const StyledLikeButton = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
+  align-items: center;
+  justify-content: center;
+
   width: 96px;
   height: 64px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
+
   cursor: pointer;
 
   ${({ theme }): string => `

@@ -1,14 +1,10 @@
-import {
-  ProductField,
-  UserProfile,
-  PriceOfferCard
-} from '@components/product-detail'
-import type { Offer } from '@components/product-detail/PriceOfferCard'
 import { css } from '@emotion/react'
 import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import { ProductField, UserProfile, PriceOfferCard } from '@components/product'
+import type { Offer } from '@components/product/PriceOfferCard'
 
 const IMAGES_MOCK = [
   {
@@ -294,20 +290,22 @@ const ProfileDivider = styled(Divider)`
 `
 const ProductStatus = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `
 const Layout = styled.div`
   display: flex;
   gap: 35px;
-  margin: 25px auto 15px;
-  max-width: 1200px;
+
   width: 100%;
+  max-width: 1200px;
+  margin: 25px auto 15px;
 
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {
       flex-direction: column;
       gap: 0;
+
       margin: 0;
       padding: 0 24px;
     }
@@ -315,6 +313,7 @@ const Layout = styled.div`
     ${theme.mediaQuery.mobile} {
       flex-direction: column;
       gap: 0;
+
       margin: 0;
       padding: 0 16px;
     }
@@ -326,10 +325,12 @@ const MainDivider = styled(Divider)`
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {
       display: block;
+
       margin: 22px 0 16px;
     }
     ${theme.mediaQuery.mobile} {
       display: block;
+
       margin: 14px 0 20px;
     }
   `}
@@ -360,6 +361,7 @@ const ProductStatusSelectBox = styled(SelectBox)`
 const TransactionContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
   margin: 24px 0;
 
   ${({ theme }): SerializedStyles => css`
@@ -367,17 +369,21 @@ const TransactionContainer = styled.div`
       display: grid;
       grid-template-columns: 152px 152px;
       row-gap: 20px;
-      column-gap: 12px;
+
       width: 316px;
       margin: 20px 0 24px;
+
+      column-gap: 12px;
     }
     ${theme.mediaQuery.mobile} {
       display: grid;
       grid-template-columns: 152px 152px;
       row-gap: 20px;
-      column-gap: 12px;
+
       width: 316px;
       margin: 24px 0;
+
+      column-gap: 12px;
     }
   `}
 `

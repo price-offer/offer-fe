@@ -25,30 +25,28 @@ type ProductItemProps = {
 
 const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
   return (
-    <>
-      <ProductItemWrapper>
-        <ProductImgWrapper>
-          <ProductImg
-            key={productItem.id}
-            alt={`productName-${productItem.title}`}
-            src={productItem.mainImageUrl}
-            style={{ maxWidth: '276px' }}
-          />
-          <HeartButton
-            icon="heart"
-            size={16}
-            toggleColor="brandPrimary"
-            toggleIcon="heartFill"></HeartButton>
-        </ProductImgWrapper>
-        <ProductItemTitle>{productItem.title}</ProductItemTitle>
-        <ProductItemStartPrice>시작가</ProductItemStartPrice>
-        &nbsp;
-        <ProductItemPrice>
-          {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
-        </ProductItemPrice>
-        <ProductItemAddress>{productItem.tradeArea} 방금전</ProductItemAddress>
-      </ProductItemWrapper>
-    </>
+    <div>
+      <ProductImgWrapper>
+        <ProductImg
+          key={productItem.id}
+          alt={`productName-${productItem.title}`}
+          src={productItem.mainImageUrl}
+          style={{ maxWidth: '276px' }}
+        />
+        <HeartButton
+          icon="heart"
+          size={16}
+          toggleColor="brandPrimary"
+          toggleIcon="heartFill"></HeartButton>
+      </ProductImgWrapper>
+      <ProductItemTitle>{productItem.title}</ProductItemTitle>
+      <ProductItemStartPrice>시작가</ProductItemStartPrice>
+      &nbsp;
+      <ProductItemPrice>
+        {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+      </ProductItemPrice>
+      <ProductItemAddress>{productItem.tradeArea} 방금전</ProductItemAddress>
+    </div>
   )
 }
 export { ProductItem }
@@ -61,35 +59,39 @@ const ProductImg = styled(Image)`
   ${({ theme }): string => theme.mediaQuery.mobile} {
     height: 200px;
   }
-  @media (max-width: 510px) {
+
+  @media (width < 510px) {
     height: 160px;
   }
 `
 
 const HeartButton = styled(ToggleButton)`
   position: absolute;
-  background-color: ${({ theme }): string => theme.colors.white};
+  right: 12px;
+  bottom: 12px;
+
   width: 25px;
   height: 24px;
   border-radius: 100%;
-  bottom: 12px;
-  right: 12px;
+
+  background-color: ${({ theme }): string => theme.colors.white};
 `
 
 const ProductImgWrapper = styled.div`
-  max-width: 276px;
   position: relative;
+
+  max-width: 276px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     max-width: 166px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     max-width: 200px;
   }
-  @media (max-width: 510px) {
+
+  @media (width < 510px) {
     max-width: 160px;
   }
 `
-const ProductItemWrapper = styled.div``
 
 const ProductItemTitle = styled.div`
   ${({ theme }): string => theme.fonts.body02R}

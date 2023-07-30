@@ -82,13 +82,16 @@ export const ResetCSS = css`
   mark,
   audio,
   video {
+    vertical-align: baseline;
+
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+
     font: inherit;
-    vertical-align: baseline;
+    font-size: 100%;
   }
+
   /* HTML5 display-role reset for older browsers */
   article,
   aside,
@@ -103,26 +106,31 @@ export const ResetCSS = css`
   section {
     display: block;
   }
+
   body {
     line-height: 1;
   }
+
   ol,
   ul {
     list-style: none;
   }
+
   blockquote,
   q {
     quotes: none;
   }
-  blockquote:before,
-  blockquote:after,
-  q:before,
-  q:after {
+
+  blockquote::before,
+  blockquote::after,
+  q::before,
+  q::after {
     content: '';
     content: none;
   }
+
   table {
-    border-collapse: collapse;
     border-spacing: 0;
+    border-collapse: collapse;
   }
 `

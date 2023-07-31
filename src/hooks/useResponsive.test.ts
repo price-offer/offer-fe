@@ -1,17 +1,18 @@
 import type { AvatarProps, ButtonProps } from '@offer-ui/react'
 import { renderHook } from '@testing-library/react'
-import { vi } from 'vitest'
 import { useResponsive } from './useResponsive'
 import { matchMediaQuery } from '@styles'
 
 describe('hooks/useResponsive()', () => {
   const setViewPort = (device: keyof typeof matchMediaQuery): void => {
-    window.matchMedia = vi.fn().mockImplementation(query => ({
-      addEventListener: vi.fn(),
+    const mockFn = jest.fn()
+
+    window.matchMedia = mockFn.mockImplementation(query => ({
+      addEventListener: mockFn,
       matches: query === matchMediaQuery[device],
       media: '',
       onchange: null,
-      removeEventListener: vi.fn()
+      removeEventListener: mockFn
     }))
   }
 

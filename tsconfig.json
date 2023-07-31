@@ -30,6 +30,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "jest.config.js",
     ".next/types/**/*.ts"
   ],
   "exclude": [

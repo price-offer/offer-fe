@@ -29,8 +29,9 @@ const OfferListBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 100%;
   overflow: scroll;
+
+  height: 100%;
 `
 
 const OfferTitle = styled(Text)`
@@ -46,6 +47,7 @@ const OfferTitle = styled(Text)`
 const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
+
   padding: 20px;
 
   ${({ theme }): string => `
@@ -76,15 +78,17 @@ const Divider = styled(DividerComponent)`
 
 const BlankCard = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 20px 0;
   align-items: center;
+  justify-content: center;
+
   height: 120px;
+  padding: 20px 0;
 `
 const Offer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
   border-radius: ${({ theme }): string => theme.border.radius06};
@@ -103,8 +107,8 @@ const Offer = styled.div`
 `
 
 const CardBody = styled.div`
-  padding: 20px 16px;
   height: 564px;
+  padding: 20px 16px;
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
@@ -120,6 +124,7 @@ const CardBody = styled.div`
 const CardFooter = styled.div`
   display: flex;
   gap: 8px;
+
   padding: 20px;
 
   ${({ theme }): string => `
@@ -149,12 +154,14 @@ const MessageButton = styled(Button)`
 `
 const LikeButton = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
+  align-items: center;
+  justify-content: center;
+
   width: 96px;
   height: 64px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
+
   cursor: pointer;
 
   ${({ theme }): string => `

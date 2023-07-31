@@ -1,8 +1,8 @@
 import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
-import { SaleTabArticle } from '../../Article'
 import type { SaleTabArticleListProps } from './types'
+import { SaleTabArticle } from '../../Article'
 
 const SaleTabArticleList = ({
   articles,

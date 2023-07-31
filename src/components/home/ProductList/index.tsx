@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
-import { ProductItem } from '../ProductItem'
 import { Styled } from './styled'
 import type { ProductListProps } from './types'
+import { ProductItem } from '../ProductItem'
 
 const ProductList = ({ productList }: ProductListProps): ReactElement => {
   return (

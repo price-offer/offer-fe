@@ -1,9 +1,9 @@
 import { useMedia } from '@offer-ui/react'
 import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
-import { PriceDialog } from '../PriceDialog'
 import { Styled } from './styled'
 import type { FilterSelectProps } from './types'
+import { PriceDialog } from '../PriceDialog'
 
 const FilterSelect = ({
   categoryItems,

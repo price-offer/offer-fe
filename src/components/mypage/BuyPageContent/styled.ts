@@ -33,12 +33,14 @@ const TabsList = styled(Tabs.List)`
   gap: 22px;
 `
 const Tab = styled(TabComponent)`
-  background: transparent;
   border: none;
+
+  background: transparent;
 `
 const StatusButtonLabel = styled.label`
   display: flex;
   align-items: center;
+
   cursor: pointer;
 `
 const Circle = styled.span<{ isCurrent: boolean }>`

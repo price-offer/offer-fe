@@ -5,32 +5,38 @@ const Dim = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: ${({ theme }): number => theme.zIndex.modal};
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   width: 100vw;
   height: 100vh;
-  z-index: ${({ theme }): number => theme.zIndex.modal};
+
   background-color: ${({ theme }): string => theme.colors.dimOpacity50};
 `
 
 const PriceDialogDesktop = styled.div`
   position: absolute;
-  width: 344px;
-  height: 164px;
-  background-color: ${({ theme }): string => theme.colors.white};
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
   top: 38px;
   left: 1px;
-  padding: 16px 12px;
   z-index: 999;
+
+  width: 344px;
+  height: 164px;
+  padding: 16px 12px;
+  border-radius: 4px;
+
+  background-color: ${({ theme }): string => theme.colors.white};
+  box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
   ${({ theme }): string => theme.mediaQuery.tablet} {
     position: relative;
+
     width: 320px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     position: relative;
+
     width: 320px;
     padding: 16px 24px;
   }
@@ -42,8 +48,9 @@ const Price = styled.div`
 
 const InputWrapper = styled.div`
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+
   margin-top: 12px;
 `
 
@@ -70,6 +77,7 @@ const MaximumInput = styled(Input)`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: right;
+
   margin-top: 12px;
 `
 
@@ -79,10 +87,11 @@ const CancelButton = styled(Button)`
 `
 
 const ApplyButton = styled(Button)`
-  background-color: ${({ theme }): string => theme.colors.black};
   max-width: 65px;
   height: 32px;
   border-radius: 4px;
+
+  background-color: ${({ theme }): string => theme.colors.black};
 `
 
 export const Styled = {

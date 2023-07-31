@@ -84,12 +84,13 @@ const ContentHeader = styled.div`
 
 const ScoreWrapper = styled.div`
   display: flex;
-  align-items: center;
   gap: 4px;
+  align-items: center;
 `
 
 const Content = styled(Text)`
   display: block;
+
   margin-top: 6px;
 `
 

@@ -3,11 +3,12 @@ import { Button } from '@offer-ui/react'
 
 const BannerWrapper = styled.div`
   display: flex;
+
   width: 100%;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-  }
+
   ${({ theme }): string => theme.mediaQuery.mobile} {
     flex-direction: column;
+
     padding: 0;
   }
 `
@@ -15,22 +16,22 @@ const BannerWrapper = styled.div`
 const BannerLeft = styled.div`
   width: 100%;
   height: 321px;
+  padding: 45px 0 27px 34px;
+
   background-color: #f6f6f7;
-  padding: 45px 0px 27px 34px;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding: 30px 0px 18px 20px;
     height: 215px;
+    padding: 30px 0 18px 20px;
   }
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding-bottom: 18px;
-    height: 215px;
-  }
+
   ${({ theme }): string => theme.mediaQuery.mobile} {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 45px 0px 0px 0px;
+
     height: 240px;
+    padding: 45px 0 0;
   }
 `
 
@@ -75,22 +76,22 @@ const BannerLeftSellButton = styled(Button)`
 const BannerRight = styled.div`
   width: 100%;
   height: 321px;
-  background-color: #000000;
-  padding: 34px 0px 0px 51px;
+  padding: 34px 0 0 51px;
+
+  background-color: #000;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding: 24px 0px 18px 33px;
     height: 215px;
+    padding: 24px 0 18px 33px;
   }
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    padding: 24px 0px 18px 33px;
-    height: 215px;
-  }
+
   ${({ theme }): string => theme.mediaQuery.mobile} {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 13px 0px 0px 0px;
+
     height: 240px;
+    padding: 13px 0 0;
   }
 `
 const BannerRightTextWrapper = styled.div`
@@ -100,29 +101,36 @@ const BannerRightTextWrapper = styled.div`
     gap: 13px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    gap: 13px;
     flex-direction: column;
+    gap: 13px;
     align-items: center;
   }
 `
 const BannerRightNewBadge = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  ${({ theme }): string => theme.fonts.caption01M};
-  background-color: ${({ theme }): string => theme.colors.bgPrimary};
-  color: ${({ theme }): string => theme.colors.grayScale05};
-  height: 24px;
+  justify-content: center;
+
   width: 41px;
+  height: 24px;
+
+  background-color: ${({ theme }): string => theme.colors.bgPrimary};
+
+  color: ${({ theme }): string => theme.colors.grayScale05};
+
+  ${({ theme }): string => theme.fonts.caption01M};
   ${({ theme }): string => theme.mediaQuery.tablet} {
     width: 40px;
   }
 `
 
 const BannerRightText1 = styled.div`
-  ${({ theme }): string => theme.fonts.headline02B}
-  color:${({ theme }): string => theme.colors.white};
   border-bottom: solid;
+
+  color: ${({ theme }): string => theme.colors.white};
+
+  ${({ theme }): string => theme.fonts.headline02B}
+
   ${({ theme }): string => theme.mediaQuery.mobile} {
     ${({ theme }): string => theme.fonts.subtitle01B}
   }

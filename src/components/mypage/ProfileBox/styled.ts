@@ -142,8 +142,8 @@ const UserProductRow = styled.div`
 `
 const UserProductTitleWrapper = styled.p`
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 `
 
 export const Styled = {

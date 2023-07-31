@@ -1,9 +1,9 @@
 import { Divider, ToggleButton, SelectBox, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
-import { UserProfile } from '../UserProfile'
 import { Styled } from './styled'
 import type { PriceOfferCardProps } from './types'
+import { UserProfile } from '../UserProfile'
 
 const PriceOfferCard = ({
   offerList,

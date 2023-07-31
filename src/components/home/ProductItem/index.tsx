@@ -5,7 +5,7 @@ import type { ProductItemProps } from './types'
 const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
   return (
     <>
-      <Styled.ProductItemWrapper>
+      <div>
         <Styled.ProductImgWrapper>
           <Styled.ProductImg
             key={productItem.id}
@@ -28,7 +28,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
         <Styled.ProductItemAddress>
           {productItem.tradeArea} 방금전
         </Styled.ProductItemAddress>
-      </Styled.ProductItemWrapper>
+      </div>
     </>
   )
 }

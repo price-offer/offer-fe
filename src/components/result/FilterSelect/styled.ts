@@ -3,12 +3,14 @@ import { SelectBox } from '@offer-ui/react'
 
 const SelectWrapper = styled.div`
   display: flex;
-  margin-top: 25px;
   justify-content: space-between;
+
+  margin-top: 25px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    margin-top: 25px;
     display: block;
     justify-content: none;
+
+    margin-top: 25px;
   }
 `
 
@@ -36,6 +38,7 @@ const RightSelectWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     margin-top: 10px;
   }
 `

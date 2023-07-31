@@ -8,8 +8,9 @@ const ProductField = styled.div`
 const TextWrapper = styled.div<StyledTextWrapperProps>`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 4px;
+  justify-content: center;
+
   height: ${({ height }): string => `${height}px`};
 `
 

@@ -9,35 +9,39 @@ const ProductImg = styled(Image)`
   ${({ theme }): string => theme.mediaQuery.mobile} {
     height: 200px;
   }
-  @media (max-width: 510px) {
+
+  @media (width < 510px) {
     height: 160px;
   }
 `
 
 const HeartButton = styled(ToggleButton)`
   position: absolute;
-  background-color: ${({ theme }): string => theme.colors.white};
+  right: 12px;
+  bottom: 12px;
+
   width: 25px;
   height: 24px;
   border-radius: 100%;
-  bottom: 12px;
-  right: 12px;
+
+  background-color: ${({ theme }): string => theme.colors.white};
 `
 
 const ProductImgWrapper = styled.div`
-  max-width: 276px;
   position: relative;
+
+  max-width: 276px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     max-width: 166px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     max-width: 200px;
   }
-  @media (max-width: 510px) {
+
+  @media (width < 510px) {
     max-width: 160px;
   }
 `
-const ProductItemWrapper = styled.div``
 
 const ProductItemTitle = styled.div`
   ${({ theme }): string => theme.fonts.body02R}
@@ -62,7 +66,6 @@ export const Styled = {
   ProductImg,
   HeartButton,
   ProductImgWrapper,
-  ProductItemWrapper,
   ProductItemTitle,
   ProductItemStartPrice,
   ProductItemPrice,

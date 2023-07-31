@@ -20,11 +20,12 @@ const ModalContainer = styled(Modal)`
 `
 
 const Header = styled.div`
-  display: flex;
   position: relative;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 4px;
+  justify-content: center;
+
   text-align: center;
 `
 
@@ -44,20 +45,22 @@ const Description = styled(Text)`
 
 const Body = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 `
 
 const Icon = styled(IconComponent)`
   margin-top: 42px;
-  background-color: ${({ theme }): string => theme.colors.grayScale20};
   border-radius: 100px;
+
+  background-color: ${({ theme }): string => theme.colors.grayScale20};
 `
 
 const Footer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   margin-top: 32px;
 `
 

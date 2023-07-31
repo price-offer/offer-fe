@@ -37,10 +37,10 @@ const OfferListBox = styled.div`
 const OfferTitle = styled(Text)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
-      ${theme.fonts.subtitle02B};
+      ${theme.fonts.subtitle01B};
     }
     ${theme.mediaQuery.mobile} {
-      ${theme.fonts.subtitle02B};
+      ${theme.fonts.subtitle01B};
     }`}
 `
 
@@ -91,7 +91,7 @@ const Offer = styled.div`
 
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
-  border-radius: ${({ theme }): string => theme.border.radius06};
+  border-radius: ${({ theme }): string => theme.border.round6};
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {

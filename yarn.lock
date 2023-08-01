@@ -2203,10 +2203,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@offer-ui/react@^0.1.24":
-  version "0.1.24"
-  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.24.tgz#7d0009e27708f774cabe05ec2d0291291310ad6d"
-  integrity sha512-t1O+fZ7kwJDqph4eOt3o0FKpCYD7soO8+Gh2q7BwgeMfZvxO4R13WZ4pgF4sUJxx7fFbdRBwdmhcVj9hvECaUQ==
+"@offer-ui/react@^0.1.25":
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.25.tgz#b2415bc722ac8af49fe8b72c4edacba708222f56"
+  integrity sha512-tMzU7XMueFq9l67WHjwmkLw2yAr+dmFYdCyvqN3NiA7c/mwGfYyUW923OBcg+ar5bFEGL3SqNimdHtbuVFj1DA==
 
 "@open-draft/until@^1.0.3":
   version "1.0.3"

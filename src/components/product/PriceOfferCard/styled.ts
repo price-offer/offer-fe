@@ -91,7 +91,7 @@ const Offer = styled.div`
 
   padding: 20px;
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
-  border-radius: ${({ theme }): string => theme.border.round6};
+  border-radius: ${({ theme }): string => theme.radius.round6};
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {

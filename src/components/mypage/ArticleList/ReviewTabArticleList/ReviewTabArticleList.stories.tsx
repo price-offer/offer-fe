@@ -1,11 +1,11 @@
 import type { Meta, Story } from '@storybook/react'
+import type { ReviewTabArticleListProps } from './types'
 import { ReviewTabArticleList } from './index'
-import type { ReviewTabArticleListProps } from './index'
 
 export default {
   argTypes: {},
   component: ReviewTabArticleList,
-  title: 'Components/MyPage/ArticleList/ReviewTabArticleList'
+  title: 'MyPage/ArticleList/ReviewTabArticleList'
 } as Meta<ReviewTabArticleListProps>
 
 const Template: Story<ReviewTabArticleListProps> = args => (

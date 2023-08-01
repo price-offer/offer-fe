@@ -1,25 +1,10 @@
-import styled from '@emotion/styled'
 import { Avatar, Badge, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import { Styled } from './styled'
+import type { UserProfileProps } from './types'
+import { TRANSACTION_TYPE } from './types'
 
-export const TRANSACTION_TYPE = {
-  all: '직거래/택배거래',
-  direct: '직거래',
-  parcel: '택배거래'
-} as const
-
-type TransactionType = keyof typeof TRANSACTION_TYPE
-export type UserProfileProps = {
-  image?: string
-  nickName: string
-  location: string
-  type: 'offer' | 'basic'
-  level: number
-  date?: string
-  transactionType?: TransactionType
-}
-
-export const UserProfile = ({
+const UserProfile = ({
   nickName,
   image = '',
   location,
@@ -31,10 +16,10 @@ export const UserProfile = ({
   const isOfferProfile = type === 'offer'
 
   return (
-    <StyledUserProfile>
+    <Styled.UserProfile>
       <Avatar alt={`user-profile`} src={image} />
-      <StyledProfileText>
-        <StyledUserName>
+      <Styled.ProfileText>
+        <Styled.UserName>
           <Text styleType="body02B" tag="p">
             {nickName}
           </Text>
@@ -42,7 +27,7 @@ export const UserProfile = ({
             Lv.
             {level}
           </Badge>
-        </StyledUserName>
+        </Styled.UserName>
         <Text color="grayScale70" styleType="caption01M" tag="p">
           {location}
           {isOfferProfile && ` · ${TRANSACTION_TYPE[transactionType]}`}
@@ -52,23 +37,9 @@ export const UserProfile = ({
             {date}
           </Text>
         )}
-      </StyledProfileText>
-    </StyledUserProfile>
+      </Styled.ProfileText>
+    </Styled.UserProfile>
   )
 }
 
-const StyledUserProfile = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-`
-const StyledProfileText = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-`
-const StyledUserName = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-`
+export { UserProfile, UserProfileProps }

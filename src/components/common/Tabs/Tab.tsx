@@ -1,19 +1,10 @@
-import styled from '@emotion/styled'
-import type {
-  MouseEvent,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode
-} from 'react'
+import type { MouseEventHandler, ReactElement } from 'react'
 import { useContext } from 'react'
+import { Styled } from './styled'
 import { TabsActionContext } from './TabsActionContext'
-type TabProps = {
-  children: ReactNode
-  index?: number
-  className?: string
-  onClick?(e: MouseEvent<HTMLDivElement>, index: number): void
-}
-export const Tab = ({
+import type { TabProps } from './types'
+
+const Tab = ({
   children,
   index,
   className,
@@ -33,7 +24,7 @@ export const Tab = ({
   }
 
   return (
-    <StyledTab
+    <Styled.Tab
       aria-controls={`tabpanel-${index}`}
       aria-selected={isCurrentTab}
       className={className}
@@ -42,10 +33,8 @@ export const Tab = ({
       tabIndex={index ? -1 : undefined}
       onClick={handleClick}>
       <span>{children}</span>
-    </StyledTab>
+    </Styled.Tab>
   )
 }
 
-const StyledTab = styled.div`
-  display: inline-block;
-`
+export { Tab, TabProps }

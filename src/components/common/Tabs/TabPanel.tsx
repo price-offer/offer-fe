@@ -1,14 +1,10 @@
-import styled from '@emotion/styled'
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { useContext } from 'react'
+import { Styled } from './styled'
 import { TabsActionContext } from './TabsActionContext'
+import type { TabPanelProps } from './types'
 
-type TabPanelProps = {
-  children: ReactNode
-  index?: number
-  className?: string
-}
-export const TabPanel = ({
+const TabPanel = ({
   index,
   children,
   className
@@ -17,7 +13,7 @@ export const TabPanel = ({
   const isCurrentTab = index === currentTabIndex
 
   return (
-    <StyledPanel
+    <Styled.Panel
       aria-labelledby={`tab-${index}`}
       className={className}
       id={`tabpanel-${index}`}
@@ -25,10 +21,8 @@ export const TabPanel = ({
       role="tabpanel"
       tabIndex={0}>
       {children}
-    </StyledPanel>
+    </Styled.Panel>
   )
 }
 
-const StyledPanel = styled.div<{ isCurrentTab: boolean }>`
-  ${({ isCurrentTab }): string => `display:${isCurrentTab ? 'unset' : 'none'};`}
-`
+export { TabPanelProps, TabPanel }

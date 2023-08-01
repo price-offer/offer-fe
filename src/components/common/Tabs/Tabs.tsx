@@ -1,17 +1,12 @@
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { TabList } from './TabList'
 import { TabPanel } from './TabPanel'
 import { TabPanels } from './TabPanels'
 import { TabsActionContext } from './TabsActionContext'
+import type { TabsProps } from './types'
 
-export type TabsProps = {
-  children: ReactNode
-  defaultTabIndex?: number
-  className?: string
-  onChange?(prevIndex?: number, currentIndex?: number): void
-}
-export const Tabs = ({
+const Tabs = ({
   children,
   onChange,
   className,
@@ -47,3 +42,5 @@ export const Tabs = ({
 Tabs.List = TabList
 Tabs.Panels = TabPanels
 Tabs.Panel = TabPanel
+
+export { Tabs, TabsProps }

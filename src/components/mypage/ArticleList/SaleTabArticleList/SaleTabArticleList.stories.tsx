@@ -2,15 +2,15 @@ import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
+import type { SaleTabArticleListProps } from './types'
 import { SaleTabArticleList } from './index'
-import type { SaleTabArticleListProps } from './index'
 import { TRADE_STATUS } from '@constants'
 import type { ArticlesElement, TradeStatus, TradeStatusCode } from '@types'
 
 export default {
   argTypes: {},
   component: SaleTabArticleList,
-  title: 'Components/MyPage/ArticleList/SaleTabArticleList'
+  title: 'MyPage/ArticleList/SaleTabArticleList'
 } as Meta<SaleTabArticleListProps>
 
 const Template: Story<SaleTabArticleListProps> = args => {

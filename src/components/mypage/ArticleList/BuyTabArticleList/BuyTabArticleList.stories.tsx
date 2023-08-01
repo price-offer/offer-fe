@@ -1,16 +1,15 @@
 import { Text } from '@offer-ui/react'
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
+import type { BuyTabArticleListProps } from './types'
 import { BuyTabArticleList } from './index'
-import type { BuyTabArticleListProps } from './index'
+import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { TradeBuyActivityType } from '@constants/app'
-import { TRADE_ACTIVITY_TYPE } from '@constants/app'
 import type { ArticlesElement } from '@types'
 
 export default {
-  argTypes: {},
   component: BuyTabArticleList,
-  title: 'Components/MyPage/ArticleList/BuyTabArticleList'
+  title: 'MyPage/ArticleList/BuyTabArticleList'
 } as Meta<BuyTabArticleListProps>
 
 const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(

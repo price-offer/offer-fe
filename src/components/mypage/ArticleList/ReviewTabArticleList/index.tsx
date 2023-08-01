@@ -1,15 +1,10 @@
 import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
-import { ReviewTabArticle } from '@components/mypage/Article'
-import type { ReviewsElement } from '@types'
+import type { ReviewTabArticleListProps } from './types'
+import { ReviewTabArticle } from '@components/mypage'
 
-export type ReviewTabArticleListProps = {
-  reviews: ReviewsElement[]
-  className?: string
-}
-
-export const ReviewTabArticleList = ({
+const ReviewTabArticleList = ({
   reviews,
   className
 }: ReviewTabArticleListProps): ReactElement => {
@@ -24,3 +19,5 @@ export const ReviewTabArticleList = ({
     </ul>
   )
 }
+
+export { ReviewTabArticleList, ReviewTabArticleListProps }

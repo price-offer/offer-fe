@@ -1,10 +1,10 @@
 import type { Meta, Story } from '@storybook/react'
-import type { PriceOfferCardProps } from './index'
+import type { PriceOfferCardProps } from './types'
 import { PriceOfferCard } from './index'
 
 export default {
   component: PriceOfferCard,
-  title: 'Components/ProductDetail/PriceOfferCard'
+  title: 'ProductDetail/PriceOfferCard'
 } as Meta<PriceOfferCardProps>
 
 const Template: Story<PriceOfferCardProps> = args => (

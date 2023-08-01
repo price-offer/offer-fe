@@ -1,32 +1,11 @@
-import styled from '@emotion/styled'
-import { Button, Divider, ToggleButton, SelectBox, Text } from '@offer-ui/react'
+import { Divider, ToggleButton, SelectBox, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
+import { Styled } from './styled'
+import type { PriceOfferCardProps } from './types'
 import { UserProfile } from '../UserProfile'
 
-const TRANSACTION_TYPE = {
-  all: '직거래/택배거래',
-  direct: '직거래',
-  parcel: '택배거래'
-} as const
-
-export type PriceOfferCardProps = {
-  offerList: Offer[]
-  likeCount: number
-  isLike: boolean
-}
-export type Offer = {
-  id: number
-  name: string
-  level: number
-  tradeArea: string
-  date: string
-  offerPrice: number
-  profileUrl: string
-  tradeMethod: keyof typeof TRANSACTION_TYPE
-}
-
-export const PriceOfferCard = ({
+const PriceOfferCard = ({
   offerList,
   likeCount,
   isLike
@@ -39,16 +18,18 @@ export const PriceOfferCard = ({
   }
 
   return (
-    <StyledOfferPriceCardWrapper>
-      <StyledCardHeader>
-        <StyledCardTitle>
-          <StyledOfferTitle styleType="headline02B">가격제안</StyledOfferTitle>
+    <Styled.OfferPriceCardWrapper>
+      <Styled.CardHeader>
+        <Styled.CardTitle>
+          <Styled.OfferTitle styleType="headline02B">
+            가격제안
+          </Styled.OfferTitle>
           {hasOffer && (
             <Text color="grayScale50" styleType="headline02B">
               {offerList.length}
             </Text>
           )}
-        </StyledCardTitle>
+        </Styled.CardTitle>
         {hasOffer && (
           <SelectBox
             items={[
@@ -61,11 +42,11 @@ export const PriceOfferCard = ({
             }}
           />
         )}
-      </StyledCardHeader>
-      <StyledDivider />
+      </Styled.CardHeader>
+      <Styled.Divider />
       {hasOffer ? (
-        <StyledCardBody>
-          <StyledOfferListBox>
+        <Styled.CardBody>
+          <Styled.OfferListBox>
             {offerList.map(
               ({
                 id,
@@ -77,7 +58,7 @@ export const PriceOfferCard = ({
                 tradeMethod,
                 offerPrice
               }) => (
-                <StyledOffer key={id}>
+                <Styled.Offer key={id}>
                   <UserProfile
                     date={date}
                     image={profileUrl}
@@ -88,21 +69,21 @@ export const PriceOfferCard = ({
                     type="offer"
                   />
                   <Text styleType="body01B">{offerPrice}원</Text>
-                </StyledOffer>
+                </Styled.Offer>
               )
             )}
-          </StyledOfferListBox>
-        </StyledCardBody>
+          </Styled.OfferListBox>
+        </Styled.CardBody>
       ) : (
-        <StyledBlankCard>
+        <Styled.BlankCard>
           <Text color="grayScale70" styleType="subtitle01M">
             아직 제안된 가격이 없어요.
           </Text>
-        </StyledBlankCard>
+        </Styled.BlankCard>
       )}
       <Divider />
-      <StyledCardFooter>
-        <StyledLikeButton role="button" onClick={handleLikeClick}>
+      <Styled.CardFooter>
+        <Styled.LikeButton role="button" onClick={handleLikeClick}>
           <ToggleButton
             color="grayScale90"
             icon="heart"
@@ -112,186 +93,11 @@ export const PriceOfferCard = ({
             toggleIcon="heartFill"
           />
           <Text styleType="body01B">{likeCount}</Text>
-        </StyledLikeButton>
-        <StyledMessageButton size="large">쪽지하기</StyledMessageButton>
-      </StyledCardFooter>
-    </StyledOfferPriceCardWrapper>
+        </Styled.LikeButton>
+        <Styled.MessageButton size="large">쪽지하기</Styled.MessageButton>
+      </Styled.CardFooter>
+    </Styled.OfferPriceCardWrapper>
   )
 }
 
-const StyledOfferPriceCardWrapper = styled.div`
-  ${({ theme }): string => {
-    const { colors, radius, mediaQuery } = theme
-
-    return `
-        width: 478px;
-        min-width: 478px;
-        background-color: ${colors.white};
-        border: solid 1px ${colors.grayScale10};
-        border-radius: ${radius.round6};
-
-        ${mediaQuery.tablet} {
-          width: 100%;
-          border: none;
-          min-width: auto;
-         }
-         ${mediaQuery.mobile} {
-          flex-direction: column;
-          min-width: auto;
-         }
-      `
-  }}
-`
-
-const StyledOfferListBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  overflow: scroll;
-
-  height: 100%;
-`
-
-const StyledOfferTitle = styled(Text)`
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      ${theme.fonts.subtitle01B};
-    }
-    ${theme.mediaQuery.mobile} {
-      ${theme.fonts.subtitle01B};
-    }`}
-`
-
-const StyledCardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  padding: 20px;
-
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      padding: 0 23px;
-    }
-    ${theme.mediaQuery.mobile} {
-      padding: 0 16px;
-    }
-  `}
-`
-
-const StyledCardTitle = styled.div`
-  display: flex;
-  gap: 8px;
-`
-
-const StyledDivider = styled(Divider)`
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      display: none;
-    }
-    ${theme.mediaQuery.mobile} {
-      display: none;
-    }
-  `}
-`
-
-const StyledBlankCard = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 120px;
-  padding: 20px 0;
-`
-const StyledOffer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 20px;
-  border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
-  border-radius: ${({ theme }): string => theme.radius.round6};
-
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      padding: 16px;
-      border: none;
-      border-bottom: solid 1px ${theme.colors.grayScale10};
-    }
-    ${theme.mediaQuery.mobile} {
-      border: none;
-      border-bottom: solid 1px ${theme.colors.grayScale10};
-    }
-  `}
-`
-
-const StyledCardBody = styled.div`
-  height: 564px;
-  padding: 20px 16px;
-
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      padding: 3px 16px;
-      max-height: 276px;
-    }
-    ${theme.mediaQuery.mobile} {
-      padding: 16px;
-      max-height: 368px;
-    }
-  `}
-`
-const StyledCardFooter = styled.div`
-  display: flex;
-  gap: 8px;
-
-  padding: 20px;
-
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      justify-content: space-between;
-      gap: 100px;
-      padding: 12px 24px;
-    }
-    ${theme.mediaQuery.mobile} {
-      justify-content: space-between;
-      gap: 100px;
-      padding: 12px 16px;
-    }
-  `}
-`
-
-const StyledMessageButton = styled(Button)`
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      width: 100%;
-      ${theme.ctaButton.medium}
-    }
-    ${theme.mediaQuery.mobile} {
-      ${theme.ctaButton.medium}
-    }
-  `}
-`
-const StyledLikeButton = styled.div`
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  justify-content: center;
-
-  width: 96px;
-  height: 64px;
-  border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
-
-  cursor: pointer;
-
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      width: 84px;
-      height: 48px;
-      border-radius: ${theme.radius.round100};
-    }
-    ${theme.mediaQuery.mobile} {
-      width: 84px;
-      height: 48px;
-      border-radius: ${theme.radius.round100};
-    }
-  `}
-`
+export { PriceOfferCard, PriceOfferCardProps }

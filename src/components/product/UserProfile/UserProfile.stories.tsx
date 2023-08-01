@@ -1,9 +1,9 @@
 import type { Meta, Story } from '@storybook/react'
-import type { UserProfileProps } from './index'
+import type { UserProfileProps } from './types'
 import { UserProfile } from './index'
 
 export default {
-  title: 'Components/ProductDetail/UserProfile',
+  title: 'ProductDetail/UserProfile',
   component: UserProfile
 } as Meta<UserProfileProps>
 

@@ -2,10 +2,13 @@ import styled from '@emotion/styled'
 import { Text, Divider } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import { BuyPageContent } from './BuyPageContent'
-import { ReviewPageContent } from './ReviewPageContent'
-import { SalePageContent } from './SalePageContent'
 import { Tabs, Tab } from '@components'
+import {
+  SalePageContent,
+  ReviewPageContent,
+  BuyPageContent
+} from '@components/mypage'
+
 import type { TradeActivityType, TradeActivityName } from '@constants'
 
 type PageTab = {

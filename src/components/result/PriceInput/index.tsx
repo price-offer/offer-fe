@@ -1,12 +1,9 @@
-import styled from '@emotion/styled'
-import { Input, Button, useMedia, Divider } from '@offer-ui/react'
-import type { Dispatch, ReactElement, SetStateAction } from 'react'
+import { useMedia, Divider } from '@offer-ui/react'
+import type { ReactElement } from 'react'
 import { useState, useEffect } from 'react'
+import { Styled } from './styled'
+import type { PriceInputProps } from './types'
 
-type PriceInputProps = {
-  isOpen: boolean
-  onClose: Dispatch<SetStateAction<boolean>>
-}
 const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
   const [dialogIsOpen, setIsOpen] = useState<boolean>(false)
   const { desktop } = useMedia()
@@ -20,131 +17,55 @@ const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
   }
   return dialogIsOpen ? (
     desktop ? (
-      <PriceDialogDesktop>
-        <Price>가격</Price>
-        <InputWrapper>
-          <MinimumInput isPrice placeholder="최소 금액"></MinimumInput>~
-          <MaximumInput isPrice placeholder="최대 금액"></MaximumInput>
-        </InputWrapper>
+      <Styled.PriceDialogDesktop>
+        <Styled.Price>가격</Styled.Price>
+        <Styled.InputWrapper>
+          <Styled.MinimumInput
+            isPrice
+            placeholder="최소 금액"></Styled.MinimumInput>
+          ~
+          <Styled.MaximumInput
+            isPrice
+            placeholder="최대 금액"></Styled.MaximumInput>
+        </Styled.InputWrapper>
         <Divider direction="horizontal" />
-        <ButtonWrapper>
-          <CancelButton styleType="ghost" onClick={handleCancelClick}>
+        <Styled.ButtonWrapper>
+          <Styled.CancelButton styleType="ghost" onClick={handleCancelClick}>
             취소
-          </CancelButton>
-          <ApplyButton styleType="solidPrimary">적용하기</ApplyButton>
-        </ButtonWrapper>
-      </PriceDialogDesktop>
+          </Styled.CancelButton>
+          <Styled.ApplyButton styleType="solidPrimary">
+            적용하기
+          </Styled.ApplyButton>
+        </Styled.ButtonWrapper>
+      </Styled.PriceDialogDesktop>
     ) : (
-      <StyledDIM>
-        <PriceDialogDesktop>
-          <Price>가격</Price>
-          <InputWrapper>
-            <MinimumInput isPrice placeholder="최소 금액"></MinimumInput>~
-            <MaximumInput isPrice placeholder="최대 금액"></MaximumInput>
-          </InputWrapper>
+      <Styled.Dim>
+        <Styled.PriceDialogDesktop>
+          <Styled.Price>가격</Styled.Price>
+          <Styled.InputWrapper>
+            <Styled.MinimumInput
+              isPrice
+              placeholder="최소 금액"></Styled.MinimumInput>
+            ~
+            <Styled.MaximumInput
+              isPrice
+              placeholder="최대 금액"></Styled.MaximumInput>
+          </Styled.InputWrapper>
           <Divider direction="horizontal" />
-          <ButtonWrapper>
-            <CancelButton styleType="ghost" onClick={handleCancelClick}>
+          <Styled.ButtonWrapper>
+            <Styled.CancelButton styleType="ghost" onClick={handleCancelClick}>
               취소
-            </CancelButton>
-            <ApplyButton styleType="solidPrimary">적용하기</ApplyButton>
-          </ButtonWrapper>
-        </PriceDialogDesktop>
-      </StyledDIM>
+            </Styled.CancelButton>
+            <Styled.ApplyButton styleType="solidPrimary">
+              적용하기
+            </Styled.ApplyButton>
+          </Styled.ButtonWrapper>
+        </Styled.PriceDialogDesktop>
+      </Styled.Dim>
     )
   ) : (
     <></>
   )
 }
 
-export { PriceInput }
-
-const StyledDIM = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: ${({ theme }): number => theme.zIndex.modal};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-color: ${({ theme }): string => theme.colors.dimOpacity50};
-`
-
-const PriceDialogDesktop = styled.div`
-  position: absolute;
-  top: 38px;
-  left: 1px;
-  z-index: 999;
-
-  width: 344px;
-  height: 164px;
-  padding: 16px 12px;
-  border-radius: 4px;
-
-  background-color: ${({ theme }): string => theme.colors.white};
-  box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    position: relative;
-
-    width: 320px;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    position: relative;
-
-    width: 320px;
-    padding: 16px 24px;
-  }
-`
-
-const Price = styled.div`
-  ${({ theme }): string => theme.fonts.body01B};
-`
-const InputWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-
-  margin-top: 12px;
-`
-
-const MinimumInput = styled(Input)`
-  max-width: 148px;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    max-width: 136px;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    max-width: 124px;
-  }
-`
-
-const MaximumInput = styled(Input)`
-  max-width: 148px;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    max-width: 136px;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    max-width: 124px;
-  }
-`
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: right;
-
-  margin-top: 12px;
-`
-
-const CancelButton = styled(Button)`
-  max-width: 65px;
-  height: 32px;
-`
-const ApplyButton = styled(Button)`
-  max-width: 65px;
-  height: 32px;
-  border-radius: 4px;
-
-  background-color: ${({ theme }): string => theme.colors.black};
-`
+export { PriceInput, PriceInputProps }

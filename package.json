@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint . --fix --max-warnings=0",
+    "lint": "tsc --noEmit && eslint --ext .ts,.tsx src",
     "storybook": "start-storybook -s public -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --env=jsdom",

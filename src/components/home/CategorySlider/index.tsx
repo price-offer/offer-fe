@@ -15,8 +15,9 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
   const isFirstCategory = containerRef.current?.scrollLeft === 0
 
   useEffect(() => {
-    if (desktop) setIsDesktop(true)
-    else {
+    if (desktop) {
+      setIsDesktop(true)
+    } else {
       setIsDesktop(false)
     }
   }, [desktop])

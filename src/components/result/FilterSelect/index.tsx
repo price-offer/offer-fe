@@ -24,8 +24,9 @@ const FilterSelect = ({
   const [disDesktop, setDIsDesktop] = useState(false)
 
   useEffect(() => {
-    if (tablet || mobile) setDIsDesktop(true)
-    else {
+    if (tablet || mobile) {
+      setDIsDesktop(true)
+    } else {
       setDIsDesktop(false)
     }
   }, [tablet, mobile])

@@ -11,6 +11,7 @@ const customTheme = {
 
 const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
   const isUseMock = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
+
   const [isReadyMock, setIsReadyMock] = useState<boolean>(!isUseMock)
 
   if (isUseMock) {
@@ -22,7 +23,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
     mock()
   }
 
-  if (!isReadyMock) return null
+  if (!isReadyMock) {
+    return null
+  }
 
   return (
     <OfferStyleProvider theme={customTheme}>

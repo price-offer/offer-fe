@@ -25,6 +25,7 @@
     "func-style": ["error", "expression"],
     "no-console": "error",
     "no-empty": "error",
+    "curly":"error",
     "import/order": [
       "error",
       {

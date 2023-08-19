@@ -1,5 +1,7 @@
+import type { SerializedStyles } from '@emotion/react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { SelectBox } from '@offer-ui/react'
+import { Button, SelectBox } from '@offer-ui/react'
 
 const Header = styled.div`
   text-align: center;
@@ -30,8 +32,15 @@ const FormItemContainer = styled.div<{ isMainItem?: boolean }>`
   & > div:first-of-type {
     margin-bottom: 8px;
 
-    ${({ theme, isMainItem }): string =>
-      isMainItem ? theme.fonts.subtitle01B : theme.fonts.body01R};
+    ${({ theme, isMainItem }): SerializedStyles => css`
+      margin-bottom: ${isMainItem ? '20px' : '8px'};
+
+      ${isMainItem ? theme.fonts.subtitle01B : theme.fonts.body01R}
+    `};
+  }
+
+  label > span {
+    ${({ theme }): string => theme.fonts.body02R};
   }
 `
 
@@ -50,6 +59,12 @@ const TradeLocation = styled.div`
   }
 `
 
+const OfferButton = styled(Button)`
+  :disabled {
+    background-color: ${({ theme }): string => theme.colors.grayScale20};
+  }
+`
+
 export const Styled = {
   Header,
   Title,
@@ -58,5 +73,6 @@ export const Styled = {
   Label,
   FormItemContainer,
   LocationSelectBoxWrapper,
-  TradeLocation
+  TradeLocation,
+  OfferButton
 }

@@ -68,7 +68,7 @@ export const TRADE_METHOD: TradeMethod[] = [
   },
   {
     code: 8,
-    name: '상관없음'
+    name: '직거래/택배거래'
   }
 ]
 

@@ -1,3 +1,5 @@
+import type { ModalProps } from '@offer-ui/react'
+
 export type OfferForm = {
   price?: number
   tradeMethod: number
@@ -8,6 +10,6 @@ export type OfferForm = {
   }
 }
 
-export type PriceOfferModalProps = {
+export type PriceOfferModalProps = ModalProps & {
   handleClickOffer(offerForm: OfferForm): void
 }

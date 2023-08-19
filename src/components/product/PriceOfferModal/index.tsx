@@ -27,7 +27,8 @@ const initialOfferForm = {
 }
 
 export const PriceOfferModal = ({
-  handleClickOffer
+  handleClickOffer,
+  ...props
 }: PriceOfferModalProps): ReactElement => {
   const [offerForm, setOfferForm] = useState<OfferForm>(initialOfferForm)
   const isTradeDirect = offerForm.tradeMethod !== 8
@@ -64,7 +65,7 @@ export const PriceOfferModal = ({
   }
 
   return (
-    <Modal isOpen>
+    <Modal {...props}>
       <Styled.Header>
         <Styled.Title>가격을 제안해볼까요?</Styled.Title>
         <Styled.Description>

@@ -1,10 +1,33 @@
 import type { SerializedStyles } from '@emotion/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Button, SelectBox } from '@offer-ui/react'
+import { Button, SelectBox, Modal } from '@offer-ui/react'
+
+const PriceOfferModal = styled(Modal)`
+  width: 400px;
+
+  ${({ theme }): SerializedStyles => css`
+    ${theme.mediaQuery.tablet} {
+      width: 320px;
+    }
+
+    ${theme.mediaQuery.mobile} {
+      width: 100vw;
+      height: 100vh;
+    }
+  `}
+`
 
 const Header = styled.div`
   text-align: center;
+`
+
+const CloseIconWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+
+  width: 100%;
+  margin-bottom: 12px;
 `
 
 const Title = styled.div`
@@ -39,8 +62,12 @@ const FormItemContainer = styled.div<{ isMainItem?: boolean }>`
     `};
   }
 
-  label > span {
-    ${({ theme }): string => theme.fonts.body02R};
+  form {
+    flex-wrap: wrap;
+
+    label > span {
+      ${({ theme }): string => theme.fonts.body02R};
+    }
   }
 `
 
@@ -66,7 +93,9 @@ const OfferButton = styled(Button)`
 `
 
 export const Styled = {
+  PriceOfferModal,
   Header,
+  CloseIconWrapper,
   Title,
   Description,
   Body,

@@ -1,3 +1,5 @@
+import type { ModalProps } from '@offer-ui/react'
+
 type Buyer = {
   id: number
   avatarSrc?: string
@@ -7,8 +9,8 @@ type Buyer = {
   offerPrice: number
 }
 
-export type SelectBuyerModalProps = {
+export type SelectBuyerModalProps = Omit<ModalProps, 'children'> & {
   productName: string
   buyers: Buyer[]
-  handleClickReviewButton?(selectedBuyer: Buyer): void
+  handleClickReviewButton?(selectedBuyerId: number): void
 }

@@ -44,12 +44,12 @@ const Body = styled.div`
   gap: 8px;
   overflow: scroll;
 
-  height: 300px;
-  max-height: 300px;
+  height: 412px;
+  max-height: 412px;
   padding: 16px 20px;
 `
 
-const BuyerContainer = styled.div`
+const BuyerContainer = styled.div<{ isSelected: boolean }>`
   display: flex;
   gap: 8px;
 
@@ -57,8 +57,9 @@ const BuyerContainer = styled.div`
 
   cursor: pointer;
 
-  ${({ theme }): SerializedStyles => css`
-    border: 1px solid ${theme.colors.grayScale10};
+  ${({ theme, isSelected }): SerializedStyles => css`
+    border: 1px solid
+      ${isSelected ? theme.colors.brandPrimary : theme.colors.grayScale10};
     border-radius: ${theme.radius.round6};
   `};
 `

@@ -1,15 +1,20 @@
 import { IconButton, Divider, Avatar } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import { useState } from 'react'
 import { Styled } from './styled'
 import type { SelectBuyerModalProps } from './types'
 import { toLocaleCurrency } from '@utils'
 
 export const SelectBuyerModal = ({
   productName,
-  buyers
+  buyers,
+  handleClickReviewButton,
+  ...props
 }: SelectBuyerModalProps): ReactElement => {
+  const [selectedBuyerId, setSelectedBuyerId] = useState<number>(0)
+
   return (
-    <Styled.SelectBuyerModal isOpen>
+    <Styled.SelectBuyerModal isOpen {...props}>
       <Styled.Header>
         <Styled.CloseIconWrapper>
           <IconButton color="grayScale30" icon="close" size={24} />
@@ -28,7 +33,12 @@ export const SelectBuyerModal = ({
             offerPrice,
             offerTime
           }) => (
-            <Styled.BuyerContainer key={id}>
+            <Styled.BuyerContainer
+              key={id}
+              isSelected={selectedBuyerId === id}
+              onClick={(): void => {
+                setSelectedBuyerId(id)
+              }}>
               <Styled.AvatarWrapper>
                 <Avatar
                   alt="buyer-profile"
@@ -55,7 +65,13 @@ export const SelectBuyerModal = ({
       </Styled.Body>
       <Divider />
       <Styled.Footer>
-        <Styled.SendReviewButton>후기 보내기</Styled.SendReviewButton>
+        <Styled.SendReviewButton
+          disabled={!selectedBuyerId}
+          onClick={(): void => {
+            handleClickReviewButton?.(selectedBuyerId)
+          }}>
+          후기 보내기
+        </Styled.SendReviewButton>
       </Styled.Footer>
     </Styled.SelectBuyerModal>
   )

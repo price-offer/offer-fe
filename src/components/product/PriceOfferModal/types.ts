@@ -10,6 +10,6 @@ export type OfferForm = {
   }
 }
 
-export type PriceOfferModalProps = ModalProps & {
-  handleClickOffer(offerForm: OfferForm): void
+export type PriceOfferModalProps = Omit<ModalProps, 'children'> & {
+  handleClickOffer?(offerForm: OfferForm): void
 }

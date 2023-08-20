@@ -1,4 +1,4 @@
-import { Modal, Input, Divider, Radio } from '@offer-ui/react'
+import { Input, Divider, Radio, IconButton } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
@@ -65,8 +65,11 @@ export const PriceOfferModal = ({
   }
 
   return (
-    <Modal {...props}>
+    <Styled.PriceOfferModal {...props}>
       <Styled.Header>
+        <Styled.CloseIconWrapper>
+          <IconButton color="grayScale30" icon="close" size={24} />
+        </Styled.CloseIconWrapper>
         <Styled.Title>가격을 제안해볼까요?</Styled.Title>
         <Styled.Description>
           가격이 마음에 든다면, 연락이 올거에요!
@@ -142,10 +145,10 @@ export const PriceOfferModal = ({
         <Styled.OfferButton
           disabled={!canOffer}
           size="large"
-          onClick={(): void => handleClickOffer(offerForm)}>
+          onClick={(): void => handleClickOffer?.(offerForm)}>
           Offer !
         </Styled.OfferButton>
       </div>
-    </Modal>
+    </Styled.PriceOfferModal>
   )
 }

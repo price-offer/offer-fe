@@ -12,5 +12,8 @@
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "cSpell.words": ["stylelint"]
+  "cSpell.words": [
+    "stylelint",
+    "unoptimized"
+  ]
 }

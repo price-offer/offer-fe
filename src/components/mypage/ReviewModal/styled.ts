@@ -90,7 +90,6 @@ const ReviewState = styled.button`
   border: none;
   background: none;
   z-index: 10;
-  click
 `
 
 const ReviewText = styled.div<StyledReviewIconProps>`

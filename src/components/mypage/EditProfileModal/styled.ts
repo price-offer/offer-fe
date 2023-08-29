@@ -30,6 +30,27 @@ const UploaderWrapper = styled.div`
   padding: 10px 0;
 `
 
+const AvatarWrapper = styled.div`
+  position: relative;
+`
+
+const CameraIconButton = styled.button`
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  padding: 5px;
+
+  border: none;
+
+  cursor: pointer;
+
+  ${({ theme }): SerializedStyles => css`
+    background-color: ${theme.colors.grayScale50};
+
+    border-radius: ${theme.radius.round100};
+  `};
+`
+
 const EditNickName = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,6 +71,8 @@ export const Styled = {
   CloseButtonWrapper,
   Body,
   UploaderWrapper,
+  AvatarWrapper,
+  CameraIconButton,
   EditNickName,
   DuplicateButton
 }

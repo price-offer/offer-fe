@@ -1,4 +1,12 @@
-import { IconButton, Avatar, Modal, Input, Button, Text } from '@offer-ui/react'
+import {
+  IconButton,
+  Avatar,
+  Modal,
+  Input,
+  Button,
+  Text,
+  Icon
+} from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 
@@ -12,7 +20,12 @@ export const EditProfileModal = (): ReactElement => (
     </Styled.Header>
     <Styled.Body>
       <Styled.UploaderWrapper>
-        <Avatar alt="" size="large" src="" />
+        <Styled.AvatarWrapper>
+          <Avatar alt="" size="large" src="" />
+          <Styled.CameraIconButton>
+            <Icon color="white" size={12} type="camera" />
+          </Styled.CameraIconButton>
+        </Styled.AvatarWrapper>
       </Styled.UploaderWrapper>
       <Styled.EditNickName>
         <Text color="grayScale70" styleType="body01M" tag="p">

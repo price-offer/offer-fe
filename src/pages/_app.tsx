@@ -1,7 +1,6 @@
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
-import { initMocks } from '../mocks'
 import { theme } from '@styles'
 
 const customTheme = {
@@ -9,9 +8,13 @@ const customTheme = {
   ...theme
 }
 
-initMocks()
+const isUseMock = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
 
-const App = ({ Component, pageProps }: AppProps): ReactElement => {
+if (isUseMock) {
+  await import('../mocks')
+}
+
+const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
   return (
     <OfferStyleProvider theme={customTheme}>
       <Component {...pageProps} />

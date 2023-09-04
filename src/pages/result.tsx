@@ -17,9 +17,10 @@ const Result: NextPage = () => {
   useEffect(() => {
     if (desktop) {
       setIsDesktop(true)
-    } else {
-      setIsDesktop(false)
+
+      return
     }
+    setIsDesktop(false)
   }, [desktop])
 
   const apiRes = {

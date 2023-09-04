@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bc643499-3f53-42b6-b0db-a6c83514621c" name="변경" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3136cae5-700b-47c1-a391-d4730832c378" />
+        <option name="url" value="https://github.com/price-offer/offer-fe.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2UvwS4tdjtMMNDLU21QBIJDMPly" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/sinhyojeong/workspace/dev/project/study/offer-fe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "/Users/sinhyojeong/workspace/dev/project/study/offer-fe/node_modules/stylelint",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/sinhyojeong/workspace/dev/project/study/offer-fe/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/src/assets/images" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="bc643499-3f53-42b6-b0db-a6c83514621c" name="변경" comment="" />
+      <created>1693833359219</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1693833359219</updated>
+      <workItem from="1693833362455" duration="116000" />
+      <workItem from="1693833483239" duration="23817000" />
+    </task>
+    <task id="LOCAL-00001" summary="fix: 스토리북 폰트 적용되지 않는 이슈 수정">
+      <created>1693839595469</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1693839595469</updated>
+    </task>
+    <task id="LOCAL-00002" summary="chore: 스토리북 디렉토리 정렬">
+      <created>1693901593836</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693901593837</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: 스토리북에서 next/image 사용할 수 없는 이슈 수정">
+      <created>1693933613812</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1693933613813</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor: ConfirmModal -&gt; DefaultModal로 네이밍 변경, 확장성 고려하기">
+      <created>1693933710319</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1693933710320</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor: ConfirmModal -&gt; DefaultModal로 네이밍 변경, 확장성 고려하기">
+      <created>1693933798780</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1693933798790</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: 스토리북 폰트 적용되지 않는 이슈 수정" />
+    <MESSAGE value="chore: 스토리북 디렉토리 정렬" />
+    <MESSAGE value="fix: 스토리북에서 next/image 사용할 수 없는 이슈 수정" />
+    <MESSAGE value="refactor: ConfirmModal -&gt; DefaultModal로 네이밍 변경, 확장성 고려하기" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: ConfirmModal -&gt; DefaultModal로 네이밍 변경, 확장성 고려하기" />
+  </component>
+</project>

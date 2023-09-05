@@ -6,7 +6,7 @@ import { myProfile } from '@mocks/fixture'
 export default {
   argTypes: {},
   component: ProfileBox,
-  title: 'Components/MyPage/ProfileBox'
+  title: 'MyPage/ProfileBox'
 } as Meta<ProfileBoxProps>
 
 const Template: Story<ProfileBoxProps> = args => <ProfileBox {...args} />

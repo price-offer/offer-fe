@@ -18,8 +18,6 @@ module.exports = {
         extensions: config.resolve.extensions
       })
     ]
-    config.resolve.alias["next/image"] = require.resolve("./config/nextImage.js");
-
     return config
   }
 }

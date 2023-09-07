@@ -9,7 +9,7 @@ export default {
     }
   },
   component: Tabs,
-  title: 'Components/Tabs'
+  title: 'Common/Tabs'
 } as Meta<TabsProps>
 
 const Template: Story<TabsProps> = args => (

@@ -15,8 +15,9 @@ const Result: NextPage = () => {
   const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
-    if (desktop) setIsDesktop(true)
-    else {
+    if (desktop) {
+      setIsDesktop(true)
+    } else {
       setIsDesktop(false)
     }
   }, [desktop])

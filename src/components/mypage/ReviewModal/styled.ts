@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { Modal, Icon, TextArea, Button } from '@offer-ui/react'
-import type { StyledReviewIconProps } from './types'
+import type { StyledReviewIconProps, StyledReviewTextProps } from './types'
 
-const ModalContainer = styled(Modal)`
+const ReviewModal = styled(Modal)`
   width: 400px;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
@@ -92,7 +92,7 @@ const ReviewState = styled.button`
   z-index: 10;
 `
 
-const ReviewText = styled.div<StyledReviewIconProps>`
+const ReviewText = styled.div<StyledReviewTextProps>`
   color: ${({ isFill, theme }): string =>
     isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
   ${({ theme }): string => theme.fonts.body01M};
@@ -103,14 +103,9 @@ const ReviewIcon = styled(Icon)<StyledReviewIconProps>`
   height: 40px;
   color: ${({ isFill, theme }): string =>
     isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
-`
-const GoodIcon = styled(Icon)<StyledReviewIconProps>`
-  width: 40px;
-  height: 40px;
-  color: ${({ isFill, theme }): string =>
-    isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
+
   path {
-    stroke-width: 1.2;
+    stroke-width: ${({ isGood }): string => (isGood ? '1.2' : '')};
   }
 `
 
@@ -131,7 +126,7 @@ const ReviewSendButton = styled(Button)`
 `
 
 export const Styled = {
-  ModalContainer,
+  ReviewModal,
   TitleContainer,
   FirstSection,
   NickName,
@@ -141,7 +136,6 @@ export const Styled = {
   ReviewState,
   ReviewText,
   ReviewIcon,
-  GoodIcon,
   ReviewTextArea,
   ReviewSendButton
 }

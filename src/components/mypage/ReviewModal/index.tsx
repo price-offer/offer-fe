@@ -1,7 +1,22 @@
 import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import type { ReviewModalProps } from './types'
+import type { ReviewModalProps, EvaluateState, EvaluateData } from './types'
+
+const evaluateData: EvaluateData = [
+  {
+    state: 'smile',
+    text: '좋아요'
+  },
+  {
+    state: 'meh',
+    text: '보통이에요'
+  },
+  {
+    state: 'sad',
+    text: '별로에요'
+  }
+]
 
 const ReviewModal = ({
   isOpen = true,
@@ -10,13 +25,12 @@ const ReviewModal = ({
   productName = '상품이름'
 }: ReviewModalProps): ReactElement => {
   const [isClickReviewIcon, setIsClickReViewIcon] = useState<boolean>(false)
+
   const [inputLength, setInputLength] = useState<number>(0)
-  const [reviewEvaluate, setReviewEvaluate] = useState<
-    string | 'smile' | 'meh' | 'sad'
-  >('')
+  const [reviewEvaluate, setReviewEvaluate] = useState<EvaluateState>(null)
   const [reviewText, setReviewText] = useState<string>('')
 
-  const handleClickReviewIcon = (reviewState: string): void => {
+  const handleClickReviewIcon = (reviewState: EvaluateState): void => {
     setIsClickReViewIcon(true)
     setReviewEvaluate(reviewState)
   }
@@ -31,7 +45,7 @@ const ReviewModal = ({
   }
 
   return (
-    <Styled.ModalContainer isOpen={isOpen} onClose={onClose}>
+    <Styled.ReviewModal isOpen={isOpen} onClose={onClose}>
       <Styled.TitleContainer>
         <Styled.FirstSection>
           <Styled.NickName>{nickName}</Styled.NickName>
@@ -41,35 +55,25 @@ const ReviewModal = ({
         <Styled.ProductText>{productName}</Styled.ProductText>
       </Styled.TitleContainer>
       <Styled.ReviewIconContainer>
-        <Styled.ReviewState
-          onClick={(): void => handleClickReviewIcon('smile')}>
-          <Styled.GoodIcon
-            isFill={reviewEvaluate === 'smile'}
-            type={
-              reviewEvaluate === 'smile' ? 'smileFill' : 'smile'
-            }></Styled.GoodIcon>
-          <Styled.ReviewText isFill={reviewEvaluate === 'smile'}>
-            좋아요
-          </Styled.ReviewText>
-        </Styled.ReviewState>
-        <Styled.ReviewState onClick={(): void => handleClickReviewIcon('meh')}>
-          <Styled.ReviewIcon
-            isFill={reviewEvaluate === 'meh'}
-            type={
-              reviewEvaluate === 'meh' ? 'mehFill' : 'meh'
-            }></Styled.ReviewIcon>
-          <Styled.ReviewText isFill={reviewEvaluate === 'meh'}>
-            보통이에요
-          </Styled.ReviewText>
-        </Styled.ReviewState>
-        <Styled.ReviewState onClick={(): void => handleClickReviewIcon('sad')}>
-          <Styled.ReviewIcon
-            isFill={reviewEvaluate === 'sad'}
-            type="sad"></Styled.ReviewIcon>
-          <Styled.ReviewText isFill={reviewEvaluate === 'sad'}>
-            별로에요
-          </Styled.ReviewText>
-        </Styled.ReviewState>
+        {evaluateData.map(evaluate => {
+          return (
+            <Styled.ReviewState
+              key={evaluate.state}
+              onClick={(): void => handleClickReviewIcon(evaluate.state)}>
+              <Styled.ReviewIcon
+                isFill={reviewEvaluate === evaluate.state}
+                isGood={evaluate.state === 'smile'}
+                type={
+                  reviewEvaluate === evaluate.state
+                    ? `${evaluate.state}Fill`
+                    : evaluate.state
+                }></Styled.ReviewIcon>
+              <Styled.ReviewText isFill={reviewEvaluate === evaluate.state}>
+                {evaluate.text}
+              </Styled.ReviewText>
+            </Styled.ReviewState>
+          )
+        })}
       </Styled.ReviewIconContainer>
       <Styled.ReviewTextArea
         guideMessage={`${inputLength}/100`}
@@ -81,7 +85,7 @@ const ReviewModal = ({
         onClick={handleClickSendReview}>
         후기 보내기
       </Styled.ReviewSendButton>
-    </Styled.ModalContainer>
+    </Styled.ReviewModal>
   )
 }
 

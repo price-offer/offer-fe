@@ -2,16 +2,16 @@ import { IconButton } from '@offer-ui/react'
 import Image from 'next/image'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
-import type { DefaultModalProps } from './types'
+import type { CommonModalProps } from './types'
 
-const DefaultModal = ({
+const CommonModal = ({
   isOpen = false,
   onClose,
   hasLogo = false,
   title,
   description = '',
   buttons
-}: DefaultModalProps): ReactElement => {
+}: CommonModalProps): ReactElement => {
   return (
     <Styled.ModalContainer isOpen={isOpen} onClose={onClose}>
       <Styled.Header>
@@ -33,4 +33,4 @@ const DefaultModal = ({
   )
 }
 
-export { DefaultModalProps, DefaultModal }
+export { CommonModalProps, CommonModal }

@@ -1,15 +1,15 @@
 import { Button } from '@offer-ui/react'
 import type { Meta, Story } from '@storybook/react'
-import type { DefaultModalProps } from './types'
-import { DefaultModal } from './index'
+import type { CommonModalProps } from './types'
+import { CommonModal } from './index'
 
 export default {
-  component: DefaultModal,
-  title: 'Common/DefaultModal'
-} as Meta<DefaultModalProps>
+  component: CommonModal,
+  title: 'Common/CommonModal'
+} as Meta<CommonModalProps>
 
-const Template: Story<DefaultModalProps> = args => (
-  <DefaultModal {...args} isOpen />
+const Template: Story<CommonModalProps> = args => (
+  <CommonModal {...args} isOpen />
 )
 
 export const Default = Template.bind({})

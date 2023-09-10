@@ -21,8 +21,9 @@ const CategorySlideFilter = ({
     onCategoryClick(name)
   }
   useEffect(() => {
-    if (desktop) setIsDesktop(true)
-    else {
+    if (desktop) {
+      setIsDesktop(true)
+    } else {
       setIsDesktop(false)
     }
   }, [desktop])

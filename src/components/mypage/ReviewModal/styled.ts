@@ -109,10 +109,19 @@ const ReviewIcon = styled(Icon)<StyledReviewIconProps>`
   }
 `
 
+const ReadModeReviewContentArea = styled.div`
+  background: ${({ theme }): string => theme.colors.bgGray02};
+  width: 100%;
+  height: 120px;
+  padding: 10px 12px;
+  ${({ theme }): string => theme.fonts.body02M};
+`
+
 const ReviewTextArea = styled(TextArea)`
   width: 100%;
   min-width: 0;
 `
+
 const ReviewSendButton = styled(Button)`
   margin-top: 40px;
   height: 64px;
@@ -137,5 +146,6 @@ export const Styled = {
   ReviewText,
   ReviewIcon,
   ReviewTextArea,
+  ReadModeReviewContentArea,
   ReviewSendButton
 }

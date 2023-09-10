@@ -33,14 +33,21 @@ const Title = styled.div`
   }
 `
 
+const SubTitle = styled.div`
+  margin-top: 4px;
+  color: ${({ theme }): string => theme.colors.grayScale70};
+  ${({ theme }): string => theme.fonts.body02R};
+`
+
 const CheckIcon = styled(Icon)`
   color: ${({ theme }): string => theme.colors.grayScale20};
-  margin: 32px 0 32px 0;
+  margin-top: 32px;
   width: 100px;
   height: 100px;
 `
 
 const ReviewConfirmButton = styled(Button)`
+  margin-top: 32px;
   height: 64px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 48px;
@@ -55,6 +62,7 @@ export const Styled = {
   ModalContainer,
   Container,
   Title,
+  SubTitle,
   CheckIcon,
   ReviewConfirmButton
 }

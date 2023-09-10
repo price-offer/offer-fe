@@ -1,15 +1,15 @@
 import type { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
-import type { ReviewConfirmModalProps } from './types'
-import { ReviewConfirmModal } from '.'
+import type { AlertModalProps } from './types'
+import { AlertModal } from '.'
 
 export default {
   argTypes: {},
-  component: ReviewConfirmModal,
-  title: 'Components/MyPage/ProfileBox'
-} as Meta<ReviewConfirmModalProps>
+  component: AlertModal,
+  title: 'Common/AlertModal'
+} as Meta<AlertModalProps>
 
-const Template: Story<ReviewConfirmModalProps> = args => {
+const Template: Story<AlertModalProps> = args => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <>
@@ -20,7 +20,7 @@ const Template: Story<ReviewConfirmModalProps> = args => {
         }}>
         click
       </button>
-      <ReviewConfirmModal
+      <AlertModal
         {...args}
         isOpen={isOpen}
         onClose={(): void => {
@@ -31,4 +31,9 @@ const Template: Story<ReviewConfirmModalProps> = args => {
   )
 }
 export const Default = Template.bind({})
-Default.args = {}
+Default.args = {
+  title: 'Title',
+  subTitle: 'SubTitle',
+  buttonContents: '확인',
+  isCheckShape: true
+}

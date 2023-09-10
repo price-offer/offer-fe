@@ -1,7 +1,12 @@
 import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import type { ReviewModalProps, EvaluateState, EvaluateData } from './types'
+import type {
+  ReviewModalProps,
+  EvaluateState,
+  EvaluateData,
+  ReviewState
+} from './types'
 
 const evaluateData: EvaluateData = [
   {
@@ -21,27 +26,36 @@ const evaluateData: EvaluateData = [
 const ReviewModal = ({
   isOpen = true,
   onClose,
+  onClick,
   nickName = '닉네임',
-  productName = '상품이름'
+  productName = '상품이름',
+  isReadMode = false,
+  readModeEvaluate = 'smile',
+  readModeReviewContent = '리뷰'
 }: ReviewModalProps): ReactElement => {
   const [isClickReviewIcon, setIsClickReViewIcon] = useState<boolean>(false)
 
-  const [inputLength, setInputLength] = useState<number>(0)
-  const [reviewEvaluate, setReviewEvaluate] = useState<EvaluateState>(null)
-  const [reviewText, setReviewText] = useState<string>('')
+  const [reviewState, setReviewState] = useState<ReviewState>({
+    inputLength: 0,
+    reviewEvaluate: null,
+    reviewText: ''
+  })
 
-  const handleClickReviewIcon = (reviewState: EvaluateState): void => {
+  const handleClickReviewIcon = (reviewEvaluate: EvaluateState): void => {
     setIsClickReViewIcon(true)
-    setReviewEvaluate(reviewState)
+    setReviewState({ ...reviewState, reviewEvaluate })
   }
 
   const handleInput: ChangeEventHandler<HTMLTextAreaElement> = e => {
-    setInputLength(e.target.value.length)
-    setReviewText(e.target.value)
+    setReviewState({
+      ...reviewState,
+      inputLength: e.target.value.length,
+      reviewText: e.target.value
+    })
   }
 
   const handleClickSendReview = (): void => {
-    alert(reviewText)
+    onClick()
   }
 
   return (
@@ -55,35 +69,64 @@ const ReviewModal = ({
         <Styled.ProductText>{productName}</Styled.ProductText>
       </Styled.TitleContainer>
       <Styled.ReviewIconContainer>
-        {evaluateData.map(evaluate => {
-          return (
-            <Styled.ReviewState
-              key={evaluate.state}
-              onClick={(): void => handleClickReviewIcon(evaluate.state)}>
-              <Styled.ReviewIcon
-                isFill={reviewEvaluate === evaluate.state}
-                isGood={evaluate.state === 'smile'}
-                type={
-                  reviewEvaluate === evaluate.state
-                    ? `${evaluate.state}Fill`
-                    : evaluate.state
-                }></Styled.ReviewIcon>
-              <Styled.ReviewText isFill={reviewEvaluate === evaluate.state}>
-                {evaluate.text}
-              </Styled.ReviewText>
-            </Styled.ReviewState>
-          )
-        })}
+        {isReadMode ? (
+          <Styled.ReviewState>
+            <Styled.ReviewIcon
+              isFill
+              isGood={readModeEvaluate === 'smile'}
+              type={`${readModeEvaluate}Fill`}></Styled.ReviewIcon>
+            <Styled.ReviewText isFill>
+              {
+                evaluateData.find(
+                  evaluate => evaluate.state === readModeEvaluate
+                )?.text
+              }
+            </Styled.ReviewText>
+          </Styled.ReviewState>
+        ) : (
+          <>
+            {evaluateData.map(evaluate => {
+              return (
+                <Styled.ReviewState
+                  key={evaluate.state}
+                  onClick={(): void => handleClickReviewIcon(evaluate.state)}>
+                  <Styled.ReviewIcon
+                    isFill={reviewState.reviewEvaluate === evaluate.state}
+                    isGood={evaluate.state === 'smile'}
+                    type={
+                      reviewState.reviewEvaluate === evaluate.state
+                        ? `${evaluate.state}Fill`
+                        : evaluate.state
+                    }></Styled.ReviewIcon>
+                  <Styled.ReviewText
+                    isFill={reviewState.reviewEvaluate === evaluate.state}>
+                    {evaluate.text}
+                  </Styled.ReviewText>
+                </Styled.ReviewState>
+              )
+            })}
+          </>
+        )}
       </Styled.ReviewIconContainer>
-      <Styled.ReviewTextArea
-        guideMessage={`${inputLength}/100`}
-        maxLength={100}
-        onInput={handleInput}></Styled.ReviewTextArea>
+
+      {isReadMode ? (
+        <Styled.ReadModeReviewContentArea>
+          {readModeReviewContent}
+        </Styled.ReadModeReviewContentArea>
+      ) : (
+        <Styled.ReviewTextArea
+          guideMessage={`${reviewState.inputLength}/100`}
+          maxLength={100}
+          onInput={handleInput}></Styled.ReviewTextArea>
+      )}
+
       <Styled.ReviewSendButton
-        disabled={!isClickReviewIcon}
-        styleType={isClickReviewIcon ? 'solidPrimary' : 'solidDisabled'}
+        disabled={isReadMode ? false : !isClickReviewIcon}
+        styleType={
+          isClickReviewIcon || isReadMode ? 'solidPrimary' : 'solidDisabled'
+        }
         onClick={handleClickSendReview}>
-        후기 보내기
+        {isReadMode ? '확인' : '후기 보내기'}
       </Styled.ReviewSendButton>
     </Styled.ReviewModal>
   )

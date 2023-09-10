@@ -6,7 +6,7 @@ import { ReviewModal } from '.'
 export default {
   argTypes: {},
   component: ReviewModal,
-  title: 'Components/MyPage/ProfileBox'
+  title: 'MyPage/ReviewModal'
 } as Meta<ReviewModalProps>
 
 const Template: Story<ReviewModalProps> = args => {
@@ -33,5 +33,6 @@ const Template: Story<ReviewModalProps> = args => {
 export const Default = Template.bind({})
 Default.args = {
   nickName: '닉네임',
-  productName: '상품이름'
+  productName: '상품이름',
+  isReadMode: false
 }

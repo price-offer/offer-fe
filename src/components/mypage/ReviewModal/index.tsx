@@ -4,11 +4,11 @@ import { Styled } from './styled'
 import type {
   ReviewModalProps,
   EvaluateState,
-  EvaluateData,
+  SCORE,
   ReviewState
 } from './types'
 
-const evaluateData: EvaluateData = [
+const MOCK_SCORE: SCORE = [
   {
     state: 'smile',
     text: '좋아요'
@@ -30,8 +30,8 @@ const ReviewModal = ({
   nickName = '닉네임',
   productName = '상품이름',
   isReadMode = false,
-  readModeEvaluate = 'smile',
-  readModeReviewContent = '리뷰'
+  score = 'smile',
+  content = '리뷰'
 }: ReviewModalProps): ReactElement => {
   const [isClickReviewIcon, setIsClickReViewIcon] = useState<boolean>(false)
 
@@ -73,19 +73,15 @@ const ReviewModal = ({
           <Styled.ReviewState>
             <Styled.ReviewIcon
               isFill
-              isGood={readModeEvaluate === 'smile'}
-              type={`${readModeEvaluate}Fill`}></Styled.ReviewIcon>
+              isGood={score === 'smile'}
+              type={`${score}Fill`}></Styled.ReviewIcon>
             <Styled.ReviewText isFill>
-              {
-                evaluateData.find(
-                  evaluate => evaluate.state === readModeEvaluate
-                )?.text
-              }
+              {MOCK_SCORE.find(evaluate => evaluate.state === score)?.text}
             </Styled.ReviewText>
           </Styled.ReviewState>
         ) : (
           <>
-            {evaluateData.map(evaluate => {
+            {MOCK_SCORE.map(evaluate => {
               return (
                 <Styled.ReviewState
                   key={evaluate.state}
@@ -111,7 +107,7 @@ const ReviewModal = ({
 
       {isReadMode ? (
         <Styled.ReadModeReviewContentArea>
-          {readModeReviewContent}
+          {content}
         </Styled.ReadModeReviewContentArea>
       ) : (
         <Styled.ReviewTextArea

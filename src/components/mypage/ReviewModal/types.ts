@@ -11,12 +11,12 @@ export type ReviewModalProps = Pick<
   nickName: string
   productName: string
   isReadMode?: boolean
-  readModeEvaluate?: Evaluate
-  readModeReviewContent?: string
+  score: Evaluate
+  content?: string
   onClick(): void
 }
 
-export type EvaluateData = {
+export type SCORE = {
   state: Evaluate
   text: string
 }[]

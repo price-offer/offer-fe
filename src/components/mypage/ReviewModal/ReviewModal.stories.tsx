@@ -1,7 +1,7 @@
 import type { Meta, Story } from '@storybook/react'
-import { useState } from 'react'
 import type { ReviewModalProps } from './types'
 import { ReviewModal } from '.'
+import useModals from '@hooks/useModals'
 
 export default {
   argTypes: {},
@@ -10,21 +10,21 @@ export default {
 } as Meta<ReviewModalProps>
 
 const Template: Story<ReviewModalProps> = args => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { modals, open, close } = useModals(['ReviewModal'])
   return (
     <>
       <button
         type="button"
         onClick={(): void => {
-          setIsOpen(true)
+          open('ReviewModal')
         }}>
         click
       </button>
       <ReviewModal
         {...args}
-        isOpen={isOpen}
+        isOpen={modals.ReviewModal?.isOpen}
         onClose={(): void => {
-          setIsOpen(false)
+          close('ReviewModal')
         }}
       />
     </>

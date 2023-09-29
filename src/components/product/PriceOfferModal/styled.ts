@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Button, SelectBox, Modal } from '@offer-ui/react'
+import { Button, SelectBox, Modal, Radio } from '@offer-ui/react'
 
 const PriceOfferModal = styled(Modal)`
   width: 400px;
@@ -51,24 +51,22 @@ const Label = styled.label<{ isSubTitle?: boolean }>`
     isSubTitle ? theme.fonts.subtitle01B : theme.fonts.body01R};
 `
 
-const FormItemContainer = styled.div<{ isMainItem?: boolean }>`
-  & > div:first-of-type {
-    margin-bottom: 8px;
+const FormRadio = styled(Radio)`
+  flex-wrap: wrap;
 
-    ${({ theme, isMainItem }): SerializedStyles => css`
-      margin-bottom: ${isMainItem ? '20px' : '8px'};
-
-      ${isMainItem ? theme.fonts.subtitle01B : theme.fonts.body01R}
-    `};
+  label > span {
+    ${({ theme }): string => theme.fonts.body02R};
   }
+`
 
-  form {
-    flex-wrap: wrap;
+const FormTitle = styled.p<{ isMainTitle?: boolean }>`
+  margin-bottom: 8px;
 
-    label > span {
-      ${({ theme }): string => theme.fonts.body02R};
-    }
-  }
+  ${({ theme, isMainTitle }): SerializedStyles => css`
+    margin-bottom: ${isMainTitle ? '20px' : '8px'};
+
+    ${isMainTitle ? theme.fonts.subtitle01B : theme.fonts.body01R}
+  `};
 `
 
 const LocationSelectBoxWrapper = styled(SelectBox)`
@@ -77,7 +75,7 @@ const LocationSelectBoxWrapper = styled(SelectBox)`
   }
 `
 
-const TradeLocation = styled.div`
+const TradeArea = styled.div`
   display: flex;
   gap: 8px;
 
@@ -100,8 +98,9 @@ export const Styled = {
   Description,
   Body,
   Label,
-  FormItemContainer,
+  FormTitle,
+  FormRadio,
   LocationSelectBoxWrapper,
-  TradeLocation,
+  TradeArea,
   OfferButton
 }

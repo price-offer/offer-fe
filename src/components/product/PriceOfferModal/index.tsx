@@ -1,8 +1,8 @@
-import { Input, Divider, Radio, IconButton } from '@offer-ui/react'
-import type { ReactElement } from 'react'
+import { Input, Divider, IconButton } from '@offer-ui/react'
+import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import type { OfferForm, PriceOfferModalProps } from './types'
+import type { OfferForm, PriceOfferModalProps, TradeAreaKeys } from './types'
 import { TRADE_METHOD } from '@constants'
 
 const MOCK_CITY = [
@@ -17,48 +17,50 @@ const MOCK_CITY = [
   }
 ]
 
-const initialOfferForm = {
-  tradeMethod: 0,
-  tradeLocation: {
-    city: 0,
-    country: 0,
-    town: 0
-  }
-}
-
 export const PriceOfferModal = ({
-  handleClickOffer,
+  onClickOffer,
   ...props
 }: PriceOfferModalProps): ReactElement => {
-  const [offerForm, setOfferForm] = useState<OfferForm>(initialOfferForm)
-  const isTradeDirect = offerForm.tradeMethod !== 8
-  const canOffer =
-    !!offerForm.price &&
-    !!offerForm.tradeMethod &&
-    !!offerForm.tradeLocation.city &&
-    !!offerForm.tradeLocation.country &&
-    !!offerForm.tradeLocation.town
+  const [offerForm, setOfferForm] = useState<OfferForm>({})
+  const isTradeDirection = offerForm?.tradeMethod !== 4
+  const isRequiredFormFilled = offerForm.price && offerForm.tradeMethod
+  const isDirectionFormFilled =
+    offerForm?.tradeArea?.city &&
+    offerForm?.tradeArea?.county &&
+    offerForm?.tradeArea?.town
+  const canOffer = isTradeDirection
+    ? isRequiredFormFilled && isDirectionFormFilled
+    : isRequiredFormFilled
 
-  const handleChangeForm = (
-    name: 'price' | 'tradeMethod',
-    value: string
-  ): void => {
-    const numberValue = Number(value.split(',').join(''))
+  const handleChangePrice: ChangeEventHandler<HTMLInputElement> = e => {
+    const formattedValue = Number(e.target.value.split(',').join(''))
 
     setOfferForm(prev => ({
       ...prev,
-      [name]: numberValue
+      price: formattedValue
     }))
   }
 
-  const handleChangeSelectBox = (
-    name: keyof OfferForm['tradeLocation'],
-    value: number
-  ): void => {
+  const handleChangeTradeMethod: ChangeEventHandler<HTMLFormElement> = e => {
+    const tradeMethod = Number(e.target.value)
+    const isTradeParcel = tradeMethod === 4
+    const nextOfferFrom = {
+      ...offerForm,
+      tradeMethod
+    }
+
+    if (isTradeParcel) {
+      delete nextOfferFrom.tradeArea
+    }
+
+    setOfferForm(nextOfferFrom)
+  }
+
+  const handleChangeTradeArea = (name: TradeAreaKeys, value: number): void => {
     setOfferForm(prev => ({
       ...prev,
-      tradeLocation: {
-        ...prev.tradeLocation,
+      tradeArea: {
+        ...prev.tradeArea,
         [name]: value
       }
     }))
@@ -76,68 +78,66 @@ export const PriceOfferModal = ({
         </Styled.Description>
       </Styled.Header>
       <Styled.Body>
-        <Styled.FormItemContainer>
-          <div>제안 가격</div>
+        <div>
+          <Styled.FormTitle>제안 가격</Styled.FormTitle>
           <Input
             isPrice
             placeholder="제안할 가격을 적어주세요"
             value={offerForm.price}
-            onChange={(e): void => handleChangeForm('price', e.target.value)}
+            onChange={handleChangePrice}
           />
-        </Styled.FormItemContainer>
+        </div>
         <Divider />
-        <Styled.FormItemContainer isMainItem>
-          <div>거래 방식</div>
-          <Radio
+        <div>
+          <Styled.FormTitle isMainTitle>거래 방식</Styled.FormTitle>
+          <Styled.FormRadio
             direction="horizontal"
             formName="trade-method"
             items={TRADE_METHOD}
-            onChange={(e): void =>
-              handleChangeForm('tradeMethod', e.target.value)
-            }
+            onChange={handleChangeTradeMethod}
           />
-        </Styled.FormItemContainer>
-        {isTradeDirect && (
+        </div>
+        {isTradeDirection && (
           <>
             <Divider />
-            <Styled.FormItemContainer>
-              <div>거래 지역</div>
+            <div>
+              <Styled.FormTitle>거래 지역</Styled.FormTitle>
               <Styled.LocationSelectBoxWrapper
                 items={MOCK_CITY}
                 placeholder="선택"
                 size="medium"
-                value={offerForm.tradeLocation.city}
+                value={offerForm?.tradeArea?.city}
                 onChange={(item): void =>
-                  handleChangeSelectBox('city', item.code)
+                  handleChangeTradeArea('city', item.code)
                 }
               />
-            </Styled.FormItemContainer>
-            <Styled.TradeLocation>
-              <Styled.FormItemContainer>
-                <div>시/군/구</div>
+            </div>
+            <Styled.TradeArea>
+              <div>
+                <Styled.FormTitle>시/군/구</Styled.FormTitle>
                 <Styled.LocationSelectBoxWrapper
                   items={MOCK_CITY}
                   placeholder="선택"
                   size="medium"
-                  value={offerForm.tradeLocation.country}
+                  value={offerForm?.tradeArea?.county}
                   onChange={(item): void =>
-                    handleChangeSelectBox('country', item.code)
+                    handleChangeTradeArea('county', item.code)
                   }
                 />
-              </Styled.FormItemContainer>
-              <Styled.FormItemContainer>
-                <div>읍/면/동</div>
+              </div>
+              <div>
+                <Styled.FormTitle>읍/면/동</Styled.FormTitle>
                 <Styled.LocationSelectBoxWrapper
                   items={MOCK_CITY}
                   placeholder="선택"
                   size="medium"
-                  value={offerForm.tradeLocation.town}
+                  value={offerForm?.tradeArea?.town}
                   onChange={(item): void =>
-                    handleChangeSelectBox('town', item.code)
+                    handleChangeTradeArea('town', item.code)
                   }
                 />
-              </Styled.FormItemContainer>
-            </Styled.TradeLocation>
+              </div>
+            </Styled.TradeArea>
           </>
         )}
       </Styled.Body>
@@ -145,7 +145,7 @@ export const PriceOfferModal = ({
         <Styled.OfferButton
           disabled={!canOffer}
           size="large"
-          onClick={(): void => handleClickOffer?.(offerForm)}>
+          onClick={(): void => onClickOffer?.(offerForm)}>
           Offer !
         </Styled.OfferButton>
       </div>

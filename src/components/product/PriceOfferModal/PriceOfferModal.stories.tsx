@@ -12,4 +12,6 @@ const Template: Story<PriceOfferModalProps> = args => (
 )
 
 export const Default = Template.bind({})
-Default.args = {}
+Default.args = {
+  isOpen: true
+}

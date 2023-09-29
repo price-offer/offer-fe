@@ -12,5 +12,5 @@ type Buyer = {
 export type SelectBuyerModalProps = Omit<ModalProps, 'children'> & {
   productName: string
   buyers: Buyer[]
-  handleClickReviewButton?(selectedBuyerId: number): void
+  onClickReviewButton?(selectedBuyerId: number): void
 }

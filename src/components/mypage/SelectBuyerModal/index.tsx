@@ -8,10 +8,10 @@ import { toLocaleCurrency } from '@utils'
 export const SelectBuyerModal = ({
   productName,
   buyers,
-  handleClickReviewButton,
+  onClickReviewButton,
   ...props
 }: SelectBuyerModalProps): ReactElement => {
-  const [selectedBuyerId, setSelectedBuyerId] = useState<number>(0)
+  const [selectedBuyerId, setSelectedBuyerId] = useState(0)
 
   return (
     <Styled.SelectBuyerModal isOpen {...props}>
@@ -49,8 +49,8 @@ export const SelectBuyerModal = ({
               <Styled.OfferInfo>
                 <div>
                   <Styled.BuyerInfo>
-                    <span>{nickname}</span>
-                    <span>{offerTime}</span>
+                    <Styled.Nickname>{nickname}</Styled.Nickname>
+                    <Styled.OfferTime>{offerTime}</Styled.OfferTime>
                   </Styled.BuyerInfo>
                   <Styled.LatestMessage>{latestMessage}</Styled.LatestMessage>
                 </div>
@@ -68,7 +68,7 @@ export const SelectBuyerModal = ({
         <Styled.SendReviewButton
           disabled={!selectedBuyerId}
           onClick={(): void => {
-            handleClickReviewButton?.(selectedBuyerId)
+            onClickReviewButton?.(selectedBuyerId)
           }}>
           후기 보내기
         </Styled.SendReviewButton>

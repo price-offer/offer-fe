@@ -85,18 +85,18 @@ const BuyerInfo = styled.div`
   display: flex;
   gap: 4px;
   align-items: center;
+`
 
-  span:first-of-type {
-    ${({ theme }): string => theme.fonts.body02B}
-  }
+const Nickname = styled.span`
+  ${({ theme }): string => theme.fonts.body02B}
+`
 
-  span:last-of-type {
-    ${({ theme }): SerializedStyles => css`
-      color: ${theme.colors.grayScale50};
+const OfferTime = styled.span`
+  ${({ theme }): SerializedStyles => css`
+    color: ${theme.colors.grayScale50};
 
-      ${theme.fonts.caption01M};
-    `}
-  }
+    ${theme.fonts.caption01M};
+  `}
 `
 
 const LatestMessage = styled.p`
@@ -141,6 +141,8 @@ export const Styled = {
   BuyerContainer,
   AvatarWrapper,
   BuyerInfo,
+  Nickname,
+  OfferTime,
   OfferInfo,
   LatestMessage,
   OfferPrice,

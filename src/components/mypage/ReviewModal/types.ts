@@ -4,12 +4,18 @@ type Score = Extract<IconType, 'smile' | 'meh' | 'sad'>
 
 export type ScoreState = Score | null
 
-export type ReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
+export type CommonReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
   nickname: string
   productName: string
-  isReadMode?: boolean
+}
+
+export type WriteReviewModalProps = CommonReviewModalProps & {
+  onConfirm(state: ReviewState): void
+}
+
+export type ReadReviewModalProps = CommonReviewModalProps & {
   score: Score
-  content?: string
+  content: string
   onConfirm(): void
 }
 

@@ -26,7 +26,7 @@ const MOCK_SCORE: SCORE = [
 const ReviewModal = ({
   isOpen = true,
   onClose,
-  onClick,
+  onConfirm,
   nickname = '닉네임',
   productName = '상품이름',
   isReadMode = false,
@@ -51,10 +51,6 @@ const ReviewModal = ({
       ...reviewState,
       reviewText: e.target.value
     })
-  }
-
-  const handleClickSendReview = (): void => {
-    onClick()
   }
 
   return (
@@ -118,7 +114,7 @@ const ReviewModal = ({
         styleType={
           isClickReviewIcon || isReadMode ? 'solidPrimary' : 'solidDisabled'
         }
-        onClick={handleClickSendReview}>
+        onClick={(): void => onConfirm()}>
         {isReadMode ? '확인' : '후기 보내기'}
       </Styled.ReviewSendButton>
     </Styled.ReviewModal>

@@ -10,7 +10,7 @@ export type ReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
   isReadMode?: boolean
   score: Evaluate
   content?: string
-  onClick(): void
+  onConfirm(): void
 }
 
 export type SCORE = {

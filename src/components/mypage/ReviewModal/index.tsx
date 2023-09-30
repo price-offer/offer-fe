@@ -1,12 +1,7 @@
 import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import type {
-  ReviewModalProps,
-  EvaluateState,
-  SCORE,
-  ReviewState
-} from './types'
+import type { ReviewModalProps, ScoreState, SCORE, ReviewState } from './types'
 
 const MOCK_SCORE: SCORE = [
   {
@@ -37,13 +32,13 @@ const ReviewModal = ({
     useState<boolean>(isReadMode)
 
   const [reviewState, setReviewState] = useState<ReviewState>({
-    reviewEvaluate: null,
+    reviewScore: null,
     reviewText: ''
   })
 
-  const handleClickReviewIcon = (reviewEvaluate: EvaluateState): void => {
+  const handleClickReviewIcon = (reviewScore: ScoreState): void => {
     setIsClickReViewIcon(true)
-    setReviewState({ ...reviewState, reviewEvaluate })
+    setReviewState({ ...reviewState, reviewScore })
   }
 
   const handleInput: ChangeEventHandler<HTMLTextAreaElement> = e => {
@@ -82,15 +77,15 @@ const ReviewModal = ({
                   key={scoreItem.state}
                   onClick={(): void => handleClickReviewIcon(scoreItem.state)}>
                   <Styled.ReviewIcon
-                    isFill={reviewState.reviewEvaluate === scoreItem.state}
+                    isFill={reviewState.reviewScore === scoreItem.state}
                     isGood={scoreItem.state === 'smile'}
                     type={
-                      reviewState.reviewEvaluate === scoreItem.state
+                      reviewState.reviewScore === scoreItem.state
                         ? `${scoreItem.state}Fill`
                         : scoreItem.state
                     }></Styled.ReviewIcon>
                   <Styled.ReviewText
-                    isFill={reviewState.reviewEvaluate === scoreItem.state}>
+                    isFill={reviewState.reviewScore === scoreItem.state}>
                     {scoreItem.text}
                   </Styled.ReviewText>
                 </Styled.ReviewState>

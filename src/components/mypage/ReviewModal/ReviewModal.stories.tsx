@@ -4,7 +4,6 @@ import { ReviewModal } from '.'
 import useModals from '@hooks/useModals'
 
 export default {
-  argTypes: {},
   component: ReviewModal,
   title: 'MyPage/ReviewModal'
 } as Meta<ReviewModalProps>
@@ -32,7 +31,7 @@ const Template: Story<ReviewModalProps> = args => {
 }
 export const Default = Template.bind({})
 Default.args = {
-  nickName: '닉네임',
+  nickname: '닉네임',
   productName: '상품이름',
   isReadMode: false
 }

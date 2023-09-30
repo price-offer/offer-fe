@@ -15,11 +15,12 @@ const ReviewModal = styled(Modal)`
 `
 
 const TitleContainer = styled.div`
-  margin-top: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  margin-top: 32px;
 `
 
 const FirstSection = styled.div`
@@ -51,6 +52,7 @@ const NormalText = styled.span`
 
 const ProductText = styled.div`
   margin-top: 8px;
+
   color: ${({ theme }): string => theme.colors.grayScale70};
   ${({ theme }): string => theme.fonts.body01R};
 
@@ -65,31 +67,38 @@ const ProductText = styled.div`
 
 const ReviewIconContainer = styled.div`
   display: flex;
-  justify-items: center;
   gap: 36px;
   justify-content: center;
-  margin: 32px 0 32px 0;
+  justify-items: center;
+
+  margin: 32px 0;
+
+  cursor: pointer;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
     gap: 32px;
-    margin: 24px 0 24px 0;
+
+    margin: 24px 0;
   }
 
   ${({ theme }): string => theme.mediaQuery.mobile} {
     gap: 32px;
-    margin: 24px 0 24px 0;
+
+    margin: 24px 0;
   }
 `
 
 const ReviewState = styled.button`
+  z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  align-items: center;
   gap: 4px;
+  align-items: center;
+  justify-items: center;
+
   border: none;
+
   background: none;
-  z-index: 10;
 `
 
 const ReviewText = styled.div<StyledReviewTextProps>`
@@ -101,16 +110,18 @@ const ReviewText = styled.div<StyledReviewTextProps>`
 const ReviewIcon = styled(Icon)<StyledReviewIconProps>`
   width: 40px;
   height: 40px;
+
   color: ${({ isFill, theme }): string =>
     isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
 
   path {
-    stroke-width: ${({ isGood }): string => (isGood ? '1.2' : '')};
+    /* stroke-width: ${({ isGood }): string => (isGood ? '1.2' : '')}; */
   }
 `
 
-const ReadModeReviewContentArea = styled.div`
+const ReadModeReviewContent = styled.div`
   background: ${({ theme }): string => theme.colors.bgGray02};
+
   width: 100%;
   height: 120px;
   padding: 10px 12px;
@@ -123,8 +134,8 @@ const ReviewTextArea = styled(TextArea)`
 `
 
 const ReviewSendButton = styled(Button)`
-  margin-top: 40px;
   height: 64px;
+  margin-top: 40px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 48px;
   }
@@ -146,6 +157,6 @@ export const Styled = {
   ReviewText,
   ReviewIcon,
   ReviewTextArea,
-  ReadModeReviewContentArea,
+  ReadModeReviewContent,
   ReviewSendButton
 }

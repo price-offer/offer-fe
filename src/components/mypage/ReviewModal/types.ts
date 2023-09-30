@@ -4,11 +4,8 @@ type Evaluate = Extract<IconType, 'smile' | 'meh' | 'sad'>
 
 export type EvaluateState = Evaluate | null
 
-export type ReviewModalProps = Pick<
-  ModalProps,
-  'isOpen' | 'onClose' | 'children'
-> & {
-  nickName: string
+export type ReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
+  nickname: string
   productName: string
   isReadMode?: boolean
   score: Evaluate
@@ -22,7 +19,6 @@ export type SCORE = {
 }[]
 
 export type ReviewState = {
-  inputLength: number
   reviewEvaluate: EvaluateState
   reviewText: string
 }

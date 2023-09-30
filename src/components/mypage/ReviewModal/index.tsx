@@ -27,16 +27,16 @@ const ReviewModal = ({
   isOpen = true,
   onClose,
   onClick,
-  nickName = '닉네임',
+  nickname = '닉네임',
   productName = '상품이름',
   isReadMode = false,
   score = 'smile',
   content = '리뷰'
 }: ReviewModalProps): ReactElement => {
-  const [isClickReviewIcon, setIsClickReViewIcon] = useState<boolean>(false)
+  const [isClickReviewIcon, setIsClickReViewIcon] =
+    useState<boolean>(isReadMode)
 
   const [reviewState, setReviewState] = useState<ReviewState>({
-    inputLength: 0,
     reviewEvaluate: null,
     reviewText: ''
   })
@@ -49,7 +49,6 @@ const ReviewModal = ({
   const handleInput: ChangeEventHandler<HTMLTextAreaElement> = e => {
     setReviewState({
       ...reviewState,
-      inputLength: e.target.value.length,
       reviewText: e.target.value
     })
   }
@@ -62,7 +61,7 @@ const ReviewModal = ({
     <Styled.ReviewModal isOpen={isOpen} onClose={onClose}>
       <Styled.TitleContainer>
         <Styled.FirstSection>
-          <Styled.NickName>{nickName}</Styled.NickName>
+          <Styled.NickName>{nickname}</Styled.NickName>
           <Styled.NormalText>님과</Styled.NormalText>
         </Styled.FirstSection>
         <Styled.NormalText>거래는 어땠나요?</Styled.NormalText>
@@ -76,27 +75,27 @@ const ReviewModal = ({
               isGood={score === 'smile'}
               type={`${score}Fill`}></Styled.ReviewIcon>
             <Styled.ReviewText isFill>
-              {MOCK_SCORE.find(evaluate => evaluate.state === score)?.text}
+              {MOCK_SCORE.find(scoreItem => scoreItem.state === score)?.text}
             </Styled.ReviewText>
           </Styled.ReviewState>
         ) : (
           <>
-            {MOCK_SCORE.map(evaluate => {
+            {MOCK_SCORE.map(scoreItem => {
               return (
                 <Styled.ReviewState
-                  key={evaluate.state}
-                  onClick={(): void => handleClickReviewIcon(evaluate.state)}>
+                  key={scoreItem.state}
+                  onClick={(): void => handleClickReviewIcon(scoreItem.state)}>
                   <Styled.ReviewIcon
-                    isFill={reviewState.reviewEvaluate === evaluate.state}
-                    isGood={evaluate.state === 'smile'}
+                    isFill={reviewState.reviewEvaluate === scoreItem.state}
+                    isGood={scoreItem.state === 'smile'}
                     type={
-                      reviewState.reviewEvaluate === evaluate.state
-                        ? `${evaluate.state}Fill`
-                        : evaluate.state
+                      reviewState.reviewEvaluate === scoreItem.state
+                        ? `${scoreItem.state}Fill`
+                        : scoreItem.state
                     }></Styled.ReviewIcon>
                   <Styled.ReviewText
-                    isFill={reviewState.reviewEvaluate === evaluate.state}>
-                    {evaluate.text}
+                    isFill={reviewState.reviewEvaluate === scoreItem.state}>
+                    {scoreItem.text}
                   </Styled.ReviewText>
                 </Styled.ReviewState>
               )
@@ -106,12 +105,10 @@ const ReviewModal = ({
       </Styled.ReviewIconContainer>
 
       {isReadMode ? (
-        <Styled.ReadModeReviewContentArea>
-          {content}
-        </Styled.ReadModeReviewContentArea>
+        <Styled.ReadModeReviewContent>{content}</Styled.ReadModeReviewContent>
       ) : (
         <Styled.ReviewTextArea
-          guideMessage={`${reviewState.inputLength}/100`}
+          guideMessage={`${reviewState.reviewText?.length}/100`}
           maxLength={100}
           onInput={handleInput}></Styled.ReviewTextArea>
       )}

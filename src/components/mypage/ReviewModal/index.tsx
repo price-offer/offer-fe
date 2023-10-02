@@ -148,4 +148,9 @@ const ReadReviewModal = ({
   )
 }
 
-export { WriteReviewModal, ReadReviewModal }
+const ReviewModal = {
+  Write: WriteReviewModal,
+  Read: ReadReviewModal
+}
+
+export default ReviewModal

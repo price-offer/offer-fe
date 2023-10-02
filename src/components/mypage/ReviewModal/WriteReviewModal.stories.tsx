@@ -1,29 +1,30 @@
 import type { Meta, Story } from '@storybook/react'
 import type { WriteReviewModalProps } from './types'
-import { WriteReviewModal } from '.'
-import useModals from '@hooks/useModals'
+
+import ReviewModal from '.'
+import useModal from '@hooks/useModal'
 
 export default {
-  component: WriteReviewModal,
+  component: ReviewModal.Write,
   title: 'MyPage/WriteReviewModal'
 } as Meta<WriteReviewModalProps>
 
 const Template: Story<WriteReviewModalProps> = args => {
-  const { modals, open, close } = useModals(['WriteReviewModal'])
+  const { open, close, isOpen } = useModal()
   return (
     <>
       <button
         type="button"
         onClick={(): void => {
-          open('WriteReviewModal')
+          open()
         }}>
         click
       </button>
-      <WriteReviewModal
+      <ReviewModal.Write
         {...args}
-        isOpen={modals.ReadReviewModal?.isOpen}
+        isOpen={isOpen}
         onClose={(): void => {
-          close('WriteReviewModal')
+          close()
         }}
       />
     </>

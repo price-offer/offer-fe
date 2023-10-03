@@ -12,8 +12,5 @@
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "cSpell.words": [
-    "stylelint",
-    "unoptimized"
-  ]
+  "cSpell.words": ["Pretendard", "stylelint", "unoptimized"]
 }

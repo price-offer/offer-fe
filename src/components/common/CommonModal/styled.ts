@@ -1,10 +1,5 @@
 import styled from '@emotion/styled'
-import {
-  Icon as IconComponent,
-  // IconButton,
-  Modal,
-  Text
-} from '@offer-ui/react'
+import { Icon as IconComponent, Modal, Text } from '@offer-ui/react'
 import type { StyledTitleProps } from './types'
 
 const ModalContainer = styled(Modal)`
@@ -22,31 +17,33 @@ const ModalContainer = styled(Modal)`
 const Header = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
   justify-content: center;
-
-  text-align: center;
 `
 
-//  const CloseButton = styled(IconButton)`
-//   position: absolute;
-//   right: 0;
-//   top: 0;
-// `
+const CloseButtonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+`
 
-const Title = styled(Text)<StyledTitleProps>`
-  margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
+const Title = styled.p`
+  ${({ theme }): string => theme.fonts.headline01B}
 `
 
 const Description = styled(Text)`
   color: ${({ theme }): string => theme.colors.grayScale70};
 `
 
-const Body = styled.div`
+const Body = styled.div<StyledTitleProps>`
   display: flex;
-  align-items: center;
-  justify-content: center;
+
+  flex-direction: column;
+  gap: 4px;
+
+  text-align: center;
+
+  margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
+  margin-bottom: 32px;
 `
 
 const Icon = styled(IconComponent)`
@@ -60,13 +57,12 @@ const Footer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-
-  margin-top: 32px;
 `
 
 export const Styled = {
   ModalContainer,
   Header,
+  CloseButtonWrapper,
   Title,
   Description,
   Body,

@@ -4,7 +4,6 @@ import { ProductList } from '../components/home/ProductList'
 import { IMAGE } from '../constants/images'
 import { CategorySlider } from '@components/home/CategorySlider'
 import { HomeBanner } from '@components/home/HomeBanner'
-import { ReviewModal } from '@components/mypage/ReviewModal'
 
 const Home: NextPage = () => {
   const cateGoryList = [
@@ -170,19 +169,6 @@ const Home: NextPage = () => {
         <CategorySlider imageList={cateGoryList} />
         <ProductList productList={apiRes.elements} />
       </HomeWrapper>
-      <ReviewModal
-        content="d"
-        isOpen
-        isReadMode={false}
-        nickname="d"
-        productName="d"
-        score="smile"
-        onClose={(): void => {
-          confirm
-        }}
-        onConfirm={(): void => {
-          confirm
-        }}></ReviewModal>
     </Layout>
   )
 }

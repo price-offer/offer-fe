@@ -1,6 +1,5 @@
 import type { Meta, Story } from '@storybook/react'
-import type { WriteReviewModalProps } from './types'
-
+import type { WriteReviewModalProps } from './WriteReviewModal /types'
 import ReviewModal from '.'
 import useModal from '@hooks/useModal'
 
@@ -13,20 +12,10 @@ const Template: Story<WriteReviewModalProps> = args => {
   const { open, close, isOpen } = useModal()
   return (
     <>
-      <button
-        type="button"
-        onClick={(): void => {
-          open()
-        }}>
+      <button type="button" onClick={open}>
         click
       </button>
-      <ReviewModal.Write
-        {...args}
-        isOpen={isOpen}
-        onClose={(): void => {
-          close()
-        }}
-      />
+      <ReviewModal.Write {...args} isOpen={isOpen} onClose={close} />
     </>
   )
 }

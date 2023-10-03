@@ -20,7 +20,7 @@ const AlertModal = ({
           <Styled.CheckIcon type="checkCircleFill"></Styled.CheckIcon>
         )}
       </Styled.Container>
-      <Styled.ReviewConfirmButton onClick={(): void => onClickConfirmButton()}>
+      <Styled.ReviewConfirmButton onClick={onClickConfirmButton}>
         {buttonContents}
       </Styled.ReviewConfirmButton>
     </Styled.ModalContainer>

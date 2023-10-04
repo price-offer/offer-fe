@@ -46,14 +46,14 @@ describe('hooks/useResponsive()', () => {
     expect(result.current).toBe('small')
   })
 
-  it('viewport가 tablet 미디어쿼리 값에 해당하는 경우, ButtonProps의 styleType 값을 outlineDisabled로 리턴해야 합니다.', () => {
+  it('viewport가 tablet 미디어쿼리 값에 해당하는 경우, ButtonProps의 styleType 값을 solidPrimary로 리턴해야 합니다.', () => {
     // Given, When
     setViewPort('tablet')
     const { result } = renderHook(() => {
       return useResponsive<ButtonProps, 'styleType'>({
         desktop: 'ghost',
         mobile: 'outline',
-        tablet: 'outlineDisabled'
+        tablet: 'solidPrimary'
       })
     })
 
@@ -75,13 +75,13 @@ describe('hooks/useResponsive()', () => {
     expect(result.current).toBe('ghost')
   })
 
-  it('viewport가 mobile 미디어쿼리 값에 해당하지만 mobile이 없는 경우, ButtonProps의 styleType 값을 tablet 값인 ghost로 리턴해야 합니다.', () => {
+  it('viewport가 mobile 미디어쿼리 값에 해당하지만 mobile이 없는 경우, ButtonProps의 styleType 값을 tablet 값인 solidPrimary로 리턴해야 합니다.', () => {
     // Given, When
     setViewPort('mobile')
     const { result } = renderHook(() => {
       return useResponsive<ButtonProps, 'styleType'>({
         desktop: 'ghost',
-        tablet: 'outlineDisabled'
+        tablet: 'solidPrimary'
       })
     })
 

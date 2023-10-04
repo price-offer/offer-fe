@@ -66,6 +66,10 @@ export const PriceOfferModal = ({
     }))
   }
 
+  const handleClickOffer = (): void => {
+    onClickOffer?.(offerForm)
+  }
+
   return (
     <Styled.PriceOfferModal {...props}>
       <Styled.Header>
@@ -145,7 +149,7 @@ export const PriceOfferModal = ({
         <Styled.OfferButton
           disabled={!canOffer}
           size="large"
-          onClick={(): void => onClickOffer?.(offerForm)}>
+          onClick={handleClickOffer}>
           Offer !
         </Styled.OfferButton>
       </div>

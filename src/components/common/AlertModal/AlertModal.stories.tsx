@@ -10,14 +10,14 @@ export default {
 } as Meta<AlertModalProps>
 
 const Template: Story<AlertModalProps> = args => {
-  const { isOpen, open, close } = useModal()
+  const { openModal, closeModal, isOpen } = useModal()
 
   return (
     <>
       <button
         type="button"
         onClick={(): void => {
-          open()
+          openModal()
         }}>
         click
       </button>
@@ -25,7 +25,7 @@ const Template: Story<AlertModalProps> = args => {
         {...args}
         isOpen={isOpen}
         onClose={(): void => {
-          close()
+          closeModal()
         }}
       />
     </>

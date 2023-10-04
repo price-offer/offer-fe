@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 type UseModalReturnType = {
   isOpen: boolean
-  open(): void
-  close(): void
+  openModal(): void
+  closeModal(): void
   toggle(): void
 }
 
@@ -12,8 +12,8 @@ const useModal = (): UseModalReturnType => {
 
   return {
     isOpen,
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
+    openModal: () => setIsOpen(true),
+    closeModal: () => setIsOpen(false),
     toggle: () => setIsOpen(!isOpen)
   }
 }

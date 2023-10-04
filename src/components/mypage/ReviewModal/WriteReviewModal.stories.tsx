@@ -10,13 +10,13 @@ export default {
 } as Meta<WriteReviewModalProps>
 
 const Template: Story<WriteReviewModalProps> = args => {
-  const { open, close, isOpen } = useModal()
+  const { openModal, closeModal, isOpen } = useModal()
   return (
     <>
-      <button type="button" onClick={open}>
+      <button type="button" onClick={openModal}>
         click
       </button>
-      <ReviewModal.Write {...args} isOpen={isOpen} onClose={close} />
+      <ReviewModal.Write {...args} isOpen={isOpen} onClose={closeModal} />
     </>
   )
 }

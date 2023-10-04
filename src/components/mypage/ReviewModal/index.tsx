@@ -34,8 +34,8 @@ export const CommonTitleContainer = ({
 )
 
 const ReviewModal = {
-  Write: Write,
-  Read: Read
+  Write,
+  Read
 }
 
 export default ReviewModal

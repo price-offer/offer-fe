@@ -86,10 +86,10 @@ export type TradeMethodOnDelivery = {
 }
 export type TradeMethodOnAny = {
   code: 8
-  name: '상관없음'
+  name: '직거래/택배거래'
 }
 export type TradeMethodCode = 2 | 4 | 8
-export type TradeMethodName = '직거래' | '택배거래' | '상관없음'
+export type TradeMethodName = '직거래' | '택배거래' | '직거래/택배거래'
 export type TradeMethod =
   | TradeMethodOnDirect
   | TradeMethodOnDelivery

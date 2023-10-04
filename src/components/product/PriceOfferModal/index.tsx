@@ -1,4 +1,4 @@
-import { Input, Divider, IconButton } from '@offer-ui/react'
+import { Input, Divider, IconButton, SelectBox } from '@offer-ui/react'
 import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
@@ -102,7 +102,7 @@ export const PriceOfferModal = ({
             <Divider />
             <div>
               <Styled.FormTitle>거래 지역</Styled.FormTitle>
-              <Styled.LocationSelectBoxWrapper
+              <SelectBox
                 items={MOCK_CITY}
                 placeholder="선택"
                 size="medium"
@@ -115,7 +115,7 @@ export const PriceOfferModal = ({
             <Styled.TradeArea>
               <div>
                 <Styled.FormTitle>시/군/구</Styled.FormTitle>
-                <Styled.LocationSelectBoxWrapper
+                <SelectBox
                   items={MOCK_CITY}
                   placeholder="선택"
                   size="medium"
@@ -127,7 +127,7 @@ export const PriceOfferModal = ({
               </div>
               <div>
                 <Styled.FormTitle>읍/면/동</Styled.FormTitle>
-                <Styled.LocationSelectBoxWrapper
+                <SelectBox
                   items={MOCK_CITY}
                   placeholder="선택"
                   size="medium"

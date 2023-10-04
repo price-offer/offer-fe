@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Button, SelectBox, Modal, Radio } from '@offer-ui/react'
+import { Button, Modal, Radio } from '@offer-ui/react'
 
 const PriceOfferModal = styled(Modal)`
   width: 400px;
@@ -69,12 +69,6 @@ const FormTitle = styled.p<{ isMainTitle?: boolean }>`
   `};
 `
 
-const LocationSelectBoxWrapper = styled(SelectBox)`
-  & > div {
-    width: 100%;
-  }
-`
-
 const TradeArea = styled.div`
   display: flex;
   gap: 8px;
@@ -100,7 +94,6 @@ export const Styled = {
   Label,
   FormTitle,
   FormRadio,
-  LocationSelectBoxWrapper,
   TradeArea,
   OfferButton
 }

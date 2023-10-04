@@ -18,9 +18,7 @@ export const Read = ({
       <Styled.ReviewIconContainer>
         <Styled.ReviewState isFill>
           <Styled.ReviewIcon type={`${score}Fill`}></Styled.ReviewIcon>
-          <Styled.ReviewText>
-            {MOCK_SCORE.find(scoreItem => scoreItem.state === score)?.text}
-          </Styled.ReviewText>
+          <p>{MOCK_SCORE.find(scoreItem => scoreItem.state === score)?.text}</p>
         </Styled.ReviewState>
       </Styled.ReviewIconContainer>
       <Styled.ReadModeReviewContent>{content}</Styled.ReadModeReviewContent>

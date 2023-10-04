@@ -50,7 +50,7 @@ export const Write = ({
                     ? `${scoreItem.state}Fill`
                     : scoreItem.state
                 }></Styled.ReviewIcon>
-              <Styled.ReviewText>{scoreItem.text}</Styled.ReviewText>
+              <p>{scoreItem.text}</p>
             </Styled.ReviewState>
           )
         })}

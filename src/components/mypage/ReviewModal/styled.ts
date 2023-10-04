@@ -106,8 +106,6 @@ const ReviewState = styled.button<StyledReviewStateProps>`
   }
 `
 
-const ReviewText = styled.div``
-
 const ReviewIcon = styled(Icon)`
   width: 40px;
   height: 40px;
@@ -148,7 +146,6 @@ export const Styled = {
   ProductText,
   ReviewIconContainer,
   ReviewState,
-  ReviewText,
   ReviewIcon,
   ReviewTextArea,
   ReadModeReviewContent,

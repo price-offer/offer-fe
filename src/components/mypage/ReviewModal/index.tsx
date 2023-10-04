@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react'
-import { ReadReviewModal } from './ReadReviewModal'
+import { Read } from './Read'
 import { Styled } from './styled'
 import type { CommonReviewModalProps, SCORE } from './types'
-import WriteReviewModal from './WriteReviewModal'
+import { Write } from './Write'
 
 export const MOCK_SCORE: SCORE = [
   {
@@ -34,8 +34,8 @@ export const CommonTitleContainer = ({
 )
 
 const ReviewModal = {
-  Write: WriteReviewModal,
-  Read: ReadReviewModal
+  Write: Write,
+  Read: Read
 }
 
 export default ReviewModal

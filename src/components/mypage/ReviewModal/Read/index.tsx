@@ -3,7 +3,7 @@ import type { ReadReviewModalProps } from './types'
 import { CommonTitleContainer, MOCK_SCORE } from '..'
 import { Styled } from '../styled'
 
-export const ReadReviewModal = ({
+export const Read = ({
   isOpen = true,
   onClose,
   onConfirm,
@@ -16,12 +16,9 @@ export const ReadReviewModal = ({
     <Styled.ReviewModal isOpen={isOpen} onClose={onClose}>
       <CommonTitleContainer nickname={nickname} productName={productName} />
       <Styled.ReviewIconContainer>
-        <Styled.ReviewState>
-          <Styled.ReviewIcon
-            isFill
-            isGood={score === 'smile'}
-            type={`${score}Fill`}></Styled.ReviewIcon>
-          <Styled.ReviewText isFill>
+        <Styled.ReviewState isFill>
+          <Styled.ReviewIcon type={`${score}Fill`}></Styled.ReviewIcon>
+          <Styled.ReviewText>
             {MOCK_SCORE.find(scoreItem => scoreItem.state === score)?.text}
           </Styled.ReviewText>
         </Styled.ReviewState>

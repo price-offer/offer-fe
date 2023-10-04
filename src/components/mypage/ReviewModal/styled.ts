@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Modal, Icon, TextArea, Button } from '@offer-ui/react'
-import type { StyledReviewIconProps, StyledReviewTextProps } from './types'
+import type { StyledReviewStateProps } from './types'
 
 const ReviewModal = styled(Modal)`
   width: 400px;
@@ -88,7 +88,7 @@ const ReviewIconContainer = styled.div`
   }
 `
 
-const ReviewState = styled.button`
+const ReviewState = styled.button<StyledReviewStateProps>`
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -99,24 +99,18 @@ const ReviewState = styled.button`
   border: none;
 
   background: none;
+  * {
+    color: ${({ isFill, theme }): string =>
+      isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
+    ${({ theme }): string => theme.fonts.body01M};
+  }
 `
 
-const ReviewText = styled.div<StyledReviewTextProps>`
-  color: ${({ isFill, theme }): string =>
-    isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
-  ${({ theme }): string => theme.fonts.body01M};
-`
+const ReviewText = styled.div``
 
-const ReviewIcon = styled(Icon)<StyledReviewIconProps>`
+const ReviewIcon = styled(Icon)`
   width: 40px;
   height: 40px;
-
-  color: ${({ isFill, theme }): string =>
-    isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
-
-  path {
-    /* stroke-width: ${({ isGood }): string => (isGood ? '1.2' : '')}; */
-  }
 `
 
 const ReadModeReviewContent = styled.div`

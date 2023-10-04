@@ -5,22 +5,19 @@ import { CommonTitleContainer, MOCK_SCORE } from '..'
 import { Styled } from '../styled'
 import type { ScoreState } from '../types'
 
-const WriteReviewModal = ({
+export const Write = ({
   isOpen = true,
   onClose,
   onConfirm,
   nickname = '닉네임',
   productName = '상품이름'
 }: WriteReviewModalProps): ReactElement => {
-  const [isClickReviewIcon, setIsClickReViewIcon] = useState<boolean>(false)
-
   const [reviewState, setReviewState] = useState<ReviewState>({
     reviewScore: null,
     reviewText: ''
   })
 
   const handleClickReviewIcon = (reviewScore: ScoreState): void => {
-    setIsClickReViewIcon(true)
     setReviewState({ ...reviewState, reviewScore })
   }
 
@@ -45,37 +42,30 @@ const WriteReviewModal = ({
           return (
             <Styled.ReviewState
               key={scoreItem.state}
+              isFill={reviewState.reviewScore === scoreItem.state}
               onClick={(): void => handleClickReviewIcon(scoreItem.state)}>
               <Styled.ReviewIcon
-                isFill={reviewState.reviewScore === scoreItem.state}
-                isGood={scoreItem.state === 'smile'}
                 type={
                   reviewState.reviewScore === scoreItem.state
                     ? `${scoreItem.state}Fill`
                     : scoreItem.state
                 }></Styled.ReviewIcon>
-              <Styled.ReviewText
-                isFill={reviewState.reviewScore === scoreItem.state}>
-                {scoreItem.text}
-              </Styled.ReviewText>
+              <Styled.ReviewText>{scoreItem.text}</Styled.ReviewText>
             </Styled.ReviewState>
           )
         })}
       </Styled.ReviewIconContainer>
-
       <Styled.ReviewTextArea
         guideMessage={`${reviewState.reviewText.length}/100`}
         maxLength={100}
         onInput={handleInput}></Styled.ReviewTextArea>
 
       <Styled.ReviewSendButton
-        disabled={!isClickReviewIcon}
-        styleType={isClickReviewIcon ? 'solidPrimary' : 'solidDisabled'}
+        disabled={!reviewState.reviewScore}
+        styleType={reviewState.reviewScore ? 'solidPrimary' : 'solidDisabled'}
         onClick={handleConfirm}>
         {'후기 보내기'}
       </Styled.ReviewSendButton>
     </Styled.ReviewModal>
   )
 }
-
-export default WriteReviewModal

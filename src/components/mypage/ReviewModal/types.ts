@@ -14,11 +14,6 @@ export type SCORE = {
   text: string
 }[]
 
-export type StyledReviewIconProps = {
-  isFill: boolean
-  isGood: boolean
-}
-
-export type StyledReviewTextProps = {
+export type StyledReviewStateProps = {
   isFill: boolean
 }

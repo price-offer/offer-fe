@@ -20,13 +20,9 @@ const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
       <Styled.PriceDialogDesktop>
         <Styled.Price>가격</Styled.Price>
         <Styled.InputWrapper>
-          <Styled.MinimumInput
-            isPrice
-            placeholder="최소 금액"></Styled.MinimumInput>
+          <Styled.MinimumInput isPrice placeholder="최소 금액" />
           ~
-          <Styled.MaximumInput
-            isPrice
-            placeholder="최대 금액"></Styled.MaximumInput>
+          <Styled.MaximumInput isPrice placeholder="최대 금액" />
         </Styled.InputWrapper>
         <Divider direction="horizontal" />
         <Styled.ButtonWrapper>
@@ -43,13 +39,9 @@ const PriceInput = ({ isOpen, onClose }: PriceInputProps): ReactElement => {
         <Styled.PriceDialogDesktop>
           <Styled.Price>가격</Styled.Price>
           <Styled.InputWrapper>
-            <Styled.MinimumInput
-              isPrice
-              placeholder="최소 금액"></Styled.MinimumInput>
+            <Styled.MinimumInput isPrice placeholder="최소 금액" />
             ~
-            <Styled.MaximumInput
-              isPrice
-              placeholder="최대 금액"></Styled.MaximumInput>
+            <Styled.MaximumInput isPrice placeholder="최대 금액" />
           </Styled.InputWrapper>
           <Divider direction="horizontal" />
           <Styled.ButtonWrapper>

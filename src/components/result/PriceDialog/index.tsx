@@ -29,7 +29,7 @@ const PriceDialog = ({
             setIsOpen(!isOpen)
           }}>
           <div>가격</div>
-          <Styled.PriceArrowDown type="chevronDown"></Styled.PriceArrowDown>
+          <Styled.PriceArrowDown type="chevronDown" />
         </Styled.PriceDialogWrapper>
         {/* <PriceInput isOpen={isOpen} onClose={setIsOpen}></PriceInput> */}
         {isOpen ? (
@@ -41,13 +41,15 @@ const PriceDialog = ({
                   isPrice
                   placeholder="최소 금액"
                   value={minPriceValue}
-                  onChange={handleMinPriceInputChange}></Styled.MinimumInput>
+                  onChange={handleMinPriceInputChange}
+                />
                 ~
                 <Styled.MaximumInput
                   isPrice
                   placeholder="최대 금액"
                   value={maxPriceValue}
-                  onChange={handleMaxPriceInputChange}></Styled.MaximumInput>
+                  onChange={handleMaxPriceInputChange}
+                />
               </Styled.InputWrapper>
               <Divider direction="horizontal" />
               <Styled.ButtonWrapper>
@@ -68,13 +70,9 @@ const PriceDialog = ({
               <Styled.PriceDialogDesktop>
                 <Styled.Price>가격</Styled.Price>
                 <Styled.InputWrapper>
-                  <Styled.MinimumInput
-                    isPrice
-                    placeholder="최소 금액"></Styled.MinimumInput>
+                  <Styled.MinimumInput isPrice placeholder="최소 금액" />
                   ~
-                  <Styled.MaximumInput
-                    isPrice
-                    placeholder="최대 금액"></Styled.MaximumInput>
+                  <Styled.MaximumInput isPrice placeholder="최대 금액" />
                 </Styled.InputWrapper>
                 <Divider direction="horizontal" />
                 <Styled.ButtonWrapper>

@@ -75,6 +75,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
       <Styled.CateGoryWrapper>
         <Styled.CateGoryBox
           ref={containerRef}
+          data-test-id="category_scroll_area"
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
           onTouchMove={isDrag ? onDragMove : undefined}

@@ -17,8 +17,10 @@
     "next/core-web-vitals",
     "plugin:prettier/recommended",
     "plugin:jest-dom/recommended",
-    "plugin:testing-library/react"
+    "plugin:testing-library/react",
+    "plugin:cypress/recommended"
   ],
+  "ignorePatterns": ["src/tests/e2e", "**/*.cy.ts"],
   "rules": {
     "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
     "default-case-last": "error",

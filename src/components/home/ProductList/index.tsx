@@ -9,7 +9,7 @@ const ProductList = ({ productList }: ProductListProps): ReactElement => {
       <Styled.NewProductTitle>새로운 상품</Styled.NewProductTitle>
       <Styled.ProductListWrapper>
         {productList.map(item => (
-          <ProductItem key={item.id} productItem={item}></ProductItem>
+          <ProductItem key={item.id} productItem={item} />
         ))}
       </Styled.ProductListWrapper>
     </>

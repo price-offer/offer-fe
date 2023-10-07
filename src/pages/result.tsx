@@ -145,7 +145,7 @@ const Result: NextPage = () => {
     <div>
       <Layout>
         <ResultWrapper>
-          <ResultHeader searchResult="###"></ResultHeader>
+          <ResultHeader searchResult="###" />
           {isDesktop && (
             <CategorySlideFilter
               cateGoryList={checkFilterList}
@@ -166,7 +166,8 @@ const Result: NextPage = () => {
             selectedSortPriceValue={selectedSortPriceValue}
             selectedTradePeriodValue={selectedTradePeriodValue}
             sortPriceItems={sortPriceItems}
-            tradePeriodItems={tradePeriodItems}></FilterSelect>
+            tradePeriodItems={tradePeriodItems}
+          />
           <ProductList productList={apiRes.elements} />
         </ResultWrapper>
       </Layout>

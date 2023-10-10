@@ -18,6 +18,8 @@
     "stylelint",
     "tanstack",
     "unoptimized",
-    "jotai"
+    "jotai",
+    "Messagebox",
+    "xsmall"
   ]
 }

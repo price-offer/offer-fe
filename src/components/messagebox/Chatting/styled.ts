@@ -7,7 +7,7 @@ const Container = styled.div`
   gap: 8px;
 
   width: 100%;
-  height: 100%;
+  height: auto;
   padding: 20px;
 
   ${({ theme }) => css`
@@ -40,11 +40,13 @@ const BubbleWrapper = styled.div<{
   gap: 4px;
   align-items: end;
 
-  ${({ isSender = false, isSectionStart = false }) =>
+  ${({ isSender = false, isSectionStart = false, theme }) =>
     css`
       justify-content: ${isSender ? 'end' : 'start'};
 
       margin-top: ${isSectionStart ? '12px' : '0'};
+
+      color: ${isSender ? theme.colors.white : theme.colors.grayScale90};
     `};
 `
 

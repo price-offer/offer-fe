@@ -1,4 +1,5 @@
 export type MessagePreviewProps = {
+  id: number
   userInfo: {
     id: number
     nickname: string
@@ -12,6 +13,6 @@ export type MessagePreviewProps = {
     content: string
     createdDate: string
   }
-  isSelected: boolean
-  onClick?(): void
+  isSelected?: boolean
+  onClick?(id: number): void
 }

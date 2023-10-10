@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
 `
 
@@ -71,9 +72,20 @@ const OfferPrice = styled.span`
   ${({ theme }) => theme.fonts.body02B};
 `
 
+const ChattingWrapper = styled.div`
+  overflow: scroll;
+
+  height: calc(100% - 243px);
+`
+
 const InputWrapper = styled.div`
   padding: 14px 24px;
-  border-top: 1px solid ${({ theme }) => theme.colors.grayScale10};
+  ${({ theme }) =>
+    css`
+      border-top: 1px solid ${theme.colors.grayScale10};
+
+      background-color: ${theme.colors.white};
+    `};
 `
 
 export const Styled = {
@@ -86,5 +98,6 @@ export const Styled = {
   ProductName,
   ProductItem,
   OfferPrice,
+  ChattingWrapper,
   InputWrapper
 }

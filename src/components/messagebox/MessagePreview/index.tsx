@@ -5,14 +5,22 @@ import type { MessagePreviewProps } from './types'
 import { toLocaleCurrency } from '@utils'
 
 export const MessagePreview = ({
+  id,
   userInfo,
   productInfo,
   latestTalk,
-  isSelected,
+  isSelected = false,
   onClick
 }: MessagePreviewProps): ReactElement => {
+  const handleClickPreview = () => {
+    onClick?.(id)
+  }
+
   return (
-    <Styled.Container isSelected={isSelected} role="button" onClick={onClick}>
+    <Styled.Container
+      isSelected={isSelected}
+      role="button"
+      onClick={handleClickPreview}>
       <Styled.AvatarWrapper>
         <Avatar
           alt="avatar"
@@ -36,7 +44,7 @@ export const MessagePreview = ({
       <Styled.ImageWrapper>
         <Image
           alt="product"
-          fallbackSrc="/images/product_fallback.png"
+          fallbackSrc="/images/checkboard.png"
           height="40px"
           src={productInfo.productImageUrl || ''}
           width="40px"

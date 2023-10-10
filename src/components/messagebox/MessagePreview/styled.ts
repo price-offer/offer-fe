@@ -10,11 +10,20 @@ const Container = styled.li<{ isSelected: boolean }>`
   width: 100%;
   padding: 20px;
 
-  background-color: ${({ isSelected, theme }): string =>
-    isSelected ? theme.colors.grayScale20 : theme.colors.white};
   list-style: none;
 
   cursor: pointer;
+
+  ${({ isSelected, theme }) =>
+    css`
+      background-color: ${isSelected
+        ? theme.colors.bgPrimaryWeak
+        : theme.colors.white};
+
+      &:hover {
+        background-color: ${theme.colors.bgGray04};
+      }
+    `};
 `
 
 const AvatarWrapper = styled.div`

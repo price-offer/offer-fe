@@ -33,25 +33,44 @@ const ChattingDate = styled.span`
 `
 
 const BubbleWrapper = styled.div<{
-  isSender: boolean
-  isFirstMessage: boolean
+  isSender?: boolean
+  isSectionStart?: boolean
 }>`
   display: flex;
   gap: 4px;
   align-items: end;
 
-  ${({ isSender, isFirstMessage }) =>
+  ${({ isSender = false, isSectionStart = false }) =>
     css`
-      flex-direction: ${isSender ? 'row' : 'row-reverse'};
       justify-content: ${isSender ? 'end' : 'start'};
 
-      margin-top: ${isFirstMessage ? '12px' : '0'};
+      margin-top: ${isSectionStart ? '12px' : '0'};
     `};
+`
+
+const ReceiveContainer = styled.div<{ isSectionStart?: boolean }>`
+  display: flex;
+  gap: 8px;
+  align-items: start;
+
+  margin-top: ${({ isSectionStart }) => (isSectionStart ? '12px' : 0)};
+`
+
+const AvatarWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
 `
 
 export const Styled = {
   Container,
   DateWrapper,
   ChattingDate,
-  BubbleWrapper
+  BubbleWrapper,
+  ReceiveContainer,
+  AvatarWrapper
 }

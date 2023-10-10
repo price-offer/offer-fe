@@ -11,6 +11,7 @@ const Template: Story<ChattingProps> = args => <Chatting {...args} />
 export const Default = Template.bind({})
 Default.args = {
   userId: 1,
+  receiverImageUrl: 'https://picsum.photos/id/237/200/300',
   messages: [
     {
       id: 10,
@@ -35,7 +36,28 @@ Default.args = {
       createdDate: '2021-12-15T00:25:31'
     },
     {
+      id: 61,
+      content: 'offer 쪽지3',
+      receiverId: 2,
+      senderId: 1,
+      createdDate: '2021-12-15T01:45:41'
+    },
+    {
+      id: 62,
+      content: 'offer 쪽지3',
+      receiverId: 2,
+      senderId: 1,
+      createdDate: '2021-12-15T01:45:41'
+    },
+    {
       id: 63,
+      content: 'offer 쪽지3',
+      receiverId: 2,
+      senderId: 1,
+      createdDate: '2021-12-15T01:45:41'
+    },
+    {
+      id: 64,
       content: 'offer 쪽지3',
       receiverId: 2,
       senderId: 1,

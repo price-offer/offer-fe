@@ -1,38 +1,46 @@
-import { ChattingBubble } from '@offer-ui/react'
+import { Receive } from './Receive'
+import { Send } from './Send'
 import { Styled } from './styled'
 import type { ChattingProps } from './types'
 import { formatDate } from '@utils/format'
 
-// TODO: 상품 정보 버블 추가, receiver profile 추가
-export const Chatting = ({ userId, messages }: ChattingProps) => {
+// TODO: 상품 정보 버블 추가
+export const Chatting = ({
+  userId,
+  messages,
+  receiverImageUrl
+}: ChattingProps) => {
   return (
     <Styled.Container>
       {messages.map(({ id, content, senderId, createdDate }, idx, list) => {
-        const prevMessage = list[idx - 1]
+        const prevMessage = list.at(idx - 1)
+        const nextMessage = list.at(idx + 1)
+        const isSender = senderId === userId
         const isNewDate =
           prevMessage?.createdDate.split('T')[0] !== createdDate.split('T')[0]
-        const isFirstMessage = senderId !== prevMessage?.senderId || isNewDate
-        const isSender = senderId === userId
+        const commonProps = {
+          time: formatDate(createdDate, 'A H:m'),
+          isSectionStart: senderId !== prevMessage?.senderId || isNewDate,
+          isSectionLast: senderId !== nextMessage?.senderId
+        }
 
         return (
-          <>
+          <div key={id}>
             {isNewDate && (
-              <Styled.DateWrapper>
+              <Styled.DateWrapper key={createdDate}>
                 <Styled.ChattingDate>
                   {formatDate(createdDate, 'YYYY년 M월 D일 dddd')}
                 </Styled.ChattingDate>
               </Styled.DateWrapper>
             )}
-            <Styled.BubbleWrapper
-              key={id}
-              isFirstMessage={isFirstMessage}
-              isSender={isSender}>
-              <span>{formatDate(createdDate, 'A H:m')}</span>
-              <ChattingBubble messageType={isSender ? 'send' : 'receive'}>
+            {isSender ? (
+              <Send {...commonProps}>{content}</Send>
+            ) : (
+              <Receive avatarUrl={receiverImageUrl} {...commonProps}>
                 {content}
-              </ChattingBubble>
-            </Styled.BubbleWrapper>
-          </>
+              </Receive>
+            )}
+          </div>
         )
       })}
     </Styled.Container>

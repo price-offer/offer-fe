@@ -75,7 +75,10 @@ const OfferPrice = styled.span`
 const ChattingWrapper = styled.div`
   overflow: scroll;
 
-  height: calc(100% - 243px);
+  height: calc(100% - 240px);
+  padding: 20px;
+
+  background-color: ${({ theme }) => theme.colors.bgGray03};
 `
 
 const InputWrapper = styled.div`

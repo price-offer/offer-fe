@@ -16,17 +16,20 @@ export const Chatting = ({
         const prevMessage = list.at(idx - 1)
         const nextMessage = list.at(idx + 1)
         const isSender = senderId === userId
-        const isNewDate =
+        const isPrevDateChanged =
           prevMessage?.createdDate.split('T')[0] !== createdDate.split('T')[0]
+        const isNextDateChanged =
+          nextMessage?.createdDate.split('T')[0] !== createdDate.split('T')[0]
         const commonProps = {
           time: formatDate(createdDate, 'A H:m'),
-          isSectionStart: senderId !== prevMessage?.senderId || isNewDate,
-          isSectionLast: senderId !== nextMessage?.senderId
+          isSectionStart:
+            senderId !== prevMessage?.senderId || isPrevDateChanged,
+          isSectionLast: senderId !== nextMessage?.senderId || isNextDateChanged
         }
 
         return (
           <div key={id}>
-            {isNewDate && (
+            {isPrevDateChanged && (
               <Styled.DateWrapper key={createdDate}>
                 <Styled.ChattingDate>
                   {formatDate(createdDate, 'YYYY년 M월 D일 dddd')}

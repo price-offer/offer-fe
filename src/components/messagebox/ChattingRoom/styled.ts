@@ -17,6 +17,16 @@ const Header = styled.div`
 const Nickname = styled.p`
   width: 100%;
   margin-left: 12px;
+
+  ${({ theme }) => css`
+    ${theme.mediaQuery.tablet} {
+      ${theme.fonts.body01B}
+    }
+
+    ${theme.mediaQuery.mobile} {
+      ${theme.fonts.body01B}
+    }
+  `}
 `
 
 const IconButtonContainer = styled.div`
@@ -75,7 +85,7 @@ const OfferPrice = styled.span`
 const ChattingWrapper = styled.div`
   overflow: scroll;
 
-  height: calc(100% - 240px);
+  height: calc(100% - 241px);
   padding: 20px;
 
   background-color: ${({ theme }) => theme.colors.bgGray03};

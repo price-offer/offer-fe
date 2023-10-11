@@ -1,7 +1,9 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useState, type ReactElement } from 'react'
+import { Modal, useMedia } from '@offer-ui/react'
+import { useState, type ReactElement, useEffect } from 'react'
 import { MessagePreview, Tabs, Tab, ChattingRoom, NoContent } from '@components'
+import useModal from '@hooks/useModal'
 
 type TabType = 'all' | 'buy' | 'sell'
 
@@ -17,6 +19,8 @@ const TabEntries = Object.entries(TABS)
 const MessageBoxPage = (): ReactElement => {
   const [tab, setTab] = useState<TabType>('all')
   const [roomId, setRoomId] = useState<number | null>(null)
+  const { isOpen, openModal, closeModal } = useModal()
+  const { desktop, mobile, tablet } = useMedia()
 
   const handleChangeTab = (currentIndex: number, nextIndex: number) => {
     const nextTab = TabKeys[nextIndex]
@@ -26,65 +30,94 @@ const MessageBoxPage = (): ReactElement => {
 
   const handleSelectRoom = (id: number) => {
     setRoomId(id)
+
+    if (!desktop) {
+      openModal()
+    }
   }
 
+  const handleCloseRoom = () => {
+    setRoomId(null)
+
+    if (!desktop) {
+      closeModal()
+    }
+  }
+
+  useEffect(() => {
+    setRoomId(null)
+  }, [desktop, tablet, mobile])
+
   return (
-    <Page>
-      <Container>
-        <ListContainer>
-          <ListHeader>
-            <span>
-              내 쪽지함 <i>{LIST_MOCK.length}</i>
-            </span>
-            <div>
-              <Tabs onChange={handleChangeTab}>
-                <Tabs.List>
-                  {TabEntries.map(([key, value]) => (
-                    <Tab key={key}>
-                      <TabButton isSelected={key === tab}>{value}</TabButton>
-                    </Tab>
-                  ))}
-                </Tabs.List>
-              </Tabs>
-            </div>
-          </ListHeader>
-          <MessageList>
+    <>
+      <Page>
+        <Container>
+          <ListContainer>
+            <ListHeader>
+              <span>
+                내 쪽지함 <i>{LIST_MOCK.length}</i>
+              </span>
+              <div>
+                <Tabs onChange={handleChangeTab}>
+                  <Tabs.List>
+                    {TabEntries.map(([key, value]) => (
+                      <Tab key={key}>
+                        <TabButton isSelected={key === tab}>{value}</TabButton>
+                      </Tab>
+                    ))}
+                  </Tabs.List>
+                </Tabs>
+              </div>
+            </ListHeader>
+            <MessageList>
+              <NoContent
+                hasContent={LIST_MOCK.length > 0}
+                image={{
+                  url: '/images/mail.png',
+                  width: '90px',
+                  height: '90px'
+                }}
+                message={`쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.`}>
+                {LIST_MOCK.map(({ id, ...messageInfo }) => (
+                  <MessagePreview
+                    key={id}
+                    id={id}
+                    isSelected={id === roomId}
+                    onClick={handleSelectRoom}
+                    {...messageInfo}
+                  />
+                ))}
+              </NoContent>
+            </MessageList>
+          </ListContainer>
+          <DetailContainer>
             <NoContent
-              hasContent={LIST_MOCK.length > 0}
+              hasContent={!!roomId}
               image={{
-                url: '/images/mail.png',
-                width: '90px',
+                url: '/images/message.svg',
+                width: '110px',
                 height: '90px'
               }}
-              message={`쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.`}>
-              {LIST_MOCK.map(({ id, ...messageInfo }) => (
-                <MessagePreview
-                  key={id}
-                  id={id}
-                  isSelected={id === roomId}
-                  onClick={handleSelectRoom}
-                  {...messageInfo}
-                />
-              ))}
+              message="쪽지할 상대를 선택해주세요.">
+              {roomId && <ChattingRoom id={roomId} onClose={handleCloseRoom} />}
             </NoContent>
-          </MessageList>
-        </ListContainer>
-        <DetailContainer>
-          <NoContent
-            hasContent={!!roomId}
-            image={{
-              url: '/images/message.svg',
-              width: '110px',
-              height: '90px'
-            }}
-            message="쪽지할 상대를 선택해주세요.">
-            {roomId && <ChattingRoom id={roomId} />}
-          </NoContent>
-        </DetailContainer>
-      </Container>
-    </Page>
+          </DetailContainer>
+        </Container>
+      </Page>
+      {roomId && (
+        <ChattingRoomModal isOpen={isOpen}>
+          <ChattingRoom id={roomId} onClose={handleCloseRoom} />
+        </ChattingRoomModal>
+      )}
+    </>
   )
 }
+
+const ChattingRoomModal = styled(Modal)`
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+`
 
 const Page = styled.div`
   display: flex;
@@ -106,6 +139,16 @@ const Container = styled.div`
 const ListContainer = styled.div`
   width: 100%;
   max-width: 512px;
+
+  ${({ theme }) => css`
+    ${theme.mediaQuery.tablet} {
+      max-width: none;
+    }
+
+    ${theme.mediaQuery.mobile} {
+      max-width: none;
+    }
+  `}
 `
 
 const ListHeader = styled.div`
@@ -118,6 +161,14 @@ const ListHeader = styled.div`
     border-bottom: 1px solid ${theme.colors.grayScale10};
 
     ${theme.fonts.headline02B}
+
+    ${theme.mediaQuery.tablet} {
+      ${theme.fonts.subtitle01B}
+    }
+
+    ${theme.mediaQuery.mobile} {
+      ${theme.fonts.subtitle01B}
+    }
   `}
 
   i {
@@ -132,13 +183,7 @@ const TabButton = styled.button<{ isSelected: boolean }>`
 
   background-color: transparent;
 
-  ${({ theme, isSelected }) => css`
-    color: ${isSelected ? theme.colors.grayScale90 : theme.colors.grayScale50};
-
-    ${theme.fonts.subtitle01B};
-  `}
-
-  cursor:pointer;
+  cursor: pointer;
 
   ::before {
     content: '●';
@@ -148,6 +193,20 @@ const TabButton = styled.button<{ isSelected: boolean }>`
     color: ${({ theme, isSelected }) =>
       isSelected ? theme.colors.brandPrimary : 'inherit'};
   }
+
+  ${({ theme, isSelected }) => css`
+    color: ${isSelected ? theme.colors.grayScale90 : theme.colors.grayScale50};
+
+    ${theme.fonts.subtitle01B};
+
+    ${theme.mediaQuery.tablet} {
+      ${theme.fonts.body02B}
+    }
+
+    ${theme.mediaQuery.mobile} {
+      ${theme.fonts.body02B}
+    }
+  `}
 `
 
 const MessageList = styled.ul`
@@ -167,6 +226,14 @@ const DetailContainer = styled.div`
     border-left: 1px solid ${theme.colors.grayScale10};
 
     background-color: ${theme.colors.bgGray01};
+
+    ${theme.mediaQuery.tablet} {
+      display: none;
+    }
+
+    ${theme.mediaQuery.mobile} {
+      display: none;
+    }
   `}
 `
 

@@ -68,6 +68,13 @@ const SubContent = styled.div`
   gap: 4px;
   align-items: center;
   justify-content: center;
+
+  ${({ theme }) => css`
+    ${theme.mediaQuery.mobile} {
+      flex-direction: column-reverse;
+      align-items: end;
+    }
+  `};
 `
 
 const AlertWrapper = styled.span`
@@ -98,7 +105,13 @@ const Price = styled.p`
   width: max-content;
 
   transform: translate(0, 1px);
-  ${({ theme }): string => theme.fonts.body01B};
+  ${({ theme }) => css`
+    ${theme.fonts.body01B}
+
+    ${theme.mediaQuery.mobile} {
+      ${theme.fonts.body02B}
+    }
+  `};
 `
 
 const ImageWrapper = styled.div`
@@ -106,6 +119,12 @@ const ImageWrapper = styled.div`
   align-items: center;
 
   width: 40px;
+
+  ${({ theme }) => css`
+    ${theme.mediaQuery.mobile} {
+      display: none;
+    }
+  `};
 `
 
 export const Styled = {

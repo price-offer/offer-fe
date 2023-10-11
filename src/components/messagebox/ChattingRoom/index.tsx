@@ -97,7 +97,7 @@ const MESSAGES_MOCK = [
     createdDate: '2021-12-15T01:45:41'
   },
   {
-    id: 62,
+    id: 612,
     content:
       'offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3',
     receiverId: 2,
@@ -105,17 +105,10 @@ const MESSAGES_MOCK = [
     createdDate: '2021-12-15T01:45:41'
   },
   {
-    id: 61,
+    id: 699,
     content: 'offer 쪽지3',
     receiverId: 2,
     senderId: 1,
     createdDate: '2021-12-15T01:45:41'
-  },
-  {
-    id: 8,
-    content: 'offer 쪽지2',
-    receiverId: 1,
-    senderId: 2,
-    createdDate: '2021-12-15T00:13:49'
   }
 ]

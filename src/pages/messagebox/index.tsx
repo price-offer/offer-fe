@@ -38,11 +38,13 @@ const MessageBoxPage = (): ReactElement => {
             </span>
             <div>
               <Tabs onChange={handleChangeTab}>
-                {TabEntries.map(([key, value]) => (
-                  <Tab key={key}>
-                    <TabButton isSelected={key === tab}>{value}</TabButton>
-                  </Tab>
-                ))}
+                <Tabs.List>
+                  {TabEntries.map(([key, value]) => (
+                    <Tab key={key}>
+                      <TabButton isSelected={key === tab}>{value}</TabButton>
+                    </Tab>
+                  ))}
+                </Tabs.List>
               </Tabs>
             </div>
           </ListHeader>
@@ -59,6 +61,7 @@ const MessageBoxPage = (): ReactElement => {
                 <MessagePreview
                   key={id}
                   id={id}
+                  isSelected={id === roomId}
                   onClick={handleSelectRoom}
                   {...messageInfo}
                 />

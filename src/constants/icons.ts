@@ -1,6 +1,7 @@
 import ARROW_LEFT_24 from '@assets/icons/arrow_left_24.svg'
 import ARROW_UP_24 from '@assets/icons/arrow_up_24.svg'
 import AVATAR from '@assets/icons/avatar.svg'
+import Banner from '@assets/icons/banner.svg'
 import BOX_16 from '@assets/icons/box_16.svg'
 import CAMERA_16 from '@assets/icons/camera_16.svg'
 import CAMERA_24 from '@assets/icons/camera_24.svg'
@@ -101,5 +102,6 @@ export const ICON = {
   SMILE_ACTIVE_40,
   STORE_16,
   STORE_24,
-  TRIANGLE_DOWN_16
+  TRIANGLE_DOWN_16,
+  Banner
 }

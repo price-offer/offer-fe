@@ -34,9 +34,7 @@ export const Write = ({
 
   return (
     <Styled.ReviewModal isOpen={isOpen} onClose={onClose}>
-      <CommonTitleContainer
-        nickname={nickname}
-        productName={productName}></CommonTitleContainer>
+      <CommonTitleContainer nickname={nickname} productName={productName} />
       <Styled.ReviewIconContainer>
         {MOCK_SCORE.map(scoreItem => {
           return (
@@ -49,7 +47,8 @@ export const Write = ({
                   reviewState.reviewScore === scoreItem.state
                     ? `${scoreItem.state}Fill`
                     : scoreItem.state
-                }></Styled.ReviewIcon>
+                }
+              />
               <p>{scoreItem.text}</p>
             </Styled.ReviewState>
           )
@@ -58,11 +57,12 @@ export const Write = ({
       <Styled.ReviewTextArea
         guideMessage={`${reviewState.reviewText.length}/100`}
         maxLength={100}
-        onInput={handleInput}></Styled.ReviewTextArea>
+        onInput={handleInput}
+      />
 
       <Styled.ReviewSendButton
         disabled={!reviewState.reviewScore}
-        styleType={reviewState.reviewScore ? 'solidPrimary' : 'solidDisabled'}
+        styleType={reviewState.reviewScore ? 'solidPrimary' : 'ghost'}
         onClick={handleConfirm}>
         {'후기 보내기'}
       </Styled.ReviewSendButton>

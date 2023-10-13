@@ -24,6 +24,7 @@ import CATEGORY_TOY from '@assets/images/category_toy.png'
 import CATEGORY_TOY_PC from '@assets/images/category_toy_pc.png'
 import CATEGORY_WOMAN_GOODS from '@assets/images/category_womangoods.png'
 import CATEGORY_WOMAN_GOODS_PC from '@assets/images/category_womangoods_pc.png'
+import LOGO from '@assets/images/logo.png'
 
 export const IMAGE = {
   CATEGORY_APPLIANCE,
@@ -51,5 +52,6 @@ export const IMAGE = {
   CATEGORY_TOY,
   CATEGORY_TOY_PC,
   CATEGORY_WOMAN_GOODS,
-  CATEGORY_WOMAN_GOODS_PC
+  CATEGORY_WOMAN_GOODS_PC,
+  LOGO
 }

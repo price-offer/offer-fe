@@ -23,6 +23,7 @@
     "@emotion/styled": "^11.10.0",
     "@offer-ui/react": "^0.1.27",
     "axios": "^1.2.3",
+    "jotai": "^2.4.3",
     "next": "^13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"

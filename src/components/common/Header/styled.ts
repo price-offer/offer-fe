@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Button, Input, Divider } from '@offer-ui/react'
+import { Avatar, Button, Input, Divider, IconButton } from '@offer-ui/react'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -43,6 +43,10 @@ const ButtonSection = styled.section`
 
 const ButtonDivider = styled(Divider)``
 
+const SellButtonDivider = styled.div`
+  width: 32px;
+`
+
 const HeaderAuthButton = styled(Button)`
   color: ${({ theme }): string => theme.colors.grayScale70};
   ${({ theme }): string => theme.fonts.body02R};
@@ -50,9 +54,24 @@ const HeaderAuthButton = styled(Button)`
   padding: 0;
 `
 
-const SellButton = styled(Button)`
-  margin-left: 32px;
+const SellButton = styled(Button)``
+
+const HeaderProfileSection = styled.section`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 33px;
+  margin-right: 24px;
 `
+
+const HeaderAvatar = styled(Avatar)``
+
+const HeaderNickName = styled.div`
+  color: ${({ theme }): string => theme.colors.grayScale90};
+  ${({ theme }): string => theme.fonts.body02R};
+`
+const LogoutIcon = styled(IconButton)``
 
 export const Styled = {
   HeaderWrapper,
@@ -63,5 +82,10 @@ export const Styled = {
   ButtonSection,
   ButtonDivider,
   HeaderAuthButton,
-  SellButton
+  SellButton,
+  SellButtonDivider,
+  HeaderProfileSection,
+  HeaderAvatar,
+  HeaderNickName,
+  LogoutIcon
 }

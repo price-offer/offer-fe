@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Avatar, Button, Input, Divider, IconButton } from '@offer-ui/react'
+import { Button, Input } from '@offer-ui/react'
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -19,6 +19,12 @@ const HeaderContent = styled.div`
   max-width: 1200px;
   width: 100%;
   height: 68px;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    padding: 16px 24px;
+  }
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    padding: 16px;
+  }
 `
 
 const LogoInputSection = styled.section`
@@ -31,6 +37,12 @@ const LogoButton = styled(Button)`
   height: 40px;
 `
 
+const InputWrapper = styled.div`
+  ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {
+    display: none;
+  }
+`
+
 const SearchInput = styled(Input)`
   width: 426px;
   margin: 0;
@@ -39,9 +51,10 @@ const SearchInput = styled(Input)`
 const ButtonSection = styled.section`
   display: flex;
   align-items: center;
+  ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {
+    display: none;
+  }
 `
-
-const ButtonDivider = styled(Divider)``
 
 const SellButtonDivider = styled.div`
   width: 32px;
@@ -54,8 +67,6 @@ const HeaderAuthButton = styled(Button)`
   padding: 0;
 `
 
-const SellButton = styled(Button)``
-
 const HeaderProfileSection = styled.section`
   position: relative;
   display: flex;
@@ -65,27 +76,32 @@ const HeaderProfileSection = styled.section`
   margin-right: 24px;
 `
 
-const HeaderAvatar = styled(Avatar)``
-
 const HeaderNickName = styled.div`
   color: ${({ theme }): string => theme.colors.grayScale90};
   ${({ theme }): string => theme.fonts.body02R};
 `
-const LogoutIcon = styled(IconButton)``
+
+const MenuSection = styled.section`
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    display: none;
+  }
+  ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {
+    display: flex;
+  }
+  gap: 8px;
+`
 
 export const Styled = {
   HeaderWrapper,
   HeaderContent,
   LogoInputSection,
   LogoButton,
+  InputWrapper,
   SearchInput,
   ButtonSection,
-  ButtonDivider,
   HeaderAuthButton,
-  SellButton,
   SellButtonDivider,
   HeaderProfileSection,
-  HeaderAvatar,
   HeaderNickName,
-  LogoutIcon
+  MenuSection
 }

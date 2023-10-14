@@ -19,7 +19,7 @@ Default.args = {
       id: 1,
       avatarSrc: '',
       nickname: '효정짱',
-      latestMessage: '사고싶어요용',
+      latestMessage: ' 사고싶어요용  사고싶어요용 사고싶어요용 사고싶어요용',
       offerTime: '2시간 전',
       offerPrice: 200000
     },

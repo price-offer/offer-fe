@@ -1,4 +1,4 @@
-import { IconButton, Divider, Avatar } from '@offer-ui/react'
+import { IconButton, Divider, Avatar, Radio } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
@@ -36,9 +36,10 @@ export const SelectBuyerModal = ({
             <Styled.BuyerContainer
               key={id}
               isSelected={selectedBuyerId === id}
-              onClick={(): void => {
+              onChange={(): void => {
                 setSelectedBuyerId(id)
               }}>
+              <Radio.Input formName="buyer" value={`${id}`} />
               <Styled.AvatarWrapper>
                 <Avatar
                   alt="buyer-profile"

@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Button, Modal } from '@offer-ui/react'
+import { Button, Modal, Radio } from '@offer-ui/react'
 
 const SelectBuyerModal = styled(Modal)`
   padding: 0;
@@ -49,7 +49,7 @@ const Body = styled.div`
   padding: 16px 20px;
 `
 
-const BuyerContainer = styled.div<{ isSelected: boolean }>`
+const BuyerContainer = styled(Radio.Label)<{ isSelected: boolean }>`
   display: flex;
   gap: 8px;
 
@@ -62,6 +62,10 @@ const BuyerContainer = styled.div<{ isSelected: boolean }>`
       ${isSelected ? theme.colors.brandPrimary : theme.colors.grayScale10};
     border-radius: ${theme.radius.round6};
   `};
+
+  input + span {
+    min-width: 20px;
+  }
 `
 
 const AvatarWrapper = styled.div`
@@ -100,6 +104,14 @@ const OfferTime = styled.span`
 `
 
 const LatestMessage = styled.p`
+  display: block;
+  overflow: hidden;
+
+  max-width: 153px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   ${({ theme }): SerializedStyles => css`
     color: ${theme.colors.grayScale70};
 

@@ -38,7 +38,7 @@ const CloseIconWrapper = styled.div`
   justify-content: end;
 `
 
-const Body = styled.div`
+const Body = styled(Radio)`
   display: flex;
   flex-direction: column;
   gap: 8px;

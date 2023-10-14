@@ -4,14 +4,19 @@ import type { StyledDialogWrapperProps } from './types'
 const DialogWrapper = styled.div<StyledDialogWrapperProps>`
   display: ${({ isOpen }): string => (isOpen ? 'flex' : 'none')};
   position: absolute;
-  top: 40px;
-  left: 130px;
+`
+const DialogOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `
 
 const DialogBox = styled.div`
   position: relative;
-  width: 120px;
-  height: 48px;
+  min-width: 120px;
+  min-height: 48px;
   padding: 16px 12px;
   background: white;
   border-radius: 4px;
@@ -20,7 +25,7 @@ const DialogBox = styled.div`
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
 `
 
-const DialogContent = styled.p`
+const DialogContent = styled.span`
   display: flex;
   text-align: center;
   align-content: center;
@@ -33,6 +38,7 @@ export type StyledReviewStateProps = {
 
 export const Styled = {
   DialogWrapper,
+  DialogOverlay,
   DialogBox,
   DialogContent
 }

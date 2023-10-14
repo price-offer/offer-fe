@@ -11,9 +11,13 @@ import { IMAGE } from '@constants/images'
 const Header = (): ReactElement => {
   const { LOGO } = IMAGE
 
-  const isLogin = false
+  const isLogin = true
 
-  const [isOpenLogoutDialog, setIsOpenLogoutDialog] = useState(true)
+  const [isOpenDialog, setIsOpenDialog] = useState({
+    logout: false,
+    search: false
+  })
+
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
 
   return (
@@ -46,12 +50,32 @@ const Header = (): ReactElement => {
                   <Styled.HeaderNickName>부드러운 냉장고</Styled.HeaderNickName>
                   <IconButton
                     icon="triangleDown"
-                    onClick={() => setIsOpenLogoutDialog(!isOpenLogoutDialog)}
+                    onClick={() =>
+                      setIsOpenDialog({
+                        ...isOpenDialog,
+                        logout: !isOpenDialog.logout
+                      })
+                    }
                   />
                   <HeaderDialog
-                    handleClickDialog={() => setIsOpenLogoutDialog(false)}
-                    isOpen={isOpenLogoutDialog}>
-                    로그아웃
+                    dialogPositionStyle={{
+                      top: '35px',
+                      right: '-105px'
+                    }}
+                    handleClickDialog={() =>
+                      setIsOpenDialog({
+                        ...isOpenDialog,
+                        logout: !isOpenDialog.logout
+                      })
+                    }
+                    isOpen={isOpenDialog.logout}
+                    onClose={() =>
+                      setIsOpenDialog({
+                        ...isOpenDialog,
+                        logout: false
+                      })
+                    }>
+                    <Styled.LogoutText>로그아웃</Styled.LogoutText>
                   </HeaderDialog>
                 </Styled.HeaderProfileSection>
               </>
@@ -75,14 +99,34 @@ const Header = (): ReactElement => {
             <IconButton
               icon="search"
               size={24}
-              onClick={() => setIsOpenLogoutDialog(!isOpenLogoutDialog)}
+              onClick={() =>
+                setIsOpenDialog({
+                  ...isOpenDialog,
+                  search: !isOpenDialog.search
+                })
+              }
             />
             <IconButton
               icon="menu"
               size={24}
               onClick={() => setIsOpenSideBar(true)}
             />
+            <HeaderDialog
+              dialogPositionStyle={{
+                top: '60px',
+                right: '0'
+              }}
+              isOpen={isOpenDialog.search}
+              onClose={() =>
+                setIsOpenDialog({
+                  ...isOpenDialog,
+                  search: false
+                })
+              }>
+              <Styled.SearchInput styleType="search" />
+            </HeaderDialog>
             <SideBar
+              isLogin={isLogin}
               isOpen={isOpenSideBar}
               onClose={() => setIsOpenSideBar(false)}
             />

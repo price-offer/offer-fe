@@ -46,6 +46,9 @@ const InputWrapper = styled.div`
 const SearchInput = styled(Input)`
   width: 426px;
   margin: 0;
+  ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {
+    width: 200px;
+  }
 `
 
 const ButtonSection = styled.section`
@@ -54,6 +57,10 @@ const ButtonSection = styled.section`
   ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {
     display: none;
   }
+`
+const LogoutText = styled.p`
+  color: ${({ theme }): string => theme.colors.grayScale90};
+  ${({ theme }): string => theme.fonts.caption01M};
 `
 
 const SellButtonDivider = styled.div`
@@ -100,6 +107,7 @@ export const Styled = {
   SearchInput,
   ButtonSection,
   HeaderAuthButton,
+  LogoutText,
   SellButtonDivider,
   HeaderProfileSection,
   HeaderNickName,

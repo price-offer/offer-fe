@@ -10,7 +10,7 @@
     "storybook": "start-storybook -s public -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --env=jsdom",
-    "cypress": "npx cypress open",
+    "cypress": "npx cypress open --browser chrome",
     "prettier": "prettier '**/*.{json,js,jsx,ts,tsx}' --write",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",

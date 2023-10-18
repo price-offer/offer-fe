@@ -16,9 +16,7 @@ const AlertModal = ({
       <Styled.Container>
         <Styled.Title>{title}</Styled.Title>
         {subTitle && <Styled.SubTitle>{subTitle}</Styled.SubTitle>}
-        {hasCheckIcon && (
-          <Styled.CheckIcon type="checkCircleFill"></Styled.CheckIcon>
-        )}
+        {hasCheckIcon && <Styled.CheckIcon type="checkCircleFill" />}
       </Styled.Container>
       <Styled.ReviewConfirmButton onClick={onClickConfirmButton}>
         {buttonContents}

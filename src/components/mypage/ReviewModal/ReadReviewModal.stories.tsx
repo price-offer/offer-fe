@@ -1,15 +1,21 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { ReadReviewModalProps } from './Read/types'
-import ReviewModal from '.'
+import { ReviewModal } from '.'
 import useModal from '@hooks/useModal'
 
-export default {
-  component: ReviewModal.Read,
-  title: 'MyPage/ReadReviewModal'
-} as Meta<ReadReviewModalProps>
+type ReadReviewModal = typeof ReadReviewModalComponent
 
-const Template: Story<ReadReviewModalProps> = args => {
+const ReadReviewModalComponent = ReviewModal.Read
+const meta: Meta<ReadReviewModal> = {
+  component: ReadReviewModalComponent,
+  title: 'MyPage/ReviewModal/Read'
+}
+
+export default meta
+
+const DefaultWithHooks = (args: ReadReviewModalProps) => {
   const { openModal, closeModal, isOpen } = useModal()
+
   return (
     <>
       <button type="button" onClick={openModal}>
@@ -19,10 +25,12 @@ const Template: Story<ReadReviewModalProps> = args => {
     </>
   )
 }
-export const Default = Template.bind({})
-Default.args = {
-  nickname: '닉네임',
-  productName: '상품이름',
-  content: '리뷰',
-  score: 'smile'
+export const Default: StoryObj<ReadReviewModal> = {
+  args: {
+    nickname: '닉네임',
+    productName: '상품이름',
+    content: '리뷰',
+    score: 'smile'
+  },
+  render: args => <DefaultWithHooks {...args} />
 }

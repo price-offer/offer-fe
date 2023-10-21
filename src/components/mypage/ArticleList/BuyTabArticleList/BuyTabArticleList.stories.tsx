@@ -1,16 +1,20 @@
 import { Text } from '@offer-ui/react'
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import type { BuyTabArticleListProps } from './types'
-import { BuyTabArticleList } from './index'
+import { BuyTabArticleList as BuyTabArticleListComponent } from './index'
 import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { TradeBuyActivityType } from '@constants/app'
 import type { ArticlesElement } from '@types'
 
-export default {
-  component: BuyTabArticleList,
+type BuyTabArticleList = typeof BuyTabArticleListComponent
+
+const meta: Meta<BuyTabArticleList> = {
+  component: BuyTabArticleListComponent,
   title: 'MyPage/ArticleList/BuyTabArticleList'
-} as Meta<BuyTabArticleListProps>
+}
+
+export default meta
 
 const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
   (_, index) => ({
@@ -32,7 +36,7 @@ const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
   })
 )
 
-const Template: Story<BuyTabArticleListProps> = args => {
+const PrimaryWithHooks = (args: BuyTabArticleListProps) => {
   const [activityType, setActivityType] =
     useState<TradeBuyActivityType>('offer')
 
@@ -49,12 +53,11 @@ const Template: Story<BuyTabArticleListProps> = args => {
           {TRADE_ACTIVITY_TYPE.buy[activityType]}
         </Text>
       </div>
-      <BuyTabArticleList {...args} activityType={activityType} />
+      <BuyTabArticleListComponent {...args} activityType={activityType} />
     </>
   )
 }
-export const Primary = Template.bind({})
-Primary.args = {
-  activityType: 'offer',
-  articles
+export const Primary: StoryObj<BuyTabArticleList> = {
+  args: { activityType: 'offer', articles },
+  render: args => <PrimaryWithHooks {...args} />
 }

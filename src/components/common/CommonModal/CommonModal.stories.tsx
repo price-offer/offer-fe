@@ -18,7 +18,13 @@ const DefaultWithHooks = (args: CommonModalProps) => {
 
   return (
     <>
-      <button type="button">open</button>
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen(true)
+        }}>
+        open
+      </button>
       <CommonModalComponent
         {...args}
         isOpen={isOpen}

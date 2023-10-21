@@ -5,12 +5,8 @@ import { useState } from 'react'
 import { HeaderDialog } from './Dialog'
 import { SideBar } from './SideBar'
 import { Styled } from './styled'
-import type {} from './types'
-import { IMAGE } from '@constants/images'
 
 const Header = (): ReactElement => {
-  const { LOGO } = IMAGE
-
   const isLogin = true
 
   const [isOpenDialog, setIsOpenDialog] = useState({
@@ -26,7 +22,7 @@ const Header = (): ReactElement => {
         <Styled.HeaderContent>
           <Styled.LogoInputSection>
             <Styled.LogoButton styleType="ghost">
-              {<Image alt="d" src={LOGO} />}
+              {<Image alt="" height={40} src="/images/logo.svg" width={72} />}
             </Styled.LogoButton>
             <Styled.InputWrapper>
               <Styled.SearchInput

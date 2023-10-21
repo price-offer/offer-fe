@@ -1,6 +1,7 @@
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
+import { Header } from '@components/common/Header'
 import { theme } from '@styles'
 
 const customTheme = {
@@ -17,6 +18,7 @@ if (isUseMock) {
 const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
   return (
     <OfferStyleProvider theme={customTheme}>
+      <Header />
       <Component {...pageProps} />
     </OfferStyleProvider>
   )

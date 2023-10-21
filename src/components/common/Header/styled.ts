@@ -89,9 +89,7 @@ const HeaderNickName = styled.div`
 `
 
 const MenuSection = styled.section`
-  ${({ theme }): string => theme.mediaQuery.desktop} {
-    display: none;
-  }
+  display: none;
   ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {
     display: flex;
   }

@@ -1,15 +1,18 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { AlertModalProps } from './types'
-import { AlertModal } from '.'
+import { AlertModal as AlertModalComponent } from '.'
 import useModal from '@hooks/useModal'
 
-export default {
-  argTypes: {},
-  component: AlertModal,
-  title: 'Common/AlertModal'
-} as Meta<AlertModalProps>
+type AlertModal = typeof AlertModalComponent
 
-const Template: Story<AlertModalProps> = args => {
+const meta: Meta<AlertModal> = {
+  component: AlertModalComponent,
+  title: 'Common/AlertModal'
+}
+
+export default meta
+
+const DefaultWithHooks = (args: AlertModalProps) => {
   const { openModal, closeModal, isOpen } = useModal()
 
   return (
@@ -21,7 +24,7 @@ const Template: Story<AlertModalProps> = args => {
         }}>
         click
       </button>
-      <AlertModal
+      <AlertModalComponent
         {...args}
         isOpen={isOpen}
         onClose={(): void => {
@@ -31,10 +34,13 @@ const Template: Story<AlertModalProps> = args => {
     </>
   )
 }
-export const Default = Template.bind({})
-Default.args = {
-  title: 'Title',
-  subTitle: 'SubTitle',
-  buttonContents: '확인',
-  hasCheckIcon: true
+
+export const Default: StoryObj<AlertModal> = {
+  args: {
+    title: 'Title',
+    subTitle: 'SubTitle',
+    buttonContents: '확인',
+    hasCheckIcon: true
+  },
+  render: args => <DefaultWithHooks {...args} />
 }

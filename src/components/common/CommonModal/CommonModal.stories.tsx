@@ -1,26 +1,52 @@
 import { Button } from '@offer-ui/react'
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import type { CommonModalProps } from './types'
-import { CommonModal } from './index'
+import { CommonModal as CommonModalComponent } from './index'
 
-export default {
-  component: CommonModal,
+type CommonModal = typeof CommonModalComponent
+
+const meta: Meta<CommonModal> = {
+  component: CommonModalComponent,
   title: 'Common/CommonModal'
-} as Meta<CommonModalProps>
+}
 
-const Template: Story<CommonModalProps> = args => (
-  <CommonModal {...args} isOpen />
-)
+export default meta
 
-export const Default = Template.bind({})
-Default.args = {
-  description: '지금 바로 Offer에서 첫 거래를 시작해볼까요?',
-  hasLogo: true,
-  title: '부드러운 냉장고님 반가워요!',
-  buttons: [
-    <Button key="first">첫 판매하기</Button>,
-    <Button key="ok" styleType="ghost">
-      괜찮아요
-    </Button>
-  ]
+const DefaultWithHooks = (args: CommonModalProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen(true)
+        }}>
+        open
+      </button>
+      <CommonModalComponent
+        {...args}
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false)
+        }}
+      />
+    </>
+  )
+}
+
+export const Default: StoryObj<CommonModal> = {
+  args: {
+    description: '지금 바로 Offer에서 첫 거래를 시작해볼까요?',
+    hasLogo: true,
+    title: '부드러운 냉장고님 반가워요!',
+    buttons: [
+      <Button key="first">첫 판매하기</Button>,
+      <Button key="ok" styleType="ghost">
+        괜찮아요
+      </Button>
+    ]
+  },
+  render: args => <DefaultWithHooks {...args} />
 }

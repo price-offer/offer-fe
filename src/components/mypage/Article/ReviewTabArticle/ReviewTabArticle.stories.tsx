@@ -1,31 +1,32 @@
-import type { Meta, Story } from '@storybook/react'
-import type { ReviewTabArticleProps } from './types'
-import { ReviewTabArticle } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
+import { ReviewTabArticle as ReviewTabArticleComponent } from './index'
 
-export default {
-  argTypes: {},
-  component: ReviewTabArticle,
+type ReviewTabArticle = typeof ReviewTabArticleComponent
+
+const meta: Meta<ReviewTabArticle> = {
+  component: ReviewTabArticleComponent,
   title: 'MyPage/Article/ReviewTabArticle'
-} as Meta<ReviewTabArticleProps>
+}
 
-const Template: Story<ReviewTabArticleProps> = args => (
-  <ReviewTabArticle {...args} />
-)
-export const Primary = Template.bind({})
-Primary.args = {
-  id: 6,
-  reviewer: {
-    id: 1,
-    profileImageUrl: '',
-    nickname: '닉네임',
-    offerLevel: 1
+export default meta
+
+export const Primary: StoryObj<ReviewTabArticle> = {
+  args: {
+    id: 6,
+    reviewer: {
+      id: 1,
+      profileImageUrl: '',
+      nickname: '닉네임',
+      offerLevel: 1
+    },
+    article: {
+      id: 1,
+      title: '거래한 상품의 제목'
+    },
+    score: 2,
+    content: '쿨거래 조아요',
+    isWritingAvailableFromCurrentMember: true,
+    createdDate: '2시간 전'
   },
-  article: {
-    id: 1,
-    title: '거래한 상품의 제목'
-  },
-  score: 2,
-  content: '쿨거래 조아요',
-  isWritingAvailableFromCurrentMember: true,
-  createdDate: '2시간 전'
+  render: args => <ReviewTabArticleComponent {...args} />
 }

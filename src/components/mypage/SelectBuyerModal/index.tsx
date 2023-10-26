@@ -18,7 +18,7 @@ export const SelectBuyerModal = ({
   }
 
   return (
-    <Styled.SelectBuyerModal isOpen {...props}>
+    <Styled.SelectBuyerModal {...props}>
       <Styled.Header>
         <Styled.CloseIconWrapper>
           <IconButton color="grayScale30" icon="close" size={24} />

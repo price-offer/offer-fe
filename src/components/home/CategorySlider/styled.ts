@@ -1,5 +1,7 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { IconButton, Image } from '@offer-ui/react'
+import { IconButton } from '@offer-ui/react'
+import Image from 'next/image'
 import type { CateGoryBoxWrapperProps } from './types'
 
 export const CategoryHeader = styled.div`
@@ -37,7 +39,10 @@ export const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
   max-width: 1200px;
   height: 118px;
 
+  cursor: pointer;
+
   transition: 0.1s;
+
   ${({ theme }): string => theme.mediaQuery.desktop} {
     transform: ${({ isMoveFromArrowButton }): string =>
       `translateX(-${isMoveFromArrowButton}px)`};
@@ -119,17 +124,42 @@ export const CategoryItem = styled.div`
     height: 88px;
   }
 `
-export const CategoryImg = styled(Image)`
+
+export const CategoryImgWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 108px;
   height: 86px;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.radius.round12};
+
+    background-color: ${theme.colors.grayScale05};
+
+    ${theme.mediaQuery.tablet} {
+      width: 80px;
+      height: 80px;
+    }
+
+    ${theme.mediaQuery.mobile} {
+      width: 60px;
+      height: 60px;
+    }
+  `};
+`
+
+export const CategoryImg = styled(Image)`
   border-radius: 12px;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    width: 80px;
-    height: 80px;
+    width: 52px;
+    height: 52px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
   }
 `
 export const CateGoryName = styled.div`
@@ -156,6 +186,7 @@ export const Styled = {
   LeftArrow,
   RightArrow,
   CategoryItem,
+  CategoryImgWrapper,
   CategoryImg,
   CateGoryName
 }

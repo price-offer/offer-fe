@@ -36,18 +36,18 @@ const AvatarWrapper = styled.div`
 
 const CameraIconButton = styled.button`
   position: absolute;
-  bottom: 4px;
   right: 4px;
-  padding: 5px;
+  bottom: 4px;
 
+  padding: 5px;
   border: none;
 
   cursor: pointer;
 
   ${({ theme }): SerializedStyles => css`
-    background-color: ${theme.colors.grayScale50};
-
     border-radius: ${theme.radius.round100};
+
+    background-color: ${theme.colors.grayScale50};
   `};
 `
 

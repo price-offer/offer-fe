@@ -2,10 +2,11 @@ import styled from '@emotion/styled'
 import { Button, Input } from '@offer-ui/react'
 
 const HeaderWrapper = styled.header`
-  display: flex;
-  justify-content: center;
   position: absolute;
   top: 0;
+  display: flex;
+  justify-content: center;
+
   width: 100%;
   height: 68px;
   border-bottom: 1px solid #e5e5e5;
@@ -15,10 +16,11 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
-  max-width: 1200px;
+
   width: 100%;
+  max-width: 1200px;
   height: 68px;
+  padding: 14px 0;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     padding: 16px 24px;
   }
@@ -68,19 +70,21 @@ const SellButtonDivider = styled.div`
 `
 
 const HeaderAuthButton = styled(Button)`
-  color: ${({ theme }): string => theme.colors.grayScale70};
-  ${({ theme }): string => theme.fonts.body02R};
   margin: 0;
   padding: 0;
+
+  color: ${({ theme }): string => theme.colors.grayScale70};
+  ${({ theme }): string => theme.fonts.body02R};
 `
 
 const HeaderProfileSection = styled.section`
   position: relative;
   display: flex;
-  align-items: center;
   gap: 4px;
-  margin-left: 33px;
+  align-items: center;
+
   margin-right: 24px;
+  margin-left: 33px;
 `
 
 const HeaderNickName = styled.div`

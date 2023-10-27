@@ -17,7 +17,7 @@ export const Read = ({
       <CommonTitleContainer nickname={nickname} productName={productName} />
       <Styled.ReviewIconContainer>
         <Styled.ReviewState isFill>
-          <Styled.ReviewIcon type={`${score}Fill`}></Styled.ReviewIcon>
+          <Styled.ReviewIcon type={`${score}Fill`} />
           <p>{MOCK_SCORE.find(scoreItem => scoreItem.state === score)?.text}</p>
         </Styled.ReviewState>
       </Styled.ReviewIconContainer>

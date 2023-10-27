@@ -99,6 +99,7 @@ const ReviewState = styled.button<StyledReviewStateProps>`
   border: none;
 
   background: none;
+
   * {
     color: ${({ isFill, theme }): string =>
       isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
@@ -112,11 +113,12 @@ const ReviewIcon = styled(Icon)`
 `
 
 const ReadModeReviewContent = styled.div`
-  background: ${({ theme }): string => theme.colors.bgGray02};
-
   width: 100%;
   height: 120px;
   padding: 10px 12px;
+
+  background: ${({ theme }): string => theme.colors.bgGray02};
+
   ${({ theme }): string => theme.fonts.body02M};
 `
 

@@ -36,3 +36,8 @@ export const getOnSaleArticles = async (
   )
   return res.data
 }
+
+export const test = async (): Promise<AxiosResponse<any>> => {
+  const res = await axios.get('/test')
+  return res.data
+}

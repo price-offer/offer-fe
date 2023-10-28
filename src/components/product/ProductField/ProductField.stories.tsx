@@ -1,16 +1,16 @@
-import type { Meta, Story } from '@storybook/react'
-import type { ProductFieldProps } from './types'
-import { ProductField } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
+import { ProductField as ProductFieldComponent } from './index'
 
-export default {
-  component: ProductField,
-  title: 'ProductDetail/ProductField'
-} as Meta<ProductFieldProps>
+type ProductField = typeof ProductFieldComponent
 
-const Template: Story<ProductFieldProps> = args => <ProductField {...args} />
+const meta: Meta<ProductField> = {
+  component: ProductFieldComponent,
+  title: 'Product/ProductField'
+}
 
-export const Default = Template.bind({})
-Default.args = {
-  label: '작성일',
-  value: '1시간 전'
+export default meta
+
+export const Default: StoryObj<ProductField> = {
+  args: { label: '작성일', value: '1시간 전' },
+  render: args => <ProductFieldComponent {...args} />
 }

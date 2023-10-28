@@ -36,14 +36,13 @@ const Description = styled(Text)`
 
 const Body = styled.div<StyledTitleProps>`
   display: flex;
-
   flex-direction: column;
   gap: 4px;
 
-  text-align: center;
-
   margin-top: ${({ hasLogo }): string => (hasLogo ? '20px' : '32px')};
   margin-bottom: 32px;
+
+  text-align: center;
 `
 
 const Icon = styled(IconComponent)`

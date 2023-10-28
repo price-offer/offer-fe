@@ -62,7 +62,7 @@ export const Write = ({
 
       <Styled.ReviewSendButton
         disabled={!reviewState.reviewScore}
-        styleType={reviewState.reviewScore ? 'solidPrimary' : 'ghost'}
+        styleType="solidPrimary"
         onClick={handleConfirm}>
         {'후기 보내기'}
       </Styled.ReviewSendButton>

@@ -33,9 +33,7 @@ export const CommonTitleContainer = ({
   </Styled.TitleContainer>
 )
 
-const ReviewModal = {
+export const ReviewModal = {
   Write,
   Read
 }
-
-export default ReviewModal

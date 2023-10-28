@@ -93,8 +93,7 @@ const ReviewState = styled.button<StyledReviewStateProps>`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  align-items: center;
-  justify-items: center;
+  place-items: center center;
 
   border: none;
 

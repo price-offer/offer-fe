@@ -17,30 +17,22 @@ const NewProductTitle = styled.div`
 const ProductListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  row-gap: 31px;
-
-  column-gap: 28px;
+  gap: 31px 28px;
   ${({ theme }): string => theme.mediaQuery.tablet} {
     grid-template-columns: repeat(4, minmax(10%, 166px));
-    row-gap: 18px;
+    gap: 18px 20px;
     justify-content: center;
-
-    column-gap: 20px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
     grid-template-columns: repeat(2, minmax(30%, 200px));
-    row-gap: 15px;
+    gap: 15px 50px;
     justify-content: center;
-
-    column-gap: 50px;
   }
 
   @media (width <= 510px) {
     grid-template-columns: repeat(2, minmax(10%, 160px));
-    row-gap: 8px;
+    gap: 8px 20px;
     justify-content: center;
-
-    column-gap: 20px;
   }
 `
 

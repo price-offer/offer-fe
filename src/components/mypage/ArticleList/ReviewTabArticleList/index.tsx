@@ -2,7 +2,7 @@ import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import type { ReviewTabArticleListProps } from './types'
-import { ReviewTabArticle } from '@components/mypage'
+import { ReviewTabArticle } from '@components/mypage/Article'
 
 const ReviewTabArticleList = ({
   reviews,

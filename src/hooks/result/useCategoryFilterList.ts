@@ -14,7 +14,7 @@ type ReturnType = {
   onCheckItem(name: string): void
 }
 
-const cateGoryList = [
+export const cateGoryList = [
   {
     code: '전체',
     name: '전체',

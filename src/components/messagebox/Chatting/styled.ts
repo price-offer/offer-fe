@@ -29,7 +29,7 @@ const ChattingDate = styled.span`
   `};
 `
 
-const BubbleWrapper = styled.div<{
+const BubbleContainer = styled.div<{
   isSender?: boolean
   isSectionStart?: boolean
 }>`
@@ -67,7 +67,7 @@ export const Styled = {
   Container,
   DateWrapper,
   ChattingDate,
-  BubbleWrapper,
+  BubbleContainer,
   ReceiveContainer,
   AvatarWrapper
 }

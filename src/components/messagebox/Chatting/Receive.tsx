@@ -13,7 +13,7 @@ export const Receive = ({
     <Styled.AvatarWrapper>
       {isSectionStart && <Avatar alt="avatar" size="xsmall" src={avatarUrl} />}
     </Styled.AvatarWrapper>
-    <Styled.BubbleWrapper>
+    <Styled.BubbleContainer>
       <ChattingBubble messageType="receive">{children}</ChattingBubble>
       {isSectionLast && (
         <span>
@@ -21,6 +21,6 @@ export const Receive = ({
           {isSectionLast}
         </span>
       )}
-    </Styled.BubbleWrapper>
+    </Styled.BubbleContainer>
   </Styled.ReceiveContainer>
 )

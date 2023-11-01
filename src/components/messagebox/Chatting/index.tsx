@@ -4,6 +4,8 @@ import { Styled } from './styled'
 import type { ChattingProps } from './types'
 import { formatDate } from '@utils/format'
 
+export const getDate = (createdDate = '') => createdDate.split('T')[0]
+
 // TODO: 상품 정보 버블 추가
 export const Chatting = ({
   userId,
@@ -16,10 +18,13 @@ export const Chatting = ({
         const prevMessage = list.at(idx - 1)
         const nextMessage = list.at(idx + 1)
         const isSender = senderId === userId
-        const isPrevDateChanged =
-          prevMessage?.createdDate.split('T')[0] !== createdDate.split('T')[0]
-        const isNextDateChanged =
-          nextMessage?.createdDate.split('T')[0] !== createdDate.split('T')[0]
+
+        const currentDate = getDate(createdDate)
+        const prevDate = getDate(prevMessage?.createdDate)
+        const nextDate = getDate(nextMessage?.createdDate)
+        const isPrevDateChanged = prevDate !== currentDate
+        const isNextDateChanged = nextDate !== currentDate
+
         const commonProps = {
           time: formatDate(createdDate, 'A H:m'),
           isSectionStart:

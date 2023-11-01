@@ -92,7 +92,7 @@ const MessageBoxPage = (): ReactElement => {
           </ListContainer>
           <DetailContainer>
             <NoContent
-              hasContent={!!roomId}
+              hasContent={Boolean(roomId)}
               image={{
                 url: '/images/message.svg',
                 width: '110px',

@@ -8,7 +8,7 @@ export const Send = ({
   children,
   time
 }: SendProps) => (
-  <Styled.BubbleWrapper isSectionStart={isSectionStart} isSender>
+  <Styled.BubbleContainer isSectionStart={isSectionStart} isSender>
     {isSectionLast && (
       <span>
         {time}
@@ -16,5 +16,5 @@ export const Send = ({
       </span>
     )}
     <ChattingBubble messageType="send">{children}</ChattingBubble>
-  </Styled.BubbleWrapper>
+  </Styled.BubbleContainer>
 )

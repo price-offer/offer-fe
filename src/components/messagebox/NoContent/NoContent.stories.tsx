@@ -1,37 +1,42 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import type { NoContentProps } from './types'
-import { NoContent } from './index'
+import { NoContent as NoContentComponent } from './index'
 
-export default {
-  component: NoContent,
+type NoContent = typeof NoContentComponent
+
+const meta: Meta<NoContent> = {
+  component: NoContentComponent,
   title: 'Messagebox/NoContent'
-} as Meta<NoContentProps>
+}
 
-const Template: Story<NoContentProps> = args => {
-  const [show, setShow] = useState(false)
+export default meta
+
+const NoContentWithHooks: StoryObj<NoContent>['render'] = args => {
+  const [hasContent, setHasContent] = useState(false)
 
   const handleClickButton = () => {
-    setShow(prev => !prev)
+    setHasContent(prev => !prev)
   }
 
   return (
     <>
       <button type="button" onClick={handleClickButton}>
-        {show ? 'no show' : 'show'}
+        {hasContent ? 'no content' : 'has content'}
       </button>
-      <NoContent {...args}>
+      <NoContentComponent hasContent={hasContent} {...args}>
         <div>has content</div>
-      </NoContent>
+      </NoContentComponent>
     </>
   )
 }
-export const Default = Template.bind({})
-Default.args = {
-  image: {
-    url: '/images/message.svg',
-    width: '110px',
-    height: '90px'
+export const Default: StoryObj<NoContent> = {
+  args: {
+    image: {
+      url: '/images/message.svg',
+      width: '110px',
+      height: '90px'
+    },
+    message: '쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.'
   },
-  message: '쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.'
+  render: args => <NoContentWithHooks {...args} />
 }

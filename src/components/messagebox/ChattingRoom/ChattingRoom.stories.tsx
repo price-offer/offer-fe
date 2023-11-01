@@ -1,14 +1,16 @@
-import type { Meta, Story } from '@storybook/react'
-import type { ChattingRoomProps } from './types'
-import { ChattingRoom } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
+import { ChattingRoom as ChattingRoomComponent } from './index'
 
-export default {
-  component: ChattingRoom,
+type ChattingRoom = typeof ChattingRoomComponent
+
+const meta: Meta<ChattingRoom> = {
+  component: ChattingRoomComponent,
   title: 'Messagebox/ChattingRoom'
-} as Meta<ChattingRoomProps>
+}
 
-const Template: Story<ChattingRoomProps> = args => <ChattingRoom {...args} />
-export const Default = Template.bind({})
-Default.args = {
-  id: 1
+export default meta
+
+export const Default: StoryObj<ChattingRoom> = {
+  args: { id: 1 },
+  render: args => <ChattingRoomComponent {...args} />
 }

@@ -8,10 +8,6 @@ export default {
 } as Meta
 
 const Template: Story = () => {
-  return (
-    <>
-      <Header />
-    </>
-  )
+  return <Header />
 }
 export const Default = Template.bind({})

@@ -10,18 +10,16 @@ export const handlers = [
     return HttpResponse.json<MyProfile>(myProfile, { status: 200 })
   }),
 
-  http.get('/test', async () => {
-    return HttpResponse.json<MyProfile>(myProfile, { status: 200 })
-  }),
-
   /**
    * 타 사용자 프로필 정보 조회
    * members/{member-id}
    * 현재는 member-id 1과 2만 존재
    */
   http.get('/members/:memberId', ({ params }) => {
-    const id = params.memberId as string
+    const id = Number(params.memberId)
+
     memberProfileList[id]
+
     return HttpResponse.json<MemberProfile>(memberProfileList[id], {
       status: 200
     })
@@ -39,7 +37,6 @@ export const handlers = [
    */
   http.get('/articles/:articleId', async ({ request, params }) => {
     const id = params.articleId as string
-
     const tradeStatus = (await request.json()) as TradeStatus
 
     articles.elements = articles.elements.map(article =>

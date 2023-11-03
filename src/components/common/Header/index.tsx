@@ -2,7 +2,7 @@ import { Avatar, Divider, IconButton, Button } from '@offer-ui/react'
 import Image from 'next/image'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
-import { HeaderDialog } from './Dialog'
+import { Dialog } from '../Dialog'
 import { SideBar } from './SideBar'
 import { Styled } from './styled'
 
@@ -22,7 +22,14 @@ const Header = (): ReactElement => {
         <Styled.HeaderContent>
           <Styled.LogoInputSection>
             <Styled.LogoButton styleType="ghost">
-              {<Image alt="" height={40} src="/images/logo.svg" width={72} />}
+              {
+                <Image
+                  alt="Logo"
+                  height={40}
+                  src="/images/logo.svg"
+                  width={72}
+                />
+              }
             </Styled.LogoButton>
             <Styled.InputWrapper>
               <Styled.SearchInput
@@ -41,22 +48,20 @@ const Header = (): ReactElement => {
                 <Styled.HeaderAuthButton styleType="ghost" width="37px">
                   쪽지함
                 </Styled.HeaderAuthButton>
-                <Styled.HeaderProfileSection>
+                <Styled.HeaderProfileSection
+                  onClick={() =>
+                    setIsOpenDialog({
+                      ...isOpenDialog,
+                      logout: !isOpenDialog.logout
+                    })
+                  }>
                   <Avatar alt="profile-image" size="xsmall" src="" />
                   <Styled.HeaderNickName>부드러운 냉장고</Styled.HeaderNickName>
-                  <IconButton
-                    icon="triangleDown"
-                    onClick={() =>
-                      setIsOpenDialog({
-                        ...isOpenDialog,
-                        logout: !isOpenDialog.logout
-                      })
-                    }
-                  />
-                  <HeaderDialog
+                  <IconButton icon="triangleDown" />
+                  <Dialog
                     dialogPositionStyle={{
                       top: '35px',
-                      right: '-105px'
+                      left: '15px'
                     }}
                     handleClickDialog={() =>
                       setIsOpenDialog({
@@ -72,7 +77,7 @@ const Header = (): ReactElement => {
                       })
                     }>
                     <Styled.LogoutText>로그아웃</Styled.LogoutText>
-                  </HeaderDialog>
+                  </Dialog>
                 </Styled.HeaderProfileSection>
               </>
             ) : (
@@ -107,7 +112,7 @@ const Header = (): ReactElement => {
               size={24}
               onClick={() => setIsOpenSideBar(true)}
             />
-            <HeaderDialog
+            <Dialog
               dialogPositionStyle={{
                 top: '60px',
                 right: '0'
@@ -120,7 +125,7 @@ const Header = (): ReactElement => {
                 })
               }>
               <Styled.SearchInput styleType="search" />
-            </HeaderDialog>
+            </Dialog>
             <SideBar
               isLogin={isLogin}
               isOpen={isOpenSideBar}

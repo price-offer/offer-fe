@@ -19,21 +19,17 @@ const DialogBox = styled.div`
   border: 1px solid var(--gray-scale-gray-10, #e8e8ea);
   border-radius: 4px;
 
-  background: var(--gray-scale-white, #fff);
+  background: ${({ theme }): string => theme.colors.white};
   box-shadow: 0 2px 6px 0 rgb(0 0 0 / 15%);
 `
 
-const DialogContent = styled.span`
+const DialogContent = styled.div`
   display: flex;
   align-content: center;
   align-self: center;
 
   text-align: center;
 `
-
-export type StyledReviewStateProps = {
-  isFill: boolean
-}
 
 export const Styled = {
   DialogWrapper,

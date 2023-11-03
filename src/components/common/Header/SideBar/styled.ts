@@ -5,7 +5,7 @@ const SidebarOverlay = styled.div<StyledSideBarWrapperProps>`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: ${({ theme }): number => theme.zIndex.modal};
   display: ${({ isOpen }): string => (isOpen ? 'block' : 'none')};
 
   width: 100%;
@@ -20,7 +20,7 @@ const SideBarWrapper = styled.div<StyledSideBarWrapperProps>`
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 11;
+  z-index: ${({ theme }): number => theme.zIndex.modalIcon};
   overflow-x: hidden;
 
   width: ${({ isOpen }): string => (isOpen ? '300px' : '0')};
@@ -33,6 +33,7 @@ const SideBarWrapper = styled.div<StyledSideBarWrapperProps>`
 `
 
 const SidebarContent = styled.div`
+  width: max-content;
   padding: 68px 24px;
 `
 

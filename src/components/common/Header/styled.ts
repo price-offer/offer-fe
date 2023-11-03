@@ -21,6 +21,9 @@ const HeaderContent = styled.div`
   max-width: 1200px;
   height: 68px;
   padding: 14px 0;
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    margin: 0 24px;
+  }
   ${({ theme }): string => theme.mediaQuery.tablet} {
     padding: 16px 24px;
   }
@@ -85,6 +88,8 @@ const HeaderProfileSection = styled.section`
 
   margin-right: 24px;
   margin-left: 33px;
+
+  cursor: pointer;
 `
 
 const HeaderNickName = styled.div`

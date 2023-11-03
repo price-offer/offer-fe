@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 
 export type DialogProps = {
-  isOpen: boolean
   children: ReactNode
   dialogPositionStyle?: {
     top?: string
@@ -11,8 +10,4 @@ export type DialogProps = {
   }
   onClose(): void
   handleClickDialog?(): void
-}
-
-export type StyledDialogWrapperProps = {
-  isOpen: boolean
 }

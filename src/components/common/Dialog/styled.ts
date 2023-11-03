@@ -1,9 +1,8 @@
 import styled from '@emotion/styled'
-import type { StyledDialogWrapperProps } from './types'
 
-const DialogWrapper = styled.div<StyledDialogWrapperProps>`
+const DialogWrapper = styled.div`
   position: absolute;
-  display: ${({ isOpen }): string => (isOpen ? 'flex' : 'none')};
+  display: 'flex';
 `
 const DialogOverlay = styled.div`
   position: fixed;

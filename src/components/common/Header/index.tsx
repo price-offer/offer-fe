@@ -2,9 +2,10 @@ import { Avatar, Divider, IconButton, Button } from '@offer-ui/react'
 import Image from 'next/image'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
-import { Dialog } from '../Dialog'
+import { SearchArea } from './SearchArea'
 import { SideBar } from './SideBar'
 import { Styled } from './styled'
+import { Dialog } from '../Dialog'
 
 const Header = (): ReactElement => {
   const isLogin = true
@@ -22,14 +23,7 @@ const Header = (): ReactElement => {
         <Styled.HeaderContent>
           <Styled.LogoInputSection>
             <Styled.LogoButton styleType="ghost">
-              {
-                <Image
-                  alt="Logo"
-                  height={40}
-                  src="/images/logo.svg"
-                  width={72}
-                />
-              }
+              <Image alt="Logo" height={40} src="/images/logo.svg" width={72} />
             </Styled.LogoButton>
             <Styled.InputWrapper>
               <Styled.SearchInput
@@ -58,26 +52,28 @@ const Header = (): ReactElement => {
                   <Avatar alt="profile-image" size="xsmall" src="" />
                   <Styled.HeaderNickName>부드러운 냉장고</Styled.HeaderNickName>
                   <IconButton icon="triangleDown" />
-                  <Dialog
-                    dialogPositionStyle={{
-                      top: '35px',
-                      left: '15px'
-                    }}
-                    handleClickDialog={() =>
-                      setIsOpenDialog({
-                        ...isOpenDialog,
-                        logout: !isOpenDialog.logout
-                      })
-                    }
-                    isOpen={isOpenDialog.logout}
-                    onClose={() =>
-                      setIsOpenDialog({
-                        ...isOpenDialog,
-                        logout: false
-                      })
-                    }>
-                    <Styled.LogoutText>로그아웃</Styled.LogoutText>
-                  </Dialog>
+
+                  {isOpenDialog.logout && (
+                    <Dialog
+                      dialogPositionStyle={{
+                        top: '35px',
+                        left: '15px'
+                      }}
+                      handleClickDialog={() =>
+                        setIsOpenDialog({
+                          ...isOpenDialog,
+                          logout: !isOpenDialog.logout
+                        })
+                      }
+                      onClose={() =>
+                        setIsOpenDialog({
+                          ...isOpenDialog,
+                          logout: false
+                        })
+                      }>
+                      <Styled.LogoutText>로그아웃</Styled.LogoutText>
+                    </Dialog>
+                  )}
                 </Styled.HeaderProfileSection>
               </>
             ) : (
@@ -112,28 +108,27 @@ const Header = (): ReactElement => {
               size={24}
               onClick={() => setIsOpenSideBar(true)}
             />
-            <Dialog
-              dialogPositionStyle={{
-                top: '60px',
-                right: '0'
-              }}
-              isOpen={isOpenDialog.search}
-              onClose={() =>
-                setIsOpenDialog({
-                  ...isOpenDialog,
-                  search: false
-                })
-              }>
-              <Styled.SearchInput styleType="search" />
-            </Dialog>
-            <SideBar
-              isLogin={isLogin}
-              isOpen={isOpenSideBar}
-              onClose={() => setIsOpenSideBar(false)}
-            />
           </Styled.MenuSection>
         </Styled.HeaderContent>
       </Styled.HeaderWrapper>
+
+      {isOpenDialog.search && (
+        <SearchArea
+          isOpen={isOpenDialog.search}
+          onClose={() =>
+            setIsOpenDialog({
+              ...isOpenDialog,
+              search: false
+            })
+          }
+        />
+      )}
+
+      <SideBar
+        isLogin={isLogin}
+        isOpen={isOpenSideBar}
+        onClose={() => setIsOpenSideBar(false)}
+      />
     </>
   )
 }

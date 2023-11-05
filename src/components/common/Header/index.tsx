@@ -59,12 +59,6 @@ const Header = (): ReactElement => {
                         top: '35px',
                         left: '15px'
                       }}
-                      handleClickDialog={() =>
-                        setIsOpenDialog({
-                          ...isOpenDialog,
-                          logout: !isOpenDialog.logout
-                        })
-                      }
                       onClose={() =>
                         setIsOpenDialog({
                           ...isOpenDialog,

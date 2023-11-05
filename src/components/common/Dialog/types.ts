@@ -9,5 +9,4 @@ export type DialogProps = {
     bottom?: string
   }
   onClose(): void
-  handleClickDialog?(): void
 }

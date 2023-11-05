@@ -1,8 +1,7 @@
-import type { ReactNode } from 'react'
 import type { ColorKeys } from '@styles/themes'
 import type { StyledProps } from '@types'
 
-export type NoContentProps = {
+export type MessageBoxPlaceholderProps = {
   color?: ColorKeys
   message: string
   image?: {
@@ -10,8 +9,9 @@ export type NoContentProps = {
     width: string
     height: string
   }
-  hasContent?: boolean
-  children: ReactNode
 }
 
-export type StyledMessageProps = StyledProps<NoContentProps, 'color'>
+export type StyledMessageProps = StyledProps<
+  MessageBoxPlaceholderProps,
+  'color'
+>

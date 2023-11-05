@@ -1,17 +1,13 @@
 import { Image } from '@offer-ui/react'
 import { Styled } from './styled'
-import type { NoContentProps } from './types'
+import type { MessageBoxPlaceholderProps } from './types'
 
-export const NoContent = ({
+export const MessageBoxPlaceholder = ({
   image,
   color = 'grayScale50',
-  message,
-  hasContent = false,
-  children
-}: NoContentProps) => {
-  return hasContent ? (
-    <>{children}</>
-  ) : (
+  message
+}: MessageBoxPlaceholderProps) => {
+  return (
     <Styled.Container>
       {image && (
         <div>

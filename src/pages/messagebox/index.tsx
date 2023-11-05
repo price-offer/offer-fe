@@ -2,7 +2,13 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
 import { useState, type ReactElement, useEffect } from 'react'
-import { MessagePreview, Tabs, Tab, ChattingRoom, NoContent } from '@components'
+import {
+  MessagePreview,
+  Tabs,
+  Tab,
+  ChattingRoom,
+  MessageBoxPlaceholder
+} from '@components'
 import useModal from '@hooks/useModal'
 
 type TabType = 'all' | 'buy' | 'sell'
@@ -70,15 +76,8 @@ const MessageBoxPage = (): ReactElement => {
               </div>
             </ListHeader>
             <MessageList>
-              <NoContent
-                hasContent={LIST_MOCK.length > 0}
-                image={{
-                  url: '/images/mail.png',
-                  width: '90px',
-                  height: '90px'
-                }}
-                message={`쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.`}>
-                {LIST_MOCK.map(({ id, ...messageInfo }) => (
+              {LIST_MOCK.length > 0 ? (
+                LIST_MOCK.map(({ id, ...messageInfo }) => (
                   <MessagePreview
                     key={id}
                     id={id}
@@ -86,21 +85,32 @@ const MessageBoxPage = (): ReactElement => {
                     onClick={handleSelectRoom}
                     {...messageInfo}
                   />
-                ))}
-              </NoContent>
+                ))
+              ) : (
+                <MessageBoxPlaceholder
+                  image={{
+                    url: '/images/mail.png',
+                    width: '90px',
+                    height: '90px'
+                  }}
+                  message={`쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.`}
+                />
+              )}
             </MessageList>
           </ListContainer>
           <DetailContainer>
-            <NoContent
-              hasContent={Boolean(roomId)}
-              image={{
-                url: '/images/message.svg',
-                width: '110px',
-                height: '90px'
-              }}
-              message="쪽지할 상대를 선택해주세요.">
-              {roomId && <ChattingRoom id={roomId} onClose={handleCloseRoom} />}
-            </NoContent>
+            {roomId ? (
+              <ChattingRoom id={roomId} onClose={handleCloseRoom} />
+            ) : (
+              <MessageBoxPlaceholder
+                image={{
+                  url: '/images/message.svg',
+                  width: '110px',
+                  height: '90px'
+                }}
+                message="쪽지할 상대를 선택해주세요."
+              />
+            )}
           </DetailContainer>
         </Container>
       </Page>

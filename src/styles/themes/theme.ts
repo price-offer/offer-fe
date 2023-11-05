@@ -5,6 +5,7 @@ import { ctaButton } from './ctaButton'
 import { fonts } from './fonts'
 import { input } from './input'
 import { mediaQuery } from './mediaQuery'
+import { mixins } from './mixins'
 import { radius } from './radius'
 import { selectBox } from './selectBox'
 import { zIndex } from './zIndex'
@@ -19,5 +20,6 @@ export const theme = {
   mediaQuery,
   radius,
   selectBox,
-  zIndex
+  zIndex,
+  mixins
 }

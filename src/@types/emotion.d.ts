@@ -9,7 +9,8 @@ import type {
   MediaQuery,
   Radius,
   SelectBox,
-  ZIndex
+  ZIndex,
+  Mixins
 } from '@themes'
 
 declare module '@emotion/react' {
@@ -25,5 +26,6 @@ declare module '@emotion/react' {
     input: Input
     ctaButton: CtaButton
     selectBox: SelectBox
+    mixins: Mixins
   }
 }

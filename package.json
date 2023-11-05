@@ -25,6 +25,7 @@
     "axios": "^1.2.3",
     "jotai": "^2.4.3",
     "jotai-tanstack-query": "^0.7.2",
+    "dayjs": "^1.11.10",
     "next": "^13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"

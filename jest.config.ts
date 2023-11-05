@@ -39,7 +39,9 @@ const config: Config.InitialOptions = {
 
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
 
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect']
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+
+  testPathIgnorePatterns: ['<rootDir>/src/tests/e2e']
 }
 
 export default config

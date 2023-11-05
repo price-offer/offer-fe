@@ -16,6 +16,8 @@
     "mypage",
     "Pretendard",
     "stylelint",
-    "unoptimized"
+    "tanstack",
+    "unoptimized",
+    "jotai"
   ]
 }

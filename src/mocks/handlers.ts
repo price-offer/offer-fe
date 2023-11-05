@@ -18,8 +18,6 @@ export const handlers = [
   http.get('/members/:memberId', ({ params }) => {
     const id = Number(params.memberId)
 
-    memberProfileList[id]
-
     return HttpResponse.json<MemberProfile>(memberProfileList[id], {
       status: 200
     })

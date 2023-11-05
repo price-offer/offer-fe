@@ -1,11 +1,7 @@
 import { Styled } from './styled'
 import type { DialogProps } from './types'
 
-export const Dialog = ({
-  onClose,
-  dialogPositionStyle,
-  children
-}: DialogProps) => {
+const Dialog = ({ onClose, dialogPositionStyle, children }: DialogProps) => {
   return (
     <>
       <Styled.DialogWrapper style={dialogPositionStyle}>
@@ -17,3 +13,5 @@ export const Dialog = ({
     </>
   )
 }
+
+export { Dialog, DialogProps }

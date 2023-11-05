@@ -43,7 +43,7 @@ export const SideBar = ({
               '로그인/회원가입'
             )}
           </Styled.SideBarAuthSection>
-          <Divider direction="horizontal" gap={16} />
+          <Divider direction="horizontal" gap={16} length="259px" />
           <Styled.SidebarMenuSection>
             {NAV_DATA.map((item, index) => {
               return (

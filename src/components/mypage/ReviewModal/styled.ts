@@ -93,8 +93,7 @@ const ReviewState = styled.button<StyledReviewStateProps>`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  align-items: center;
-  justify-items: center;
+  place-items: center center;
 
   border: none;
 
@@ -118,7 +117,6 @@ const ReadModeReviewContent = styled.div`
   padding: 10px 12px;
 
   background: ${({ theme }): string => theme.colors.bgGray02};
-
   ${({ theme }): string => theme.fonts.body02M};
 `
 

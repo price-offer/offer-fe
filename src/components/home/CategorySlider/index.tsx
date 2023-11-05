@@ -2,9 +2,72 @@ import { useMedia } from '@offer-ui/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
-import type { CategorySliderProps } from './types'
+import { IMAGE } from '@constants'
 
-const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
+const CATEGORY_LIST = [
+  {
+    imageUrl: `${IMAGE.CATEGORY_MAN_GOODS}`,
+    title: '남성패션/잡화',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_WOMAN_GOODS}`,
+    title: '여성패션/잡화',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_GAME}`,
+    title: '게임',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_SPORTS}`,
+    title: '스포츠/레저',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_TOY}`,
+    title: '장난감/취미',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_DIGITAL_DEVICE}`,
+    title: '디지털기기',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_CAR}`,
+    title: '자동차/공구',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_APPLIANCE}`,
+    title: '생활가전',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_DIGITAL_FURNITURE}`,
+    title: '가구/인테리어',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_BOOK}`,
+    title: '도서/티켓/음반',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_PET_GOODS}`,
+    title: '반려동물용품',
+    url: 'string'
+  },
+  {
+    imageUrl: `${IMAGE.CATEGORY_MORE}`,
+    title: '더보기',
+    url: 'string'
+  }
+]
+
+const CategorySlider = (): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [isDrag, setIsDrag] = useState(false)
   const [startX, setStartX] = useState<number>(0)
@@ -75,6 +138,7 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
       <Styled.CateGoryWrapper>
         <Styled.CateGoryBox
           ref={containerRef}
+          data-test-id="category_scroll_area"
           onMouseUp={onDragEnd}
           onTouchEnd={onDragEnd}
           onTouchMove={isDrag ? onDragMove : undefined}
@@ -105,18 +169,22 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
           )}
           <Styled.CateGoryBoxWrapper
             isMoveFromArrowButton={isMoveFromArrowButton}>
-            {imageList.map(cateGory => (
+            {CATEGORY_LIST.map(cateGory => (
               <Styled.CategoryItem
                 key={cateGory.title}
                 onClick={(): void => {
                   alert(cateGory.title)
                 }}>
-                <Styled.CategoryImg
-                  key={cateGory.title}
-                  alt={`category-${cateGory.title}`}
-                  src={cateGory.imageUrl}
-                />
-                <Styled.CateGoryName> {cateGory.title}</Styled.CateGoryName>
+                <Styled.CategoryImgWrapper>
+                  <Styled.CategoryImg
+                    key={cateGory.title}
+                    alt={`category-${cateGory.title}`}
+                    height={58}
+                    src={cateGory.imageUrl}
+                    width={58}
+                  />
+                </Styled.CategoryImgWrapper>
+                <Styled.CateGoryName>{cateGory.title}</Styled.CateGoryName>
               </Styled.CategoryItem>
             ))}
           </Styled.CateGoryBoxWrapper>
@@ -125,4 +193,4 @@ const CategorySlider = ({ imageList }: CategorySliderProps): ReactElement => {
     </>
   )
 }
-export { CategorySlider, CategorySliderProps }
+export { CategorySlider }

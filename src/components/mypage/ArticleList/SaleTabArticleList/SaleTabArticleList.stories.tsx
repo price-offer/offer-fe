@@ -1,19 +1,22 @@
 import { Text } from '@offer-ui/react'
 import { action } from '@storybook/addon-actions'
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import type { SaleTabArticleListProps } from './types'
-import { SaleTabArticleList } from './index'
+import { SaleTabArticleList as SaleTabArticleListComponent } from './index'
 import { TRADE_STATUS } from '@constants'
 import type { ArticlesElement, TradeStatus, TradeStatusCode } from '@types'
 
-export default {
-  argTypes: {},
-  component: SaleTabArticleList,
-  title: 'MyPage/ArticleList/SaleTabArticleList'
-} as Meta<SaleTabArticleListProps>
+type SaleTabArticleList = typeof SaleTabArticleListComponent
 
-const Template: Story<SaleTabArticleListProps> = args => {
+const meta: Meta<SaleTabArticleList> = {
+  component: SaleTabArticleListComponent,
+  title: 'MyPage/ArticleList/SaleTabArticleList'
+}
+
+export default meta
+
+const PrimaryWithHooks = (args: SaleTabArticleListProps) => {
   const [token, setToken] = useState<boolean>(false)
   const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[1])
   const articles = getArticles(tradeStatus.code)
@@ -43,7 +46,11 @@ const Template: Story<SaleTabArticleListProps> = args => {
       <div>
         <Text styleType="subtitle01B">{tradeStatus.name}</Text>
       </div>
-      <SaleTabArticleList {...args} articles={articles} hasToken={token} />
+      <SaleTabArticleListComponent
+        {...args}
+        articles={articles}
+        hasToken={token}
+      />
     </>
   )
 }
@@ -68,11 +75,13 @@ const getArticles = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
   }))
 }
 
-export const Primary = Template.bind({})
-Primary.args = {
-  hasToken: true,
-  articles: [],
-  onChangeTradeStatus: (id: number, status: TradeStatus): void => {
-    action('onChangeTradeStatus')(id, status)
-  }
+export const Primary: StoryObj<SaleTabArticleList> = {
+  args: {
+    hasToken: true,
+    articles: [],
+    onChangeTradeStatus: (id: number, status: TradeStatus): void => {
+      action('onChangeTradeStatus')(id, status)
+    }
+  },
+  render: args => <PrimaryWithHooks {...args} />
 }

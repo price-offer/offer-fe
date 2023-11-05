@@ -1,5 +1,5 @@
-import { IconButton, Divider, Avatar } from '@offer-ui/react'
-import type { ReactElement } from 'react'
+import { IconButton, Divider, Avatar, Radio } from '@offer-ui/react'
+import type { ChangeEvent, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import type { SelectBuyerModalProps } from './types'
@@ -13,8 +13,12 @@ export const SelectBuyerModal = ({
 }: SelectBuyerModalProps): ReactElement => {
   const [selectedBuyerId, setSelectedBuyerId] = useState(0)
 
+  const handleChangeRadio = (e: ChangeEvent<HTMLFormElement>) => {
+    setSelectedBuyerId(Number(e.target.value))
+  }
+
   return (
-    <Styled.SelectBuyerModal isOpen {...props}>
+    <Styled.SelectBuyerModal {...props}>
       <Styled.Header>
         <Styled.CloseIconWrapper>
           <IconButton color="grayScale30" icon="close" size={24} />
@@ -23,7 +27,10 @@ export const SelectBuyerModal = ({
         <p>{productName}</p>
       </Styled.Header>
       <Divider />
-      <Styled.Body>
+      <Styled.Body
+        direction="vertical"
+        formName="buyer"
+        onChange={handleChangeRadio}>
         {buyers.map(
           ({
             id,
@@ -33,12 +40,8 @@ export const SelectBuyerModal = ({
             offerPrice,
             offerTime
           }) => (
-            <Styled.BuyerContainer
-              key={id}
-              isSelected={selectedBuyerId === id}
-              onClick={(): void => {
-                setSelectedBuyerId(id)
-              }}>
+            <Styled.BuyerContainer key={id} isSelected={selectedBuyerId === id}>
+              <Radio.Input formName="buyer" value={`${id}`} />
               <Styled.AvatarWrapper>
                 <Avatar
                   alt="buyer-profile"

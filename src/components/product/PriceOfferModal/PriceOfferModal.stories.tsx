@@ -1,17 +1,41 @@
-import type { Meta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import type { PriceOfferModalProps } from './types'
-import { PriceOfferModal } from './index'
+import { PriceOfferModal as PriceOfferModalComponent } from './index'
 
-export default {
-  component: PriceOfferModal,
+type PriceOfferModal = typeof PriceOfferModalComponent
+
+const meta: Meta<PriceOfferModal> = {
+  component: PriceOfferModalComponent,
   title: 'Product/PriceOfferModal'
-} as Meta<PriceOfferModalProps>
+}
 
-const Template: Story<PriceOfferModalProps> = args => (
-  <PriceOfferModal {...args} />
-)
+export default meta
 
-export const Default = Template.bind({})
-Default.args = {
-  isOpen: true
+const DefaultWithHooks = (args: PriceOfferModalProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen(true)
+        }}>
+        open
+      </button>
+      <PriceOfferModalComponent
+        {...args}
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false)
+        }}
+      />
+    </>
+  )
+}
+
+export const Default: StoryObj<PriceOfferModal> = {
+  args: { isOpen: true },
+  render: args => <DefaultWithHooks {...args} />
 }

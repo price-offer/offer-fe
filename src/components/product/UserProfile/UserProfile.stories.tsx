@@ -1,21 +1,24 @@
-import type { Meta, Story } from '@storybook/react'
-import type { UserProfileProps } from './types'
-import { UserProfile } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
+import { UserProfile as UserProfileComponent } from './index'
 
-export default {
-  title: 'ProductDetail/UserProfile',
-  component: UserProfile
-} as Meta<UserProfileProps>
+type UserProfile = typeof UserProfileComponent
 
-const Template: Story<UserProfileProps> = args => <UserProfile {...args} />
+const meta: Meta<UserProfile> = {
+  title: 'Product/UserProfile',
+  component: UserProfileComponent
+}
 
-export const Default = Template.bind({})
-Default.args = {
-  image: 'https://picsum.photos/200/300',
-  nickName: '신효정',
-  location: '동작구 사당동',
-  level: 1,
-  transactionType: 'all',
-  date: '1시간 전',
-  type: 'offer'
+export default meta
+
+export const Default: StoryObj<UserProfile> = {
+  args: {
+    image: 'https://picsum.photos/200/300',
+    nickName: '신효정',
+    location: '동작구 사당동',
+    level: 1,
+    transactionType: 'all',
+    date: '1시간 전',
+    type: 'offer'
+  },
+  render: args => <UserProfileComponent {...args} />
 }

@@ -9,9 +9,13 @@ import {
 } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
+import type { EditProfileModalProps } from './types'
 
-export const EditProfileModal = (): ReactElement => (
-  <Modal isOpen>
+export const EditProfileModal = ({
+  isOpen,
+  onClose
+}: EditProfileModalProps): ReactElement => (
+  <Modal isOpen={isOpen} onClose={onClose}>
     <Styled.Header>
       <Styled.CloseButtonWrapper>
         <IconButton color="grayScale30" icon="close" size={24} />

@@ -12,5 +12,12 @@
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "cSpell.words": ["Pretendard", "stylelint", "unoptimized"]
+  "cSpell.words": [
+    "mypage",
+    "Pretendard",
+    "stylelint",
+    "tanstack",
+    "unoptimized",
+    "jotai"
+  ]
 }

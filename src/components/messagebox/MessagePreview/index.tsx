@@ -2,6 +2,7 @@ import { Avatar, Image } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { MessagePreviewProps } from './types'
+import { IMAGE } from '@constants'
 import { toLocaleCurrency } from '@utils'
 
 export const MessagePreview = ({
@@ -44,7 +45,7 @@ export const MessagePreview = ({
       <Styled.ImageWrapper>
         <Image
           alt="product"
-          fallbackSrc="/images/checkboard.png"
+          fallbackSrc={IMAGE.CHECKBOARD}
           height="40px"
           src={productInfo.productImageUrl || ''}
           width="40px"

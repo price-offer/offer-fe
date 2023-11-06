@@ -9,6 +9,7 @@ import {
   ChattingRoom,
   MessageBoxPlaceholder
 } from '@components'
+import { IMAGE } from '@constants'
 import useModal from '@hooks/useModal'
 
 type TabType = 'all' | 'buy' | 'sell'
@@ -89,7 +90,7 @@ const MessageBoxPage = (): ReactElement => {
               ) : (
                 <MessageBoxPlaceholder
                   image={{
-                    url: '/images/mail.png',
+                    url: IMAGE.MAIL,
                     width: '90px',
                     height: '90px'
                   }}
@@ -104,7 +105,7 @@ const MessageBoxPage = (): ReactElement => {
             ) : (
               <MessageBoxPlaceholder
                 image={{
-                  url: '/images/message.svg',
+                  url: IMAGE.MESSAGE,
                   width: '110px',
                   height: '90px'
                 }}

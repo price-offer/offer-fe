@@ -10,6 +10,7 @@ import CATEGORY_PET_GOODS from '@assets/images/category_petgoods.svg'
 import CATEGORY_SPORTS from '@assets/images/category_sports.svg'
 import CATEGORY_TOY from '@assets/images/category_toy.svg'
 import CATEGORY_WOMAN_GOODS from '@assets/images/category_womangoods.svg'
+import LOGO from '@assets/images/logo.svg'
 
 type ImageKey = keyof typeof IMAGE
 
@@ -25,7 +26,8 @@ export const IMAGE = {
   CATEGORY_PET_GOODS,
   CATEGORY_SPORTS,
   CATEGORY_TOY,
-  CATEGORY_WOMAN_GOODS
+  CATEGORY_WOMAN_GOODS,
+  LOGO
 }
 
 for (const key in IMAGE) {

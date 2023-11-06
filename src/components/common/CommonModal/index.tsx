@@ -3,6 +3,7 @@ import Image from 'next/image'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { CommonModalProps } from './types'
+import { IMAGE } from '@constants'
 
 const CommonModal = ({
   isOpen = false,
@@ -16,7 +17,7 @@ const CommonModal = ({
     <Styled.ModalContainer isOpen={isOpen} onClose={onClose}>
       <Styled.Header>
         {hasLogo && (
-          <Image alt="logo" height={18} src="/images/logo.svg" width={70} />
+          <Image alt="logo" height={18} src={IMAGE.LOGO} width={70} />
         )}
         <Styled.CloseButtonWrapper>
           <IconButton color="grayScale30" icon="close" onClick={onClose} />

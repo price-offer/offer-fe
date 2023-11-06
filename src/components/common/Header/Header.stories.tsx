@@ -9,5 +9,8 @@ const meta: Meta = {
 export default meta
 
 export const Default: StoryObj = {
+  parameters: {
+    layout: 'fullscreen'
+  },
   render: () => <Header />
 }

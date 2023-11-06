@@ -6,6 +6,7 @@ import { SearchArea } from './SearchArea'
 import { SideBar } from './SideBar'
 import { Styled } from './styled'
 import { Dialog } from '../Dialog'
+import { IMAGE } from '@constants'
 
 const Header = (): ReactElement => {
   const isLogin = true
@@ -23,7 +24,7 @@ const Header = (): ReactElement => {
         <Styled.HeaderContent>
           <Styled.LogoInputSection>
             <Styled.LogoButton styleType="ghost">
-              <Image alt="Logo" height={40} src="/images/logo.svg" width={72} />
+              <Image alt="Logo" height={40} src={IMAGE.LOGO} width={72} />
             </Styled.LogoButton>
             <Styled.InputWrapper>
               <Styled.SearchInput

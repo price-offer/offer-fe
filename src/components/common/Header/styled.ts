@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Button, Input } from '@offer-ui/react'
+import Link from 'next/link'
 
 const HeaderWrapper = styled.header`
   position: absolute;
@@ -78,6 +79,8 @@ const HeaderAuthButton = styled(Button)`
   margin: 0;
   padding: 0;
 
+  background: transparent;
+
   color: ${({ theme }): string => theme.colors.grayScale70};
   ${({ theme }): string => theme.fonts.body02R};
 `
@@ -107,6 +110,13 @@ const MenuSection = styled.section`
   gap: 8px;
 `
 
+const TextLink = styled(Link)`
+  background: transparent;
+
+  color: ${({ theme }) => theme.colors.grayScale90};
+  text-decoration: none;
+`
+
 export const Styled = {
   HeaderWrapper,
   HeaderContent,
@@ -120,5 +130,6 @@ export const Styled = {
   SellButtonDivider,
   HeaderProfileSection,
   HeaderNickName,
-  MenuSection
+  MenuSection,
+  TextLink
 }

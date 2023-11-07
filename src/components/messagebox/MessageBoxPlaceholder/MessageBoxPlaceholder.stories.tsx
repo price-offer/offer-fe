@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { MessageBoxPlaceholder as MessageBoxPlaceholderComponent } from './index'
+import { IMAGE } from '@constants'
 
 type MessageBoxPlaceholder = typeof MessageBoxPlaceholderComponent
 
@@ -35,7 +36,7 @@ const MessageBoxPlaceholderWithHooks: StoryObj<MessageBoxPlaceholder>['render'] 
 export const Default: StoryObj<MessageBoxPlaceholder> = {
   args: {
     image: {
-      url: '/images/message.svg',
+      url: IMAGE.MESSAGE,
       width: '110px',
       height: '90px'
     },

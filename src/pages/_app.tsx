@@ -1,9 +1,9 @@
+import { Layout } from '@layouts'
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
 import { Header } from '@components/common/Header'
-import { Layout } from '@layouts'
 import { theme } from '@styles'
 
 const customTheme = {

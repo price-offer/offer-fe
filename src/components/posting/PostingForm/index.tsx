@@ -3,13 +3,13 @@ import { Text } from '@offer-ui/react'
 import type { ReactElement, ReactNode } from 'react'
 import { useState, useEffect, useRef } from 'react'
 
-export interface PostingFormProps {
+export type PostingFormProps = {
   label: string
   children: ReactNode
 }
 
 const MAX_CONTENT_HEIGHT = 48
-interface StyledPostingFormProps {
+type StyledPostingFormProps = {
   formAlign: FormAlign
 }
 type FormAlign = 'start' | 'center'

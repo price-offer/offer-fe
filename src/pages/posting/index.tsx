@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import {
-  ImageUploader,
+  // ImageUploader,
   Input,
   SelectBox,
   Text,
@@ -11,17 +11,17 @@ import {
 } from '@offer-ui/react'
 import type {
   ImageInfo,
-  UploaderOnChangeHandler,
+  // UploaderOnChangeHandler,
   SelectOnChangeHandler,
   InputProps
 } from '@offer-ui/react'
-import type { ReactElement, ChangeEventHandler } from 'react'
+import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
 import { useState } from 'react'
 import { PostingForm } from '@components'
 import { CATEGORIES, TRADE_METHOD, PRODUCT_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
 
-interface PostForm {
+type PostForm = {
   imageUrls: ImageInfo[] | null
   title: string
   categoryCode: number | null
@@ -35,7 +35,6 @@ interface PostForm {
 type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
-type PostFormKeys = keyof PostForm
 
 const PostingPage = (): ReactElement => {
   const [postForm, setPostForm] = useState<PostForm>({
@@ -53,8 +52,8 @@ const PostingPage = (): ReactElement => {
     tablet: '100%'
   })
 
-  const isCompleteForm = (Object.keys(postForm) as PostFormKeys[])
-    .map(item => !!postForm[item])
+  const isCompleteForm = Object.values(postForm)
+    .map(value => Boolean(value))
     .reduce((prev, cur) => prev && cur, true)
 
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
@@ -64,20 +63,28 @@ const PostingPage = (): ReactElement => {
     })
   }
 
-  const handleUpdateImageUrls: UploaderOnChangeHandler = ({ images }): void => {
-    setPostForm({
-      ...postForm,
-      imageUrls: images
-    })
-  }
+  // const handleUpdateImageUrls: UploaderOnChangeHandler = ({ images }): void => {
+  //   setPostForm({
+  //     ...postForm,
+  //     imageUrls: images
+  //   })
+  // }
 
   const handleUpdatePostForm: HandleUpdatePostForm = (e): void => {
     const { name, value } = e.currentTarget
-    const isSendNumber = name === 'tradeMethodCode'
 
     setPostForm({
       ...postForm,
-      [name]: isSendNumber ? Number(value) : value
+      [name]: value
+    })
+  }
+
+  const handleChangeRadio = (e: ChangeEvent<HTMLFormElement>) => {
+    const { name, value } = e.target
+
+    setPostForm({
+      ...postForm,
+      [name]: Number(value)
     })
   }
 
@@ -101,10 +108,11 @@ const PostingPage = (): ReactElement => {
             </StyledTitleLength>
           </StyledTitleWrapper>
           <div>
+            {/* MEMO: hydration 에러가 나 잠시 주석처리 합니다.
             <ImageUploader
               images={postForm.imageUrls || []}
               onChange={handleUpdateImageUrls}
-            />
+            /> */}
           </div>
         </StyledPostingHeader>
         <StyledDivider gap={20} />
@@ -145,7 +153,7 @@ const PostingPage = (): ReactElement => {
               direction="horizontal"
               formName="productStatusCode"
               items={PRODUCT_STATUS}
-              onChange={handleUpdatePostForm}
+              onChange={handleChangeRadio}
             />
           </StyledRadioPostingForm>
           <StyledRadioPostingForm label="거래 방법">
@@ -153,7 +161,7 @@ const PostingPage = (): ReactElement => {
               direction="horizontal"
               formName="tradeMethodCode"
               items={TRADE_METHOD}
-              onChange={handleUpdatePostForm}
+              onChange={handleChangeRadio}
             />
           </StyledRadioPostingForm>
         </StyledPostingForms>
@@ -166,8 +174,7 @@ const PostingPage = (): ReactElement => {
         </StyledTextareaWrapper>
       </StyledFormWrapper>
       <StyledButtonWrapper>
-        <Button
-          styleType={`${isCompleteForm ? 'solidPrimary' : 'solidDisabled'}`}>
+        <Button disabled={!isCompleteForm} styleType="solidPrimary">
           확인
         </Button>
       </StyledButtonWrapper>
@@ -270,7 +277,10 @@ const StyledTitleInput = styled(Input)`
   `}
 `
 const StyledPostingPage = styled.div`
-  margin: 42px 0 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 42px;
+
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
       margin: 0;
@@ -279,7 +289,7 @@ const StyledPostingPage = styled.div`
     ${theme.mediaQuery.mobile} {
       margin: 0;
     }
-  `}
+  `};
 `
 const StyledTitleWrapper = styled.div`
   position: relative;
@@ -303,6 +313,7 @@ const StyledPostingHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+
   margin: 40px 0;
 
   ${({ theme }): string => `
@@ -331,10 +342,11 @@ const StyledTextareaWrapper = styled.div`
   `}
 `
 const StyledPostingForms = styled.div`
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  margin-top: 20px;
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {

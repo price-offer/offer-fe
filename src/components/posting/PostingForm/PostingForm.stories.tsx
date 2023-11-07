@@ -1,17 +1,18 @@
 import { Input } from '@offer-ui/react'
-import type { Meta, Story } from '@storybook/react'
-import { PostingForm } from './index'
-import type { PostingFormProps } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
 
-export default {
-  title: 'Components/PostingForm',
-  component: PostingForm
-} as Meta<PostingFormProps>
+import { PostingForm as PostingFormComponent } from './index'
 
-const Template: Story<PostingFormProps> = args => <PostingForm {...args} />
+type PostingForm = typeof PostingFormComponent
 
-export const Default = Template.bind({})
-Default.args = {
-  label: '시작가',
-  children: <Input />
+const meta: Meta<PostingForm> = {
+  title: 'Posting/PostingForm',
+  component: PostingFormComponent
+}
+
+export default meta
+
+export const Default: StoryObj<PostingForm> = {
+  args: { label: '시작가', children: <Input /> },
+  render: args => <PostingFormComponent {...args} />
 }

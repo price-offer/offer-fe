@@ -1,18 +1,9 @@
-import styled from '@emotion/styled'
-import { Text } from '@offer-ui/react'
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { useState, useEffect, useRef } from 'react'
-
-export type PostingFormProps = {
-  label: string
-  children: ReactNode
-}
+import { Styled } from './styled'
+import type { FormAlign, PostingFormProps } from './types'
 
 const MAX_CONTENT_HEIGHT = 48
-type StyledPostingFormProps = {
-  formAlign: FormAlign
-}
-type FormAlign = 'start' | 'center'
 
 export const PostingForm = ({
   label,
@@ -39,34 +30,9 @@ export const PostingForm = ({
   }, [])
 
   return (
-    <StyledPostingForm ref={wrapperRef} formAlign={formAlign}>
-      <StyledLabel styleType="body01B">{label}</StyledLabel>
+    <Styled.PostingForm ref={wrapperRef} formAlign={formAlign}>
+      <Styled.Label styleType="body01B">{label}</Styled.Label>
       {children}
-    </StyledPostingForm>
+    </Styled.PostingForm>
   )
 }
-
-const StyledPostingForm = styled.div<StyledPostingFormProps>`
-  display: flex;
-  gap: 20px;
-  align-items: ${({ formAlign }): string => formAlign};
-`
-const StyledLabel = styled(Text)`
-  width: 100px;
-
-  ${({ theme }): string => `
-    ${theme.mediaQuery.tablet} {
-      min-width: 60px;
-      width: 60px;
-
-      ${theme.fonts.body02B}
-    }
-
-    ${theme.mediaQuery.mobile} {
-      min-width: 60px;
-      width: 60px;
-      
-      ${theme.fonts.body02B}
-    }
-  `}
-`

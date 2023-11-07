@@ -9,17 +9,19 @@ const OfferPriceCardWrapper = styled.div`
     return css`
       width: 100%;
       max-width: 478px;
-      background-color: ${colors.white};
       border: solid 1px ${colors.grayScale10};
       border-radius: ${radius.round6};
 
+      background-color: ${colors.white};
+
       ${mediaQuery.tablet} {
         width: 100%;
-        border: none;
         min-width: auto;
+        border: none;
       }
       ${mediaQuery.mobile} {
         flex-direction: column;
+
         min-width: auto;
       }
     `

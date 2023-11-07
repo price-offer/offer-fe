@@ -1,27 +1,28 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Button, Divider as DividerComponent, Text } from '@offer-ui/react'
 
 const OfferPriceCardWrapper = styled.div`
-  ${({ theme }): string => {
+  ${({ theme }) => {
     const { colors, radius, mediaQuery } = theme
 
-    return `
-        width: 478px;
-        min-width: 478px;
-        background-color: ${colors.white};
-        border: solid 1px ${colors.grayScale10};
-        border-radius: ${radius.round6};
+    return css`
+      width: 100%;
+      max-width: 478px;
+      background-color: ${colors.white};
+      border: solid 1px ${colors.grayScale10};
+      border-radius: ${radius.round6};
 
-        ${mediaQuery.tablet} {
-          width: 100%;
-          border: none;
-          min-width: auto;
-         }
-         ${mediaQuery.mobile} {
-          flex-direction: column;
-          min-width: auto;
-         }
-      `
+      ${mediaQuery.tablet} {
+        width: 100%;
+        border: none;
+        min-width: auto;
+      }
+      ${mediaQuery.mobile} {
+        flex-direction: column;
+        min-width: auto;
+      }
+    `
   }}
 `
 

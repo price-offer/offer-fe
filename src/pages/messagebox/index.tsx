@@ -136,7 +136,7 @@ const Page = styled.div`
   overflow: hidden;
 
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 67px);
 `
 
 const Container = styled.div`

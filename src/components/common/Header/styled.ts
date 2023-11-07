@@ -10,6 +10,8 @@ const HeaderWrapper = styled.header`
   width: 100%;
   height: 68px;
   border-bottom: 1px solid #e5e5e5;
+
+  background-color: ${({ theme }) => theme.colors.white};
 `
 
 const HeaderContent = styled.div`

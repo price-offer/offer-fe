@@ -18,6 +18,8 @@
       "@containers": ["containers"],
       "@hooks/*": ["hooks/*"],
       "@hooks": ["hooks"],
+      "@layouts/*": ["layouts/*"],
+      "@layouts": ["layouts"],
       "@pages/*": ["pages/*"],
       "@pages": ["pages"],
       "@styles/*": ["styles/*"],

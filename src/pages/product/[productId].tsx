@@ -299,7 +299,8 @@ const Layout = styled.div`
 
   width: 100%;
   max-width: 1200px;
-  margin: 25px auto 15px;
+  margin: 0 auto 15px;
+  padding-top: 20px;
 
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {

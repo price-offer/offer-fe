@@ -1,3 +1,4 @@
+import { Layout } from '@layouts'
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
@@ -23,7 +24,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
     <QueryClientProvider client={queryClient}>
       <OfferStyleProvider theme={customTheme}>
         <Header />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </OfferStyleProvider>
     </QueryClientProvider>
   )

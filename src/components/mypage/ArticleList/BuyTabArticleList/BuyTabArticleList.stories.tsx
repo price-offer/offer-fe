@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import type { BuyTabArticleListProps } from './types'
 import { BuyTabArticleList as BuyTabArticleListComponent } from './index'
-import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { TradeBuyActivityType } from '@constants/app'
+import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { ArticlesElement } from '@types'
 
 type BuyTabArticleList = typeof BuyTabArticleListComponent

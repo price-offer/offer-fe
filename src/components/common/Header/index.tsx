@@ -1,6 +1,7 @@
 import { Avatar, Divider, IconButton, Button } from '@offer-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { SearchArea } from './SearchArea'
@@ -8,20 +9,26 @@ import { SideBar } from './SideBar'
 import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
+import { OAUTH_URL } from '@constants/oauth'
 import useModal from '@hooks/useModal'
 import { IMAGE } from '@constants'
 
 const Header = (): ReactElement => {
+  const router = useRouter()
   const isLogin = false
+  const { isOpen, openModal, closeModal } = useModal()
+  const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const [isOpenDialog, setIsOpenDialog] = useState({
     logout: false,
     search: false
   })
-  const { isOpen, openModal, closeModal } = useModal()
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false)
 
   const handleOpenLoginModal = () => {
     openModal()
+  }
+
+  const handleClickLogin = () => {
+    router.replace(OAUTH_URL.KAKAO)
   }
 
   return (
@@ -145,7 +152,8 @@ const Header = (): ReactElement => {
             key="kakao-button"
             color="kakao"
             icon="kakao"
-            size="large">
+            size="large"
+            onClick={handleClickLogin}>
             카카오로 시작하기
           </Styled.KaKaoButton>
         ]}

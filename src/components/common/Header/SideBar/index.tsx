@@ -1,9 +1,11 @@
 import { Avatar, Divider, Icon, Badge } from '@offer-ui/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import React from 'react'
 import { Styled } from './styled'
 import type { SideBarProps, NavDataType } from './types'
+import { OAUTH_URL } from '@constants/oauth'
 
 const NAV_DATA: NavDataType = [
   {
@@ -28,12 +30,17 @@ export const SideBar = ({
   isLogin,
   onClose
 }: SideBarProps): ReactElement => {
+  const router = useRouter()
+  const handleClickLogin = () => {
+    router.replace(OAUTH_URL.KAKAO)
+  }
+
   return (
     <>
       <Styled.SidebarOverlay isOpen={isOpen} onClick={onClose} />
       <Styled.SideBarWrapper isOpen={isOpen}>
         <Styled.SidebarContent>
-          <Styled.SideBarAuthSection>
+          <Styled.SideBarAuthSection onClick={handleClickLogin}>
             <Avatar alt="user-profile" size="xsmall" src={''} />
             {isLogin ? (
               <>

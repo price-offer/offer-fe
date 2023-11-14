@@ -21,11 +21,8 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@offer-ui/react": "^0.1.27",
-    "@tanstack/query-core": "^4.36.1",
     "axios": "^1.2.3",
     "dayjs": "^1.11.10",
-    "jotai": "^2.4.3",
-    "jotai-tanstack-query": "^0.7.2",
     "next": "^13.4.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"

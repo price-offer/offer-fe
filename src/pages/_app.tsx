@@ -1,4 +1,5 @@
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
 import { Header } from '@components/common/Header'
@@ -15,12 +16,16 @@ if (isUseMock) {
   await import('../mocks')
 }
 
+const queryClient = new QueryClient()
+
 const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
   return (
-    <OfferStyleProvider theme={customTheme}>
-      <Header />
-      <Component {...pageProps} />
-    </OfferStyleProvider>
+    <QueryClientProvider client={queryClient}>
+      <OfferStyleProvider theme={customTheme}>
+        <Header />
+        <Component {...pageProps} />
+      </OfferStyleProvider>
+    </QueryClientProvider>
   )
 }
 

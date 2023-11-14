@@ -18,16 +18,19 @@ export const http = {
     Axios.get<Response>(url).then(getResult),
   post: <Response = unknown, Request = unknown>(
     url: string,
-    data?: Request
-  ): Promise<Response> => Axios.post<Response>(url, data).then(getResult),
+    payload?: Request
+  ): Promise<Response> => Axios.post<Response>(url, payload).then(getResult),
   put: <Response = unknown, Request = unknown>(
     url: string,
-    data?: Request
-  ): Promise<Response> => Axios.put<Response>(url, data).then(getResult),
-  patch: <Response = unknown, Request = unknown>(url: string, data?: Request) =>
-    Axios.patch<Response>(url, data).then(getResult),
+    payload?: Request
+  ): Promise<Response> => Axios.put<Response>(url, payload).then(getResult),
+  patch: <Response = unknown, Request = unknown>(
+    url: string,
+    payload?: Request
+  ) => Axios.patch<Response>(url, payload).then(getResult),
   delete: <Response = unknown, Request = unknown>(
     url: string,
-    data?: Request
-  ): Promise<Response> => Axios.delete<Response>(url, { data }).then(getResult)
+    payload?: Request
+  ): Promise<Response> =>
+    Axios.delete<Response>(url, { data: payload }).then(getResult)
 }

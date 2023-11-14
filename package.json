@@ -68,6 +68,7 @@
     "jest-environment-jsdom": "^29.6.2",
     "jest-svg-transformer": "^1.0.0",
     "jest-transformer-svg": "^2.0.1",
+    "jotai": "^2.5.1",
     "jsdom": "^20.0.3",
     "lint-staged": "^13.0.3",
     "msw": "^2.0.1",

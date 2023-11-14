@@ -28,9 +28,6 @@ export const http = {
     url: string,
     payload?: Request
   ) => Axios.patch<Response>(url, payload).then(getResult),
-  delete: <Response = unknown, Request = unknown>(
-    url: string,
-    payload?: Request
-  ): Promise<Response> =>
-    Axios.delete<Response>(url, { data: payload }).then(getResult)
+  delete: <Response = unknown>(url: string): Promise<Response> =>
+    Axios.delete<Response>(url).then(getResult)
 }

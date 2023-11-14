@@ -1,5 +1,5 @@
 import type { SampleReq, SampleRes } from './types'
-import { http } from '@utils/http'
+import { http } from '@utils/http/index'
 
 export const getSample = (param: SampleReq) =>
-  http.get<SampleRes>(`/sample?${param}`)
+  http.get<SampleReq, SampleRes>(`/sample`, param)

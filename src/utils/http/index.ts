@@ -14,17 +14,22 @@ const Axios = axios.create({
 const getResult = <T>(response: AxiosResponse<T>): T => response.data
 
 export const http = {
-  get: <Response = unknown>(url: string): Promise<Response> =>
-    Axios.get<Response>(url).then(getResult),
-  post: <Response = unknown, Request = unknown>(
+  get: <Request = unknown, Response = unknown>(
+    url: string,
+    params?: Request
+  ): Promise<Response> =>
+    Axios.get<Response, AxiosResponse<Response>, Request>(url, { params }).then(
+      getResult
+    ),
+  post: <Request = unknown, Response = unknown>(
     url: string,
     payload?: Request
   ): Promise<Response> => Axios.post<Response>(url, payload).then(getResult),
-  put: <Response = unknown, Request = unknown>(
+  put: <Request = unknown, Response = unknown>(
     url: string,
     payload?: Request
   ): Promise<Response> => Axios.put<Response>(url, payload).then(getResult),
-  patch: <Response = unknown, Request = unknown>(
+  patch: <Request = unknown, Response = unknown>(
     url: string,
     payload?: Request
   ) => Axios.patch<Response>(url, payload).then(getResult),

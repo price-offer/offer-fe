@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Text } from '@offer-ui/react'
-import type { StyledPostingFormProps } from './types'
+import type { StyledPostFormProps } from './types'
 
-const PostingForm = styled.div<StyledPostingFormProps>`
+const PostForm = styled.div<StyledPostFormProps>`
   display: flex;
   gap: 20px;
   align-items: ${({ formAlign }): string => formAlign};
@@ -28,6 +28,6 @@ const Label = styled(Text)`
 `
 
 export const Styled = {
-  PostingForm,
+  PostForm,
   Label
 }

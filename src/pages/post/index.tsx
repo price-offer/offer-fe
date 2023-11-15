@@ -17,11 +17,11 @@ import type {
 } from '@offer-ui/react'
 import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
 import { useState } from 'react'
-import { PostingForm } from '@components'
+import { PostForm } from '@components'
 import { CATEGORIES, TRADE_METHOD, PRODUCT_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
 
-type PostForm = {
+type PostFormStatus = {
   imageUrls: ImageInfo[] | null
   title: string
   categoryCode: number | null
@@ -36,8 +36,8 @@ type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
 
-const PostingPage = (): ReactElement => {
-  const [postForm, setPostForm] = useState<PostForm>({
+const PostPage = (): ReactElement => {
+  const [postForm, setPostForm] = useState<PostFormStatus>({
     imageUrls: null,
     title: '',
     categoryCode: null,
@@ -89,7 +89,7 @@ const PostingPage = (): ReactElement => {
   }
 
   return (
-    <StyledPostingPage>
+    <StyledPostPage>
       <StyledSellText styleType="headline02B" tag="p">
         판매하기
       </StyledSellText>
@@ -122,16 +122,16 @@ const PostingPage = (): ReactElement => {
             *
           </StyledRequiredMark>
         </Text>
-        <StyledPostingForms>
-          <PostingForm label="카테고리">
+        <StyledPostForms>
+          <PostForm label="카테고리">
             <SelectBox
               items={CATEGORIES}
               placeholder="선택"
               size="small"
               onChange={handleUpdateCategory}
             />
-          </PostingForm>
-          <PostingForm label="시작가">
+          </PostForm>
+          <PostForm label="시작가">
             <Input
               isPrice
               name="price"
@@ -139,32 +139,32 @@ const PostingPage = (): ReactElement => {
               width={InputSize}
               onChange={handleUpdatePostForm}
             />
-          </PostingForm>
-          <PostingForm label="거래 지역">
+          </PostForm>
+          <PostForm label="거래 지역">
             <Input
               name="tradeArea"
               placeholder="ex. 동작구 사당동"
               width={InputSize}
               onChange={handleUpdatePostForm}
             />
-          </PostingForm>
-          <StyledRadioPostingForm label="상품 상태">
+          </PostForm>
+          <StyledRadioPostForm label="상품 상태">
             <StyledRadio
               direction="horizontal"
               formName="productStatusCode"
               items={PRODUCT_STATUS}
               onChange={handleChangeRadio}
             />
-          </StyledRadioPostingForm>
-          <StyledRadioPostingForm label="거래 방법">
+          </StyledRadioPostForm>
+          <StyledRadioPostForm label="거래 방법">
             <StyledRadio
               direction="horizontal"
               formName="tradeMethodCode"
               items={TRADE_METHOD}
               onChange={handleChangeRadio}
             />
-          </StyledRadioPostingForm>
-        </StyledPostingForms>
+          </StyledRadioPostForm>
+        </StyledPostForms>
         <StyledDivider gap={20} />
         <StyledTextareaWrapper>
           <Text color="grayScale70" styleType="body01M">
@@ -178,11 +178,11 @@ const PostingPage = (): ReactElement => {
           확인
         </Button>
       </StyledButtonWrapper>
-    </StyledPostingPage>
+    </StyledPostPage>
   )
 }
 
-const StyledRadioPostingForm = styled(PostingForm)`
+const StyledRadioPostForm = styled(PostForm)`
   ${({ theme }): string => `
     ${theme.mediaQuery.mobile} {
       align-items: start;
@@ -276,7 +276,7 @@ const StyledTitleInput = styled(Input)`
     }
   `}
 `
-const StyledPostingPage = styled.div`
+const StyledPostPage = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 42px;
@@ -341,7 +341,7 @@ const StyledTextareaWrapper = styled.div`
     }
   `}
 `
-const StyledPostingForms = styled.div`
+const StyledPostForms = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -373,4 +373,4 @@ const StyledFormWrapper = styled.div`
   `}
 `
 
-export default PostingPage
+export default PostPage

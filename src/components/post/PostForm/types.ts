@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
 
-export type PostingFormProps = {
+export type PostFormProps = {
   label: string
   children: ReactNode
 }
 
 export type FormAlign = 'start' | 'center'
-export type StyledPostingFormProps = {
+export type StyledPostFormProps = {
   formAlign: FormAlign
 }

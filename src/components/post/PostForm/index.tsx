@@ -15,6 +15,7 @@ export const PostForm = ({ label, children }: PostFormProps): ReactElement => {
         const { clientHeight: wrapperClientHeight } = wrapperRef.current
         const alignType =
           MAX_CONTENT_HEIGHT < Number(wrapperClientHeight) ? 'start' : 'center'
+
         setFormAlign(alignType)
       }
     }

@@ -1,3 +1,4 @@
+import type { CategoryRes } from '@apis/post-controller/categories/types'
 import type { MyProfile, MemberProfile, Articles, Reviews } from '@types'
 
 export const myProfile: MyProfile = {
@@ -152,4 +153,59 @@ export const reviews: Reviews = {
     isFirstPage: true,
     isLastPage: true
   }
+}
+
+export const categories: CategoryRes = {
+  code: 200,
+  message: '',
+  data: [
+    {
+      name: 'MEN_FASHION',
+      exposureTitle: '남성패션/잡화'
+    },
+    {
+      name: 'WOMEN_FASHION',
+      exposureTitle: '여성패션/잡화'
+    },
+    {
+      name: 'GAME',
+      exposureTitle: '게임'
+    },
+    {
+      name: 'SPORTS',
+      exposureTitle: '스포츠/레저'
+    },
+    {
+      name: 'TOY',
+      exposureTitle: '장난감/취미'
+    },
+    {
+      name: 'DIGITAL',
+      exposureTitle: '디지털기기'
+    },
+    {
+      name: 'CAR',
+      exposureTitle: '자동차/공구'
+    },
+    {
+      name: 'APPLIANCE',
+      exposureTitle: '생활가전'
+    },
+    {
+      name: 'FURNITURE',
+      exposureTitle: '가구/인테리어'
+    },
+    {
+      name: 'BOOKS',
+      exposureTitle: '도서/티켓/음반'
+    },
+    {
+      name: 'PET',
+      exposureTitle: '반려동물용품'
+    },
+    {
+      name: 'OTHER',
+      exposureTitle: '기타 중고물품'
+    }
+  ]
 }

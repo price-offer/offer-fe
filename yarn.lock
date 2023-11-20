@@ -1902,10 +1902,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@offer-ui/react@^0.1.27":
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.1.27.tgz#1136441ee0907e7cca37578b302c93086259c51b"
-  integrity sha512-mYqpBHEzYV7J8Zs0Pc8R3xq5PDT+WcxnDHasUaOv/2CAAKo9zmNFqsKd+uXDTg5iTaCSJTaDrOoFJV9mbU8+Og==
+"@offer-ui/react@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.2.1.tgz#b5f62759d50bf7d162bde790c6b63e33c69bbe8d"
+  integrity sha512-iDkEXXm+ENeZ2xUDC8HShVqL/Mo6emSeV8+u5uy3kYjfHL4TGhgPgE+aLTJ98kmkqYxrCVUq097Eif+D9MCJ7w==
 
 "@open-draft/deferred-promise@^2.2.0":
   version "2.2.0"

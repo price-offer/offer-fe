@@ -1,10 +1,10 @@
 export type PostReq = {
-  sort: string
-  tradeType:
+  sort?: string
+  tradeType?:
     | 'TRADE_TYPE__ALL'
     | 'TRADE_TYPE__FACE_TO_FACE'
     | 'TRADE_TYPE__SHIPPING'
-  category:
+  category?:
     | ''
     | 'MEN_FASHION'
     | 'WOMEN_FASHION'
@@ -18,14 +18,21 @@ export type PostReq = {
     | 'BOOKS'
     | 'PET'
     | 'OTHER'
-  minPrice: number
-  maxPrice: number
-  lastId: number
+  minPrice?: number
+  maxPrice?: number
+  lastId?: number | null
   limit: number
 }
 
 export type PostRes = {
-  data: Post[]
+  code: number
+  message: string
+  data: PostDataInfo
+}
+
+export type PostDataInfo = {
+  posts: Post[]
+  hasNext: boolean
 }
 
 export type Post = {
@@ -34,6 +41,6 @@ export type Post = {
   price: number
   thumnail: string
   location: string
-  createdDate: string
-  favorite: boolean
+  createdAt: string
+  liked: boolean
 }

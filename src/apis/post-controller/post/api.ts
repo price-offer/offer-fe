@@ -1,8 +1,9 @@
-import type { AxiosResponse } from 'axios'
 import axios from 'axios'
-import type { PostReq, PostRes } from './types'
+import type { PostReq, PostDataInfo } from './types'
 
-export const getSample = async (
-  param: PostReq
-): Promise<AxiosResponse<PostRes>> =>
-  axios.get(`https://offer-be.kro.kr/api/post?${param}`)
+export const getPost = async (param: PostReq): Promise<PostDataInfo> => {
+  const res = await axios.get('https://offer-be.kro.kr/api/posts', {
+    params: param
+  })
+  return res.data.data
+}

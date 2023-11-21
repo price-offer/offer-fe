@@ -10,7 +10,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           <Styled.ProductImg
             key={productItem.id}
             alt={`productName-${productItem.title}`}
-            src={productItem.mainImageUrl}
+            src={productItem.thumnail}
             style={{ maxWidth: '276px' }}
           />
           <Styled.HeartButton
@@ -27,7 +27,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </Styled.ProductItemPrice>
         <Styled.ProductItemAddress>
-          {productItem.tradeArea} 방금전
+          {productItem.location} 방금전
         </Styled.ProductItemAddress>
       </div>
     </>

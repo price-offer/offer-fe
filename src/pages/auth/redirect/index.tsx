@@ -1,30 +1,37 @@
-import axios from 'axios'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useLoginQuery } from '@apis'
 
-const BASE_URL = 'https://offer-be.kro.kr'
-
-const RedirectionPage = () => {
+const AuthRedirectionPage = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const [kakaoCode, setKakaoCode] = useState('')
+  const { data: userData } = useLoginQuery(kakaoCode)
 
-  const login = async () => {
-    const code = new URL(window.location.toString()).searchParams.get('code')
+  const getKakaoCode = async () => {
+    const code = searchParams.get('code')
 
     if (code) {
-      try {
-        await axios.get(`${BASE_URL}/api/login/kakao?code=${code}`)
+      setKakaoCode(code)
+    }
+  }
 
-        router.replace('/')
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e)
-      }
+  const updateUserAtom = async () => {
+    if (userData) {
+      router.replace('/')
     }
   }
 
   useEffect(() => {
-    login()
-  }, [])
+    getKakaoCode()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
+
+  useEffect(() => {
+    updateUserAtom()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData])
 }
 
-export default RedirectionPage
+export default AuthRedirectionPage

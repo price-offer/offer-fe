@@ -6,11 +6,16 @@ import type { ProductListProps } from './types'
 import { ProductItem } from '../ProductItem'
 import { useGetPostListQuery } from '@apis/post-controller/post/query'
 
-const ProductList = (): ReactElement => {
+const ProductList = ({ filterOption }: ProductListProps): ReactElement => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(false)
+
   const { data, fetchNextPage, hasNextPage } = useGetPostListQuery({
+    sort: filterOption?.sort,
+    category: filterOption?.category,
     lastId: null,
-    limit: 8
+    limit: 8,
+    minPrice: filterOption?.minPrice,
+    maxPrice: filterOption?.maxPrice
   })
 
   const { ref: isLastPrdRef, inView } = useInView({

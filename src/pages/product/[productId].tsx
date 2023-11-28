@@ -224,7 +224,7 @@ const ProductDetailPage = (): ReactElement => {
         <div>
           <Carousel images={IMAGES_MOCK} isArrow name="product" />
         </div>
-        <div>
+        <Content>
           <div>
             <ProductStatus>
               <ProductStatusSelectBox
@@ -250,7 +250,7 @@ const ProductDetailPage = (): ReactElement => {
               <Text styleType="subtitle01M">원</Text>
             </Text>
           </div>
-          <ProfileDivider gap={16} />
+          <Divider gap={16} />
           <div>
             <Text styleType="headline02B">상품 정보</Text>
             <TransactionContainer>
@@ -258,11 +258,9 @@ const ProductDetailPage = (): ReactElement => {
                 <ProductField key={label} label={label} value={value} />
               ))}
             </TransactionContainer>
-            <Text styleType="body02R" tag="p">
-              {PRODUCT_MOCK.title}
-            </Text>
+            <Description>{PRODUCT_MOCK.title}</Description>
           </div>
-          <ProfileDivider gap={16} />
+          <Divider gap={16} />
           <UserProfile
             image={PRODUCT_MOCK.author.profileImageUrl}
             level={1}
@@ -270,7 +268,7 @@ const ProductDetailPage = (): ReactElement => {
             nickName={PRODUCT_MOCK.author.nickname}
             type="basic"
           />
-        </div>
+        </Content>
       </Main>
       <MainDivider size="bold" />
       <PriceOfferCard isLike={false} likeCount={3} offerList={OFFERS_MOCK} />
@@ -278,16 +276,6 @@ const ProductDetailPage = (): ReactElement => {
   )
 }
 
-const ProfileDivider = styled(Divider)`
-  ${({ theme }): SerializedStyles => css`
-    ${theme.mediaQuery.tablet} {
-      margin: 20px 0;
-    }
-    ${theme.mediaQuery.mobile} {
-      margin: 20px 0;
-    }
-  `}
-`
 const ProductStatus = styled.div`
   display: flex;
   align-items: center;
@@ -299,7 +287,8 @@ const Layout = styled.div`
 
   width: 100%;
   max-width: 1200px;
-  margin: 25px auto 15px;
+  margin: 0 auto 15px;
+  padding-top: 20px;
 
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {
@@ -307,7 +296,7 @@ const Layout = styled.div`
       gap: 0;
 
       margin: 0;
-      padding: 0 24px;
+      padding-top: 0;
     }
 
     ${theme.mediaQuery.mobile} {
@@ -315,7 +304,7 @@ const Layout = styled.div`
       gap: 0;
 
       margin: 0;
-      padding: 0 16px;
+      padding-top: 0;
     }
   `}
 `
@@ -338,10 +327,21 @@ const MainDivider = styled(Divider)`
 const Main = styled.div`
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {
-      margin: 20px 24px 0;
+      margin: 0;
     }
     ${theme.mediaQuery.mobile} {
-      margin: 20px 16px;
+      margin: 0;
+    }
+  `}
+`
+
+const Content = styled.div`
+  ${({ theme }): SerializedStyles => css`
+    ${theme.mediaQuery.tablet} {
+      padding: 0 24px;
+    }
+    ${theme.mediaQuery.mobile} {
+      padding: 0 16px;
     }
   `}
 `
@@ -398,6 +398,12 @@ const ProductName = styled(Text)`
       margin: 2px 0 8px;
     }
   `}
+`
+
+const Description = styled.p`
+  margin-bottom: 4px;
+
+  ${({ theme }) => theme.fonts.body02R}
 `
 
 export default ProductDetailPage

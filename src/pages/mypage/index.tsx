@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
-import { Text, Divider } from '@offer-ui/react'
+import { Divider } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import { Tabs, Tab } from '@components'
 import {
   SalePageContent,
   ReviewPageContent,
   BuyPageContent
 } from '@components/mypage'
+import { Tabs, Tab } from '@components'
 
 import type { TradeActivityType, TradeActivityName } from '@constants'
 
@@ -54,9 +54,7 @@ const MyPage = (): ReactElement => {
 
   return (
     <div>
-      <StyledUserName styleType="headline02B">
-        닉네임님의 거래 활동
-      </StyledUserName>
+      <StyledUserName>닉네임님의 거래 활동</StyledUserName>
       <Divider />
       <Tabs>
         <StyledLayout>
@@ -87,11 +85,14 @@ const MyPage = (): ReactElement => {
 
 export default MyPage
 
-const StyledUserName = styled(Text)`
+const StyledUserName = styled.p`
   ${({ theme }): string => `
     display: block;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 0 auto 20px;
+    padding-top: 20px;
+
+    ${theme.fonts.headline02B};
 
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.body01B};

@@ -1,10 +1,10 @@
+import { myProfile, memberProfileList, articles } from '@mocks/fixture'
 import {
   getMyProfile,
   getProfile,
   getOnSaleArticles,
   updateProductTradeStatus
 } from '@apis'
-import { myProfile, memberProfileList, articles } from '@mocks/fixture'
 import type { TradeStatus } from '@types'
 
 describe('/apis', () => {

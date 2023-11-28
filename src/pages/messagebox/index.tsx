@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
 import { useState, type ReactElement, useEffect } from 'react'
+import useModal from '@hooks/useModal'
 import {
   MessagePreview,
   Tabs,
@@ -10,7 +11,6 @@ import {
   MessageBoxPlaceholder
 } from '@components'
 import { IMAGE } from '@constants'
-import useModal from '@hooks/useModal'
 
 type TabType = 'all' | 'buy' | 'sell'
 
@@ -136,7 +136,7 @@ const Page = styled.div`
   overflow: hidden;
 
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 67px);
 `
 
 const Container = styled.div`

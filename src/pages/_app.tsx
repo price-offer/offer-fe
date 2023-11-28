@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
 import { Header } from '@components/common/Header'
+import { Layout } from '@layouts'
 import { theme } from '@styles'
 
 const customTheme = {
@@ -23,7 +24,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
     <QueryClientProvider client={queryClient}>
       <OfferStyleProvider theme={customTheme}>
         <Header />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </OfferStyleProvider>
     </QueryClientProvider>
   )

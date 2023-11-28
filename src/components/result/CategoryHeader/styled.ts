@@ -23,7 +23,7 @@ const CategoryHeader = styled.div`
 `
 
 const CategoryHeaderResultCount = styled.div`
-  margin-top: 42px 0 22px;
+  margin: 42px 0 22px;
 
   color: ${({ theme }): string => theme.colors.grayScale50};
 

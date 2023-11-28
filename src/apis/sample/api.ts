@@ -1,7 +1,5 @@
-import type { AxiosResponse } from 'axios'
-import axios from 'axios'
 import type { SampleReq, SampleRes } from './types'
+import { http } from '@utils/http/index'
 
-export const getSample = async (
-  param: SampleReq
-): Promise<AxiosResponse<SampleRes>> => axios.get(`/sample?${param}`)
+export const getSample = (param: SampleReq) =>
+  http.get<SampleReq, SampleRes>(`/sample`, param)

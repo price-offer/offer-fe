@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 
@@ -10,7 +11,9 @@ const HomeBanner = (): ReactElement => {
             처치곤란한 물건이 있다면?
           </Styled.BannerLeftText1>
           <Styled.BannerLeftText2>Offer에 올려보세요!</Styled.BannerLeftText2>
-          <Styled.BannerLeftSellButton>판매하기</Styled.BannerLeftSellButton>
+          <Link href="/post">
+            <Styled.BannerLeftSellButton>판매하기</Styled.BannerLeftSellButton>
+          </Link>
         </Styled.BannerLeft>
         <Styled.BannerRight>
           <Styled.BannerRightTextWrapper>

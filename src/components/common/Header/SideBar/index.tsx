@@ -8,7 +8,7 @@ import type { SideBarProps, NavDataType } from './types'
 const NAV_DATA: NavDataType = [
   {
     content: '판매하기',
-    url: '/sell',
+    url: '/post',
     iconType: 'box'
   },
   {

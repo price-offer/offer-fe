@@ -90,7 +90,7 @@ const Header = (): ReactElement => {
                 <Styled.SellButtonDivider />
               </>
             )}
-            <Link href="/posting">
+            <Link href="/post">
               <Button size="small" styleType="solidSub">
                 판매하기
               </Button>

@@ -4,8 +4,8 @@ import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { ReviewTabArticleList } from '@components/mypage/ArticleList'
 import { ProfileBox } from '@components/mypage/ProfileBox'
-import { TRADE_ACTIVITY_TYPE } from '@constants'
 import { myProfile } from '@mocks/fixture'
+import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { ReviewsElement } from '@types'
 
 const tradeReviewActivityList = Object.entries(TRADE_ACTIVITY_TYPE.review)

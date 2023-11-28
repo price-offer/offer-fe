@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
   // ImageUploader,
@@ -279,15 +280,17 @@ const StyledTitleInput = styled(Input)`
 const StyledPostPage = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 42px;
+  padding: 42px 24px 0;
 
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     ${theme.mediaQuery.tablet} {
       margin: 0;
+      padding: 0;
     }
 
     ${theme.mediaQuery.mobile} {
       margin: 0;
+      padding: 0;
     }
   `};
 `

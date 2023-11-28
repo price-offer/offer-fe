@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProductItemProps } from './types'
+import { getTimeDiffText } from '@utils/format'
 
 const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
   return (
@@ -27,7 +28,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </Styled.ProductItemPrice>
         <Styled.ProductItemAddress>
-          {productItem.location} 방금전
+          {productItem.location} {getTimeDiffText(productItem.createdAt)}
         </Styled.ProductItemAddress>
       </div>
     </>

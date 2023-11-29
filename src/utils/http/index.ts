@@ -11,28 +11,40 @@ const Axios = axios.create({
   }
 })
 
+type CommonResponse<T> = {
+  code: number
+  data: T
+  message: string
+}
+
 const getResult = <T>(response: AxiosResponse<T>): T => response.data
 
 export const http = {
   get: <Request = unknown, Response = unknown>(
     url: string,
     params?: Request
-  ): Promise<Response> =>
-    Axios.get<Response, AxiosResponse<Response>, Request>(url, { params }).then(
-      getResult
-    ),
+  ): Promise<CommonResponse<Response>> =>
+    Axios.get<
+      CommonResponse<Response>,
+      AxiosResponse<CommonResponse<Response>>,
+      Request
+    >(url, { params }).then(getResult),
   post: <Request = unknown, Response = unknown>(
     url: string,
     payload?: Request
-  ): Promise<Response> => Axios.post<Response>(url, payload).then(getResult),
+  ): Promise<CommonResponse<Response>> =>
+    Axios.post<CommonResponse<Response>>(url, payload).then(getResult),
   put: <Request = unknown, Response = unknown>(
     url: string,
     payload?: Request
-  ): Promise<Response> => Axios.put<Response>(url, payload).then(getResult),
+  ): Promise<CommonResponse<Response>> =>
+    Axios.put<CommonResponse<Response>>(url, payload).then(getResult),
   patch: <Request = unknown, Response = unknown>(
     url: string,
     payload?: Request
   ) => Axios.patch<Response>(url, payload).then(getResult),
-  delete: <Response = unknown>(url: string): Promise<Response> =>
-    Axios.delete<Response>(url).then(getResult)
+  delete: <Response = unknown>(
+    url: string
+  ): Promise<CommonResponse<Response>> =>
+    Axios.delete<CommonResponse<Response>>(url).then(getResult)
 }

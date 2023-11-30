@@ -7,6 +7,11 @@ type SelectItemsType = {
   name: string
 }
 
+export type ApplyPriceType = {
+  minPrice: number
+  maxPrice: number
+}
+
 type ReturnType = {
   tradePeriodItems: SelectItemsType[]
   sortPriceItems: SelectItemsType[]
@@ -14,6 +19,7 @@ type ReturnType = {
   selectedSortPriceValue: string
   minPriceValue: string
   maxPriceValue: string
+  applyPrice: ApplyPriceType
   handleTradePeriodSelectChange: SelectOnChangeHandler
   handleSortPriceSelectChange: SelectOnChangeHandler
   handleMinPriceInputChange: ChangeEventHandler
@@ -58,6 +64,10 @@ const useSelectBoxFilter = (): ReturnType => {
     useState<string>('')
   const [minPriceValue, setMinPriceValue] = useState<string>('')
   const [maxPriceValue, setMaxPriceValue] = useState<string>('')
+  const [applyPrice, setApplyPrice] = useState<ApplyPriceType>({
+    minPrice: 0,
+    maxPrice: 0
+  })
 
   const handleTradePeriodSelectChange: SelectOnChangeHandler<{
     code: string
@@ -85,6 +95,10 @@ const useSelectBoxFilter = (): ReturnType => {
 
   const handlePriceApplyClick = (): void => {
     //필터적용
+    setApplyPrice({
+      minPrice: Number(minPriceValue.replace(/,/g, '')),
+      maxPrice: Number(maxPriceValue.replace(/,/g, ''))
+    })
   }
 
   return {
@@ -94,6 +108,7 @@ const useSelectBoxFilter = (): ReturnType => {
     selectedSortPriceValue,
     minPriceValue,
     maxPriceValue,
+    applyPrice,
     handleTradePeriodSelectChange,
     handleSortPriceSelectChange,
     handleMinPriceInputChange,

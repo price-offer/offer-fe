@@ -8,8 +8,9 @@ const PriceDialogWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 61px;
+  width: fit-conent;
   height: 32px;
+  padding: 0 4px;
   border: solid 1px ${({ theme }): string => theme.colors.grayScale20};
   border-radius: 4px;
 
@@ -27,11 +28,16 @@ const PriceArrowDown = styled(Icon)`
   height: 16px;
 `
 
+const DialogOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+`
+
 const Dim = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: ${({ theme }): number => theme.zIndex.modal};
+  z-index: ${({ theme }): number => theme.zIndex.selectbox};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,11 +48,11 @@ const Dim = styled.div`
   background-color: ${({ theme }): string => theme.colors.dimOpacity50};
 `
 
-const PriceDialogDesktop = styled.div`
+const PriceDialog = styled.div`
   position: absolute;
   top: 38px;
   left: 1px;
-  z-index: 999;
+  z-index: ${({ theme }): number => theme.zIndex.modal};
 
   width: 344px;
   height: 164px;
@@ -121,8 +127,9 @@ export const Styled = {
   PriceDialogWrapper,
   Wrapper,
   PriceArrowDown,
+  DialogOverlay,
   Dim,
-  PriceDialogDesktop,
+  PriceDialog,
   Price,
   InputWrapper,
   MinimumInput,

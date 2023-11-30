@@ -134,6 +134,7 @@ const Result: NextPage = () => {
     selectedSortPriceValue,
     minPriceValue,
     maxPriceValue,
+    applyPrice,
     handleTradePeriodSelectChange,
     handleSortPriceSelectChange,
     handleMinPriceInputChange,
@@ -153,6 +154,7 @@ const Result: NextPage = () => {
             />
           )}
           <FilterSelect
+            applyPrice={applyPrice}
             categoryItems={checkFilterList}
             handleCategoryChange={handleCategorySelectChange}
             handleMaxPriceInputChange={handleMaxPriceInputChange}

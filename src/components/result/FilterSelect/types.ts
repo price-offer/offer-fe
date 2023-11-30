@@ -1,7 +1,9 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import type { ChangeEventHandler } from 'react'
+import type { ApplyPriceType } from '@hooks/result/useSelectBoxFilter'
 
 export type FilterSelectProps = {
+  applyPrice: ApplyPriceType
   categoryItems: {
     code: string
     name: string

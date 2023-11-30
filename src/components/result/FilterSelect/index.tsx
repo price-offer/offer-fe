@@ -12,6 +12,7 @@ const FilterSelect = ({
   selectedCategoryValue,
   minPriceValue,
   maxPriceValue,
+  applyPrice,
   handleSortPriceChange,
   handleCategoryChange,
   handleTradePeriodChange,
@@ -53,6 +54,7 @@ const FilterSelect = ({
             onChange={handleTradePeriodChange}
           />
           <PriceDialog
+            applyPrice={applyPrice}
             handleMaxPriceInputChange={handleMaxPriceInputChange}
             handleMinPriceInputChange={handleMinPriceInputChange}
             handlePriceApplyClick={handlePriceApplyClick}

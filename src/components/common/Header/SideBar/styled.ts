@@ -37,7 +37,7 @@ const SidebarContent = styled.div`
   padding: 68px 24px;
 `
 
-const SideBarAuthSection = styled.button`
+const SideBarAuthSection = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
@@ -48,6 +48,14 @@ const SideBarAuthSection = styled.button`
 
   ${({ theme }): string => theme.fonts.body02R};
   color: ${({ theme }): string => theme.colors.grayScale90};
+`
+
+const SideBarLoginButton = styled.button`
+  color: ${({ theme }): string => theme.colors.grayScale90};
+
+  cursor: pointer;
+
+  ${({ theme }): string => theme.fonts.body02R};
 `
 
 const SidebarMenuSection = styled.nav`
@@ -79,6 +87,8 @@ const SidebarLogoutButton = styled.button`
   color: ${({ theme }): string => theme.colors.grayScale70};
   text-align: left;
 
+  cursor: pointer;
+
   ${({ theme }): string => theme.fonts.body02M};
 `
 
@@ -87,6 +97,7 @@ export const Styled = {
   SideBarWrapper,
   SidebarContent,
   SideBarAuthSection,
+  SideBarLoginButton,
   SidebarMenuSection,
   SidebarMenu,
   SidebarLogoutButton

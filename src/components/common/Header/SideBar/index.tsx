@@ -42,21 +42,23 @@ export const SideBar = ({
       <Styled.SidebarOverlay isOpen={isOpen} onClick={onClose} />
       <Styled.SideBarWrapper isOpen={isOpen}>
         <Styled.SidebarContent>
-          <Styled.SideBarAuthSection onClick={handleClickLogin}>
-            <Avatar
-              alt="user-profile"
-              size="xsmall"
-              src={user?.profileImageUrl || ''}
-            />
-            {isLogin ? (
+          {isLogin ? (
+            <Styled.SideBarAuthSection>
+              <Avatar
+                alt="user-profile"
+                size="xsmall"
+                src={user?.profileImageUrl || ''}
+              />
               <>
                 {user?.nickname}{' '}
                 <Badge colorType="orange">Lv.{user?.level}</Badge>
               </>
-            ) : (
-              '로그인/회원가입'
-            )}
-          </Styled.SideBarAuthSection>
+            </Styled.SideBarAuthSection>
+          ) : (
+            <Styled.SideBarLoginButton onClick={handleClickLogin}>
+              로그인/회원가입
+            </Styled.SideBarLoginButton>
+          )}
           <Divider direction="horizontal" gap={16} length="259px" />
           <Styled.SidebarMenuSection>
             {NAV_DATA.map((item, index) => {

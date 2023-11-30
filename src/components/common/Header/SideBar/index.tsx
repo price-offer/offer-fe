@@ -26,11 +26,13 @@ const NAV_DATA: NavDataType = [
 ]
 
 export const SideBar = ({
+  user,
   isOpen,
   isLogin,
   onClose
 }: SideBarProps): ReactElement => {
   const router = useRouter()
+
   const handleClickLogin = () => {
     router.replace(OAUTH_URL.KAKAO)
   }
@@ -41,10 +43,15 @@ export const SideBar = ({
       <Styled.SideBarWrapper isOpen={isOpen}>
         <Styled.SidebarContent>
           <Styled.SideBarAuthSection onClick={handleClickLogin}>
-            <Avatar alt="user-profile" size="xsmall" src={''} />
+            <Avatar
+              alt="user-profile"
+              size="xsmall"
+              src={user?.profileImageUrl || ''}
+            />
             {isLogin ? (
               <>
-                부드러운 냉장고 <Badge colorType="orange">Lv.1</Badge>
+                {user?.nickname}{' '}
+                <Badge colorType="orange">Lv.{user?.level}</Badge>
               </>
             ) : (
               '로그인/회원가입'

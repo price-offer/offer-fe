@@ -1,4 +1,10 @@
 export type SideBarProps = {
+  user?: {
+    id: number
+    nickname: string
+    level: number
+    profileImageUrl: string
+  }
   isOpen: boolean
   isLogin: boolean
   onClose(): void

@@ -17,11 +17,14 @@ const SelectWrapper = styled.div`
 const LeftSelectWrapper = styled.div`
   display: flex;
   gap: 8px;
+
+  min-width: max-content;
 `
 const CategorySelect = styled(SelectBox)`
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
+      color: ${({ theme }): string => theme.colors.white};
     }
   }
 `

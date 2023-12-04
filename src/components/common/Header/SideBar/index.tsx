@@ -6,6 +6,7 @@ import React from 'react'
 import { Styled } from './styled'
 import type { SideBarProps, NavDataType } from './types'
 import { OAUTH_URL } from '@constants/oauth'
+import { useAuth } from '@hooks/useAuth'
 
 const NAV_DATA: NavDataType = [
   {
@@ -25,16 +26,18 @@ const NAV_DATA: NavDataType = [
   }
 ]
 
-export const SideBar = ({
-  user,
-  isOpen,
-  isLogin,
-  onClose
-}: SideBarProps): ReactElement => {
+export const SideBar = ({ isOpen, onClose }: SideBarProps): ReactElement => {
   const router = useRouter()
+  const { handleLogout, user, isLogin } = useAuth()
 
   const handleClickLogin = () => {
     router.replace(OAUTH_URL.KAKAO)
+    onClose()
+  }
+
+  const handleClickLogout = () => {
+    handleLogout()
+    onClose()
   }
 
   return (
@@ -47,11 +50,11 @@ export const SideBar = ({
               <Avatar
                 alt="user-profile"
                 size="xsmall"
-                src={user?.profileImageUrl || ''}
+                src={user.profileImageUrl}
               />
               <>
-                {user?.nickname}{' '}
-                <Badge colorType="orange">Lv.{user?.level}</Badge>
+                {user.nickname}
+                <Badge colorType="orange">Lv.{user.offerLevel}</Badge>
               </>
             </Styled.SideBarAuthSection>
           ) : (
@@ -74,10 +77,7 @@ export const SideBar = ({
           </Styled.SidebarMenuSection>
           <Divider direction="horizontal" gap={16} />
           {isLogin && (
-            <Styled.SidebarLogoutButton
-              onClick={() => {
-                alert('로그아웃')
-              }}>
+            <Styled.SidebarLogoutButton onClick={handleClickLogout}>
               로그아웃
             </Styled.SidebarLogoutButton>
           )}

@@ -16,7 +16,7 @@ import { IMAGE } from '@constants'
 
 const Header = (): ReactElement => {
   const router = useRouter()
-  const { isLogin, user } = useAuth()
+  const { isLogin, user, handleLogout } = useAuth()
   const { isOpen, openModal, closeModal } = useModal()
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const [isOpenDialog, setIsOpenDialog] = useState({
@@ -90,7 +90,9 @@ const Header = (): ReactElement => {
                           logout: false
                         })
                       }>
-                      <Styled.LogoutText>로그아웃</Styled.LogoutText>
+                      <Styled.LogoutButton onClick={handleLogout}>
+                        로그아웃
+                      </Styled.LogoutButton>
                     </Dialog>
                   )}
                 </Styled.HeaderProfileSection>
@@ -149,12 +151,6 @@ const Header = (): ReactElement => {
       <SideBar
         isLogin={isLogin}
         isOpen={isOpenSideBar}
-        user={{
-          id: user.id,
-          profileImageUrl: user.profileImageUrl,
-          nickname: user.nickname,
-          level: user.offerLevel
-        }}
         onClose={() => setIsOpenSideBar(false)}
       />
       <CommonModal

@@ -67,7 +67,11 @@ const ButtonSection = styled.section`
     display: none;
   }
 `
-const LogoutText = styled.p`
+const LogoutButton = styled.button`
+  border: none;
+
+  background: none;
+
   color: ${({ theme }): string => theme.colors.grayScale90};
   ${({ theme }): string => theme.fonts.caption01M};
 `
@@ -135,7 +139,7 @@ export const Styled = {
   SearchInput,
   ButtonSection,
   HeaderAuthButton,
-  LogoutText,
+  LogoutButton,
   SellButtonDivider,
   HeaderProfileSection,
   HeaderNickName,

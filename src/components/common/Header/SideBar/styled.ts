@@ -42,15 +42,15 @@ const SideBarAuthSection = styled.div`
   gap: 12px;
   align-items: center;
 
-  border: none;
-
-  background: none;
-
   ${({ theme }): string => theme.fonts.body02R};
   color: ${({ theme }): string => theme.colors.grayScale90};
 `
 
 const SideBarLoginButton = styled.button`
+  border: none;
+
+  background: none;
+
   color: ${({ theme }): string => theme.colors.grayScale90};
 
   cursor: pointer;

@@ -1,4 +1,5 @@
 import { toQueryString } from '@utils/format'
+import { env } from '@constants'
 
 const OAUTH_ENDPOINT = {
   KAKAO: 'https://kauth.kakao.com/oauth/authorize'
@@ -7,7 +8,7 @@ const OAUTH_ENDPOINT = {
 export const OAUTH_URL = {
   KAKAO: `${OAUTH_ENDPOINT.KAKAO}${toQueryString({
     response_type: 'code',
-    client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '',
-    redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || ''
+    client_id: env.KAKAO_REST_API_KEY || '',
+    redirect_uri: env.KAKAO_REDIRECT_URI || ''
   })}`
 }

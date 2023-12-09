@@ -4,19 +4,13 @@ import { useInView } from 'react-intersection-observer'
 import { Styled } from './styled'
 import type { ProductListProps } from './types'
 import { ProductItem } from '../ProductItem'
-import { useGetPostListQuery } from '@apis/post-controller/post/query'
 
-const ProductList = ({ filterOption }: ProductListProps): ReactElement => {
+const ProductList = ({
+  postData,
+  hasNextPage,
+  fetchNextPage
+}: ProductListProps): ReactElement => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(false)
-
-  const { data, fetchNextPage, hasNextPage } = useGetPostListQuery({
-    sort: filterOption?.sort,
-    category: filterOption?.category,
-    lastId: null,
-    limit: 8,
-    minPrice: filterOption?.minPrice,
-    maxPrice: filterOption?.maxPrice
-  })
 
   const { ref: isLastPrdRef, inView } = useInView({
     threshold: 1
@@ -28,7 +22,7 @@ const ProductList = ({ filterOption }: ProductListProps): ReactElement => {
         setIsFirstRender(true)
         return
       }
-      fetchNextPage()
+      fetchNextPage && fetchNextPage()
     }
   }, [inView, hasNextPage, fetchNextPage])
 
@@ -36,7 +30,7 @@ const ProductList = ({ filterOption }: ProductListProps): ReactElement => {
     <>
       <Styled.NewProductTitle>새로운 상품</Styled.NewProductTitle>
       <Styled.ProductListWrapper>
-        {data?.pages?.map(page =>
+        {postData?.pages?.map(page =>
           page?.posts?.map(item => (
             <ProductItem key={item.id} productItem={item} />
           ))

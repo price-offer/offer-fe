@@ -103,8 +103,26 @@ const NickName = styled.span`
     }
   `}
 `
-const UserProductWrapper = styled.div`
-  ${({ theme }): string => `
+const applyMemberProfileLayout = (mode: 'tablet' | 'mobile') => {
+  const isTablet = mode === 'tablet'
+
+  return `
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: ${isTablet ? '". sell sold review ."' : 'none'};
+
+    div:nth-of-type(1) {
+      grid-area: ${isTablet ? 'sell' : 'auto'};
+    }
+    div:nth-of-type(2) {
+      grid-area: ${isTablet ? 'sold' : 'auto'};
+    }
+    div:nth-of-type(3) {
+      grid-area: ${isTablet ? 'review' : 'auto'};
+    }
+  `
+}
+const UserProductWrapper = styled.div<{ isMyProfile: boolean }>`
+  ${({ theme, isMyProfile }): string => `
     display: grid;
     background-color: ${theme.colors.bgGray01};
     gap: 16px;
@@ -115,6 +133,7 @@ const UserProductWrapper = styled.div`
       gap: 93px;
       padding: 24px 40px;
       min-width: 684px;
+      ${!isMyProfile && applyMemberProfileLayout('tablet')}
     }
 
     ${theme.mediaQuery.mobile} {
@@ -122,6 +141,7 @@ const UserProductWrapper = styled.div`
       gap: 44px;
       min-width: 300px;
       padding: 20px 36px;
+      ${!isMyProfile && applyMemberProfileLayout('mobile')}
     }
   `}
 `

@@ -3,7 +3,7 @@ import {
   BuyPageContent,
   ReviewPageContent,
   SalePageContent
-} from '@components/mypage'
+} from '@components/shop'
 import type { TradeActivityName, TradeActivityType } from '@constants/app'
 
 export type PageTab = {

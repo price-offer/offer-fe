@@ -2,7 +2,7 @@ import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
-import { ReviewTabArticleList } from '@components/mypage/ArticleList'
+import { ReviewTabArticleList } from '@components/shop/ArticleList'
 import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { ReviewsElement } from '@types'
 

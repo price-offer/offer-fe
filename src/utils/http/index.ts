@@ -1,15 +1,5 @@
 import axios from 'axios'
-
-import type { AxiosResponse } from 'axios'
-
-const BASE_URL = 'https://offer-be.kro.kr'
-
-const Axios = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'content-type': 'application/json'
-  }
-})
+import type { AxiosResponse, RawAxiosRequestHeaders } from 'axios'
 
 type CommonResponse<T> = {
   code: number
@@ -17,34 +7,49 @@ type CommonResponse<T> = {
   message: string
 }
 
+const BASE_URL = 'https://offer-be.kro.kr/api'
+
 const getResult = <T>(response: AxiosResponse<T>): T => response.data
+
+const Axios = axios.create({
+  baseURL: BASE_URL
+})
 
 export const http = {
   get: <Request = unknown, Response = unknown>(
     url: string,
-    params?: Request
+    params?: Request,
+    headers?: RawAxiosRequestHeaders
   ): Promise<CommonResponse<Response>> =>
     Axios.get<
       CommonResponse<Response>,
       AxiosResponse<CommonResponse<Response>>,
       Request
-    >(url, { params }).then(getResult),
+    >(url, { params, headers }).then(getResult),
   post: <Request = unknown, Response = unknown>(
     url: string,
-    payload?: Request
+    payload?: Request,
+    headers?: RawAxiosRequestHeaders
   ): Promise<CommonResponse<Response>> =>
-    Axios.post<CommonResponse<Response>>(url, payload).then(getResult),
+    Axios.post<CommonResponse<Response>>(url, payload, { headers }).then(
+      getResult
+    ),
   put: <Request = unknown, Response = unknown>(
     url: string,
-    payload?: Request
+    payload?: Request,
+    headers?: RawAxiosRequestHeaders
   ): Promise<CommonResponse<Response>> =>
-    Axios.put<CommonResponse<Response>>(url, payload).then(getResult),
+    Axios.put<CommonResponse<Response>>(url, payload, { headers }).then(
+      getResult
+    ),
   patch: <Request = unknown, Response = unknown>(
     url: string,
-    payload?: Request
-  ) => Axios.patch<Response>(url, payload).then(getResult),
+    payload?: Request,
+    headers?: RawAxiosRequestHeaders
+  ) => Axios.patch<Response>(url, payload, { headers }).then(getResult),
   delete: <Response = unknown>(
-    url: string
+    url: string,
+    headers?: RawAxiosRequestHeaders
   ): Promise<CommonResponse<Response>> =>
-    Axios.delete<CommonResponse<Response>>(url).then(getResult)
+    Axios.delete<CommonResponse<Response>>(url, { headers }).then(getResult)
 }

@@ -10,19 +10,21 @@ const getCookie = (key: string) => key
 
 const MyPage = (): ReactElement => {
   const accessToken = getCookie('accessToken')
-  const [pageIndex, setPageIndex] = useState<number>(0)
+  const [tabIndex, setTabIndex] = useState<number>(0)
   const { data: myProfile } = useMyProfileQuery(accessToken)
 
   const handleTabClick = (
     _: MouseEvent<HTMLDivElement>,
     index: number
   ): void => {
-    setPageIndex(index)
+    setTabIndex(index)
   }
 
   return (
     <div>
-      <Styled.UserName>닉네임님의 거래 활동</Styled.UserName>
+      <Styled.UserName>
+        {myProfile?.data.nickname}님의 거래 활동
+      </Styled.UserName>
       <Divider />
       <Tabs>
         <Styled.Layout>
@@ -30,7 +32,7 @@ const MyPage = (): ReactElement => {
             {pageTabs.map(({ tab }, index) => (
               <Styled.Tab
                 key={`${tab.code}-tab`}
-                isSelected={pageIndex === index}
+                isSelected={tabIndex === index}
                 onClick={handleTabClick}>
                 {tab.name}
               </Styled.Tab>

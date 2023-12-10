@@ -1,9 +1,14 @@
-const { default: DevServer } = require('next/dist/server/dev/next-dev-server')
+const BASE_API_URL = 'https://offer-be.kro.kr/api'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${BASE_API_URL}/:path*`
+      }
+    ]
+  },
   swcMinify: true,
-  reactStrictMode: true
+  reactStrictMode: false
 }
-
-module.exports = nextConfig

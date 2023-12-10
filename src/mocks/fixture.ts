@@ -1,17 +1,14 @@
 import type { MyProfile, MemberProfile, Articles, Reviews } from '@types'
 
 export const myProfile: MyProfile = {
-  member: {
-    id: 1,
-    offerLevel: 1,
-    nickname: 'my profile',
-    profileImageUrl: 'https://avatars.githubusercontent.com/u/47546413?v=4',
-    address: '서울시'
-  },
-  sellingArticleCount: 0,
-  likedArticleCount: 0,
-  offerCount: 0,
-  reviewCount: 0
+  id: 1,
+  nickname: 'my profile',
+  profileImageUrl: 'https://avatars.githubusercontent.com/u/47546413?v=4',
+  offerLevel: 1,
+  sellingProductCount: 0,
+  soldProductCount: 0,
+  reviewCount: 0,
+  likeProductCount: 0
 }
 
 type MemberProfileList = {

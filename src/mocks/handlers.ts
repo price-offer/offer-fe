@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw'
-import { myProfile, memberProfileList, articles } from './fixture'
+import { myProfile, memberProfileList, articles, categories } from './fixture'
+import type { CategoryRes } from '@apis/post-controller/categories/types'
 import type { Articles, MemberProfile, MyProfile, TradeStatus } from '@types'
 
 export const handlers = [
@@ -53,5 +54,14 @@ export const handlers = [
    */
   http.get('/articles', async () => {
     return HttpResponse.json<Articles>(articles, { status: 200 })
+  }),
+
+  /**
+   * 메인 페이지 카테고리
+   *
+   *
+   */
+  http.get('https://offer-be.kro.kr/api/categories', () => {
+    return HttpResponse.json<CategoryRes>(categories, { status: 200 })
   })
 ]

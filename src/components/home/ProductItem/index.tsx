@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProductItemProps } from './types'
+import { getTimeDiffText } from '@utils/format'
 
 const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
   return (
@@ -10,7 +11,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           <Styled.ProductImg
             key={productItem.id}
             alt={`productName-${productItem.title}`}
-            src={productItem.mainImageUrl}
+            src={productItem.thumnail}
             style={{ maxWidth: '276px' }}
           />
           <Styled.HeartButton
@@ -27,7 +28,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </Styled.ProductItemPrice>
         <Styled.ProductItemAddress>
-          {productItem.tradeArea} 방금전
+          {productItem.location} {getTimeDiffText(productItem.createdAt)}
         </Styled.ProductItemAddress>
       </div>
     </>

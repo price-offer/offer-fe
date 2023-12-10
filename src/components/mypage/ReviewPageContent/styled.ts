@@ -3,18 +3,6 @@ import type { ColorKeys } from '@offer-ui/react'
 import { Divider as DividerComponent } from '@offer-ui/react'
 import { Tabs, Tab as TabComponent } from '@components/common'
 
-const ContentWrapper = styled.div`
-  ${({ theme }): string => `
-    display: flex;
-    gap: 32px;
-
-    ${theme.mediaQuery.tablet} {
-      position: relative;
-      flex-direction: column;
-      gap: 0;
-    }
-  `}
-`
 const SearchOptionsWrapper = styled.div`
   ${({ theme }): string => `
     padding: 20px;
@@ -118,7 +106,6 @@ const Divider = styled(DividerComponent)`
 `
 
 export const Styled = {
-  ContentWrapper,
   SearchOptionsWrapper,
   TabsList,
   Tab,

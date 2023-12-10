@@ -3,8 +3,6 @@ import { useState } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { ReviewTabArticleList } from '@components/mypage/ArticleList'
-import { ProfileBox } from '@components/mypage/ProfileBox'
-import { myProfile } from '@mocks/fixture'
 import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { ReviewsElement } from '@types'
 
@@ -45,50 +43,45 @@ const ReviewPageContent = (): ReactElement => {
 
   return (
     <div>
-      <Styled.ContentWrapper>
-        <ProfileBox {...myProfile} />
-        <Styled.Divider size="bold" />
-        <Styled.UserProductsWrapper>
-          <Tabs>
-            <Styled.SearchOptionsWrapper>
-              <Styled.TabsList>
-                {tradeReviewActivityList.map((tradeReviewActivity, index) => {
-                  const isCurrent = tabIndex === index
+      <Styled.Divider size="bold" />
+      <Styled.UserProductsWrapper>
+        <Tabs>
+          <Styled.SearchOptionsWrapper>
+            <Styled.TabsList>
+              {tradeReviewActivityList.map((tradeReviewActivity, index) => {
+                const isCurrent = tabIndex === index
 
-                  return (
-                    <Styled.Tab
-                      key={tradeReviewActivity[0]}
-                      onClick={handleTabClick}>
-                      <Styled.StatusButtonLabel>
-                        <Styled.Circle isCurrent={isCurrent} />
-                        <Styled.StatusButton
-                          isCurrent={isCurrent}
-                          type="button">
-                          <Styled.Text isCurrent={isCurrent}>
-                            {tradeReviewActivity[1]}
-                          </Styled.Text>
-                        </Styled.StatusButton>
-                        <Styled.Text color="grayScale50">1</Styled.Text>
-                      </Styled.StatusButtonLabel>
-                    </Styled.Tab>
-                  )
-                })}
-              </Styled.TabsList>
-            </Styled.SearchOptionsWrapper>
-            <Styled.ProductListPanels>
-              <Tabs.Panel>
-                <ReviewTabArticleList reviews={reviews} />
-              </Tabs.Panel>
-              <Tabs.Panel>
-                <ReviewTabArticleList reviews={reviews} />
-              </Tabs.Panel>
-              <Tabs.Panel>
-                <ReviewTabArticleList reviews={reviews} />
-              </Tabs.Panel>
-            </Styled.ProductListPanels>
-          </Tabs>
-        </Styled.UserProductsWrapper>
-      </Styled.ContentWrapper>
+                return (
+                  <Styled.Tab
+                    key={tradeReviewActivity[0]}
+                    onClick={handleTabClick}>
+                    <Styled.StatusButtonLabel>
+                      <Styled.Circle isCurrent={isCurrent} />
+                      <Styled.StatusButton isCurrent={isCurrent} type="button">
+                        <Styled.Text isCurrent={isCurrent}>
+                          {tradeReviewActivity[1]}
+                        </Styled.Text>
+                      </Styled.StatusButton>
+                      <Styled.Text color="grayScale50">1</Styled.Text>
+                    </Styled.StatusButtonLabel>
+                  </Styled.Tab>
+                )
+              })}
+            </Styled.TabsList>
+          </Styled.SearchOptionsWrapper>
+          <Styled.ProductListPanels>
+            <Tabs.Panel>
+              <ReviewTabArticleList reviews={reviews} />
+            </Tabs.Panel>
+            <Tabs.Panel>
+              <ReviewTabArticleList reviews={reviews} />
+            </Tabs.Panel>
+            <Tabs.Panel>
+              <ReviewTabArticleList reviews={reviews} />
+            </Tabs.Panel>
+          </Styled.ProductListPanels>
+        </Tabs>
+      </Styled.UserProductsWrapper>
     </div>
   )
 }

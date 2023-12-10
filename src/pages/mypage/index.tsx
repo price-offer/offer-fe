@@ -1,52 +1,20 @@
-import styled from '@emotion/styled'
 import { Divider } from '@offer-ui/react'
 import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
-import {
-  SalePageContent,
-  ReviewPageContent,
-  BuyPageContent
-} from '@components/mypage'
-import { Tabs, Tab } from '@components'
+import { pageTabs } from './pageTabs'
+import { Styled } from './styled'
+import { useMyProfileQuery } from '@apis/member'
+import { Tabs, ProfileBox } from '@components'
 
-import type { TradeActivityType, TradeActivityName } from '@constants'
-
-type PageTab = {
-  tab: {
-    code: TradeActivityType
-    name: TradeActivityName
-  }
-  panel(): ReactElement
-}
-const pageTabs: PageTab[] = [
-  {
-    tab: {
-      code: 'sale',
-      name: '판매'
-    },
-    panel: SalePageContent
-  },
-  {
-    tab: {
-      code: 'buy',
-      name: '구매'
-    },
-    panel: BuyPageContent
-  },
-  {
-    tab: {
-      code: 'review',
-      name: '후기'
-    },
-    panel: ReviewPageContent
-  }
-]
+const getCookie = (key: string) => key
 
 const MyPage = (): ReactElement => {
+  const accessToken = getCookie('accessToken')
   const [pageIndex, setPageIndex] = useState<number>(0)
+  const { data: myProfile } = useMyProfileQuery(accessToken)
 
   const handleTabClick = (
-    e: MouseEvent<HTMLDivElement>,
+    _: MouseEvent<HTMLDivElement>,
     index: number
   ): void => {
     setPageIndex(index)
@@ -54,29 +22,32 @@ const MyPage = (): ReactElement => {
 
   return (
     <div>
-      <StyledUserName>닉네임님의 거래 활동</StyledUserName>
+      <Styled.UserName>닉네임님의 거래 활동</Styled.UserName>
       <Divider />
       <Tabs>
-        <StyledLayout>
+        <Styled.Layout>
           <Tabs.List>
             {pageTabs.map(({ tab }, index) => (
-              <StyledTab
+              <Styled.Tab
                 key={`${tab.code}-tab`}
                 isSelected={pageIndex === index}
                 onClick={handleTabClick}>
                 {tab.name}
-              </StyledTab>
+              </Styled.Tab>
             ))}
           </Tabs.List>
-        </StyledLayout>
+        </Styled.Layout>
         <Divider />
-        <StyledLayout>
-          <StyledTabPanels>
+        <Styled.Layout>
+          <Styled.TabPanels>
             {pageTabs.map(({ tab, panel }) => (
-              <Tabs.Panel key={`${tab.code}-panel`}>{panel()}</Tabs.Panel>
+              <Styled.TabPanel key={`${tab.code}-panel`}>
+                <ProfileBox {...myProfile?.data} />
+                {panel()}
+              </Styled.TabPanel>
             ))}
-          </StyledTabPanels>
-        </StyledLayout>
+          </Styled.TabPanels>
+        </Styled.Layout>
       </Tabs>
       <Divider />
     </div>
@@ -84,52 +55,3 @@ const MyPage = (): ReactElement => {
 }
 
 export default MyPage
-
-const StyledUserName = styled.p`
-  ${({ theme }): string => `
-    display: block;
-    max-width: 1200px;
-    margin: 0 auto 20px;
-    padding-top: 20px;
-
-    ${theme.fonts.headline02B};
-
-    ${theme.mediaQuery.tablet} {
-      ${theme.fonts.body01B};
-      margin: 16px auto;
-    }
-
-    ${theme.mediaQuery.mobile} {
-      margin-left: 16px;
-    }
-  `}
-`
-const StyledLayout = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-`
-const StyledTab = styled(Tab)<{ isSelected: boolean }>`
-  ${({ theme, isSelected }): string => `
-    padding: 17px 16px;
-    color: ${isSelected ? theme.colors.white : theme.colors.black};
-    background-color: ${isSelected ? theme.colors.black : theme.colors.white};
-    border: none;
-    cursor: pointer;
-    ${theme.fonts.subtitle01B};
-    user-select: none;
-
-    ${theme.mediaQuery.tablet} {
-      ${theme.fonts.body01B};
-      padding: 16px 24px;
-    }
-  `}
-`
-const StyledTabPanels = styled(Tabs.Panels)`
-  ${({ theme }): string => `
-    padding-top: 40px;
-
-    ${theme.mediaQuery.tablet} {
-      padding-top: 0;
-    }
-  `}
-`

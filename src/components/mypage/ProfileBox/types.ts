@@ -1,5 +1,5 @@
-import type { MyProfile } from '@types'
+import type { GetMyProfileRes } from '@apis/member'
 
 export type ProfileBoxProps = {
   className?: string
-} & MyProfile
+} & GetMyProfileRes

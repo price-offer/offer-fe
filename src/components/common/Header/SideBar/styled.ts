@@ -47,11 +47,13 @@ const SideBarAuthSection = styled.div`
 `
 
 const SideBarLoginButton = styled.button`
+  width: 100%;
   border: none;
 
   background: none;
 
   color: ${({ theme }): string => theme.colors.grayScale90};
+  text-align: left;
 
   cursor: pointer;
 
@@ -79,6 +81,7 @@ const SidebarMenu = styled.li`
 `
 
 const SidebarLogoutButton = styled.button`
+  width: 100%;
   height: fit-content;
   border: none;
 

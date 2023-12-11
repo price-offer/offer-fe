@@ -68,11 +68,13 @@ const ButtonSection = styled.section`
   }
 `
 const LogoutButton = styled.button`
+  width: 100%;
   border: none;
 
   background: none;
 
   color: ${({ theme }): string => theme.colors.grayScale90};
+  text-align: left;
   ${({ theme }): string => theme.fonts.caption01M};
 `
 

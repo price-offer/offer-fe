@@ -1,4 +1,5 @@
 import { deleteCookie, getCookie } from 'cookies-next'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useGetMemberProfileQuery } from '@apis/member'
 
@@ -15,6 +16,7 @@ const initialMember = {
 }
 
 export const useAuth = () => {
+  const router = useRouter()
   const userQuery = useGetMemberProfileQuery()
   const accessToken = getCookie('accessToken')
   const [isLogin, setIsLogin] = useState(false)
@@ -22,6 +24,8 @@ export const useAuth = () => {
   const handleLogout = () => {
     deleteCookie('accessToken')
     setIsLogin(false)
+
+    router.reload()
   }
 
   useEffect(() => {

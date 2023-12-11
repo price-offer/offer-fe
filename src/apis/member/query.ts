@@ -3,7 +3,7 @@ import { getMyProfile } from './api'
 
 export const useGetMyProfileQuery = (accessToken?: string) =>
   useQuery({
-    queryKey: ['member'],
+    queryKey: ['myProfile', accessToken],
     queryFn: getMyProfile,
     enabled: Boolean(accessToken)
   })

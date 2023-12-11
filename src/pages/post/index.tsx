@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
-  // ImageUploader,
+  ImageUploader,
   Input,
   SelectBox,
   Text,
@@ -12,25 +12,26 @@ import {
 } from '@offer-ui/react'
 import type {
   ImageInfo,
-  // UploaderOnChangeHandler,
+  UploaderOnChangeHandler,
   SelectOnChangeHandler,
   InputProps
 } from '@offer-ui/react'
 import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
 import { useState } from 'react'
+import { usePostProductMutation } from '@apis/post'
 import { PostForm } from '@components'
 import { CATEGORIES, TRADE_METHOD, PRODUCT_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormStatus = {
-  imageUrls: ImageInfo[] | null
   title: string
-  categoryCode: number | null
-  tradeArea: string
-  productStatusCode: string
-  tradeMethodCode: number | null
-  content: string
+  imageInfos: ImageInfo[]
+  category: number | null
   price: number
+  location: string
+  productCondition: string
+  tradeType: number | null
+  description: string
 }
 
 type HandleUpdatePostForm = ChangeEventHandler<
@@ -38,14 +39,15 @@ type HandleUpdatePostForm = ChangeEventHandler<
 >
 
 const PostPage = (): ReactElement => {
+  const { mutateAsync: postProduct } = usePostProductMutation()
   const [postForm, setPostForm] = useState<PostFormStatus>({
-    imageUrls: null,
+    imageInfos: [],
     title: '',
-    categoryCode: null,
-    tradeArea: '',
-    productStatusCode: '',
-    tradeMethodCode: null,
-    content: '',
+    category: null,
+    location: '',
+    productCondition: '',
+    tradeType: null,
+    description: '',
     price: 0
   })
   const InputSize = useResponsive<InputProps, 'width'>({
@@ -60,16 +62,18 @@ const PostPage = (): ReactElement => {
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
     setPostForm({
       ...postForm,
-      categoryCode: Number(code)
+      category: Number(code)
     })
   }
 
-  // const handleUpdateImageUrls: UploaderOnChangeHandler = ({ images }): void => {
-  //   setPostForm({
-  //     ...postForm,
-  //     imageUrls: images
-  //   })
-  // }
+  const handleUpdateImageInfos: UploaderOnChangeHandler = ({
+    images
+  }): void => {
+    setPostForm({
+      ...postForm,
+      imageInfos: images
+    })
+  }
 
   const handleUpdatePostForm: HandleUpdatePostForm = (e): void => {
     const { name, value } = e.currentTarget
@@ -86,6 +90,19 @@ const PostPage = (): ReactElement => {
     setPostForm({
       ...postForm,
       [name]: Number(value)
+    })
+  }
+
+  const handlePostProduct = async () => {
+    const { imageInfos, category, tradeType } = postForm
+    const imageUrls = imageInfos.map(({ url }) => url)
+
+    await postProduct({
+      ...postForm,
+      imageUrls,
+      category: String(category),
+      tradeType: String(tradeType),
+      thumbnailImageUrl: imageUrls[0] || ''
     })
   }
 
@@ -109,11 +126,10 @@ const PostPage = (): ReactElement => {
             </StyledTitleLength>
           </StyledTitleWrapper>
           <div>
-            {/* MEMO: hydration 에러가 나 잠시 주석처리 합니다.
             <ImageUploader
-              images={postForm.imageUrls || []}
-              onChange={handleUpdateImageUrls}
-            /> */}
+              images={postForm.imageInfos || []}
+              onChange={handleUpdateImageInfos}
+            />
           </div>
         </StyledPostingHeader>
         <StyledDivider gap={20} />
@@ -143,7 +159,7 @@ const PostPage = (): ReactElement => {
           </PostForm>
           <PostForm label="거래 지역">
             <Input
-              name="tradeArea"
+              name="location"
               placeholder="ex. 동작구 사당동"
               width={InputSize}
               onChange={handleUpdatePostForm}
@@ -152,7 +168,7 @@ const PostPage = (): ReactElement => {
           <StyledRadioPostForm label="상품 상태">
             <StyledRadio
               direction="horizontal"
-              formName="productStatusCode"
+              formName="productCondition"
               items={PRODUCT_STATUS}
               onChange={handleChangeRadio}
             />
@@ -160,7 +176,7 @@ const PostPage = (): ReactElement => {
           <StyledRadioPostForm label="거래 방법">
             <StyledRadio
               direction="horizontal"
-              formName="tradeMethodCode"
+              formName="tradeType"
               items={TRADE_METHOD}
               onChange={handleChangeRadio}
             />
@@ -171,11 +187,14 @@ const PostPage = (): ReactElement => {
           <Text color="grayScale70" styleType="body01M">
             상품 설명
           </Text>
-          <StyledTextarea name="content" onChange={handleUpdatePostForm} />
+          <StyledTextarea name="description" onChange={handleUpdatePostForm} />
         </StyledTextareaWrapper>
       </StyledFormWrapper>
       <StyledButtonWrapper>
-        <Button disabled={!isCompleteForm} styleType="solidPrimary">
+        <Button
+          disabled={!isCompleteForm}
+          styleType="solidPrimary"
+          onClick={handlePostProduct}>
           확인
         </Button>
       </StyledButtonWrapper>
@@ -213,7 +232,7 @@ const StyledSellText = styled(Text)`
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
       display: flex;
-      justify-content: center;
+      justify-description: center;
       align-items: center;
       height: 56px;
       border-bottom: solid 1px ${theme.colors.grayScale10};
@@ -222,7 +241,7 @@ const StyledSellText = styled(Text)`
 
     ${theme.mediaQuery.mobile} {
       display: flex;
-      justify-content: center;
+      justify-description: center;
       align-items: center;
       height: 56px;
       border-bottom: solid 1px ${theme.colors.grayScale10};

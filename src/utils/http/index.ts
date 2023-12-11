@@ -1,7 +1,6 @@
-import axios, { AxiosHeaders } from 'axios'
+import axios from 'axios'
 
-import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
-import { getCookie } from 'cookies-next'
+import type { AxiosResponse } from 'axios'
 
 export const BASE_URL = '/api'
 
@@ -10,19 +9,6 @@ const Axios = axios.create({
   headers: {
     'content-type': 'application/json'
   }
-})
-
-Axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const headers = new AxiosHeaders()
-  const token = getCookie('accessToken')
-
-  headers.set({
-    Authorization: token ? `Bearer ${token}` : ''
-  })
-
-  config.headers = headers
-
-  return config
 })
 
 export type CommonResponse<T> = {

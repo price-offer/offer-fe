@@ -1,9 +1,12 @@
-const { default: DevServer } = require('next/dist/server/dev/next-dev-server')
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BASE_URL}/:path*`
+      }
+    ]
+  },
   swcMinify: true,
   reactStrictMode: false
 }
-
-module.exports = nextConfig

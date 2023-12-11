@@ -1,6 +1,5 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { BASE_URL } from '@utils/http'
 import type { CommonResponse } from '@utils/http'
 import { env } from '@constants'
 
@@ -13,7 +12,7 @@ type LoginRes = {
 }
 
 const getLogin = (code: string): Promise<CommonResponse<LoginRes>> => {
-  const data = fetch(`${BASE_URL}/api/login/kakao?code=${code}`, {
+  const data = fetch(`${env.BASE_API_URL}/api/login/kakao?code=${code}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'

@@ -3,7 +3,7 @@ import axios, { AxiosHeaders } from 'axios'
 import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { getCookie } from 'cookies-next'
 
-export const BASE_URL = '/api'
+const BASE_URL = '/api'
 
 const Axios = axios.create({
   baseURL: BASE_URL,

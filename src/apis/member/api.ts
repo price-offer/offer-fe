@@ -1,5 +1,5 @@
-import type { MemberProfileRes } from './types'
+import type { MyProfileRes } from './types'
 import { http } from '@utils/http'
 
-export const getMemberProfile = async () =>
-  http.get<unknown, MemberProfileRes>('/api/member/access-token/me')
+export const getMyProfile = async () =>
+  http.get<null, MyProfileRes>('/api/member/access-token/me')

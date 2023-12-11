@@ -1,4 +1,4 @@
-export type MemberProfileRes = {
+export type MyProfileRes = {
   id: number
   nickname: string
   profileImageUrl: string

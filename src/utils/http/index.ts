@@ -1,8 +1,10 @@
-import axios from 'axios'
+import axios, { AxiosHeaders } from 'axios'
 
-import type { AxiosResponse } from 'axios'
+import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import { getCookie } from 'cookies-next'
+import { env } from '@constants'
 
-const BASE_URL = 'https://offer-be.kro.kr'
+const BASE_URL = env.BASE_API_URL
 
 const Axios = axios.create({
   baseURL: BASE_URL,
@@ -11,7 +13,21 @@ const Axios = axios.create({
   }
 })
 
-type CommonResponse<T> = {
+Axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const accessToken = getCookie(env.AUTH_TOKEN_KEY)
+  const headers = new AxiosHeaders()
+
+  if (accessToken) {
+    headers.set({
+      Authorization: `Bearer ${accessToken}`
+    })
+  }
+  config.headers = headers
+
+  return config
+})
+
+export type CommonResponse<T> = {
   code: number
   data: T
   message: string

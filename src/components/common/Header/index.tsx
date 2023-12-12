@@ -1,23 +1,36 @@
 import { Avatar, Divider, IconButton, Button } from '@offer-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { SearchArea } from './SearchArea'
 import { SideBar } from './SideBar'
 import { Styled } from './styled'
+import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
+import { OAUTH_URL } from '@constants/oauth'
+import { useAuth } from '@hooks/useAuth'
+import useModal from '@hooks/useModal'
 import { IMAGE } from '@constants'
 
 const Header = (): ReactElement => {
-  const isLogin = true
-
+  const router = useRouter()
+  const { isLogin, user, handleLogout } = useAuth()
+  const { isOpen, openModal, closeModal } = useModal()
+  const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const [isOpenDialog, setIsOpenDialog] = useState({
     logout: false,
     search: false
   })
 
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false)
+  const handleOpenLoginModal = () => {
+    openModal()
+  }
+
+  const handleClickLogin = () => {
+    router.replace(OAUTH_URL.KAKAO)
+  }
 
   return (
     <>
@@ -58,8 +71,12 @@ const Header = (): ReactElement => {
                       logout: !isOpenDialog.logout
                     })
                   }>
-                  <Avatar alt="profile-image" size="xsmall" src="" />
-                  <Styled.HeaderNickName>부드러운 냉장고</Styled.HeaderNickName>
+                  <Avatar
+                    alt="profile-image"
+                    size="xsmall"
+                    src={user.profileImageUrl}
+                  />
+                  <Styled.HeaderNickName>{user.nickname}</Styled.HeaderNickName>
                   <IconButton icon="triangleDown" />
                   {isOpenDialog.logout && (
                     <Dialog
@@ -73,14 +90,19 @@ const Header = (): ReactElement => {
                           logout: false
                         })
                       }>
-                      <Styled.LogoutText>로그아웃</Styled.LogoutText>
+                      <Styled.LogoutButton onClick={handleLogout}>
+                        로그아웃
+                      </Styled.LogoutButton>
                     </Dialog>
                   )}
                 </Styled.HeaderProfileSection>
               </>
             ) : (
               <>
-                <Styled.HeaderAuthButton styleType="ghost" width="37px">
+                <Styled.HeaderAuthButton
+                  styleType="ghost"
+                  width="37px"
+                  onClick={handleOpenLoginModal}>
                   로그인
                 </Styled.HeaderAuthButton>
                 <Divider direction="vertical" gap={16} />
@@ -130,6 +152,22 @@ const Header = (): ReactElement => {
         isLogin={isLogin}
         isOpen={isOpenSideBar}
         onClose={() => setIsOpenSideBar(false)}
+      />
+      <CommonModal
+        buttons={[
+          <Styled.KaKaoButton
+            key="kakao-button"
+            color="kakao"
+            icon="kakao"
+            size="large"
+            onClick={handleClickLogin}>
+            카카오로 시작하기
+          </Styled.KaKaoButton>
+        ]}
+        hasLogo
+        isOpen={isOpen}
+        title={`가격을 제안해보세요\n경매식 중고거래, Offer!`}
+        onClose={closeModal}
       />
     </>
   )

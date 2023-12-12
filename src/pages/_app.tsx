@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
 import { Header } from '@components/common/Header'
+import { env } from '@constants'
 import { Layout } from '@layouts'
 import { theme } from '@styles'
 
@@ -11,7 +12,7 @@ const customTheme = {
   ...theme
 }
 
-const isUseMock = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
+const isUseMock = env.API_MOCKING === 'enabled'
 
 if (isUseMock) {
   await import('../mocks')

@@ -70,7 +70,7 @@ export const TRADE_TYPE = [
   }
 ] as const
 
-export const PRODUCT_STATUS = [
+export const PRODUCT_CONDITION = [
   {
     code: 'NEW',
     name: '새상품'

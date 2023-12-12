@@ -19,7 +19,7 @@ import type {
 import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
 import { useState } from 'react'
 import { PostForm } from '@components'
-import { CATEGORIES, TRADE_TYPE, PRODUCT_STATUS } from '@constants'
+import { CATEGORIES, TRADE_TYPE, PRODUCT_CONDITION } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormStatus = {
@@ -27,7 +27,7 @@ type PostFormStatus = {
   title: string
   categoryCode: number | null
   tradeArea: string
-  productStatusCode: string
+  ProductConditionCode: string
   tradeMethodCode: number | null
   content: string
   price: number
@@ -43,7 +43,7 @@ const PostPage = (): ReactElement => {
     title: '',
     categoryCode: null,
     tradeArea: '',
-    productStatusCode: '',
+    ProductConditionCode: '',
     tradeMethodCode: null,
     content: '',
     price: 0
@@ -152,8 +152,8 @@ const PostPage = (): ReactElement => {
           <StyledRadioPostForm label="상품 상태">
             <StyledRadio
               direction="horizontal"
-              formName="productStatusCode"
-              items={PRODUCT_STATUS}
+              formName="ProductConditionCode"
+              items={PRODUCT_CONDITION}
               onChange={handleChangeRadio}
             />
           </StyledRadioPostForm>

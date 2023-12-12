@@ -1,4 +1,8 @@
-import type { PRODUCT_STATUS, TRADE_TYPE, TRADE_STATUS } from '@constants/app'
+import type {
+  PRODUCT_CONDITION,
+  TRADE_TYPE,
+  TRADE_STATUS
+} from '@constants/app'
 
 /** Member */
 export type MemberProfile = {
@@ -30,7 +34,7 @@ export type Article = {
   category: Option
   tradeStatus: Option
   tradeArea: string
-  productStatus: Option
+  ProductCondition: Option
   tradeMethod: Option
   quantity: number
   price: number
@@ -91,17 +95,17 @@ export type TradeTypeCodes = TradeType['code']
 export type TradeTypeNames = TradeType['name']
 
 /** Product Status */
-export type ProductStatus = typeof PRODUCT_STATUS[number]
-export type ProductStatusCodes = ProductStatus['code']
-export type ProductStatusNames = ProductStatus['name']
+export type ProductCondition = typeof PRODUCT_CONDITION[number]
+export type ProductConditionCodes = ProductCondition['code']
+export type ProductConditionNames = ProductCondition['name']
 
 /** Sort Type */
-export type SortType = typeof PRODUCT_STATUS[number]
+export type SortType = typeof PRODUCT_CONDITION[number]
 export type SortTypeCodes = SortType['code']
 export type SortTypeNames = SortType['name']
 
 /** Categories */
-export type Categories = typeof PRODUCT_STATUS[number]
+export type Categories = typeof PRODUCT_CONDITION[number]
 export type CategoryCodes = Categories['code']
 export type CategoryNames = Categories['name']
 

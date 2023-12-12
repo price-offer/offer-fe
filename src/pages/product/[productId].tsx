@@ -199,7 +199,7 @@ const PRODUCT_MOCK = {
     name: '판매중'
   },
   tradeArea: '서울시 강남구',
-  ProductCondition: {
+  productCondition: {
     code: 2,
     name: '새상품'
   },

@@ -34,7 +34,7 @@ export type Article = {
   category: Option
   tradeStatus: Option
   tradeArea: string
-  ProductCondition: Option
+  productCondition: Option
   tradeMethod: Option
   quantity: number
   price: number

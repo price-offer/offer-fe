@@ -25,10 +25,10 @@ import { useResponsive } from '@hooks'
 type PostFormStatus = {
   imageUrls: ImageInfo[] | null
   title: string
-  categoryCode: number | null
+  category: number | null
   tradeArea: string
-  ProductConditionCode: string
-  tradeMethodCode: number | null
+  productCondition: string
+  tradeMethod: number | null
   content: string
   price: number
 }
@@ -41,10 +41,10 @@ const PostPage = (): ReactElement => {
   const [postForm, setPostForm] = useState<PostFormStatus>({
     imageUrls: null,
     title: '',
-    categoryCode: null,
+    category: null,
     tradeArea: '',
-    ProductConditionCode: '',
-    tradeMethodCode: null,
+    productCondition: '',
+    tradeMethod: null,
     content: '',
     price: 0
   })
@@ -60,7 +60,7 @@ const PostPage = (): ReactElement => {
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
     setPostForm({
       ...postForm,
-      categoryCode: Number(code)
+      category: Number(code)
     })
   }
 
@@ -152,7 +152,7 @@ const PostPage = (): ReactElement => {
           <StyledRadioPostForm label="상품 상태">
             <StyledRadio
               direction="horizontal"
-              formName="ProductConditionCode"
+              formName="productCondition"
               items={PRODUCT_CONDITION}
               onChange={handleChangeRadio}
             />
@@ -160,7 +160,7 @@ const PostPage = (): ReactElement => {
           <StyledRadioPostForm label="거래 방법">
             <StyledRadio
               direction="horizontal"
-              formName="tradeMethodCode"
+              formName="tradeMethod"
               items={TRADE_TYPE}
               onChange={handleChangeRadio}
             />

@@ -10,12 +10,13 @@ import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
 import { OAUTH_URL } from '@constants/oauth'
+import { useAuth } from '@hooks/useAuth'
 import useModal from '@hooks/useModal'
 import { IMAGE } from '@constants'
 
 const Header = (): ReactElement => {
   const router = useRouter()
-  const isLogin = false
+  const { isLogin, user, handleLogout } = useAuth()
   const { isOpen, openModal, closeModal } = useModal()
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const [isOpenDialog, setIsOpenDialog] = useState({
@@ -70,8 +71,12 @@ const Header = (): ReactElement => {
                       logout: !isOpenDialog.logout
                     })
                   }>
-                  <Avatar alt="profile-image" size="xsmall" src="" />
-                  <Styled.HeaderNickName>부드러운 냉장고</Styled.HeaderNickName>
+                  <Avatar
+                    alt="profile-image"
+                    size="xsmall"
+                    src={user.profileImageUrl}
+                  />
+                  <Styled.HeaderNickName>{user.nickname}</Styled.HeaderNickName>
                   <IconButton icon="triangleDown" />
                   {isOpenDialog.logout && (
                     <Dialog
@@ -85,7 +90,9 @@ const Header = (): ReactElement => {
                           logout: false
                         })
                       }>
-                      <Styled.LogoutText>로그아웃</Styled.LogoutText>
+                      <Styled.LogoutButton onClick={handleLogout}>
+                        로그아웃
+                      </Styled.LogoutButton>
                     </Dialog>
                   )}
                 </Styled.HeaderProfileSection>

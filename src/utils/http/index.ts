@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import type { AxiosResponse } from 'axios'
 
-export const BASE_URL = 'https://offer-be.kro.kr'
+const BASE_URL = '/api'
 
 const Axios = axios.create({
   baseURL: BASE_URL,

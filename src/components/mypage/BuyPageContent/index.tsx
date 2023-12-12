@@ -12,13 +12,11 @@ import { TRADE_STATUS, TRADE_ACTIVITY_TYPE } from '@constants'
 import type { ArticlesElement } from '@types'
 import { noop } from '@utils'
 
-const tradeStatusList = TRADE_STATUS.filter(item => item.code !== 2)
 const tradeBuyActivityList = Object.entries(TRADE_ACTIVITY_TYPE.buy)
 
 const getArticles = (): ArticlesElement[] => {
   return Array.from({ length: 10 }, () => 0).map((_, index) => {
-    const tradeStatus =
-      index % 2 !== 0 ? tradeStatusList[0] : tradeStatusList[1]
+    const tradeStatus = index % 2 !== 0 ? TRADE_STATUS[0] : TRADE_STATUS[1]
 
     return {
       id: index,

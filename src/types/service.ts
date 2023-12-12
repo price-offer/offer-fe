@@ -1,3 +1,5 @@
+import type { PRODUCT_STATUS, TRADE_METHOD, TRADE_STATUS } from '@constants/app'
+
 /** Member */
 export type MemberProfile = {
   member: Member
@@ -55,59 +57,6 @@ export type Option = {
   code: number
   name: string
 }
-/** Trade Status */
-export type TradeStatusOnReserve = {
-  code: 2
-  name: '예약중'
-}
-export type TradeStatusOnSale = {
-  code: 4
-  name: '판매중'
-}
-export type TradeStatusOnSoldOut = {
-  code: 8
-  name: '거래완료'
-}
-export type TradeStatusCode = 2 | 4 | 8
-export type TradeStatusName = '예약중' | '판매중' | '거래완료'
-export type TradeStatus =
-  | TradeStatusOnReserve
-  | TradeStatusOnSale
-  | TradeStatusOnSoldOut
-
-/** Trade Method */
-export type TradeMethodOnDirect = {
-  code: 2
-  name: '직거래'
-}
-export type TradeMethodOnDelivery = {
-  code: 4
-  name: '택배거래'
-}
-export type TradeMethodOnAny = {
-  code: 8
-  name: '직거래/택배거래'
-}
-export type TradeMethodCode = 2 | 4 | 8
-export type TradeMethodName = '직거래' | '택배거래' | '직거래/택배거래'
-export type TradeMethod =
-  | TradeMethodOnDirect
-  | TradeMethodOnDelivery
-  | TradeMethodOnAny
-
-/** Product Status */
-export type ProductStatusOnNew = {
-  code: 2
-  name: '새상품'
-}
-export type ProductStatusOnOld = {
-  code: 4
-  name: '중고상품'
-}
-export type ProductStatusCode = 2 | 4
-export type ProductStatusName = '새상품' | '중고상품'
-export type ProductStatus = ProductStatusOnNew | ProductStatusOnOld
-
 export type ArticlesElement = {
   id: number
   mainImageUrl: string
@@ -130,6 +79,31 @@ export type PageInfo = {
   isFirstPage: boolean
   isLastPage: boolean
 }
+
+/** Trade Status */
+export type TradeStatus = typeof TRADE_STATUS[number]
+export type TradeStatusCodes = TradeStatus['code']
+export type TradeStatusNames = TradeStatus['name']
+
+/** Trade Method */
+export type TradeMethod = typeof TRADE_METHOD[number]
+export type TradeMethodCodes = TradeMethod['code']
+export type TradeMethodNames = TradeMethod['name']
+
+/** Product Status */
+export type ProductStatus = typeof PRODUCT_STATUS[number]
+export type ProductStatusCodes = ProductStatus['code']
+export type ProductStatusNames = ProductStatus['name']
+
+/** Sort Type */
+export type SortType = typeof PRODUCT_STATUS[number]
+export type SortTypeCodes = SortType['code']
+export type SortTypeNames = SortType['name']
+
+/** Categories */
+export type Categories = typeof PRODUCT_STATUS[number]
+export type CategoryCodes = Categories['code']
+export type CategoryNames = Categories['name']
 
 /** Offer */
 export type Offer = {

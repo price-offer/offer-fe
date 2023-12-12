@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useGetMyProfileQuery } from '@apis/member'
 
 const EMPTY_COUNT_NUMBER = -1
-const initialMember = {
+const initialUser = {
   id: EMPTY_COUNT_NUMBER,
   nickname: '',
   profileImageUrl: '',
@@ -18,7 +18,7 @@ const initialMember = {
 export const useAuth = () => {
   const router = useRouter()
   const accessToken = getCookie('accessToken')
-  const userQuery = useGetMyProfileQuery(accessToken)
+  const { data: userData } = useGetMyProfileQuery(accessToken)
   const [isLogin, setIsLogin] = useState(false)
 
   const handleLogout = () => {
@@ -35,6 +35,6 @@ export const useAuth = () => {
   return {
     isLogin,
     handleLogout,
-    user: userQuery.data?.data || initialMember
+    user: userData || initialUser
   }
 }

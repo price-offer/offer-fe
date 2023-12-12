@@ -55,7 +55,7 @@ export const SORT_TYPE = [
   }
 ] as const
 
-export const TRADE_METHOD = [
+export const TRADE_TYPE = [
   {
     code: 'FACE_TO_FACE',
     name: '직거래'

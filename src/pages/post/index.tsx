@@ -19,7 +19,7 @@ import type {
 import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
 import { useState } from 'react'
 import { PostForm } from '@components'
-import { CATEGORIES, TRADE_METHOD, PRODUCT_STATUS } from '@constants'
+import { CATEGORIES, TRADE_TYPE, PRODUCT_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormStatus = {
@@ -161,7 +161,7 @@ const PostPage = (): ReactElement => {
             <StyledRadio
               direction="horizontal"
               formName="tradeMethodCode"
-              items={TRADE_METHOD}
+              items={TRADE_TYPE}
               onChange={handleChangeRadio}
             />
           </StyledRadioPostForm>

@@ -1,4 +1,4 @@
-import type { PRODUCT_STATUS, TRADE_METHOD, TRADE_STATUS } from '@constants/app'
+import type { PRODUCT_STATUS, TRADE_TYPE, TRADE_STATUS } from '@constants/app'
 
 /** Member */
 export type MemberProfile = {
@@ -86,9 +86,9 @@ export type TradeStatusCodes = TradeStatus['code']
 export type TradeStatusNames = TradeStatus['name']
 
 /** Trade Method */
-export type TradeMethod = typeof TRADE_METHOD[number]
-export type TradeMethodCodes = TradeMethod['code']
-export type TradeMethodNames = TradeMethod['name']
+export type TradeType = typeof TRADE_TYPE[number]
+export type TradeTypeCodes = TradeType['code']
+export type TradeTypeNames = TradeType['name']
 
 /** Product Status */
 export type ProductStatus = typeof PRODUCT_STATUS[number]

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import type { AxiosResponse } from 'axios'
 
-const BASE_URL = 'https://offer-be.kro.kr'
+const BASE_URL = '/api'
 
 const Axios = axios.create({
   baseURL: BASE_URL,
@@ -11,7 +11,7 @@ const Axios = axios.create({
   }
 })
 
-type CommonResponse<T> = {
+export type CommonResponse<T> = {
   code: number
   data: T
   message: string

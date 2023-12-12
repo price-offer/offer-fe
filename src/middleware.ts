@@ -28,7 +28,7 @@ const middleware = async (request: NextRequest) => {
 }
 
 export const config = {
-  matcher: ['/messagebox', '/mypage', '/post', '/auth/redirect', '/api/:path*']
+  matcher: ['/messagebox', '/post', '/auth/redirect', '/api/:path*']
 }
 
 export default middleware

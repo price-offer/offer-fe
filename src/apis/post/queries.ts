@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { postProduct } from './api'
+import { postProduct } from './apis'
 import type { PostProductReq } from './types'
 
 export const usePostProductMutation = () =>

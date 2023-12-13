@@ -3,7 +3,7 @@ import { ErrorBoundary, Suspense } from '@suspensive/react'
 import {
   QueryClient,
   QueryClientProvider,
-  useQueryErrorResetBoundary
+  QueryErrorResetBoundary
 } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
@@ -26,20 +26,22 @@ if (isUseMock) {
 const queryClient = new QueryClient()
 
 const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
-  const { reset } = useQueryErrorResetBoundary()
-
   return (
     <QueryClientProvider client={queryClient}>
-      <ErrorBoundary fallback={<div>Error</div>} onReset={reset}>
-        <OfferStyleProvider theme={customTheme}>
-          <Suspense.CSROnly fallback={<HeaderSkeleton />}>
-            <Header />
-          </Suspense.CSROnly>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </OfferStyleProvider>
-      </ErrorBoundary>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary fallback={<div>Error</div>} onReset={reset}>
+            <OfferStyleProvider theme={customTheme}>
+              <Suspense.CSROnly fallback={<HeaderSkeleton />}>
+                <Header />
+              </Suspense.CSROnly>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </OfferStyleProvider>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
     </QueryClientProvider>
   )
 }

@@ -104,6 +104,11 @@ const Header = (): ReactElement => {
                       </Dialog>
                     )}
                   </Styled.HeaderProfileSection>
+                  <Link href="/post">
+                    <Button size="small" styleType="solidSub">
+                      판매하기
+                    </Button>
+                  </Link>
                 </>
               ) : (
                 <>
@@ -117,14 +122,8 @@ const Header = (): ReactElement => {
                   <Styled.HeaderAuthButton styleType="ghost" width="50px">
                     회원가입
                   </Styled.HeaderAuthButton>
-                  <Styled.SellButtonDivider />
                 </>
               )}
-              <Link href="/post">
-                <Button size="small" styleType="solidSub">
-                  판매하기
-                </Button>
-              </Link>
             </Styled.ButtonSection>
           )}
           <Styled.MenuSection>

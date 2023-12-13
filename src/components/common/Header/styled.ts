@@ -78,10 +78,6 @@ const LogoutButton = styled.button`
   ${({ theme }): string => theme.fonts.caption01M};
 `
 
-const SellButtonDivider = styled.div`
-  width: 32px;
-`
-
 const HeaderAuthButton = styled(Button)`
   margin: 0;
   padding: 0;
@@ -142,7 +138,6 @@ export const Styled = {
   ButtonSection,
   HeaderAuthButton,
   LogoutButton,
-  SellButtonDivider,
   HeaderProfileSection,
   HeaderNickName,
   MenuSection,

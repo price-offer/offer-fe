@@ -16,7 +16,7 @@ export const Default: StoryObj<ProductBubble> = {
     title: '마르니 플랫 로퍼 (black)',
     price: 133000,
     offerPrice: 144449,
-    tradeType: 2,
+    tradeType: 'ALL',
     productImageUrl: 'https://picsum.photos/id/237/200/300'
   },
   render: args => <ProductBubbleComponent {...args} />

@@ -1,10 +1,4 @@
-import type {
-  KeyOf,
-  ProductStatus,
-  TradeMethod,
-  TradeStatus,
-  ValueOf
-} from '@types'
+import type { KeyOf, ValueOf } from '@types'
 
 /** 나의 거래 활동 */
 export type TradeActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE>
@@ -42,122 +36,98 @@ export const TRADE_ACTIVITY_TYPE = {
   }
 } as const
 
-export const TRADE_STATUS: TradeStatus[] = [
+export const TRADE_STATUS = [
   {
-    code: 2,
-    name: '예약중'
-  },
-  {
-    code: 4,
+    code: 'SELLING',
     name: '판매중'
   },
   {
-    code: 8,
+    code: 'SOLD',
     name: '거래완료'
   }
-]
+] as const
 
-export const TRADE_METHOD: TradeMethod[] = [
+export const SORT_TYPE = [
+  { name: 'RECENT_CREATED', exposureTitle: '최신순' },
   {
-    code: 2,
+    name: 'LOW_PRICE',
+    exposureTitle: '낮은 가격순'
+  }
+] as const
+
+export const TRADE_TYPE = [
+  {
+    code: 'FACE_TO_FACE',
     name: '직거래'
   },
   {
-    code: 4,
+    code: 'SHIPPING',
     name: '택배거래'
   },
   {
-    code: 8,
+    code: 'ALL',
     name: '직거래/택배거래'
   }
-]
+] as const
 
-export const PRODUCT_STATUS: ProductStatus[] = [
+export const PRODUCT_CONDITION = [
   {
-    code: 2,
+    code: 'NEW',
     name: '새상품'
   },
   {
-    code: 4,
+    code: 'SECONDHAND',
     name: '중고상품'
   }
-]
+] as const
 
 export const CATEGORIES = [
   {
-    code: 1,
-    name: '인기매물'
-  },
-  {
-    code: 2,
-    name: '디지털기기'
-  },
-  {
-    code: 3,
-    name: '생활가전'
-  },
-  {
-    code: 4,
-    name: '가구/인테리어'
-  },
-  {
-    code: 5,
-    name: '유아동'
-  },
-  {
-    code: 6,
-    name: '생활/가공식품'
-  },
-  {
-    code: 7,
-    name: '유아도서'
-  },
-  {
-    code: 8,
-    name: '스포츠/레저'
-  },
-  {
-    code: 9,
-    name: '여성잡화'
-  },
-  {
-    code: 10,
-    name: '여성의류'
-  },
-  {
-    code: 11,
+    code: 'MEN_FASHION',
     name: '남성패션/잡화'
   },
   {
-    code: 12,
-    name: '게임/취미'
+    code: 'WOMEN_FASHION',
+    name: '여성패션/잡화'
   },
   {
-    code: 13,
-    name: '뷰티/미용'
+    code: 'GAME',
+    name: '게임'
   },
   {
-    code: 14,
-    name: '반려동물용품'
+    code: 'SPORTS',
+    name: '스포츠/레저'
   },
   {
-    code: 15,
+    code: 'TOY',
+    name: '장난감/취미'
+  },
+  {
+    code: 'DIGITAL',
+    name: '디지털기기'
+  },
+  {
+    code: 'CAR',
+    name: '자동차/공구'
+  },
+  {
+    code: 'APPLIANCE',
+    name: '생활가전'
+  },
+  {
+    code: 'FURNITURE',
+    name: '가구/인테리어'
+  },
+  {
+    code: 'BOOKS',
     name: '도서/티켓/음반'
   },
   {
-    code: 16,
-    name: '식물'
+    code: 'PET',
+    name: '반려동물용품'
   },
   {
-    code: 17,
-    name: '식품'
-  },
-  {
-    code: 18,
+    code: 'OTHER',
     name: '기타 중고물품'
-  },
-  {
-    code: 19,
-    name: '삽니다'
   }
 ] as const

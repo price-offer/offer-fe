@@ -199,7 +199,7 @@ const PRODUCT_MOCK = {
     name: '판매중'
   },
   tradeArea: '서울시 강남구',
-  productStatus: {
+  productCondition: {
     code: 2,
     name: '새상품'
   },
@@ -226,8 +226,8 @@ const ProductDetailPage = (): ReactElement => {
         </div>
         <Content>
           <div>
-            <ProductStatus>
-              <ProductStatusSelectBox
+            <ProductCondition>
+              <ProductConditionSelectBox
                 items={[
                   { code: 1, name: '판매중' },
                   { code: 2, name: '거래 완료' }
@@ -238,7 +238,7 @@ const ProductDetailPage = (): ReactElement => {
                 }}
               />
               <IconButton icon="more" size={24} />
-            </ProductStatus>
+            </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
               카테고리
             </Text>
@@ -276,7 +276,7 @@ const ProductDetailPage = (): ReactElement => {
   )
 }
 
-const ProductStatus = styled.div`
+const ProductCondition = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -346,7 +346,7 @@ const Content = styled.div`
   `}
 `
 
-const ProductStatusSelectBox = styled(SelectBox)`
+const ProductConditionSelectBox = styled(SelectBox)`
   margin: 33px 0 16px;
 
   ${({ theme }): SerializedStyles => css`

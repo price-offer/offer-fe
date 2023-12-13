@@ -44,7 +44,7 @@ describe('/apis', () => {
   it('getOnSaleArticles() - 함수 호출 시, 판매자의 판매중인 게시글 목록을 받아옵니다.', async () => {
     // Given
     const memberId = '1'
-    const tradeStatusCode = 4
+    const tradeStatusCode = 'SELLING'
 
     // When
     const res = await getOnSaleArticles(memberId, tradeStatusCode)
@@ -58,7 +58,7 @@ describe('/apis', () => {
     // Given
     const articleId = '4'
     const tradeStatus: TradeStatus = {
-      code: 8,
+      code: 'SOLD',
       name: '거래완료'
     }
     // When

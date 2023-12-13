@@ -52,7 +52,7 @@ export const articles: Articles = {
       price: 36500,
       tradeArea: '서울시 강남구',
       tradeStatus: {
-        code: 4,
+        code: 'SELLING',
         name: '판매중'
       },
       createdDate: '2021-12-10T14:25:30',
@@ -69,7 +69,7 @@ export const articles: Articles = {
       price: 8000,
       tradeArea: '서울시 강남구',
       tradeStatus: {
-        code: 4,
+        code: 'SELLING',
         name: '판매중'
       },
       createdDate: '2021-12-10T14:23:53',

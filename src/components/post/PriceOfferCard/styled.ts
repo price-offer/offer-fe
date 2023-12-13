@@ -16,7 +16,7 @@ const OfferPriceCardWrapper = styled.div`
 
       ${mediaQuery.tablet} {
         width: 100%;
-        min-width: auto;
+        max-width: none;
         border: none;
       }
       ${mediaQuery.mobile} {

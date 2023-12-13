@@ -4,6 +4,5 @@ import { getMyProfile } from './apis'
 export const useGetMyProfileQuery = (accessToken?: string) =>
   useSuspenseQuery({
     queryKey: ['myProfile', accessToken],
-    queryFn: getMyProfile,
-    select: res => res.data
+    queryFn: getMyProfile
   })

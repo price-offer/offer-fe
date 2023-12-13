@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
-  ImageUploader,
+  // ImageUploader,
   Input,
   SelectBox,
   Text,
@@ -12,25 +12,32 @@ import {
 } from '@offer-ui/react'
 import type {
   ImageInfo,
-  UploaderOnChangeHandler,
+  // UploaderOnChangeHandler,
   SelectOnChangeHandler,
   InputProps
 } from '@offer-ui/react'
-import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
+import { useRouter } from 'next/router'
+import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState } from 'react'
 import { usePostProductMutation } from '@apis/post'
+import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
 import { CATEGORIES, TRADE_TYPE, PRODUCT_CONDITION } from '@constants'
 import { useResponsive } from '@hooks'
+import type {
+  CategoryCodes,
+  ProductConditionCodes,
+  TradeTypeCodes
+} from '@types'
 
 type PostFormStatus = {
   title: string
   imageInfos: ImageInfo[]
-  category: number | null
-  price: number
+  category: CategoryCodes | ''
+  price: string
   location: string
-  productCondition: string
-  tradeType: number | null
+  productCondition: ProductConditionCodes | ''
+  tradeType: TradeTypeCodes | ''
   description: string
 }
 
@@ -38,18 +45,28 @@ type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
 
+const MOCK_IMAGE_INFOS: ImageInfo[] = Array.from({ length: 4 }).map(
+  (_, idx) => ({
+    isRepresent: idx === 0,
+    id: String(idx),
+    url: 'https://picsum.photos/200/300'
+  })
+)
+
 const PostPage = (): ReactElement => {
   const { mutateAsync: postProduct } = usePostProductMutation()
+  const router = useRouter()
   const [postForm, setPostForm] = useState<PostFormStatus>({
-    imageInfos: [],
+    imageInfos: MOCK_IMAGE_INFOS,
     title: '',
-    category: null,
+    category: '',
     location: '',
     productCondition: '',
-    tradeType: null,
+    tradeType: '',
     description: '',
-    price: 0
+    price: ''
   })
+
   const InputSize = useResponsive<InputProps, 'width'>({
     desktop: '278px',
     tablet: '100%'
@@ -62,21 +79,21 @@ const PostPage = (): ReactElement => {
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
     setPostForm({
       ...postForm,
-      category: Number(code)
+      category: code
     })
   }
 
-  const handleUpdateImageInfos: UploaderOnChangeHandler = ({
-    images
-  }): void => {
-    setPostForm({
-      ...postForm,
-      imageInfos: images
-    })
-  }
+  // const handleUpdateImageInfos: UploaderOnChangeHandler = ({
+  //   images
+  // }): void => {
+  //   setPostForm({
+  //     ...postForm,
+  //     imageInfos: images
+  //   })
+  // }
 
   const handleUpdatePostForm: HandleUpdatePostForm = (e): void => {
-    const { name, value } = e.currentTarget
+    const { name, value } = e.target
 
     setPostForm({
       ...postForm,
@@ -84,26 +101,18 @@ const PostPage = (): ReactElement => {
     })
   }
 
-  const handleChangeRadio = (e: ChangeEvent<HTMLFormElement>) => {
-    const { name, value } = e.target
-
-    setPostForm({
-      ...postForm,
-      [name]: Number(value)
-    })
-  }
-
   const handlePostProduct = async () => {
-    const { imageInfos, category, tradeType } = postForm
+    const { imageInfos, price, ...restInfos } = postForm
     const imageUrls = imageInfos.map(({ url }) => url)
 
-    await postProduct({
-      ...postForm,
+    const res = await postProduct({
+      ...restInfos,
       imageUrls,
-      category: String(category),
-      tradeType: String(tradeType),
+      price: localeCurrencyToNumber(price),
       thumbnailImageUrl: imageUrls[0] || ''
     })
+
+    router.push(`/product/${res.data.id}`)
   }
 
   return (
@@ -126,10 +135,10 @@ const PostPage = (): ReactElement => {
             </StyledTitleLength>
           </StyledTitleWrapper>
           <div>
-            <ImageUploader
+            {/* <ImageUploader
               images={postForm.imageInfos || []}
               onChange={handleUpdateImageInfos}
-            />
+            /> */}
           </div>
         </StyledPostingHeader>
         <StyledDivider gap={20} />
@@ -170,15 +179,15 @@ const PostPage = (): ReactElement => {
               direction="horizontal"
               formName="productCondition"
               items={PRODUCT_CONDITION}
-              onChange={handleChangeRadio}
+              onChange={handleUpdatePostForm}
             />
           </StyledRadioPostForm>
           <StyledRadioPostForm label="거래 방법">
             <StyledRadio
               direction="horizontal"
-              formName="tradeMethod"
+              formName="tradeType"
               items={TRADE_TYPE}
-              onChange={handleChangeRadio}
+              onChange={handleUpdatePostForm}
             />
           </StyledRadioPostForm>
         </StyledPostForms>

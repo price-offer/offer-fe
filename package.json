@@ -27,7 +27,8 @@
     "dayjs": "^1.11.10",
     "next": "^13.4.8",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "undici": "^6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",

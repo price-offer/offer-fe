@@ -2,15 +2,10 @@ import type { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
   clearMocks: true,
-
   collectCoverage: false,
-
   coverageDirectory: 'coverage',
-
   coverageProvider: 'v8',
-
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
-
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@apis(.*)$': '<rootDir>/src/apis/$1',
@@ -27,20 +22,18 @@ const config: Config.InitialOptions = {
     '^@types(.*)$': '<rootDir>/src/types/$1',
     '^@utils(.*)$': '<rootDir>/src/utils/$1'
   },
-
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
     '^.+\\.svg$': 'jest-transformer-svg'
   },
-
   testEnvironment: 'jest-environment-node',
-
+  testEnvironmentOptions: {
+    customExportConditions: ['']
+  },
   testMatch: ['<rootDir>/**/*.test.(js|jsx|ts|tsx)'],
-
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
-
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-
+  setupFiles: ['./jest.polyfills.js'],
   testPathIgnorePatterns: ['<rootDir>/src/tests/e2e']
 }
 

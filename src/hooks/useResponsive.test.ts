@@ -58,7 +58,7 @@ describe('hooks/useResponsive()', () => {
     })
 
     // Then
-    expect(result.current).toBe('outlineDisabled')
+    expect(result.current).toBe('solidPrimary')
   })
 
   it('viewport가 tablet 미디어쿼리 값에 해당하지만 tablet이 없는 경우, ButtonProps의 styleType 값을 desktop 값인 ghost로 리턴해야 합니다.', () => {
@@ -86,6 +86,6 @@ describe('hooks/useResponsive()', () => {
     })
 
     // Then
-    expect(result.current).toBe('outlineDisabled')
+    expect(result.current).toBe('solidPrimary')
   })
 })

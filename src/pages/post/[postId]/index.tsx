@@ -3,8 +3,8 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { ProductField, UserProfile, PriceOfferCard } from '@components/product'
-import type { Offer } from '@components/product/PriceOfferCard/types'
+import type { Offer } from '@components/post/PriceOfferCard/types'
+import { PostField, UserProfile, PriceOfferCard } from '@components'
 
 const IMAGES_MOCK = [
   {
@@ -217,7 +217,7 @@ const PRODUCT_MOCK = {
   isLiked: false
 }
 
-const ProductDetailPage = (): ReactElement => {
+const PostDetailPage = (): ReactElement => {
   return (
     <Layout>
       <Main>
@@ -242,9 +242,9 @@ const ProductDetailPage = (): ReactElement => {
             <Text color="grayScale70" styleType="body02M" tag="p">
               카테고리
             </Text>
-            <ProductName styleType="headline01B" tag="p">
+            <PostName styleType="headline01B" tag="p">
               제품명
-            </ProductName>
+            </PostName>
             <Text styleType="display01B" tag="p">
               {PRODUCT_MOCK.price}
               <Text styleType="subtitle01M">원</Text>
@@ -255,7 +255,7 @@ const ProductDetailPage = (): ReactElement => {
             <Text styleType="headline02B">상품 정보</Text>
             <TransactionContainer>
               {CATEGORIES_MOCK.map(({ label, value }) => (
-                <ProductField key={label} label={label} value={value} />
+                <PostField key={label} label={label} value={value} />
               ))}
             </TransactionContainer>
             <Description>{PRODUCT_MOCK.title}</Description>
@@ -387,7 +387,7 @@ const TransactionContainer = styled.div`
     }
   `}
 `
-const ProductName = styled(Text)`
+const PostName = styled(Text)`
   margin: 4px 0 8px;
 
   ${({ theme }): SerializedStyles => css`
@@ -406,4 +406,4 @@ const Description = styled.p`
   ${({ theme }) => theme.fonts.body02R}
 `
 
-export default ProductDetailPage
+export default PostDetailPage

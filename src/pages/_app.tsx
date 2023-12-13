@@ -1,5 +1,5 @@
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
-import { ErrorBoundary, Suspense } from '@suspensive/react'
+import { ErrorBoundary } from '@suspensive/react'
 import {
   QueryClient,
   QueryClientProvider,
@@ -7,7 +7,6 @@ import {
 } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
-import { HeaderSkeleton } from '@components'
 import { env } from '@constants'
 import { Layout } from '@layouts'
 import { theme } from '@styles'
@@ -32,7 +31,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
         {({ reset }) => (
           <ErrorBoundary fallback={<div>Error</div>} onReset={reset}>
             <OfferStyleProvider theme={customTheme}>
-              <Suspense.CSROnly fallback={<HeaderSkeleton />} />
               <Layout>
                 <Component {...pageProps} />
               </Layout>

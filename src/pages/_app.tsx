@@ -1,7 +1,13 @@
 import { OfferStyleProvider, theme as offerTheme } from '@offer-ui/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ErrorBoundary, Suspense } from '@suspensive/react'
+import {
+  QueryClient,
+  QueryClientProvider,
+  QueryErrorResetBoundary
+} from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
+import { HeaderSkeleton } from '@components'
 import { env } from '@constants'
 import { Layout } from '@layouts'
 import { theme } from '@styles'
@@ -22,11 +28,18 @@ const queryClient = new QueryClient()
 const App = ({ Component, pageProps }: AppProps): ReactElement | null => {
   return (
     <QueryClientProvider client={queryClient}>
-      <OfferStyleProvider theme={customTheme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </OfferStyleProvider>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary fallback={<div>Error</div>} onReset={reset}>
+            <OfferStyleProvider theme={customTheme}>
+              <Suspense.CSROnly fallback={<HeaderSkeleton />} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </OfferStyleProvider>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
     </QueryClientProvider>
   )
 }

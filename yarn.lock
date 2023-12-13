@@ -3062,6 +3062,11 @@
   dependencies:
     "@babel/core" "^7.17.9"
 
+"@suspensive/react@^1.20.7":
+  version "1.20.7"
+  resolved "https://registry.yarnpkg.com/@suspensive/react/-/react-1.20.7.tgz#58fdab664ab54388688a42296f2f09ad5942f535"
+  integrity sha512-64KNgOloluurl0Hc/UCZg+VYnJkh4CA6ovw0ncPCL+ufpIk6L71WsUkfUvLN4PRPIY9hyT7TCU1Qpm6BUqY0Lw==
+
 "@swc/core-darwin-arm64@1.3.96":
   version "1.3.96"
   resolved "https://registry.yarnpkg.com/@swc/core-darwin-arm64/-/core-darwin-arm64-1.3.96.tgz#7c1c4245ce3f160a5b36a48ed071e3061a839e1d"

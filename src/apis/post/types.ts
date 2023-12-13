@@ -11,3 +11,8 @@ export type GetPostDetailRes = {
   productCondition: ProductConditionCodes
   createdAt: string
 }
+
+export type GetCategoriesRes = {
+  code: string
+  name: string
+}[]

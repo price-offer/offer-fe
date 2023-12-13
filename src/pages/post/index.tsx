@@ -109,7 +109,7 @@ const PostPage = (): ReactElement => {
       thumbnailImageUrl: imageUrls[0] || ''
     })
 
-    router.push(`/product/${res.id}`)
+    router.replace(`/post/${res.id}`)
   }
 
   return (
@@ -148,7 +148,7 @@ const PostPage = (): ReactElement => {
         <StyledPostForms>
           <PostForm label="카테고리">
             <SelectBox
-              items={categoriesData}
+              items={categoriesData || []}
               placeholder="선택"
               size="small"
               onChange={handleUpdateCategory}

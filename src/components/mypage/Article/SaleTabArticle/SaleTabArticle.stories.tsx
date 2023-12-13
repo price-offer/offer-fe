@@ -24,12 +24,12 @@ const PrimaryWithHooks: Story<SaleTabArticleProps> = args => {
       <div>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[0])}>
           판매중
         </button>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[2])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
           거래 완료
         </button>
       </div>

@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { SaleTabArticleListProps } from './types'
 import { SaleTabArticleList as SaleTabArticleListComponent } from './index'
 import { TRADE_STATUS } from '@constants'
-import type { ArticlesElement, TradeStatus, TradeStatusCode } from '@types'
+import type { ArticlesElement, TradeStatus, TradeStatusCodes } from '@types'
 
 type SaleTabArticleList = typeof SaleTabArticleListComponent
 
@@ -34,12 +34,12 @@ const PrimaryWithHooks = (args: SaleTabArticleListProps) => {
       <div>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[0])}>
           판매중
         </button>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[2])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
           거래완료
         </button>
       </div>
@@ -55,9 +55,9 @@ const PrimaryWithHooks = (args: SaleTabArticleListProps) => {
   )
 }
 
-const getArticles = (tradeStatusCode: TradeStatusCode): ArticlesElement[] => {
-  const isOnSale = tradeStatusCode === 4
-  const tradeStatus = isOnSale ? TRADE_STATUS[1] : TRADE_STATUS[2]
+const getArticles = (tradeStatusCode: TradeStatusCodes): ArticlesElement[] => {
+  const isOnSale = tradeStatusCode === 'SELLING'
+  const tradeStatus = isOnSale ? TRADE_STATUS[0] : TRADE_STATUS[1]
 
   return Array.from({ length: 10 }, () => 0).map((_, index) => ({
     id: index,

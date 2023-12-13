@@ -7,7 +7,7 @@ type PriceOfferModal = typeof PriceOfferModalComponent
 
 const meta: Meta<PriceOfferModal> = {
   component: PriceOfferModalComponent,
-  title: 'Product/PriceOfferModal'
+  title: 'Post/PriceOfferModal'
 }
 
 export default meta

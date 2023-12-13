@@ -109,7 +109,7 @@ const PostPage = (): ReactElement => {
       thumbnailImageUrl: imageUrls[0] || ''
     })
 
-    router.push(`/product/${res.data.id}`)
+    router.push(`/product/${res.id}`)
   }
 
   return (
@@ -307,16 +307,18 @@ const StyledTitleInput = styled(Input)`
 const StyledPostPage = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 42px 24px 0;
+  padding-top: 42px;
 
   ${({ theme }) => css`
     ${theme.mediaQuery.tablet} {
       margin: 0;
+      margin-top: -67px;
       padding: 0;
     }
 
     ${theme.mediaQuery.mobile} {
       margin: 0;
+      margin-top: -67px;
       padding: 0;
     }
   `};

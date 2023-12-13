@@ -4,7 +4,7 @@ import { UserProfile as UserProfileComponent } from './index'
 type UserProfile = typeof UserProfileComponent
 
 const meta: Meta<UserProfile> = {
-  title: 'Product/UserProfile',
+  title: 'Post/UserProfile',
   component: UserProfileComponent
 }
 

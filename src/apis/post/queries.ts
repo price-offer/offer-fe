@@ -10,6 +10,5 @@ export const usePostProductMutation = () =>
 export const useGetCategoriesQuery = () =>
   useQuery({
     queryKey: ['getCategories'],
-    queryFn: getCategories,
-    select: res => res.data
+    queryFn: getCategories
   })

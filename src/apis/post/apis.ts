@@ -5,4 +5,4 @@ export const postProduct = (param: PostProductReq) =>
   http.post<PostProductReq, PostProductRes>('/posts', param)
 
 export const getCategories = () =>
-  http.post<null, GetCategoriesRes>('/categories')
+  http.get<null, GetCategoriesRes>('/categories')

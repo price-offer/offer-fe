@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { StyledTextWrapperProps } from './types'
 
-const ProductField = styled.div`
+const PostField = styled.div`
   display: flex;
   gap: 12px;
 `
@@ -15,6 +15,6 @@ const TextWrapper = styled.div<StyledTextWrapperProps>`
 `
 
 export const Styled = {
-  ProductField,
+  PostField,
   TextWrapper
 }

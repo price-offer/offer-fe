@@ -5,7 +5,7 @@ import { PriceOfferCard as PriceOfferCardComponent } from './index'
 type PriceOfferCard = typeof PriceOfferCardComponent
 const meta: Meta<PriceOfferCard> = {
   component: PriceOfferCardComponent,
-  title: 'Product/PriceOfferCard'
+  title: 'Post/PriceOfferCard'
 }
 
 export default meta

@@ -235,11 +235,12 @@ const StyledRequiredMark = styled(Text)`
   margin-left: 5px;
 `
 const StyledSellText = styled(Text)`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     ${theme.mediaQuery.tablet} {
       display: flex;
-      justify-description: center;
       align-items: center;
+      justify-content: center;
+
       height: 56px;
       border-bottom: solid 1px ${theme.colors.grayScale10};
       ${theme.fonts.body01B}
@@ -247,8 +248,9 @@ const StyledSellText = styled(Text)`
 
     ${theme.mediaQuery.mobile} {
       display: flex;
-      justify-description: center;
       align-items: center;
+      justify-content: center;
+
       height: 56px;
       border-bottom: solid 1px ${theme.colors.grayScale10};
       ${theme.fonts.body01B}

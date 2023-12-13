@@ -5,7 +5,7 @@ type PostField = typeof PostFieldComponent
 
 const meta: Meta<PostField> = {
   component: PostFieldComponent,
-  title: 'Product/PostField'
+  title: 'Post/PostField'
 }
 
 export default meta

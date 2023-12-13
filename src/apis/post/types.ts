@@ -14,3 +14,8 @@ export type PostProductRes = {
   id: number
   createdAt: string
 }
+
+export type GetCategoriesRes = {
+  code: string
+  name: string
+}[]

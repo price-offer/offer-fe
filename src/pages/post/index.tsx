@@ -19,21 +19,17 @@ import type {
 import { useRouter } from 'next/router'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState } from 'react'
-import { usePostProductMutation } from '@apis/post'
+import { useGetCategoriesQuery, usePostProductMutation } from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
-import { CATEGORIES, TRADE_TYPE, PRODUCT_CONDITION } from '@constants'
+import { TRADE_TYPE, PRODUCT_CONDITION } from '@constants'
 import { useResponsive } from '@hooks'
-import type {
-  CategoryCodes,
-  ProductConditionCodes,
-  TradeTypeCodes
-} from '@types'
+import type { ProductConditionCodes, TradeTypeCodes } from '@types'
 
 type PostFormStatus = {
   title: string
   imageInfos: ImageInfo[]
-  category: CategoryCodes | ''
+  category: string
   price: string
   location: string
   productCondition: ProductConditionCodes | ''
@@ -55,6 +51,7 @@ const MOCK_IMAGE_INFOS: ImageInfo[] = Array.from({ length: 4 }).map(
 
 const PostPage = (): ReactElement => {
   const { mutateAsync: postProduct } = usePostProductMutation()
+  const { data: categoriesData } = useGetCategoriesQuery()
   const router = useRouter()
   const [postForm, setPostForm] = useState<PostFormStatus>({
     imageInfos: MOCK_IMAGE_INFOS,
@@ -151,7 +148,7 @@ const PostPage = (): ReactElement => {
         <StyledPostForms>
           <PostForm label="카테고리">
             <SelectBox
-              items={CATEGORIES}
+              items={categoriesData}
               placeholder="선택"
               size="small"
               onChange={handleUpdateCategory}

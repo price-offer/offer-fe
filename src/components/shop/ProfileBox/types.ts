@@ -2,4 +2,5 @@ import type { MyProfile } from '@types'
 
 export type ProfileBoxProps = {
   className?: string
-} & MyProfile
+  likeProductCount?: number
+} & Omit<MyProfile, 'likeProductCount'>

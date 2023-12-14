@@ -4,8 +4,6 @@ import { useEffect, useState, useCallback } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { SaleTabArticleList } from '@components/shop/ArticleList'
-import { ProfileBox } from '@components/shop/ProfileBox'
-import { myProfile } from '@mocks/fixture'
 import { getOnSaleArticles } from '@apis'
 import { TRADE_STATUS } from '@constants'
 import type { ArticlesElement, TradeStatusCodes } from '@types'
@@ -38,8 +36,7 @@ const SalePageContent = (): ReactElement => {
   }, [fetchArticles])
 
   return (
-    <Styled.ContentWrapper>
-      <ProfileBox {...myProfile} />
+    <div>
       <Styled.Divider size="bold" />
       <Styled.UserProductsWrapper>
         <Tabs>
@@ -90,7 +87,7 @@ const SalePageContent = (): ReactElement => {
           </Styled.ProductListPanels>
         </Tabs>
       </Styled.UserProductsWrapper>
-    </Styled.ContentWrapper>
+    </div>
   )
 }
 

@@ -30,7 +30,7 @@ export const HeaderSkeleton = (): ReactElement => {
               styleType="ghost"
               type="button"
               width="76px">
-              <Styled.TextLink href="/mypage">나의 거래활동</Styled.TextLink>
+              <Styled.TextLink href="/shop">나의 거래활동</Styled.TextLink>
             </Styled.HeaderAuthButton>
             <Divider direction="vertical" gap={16} />
             <Styled.HeaderAuthButton styleType="ghost" width="37px">

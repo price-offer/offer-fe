@@ -6,7 +6,7 @@ import {
   SalePageContent,
   ReviewPageContent,
   BuyPageContent
-} from '@components/mypage'
+} from '@components/shop'
 import { Tabs, Tab } from '@components'
 
 import type { TradeActivityType, TradeActivityName } from '@constants'
@@ -42,7 +42,7 @@ const pageTabs: PageTab[] = [
   }
 ]
 
-const MyPage = (): ReactElement => {
+const ShopPage = (): ReactElement => {
   const [pageIndex, setPageIndex] = useState<number>(0)
 
   const handleTabClick = (
@@ -83,7 +83,7 @@ const MyPage = (): ReactElement => {
   )
 }
 
-export default MyPage
+export default ShopPage
 
 const StyledUserName = styled.p`
   ${({ theme }): string => `

@@ -2,7 +2,7 @@ import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import type { BuyTabArticleListProps } from './types'
-import { BuyTabArticle } from '@components/mypage/Article'
+import { BuyTabArticle } from '@components/shop/Article'
 
 const BuyTabArticleList = ({
   activityType,

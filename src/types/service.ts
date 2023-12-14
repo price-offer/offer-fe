@@ -11,11 +11,14 @@ export type MemberProfile = {
   reviewCount: number
 }
 export type MyProfile = {
-  member: Member
-  sellingArticleCount: number
-  likedArticleCount: number
-  offerCount: number
+  id: number
+  nickname: string
+  profileImageUrl: string
+  likeProductCount: number
+  offerLevel: number
   reviewCount: number
+  sellingProductCount: number
+  soldProductCount: number
 }
 export type Member = {
   id: number

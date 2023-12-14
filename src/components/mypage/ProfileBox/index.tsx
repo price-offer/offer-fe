@@ -4,11 +4,13 @@ import { Styled } from './styled'
 import type { ProfileBoxProps } from './types'
 
 const ProfileBox = ({
-  member,
-  sellingArticleCount,
-  likedArticleCount,
-  offerCount,
+  nickname,
+  profileImageUrl,
+  likeProductCount,
+  offerLevel,
   reviewCount,
+  sellingProductCount,
+  soldProductCount,
   className
 }: ProfileBoxProps): ReactElement => {
   return (
@@ -18,10 +20,10 @@ const ProfileBox = ({
       </Styled.SettingsButton>
       <Styled.ProfileWrapper>
         <Styled.UserWrapper>
-          <Styled.Avatar alt="avatar" src={member.profileImageUrl} />
+          <Styled.Avatar alt="avatar" src={profileImageUrl} />
           <Styled.NickNameRow>
-            <Styled.NickName>{member.nickname}</Styled.NickName>
-            <Badge colorType="orange">Lv.{member.offerLevel}</Badge>
+            <Styled.NickName>{nickname}</Styled.NickName>
+            <Badge colorType="orange">Lv.{offerLevel}</Badge>
           </Styled.NickNameRow>
         </Styled.UserWrapper>
         <Styled.UserProductWrapper>
@@ -30,14 +32,14 @@ const ProfileBox = ({
               <Icon color="grayScale30" size={16} type="store" />
               <Text styleType="caption01M">판매중</Text>
             </Styled.UserProductTitleWrapper>
-            <Text styleType="caption01M">{sellingArticleCount}개</Text>
+            <Text styleType="caption01M">{sellingProductCount}개</Text>
           </Styled.UserProductRow>
           <Styled.UserProductRow>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="checkCircle" />
               <Text styleType="caption01M">거래완료</Text>
             </Styled.UserProductTitleWrapper>
-            <Text styleType="caption01M">{offerCount}개</Text>
+            <Text styleType="caption01M">{soldProductCount}개</Text>
           </Styled.UserProductRow>
           <Styled.UserProductRow>
             <Styled.UserProductTitleWrapper>
@@ -51,7 +53,7 @@ const ProfileBox = ({
               <Icon color="grayScale30" size={16} type="heart" />
               <Text styleType="caption01M">관심상품</Text>
             </Styled.UserProductTitleWrapper>
-            <Text styleType="caption01M">{likedArticleCount}개</Text>
+            <Text styleType="caption01M">{likeProductCount}개</Text>
           </Styled.UserProductRow>
         </Styled.UserProductWrapper>
       </Styled.ProfileWrapper>

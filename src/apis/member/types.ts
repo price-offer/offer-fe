@@ -1,10 +1,8 @@
-export type MyProfileRes = {
-  id: number
-  nickname: string
-  profileImageUrl: string
-  likeProductCount: number
-  offerLevel: number
-  reviewCount: number
-  sellingProductCount: number
-  soldProductCount: number
+import type { MyProfile } from '@types'
+
+export type GetMyProfileRes = MyProfile
+
+export type GetMemberProfileReq = {
+  memberId: string
 }
+export type GetMemberProfileRes = Omit<MyProfile, 'likeProductCount'>

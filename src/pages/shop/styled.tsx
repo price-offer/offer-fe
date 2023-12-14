@@ -49,7 +49,7 @@ const TabPanels = styled(Tabs.Panels)`
     }
   `}
 `
-const TabPanel = styled(Tabs.Panel)`
+const TabPanelContent = styled.div`
   ${({ theme }): string => `
   display: flex;
   gap: 32px;
@@ -67,5 +67,5 @@ export const Styled = {
   Layout,
   Tab,
   TabPanels,
-  TabPanel
+  TabPanelContent
 }

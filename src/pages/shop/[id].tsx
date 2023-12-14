@@ -32,7 +32,7 @@ const ShopPage = ({ memberId }: ShopPageProps): ReactElement => {
 
   return (
     <div>
-      <Styled.UserName>닉네임님의 거래 활동</Styled.UserName>
+      <Styled.UserName>{profile.nickname}님의 거래 활동</Styled.UserName>
       <Divider />
       <Tabs>
         <Styled.Layout>
@@ -52,10 +52,12 @@ const ShopPage = ({ memberId }: ShopPageProps): ReactElement => {
           <Suspense.CSROnly>
             <Styled.TabPanels>
               {pageTabs.map(({ tab, panel }) => (
-                <Styled.TabPanel key={`${tab.code}-panel`}>
-                  <ProfileBox {...profile} />
-                  {panel()}
-                </Styled.TabPanel>
+                <Tabs.Panel key={`${tab.code}-panel`}>
+                  <Styled.TabPanelContent>
+                    <ProfileBox {...profile} />
+                    {panel()}
+                  </Styled.TabPanelContent>
+                </Tabs.Panel>
               ))}
             </Styled.TabPanels>
           </Suspense.CSROnly>

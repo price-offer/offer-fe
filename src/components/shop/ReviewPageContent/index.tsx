@@ -3,8 +3,6 @@ import { useState } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { ReviewTabArticleList } from '@components/shop/ArticleList'
-import { ProfileBox } from '@components/shop/ProfileBox'
-import { myProfile } from '@mocks/fixture'
 import { TRADE_ACTIVITY_TYPE } from '@constants'
 import type { ReviewsElement } from '@types'
 
@@ -45,7 +43,6 @@ const ReviewPageContent = (): ReactElement => {
 
   return (
     <div>
-      <ProfileBox {...myProfile} />
       <Styled.Divider size="bold" />
       <Styled.UserProductsWrapper>
         <Tabs>

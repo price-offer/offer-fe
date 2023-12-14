@@ -10,8 +10,8 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           <Styled.ProductImg
             key={productItem.id}
             alt={`productName-${productItem.title}`}
+            maxWidth="276px"
             src={productItem.mainImageUrl}
-            style={{ maxWidth: '276px' }}
           />
           <Styled.HeartButton
             icon="heart"

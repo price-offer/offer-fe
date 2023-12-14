@@ -23,6 +23,7 @@ export const useAuth = () => {
 
   return {
     isLogin,
+    isLoading: user.isLoading,
     handleLogout,
     user: user.data
   }

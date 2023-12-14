@@ -10,4 +10,4 @@ export const getMyProfile = () =>
 
 export const getMemberProfile = async (
   memberId: GetMemberProfileReq['memberId']
-) => http.get<null, GetMemberProfileRes>(`/api/member/${memberId}`)
+) => http.get<null, GetMemberProfileRes>(`/member/${memberId}`)

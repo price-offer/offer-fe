@@ -7,7 +7,7 @@ export const useGetMyProfileQuery = (accessToken?: string) =>
     queryFn: getMyProfile
   })
 
-export const useGetMemberProfileQuery = (memberId = '1') =>
+export const useGetMemberProfileQuery = (memberId = '') =>
   useSuspenseQuery({
     queryKey: ['memberProfile', memberId],
     queryFn: () => getMemberProfile(memberId)

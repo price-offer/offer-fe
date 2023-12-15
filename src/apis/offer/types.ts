@@ -1,4 +1,8 @@
 import type { TradeTypeCodes } from '@types'
+export type GetPostOfferReq = {
+  postId: number
+  page: number
+}
 
 export type GetPostOfferRes = {
   totalSize: number

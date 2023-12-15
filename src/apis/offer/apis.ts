@@ -1,4 +1,8 @@
-import type { GetPostOfferReq, GetPostOfferRes } from './types'
+import type {
+  GetPostOfferReq,
+  GetPostOfferRes,
+  PostOfferPriceReq
+} from './types'
 import { http } from '@utils/http'
 
 export const getPostOffers = (postId: number) =>
@@ -6,3 +10,9 @@ export const getPostOffers = (postId: number) =>
     postId,
     page: 0
   })
+
+export const postOfferPrice = (postId: number, params: PostOfferPriceReq) =>
+  http.post<PostOfferPriceReq, PostOfferPriceReq>(
+    `/posts/${postId}/offers`,
+    params
+  )

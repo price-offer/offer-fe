@@ -23,3 +23,14 @@ export type GetPostOfferRes = {
   offerCountOfCurrentMember: number
   maximumOfferCount: number
 }
+
+export type PostOfferPriceReq = {
+  price: number
+  tradeType: TradeTypeCodes
+  location: string
+}
+
+export type PostOfferPriceRes = {
+  id: number
+  createdAt: string
+}

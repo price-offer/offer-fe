@@ -1,21 +1,18 @@
-export const TRANSACTION_TYPE = {
-  all: '직거래/택배거래',
-  direct: '직거래',
-  parcel: '택배거래'
-} as const
+import type { TradeTypeCodes } from '@types'
 
 export type PriceOfferCardProps = {
   offerList: Offer[]
   likeCount: number
   isLike: boolean
 }
+
 export type Offer = {
   id: number
-  name: string
+  nickname: string
   level: number
-  tradeArea: string
+  location: string
   date: string
-  offerPrice: number
-  profileUrl: string
-  tradeMethod: keyof typeof TRANSACTION_TYPE
+  price: number
+  profileImageUrl: string
+  tradeType: TradeTypeCodes
 }

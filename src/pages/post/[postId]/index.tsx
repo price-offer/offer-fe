@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
+import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostDetailQuery } from '@apis/post'
-import type { Offer } from '@components/post/PriceOfferCard/types'
 import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
 import {
@@ -13,149 +13,6 @@ import {
   TRADE_STATUS,
   TRADE_TYPE_LABEL
 } from '@constants'
-
-const OFFERS_MOCK: Offer[] = [
-  {
-    id: 23,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 22343,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 2223433,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 224323,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 215913,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 217813,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 210913,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 215613,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 211473,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 2187913,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 214513,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 215613,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 277113,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  },
-  {
-    id: 21138,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
-    date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
-  }
-]
 
 // TODO: api에 작성자 데이터 추가되면 제거
 const AUTHOR_MOCK = {
@@ -182,6 +39,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postDetailQuery = useGetPostDetailQuery(postId)
+  const postOffersQuery = useGetPostOffersQuery(postId)
   const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
   const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
@@ -204,6 +62,15 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     },
     { label: '거래 지역', value: postDetailQuery.data?.location }
   ]
+  const offers = postOffersQuery.data?.offers.map(
+    ({ id, offerer, createdAt, price }) => ({
+      ...offerer,
+      level: Number(offerer.level),
+      id,
+      date: createdAt,
+      price
+    })
+  )
 
   return (
     <Layout>
@@ -255,7 +122,11 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         </Content>
       </Main>
       <MainDivider size="bold" />
-      <PriceOfferCard isLike={false} likeCount={3} offerList={OFFERS_MOCK} />
+      <PriceOfferCard
+        isLike={false}
+        likeCount={postOffersQuery.data?.offerCountOfCurrentMember || 0}
+        offerList={offers || []}
+      />
     </Layout>
   )
 }

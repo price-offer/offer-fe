@@ -2,32 +2,17 @@ import { css } from '@emotion/react'
 import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
+import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
+import { useGetPostDetailQuery } from '@apis/post'
 import type { Offer } from '@components/post/PriceOfferCard/types'
+import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
-
-const IMAGES_MOCK = [
-  {
-    id: 1,
-    url: 'https://picsum.photos/200/300'
-  },
-  {
-    id: 2,
-    url: 'https://picsum.photos/200/300'
-  },
-  {
-    id: 3,
-    url: 'https://picsum.photos/200/300'
-  },
-  {
-    id: 4,
-    url: 'https://picsum.photos/200/300'
-  },
-  {
-    id: 5,
-    url: 'https://picsum.photos/200/300'
-  }
-]
+import {
+  PRODUCT_CONDITION_LABEL,
+  TRADE_STATUS,
+  TRADE_TYPE_LABEL
+} from '@constants'
 
 const OFFERS_MOCK: Offer[] = [
   {
@@ -171,68 +156,67 @@ const OFFERS_MOCK: Offer[] = [
     tradeMethod: 'all'
   }
 ]
-const CATEGORIES_MOCK = [
-  { label: '작성일', value: '1시간 전' },
-  { label: '상품 상태', value: '새상품' },
-  { label: '거래 방식', value: '직거래' },
-  { label: '거래 지역', value: '동작구 사당동' }
-]
-const PRODUCT_MOCK = {
-  id: 2,
-  author: {
-    id: 1,
-    email: 'shinyojeong@naver.com',
-    offerLevel: 1,
-    nickname: '효정',
-    profileImageUrl: 'https://picsum.photos/200/300',
-    address: '서울시 고백구 행복동'
-  },
-  title: '제목입니다.',
-  content:
-    '인텔리전스랩스는 다양한 게임 정보를 활용해 ‘빅데이터’, ‘머신러닝·딥러닝’, ‘인공지능(AI)’ 기술과 공학적 사고를 통해 솔루션을 만들고 게임 사용자와 넥슨 구성원이 사용할 서비스를 제공하는 조직입니다. * UI/UX 디자이너는 인텔리전스랩스 UX실에 소속되어 유저 인사이트 기반으로 서비스가 성장하도록 돕습니다.',
-  category: {
-    code: 7,
-    name: '유아도서'
-  },
-  tradeStatus: {
-    code: 4,
-    name: '판매중'
-  },
-  tradeArea: '서울시 강남구',
-  productCondition: {
-    code: 2,
-    name: '새상품'
-  },
-  tradeMethod: {
-    code: 4,
-    name: '택배거래'
-  },
-  quantity: 5,
-  price: 36500,
-  mainImageUrl: 'https://picsum.photos/200/300',
-  createdDate: '2021-12-10T15:01:30',
-  modifiedDate: '2021-12-10T15:01:30',
-  likeCount: 0,
-  viewCount: 1,
-  isLiked: false
+
+// TODO: api에 작성자 데이터 추가되면 제거
+const AUTHOR_MOCK = {
+  id: 1,
+  email: 'shinyojeong@naver.com',
+  offerLevel: 1,
+  nickname: '효정',
+  profileImageUrl: 'https://picsum.photos/200/300',
+  address: '서울시 고백구 행복동'
+}
+const CATEGORY_MOCK = {
+  code: 'ALL',
+  name: '전체'
 }
 
-const PostDetailPage = (): ReactElement => {
+type Props = { postId: number }
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query
+}) => ({
+  props: {
+    postId: Number(query.postId)
+  }
+})
+
+const PostDetailPage = ({ postId }: Props): ReactElement => {
+  const postDetailQuery = useGetPostDetailQuery(postId)
+  const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
+  const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
+    id: idx,
+    url
+  }))
+  const postInfoList = [
+    {
+      label: '작성일',
+      // TODO: 주영님이 만든 유틸 적용하기
+      value: formatDate(postDetailQuery.data?.createdAt || '', 'A H:m')
+    },
+    {
+      label: '상품 상태',
+      value:
+        PRODUCT_CONDITION_LABEL[postDetailQuery.data?.productCondition || '']
+    },
+    {
+      label: '거래 방식',
+      value: TRADE_TYPE_LABEL[postDetailQuery.data?.tradeType || '']
+    },
+    { label: '거래 지역', value: postDetailQuery.data?.location }
+  ]
+
   return (
     <Layout>
       <Main>
         <div>
-          <Carousel images={IMAGES_MOCK} isArrow name="product" />
+          <Carousel images={postImages || []} isArrow name="post-carousel" />
         </div>
         <Content>
           <div>
             <ProductCondition>
               <ProductConditionSelectBox
-                items={[
-                  { code: 1, name: '판매중' },
-                  { code: 2, name: '거래 완료' }
-                ]}
-                value={1}
+                items={TRADE_STATUS}
+                value={postDetailQuery.data?.tradeStatus}
                 onChange={(): void => {
                   // do something
                 }}
@@ -240,13 +224,13 @@ const PostDetailPage = (): ReactElement => {
               <IconButton icon="more" size={24} />
             </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
-              카테고리
+              {CATEGORY_MOCK.name}
             </Text>
             <PostName styleType="headline01B" tag="p">
-              제품명
+              {postDetailQuery.data?.title || ''}
             </PostName>
             <Text styleType="display01B" tag="p">
-              {PRODUCT_MOCK.price}
+              {postPrice}
               <Text styleType="subtitle01M">원</Text>
             </Text>
           </div>
@@ -254,18 +238,18 @@ const PostDetailPage = (): ReactElement => {
           <div>
             <Text styleType="headline02B">상품 정보</Text>
             <TransactionContainer>
-              {CATEGORIES_MOCK.map(({ label, value }) => (
-                <PostField key={label} label={label} value={value} />
+              {postInfoList.map(({ label, value }) => (
+                <PostField key={label} label={label} value={value || ''} />
               ))}
             </TransactionContainer>
-            <Description>{PRODUCT_MOCK.title}</Description>
+            <Description>{postDetailQuery.data?.description}</Description>
           </div>
           <Divider gap={16} />
           <UserProfile
-            image={PRODUCT_MOCK.author.profileImageUrl}
-            level={1}
-            location={PRODUCT_MOCK.author.address}
-            nickName={PRODUCT_MOCK.author.nickname}
+            image={AUTHOR_MOCK.profileImageUrl}
+            level={AUTHOR_MOCK.offerLevel}
+            location={AUTHOR_MOCK.address}
+            nickName={AUTHOR_MOCK.nickname}
             type="basic"
           />
         </Content>

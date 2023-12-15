@@ -4,8 +4,10 @@ import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
+import { usePutPostLikeMutation } from '@apis/like'
 import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostDetailQuery } from '@apis/post'
+import { useToggleBoolean } from '@hooks/useToggleBoolean'
 import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
 import {
@@ -40,6 +42,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postDetailQuery = useGetPostDetailQuery(postId)
   const postOffersQuery = useGetPostOffersQuery(postId)
+  const putPstLikeMutation = usePutPostLikeMutation()
+  const [isLikePost, toggleLikePost] = useToggleBoolean(false)
   const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
   const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
@@ -71,6 +75,11 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
       price
     })
   )
+
+  const handleClickLike = async () => {
+    toggleLikePost()
+    await putPstLikeMutation.mutateAsync(postId)
+  }
 
   return (
     <Layout>
@@ -123,7 +132,8 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
       </Main>
       <MainDivider size="bold" />
       <PriceOfferCard
-        isLike={false}
+        handleClickLike={handleClickLike}
+        isLikePost={isLikePost}
         likeCount={postOffersQuery.data?.offerCountOfCurrentMember || 0}
         offerList={offers || []}
       />

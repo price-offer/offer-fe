@@ -3,7 +3,8 @@ import type { TradeTypeCodes } from '@types'
 export type PriceOfferCardProps = {
   offerList: Offer[]
   likeCount: number
-  isLike: boolean
+  isLikePost: boolean
+  handleClickLike?(): void
 }
 
 export type Offer = {

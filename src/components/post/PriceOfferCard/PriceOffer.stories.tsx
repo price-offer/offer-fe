@@ -153,6 +153,6 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   }
 ]
 export const Default: StoryObj<PriceOfferCard> = {
-  args: { offerList: OFFERLISTS_MOCKS, likeCount: 3, isLike: true },
+  args: { offerList: OFFERLISTS_MOCKS, likeCount: 3, isLikePost: true },
   render: args => <PriceOfferCardComponent {...args} />
 }

@@ -1,6 +1,5 @@
-import { Divider, ToggleButton, SelectBox, Text } from '@offer-ui/react'
+import { Divider, SelectBox, Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { useState } from 'react'
 import { Styled } from './styled'
 import type { PriceOfferCardProps } from './types'
 import { UserProfile } from '../UserProfile'
@@ -8,14 +7,10 @@ import { UserProfile } from '../UserProfile'
 const PriceOfferCard = ({
   offerList,
   likeCount,
-  isLike
+  isLikePost,
+  handleClickLike
 }: PriceOfferCardProps): ReactElement => {
   const hasOffer = offerList.length > 0
-  const [isLikeToggle, setIsLikeToggle] = useState<boolean>(isLike)
-
-  const handleLikeClick = (): void => {
-    setIsLikeToggle(!isLikeToggle)
-  }
 
   return (
     <Styled.OfferPriceCardWrapper>
@@ -83,15 +78,13 @@ const PriceOfferCard = ({
       )}
       <Divider />
       <Styled.CardFooter>
-        <Styled.LikeButton role="button" onClick={handleLikeClick}>
-          <ToggleButton
-            color="grayScale90"
-            icon="heart"
-            isToggle={isLikeToggle}
-            size={24}
-            toggleColor="brandPrimary"
-            toggleIcon="heartFill"
-          />
+        <Styled.LikeButton role="button" onClick={handleClickLike}>
+          {/* TODO: Icon outline에 색상 넣을 수 있도록 수정 후 반영 */}
+          {isLikePost ? (
+            <Icon color="brandPrimary" type="heartFill" />
+          ) : (
+            <Icon fill="grayScale90" type="heartFill" />
+          )}
           <Text styleType="body01B">{likeCount}</Text>
         </Styled.LikeButton>
         <Styled.MessageButton size="large">쪽지하기</Styled.MessageButton>

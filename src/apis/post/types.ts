@@ -1,4 +1,8 @@
-import type { ProductConditionCodes, TradeTypeCodes } from '@types'
+import type {
+  ProductConditionCodes,
+  TradeStatusCodes,
+  TradeTypeCodes
+} from '@types'
 
 export type GetPostDetailRes = {
   id: number
@@ -8,6 +12,7 @@ export type GetPostDetailRes = {
   price: number
   location: string
   tradeType: TradeTypeCodes
+  tradeStatus: TradeStatusCodes
   productCondition: ProductConditionCodes
   createdAt: string
 }

@@ -1,3 +1,4 @@
+import { toLabelObject } from '@utils/format'
 import type { KeyOf, ValueOf } from '@types'
 
 /** 나의 거래 활동 */
@@ -46,14 +47,16 @@ export const TRADE_STATUS = [
     name: '거래완료'
   }
 ] as const
+export const TRADE_STATUS_LABEL = toLabelObject(TRADE_STATUS)
 
 export const SORT_TYPE = [
-  { name: 'RECENT_CREATED', exposureTitle: '최신순' },
+  { code: 'RECENT_CREATED', name: '최신순' },
   {
-    name: 'LOW_PRICE',
-    exposureTitle: '낮은 가격순'
+    code: 'LOW_PRICE',
+    name: '낮은 가격순'
   }
 ] as const
+export const SORT_TYPE_LABEL = toLabelObject(SORT_TYPE)
 
 export const TRADE_TYPE = [
   {
@@ -69,6 +72,7 @@ export const TRADE_TYPE = [
     name: '직거래/택배거래'
   }
 ] as const
+export const TRADE_TYPE_LABEL = toLabelObject(TRADE_TYPE)
 
 export const PRODUCT_CONDITION = [
   {
@@ -80,6 +84,7 @@ export const PRODUCT_CONDITION = [
     name: '중고상품'
   }
 ] as const
+export const PRODUCT_CONDITION_LABEL = toLabelObject(PRODUCT_CONDITION)
 
 export const CATEGORIES = [
   {

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { AxiosResponse } from 'axios'
+import type { GetCategoriesRes } from './post'
 import type {
   Articles,
   MemberProfile,
@@ -37,7 +38,9 @@ export const getOnSaleArticles = async (
   return res.data
 }
 
-export const getCategory = async (): Promise<AxiosResponse<Category>> => {
+export const getCategory = async (): Promise<
+  AxiosResponse<GetCategoriesRes>
+> => {
   const res = await axios.get('https://offer-be.kro.kr/api/categories')
   return res.data
 }

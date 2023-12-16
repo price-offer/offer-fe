@@ -2,8 +2,7 @@ import { useMedia } from '@offer-ui/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
-import { useGetCategoryQuery } from '@apis/post-controller/categories/query'
-import type { CategorySelectRes } from '@apis/post-controller/categories/types'
+import { useGetCategoriesQuery } from '@apis/post'
 
 const CategorySlider = (): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -15,7 +14,7 @@ const CategorySlider = (): ReactElement => {
   const [isMoveFromArrowButton, setIsMoveArrowButton] = useState<number>(0)
   const isFirstCategory = containerRef.current?.scrollLeft === 0
 
-  const { data } = useGetCategoryQuery()
+  const { data: categories } = useGetCategoriesQuery()
 
   useEffect(() => {
     if (desktop) {
@@ -109,12 +108,12 @@ const CategorySlider = (): ReactElement => {
           )}
           <Styled.CateGoryBoxWrapper
             isMoveFromArrowButton={isMoveFromArrowButton}>
-            {data?.map((cateGory: CategorySelectRes) => {
+            {categories?.map(cateGory => {
               return (
                 <Styled.CategoryItem
                   key={cateGory.name}
                   onClick={(): void => {
-                    alert(cateGory.exposureTitle)
+                    alert(cateGory.name)
                   }}>
                   <Styled.CategoryImgWrapper>
                     <Styled.CategoryImg
@@ -125,9 +124,7 @@ const CategorySlider = (): ReactElement => {
                       width={58}
                     />
                   </Styled.CategoryImgWrapper>
-                  <Styled.CateGoryName>
-                    {cateGory.exposureTitle}
-                  </Styled.CateGoryName>
+                  <Styled.CateGoryName>{cateGory.name}</Styled.CateGoryName>
                 </Styled.CategoryItem>
               )
             })}

@@ -1,6 +1,5 @@
-import type { CategoryRes } from '@apis/post-controller/categories/types'
+import type { GetCategoriesRes } from '@apis/post'
 import type { MyProfile, MemberProfile, Articles, Reviews } from '@types'
-
 export const myProfile: MyProfile = {
   member: {
     id: 1,
@@ -155,57 +154,65 @@ export const reviews: Reviews = {
   }
 }
 
-export const categories: CategoryRes = {
-  code: 200,
-  message: '',
-  data: [
-    {
-      name: 'MEN_FASHION',
-      exposureTitle: '남성패션/잡화'
-    },
-    {
-      name: 'WOMEN_FASHION',
-      exposureTitle: '여성패션/잡화'
-    },
-    {
-      name: 'GAME',
-      exposureTitle: '게임'
-    },
-    {
-      name: 'SPORTS',
-      exposureTitle: '스포츠/레저'
-    },
-    {
-      name: 'TOY',
-      exposureTitle: '장난감/취미'
-    },
-    {
-      name: 'DIGITAL',
-      exposureTitle: '디지털기기'
-    },
-    {
-      name: 'CAR',
-      exposureTitle: '자동차/공구'
-    },
-    {
-      name: 'APPLIANCE',
-      exposureTitle: '생활가전'
-    },
-    {
-      name: 'FURNITURE',
-      exposureTitle: '가구/인테리어'
-    },
-    {
-      name: 'BOOKS',
-      exposureTitle: '도서/티켓/음반'
-    },
-    {
-      name: 'PET',
-      exposureTitle: '반려동물용품'
-    },
-    {
-      name: 'OTHER',
-      exposureTitle: '기타 중고물품'
-    }
-  ]
-}
+export const categories: GetCategoriesRes = [
+  {
+    code: 'MEN_FASHION',
+    name: '남성패션/잡화',
+    imageUrl: ''
+  },
+  {
+    code: 'WOMEN_FASHION',
+    name: '여성패션/잡화',
+    imageUrl: ''
+  },
+  {
+    code: 'GAME',
+    name: '게임',
+    imageUrl: ''
+  },
+  {
+    code: 'SPORTS',
+    name: '스포츠/레저',
+    imageUrl: ''
+  },
+  {
+    code: 'TOY',
+    name: '장난감/취미',
+    imageUrl: ''
+  },
+  {
+    code: 'DIGITAL',
+    name: '디지털기기',
+    imageUrl: ''
+  },
+  {
+    code: 'CAR',
+    name: '자동차/공구',
+    imageUrl: ''
+  },
+  {
+    code: 'APPLIANCE',
+    name: '생활가전',
+    imageUrl: ''
+  },
+  {
+    code: 'FURNITURE',
+    name: '가구/인테리어',
+    imageUrl: ''
+  },
+  {
+    code: 'BOOKS',
+    name: '도서/티켓/음반',
+    imageUrl: ''
+  },
+  {
+    code: 'PET',
+    name: '반려동물용품',
+    imageUrl: ''
+  },
+  {
+    code: 'OTHER',
+    name: '기타 중고물품',
+    imageUrl: ''
+  }
+]

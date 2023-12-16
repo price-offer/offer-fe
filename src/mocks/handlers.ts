@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 import { myProfile, memberProfileList, articles, categories } from './fixture'
-import type { CategoryRes } from '@apis/post-controller/categories/types'
+import type { GetCategoriesRes } from '@apis/post'
 import type { Articles, MemberProfile, MyProfile, TradeStatus } from '@types'
 
 export const handlers = [
@@ -62,6 +62,6 @@ export const handlers = [
    *
    */
   http.get('https://offer-be.kro.kr/api/categories', () => {
-    return HttpResponse.json<CategoryRes>(categories, { status: 200 })
+    return HttpResponse.json<GetCategoriesRes>(categories, { status: 200 })
   })
 ]

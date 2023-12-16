@@ -18,3 +18,18 @@ export type GetMessageListRes = {
   notReadCnt: number
   lastSendTime: string
 }[]
+
+export type GetMessageRoomReq = {
+  msgRoomId: number | null
+  page: number
+}
+
+export type GetMessageRoomRes = {
+  content: string
+  member: {
+    id: number
+    imageUrl: string
+    nickname: string
+  }
+  sendTime: string
+}[]

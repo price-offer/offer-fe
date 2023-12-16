@@ -1,18 +1,18 @@
 export type MessagePreviewProps = {
   id: number
-  userInfo: {
+  partner: {
     id: number
     nickname: string
-    profileImageUrl: string | null
+    imageUrl: string
   }
-  productInfo: {
-    price: number
-    productImageUrl: string | null
+  post: {
+    title: string
+    imageUrl?: string
   }
-  latestTalk: {
-    content: string
-    createdDate: string
-  }
+  offerPrice: number
+  lastContent: string
+  lastSendTime: string
   isSelected?: boolean
+  notReadCnt: number
   onClick?(id: number): void
 }

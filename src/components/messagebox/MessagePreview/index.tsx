@@ -7,9 +7,12 @@ import { toLocaleCurrency } from '@utils'
 
 export const MessagePreview = ({
   id,
-  userInfo,
-  productInfo,
-  latestTalk,
+  partner,
+  post,
+  offerPrice,
+  lastContent,
+  lastSendTime,
+  notReadCnt,
   isSelected = false,
   onClick
 }: MessagePreviewProps): ReactElement => {
@@ -23,31 +26,27 @@ export const MessagePreview = ({
       role="button"
       onClick={handleClickPreview}>
       <Styled.AvatarWrapper>
-        <Avatar
-          alt="avatar"
-          size="small"
-          src={userInfo.profileImageUrl || ''}
-        />
+        <Avatar alt="avatar" size="small" src={partner.imageUrl || ''} />
       </Styled.AvatarWrapper>
       <Styled.Content>
-        <Styled.Nickname>{userInfo.nickname}</Styled.Nickname>
-        <Styled.Time>{latestTalk.createdDate}</Styled.Time>
-        <Styled.LastMessage>{latestTalk.content}</Styled.LastMessage>
+        <Styled.Nickname>{partner.nickname}</Styled.Nickname>
+        <Styled.Time>{lastSendTime}</Styled.Time>
+        <Styled.LastMessage>{lastContent}</Styled.LastMessage>
       </Styled.Content>
       <Styled.SubContent>
-        <Styled.AlertWrapper>
-          <Styled.Alert>6</Styled.Alert>
-        </Styled.AlertWrapper>
-        <Styled.Price>{`${toLocaleCurrency(
-          productInfo.price
-        )}원`}</Styled.Price>
+        {notReadCnt && (
+          <Styled.AlertWrapper>
+            <Styled.Alert>{notReadCnt}</Styled.Alert>
+          </Styled.AlertWrapper>
+        )}
+        <Styled.Price>{`${toLocaleCurrency(offerPrice)}원`}</Styled.Price>
       </Styled.SubContent>
       <Styled.ImageWrapper>
         <Image
           alt="product"
           fallbackSrc={IMAGE.CHECKBOARD}
           height="40px"
-          src={productInfo.productImageUrl || ''}
+          src={post.imageUrl || ''}
           width="40px"
         />
       </Styled.ImageWrapper>

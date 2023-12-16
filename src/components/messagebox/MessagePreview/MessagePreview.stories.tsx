@@ -12,20 +12,20 @@ export default meta
 
 export const Default: StoryObj<MessagePreview> = {
   args: {
-    userInfo: {
+    partner: {
       id: 1,
       nickname: 'offerer',
-      profileImageUrl: null
+      imageUrl: ''
     },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
+    post: {
+      title: '구매해요',
+      imageUrl: ''
     },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
+    offerPrice: 123,
+    lastContent:
+      '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
+    lastSendTime: '2시간 전',
+    notReadCnt: 0
   },
   render: args => <MessagePreviewComponent {...args} />
 }

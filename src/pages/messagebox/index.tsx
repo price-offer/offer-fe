@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
 import { useState, type ReactElement, useEffect } from 'react'
+import { useGetMessageList } from '@apis/message'
 import useModal from '@hooks/useModal'
 import {
   MessagePreview,
@@ -24,10 +25,13 @@ const TabKeys = Object.keys(TABS) as TabType[]
 const TabEntries = Object.entries(TABS)
 
 const MessageBoxPage = (): ReactElement => {
+  const getMessageListQuery = useGetMessageList()
   const [tab, setTab] = useState<TabType>('all')
   const [roomId, setRoomId] = useState<number | null>(null)
   const { isOpen, openModal, closeModal } = useModal()
   const { desktop, mobile, tablet } = useMedia()
+  const messageList = getMessageListQuery.data || []
+  const messageCount = messageList.length
 
   const handleChangeTab = (currentIndex: number, nextIndex: number) => {
     const nextTab = TabKeys[nextIndex]
@@ -62,7 +66,7 @@ const MessageBoxPage = (): ReactElement => {
           <ListContainer>
             <ListHeader>
               <span>
-                내 쪽지함 <i>{LIST_MOCK.length}</i>
+                내 쪽지함 <i>{messageCount}</i>
               </span>
               <div>
                 <Tabs onChange={handleChangeTab}>
@@ -77,14 +81,18 @@ const MessageBoxPage = (): ReactElement => {
               </div>
             </ListHeader>
             <MessageList>
-              {LIST_MOCK.length > 0 ? (
-                LIST_MOCK.map(({ id, ...messageInfo }) => (
+              {messageCount > 0 ? (
+                messageList.map(({ id, post, ...resInfo }) => (
                   <MessagePreview
                     key={id}
                     id={id}
                     isSelected={id === roomId}
+                    post={{
+                      title: post.title,
+                      imageUrl: ''
+                    }}
                     onClick={handleSelectRoom}
-                    {...messageInfo}
+                    {...resInfo}
                   />
                 ))
               ) : (
@@ -247,178 +255,5 @@ const DetailContainer = styled.div`
     }
   `}
 `
-
-const LIST_MOCK = [
-  {
-    id: 1,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 2,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 3,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 4,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 5,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 6,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 7,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 8,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 9,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 10,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  }
-]
 
 export default MessageBoxPage

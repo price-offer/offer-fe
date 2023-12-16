@@ -3,11 +3,10 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
-import type { ReactElement } from 'react'
+import { useState, type ReactElement } from 'react'
 import { usePutPostLikeMutation } from '@apis/like'
 import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostDetailQuery } from '@apis/post'
-import { useToggleBoolean } from '@hooks/useToggleBoolean'
 import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
 import {
@@ -43,7 +42,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postDetailQuery = useGetPostDetailQuery(postId)
   const postOffersQuery = useGetPostOffersQuery(postId)
   const putPstLikeMutation = usePutPostLikeMutation()
-  const [isLikePost, toggleLikePost] = useToggleBoolean(false)
+  const [likePost, setLikePost] = useState({
+    status: false,
+    count: postOffersQuery.data?.offerCountOfCurrentMember || 0
+  })
   const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
   const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
@@ -77,7 +79,11 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   )
 
   const handleClickLike = async () => {
-    toggleLikePost()
+    setLikePost(({ status, count }) => ({
+      status: !status,
+      count: status ? count - 1 : count + 1
+    }))
+
     await putPstLikeMutation.mutateAsync(postId)
   }
 
@@ -133,8 +139,8 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
       <MainDivider size="bold" />
       <PriceOfferCard
         handleClickLike={handleClickLike}
-        isLikePost={isLikePost}
-        likeCount={postOffersQuery.data?.offerCountOfCurrentMember || 0}
+        isLikePost={likePost.status}
+        likeCount={likePost.count}
         offerList={offers || []}
       />
     </Layout>

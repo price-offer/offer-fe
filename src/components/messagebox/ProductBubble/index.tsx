@@ -2,7 +2,7 @@ import { Badge, Divider, Image } from '@offer-ui/react'
 import Link from 'next/link'
 import { Styled } from './styled'
 import type { ProductBubbleProps } from './types'
-import { TRADE_METHOD } from '@constants/app'
+import { TRADE_TYPE } from '@constants/app'
 import { toLocaleCurrency } from '@utils/format'
 
 export const ProductBubble = ({
@@ -14,7 +14,7 @@ export const ProductBubble = ({
   productImageUrl,
   onClick
 }: ProductBubbleProps) => {
-  const tradeLabel = TRADE_METHOD.find(item => item.code === tradeType)?.name
+  const tradeLabel = TRADE_TYPE.find(item => item.code === tradeType)?.name
 
   const handleClickButton = () => {
     onClick?.(id)

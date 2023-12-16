@@ -3,7 +3,7 @@ import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import type { OfferForm, PriceOfferModalProps, TradeAreaKeys } from './types'
-import { TRADE_METHOD } from '@constants'
+import { TRADE_TYPE } from '@constants'
 
 const MOCK_CITY = [
   { code: 1, name: 'Seoul' },
@@ -97,7 +97,7 @@ export const PriceOfferModal = ({
           <Styled.FormRadio
             direction="horizontal"
             formName="trade-method"
-            items={TRADE_METHOD}
+            items={TRADE_TYPE}
             onChange={handleChangeTradeMethod}
           />
         </div>

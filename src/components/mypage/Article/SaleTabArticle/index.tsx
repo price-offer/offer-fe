@@ -21,7 +21,7 @@ const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
     isReviewed,
     onChangeTradeStatus
   } = props
-  const isSoldOut = tradeStatus.code === 8
+  const isSoldOut = tradeStatus.code === 'SOLD'
 
   const handleChangeTradeStatus: SelectOnChangeHandler<TradeStatus> = item => {
     onChangeTradeStatus?.(id, item)

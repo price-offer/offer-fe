@@ -5,8 +5,7 @@ import type {
   MemberProfile,
   MyProfile,
   TradeStatus,
-  TradeStatusCode,
-  Category
+  TradeStatusCodes
 } from '@types'
 
 export const getMyProfile = async (): Promise<AxiosResponse<MyProfile>> => {
@@ -30,7 +29,7 @@ export const updateProductTradeStatus = async (
 
 export const getOnSaleArticles = async (
   memberId: string,
-  tradeStatusCode: TradeStatusCode
+  tradeStatusCode: TradeStatusCodes
 ): Promise<Articles> => {
   const res = await axios.get(
     `/articles?memberId=${memberId}&tradeStatusCode=${tradeStatusCode}`

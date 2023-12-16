@@ -4,7 +4,7 @@ import { Styled } from './styled'
 import type { ChattingProps } from './types'
 import { formatDate } from '@utils/format'
 
-export const getDate = (createdDate = '') => createdDate.split('T')[0]
+export const getDate = (sendTime = '') => sendTime.split('T')[0]
 
 // TODO: 상품 정보 버블 추가
 export const Chatting = ({
@@ -14,30 +14,32 @@ export const Chatting = ({
 }: ChattingProps) => {
   return (
     <Styled.Container>
-      {messages.map(({ id, content, senderId, createdDate }, idx, list) => {
+      {messages.map(({ content, member, sendTime }, idx, list) => {
         const prevMessage = list.at(idx - 1)
         const nextMessage = list.at(idx + 1)
-        const isSender = senderId === userId
+        const isSender = member.id === userId
 
-        const currentDate = getDate(createdDate)
-        const prevDate = getDate(prevMessage?.createdDate)
-        const nextDate = getDate(nextMessage?.createdDate)
+        const currentDate = getDate(sendTime)
+        const prevDate = getDate(prevMessage?.sendTime)
+        const nextDate = getDate(nextMessage?.sendTime)
         const isPrevDateChanged = prevDate !== currentDate
         const isNextDateChanged = nextDate !== currentDate
 
         const commonProps = {
-          time: formatDate(createdDate, 'A H:m'),
+          time: formatDate(sendTime, 'A H:m'),
           isSectionStart:
-            senderId !== prevMessage?.senderId || isPrevDateChanged,
-          isSectionLast: senderId !== nextMessage?.senderId || isNextDateChanged
+            member.id !== prevMessage?.member.id || isPrevDateChanged,
+          isSectionLast:
+            member.id !== nextMessage?.member.id || isNextDateChanged
         }
 
         return (
-          <div key={id}>
+          // TODO: 메세지 키값 내려줄 수 있는지 확인하기
+          <div key={`${member.nickname}-${sendTime}`}>
             {isPrevDateChanged && (
-              <Styled.DateWrapper key={createdDate}>
+              <Styled.DateWrapper key={sendTime}>
                 <Styled.ChattingDate>
-                  {formatDate(createdDate, 'YYYY년 M월 D일 dddd')}
+                  {formatDate(sendTime, 'YYYY년 M월 D일 dddd')}
                 </Styled.ChattingDate>
               </Styled.DateWrapper>
             )}

@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
 import { useState, type ReactElement, useEffect } from 'react'
-import { useGetMessageList } from '@apis/message'
+import { useGetMessageListQuery } from '@apis/message'
 import useModal from '@hooks/useModal'
 import {
   MessagePreview,
@@ -25,7 +25,7 @@ const TabKeys = Object.keys(TABS) as TabType[]
 const TabEntries = Object.entries(TABS)
 
 const MessageBoxPage = (): ReactElement => {
-  const getMessageListQuery = useGetMessageList()
+  const getMessageListQuery = useGetMessageListQuery()
   const [tab, setTab] = useState<TabType>('all')
   const [roomId, setRoomId] = useState<number | null>(null)
   const { isOpen, openModal, closeModal } = useModal()

@@ -8,8 +8,3 @@ export const getCategories = () =>
 export const getPostList = (param: PostReq) => {
   return http.get<PostReq, PostDataInfoRes>('/posts', param)
 }
-
-// export const getPost = async (param: PostReq): Promise<PostDataInfo> => {
-//   const res = await getPostList(param)
-//   return res
-// }

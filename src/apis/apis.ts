@@ -1,6 +1,5 @@
-import axios from 'axios'
-import type { AxiosResponse } from 'axios'
 import type { GetCategoriesRes } from './post'
+import { http } from '@utils/http'
 import type {
   Articles,
   MemberProfile,
@@ -9,21 +8,21 @@ import type {
   TradeStatusCodes
 } from '@types'
 
-export const getMyProfile = async (): Promise<AxiosResponse<MyProfile>> => {
-  const res = await axios.get('/members/mypage')
-  return res.data
+export const getMyProfile = async () => {
+  const res = await http.get<null, MyProfile>('/members/mypage')
+  return res
 }
 
 export const getProfile = async (memberId: string): Promise<MemberProfile> => {
-  const res = await axios.get(`/members/${memberId}`)
-  return res.data
+  const res = await http.get<null, MemberProfile>(`/members/${memberId}`)
+  return res
 }
 
 export const updateProductTradeStatus = async (
   articleId: string,
   tradeStatus: TradeStatus
 ): Promise<void> => {
-  await axios.patch(`/articles/${articleId}`, {
+  await http.patch(`/articles/${articleId}`, {
     tradeStatus
   })
 }
@@ -31,16 +30,16 @@ export const updateProductTradeStatus = async (
 export const getOnSaleArticles = async (
   memberId: string,
   tradeStatusCode: TradeStatusCodes
-): Promise<Articles> => {
-  const res = await axios.get(
+) => {
+  const res = await http.get<null, Articles>(
     `/articles?memberId=${memberId}&tradeStatusCode=${tradeStatusCode}`
   )
-  return res.data
+  return res
 }
 
-export const getCategory = async (): Promise<
-  AxiosResponse<GetCategoriesRes>
-> => {
-  const res = await axios.get('https://offer-be.kro.kr/api/categories')
-  return res.data
+export const getCategory = async () => {
+  const res = await http.get<null, GetCategoriesRes>(
+    'https://offer-be.kro.kr/api/categories'
+  )
+  return res
 }

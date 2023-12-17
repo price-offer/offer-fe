@@ -2,27 +2,27 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 
 import type { BuyTabArticleProps } from './types'
-import { toLocaleCurrency } from '@utils'
+// import { toLocaleCurrency } from '@utils'
 
 const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
   const {
-    activityType,
-    className,
-    sellerNickName,
-    id,
-    mainImageUrl,
-    title,
-    price,
-    tradeStatus,
-    modifiedDate,
-    likeCount,
-    isReviewed
+    // activityType,
+    className
+    // sellerNickName,
+    // id,
+    // mainImageUrl,
+    // title,
+    // price,
+    // tradeStatus,
+    // modifiedDate,
+    // likeCount,
+    // isReviewed
   } = props
-  const isOfferType = activityType === 'offer'
+  // const isOfferType = activityType === 'offer'
 
   return (
     <Styled.Container className={className}>
-      <Styled.ProductWrapper>
+      {/* <Styled.ProductWrapper>
         <Styled.ProductImg alt={`product${id}-img`} src={mainImageUrl} />
         <Styled.ProductMetaWrapper>
           <Styled.SellerName styleType="body02R">
@@ -51,7 +51,7 @@ const BuyTabArticle = (props: BuyTabArticleProps): ReactElement => {
         <Styled.LikeButton color="grayScale90" size="small" styleType="outline">
           관심 {likeCount}
         </Styled.LikeButton>
-      )}
+      )} */}
     </Styled.Container>
   )
 }

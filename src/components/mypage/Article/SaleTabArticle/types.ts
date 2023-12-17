@@ -1,4 +1,4 @@
-import type { ArticlesElement, TradeStatus } from '@types'
+import type { TradeStatus } from '@types'
 
 // NOTE: ArticlesElement 타입에 없어서 임시로 추가한 부분 : likeCount, review, sellerName
 export type SaleTabArticleProps = {
@@ -7,4 +7,4 @@ export type SaleTabArticleProps = {
   className?: string
   // tradeStatus 변경 시, 이벤트
   onChangeTradeStatus(productId: number, status: TradeStatus): void
-} & ArticlesElement
+}

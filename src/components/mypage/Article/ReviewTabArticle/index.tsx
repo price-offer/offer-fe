@@ -1,21 +1,21 @@
-import { Text, Icon } from '@offer-ui/react'
+// import { Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import React from 'react'
 import { Styled } from './styled'
 import type { ReviewTabArticleProps } from './types'
-import { ICON_META } from './types'
+// import { ICON_META } from './types'
 
 const ReviewTabArticle = ({
-  reviewer,
-  article,
-  score,
-  content,
-  createdDate,
+  // reviewer,
+  // article,
+  // score,
+  // content,
+  // createdDate,
   className
 }: ReviewTabArticleProps): ReactElement => {
   return (
     <Styled.Wrapper className={className}>
-      <Styled.Avatar alt="avatar" src={reviewer.profileImageUrl} />
+      {/* <Styled.Avatar alt="avatar" src={reviewer.profileImageUrl} />
       <Styled.ContentWrapper>
         <Styled.ContentHeader>
           <Styled.Meta>
@@ -42,7 +42,7 @@ const ReviewTabArticle = ({
           </Text>
         </Styled.ScoreWrapper>
         <Styled.Content styleType="body02R">{content}</Styled.Content>
-      </Styled.ContentWrapper>
+      </Styled.ContentWrapper> */}
     </Styled.Wrapper>
   )
 }

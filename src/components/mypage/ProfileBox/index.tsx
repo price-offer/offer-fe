@@ -1,19 +1,19 @@
-import { Badge, Text, Icon } from '@offer-ui/react'
+// import { Badge, Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProfileBoxProps } from './types'
 
 const ProfileBox = ({
-  member,
-  sellingArticleCount,
-  likedArticleCount,
-  offerCount,
-  reviewCount,
+  // member,
+  // sellingArticleCount,
+  // likedArticleCount,
+  // offerCount,
+  // reviewCount,
   className
 }: ProfileBoxProps): ReactElement => {
   return (
     <Styled.Container className={className}>
-      <Styled.SettingsButton>
+      {/* <Styled.SettingsButton>
         <Icon color="grayScale30" size={24} type="setting" />
       </Styled.SettingsButton>
       <Styled.ProfileWrapper>
@@ -54,7 +54,7 @@ const ProfileBox = ({
             <Text styleType="caption01M">{likedArticleCount}개</Text>
           </Styled.UserProductRow>
         </Styled.UserProductWrapper>
-      </Styled.ProfileWrapper>
+      </Styled.ProfileWrapper> */}
     </Styled.Container>
   )
 }

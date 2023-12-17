@@ -9,12 +9,12 @@ import {
 } from '@components/mypage'
 import { Tabs, Tab } from '@components'
 
-import type { TradeActivityType, TradeActivityName } from '@constants'
+import type { TradeActivityCodes, TradeActivityNames } from '@types'
 
 type PageTab = {
   tab: {
-    code: TradeActivityType
-    name: TradeActivityName
+    code: TradeActivityCodes
+    name: TradeActivityNames
   }
   panel(): ReactElement
 }

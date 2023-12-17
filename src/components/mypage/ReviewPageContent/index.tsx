@@ -2,39 +2,39 @@ import type { ReactElement, MouseEvent } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
-import { ReviewTabArticleList } from '@components/mypage/ArticleList'
+// import { ReviewTabArticleList } from '@components/mypage/ArticleList'
 import { ProfileBox } from '@components/mypage/ProfileBox'
 import { myProfile } from '@mocks/fixture'
-import { TRADE_ACTIVITY_TYPE } from '@constants'
-import type { ReviewsElement } from '@types'
+import { TRADE_ACTIVITY_TYPES } from '@constants'
+// import type { ReviewsElement } from '@types'
 
-const tradeReviewActivityList = Object.entries(TRADE_ACTIVITY_TYPE.review)
+const tradeReviewActivityList = Object.entries(TRADE_ACTIVITY_TYPES.review)
 
-const getReviews = (): ReviewsElement[] => {
-  return Array.from({ length: 10 }, () => 0).map((_, index) => {
-    return {
-      id: index,
-      reviewer: {
-        id: 1,
-        profileImageUrl: '',
-        nickname: '닉네임',
-        offerLevel: 1
-      },
-      article: {
-        id: 1,
-        title: '거래한 상품의 제목'
-      },
-      score: 2,
-      content: '너무 좋습니다!',
-      isWritingAvailableFromCurrentMember: true,
-      createdDate: '2시간 전'
-    }
-  })
-}
+// const getReviews = (): ReviewsElement[] => {
+//   return Array.from({ length: 10 }, () => 0).map((_, index) => {
+//     return {
+//       id: index,
+//       reviewer: {
+//         id: 1,
+//         profileImageUrl: '',
+//         nickname: '닉네임',
+//         offerLevel: 1
+//       },
+//       article: {
+//         id: 1,
+//         title: '거래한 상품의 제목'
+//       },
+//       score: 2,
+//       content: '너무 좋습니다!',
+//       isWritingAvailableFromCurrentMember: true,
+//       createdDate: '2시간 전'
+//     }
+//   })
+// }
 
 const ReviewPageContent = (): ReactElement => {
   const [tabIndex, setTabIndex] = useState<number>(0)
-  const [reviews] = useState<ReviewsElement[]>(getReviews())
+  // const [reviews] = useState<ReviewsElement[]>(getReviews())
 
   const handleTabClick = (
     e: MouseEvent<HTMLDivElement>,
@@ -75,7 +75,7 @@ const ReviewPageContent = (): ReactElement => {
                 })}
               </Styled.TabsList>
             </Styled.SearchOptionsWrapper>
-            <Styled.ProductListPanels>
+            {/* <Styled.ProductListPanels>
               <Tabs.Panel>
                 <ReviewTabArticleList reviews={reviews} />
               </Tabs.Panel>
@@ -85,7 +85,7 @@ const ReviewPageContent = (): ReactElement => {
               <Tabs.Panel>
                 <ReviewTabArticleList reviews={reviews} />
               </Tabs.Panel>
-            </Styled.ProductListPanels>
+            </Styled.ProductListPanels> */}
           </Tabs>
         </Styled.UserProductsWrapper>
       </Styled.ContentWrapper>

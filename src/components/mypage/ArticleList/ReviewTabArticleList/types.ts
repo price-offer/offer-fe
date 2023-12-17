@@ -1,6 +1,6 @@
-import type { ReviewsElement } from '@types'
+// import type { ReviewsElement } from '@types'
 
 export type ReviewTabArticleListProps = {
-  reviews: ReviewsElement[]
+  // reviews: ReviewsElement[]
   className?: string
 }

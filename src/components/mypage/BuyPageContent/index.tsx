@@ -4,40 +4,43 @@ import { useState } from 'react'
 import { Styled } from './styled'
 import { sortItems } from './types'
 import { Tabs } from '@components/common'
-import { BuyTabArticleList } from '@components/mypage/ArticleList'
+// import { BuyTabArticleList } from '@components/mypage/ArticleList'
 import { ProfileBox } from '@components/mypage/ProfileBox'
 import { myProfile } from '@mocks/fixture'
-import type { TradeBuyActivityType } from '@constants'
-import { TRADE_STATUS, TRADE_ACTIVITY_TYPE } from '@constants'
-import type { ArticlesElement } from '@types'
+// import type { TradeBuyActivityType } from '@constants'
+import {
+  // TRADE_STATUS,
+  TRADE_ACTIVITY_TYPES
+} from '@constants'
+// import type { ArticlesElement } from '@types'
 import { noop } from '@utils'
 
-const tradeBuyActivityList = Object.entries(TRADE_ACTIVITY_TYPE.buy)
+const tradeBuyActivityList = Object.entries(TRADE_ACTIVITY_TYPES.buy)
 
-const getArticles = (): ArticlesElement[] => {
-  return Array.from({ length: 10 }, () => 0).map((_, index) => {
-    const tradeStatus = index % 2 !== 0 ? TRADE_STATUS[0] : TRADE_STATUS[1]
+// const getArticles = (): ArticlesElement[] => {
+//   return Array.from({ length: 10 }, () => 0).map((_, index) => {
+//     const tradeStatus = index % 2 !== 0 ? TRADE_STATUS[0] : TRADE_STATUS[1]
 
-    return {
-      id: index,
-      mainImageUrl: '',
-      title: `${tradeStatus.name}인 상품`,
-      price: 36500,
-      tradeArea: '서울시 강남구',
-      tradeStatus,
-      createdDate: '2023.01.25',
-      modifiedDate: '2023.01.25',
-      isLiked: false,
-      likeCount: 0,
-      isReviewed: !!(index % 2 !== 0),
-      sellerNickName: 'hypeboy'
-    }
-  })
-}
+//     return {
+//       id: index,
+//       mainImageUrl: '',
+//       title: `${tradeStatus.name}인 상품`,
+//       price: 36500,
+//       tradeArea: '서울시 강남구',
+//       tradeStatus,
+//       createdDate: '2023.01.25',
+//       modifiedDate: '2023.01.25',
+//       isLiked: false,
+//       likeCount: 0,
+//       isReviewed: !!(index % 2 !== 0),
+//       sellerNickName: 'hypeboy'
+//     }
+//   })
+// }
 
 const BuyPageContent = (): ReactElement => {
   const [tabIndex, setTabIndex] = useState<number>(0)
-  const [articles] = useState<ArticlesElement[]>(getArticles())
+  // const [articles] = useState<ArticlesElement[]>(getArticles())
 
   const handleTabClick = (
     e: MouseEvent<HTMLDivElement>,
@@ -84,7 +87,7 @@ const BuyPageContent = (): ReactElement => {
                 onChange={noop}
               />
             </Styled.SearchOptionsWrapper>
-            <Styled.ProductListPanels>
+            {/* <Styled.ProductListPanels>
               <Tabs.Panel>
                 <BuyTabArticleList
                   activityType={
@@ -101,7 +104,7 @@ const BuyPageContent = (): ReactElement => {
                   articles={articles}
                 />
               </Tabs.Panel>
-            </Styled.ProductListPanels>
+            </Styled.ProductListPanels> */}
           </Tabs>
         </Styled.UserProductsWrapper>
       </Styled.ContentWrapper>

@@ -1,35 +1,35 @@
-import type { SelectOnChangeHandler } from '@offer-ui/react'
-import { Icon, Text } from '@offer-ui/react'
+// import type { SelectOnChangeHandler } from '@offer-ui/react'
+// import { Icon, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { SaleTabArticleProps } from './types'
-import { TRADE_STATUS } from '@constants'
-import type { TradeStatus } from '@types'
-import { toLocaleCurrency } from '@utils'
+// import { TRADE_STATUS } from '@constants'
+// import type { TradeStatus } from '@types'
+// import { toLocaleCurrency } from '@utils'
 
 const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
   const {
-    className,
-    id,
-    mainImageUrl,
-    title,
-    price,
-    tradeStatus,
-    modifiedDate,
-    likeCount,
-    hasToken,
-    isReviewed,
-    onChangeTradeStatus
+    className
+    // id,
+    // mainImageUrl,
+    // title,
+    // price,
+    // tradeStatus,
+    // modifiedDate,
+    // likeCount,
+    // isReviewed,
+    // hasToken,
+    // onChangeTradeStatus
   } = props
-  const isSoldOut = tradeStatus.code === 'SOLD'
+  // const isSoldOut = tradeStatus.code === 'SOLD'
 
-  const handleChangeTradeStatus: SelectOnChangeHandler<TradeStatus> = item => {
-    onChangeTradeStatus?.(id, item)
-  }
+  // const handleChangeTradeStatus: SelectOnChangeHandler<TradeStatus> = item => {
+  //   onChangeTradeStatus?.(id, item)
+  // }
 
   return (
     <Styled.Container className={className}>
-      <Styled.ProductWrapper hasToken={hasToken}>
+      {/* <Styled.ProductWrapper hasToken={hasToken}>
         <Styled.ProductImg alt={`product${id}-img`} src={mainImageUrl} />
         {hasToken ? (
           <Styled.SelectBox
@@ -66,7 +66,7 @@ const SaleTabArticle = (props: SaleTabArticleProps): ReactElement => {
             {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
           </Styled.ReviewButton>
         </Styled.ReviewButtonWrapper>
-      )}
+      )} */}
     </Styled.Container>
   )
 }

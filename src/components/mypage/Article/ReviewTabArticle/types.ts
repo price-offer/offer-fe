@@ -1,9 +1,8 @@
 import type { IconType } from '@offer-ui/react'
-import type { ReviewsElement } from '@types'
 
 export type ReviewTabArticleProps = {
   className?: string
-} & ReviewsElement
+}
 
 export type IconMeta = {
   type: IconType

@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react'
-import type { StyledProps } from '@types'
 
 export type CommonModalProps = {
   isOpen?: boolean

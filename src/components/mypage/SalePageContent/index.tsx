@@ -1,14 +1,21 @@
 import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { useEffect, useState, useCallback } from 'react'
+import {
+  // useEffect,
+  useState
+  // useCallback
+} from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
-import { SaleTabArticleList } from '@components/mypage/ArticleList'
+// import { SaleTabArticleList } from '@components/mypage/ArticleList'
 import { ProfileBox } from '@components/mypage/ProfileBox'
 import { myProfile } from '@mocks/fixture'
-import { getOnSaleArticles } from '@apis'
+// import { getOnSaleArticles } from '@apis'
 import { TRADE_STATUS } from '@constants'
-import type { ArticlesElement, TradeStatusCodes } from '@types'
+import type {
+  // ArticlesElement,
+  TradeStatusCodes
+} from '@types'
 import { noop } from '@utils'
 
 const sortItems = [
@@ -19,23 +26,23 @@ const sortItems = [
 ]
 
 const SalePageContent = (): ReactElement => {
-  const hasToken = true
+  // const hasToken = true
   const [tradeStatusCode, setTradeStatusCode] =
     useState<TradeStatusCodes>('SELLING')
-  const [articles, setArticles] = useState<ArticlesElement[]>([])
+  // const [articles, setArticles] = useState<ArticlesElement[]>([])
 
-  const fetchArticles = useCallback(async (): Promise<void> => {
-    const res = await getOnSaleArticles('sonny', tradeStatusCode)
-    setArticles(res.elements)
-  }, [tradeStatusCode])
+  // const fetchArticles = useCallback(async (): Promise<void> => {
+  //   // const res = await getOnSaleArticles('sonny', tradeStatusCode)
+  //   // setArticles(res.elements)
+  // }, [tradeStatusCode])
 
   const handleTabClick = (newTradeStatusCode: TradeStatusCodes) => () => {
     setTradeStatusCode(newTradeStatusCode)
   }
 
-  useEffect(() => {
-    fetchArticles()
-  }, [fetchArticles])
+  // useEffect(() => {
+  //   fetchArticles()
+  // }, [fetchArticles])
 
   return (
     <Styled.ContentWrapper>
@@ -72,7 +79,7 @@ const SalePageContent = (): ReactElement => {
               onChange={noop}
             />
           </Styled.SearchOptionsWrapper>
-          <Styled.ProductListPanels>
+          {/* <Styled.ProductListPanels>
             <Tabs.Panel>
               <SaleTabArticleList
                 articles={articles}
@@ -87,7 +94,7 @@ const SalePageContent = (): ReactElement => {
                 onChangeTradeStatus={noop}
               />
             </Tabs.Panel>
-          </Styled.ProductListPanels>
+          </Styled.ProductListPanels> */}
         </Tabs>
       </Styled.UserProductsWrapper>
     </Styled.ContentWrapper>

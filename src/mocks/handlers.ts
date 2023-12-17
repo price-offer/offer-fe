@@ -59,7 +59,7 @@ export const handlers = [
   /**
    * 메인 페이지 카테고리
    */
-  http.get('https://offer-be.kro.kr/api/categories', () => {
+  http.get('/categories', async () => {
     return HttpResponse.json<GetCategoriesRes>(categories, { status: 200 })
   })
 ]

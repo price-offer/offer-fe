@@ -8,38 +8,34 @@ import type {
   TradeStatusCodes
 } from '@types'
 
-export const getMyProfile = async () => {
-  const res = await http.get<null, MyProfile>('/members/mypage')
-  return res
+export const getMyProfile = () => {
+  return http.get<null, MyProfile>('/members/mypage')
 }
 
-export const getProfile = async (memberId: string): Promise<MemberProfile> => {
-  const res = await http.get<null, MemberProfile>(`/members/${memberId}`)
-  return res
+export const getProfile = (memberId: string): Promise<MemberProfile> => {
+  return http.get<null, MemberProfile>(`/members/${memberId}`)
 }
 
-export const updateProductTradeStatus = async (
+export const updateProductTradeStatus = (
   articleId: string,
   tradeStatus: TradeStatus
-): Promise<void> => {
-  await http.patch(`/articles/${articleId}`, {
+) => {
+  return http.patch(`/articles/${articleId}`, {
     tradeStatus
   })
 }
 
-export const getOnSaleArticles = async (
+export const getOnSaleArticles = (
   memberId: string,
   tradeStatusCode: TradeStatusCodes
 ) => {
-  const res = await http.get<null, Articles>(
+  return http.get<null, Articles>(
     `/articles?memberId=${memberId}&tradeStatusCode=${tradeStatusCode}`
   )
-  return res
 }
 
-export const getCategory = async () => {
-  const res = await http.get<null, GetCategoriesRes>(
+export const getCategory = () => {
+  return http.get<null, GetCategoriesRes>(
     'https://offer-be.kro.kr/api/categories'
   )
-  return res
 }

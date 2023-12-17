@@ -7,19 +7,12 @@ import {
 } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import type { ReactElement } from 'react'
-import { env } from '@constants'
 import { Layout } from '@layouts'
 import { theme } from '@styles'
 
 const customTheme = {
   ...offerTheme,
   ...theme
-}
-
-const isUseMock = env.API_MOCKING === 'enabled'
-
-if (isUseMock) {
-  await import('../mocks')
 }
 
 const queryClient = new QueryClient()

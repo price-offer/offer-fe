@@ -1,6 +1,6 @@
 import type {
-  GetMemberProfileReq,
   GetMemberProfileRes,
+  GetMemberProfileReq,
   GetMyProfileRes
 } from './types'
 import { http } from '@utils/http'

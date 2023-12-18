@@ -4,9 +4,8 @@ import { useEffect, useState, useCallback } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { SaleTabArticleList } from '@components/shop/ArticleList'
-import { getOnSaleArticles } from '@apis'
 import { TRADE_STATUS } from '@constants'
-import type { ArticlesElement, TradeStatusCodes } from '@types'
+import type { TradeStatusCodes } from '@types'
 import { noop } from '@utils'
 
 const sortItems = [
@@ -20,12 +19,11 @@ const SalePageContent = (): ReactElement => {
   const hasToken = true
   const [tradeStatusCode, setTradeStatusCode] =
     useState<TradeStatusCodes>('SELLING')
-  const [articles, setArticles] = useState<ArticlesElement[]>([])
+  const [articles, setArticles] = useState<any>([])
 
   const fetchArticles = useCallback(async (): Promise<void> => {
-    const res = await getOnSaleArticles('sonny', tradeStatusCode)
-    setArticles(res.elements)
-  }, [tradeStatusCode])
+    setArticles([])
+  }, [])
 
   const handleTabClick = (newTradeStatusCode: TradeStatusCodes) => () => {
     setTradeStatusCode(newTradeStatusCode)

@@ -3,36 +3,17 @@ import { useState } from 'react'
 import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { ReviewTabArticleList } from '@components/shop/ArticleList'
-import { TRADE_ACTIVITY_TYPE } from '@constants'
-import type { ReviewsElement } from '@types'
+import { TRADE_ACTIVITY_TYPES } from '@constants'
 
-const tradeReviewActivityList = Object.entries(TRADE_ACTIVITY_TYPE.review)
+const tradeReviewActivityList = Object.entries(TRADE_ACTIVITY_TYPES.review)
 
-const getReviews = (): ReviewsElement[] => {
-  return Array.from({ length: 10 }, () => 0).map((_, index) => {
-    return {
-      id: index,
-      reviewer: {
-        id: 1,
-        profileImageUrl: '',
-        nickname: '닉네임',
-        offerLevel: 1
-      },
-      article: {
-        id: 1,
-        title: '거래한 상품의 제목'
-      },
-      score: 2,
-      content: '너무 좋습니다!',
-      isWritingAvailableFromCurrentMember: true,
-      createdDate: '2시간 전'
-    }
-  })
+const getReviews = () => {
+  return []
 }
 
 const ReviewPageContent = (): ReactElement => {
   const [tabIndex, setTabIndex] = useState<number>(0)
-  const [reviews] = useState<ReviewsElement[]>(getReviews())
+  const [reviews] = useState<any>(getReviews())
 
   const handleTabClick = (
     e: MouseEvent<HTMLDivElement>,

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import type { AlertModalProps } from './types'
 import { AlertModal as AlertModalComponent } from '.'
-import useModal from '@hooks/useModal'
+import { useModal } from '@hooks'
 
 type AlertModal = typeof AlertModalComponent
 

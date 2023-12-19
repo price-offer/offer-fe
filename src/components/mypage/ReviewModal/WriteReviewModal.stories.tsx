@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import type { WriteReviewModalProps } from './Write/types'
 import { ReviewModal } from '.'
-import useModal from '@hooks/useModal'
+import { useModal } from '@hooks'
 
 type WriteReviewModal = typeof WriteReviewModalComponent
 

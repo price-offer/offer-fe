@@ -11,7 +11,7 @@ import { useModal } from '@hooks'
 
 const PriceOfferCard = ({ postId }: PriceOfferCardProps): ReactElement => {
   const postOffersQuery = useGetPostOffersQuery(postId)
-  const putPstLikeMutation = usePutPostLikeMutation()
+  const postLikeMutation = usePutPostLikeMutation()
   const isAuthor = false
   const {
     isOpen: isOfferModalOpen,
@@ -20,7 +20,7 @@ const PriceOfferCard = ({ postId }: PriceOfferCardProps): ReactElement => {
   } = useModal()
   const [likePost, setLikePost] = useState({
     status: false,
-    count: postOffersQuery.data?.offerCountOfCurrentMember || 0
+    count: 0
   })
   const offers =
     postOffersQuery.data?.offers.map(({ id, offerer, createdAt, price }) => ({
@@ -39,7 +39,7 @@ const PriceOfferCard = ({ postId }: PriceOfferCardProps): ReactElement => {
       count: status ? count - 1 : count + 1
     }))
 
-    await putPstLikeMutation.mutateAsync(postId)
+    await postLikeMutation.mutateAsync(postId)
   }
 
   return (
@@ -125,7 +125,9 @@ const PriceOfferCard = ({ postId }: PriceOfferCardProps): ReactElement => {
               size="large"
               onClick={() => {
                 openOfferModal()
-              }}>{`가격 제안하기(${0}/2)`}</Styled.MessageButton>
+              }}>{`가격 제안하기(${
+              postOffersQuery.data?.offerCountOfCurrentMember || 0
+            }/2)`}</Styled.MessageButton>
           )}
         </Styled.CardFooter>
       </Styled.OfferPriceCardWrapper>

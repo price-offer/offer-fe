@@ -3,9 +3,6 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
-import { useState, type ReactElement } from 'react'
-import { usePutPostLikeMutation } from '@apis/like'
-import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostDetailQuery } from '@apis/post'
 import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
@@ -38,14 +35,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   }
 })
 
-const PostDetailPage = ({ postId }: Props): ReactElement => {
+const PostDetailPage = ({ postId }: Props) => {
   const postDetailQuery = useGetPostDetailQuery(postId)
-  const postOffersQuery = useGetPostOffersQuery(postId)
-  const putPstLikeMutation = usePutPostLikeMutation()
-  const [likePost, setLikePost] = useState({
-    status: false,
-    count: postOffersQuery.data?.offerCountOfCurrentMember || 0
-  })
+
+  const isAuthor = false
   const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
   const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
@@ -68,24 +61,6 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     },
     { label: '거래 지역', value: postDetailQuery.data?.location }
   ]
-  const offers = postOffersQuery.data?.offers.map(
-    ({ id, offerer, createdAt, price }) => ({
-      ...offerer,
-      level: Number(offerer.level),
-      id,
-      date: createdAt,
-      price
-    })
-  )
-
-  const handleClickLike = async () => {
-    setLikePost(({ status, count }) => ({
-      status: !status,
-      count: status ? count - 1 : count + 1
-    }))
-
-    await putPstLikeMutation.mutateAsync(postId)
-  }
 
   return (
     <Layout>
@@ -96,14 +71,22 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         <Content>
           <div>
             <ProductCondition>
-              <ProductConditionSelectBox
-                items={TRADE_STATUS}
-                value={postDetailQuery.data?.tradeStatus}
-                onChange={(): void => {
-                  // do something
-                }}
-              />
-              <IconButton icon="more" size={24} />
+              {isAuthor ? (
+                <>
+                  <ProductConditionSelectBox
+                    items={TRADE_STATUS}
+                    value={postDetailQuery.data?.tradeStatus}
+                    onChange={(): void => {
+                      // do something
+                    }}
+                  />
+                  <IconButton icon="more" size={24} />
+                </>
+              ) : (
+                <ProductConditionBadge>
+                  {postDetailQuery.data?.tradeStatus}
+                </ProductConditionBadge>
+              )}
             </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
               {CATEGORY_MOCK.name}
@@ -137,12 +120,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         </Content>
       </Main>
       <MainDivider size="bold" />
-      <PriceOfferCard
-        handleClickLike={handleClickLike}
-        isLikePost={likePost.status}
-        likeCount={likePost.count}
-        offerList={offers || []}
-      />
+      <PriceOfferCard postId={postId} />
     </Layout>
   )
 }
@@ -158,6 +136,7 @@ const Layout = styled.div`
 
   width: 100%;
   max-width: 1200px;
+  height: fit-content;
   margin: 0 auto 15px;
   padding-top: 20px;
 
@@ -229,6 +208,22 @@ const ProductConditionSelectBox = styled(SelectBox)`
     }
   `}
 `
+
+const ProductConditionBadge = styled.div`
+  margin-bottom: 20px;
+  padding: 4px 8px;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.radius.round4};
+
+    background-color: ${theme.colors.black};
+
+    color: ${theme.colors.white};
+
+    ${theme.fonts.body02B}
+  `}
+`
+
 const TransactionContainer = styled.div`
   display: flex;
   justify-content: space-between;

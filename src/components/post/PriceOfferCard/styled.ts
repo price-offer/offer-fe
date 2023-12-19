@@ -9,6 +9,7 @@ const OfferPriceCardWrapper = styled.div`
     return css`
       width: 100%;
       max-width: 478px;
+      height: fit-content;
       border: solid 1px ${colors.grayScale10};
       border-radius: ${radius.round6};
 

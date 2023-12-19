@@ -36,9 +36,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const PostDetailPage = ({ postId }: Props) => {
-  const postDetailQuery = useGetPostDetailQuery(postId)
-
   const isAuthor = false
+  const postDetailQuery = useGetPostDetailQuery(postId)
   const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
   const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
@@ -120,7 +119,7 @@ const PostDetailPage = ({ postId }: Props) => {
         </Content>
       </Main>
       <MainDivider size="bold" />
-      <PriceOfferCard postId={postId} />
+      <PriceOfferCard isAuthor={isAuthor} postId={postId} />
     </Layout>
   )
 }
@@ -211,7 +210,7 @@ const ProductConditionSelectBox = styled(SelectBox)`
 
 const ProductConditionBadge = styled.div`
   margin-bottom: 20px;
-  padding: 4px 8px;
+  padding: 4px 8px 3px;
 
   ${({ theme }) => css`
     border-radius: ${theme.radius.round4};

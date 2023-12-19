@@ -9,10 +9,12 @@ import { usePutPostLikeMutation } from '@apis/like'
 import { useGetPostOffersQuery } from '@apis/offer'
 import { useModal } from '@hooks'
 
-const PriceOfferCard = ({ postId }: PriceOfferCardProps): ReactElement => {
+const PriceOfferCard = ({
+  postId,
+  isAuthor
+}: PriceOfferCardProps): ReactElement => {
   const postOffersQuery = useGetPostOffersQuery(postId)
   const postLikeMutation = usePutPostLikeMutation()
-  const isAuthor = false
   const {
     isOpen: isOfferModalOpen,
     openModal: openOfferModal,

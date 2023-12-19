@@ -1,6 +1,7 @@
 import type { TradeTypeCodes } from '@types'
 
 export type PriceOfferCardProps = {
+  isAuthor: boolean
   postId: number
 }
 

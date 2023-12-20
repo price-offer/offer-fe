@@ -5,7 +5,7 @@ import type {
   TRADE_TYPES,
   TRADE_STATUS,
   PRODUCT_CONDITIONS
-} from '@constants/app'
+} from '@constants'
 
 /** 정렬 옵션  */
 export type SortOptions = typeof SORT_OPTIONS

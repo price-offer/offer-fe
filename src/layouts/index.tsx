@@ -1,9 +1,8 @@
 import styled from '@emotion/styled'
 import { useMedia } from '@offer-ui/react'
-import { Suspense } from '@suspensive/react'
 import { useRouter } from 'next/router'
 import type { PropsWithChildren } from 'react'
-import { Header, HeaderSkeleton } from '@components'
+import { Header } from '@components'
 
 type LayoutProps = PropsWithChildren<unknown>
 
@@ -25,9 +24,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <Container>
-      <Suspense.CSROnly fallback={<HeaderSkeleton />}>
-        {hasHeader && <Header />}
-      </Suspense.CSROnly>
+      {hasHeader && <Header />}
       {children}
     </Container>
   )

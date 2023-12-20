@@ -6,5 +6,6 @@ export const useGetMyProfileQuery = (accessToken?: string) =>
   useQuery({
     queryKey: ['myProfile', accessToken],
     queryFn: getMyProfile,
+    enabled: Boolean(accessToken),
     initialData: initialMyProfile
   })

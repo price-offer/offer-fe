@@ -22,12 +22,7 @@ type SplittedObjectArray<T> = { [key in KeyOf<T>]: ValueOf<T> }[]
 
 export const splitObject = <T extends UnknownObject>(
   object: T
-): SplittedObjectArray<T> => {
-  if (Object.keys(object).length === 0) {
-    return []
-  }
-
-  return Object.entries(object).map(([key, value]) => ({
+): SplittedObjectArray<T> =>
+  Object.entries(object).map(([key, value]) => ({
     [key]: value
   })) as SplittedObjectArray<T>
-}

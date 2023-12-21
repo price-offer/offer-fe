@@ -22,7 +22,7 @@ import { useState } from 'react'
 import { useGetCategoriesQuery, usePostProductMutation } from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
-import { TRADE_TYPE, PRODUCT_CONDITION } from '@constants'
+import { PRODUCT_CONDITIONS, TRADE_TYPES } from '@constants'
 import { useResponsive } from '@hooks'
 import type { ProductConditionCodes, TradeTypeCodes } from '@types'
 
@@ -175,7 +175,7 @@ const PostPage = (): ReactElement => {
             <StyledRadio
               direction="horizontal"
               formName="productCondition"
-              items={PRODUCT_CONDITION}
+              items={PRODUCT_CONDITIONS}
               onChange={handleUpdatePostForm}
             />
           </StyledRadioPostForm>
@@ -183,7 +183,7 @@ const PostPage = (): ReactElement => {
             <StyledRadio
               direction="horizontal"
               formName="tradeType"
-              items={TRADE_TYPE}
+              items={TRADE_TYPES}
               onChange={handleUpdatePostForm}
             />
           </StyledRadioPostForm>

@@ -1,24 +1,10 @@
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { ShopPageMainView } from './view/main'
 import { useAuth } from '@hooks/useAuth'
 
-const ShopIndexPage = () => {
-  const router = useRouter()
-  const { isLogin, isLoading, user } = useAuth()
+const MyShopPage = () => {
+  const { user } = useAuth()
 
-  const myShop = `/shop/${user.id}`
-
-  useEffect(
-    function redirect() {
-      if (isLoading) {
-        return
-      }
-
-      const redirectPath = isLogin ? myShop : '/'
-      router.push(redirectPath)
-    },
-    [isLoading, isLogin, router, user, myShop]
-  )
+  return <ShopPageMainView profile={user} />
 }
 
-export default ShopIndexPage
+export default MyShopPage

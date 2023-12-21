@@ -4,7 +4,7 @@ import { useState } from 'react'
 import type { BuyTabPostListProps } from './types'
 import { BuyTabPostList as BuyTabPostListComponent } from './index'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
-import type { TradeBuyActivityCodes } from '@types'
+import type { PostSummary, TradeBuyActivityCodes } from '@types'
 
 type BuyTabArticleList = typeof BuyTabPostListComponent
 
@@ -15,29 +15,24 @@ const meta: Meta<BuyTabArticleList> = {
 
 export default meta
 
-const articles: ArticlesElement[] = Array.from({ length: 10 }, () => 0).map(
+const posts: PostSummary[] = Array.from({ length: 10 }, () => 0).map(
   (_, index) => ({
     id: index,
-    mainImageUrl: '',
-    title: 'string',
-    price: 36500,
-    tradeArea: '서울시 강남구',
-    tradeStatus: {
-      code: 'SELLING',
-      name: '판매중'
-    },
-    createdDate: '2021-12-10T14:25:30',
-    modifiedDate: '2021-12-10T14:25:30',
-    isLiked: false,
+    title: 'title',
+    price: 0,
+    location: '서울시',
+    thumbnailImageUrl: '',
+    liked: true,
+    tradeStatus: 'SELLING',
     likeCount: 0,
-    isReviewed: !!(index % 2 !== 0),
-    sellerNickName: 'hypeboy'
+    createdAt: ''
   })
 )
 
 const PrimaryWithHooks = (args: BuyTabPostListProps) => {
   const [activityType, setActivityType] =
     useState<TradeBuyActivityCodes>('offer')
+  const posts = args.posts as PostSummary[]
 
   return (
     <>
@@ -52,11 +47,11 @@ const PrimaryWithHooks = (args: BuyTabPostListProps) => {
           {TRADE_ACTIVITY_TYPES.buy[activityType]}
         </Text>
       </div>
-      <BuyTabPostListComponent {...args} activityType={activityType} />
+      <BuyTabPostListComponent activityType="like" posts={posts} />
     </>
   )
 }
 export const Primary: StoryObj<BuyTabArticleList> = {
-  args: { activityType: 'offer', articles },
+  args: { activityType: 'like', posts },
   render: args => <PrimaryWithHooks {...args} />
 }

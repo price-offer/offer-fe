@@ -7,16 +7,21 @@ import { find, toLocaleCurrency } from '@utils'
 const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
   const {
     className,
-    sellerNickName,
+    // sellerNickName,
     postId,
     thumbnailImageUrl,
-    title = '',
+    // title = '',
     offerPrice,
     tradeStatus,
-    createdAt,
-    isReviewed
+    createdAt
+    // isReviewed
   } = props
   const tradeStatusOption = find(TRADE_STATUS, { code: tradeStatus })
+
+  // TODO: API Scheme 변경 필요
+  const sellerNickName = ''
+  const title = ''
+  const isReviewed = false
 
   return (
     <Styled.Container className={className}>

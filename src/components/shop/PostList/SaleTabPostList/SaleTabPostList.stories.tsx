@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { SaleTabPostListProps } from './types'
 import { SaleTabPostList as SaleTabPostListComponent } from './index'
 import { TRADE_STATUS } from '@constants'
-import type { ArticlesElement, TradeStatus, TradeStatusCodes } from '@types'
+import type { PostSummary, TradeStatusType } from '@types'
 
 type SaleTabPostList = typeof SaleTabPostListComponent
 
@@ -18,8 +18,10 @@ export default meta
 
 const PrimaryWithHooks = (args: SaleTabPostListProps) => {
   const [token, setToken] = useState<boolean>(false)
-  const [tradeStatus, setTradeStatus] = useState<TradeStatus>(TRADE_STATUS[1])
-  const articles = getArticles(tradeStatus.code)
+  const [tradeStatus, setTradeStatus] = useState<TradeStatusType>(
+    TRADE_STATUS[1]
+  )
+  const posts = [] as PostSummary[]
 
   return (
     <>
@@ -46,40 +48,16 @@ const PrimaryWithHooks = (args: SaleTabPostListProps) => {
       <div>
         <Text styleType="subtitle01B">{tradeStatus.name}</Text>
       </div>
-      <SaleTabPostListComponent
-        {...args}
-        articles={articles}
-        hasToken={token}
-      />
+      <SaleTabPostListComponent {...args} hasToken={token} posts={posts} />
     </>
   )
-}
-
-const getArticles = (tradeStatusCode: TradeStatusCodes): ArticlesElement[] => {
-  const isOnSale = tradeStatusCode === 'SELLING'
-  const tradeStatus = isOnSale ? TRADE_STATUS[0] : TRADE_STATUS[1]
-
-  return Array.from({ length: 10 }, () => 0).map((_, index) => ({
-    id: index,
-    mainImageUrl: '',
-    title: `${tradeStatus.name}인 상품`,
-    price: 36500,
-    tradeArea: '서울시 강남구',
-    tradeStatus,
-    createdDate: '2021-12-10T14:25:30',
-    modifiedDate: '2021-12-10T14:25:30',
-    isLiked: false,
-    likeCount: 0,
-    isReviewed: !!(index % 2 !== 0),
-    sellerNickName: 'hypeboy'
-  }))
 }
 
 export const Primary: StoryObj<SaleTabPostList> = {
   args: {
     hasToken: true,
-    articles: [],
-    onChangeTradeStatus: (id: number, status: TradeStatus): void => {
+    posts: [],
+    onChangeTradeStatus: (id: number, status: TradeStatusType): void => {
       action('onChangeTradeStatus')(id, status)
     }
   },

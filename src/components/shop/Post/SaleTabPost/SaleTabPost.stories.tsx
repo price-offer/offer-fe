@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { SaleTabPostProps } from './types'
 import { SaleTabPost as SaleTabPostComponent } from './index'
 import { TRADE_STATUS } from '@constants'
-import type { TradeStatus, TradeStatusCodes } from '@types'
+import type { TradeStatusCodes, TradeStatusType } from '@types'
 
 type SaleTabPost = typeof SaleTabPostComponent
 
@@ -26,12 +26,12 @@ const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
       <div>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[0])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[0].code)}>
           판매중
         </button>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[1].code)}>
           거래 완료
         </button>
       </div>
@@ -40,7 +40,7 @@ const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
       <SaleTabPostComponent
         {...args}
         hasToken
-        isReviewed
+        // isReviewed
         tradeStatus={tradeStatus}
       />
       <Text styleType="subtitle01B">타 사용자</Text>
@@ -60,19 +60,18 @@ const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
 export const Primary: StoryObj<SaleTabPost> = {
   args: {
     hasToken: false,
-    sellerNickName: 'sonny',
+    // sellerNickName: 'sonny',
     id: 4,
-    mainImageUrl: '',
+    thumbnailImageUrl: '',
     title: '상품 이름 상품 이름',
     price: 36500,
-    tradeArea: '서울시 강남구',
-    tradeStatus: TRADE_STATUS[1],
-    createdDate: '2021-12-10T14:25:30',
-    modifiedDate: '2021-12-10T14:25:30',
-    isLiked: false,
+    location: '서울시 강남구',
+    tradeStatus: TRADE_STATUS[1].code,
+    createdAt: '2021-12-10T14:25:30',
+    // isLiked: false,
     likeCount: 0,
-    isReviewed: false,
-    onChangeTradeStatus: (productId: number, status: TradeStatus): void => {
+    // isReviewed: false,
+    onChangeTradeStatus: (productId: number, status: TradeStatusType): void => {
       action('onChangeTradeStatus')(productId, status)
     }
   },

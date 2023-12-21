@@ -8,16 +8,20 @@ import { find, toLocaleCurrency } from '@utils'
 const LikeTabPanel = (props: LikeTabPanelProps): ReactElement => {
   const {
     className,
-    sellerNickName,
+    // sellerNickName,
     id: postId,
     thumbnailImageUrl,
     title = '',
-    startPrice,
+    // startPrice,
     tradeStatus,
     createdAt,
     likeCount
   } = props
   const tradeStatusOption = find(TRADE_STATUS, { code: tradeStatus })
+
+  // TODO: API Scheme 변경 필요
+  const sellerNickName = ''
+  const startPrice = 0
 
   return (
     <Styled.Container className={className}>

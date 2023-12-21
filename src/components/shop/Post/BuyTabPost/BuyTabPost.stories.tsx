@@ -2,6 +2,7 @@ import { Text } from '@offer-ui/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { BuyTabPostProps } from './types'
 import { BuyTabPost as BuyTabPostComponent } from './index'
+import type { OfferSummary } from '@types'
 
 type BuyTabPost = typeof BuyTabPostComponent
 
@@ -14,30 +15,27 @@ export default meta
 
 export const Primary: StoryObj<BuyTabPost> = {
   args: {
-    activityType: 'like',
-    sellerNickName: '판매자 닉네임닉네임',
-    id: 4,
-    mainImageUrl: '',
-    title: '상품 이름 상품 이름',
-    price: 36500,
-    tradeArea: '서울시 강남구',
-    tradeStatus: {
-      code: 'SELLING',
-      name: '판매중'
-    },
-    createdDate: '2021-12-10T14:25:30',
-    modifiedDate: '2021-12-10T14:25:30',
-    isLiked: false,
+    id: 0,
+    title: 'title',
+    price: 0,
+    location: '서울시',
+    thumbnailImageUrl: '',
+    liked: true,
+    tradeStatus: 'SELLING',
     likeCount: 0,
-    isReviewed: false
+    createdAt: ''
   },
-  render: args => (
-    <>
-      <Text styleType="subtitle01B">가격제안</Text>
-      <BuyTabPostComponent {...args} activityType="offer" isReviewed={false} />
-      <BuyTabPostComponent {...args} activityType="offer" />
-      <Text styleType="subtitle01B">관심상품</Text>
-      <BuyTabPostComponent {...args} />
-    </>
-  )
+  render: args => {
+    const post = args as OfferSummary
+
+    return (
+      <>
+        <Text styleType="subtitle01B">가격제안</Text>
+        <BuyTabPostComponent {...post} activityType="offer" />
+        {/* TODO: 타입 이슈 디버깅 후 다시 확인 */}
+        {/* <Text styleType="subtitle01B">관심상품</Text>
+        <BuyTabPostComponent {...args} /> */}
+      </>
+    )
+  }
 }

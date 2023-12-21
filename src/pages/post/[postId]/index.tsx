@@ -8,11 +8,7 @@ import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostDetailQuery } from '@apis/post'
 import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
-import {
-  PRODUCT_CONDITION_LABEL,
-  TRADE_STATUS,
-  TRADE_TYPE_LABEL
-} from '@constants'
+import { TRADE_STATUS } from '@constants'
 
 // TODO: api에 작성자 데이터 추가되면 제거
 const AUTHOR_MOCK = {
@@ -53,12 +49,11 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     },
     {
       label: '상품 상태',
-      value:
-        PRODUCT_CONDITION_LABEL[postDetailQuery.data?.productCondition || '']
+      value: postDetailQuery.data?.productCondition || ''
     },
     {
       label: '거래 방식',
-      value: TRADE_TYPE_LABEL[postDetailQuery.data?.tradeType || '']
+      value: postDetailQuery.data?.tradeType || ''
     },
     { label: '거래 지역', value: postDetailQuery.data?.location }
   ]

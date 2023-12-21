@@ -1,27 +1,59 @@
-import { toLabelObject } from '@utils/format'
-import type { KeyOf, ValueOf } from '@types'
+/* Server */
+export const SORT_OPTIONS = [
+  { code: 'CREATED_DATE_DESC', name: '최신순' },
+  {
+    code: 'PRICE_DESC',
+    name: '낮은 가격순'
+  }
+] as const
 
-/** 나의 거래 활동 */
-export type TradeActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE>
-export type TradeActivityName = '판매' | '구매' | '후기'
+export const SORT_TYPES = [
+  { code: 'OFFER', name: '가격제안 정렬' },
+  {
+    code: 'POST',
+    name: '게시글 정렬'
+  }
+] as const
 
-/** 나의 거래 활동 - 판매 */
-export type TradeSaleActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['sale']>
-export type TradeSaleActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['sale']>
+export const TRADE_TYPES = [
+  {
+    code: 'FACE_TO_FACE',
+    name: '직거래'
+  },
+  {
+    code: 'SHIPPING',
+    name: '택배거래'
+  },
+  {
+    code: 'ALL',
+    name: '직거래/택배거래'
+  }
+] as const
 
-/** 나의 거래 활동 - 구매 */
-export type TradeBuyActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['buy']>
-export type TradeBuyActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['buy']>
+export const TRADE_STATUS = [
+  {
+    code: 'SELLING',
+    name: '판매중'
+  },
+  {
+    code: 'SOLD',
+    name: '거래완료'
+  }
+] as const
 
-/** 나의 거래 활동 - 리뷰 */
-export type TradeReviewActivityType = KeyOf<
-  typeof TRADE_ACTIVITY_TYPE['review']
->
-export type TradeReviewActivityName = ValueOf<
-  typeof TRADE_ACTIVITY_TYPE['review']
->
+export const PRODUCT_CONDITIONS = [
+  {
+    code: 'NEW',
+    name: '새상품'
+  },
+  {
+    code: 'SECONDHAND',
+    name: '중고상품'
+  }
+] as const
 
-export const TRADE_ACTIVITY_TYPE = {
+/* Client */
+export const TRADE_ACTIVITY_TYPES = {
   sale: {
     sale: '판매중',
     soldOut: '거래완료'
@@ -36,55 +68,6 @@ export const TRADE_ACTIVITY_TYPE = {
     seller: '판매자 후기'
   }
 } as const
-
-export const TRADE_STATUS = [
-  {
-    code: 'SELLING',
-    name: '판매중'
-  },
-  {
-    code: 'SOLD',
-    name: '거래완료'
-  }
-] as const
-export const TRADE_STATUS_LABEL = toLabelObject(TRADE_STATUS)
-
-export const SORT_TYPE = [
-  { code: 'RECENT_CREATED', name: '최신순' },
-  {
-    code: 'LOW_PRICE',
-    name: '낮은 가격순'
-  }
-] as const
-export const SORT_TYPE_LABEL = toLabelObject(SORT_TYPE)
-
-export const TRADE_TYPE = [
-  {
-    code: 'FACE_TO_FACE',
-    name: '직거래'
-  },
-  {
-    code: 'SHIPPING',
-    name: '택배거래'
-  },
-  {
-    code: 'ALL',
-    name: '직거래/택배거래'
-  }
-] as const
-export const TRADE_TYPE_LABEL = toLabelObject(TRADE_TYPE)
-
-export const PRODUCT_CONDITION = [
-  {
-    code: 'NEW',
-    name: '새상품'
-  },
-  {
-    code: 'SECONDHAND',
-    name: '중고상품'
-  }
-] as const
-export const PRODUCT_CONDITION_LABEL = toLabelObject(PRODUCT_CONDITION)
 
 export const CATEGORIES = [
   {

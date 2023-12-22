@@ -1,19 +1,17 @@
+import type {
+  FetchNextPageOptions,
+  InfiniteData,
+  InfiniteQueryObserverResult
+} from '@tanstack/react-query'
+import type { PostReq, PostDataInfoRes } from '@apis/post'
+
 export type ProductListProps = {
-  productList: {
-    id: number
-    mainImageUrl: string
-    title: string
-    price: number
-    tradeArea: string
-    tradeStatus: {
-      code: number
-      name: string
-    }
-    createdDate: string
-    modifiedDate: string
-    isLiked: boolean
-    likeCount: number
-    isReviewed: boolean
-    sellerNickName: string
-  }[]
+  postData?: PostDataInfoRes[]
+  filterOption?: Pick<PostReq, 'sort' | 'category' | 'minPrice' | 'maxPrice'>
+  hasNextPage?: boolean
+  fetchNextPage?(
+    options?: FetchNextPageOptions
+  ): Promise<
+    InfiniteQueryObserverResult<InfiniteData<PostDataInfoRes, unknown>, Error>
+  >
 }

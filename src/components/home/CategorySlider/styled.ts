@@ -37,7 +37,7 @@ export const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
 
   width: 100%;
   max-width: 1200px;
-  height: 118px;
+  height: fit-content;
 
   cursor: pointer;
 

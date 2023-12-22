@@ -1,11 +1,15 @@
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { ProductList } from '../components/home/ProductList'
-import { useGetPostListQuery } from '@apis/post-controller/post/query'
+import { useGetPostListQuery } from '@apis/post'
 import { CategorySlider, HomeBanner } from '@components'
 
 const Home: NextPage = () => {
-  const { data, fetchNextPage, hasNextPage } = useGetPostListQuery({
+  const {
+    data: postList,
+    fetchNextPage,
+    hasNextPage
+  } = useGetPostListQuery({
     lastId: null,
     limit: 8
   })
@@ -18,7 +22,7 @@ const Home: NextPage = () => {
         <ProductList
           fetchNextPage={fetchNextPage}
           hasNextPage={hasNextPage}
-          postData={data}
+          postData={postList?.pages}
         />
       </HomeWrapper>
     </Layout>

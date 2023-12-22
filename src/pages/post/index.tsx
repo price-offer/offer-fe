@@ -19,16 +19,16 @@ import type {
 import type { ReactElement, ChangeEventHandler, ChangeEvent } from 'react'
 import { useState } from 'react'
 import { PostForm } from '@components'
-import { CATEGORIES, TRADE_METHOD, PRODUCT_STATUS } from '@constants'
+import { CATEGORIES, TRADE_TYPE, PRODUCT_CONDITION } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormStatus = {
   imageUrls: ImageInfo[] | null
   title: string
-  categoryCode: number | null
+  category: number | null
   tradeArea: string
-  productStatusCode: string
-  tradeMethodCode: number | null
+  productCondition: string
+  tradeMethod: number | null
   content: string
   price: number
 }
@@ -41,10 +41,10 @@ const PostPage = (): ReactElement => {
   const [postForm, setPostForm] = useState<PostFormStatus>({
     imageUrls: null,
     title: '',
-    categoryCode: null,
+    category: null,
     tradeArea: '',
-    productStatusCode: '',
-    tradeMethodCode: null,
+    productCondition: '',
+    tradeMethod: null,
     content: '',
     price: 0
   })
@@ -60,7 +60,7 @@ const PostPage = (): ReactElement => {
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
     setPostForm({
       ...postForm,
-      categoryCode: Number(code)
+      category: Number(code)
     })
   }
 
@@ -152,16 +152,16 @@ const PostPage = (): ReactElement => {
           <StyledRadioPostForm label="상품 상태">
             <StyledRadio
               direction="horizontal"
-              formName="productStatusCode"
-              items={PRODUCT_STATUS}
+              formName="productCondition"
+              items={PRODUCT_CONDITION}
               onChange={handleChangeRadio}
             />
           </StyledRadioPostForm>
           <StyledRadioPostForm label="거래 방법">
             <StyledRadio
               direction="horizontal"
-              formName="tradeMethodCode"
-              items={TRADE_METHOD}
+              formName="tradeMethod"
+              items={TRADE_TYPE}
               onChange={handleChangeRadio}
             />
           </StyledRadioPostForm>
@@ -280,16 +280,18 @@ const StyledTitleInput = styled(Input)`
 const StyledPostPage = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 42px 24px 0;
+  padding-top: 42px;
 
   ${({ theme }) => css`
     ${theme.mediaQuery.tablet} {
       margin: 0;
+      margin-top: -67px;
       padding: 0;
     }
 
     ${theme.mediaQuery.mobile} {
       margin: 0;
+      margin-top: -67px;
       padding: 0;
     }
   `};

@@ -46,6 +46,11 @@
             "pattern": "@*",
             "group": "internal",
             "position": "after"
+          },
+          {
+            "pattern": "@layouts",
+            "group": "internal",
+            "position": "after"
           }
         ],
         "alphabetize": {

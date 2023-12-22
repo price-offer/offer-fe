@@ -8,7 +8,7 @@ import { ProfileBox } from '@components/mypage/ProfileBox'
 import { myProfile } from '@mocks/fixture'
 import { getOnSaleArticles } from '@apis'
 import { TRADE_STATUS } from '@constants'
-import type { ArticlesElement, TradeStatusCode } from '@types'
+import type { ArticlesElement, TradeStatusCodes } from '@types'
 import { noop } from '@utils'
 
 const sortItems = [
@@ -18,11 +18,10 @@ const sortItems = [
   }
 ]
 
-const tradeStatusList = TRADE_STATUS.filter(item => item.code !== 2)
-
 const SalePageContent = (): ReactElement => {
   const hasToken = true
-  const [tradeStatusCode, setTradeStatusCode] = useState<TradeStatusCode>(4)
+  const [tradeStatusCode, setTradeStatusCode] =
+    useState<TradeStatusCodes>('SELLING')
   const [articles, setArticles] = useState<ArticlesElement[]>([])
 
   const fetchArticles = useCallback(async (): Promise<void> => {
@@ -30,7 +29,7 @@ const SalePageContent = (): ReactElement => {
     setArticles(res.elements)
   }, [tradeStatusCode])
 
-  const handleTabClick = (newTradeStatusCode: TradeStatusCode) => () => {
+  const handleTabClick = (newTradeStatusCode: TradeStatusCodes) => () => {
     setTradeStatusCode(newTradeStatusCode)
   }
 
@@ -46,7 +45,7 @@ const SalePageContent = (): ReactElement => {
         <Tabs>
           <Styled.SearchOptionsWrapper>
             <Styled.TabsList>
-              {tradeStatusList.map(tradeStatus => {
+              {TRADE_STATUS.map(tradeStatus => {
                 const isCurrent = tradeStatus.code === tradeStatusCode
 
                 return (

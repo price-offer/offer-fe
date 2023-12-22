@@ -20,9 +20,11 @@
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "@offer-ui/react": "^0.2.1",
+    "@offer-ui/react": "^0.2.5",
+    "@suspensive/react": "^1.20.7",
     "@tanstack/react-query": "^5.8.3",
     "axios": "^1.2.3",
+    "cookies-next": "^4.1.0",
     "dayjs": "^1.11.10",
     "next": "^13.4.8",
     "react": "18.2.0",
@@ -71,7 +73,6 @@
     "jotai": "^2.5.1",
     "jsdom": "^20.0.3",
     "lint-staged": "^13.0.3",
-    "msw": "^2.0.1",
     "postcss": "^8.4.27",
     "postcss-syntax": "^0.36.2",
     "prettier": "2.7.1",
@@ -94,8 +95,5 @@
     "node": ">=18.17.1"
   },
   "lint-staged": {},
-  "msw": {
-    "workerDirectory": "public"
-  },
   "packageManager": "yarn@1.22.19"
 }

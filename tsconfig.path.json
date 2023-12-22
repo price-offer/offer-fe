@@ -20,6 +20,8 @@
       "@hooks": ["hooks"],
       "@layouts/*": ["layouts/*"],
       "@layouts": ["layouts"],
+      "@middlewares/*": ["middlewares/*"],
+      "@middlewares": ["middlewares"],
       "@pages/*": ["pages/*"],
       "@pages": ["pages"],
       "@styles/*": ["styles/*"],

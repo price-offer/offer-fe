@@ -27,11 +27,14 @@ const CloseButtonWrapper = styled.div`
 `
 
 const Title = styled.p`
-  ${({ theme }): string => theme.fonts.headline01B}
+  white-space: pre-wrap;
+
+  ${({ theme }): string => theme.fonts.headline01B};
 `
 
 const Description = styled(Text)`
   color: ${({ theme }): string => theme.colors.grayScale70};
+  white-space: pre-wrap;
 `
 
 const Body = styled.div<StyledTitleProps>`

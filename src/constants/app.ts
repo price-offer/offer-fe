@@ -1,32 +1,59 @@
-import type {
-  KeyOf,
-  ProductStatus,
-  TradeMethod,
-  TradeStatus,
-  ValueOf
-} from '@types'
+/* Server */
+export const SORT_OPTIONS = [
+  { code: 'CREATED_DATE_DESC', name: '최신순' },
+  {
+    code: 'PRICE_DESC',
+    name: '낮은 가격순'
+  }
+] as const
 
-/** 나의 거래 활동 */
-export type TradeActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE>
-export type TradeActivityName = '판매' | '구매' | '후기'
+export const SORT_TYPES = [
+  { code: 'OFFER', name: '가격제안 정렬' },
+  {
+    code: 'POST',
+    name: '게시글 정렬'
+  }
+] as const
 
-/** 나의 거래 활동 - 판매 */
-export type TradeSaleActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['sale']>
-export type TradeSaleActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['sale']>
+export const TRADE_TYPES = [
+  {
+    code: 'FACE_TO_FACE',
+    name: '직거래'
+  },
+  {
+    code: 'SHIPPING',
+    name: '택배거래'
+  },
+  {
+    code: 'ALL',
+    name: '직거래/택배거래'
+  }
+] as const
 
-/** 나의 거래 활동 - 구매 */
-export type TradeBuyActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['buy']>
-export type TradeBuyActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['buy']>
+export const TRADE_STATUS = [
+  {
+    code: 'SELLING',
+    name: '판매중'
+  },
+  {
+    code: 'SOLD',
+    name: '거래완료'
+  }
+] as const
 
-/** 나의 거래 활동 - 리뷰 */
-export type TradeReviewActivityType = KeyOf<
-  typeof TRADE_ACTIVITY_TYPE['review']
->
-export type TradeReviewActivityName = ValueOf<
-  typeof TRADE_ACTIVITY_TYPE['review']
->
+export const PRODUCT_CONDITIONS = [
+  {
+    code: 'NEW',
+    name: '새상품'
+  },
+  {
+    code: 'SECONDHAND',
+    name: '중고상품'
+  }
+] as const
 
-export const TRADE_ACTIVITY_TYPE = {
+/* Client */
+export const TRADE_ACTIVITY_TYPES = {
   sale: {
     sale: '판매중',
     soldOut: '거래완료'
@@ -42,122 +69,53 @@ export const TRADE_ACTIVITY_TYPE = {
   }
 } as const
 
-export const TRADE_STATUS: TradeStatus[] = [
-  {
-    code: 2,
-    name: '예약중'
-  },
-  {
-    code: 4,
-    name: '판매중'
-  },
-  {
-    code: 8,
-    name: '거래완료'
-  }
-]
-
-export const TRADE_METHOD: TradeMethod[] = [
-  {
-    code: 2,
-    name: '직거래'
-  },
-  {
-    code: 4,
-    name: '택배거래'
-  },
-  {
-    code: 8,
-    name: '직거래/택배거래'
-  }
-]
-
-export const PRODUCT_STATUS: ProductStatus[] = [
-  {
-    code: 2,
-    name: '새상품'
-  },
-  {
-    code: 4,
-    name: '중고상품'
-  }
-]
-
 export const CATEGORIES = [
   {
-    code: 1,
-    name: '인기매물'
-  },
-  {
-    code: 2,
-    name: '디지털기기'
-  },
-  {
-    code: 3,
-    name: '생활가전'
-  },
-  {
-    code: 4,
-    name: '가구/인테리어'
-  },
-  {
-    code: 5,
-    name: '유아동'
-  },
-  {
-    code: 6,
-    name: '생활/가공식품'
-  },
-  {
-    code: 7,
-    name: '유아도서'
-  },
-  {
-    code: 8,
-    name: '스포츠/레저'
-  },
-  {
-    code: 9,
-    name: '여성잡화'
-  },
-  {
-    code: 10,
-    name: '여성의류'
-  },
-  {
-    code: 11,
+    code: 'MEN_FASHION',
     name: '남성패션/잡화'
   },
   {
-    code: 12,
-    name: '게임/취미'
+    code: 'WOMEN_FASHION',
+    name: '여성패션/잡화'
   },
   {
-    code: 13,
-    name: '뷰티/미용'
+    code: 'GAME',
+    name: '게임'
   },
   {
-    code: 14,
-    name: '반려동물용품'
+    code: 'SPORTS',
+    name: '스포츠/레저'
   },
   {
-    code: 15,
+    code: 'TOY',
+    name: '장난감/취미'
+  },
+  {
+    code: 'DIGITAL',
+    name: '디지털기기'
+  },
+  {
+    code: 'CAR',
+    name: '자동차/공구'
+  },
+  {
+    code: 'APPLIANCE',
+    name: '생활가전'
+  },
+  {
+    code: 'FURNITURE',
+    name: '가구/인테리어'
+  },
+  {
+    code: 'BOOKS',
     name: '도서/티켓/음반'
   },
   {
-    code: 16,
-    name: '식물'
+    code: 'PET',
+    name: '반려동물용품'
   },
   {
-    code: 17,
-    name: '식품'
-  },
-  {
-    code: 18,
+    code: 'OTHER',
     name: '기타 중고물품'
-  },
-  {
-    code: 19,
-    name: '삽니다'
   }
 ] as const

@@ -19,6 +19,7 @@ export const colors = {
   brandPrimaryWeak: '#FFECE9',
   brandSub: '#673CE6',
   brandSubWeak: '#E1D8FA',
+  kakao: '#FEE500',
 
   // dim
   dimOpacity25: '#00000040',

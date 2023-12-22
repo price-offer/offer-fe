@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Button, Input } from '@offer-ui/react'
 import Link from 'next/link'
@@ -66,13 +67,15 @@ const ButtonSection = styled.section`
     display: none;
   }
 `
-const LogoutText = styled.p`
-  color: ${({ theme }): string => theme.colors.grayScale90};
-  ${({ theme }): string => theme.fonts.caption01M};
-`
+const LogoutButton = styled.button`
+  width: 100%;
+  border: none;
 
-const SellButtonDivider = styled.div`
-  width: 32px;
+  background: none;
+
+  color: ${({ theme }): string => theme.colors.grayScale90};
+  text-align: left;
+  ${({ theme }): string => theme.fonts.caption01M};
 `
 
 const HeaderAuthButton = styled(Button)`
@@ -117,6 +120,14 @@ const TextLink = styled(Link)`
   text-decoration: none;
 `
 
+const KaKaoButton = styled(Button)`
+  ${({ theme }) => css`
+    background: ${theme.colors.kakao};
+
+    color: ${theme.colors.grayScale90};
+  `};
+`
+
 export const Styled = {
   HeaderWrapper,
   HeaderContent,
@@ -126,10 +137,10 @@ export const Styled = {
   SearchInput,
   ButtonSection,
   HeaderAuthButton,
-  LogoutText,
-  SellButtonDivider,
+  LogoutButton,
   HeaderProfileSection,
   HeaderNickName,
   MenuSection,
-  TextLink
+  TextLink,
+  KaKaoButton
 }

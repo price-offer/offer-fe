@@ -1,9 +1,12 @@
 import { Avatar, Divider, Icon, Badge } from '@offer-ui/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import React from 'react'
 import { Styled } from './styled'
 import type { SideBarProps, NavDataType } from './types'
+import { OAUTH_URL } from '@constants/oauth'
+import { useAuth } from '@hooks/useAuth'
 
 const NAV_DATA: NavDataType = [
   {
@@ -23,26 +26,42 @@ const NAV_DATA: NavDataType = [
   }
 ]
 
-export const SideBar = ({
-  isOpen,
-  isLogin,
-  onClose
-}: SideBarProps): ReactElement => {
+export const SideBar = ({ isOpen, onClose }: SideBarProps): ReactElement => {
+  const router = useRouter()
+  const { handleLogout, user, isLogin } = useAuth()
+
+  const handleClickLogin = () => {
+    router.replace(OAUTH_URL.KAKAO)
+    onClose()
+  }
+
+  const handleClickLogout = () => {
+    handleLogout()
+    onClose()
+  }
+
   return (
     <>
       <Styled.SidebarOverlay isOpen={isOpen} onClick={onClose} />
       <Styled.SideBarWrapper isOpen={isOpen}>
         <Styled.SidebarContent>
-          <Styled.SideBarAuthSection>
-            <Avatar alt="user-profile" size="xsmall" src={''} />
-            {isLogin ? (
+          {isLogin ? (
+            <Styled.SideBarAuthSection>
+              <Avatar
+                alt="user-profile"
+                size="xsmall"
+                src={user.profileImageUrl}
+              />
               <>
-                부드러운 냉장고 <Badge colorType="orange">Lv.1</Badge>
+                {user.nickname}
+                <Badge colorType="orange">Lv.{user.offerLevel}</Badge>
               </>
-            ) : (
-              '로그인/회원가입'
-            )}
-          </Styled.SideBarAuthSection>
+            </Styled.SideBarAuthSection>
+          ) : (
+            <Styled.SideBarLoginButton onClick={handleClickLogin}>
+              로그인/회원가입
+            </Styled.SideBarLoginButton>
+          )}
           <Divider direction="horizontal" gap={16} length="259px" />
           <Styled.SidebarMenuSection>
             {NAV_DATA.map((item, index) => {
@@ -58,10 +77,7 @@ export const SideBar = ({
           </Styled.SidebarMenuSection>
           <Divider direction="horizontal" gap={16} />
           {isLogin && (
-            <Styled.SidebarLogoutButton
-              onClick={() => {
-                alert('로그아웃')
-              }}>
+            <Styled.SidebarLogoutButton onClick={handleClickLogout}>
               로그아웃
             </Styled.SidebarLogoutButton>
           )}

@@ -6,7 +6,6 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { SearchArea } from './SearchArea'
 import { SideBar } from './SideBar'
-import { HeaderSkeleton } from './skeleton'
 import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
@@ -182,4 +181,4 @@ const Header = (): ReactElement => {
   )
 }
 
-export { Header, HeaderSkeleton }
+export { Header }

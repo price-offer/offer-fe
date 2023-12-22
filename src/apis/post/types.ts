@@ -1,33 +1,72 @@
-export type GetCategoriesRes = {
-  code: string
-  name: string
-  imageUrl: string
-}[]
+import type {
+  CommonCreation,
+  OptionShape,
+  PostDetail,
+  PostSummaries,
+  SortOptionsShape,
+  TradeStatusType
+} from '@types'
 
-export type PostReq = {
-  sort?: string
-  tradeType?:
-    | 'TRADE_TYPE__ALL'
-    | 'TRADE_TYPE__FACE_TO_FACE'
-    | 'TRADE_TYPE__SHIPPING'
-  category?: string
-  minPrice?: number
-  maxPrice?: number
-  lastId?: number | null
+export type GetPostRes = PostDetail
+
+export type UpdatePostReq = {
+  title: string
+  category: string
+  price: number
+  location: string
+  productCondition: string
+  tradeStatus: string
+  tradeType: string
+  thumbnailImageUrl: string
+  imageUrls: string[]
+  description: string
+}
+export type UpdatePostRes = PostDetail
+
+export type DeletePostReq = {
+  postId: number
+}
+export type DeletePostRes = {
+  // TODO: 정확한 타입 BE 확인 필요
+}
+
+// TODO: 정확한 타입 BE 확인 필요
+export type UpdateTradeStatusReq = {
+  postId: number
+  request: TradeStatusType
+}
+export type UpdateTradeStatusRes = number
+
+export type GetPostsReq = {
+  sort: string
+  tradeType: string
+  category: string
+  sellerId: number
+  tradeStatus: string
+  minPrice: number
+  maxPrice: number
+  lastId: number
   limit: number
 }
+export type GetPostsRes = PostSummaries
 
-export type PostDataInfoRes = {
-  posts: Post[]
-  hasNext: boolean
-}
-
-export type Post = {
-  id: number
+export type CreatePostReq = {
   title: string
+  category: string
   price: number
-  thumnail: string
   location: string
-  createdAt: string
-  liked: boolean
+  productCondition: string
+  tradeType: string
+  thumbnailImageUrl: string
+  imageUrls: string[]
+  description: string
 }
+export type CreatePostRes = CommonCreation
+
+// TODO: 정확한 타입 BE 확인 필요
+export type GetSortOptionsReq = {
+  type: string
+}
+export type GetSortOptionsRes = SortOptionsShape
+
+export type GetCategoriesRes = OptionShape[]

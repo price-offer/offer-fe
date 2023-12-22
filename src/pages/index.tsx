@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { ProductList } from '../components/home/ProductList'
-import { useGetPostListQuery } from '@apis/post'
+import { useGetInfinitePostsQuery } from '@apis/post'
 import { CategorySlider, HomeBanner } from '@components'
 
 const Home: NextPage = () => {
@@ -9,7 +9,7 @@ const Home: NextPage = () => {
     data: postList,
     fetchNextPage,
     hasNextPage
-  } = useGetPostListQuery({
+  } = useGetInfinitePostsQuery({
     lastId: null,
     limit: 8
   })

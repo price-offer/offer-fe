@@ -1,5 +1,3 @@
-import type { StyledProps } from '@types'
-
 export type PostFieldProps = {
   label: string
   value: string

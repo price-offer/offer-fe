@@ -21,6 +21,7 @@ export const ShopPageReviewView = ({
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [reviews] = useState<any>(getReviews())
 
+  // eslint-disable-next-line no-console
   console.log(memberId)
 
   const handleTabClick = (

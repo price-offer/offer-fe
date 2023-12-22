@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { getCategories, getPostList } from './apis'
-import type { PostReq, PostDataInfoRes } from './types'
+import { getCategories, getPosts } from './apis'
+import type { GetPostsReq, GetPostsRes } from './types'
 
 export const useGetCategoriesQuery = () =>
   useQuery({
@@ -8,10 +8,16 @@ export const useGetCategoriesQuery = () =>
     queryFn: getCategories
   })
 
-export const useGetPostListQuery = (param: PostReq) =>
-  useInfiniteQuery<PostDataInfoRes>({
-    queryKey: ['postList'],
-    queryFn: () => getPostList(param),
+export const useGetPostsQuery = (params: GetPostsReq) =>
+  useQuery({
+    queryKey: ['getPosts'],
+    queryFn: () => getPosts(params)
+  })
+
+export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
+  useInfiniteQuery<GetPostsRes>({
+    queryKey: ['getPosts'],
+    queryFn: () => getPosts(params),
     initialPageParam: null,
     getNextPageParam: lastPage =>
       lastPage?.hasNext

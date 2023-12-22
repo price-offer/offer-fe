@@ -3,7 +3,7 @@ export type ProductItemProps = {
     id: number
     title: string
     price: number
-    thumnail: string
+    thumbnailImageUrl: string
     location: string
     createdAt: string
     liked: boolean

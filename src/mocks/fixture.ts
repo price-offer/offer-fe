@@ -1,3 +1,4 @@
+import type { GetCategoriesRes } from '@apis/post'
 import type { MyProfile } from '@types'
 
 export const myProfile: MyProfile = {

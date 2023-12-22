@@ -53,7 +53,8 @@ export const ShopPageSaleView = ({
                         </Styled.Text>
                       </Styled.StatusButton>
                       <Styled.Text color="grayScale50">
-                        {postsInfo?.[tradeStatus.code].posts.length}
+                        {/* MEMO: 거래 상태 갯수 */}
+                        {postsInfo?.posts.length}
                       </Styled.Text>
                     </Styled.StatusButtonLabel>
                   </Styled.Tab>
@@ -71,14 +72,16 @@ export const ShopPageSaleView = ({
             <Tabs.Panel>
               <SaleTabPostList
                 hasToken={hasToken}
-                posts={postsInfo?.['SELLING'].posts || []}
+                // MEMO: Selling인 항목
+                posts={postsInfo?.posts || []}
                 onChangeTradeStatus={noop}
               />
             </Tabs.Panel>
             <Tabs.Panel>
               <SaleTabPostList
                 hasToken={hasToken}
-                posts={postsInfo?.['SOLD'].posts || []}
+                // MEMO: Sold인 항목
+                posts={postsInfo?.posts || []}
                 onChangeTradeStatus={noop}
               />
             </Tabs.Panel>

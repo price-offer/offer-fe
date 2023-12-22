@@ -11,7 +11,7 @@ const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
           <Styled.ProductImg
             key={productItem.id}
             alt={`productName-${productItem.title}`}
-            src={productItem.thumnail}
+            src={productItem.thumbnailImageUrl}
             style={{ maxWidth: '276px' }}
           />
           <Styled.HeartButton

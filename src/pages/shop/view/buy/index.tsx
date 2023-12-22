@@ -6,7 +6,7 @@ import { sortItems } from './types'
 import { Tabs } from '@components/common'
 import { BuyTabPostList } from '@components/shop/PostList'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
-import type { TradeBuyActivityNames } from '@types'
+import type { TradeBuyActivityCodes } from '@types'
 import { noop } from '@utils'
 
 const tradeBuyActivityList = Object.entries(TRADE_ACTIVITY_TYPES.buy)
@@ -25,6 +25,7 @@ export const ShopPageBuyView = ({
   const [tabIndex, setTabIndex] = useState<number>(0)
   const [articles] = useState<any>(getArticles())
 
+  // eslint-disable-next-line no-console
   console.log(memberId)
 
   const handleTabClick = (
@@ -72,7 +73,7 @@ export const ShopPageBuyView = ({
             <Tabs.Panel>
               <BuyTabPostList
                 activityType={
-                  tradeBuyActivityList[tabIndex][0] as TradeBuyActivityNames
+                  tradeBuyActivityList[tabIndex][0] as TradeBuyActivityCodes
                 }
                 posts={articles || []}
               />
@@ -80,7 +81,7 @@ export const ShopPageBuyView = ({
             <Tabs.Panel>
               <BuyTabPostList
                 activityType={
-                  tradeBuyActivityList[tabIndex][0] as TradeBuyActivityNames
+                  tradeBuyActivityList[tabIndex][0] as TradeBuyActivityCodes
                 }
                 posts={articles || []}
               />

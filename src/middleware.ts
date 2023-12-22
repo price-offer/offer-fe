@@ -20,7 +20,7 @@ const middleware = async (request: NextRequest) => {
 }
 
 export const config = {
-  matcher: ['/messagebox', '/post', '/auth/redirect']
+  matcher: ['/messagebox', '/shop', '/post', '/auth/redirect']
 }
 
 export default middleware

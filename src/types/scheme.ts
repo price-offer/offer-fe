@@ -34,7 +34,7 @@ export type PostSummary = {
   price: number
   location: string
   thumbnailImageUrl: string
-  liked: true
+  liked: boolean
   tradeStatus: TradeStatusCodes
   likeCount: number
   createdAt: string

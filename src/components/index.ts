@@ -1,6 +1,6 @@
 export * from './common'
 export * from './home'
-export * from './mypage'
+export * from './shop'
 export * from './result'
 export * from './messagebox'
 export * from './post'

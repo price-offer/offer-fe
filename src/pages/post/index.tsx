@@ -19,10 +19,10 @@ import type {
 import { useRouter } from 'next/router'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState } from 'react'
-import { useGetCategoriesQuery, usePostProductMutation } from '@apis/post'
+import { useGetCategoriesQuery, useCreatePostMutation } from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
-import { PRODUCT_CONDITIONS, TRADE_TYPES } from '@constants'
+import { TRADE_TYPES, PRODUCT_CONDITIONS } from '@constants'
 import { useResponsive } from '@hooks'
 import type { ProductConditionCodes, TradeTypeCodes } from '@types'
 
@@ -50,7 +50,7 @@ const MOCK_IMAGE_INFOS: ImageInfo[] = Array.from({ length: 4 }).map(
 )
 
 const PostPage = (): ReactElement => {
-  const { mutateAsync: postProduct } = usePostProductMutation()
+  const { mutateAsync: postProduct } = useCreatePostMutation()
   const { data: categoriesData } = useGetCategoriesQuery()
   const router = useRouter()
   const [postForm, setPostForm] = useState<PostFormStatus>({

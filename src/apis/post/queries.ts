@@ -1,14 +1,31 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { getCategories, postProduct } from './apis'
-import type { CreatePostReq } from './types'
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import { getCategories, createPost, getPosts } from './apis'
+import type { CreatePostReq, GetPostsReq, GetPostsRes } from './types'
 
-export const usePostProductMutation = () =>
+export const useCreatePostMutation = () =>
   useMutation({
-    mutationFn: (param: CreatePostReq) => postProduct(param)
+    mutationFn: (param: CreatePostReq) => createPost(param)
   })
 
 export const useGetCategoriesQuery = () =>
   useQuery({
     queryKey: ['getCategories'],
     queryFn: getCategories
+  })
+
+export const useGetPostsQuery = (params: GetPostsReq) =>
+  useQuery({
+    queryKey: ['getPosts'],
+    queryFn: () => getPosts(params)
+  })
+
+export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
+  useInfiniteQuery<GetPostsRes>({
+    queryKey: ['getPosts'],
+    queryFn: () => getPosts(params),
+    initialPageParam: null,
+    getNextPageParam: lastPage =>
+      lastPage?.hasNext
+        ? lastPage.posts[lastPage.posts.length - 1].id
+        : undefined
   })

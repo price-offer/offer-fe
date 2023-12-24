@@ -76,6 +76,7 @@
     "postcss": "^8.4.27",
     "postcss-syntax": "^0.36.2",
     "prettier": "2.7.1",
+    "react-intersection-observer": "^9.5.3",
     "storybook": "^7.5.1",
     "stylelint": "^15.10.2",
     "stylelint-config-standard": "^34.0.0",

@@ -40,7 +40,7 @@ export type UpdateTradeStatusRes = number
 export type GetPostsReq = {
   sort?: string
   tradeType?: string
-  category?: string
+  category?: string | null
   sellerId?: number
   tradeStatus?: string
   minPrice?: number | null
@@ -65,7 +65,7 @@ export type CreatePostRes = CommonCreation
 
 // TODO: 정확한 타입 BE 확인 필요
 export type GetSortOptionsReq = {
-  type: string
+  type: 'OFFER' | 'POST'
 }
 export type GetSortOptionsRes = SortOptionsShape
 

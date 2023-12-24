@@ -11,6 +11,8 @@ import { FilterSelect } from '@components/result/FilterSelect'
 import useCategoryFilterList from '@hooks/result/useCategoryFilterList'
 import useSelectBoxFilter from '@hooks/result/useSelectBoxFilter'
 
+const DEFAULT_POST_PAGE_NUMBER = 8
+
 const Result: NextPage = () => {
   const { desktop } = useMedia()
   const [isDesktop, setIsDesktop] = useState(false)
@@ -45,6 +47,9 @@ const Result: NextPage = () => {
     handlePriceApplyClick
   } = useSelectBoxFilter()
 
+  const categoryFilterOption =
+    selectedCategoryValue === 'ALL' ? null : selectedCategoryValue
+
   const {
     data: postList,
     fetchNextPage,
@@ -52,51 +57,52 @@ const Result: NextPage = () => {
     refetch
   } = useGetInfinitePostsQuery({
     lastId: null,
-    limit: 8,
+    limit: DEFAULT_POST_PAGE_NUMBER,
+    category: categoryFilterOption,
     minPrice: applyPrice.minPrice,
-    maxPrice: applyPrice.maxPrice
+    maxPrice: applyPrice.maxPrice,
+    tradeType: selectedTradePeriodValue
   })
 
   useEffect(() => {
     refetch()
-  }, [applyPrice, refetch])
+  }, [applyPrice, selectedCategoryValue, selectedTradePeriodValue, refetch])
 
   return (
-    <div>
-      <Layout>
-        <ResultWrapper>
-          <ResultHeader searchResult="###" />
-          {isDesktop && (
-            <CategorySlideFilter
-              cateGoryList={checkFilterList}
-              onCategoryClick={onCheckItem}
-            />
-          )}
-          <FilterSelect
-            applyPrice={applyPrice}
-            categoryItems={checkFilterList}
-            handleCategoryChange={handleCategorySelectChange}
-            handleMaxPriceInputChange={handleMaxPriceInputChange}
-            handleMinPriceInputChange={handleMinPriceInputChange}
-            handlePriceApplyClick={handlePriceApplyClick}
-            handleSortPriceChange={handleSortPriceSelectChange}
-            handleTradePeriodChange={handleTradePeriodSelectChange}
-            maxPriceValue={maxPriceValue}
-            minPriceValue={minPriceValue}
-            selectedCategoryValue={selectedCategoryValue}
-            selectedSortPriceValue={selectedSortPriceValue}
-            selectedTradePeriodValue={selectedTradePeriodValue}
-            sortPriceItems={sortPriceItems}
-            tradePeriodItems={tradePeriodItems}
+    <Layout>
+      <ResultWrapper>
+        <ResultHeader postData={postList?.pages} searchResult="###" />
+        {isDesktop && (
+          <CategorySlideFilter
+            cateGoryList={checkFilterList}
+            onCategoryClick={onCheckItem}
           />
-          <ProductList
-            fetchNextPage={fetchNextPage}
-            hasNextPage={hasNextPage}
-            postData={postList?.pages}
-          />
-        </ResultWrapper>
-      </Layout>
-    </div>
+        )}
+        <FilterSelect
+          applyPrice={applyPrice}
+          categoryItems={checkFilterList}
+          handleCategoryChange={handleCategorySelectChange}
+          handleMaxPriceInputChange={handleMaxPriceInputChange}
+          handleMinPriceInputChange={handleMinPriceInputChange}
+          handlePriceApplyClick={handlePriceApplyClick}
+          handleSortPriceChange={handleSortPriceSelectChange}
+          handleTradePeriodChange={handleTradePeriodSelectChange}
+          maxPriceValue={maxPriceValue}
+          minPriceValue={minPriceValue}
+          postData={postList?.pages}
+          selectedCategoryValue={selectedCategoryValue}
+          selectedSortPriceValue={selectedSortPriceValue}
+          selectedTradePeriodValue={selectedTradePeriodValue}
+          sortPriceItems={sortPriceItems}
+          tradePeriodItems={tradePeriodItems}
+        />
+        <ProductList
+          fetchNextPage={fetchNextPage}
+          hasNextPage={hasNextPage}
+          postData={postList?.pages}
+        />
+      </ResultWrapper>
+    </Layout>
   )
 }
 

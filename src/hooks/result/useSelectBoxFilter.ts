@@ -1,6 +1,7 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import type { ChangeEventHandler } from 'react'
 import { useState } from 'react'
+import { TRADE_TYPES } from '@constants/app'
 
 type SelectItemsType = {
   code: string
@@ -13,7 +14,7 @@ export type ApplyPriceType = {
 }
 
 type ReturnType = {
-  tradePeriodItems: SelectItemsType[]
+  tradePeriodItems: any
   sortPriceItems: SelectItemsType[]
   selectedTradePeriodValue: string
   selectedSortPriceValue: string
@@ -26,21 +27,6 @@ type ReturnType = {
   handleMaxPriceInputChange: ChangeEventHandler
   handlePriceApplyClick(): void
 }
-
-const tradePeriodItems = [
-  {
-    code: '직거래/택배거래',
-    name: '직거래/택배거래'
-  },
-  {
-    code: '직거래',
-    name: '직거래'
-  },
-  {
-    code: '택배거래',
-    name: '택배거래'
-  }
-]
 
 const sortPriceItems = [
   {
@@ -102,7 +88,7 @@ const useSelectBoxFilter = (): ReturnType => {
   }
 
   return {
-    tradePeriodItems,
+    tradePeriodItems: TRADE_TYPES,
     sortPriceItems,
     selectedTradePeriodValue,
     selectedSortPriceValue,

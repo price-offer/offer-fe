@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { getCategories, getPosts } from './apis'
-import type { GetPostsReq, GetPostsRes } from './types'
+import { getCategories, getPosts, getSortOption } from './apis'
+import type { GetPostsReq, GetPostsRes, GetSortOptionsReq } from './types'
 
 export const useGetCategoriesQuery = () =>
   useQuery({
@@ -24,4 +24,10 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
       lastPage?.hasNext
         ? lastPage.posts[lastPage.posts.length - 1].id
         : undefined
+  })
+
+export const useGetSortOptions = (params: GetSortOptionsReq) =>
+  useQuery({
+    queryKey: ['getSortOption'],
+    queryFn: () => getSortOption(params)
   })

@@ -4,15 +4,16 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { FilterSelectProps } from './types'
 import { PriceDialog } from '../PriceDialog'
+import { useGetSortOptions } from '@apis/post/queries'
 
 const FilterSelect = ({
   categoryItems,
-  sortPriceItems,
   tradePeriodItems,
   selectedCategoryValue,
   minPriceValue,
   maxPriceValue,
   applyPrice,
+  postData,
   handleSortPriceChange,
   handleCategoryChange,
   handleTradePeriodChange,
@@ -21,8 +22,19 @@ const FilterSelect = ({
   handlePriceApplyClick
 }: FilterSelectProps): ReactElement => {
   const { tablet, mobile } = useMedia()
-
+  const { data: priceSortOptions, isLoading } = useGetSortOptions({
+    type: 'POST'
+  })
   const [disDesktop, setDIsDesktop] = useState(false)
+
+  const postCount =
+    postData && postData.reduce((acc, cur) => acc + cur.posts.length, 0)
+
+  useEffect(() => {
+    if (priceSortOptions === undefined) {
+      return
+    }
+  }, [priceSortOptions])
 
   useEffect(() => {
     if (tablet || mobile) {
@@ -31,6 +43,10 @@ const FilterSelect = ({
       setDIsDesktop(false)
     }
   }, [tablet, mobile])
+
+  if (isLoading) {
+    return <></>
+  }
 
   return (
     <>
@@ -41,7 +57,7 @@ const FilterSelect = ({
               <Styled.CategorySelect
                 colorType="dark"
                 items={categoryItems}
-                placeholder="전체"
+                placeholder={selectedCategoryValue}
                 value={selectedCategoryValue}
                 onChange={handleCategoryChange}
               />
@@ -62,18 +78,15 @@ const FilterSelect = ({
               maxPriceValue={maxPriceValue}
               minPriceValue={minPriceValue}
             />
-            <select>
-              <option value="">거래방식</option>
-              <option value="ㅂ">직거래</option>
-              <option value="택배">택배</option>
-            </select>
           </Styled.LeftSelectSlider>
         </Styled.LeftSelectWrapper>
         <Styled.RightSelectWrapper>
-          {disDesktop && <Styled.ProductCount>전체 999개</Styled.ProductCount>}
+          {disDesktop && (
+            <Styled.ProductCount>전체 {postCount}개</Styled.ProductCount>
+          )}
           <Styled.PriceFilterSelect
             colorType="none"
-            items={sortPriceItems}
+            items={priceSortOptions}
             placeholder="높은 가격순"
             onChange={handleSortPriceChange}
           />

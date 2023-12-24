@@ -3,6 +3,7 @@ import { useMedia } from '@offer-ui/react'
 import type { NextPage } from 'next'
 
 import { useEffect, useState } from 'react'
+import { useGetInfinitePostsQuery } from '@apis/post'
 import { ProductList } from '@components/home/ProductList'
 import { ResultHeader } from '@components/result/CategoryHeader'
 import { CategorySlideFilter } from '@components/result/CategorySlideFilter'
@@ -44,6 +45,22 @@ const Result: NextPage = () => {
     handlePriceApplyClick
   } = useSelectBoxFilter()
 
+  const {
+    data: postList,
+    fetchNextPage,
+    hasNextPage,
+    refetch
+  } = useGetInfinitePostsQuery({
+    lastId: null,
+    limit: 8,
+    minPrice: applyPrice.minPrice,
+    maxPrice: applyPrice.maxPrice
+  })
+
+  useEffect(() => {
+    refetch()
+  }, [applyPrice, refetch])
+
   return (
     <div>
       <Layout>
@@ -72,7 +89,11 @@ const Result: NextPage = () => {
             sortPriceItems={sortPriceItems}
             tradePeriodItems={tradePeriodItems}
           />
-          <ProductList />
+          <ProductList
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+            postData={postList?.pages}
+          />
         </ResultWrapper>
       </Layout>
     </div>

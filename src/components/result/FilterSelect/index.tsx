@@ -36,31 +36,38 @@ const FilterSelect = ({
     <>
       <Styled.SelectWrapper>
         <Styled.LeftSelectWrapper>
-          {disDesktop ? (
-            <Styled.CategorySelect
-              colorType="dark"
-              items={categoryItems}
-              placeholder="전체"
-              value={selectedCategoryValue}
-              onChange={handleCategoryChange}
+          <Styled.LeftSelectSlider>
+            {disDesktop ? (
+              <Styled.CategorySelect
+                colorType="dark"
+                items={categoryItems}
+                placeholder="전체"
+                value={selectedCategoryValue}
+                onChange={handleCategoryChange}
+              />
+            ) : (
+              <></>
+            )}
+            <Styled.TradePeriodSelect
+              colorType="light"
+              items={tradePeriodItems}
+              placeholder="거래방식"
+              onChange={handleTradePeriodChange}
             />
-          ) : (
-            <></>
-          )}
-          <Styled.TradePeriodSelect
-            colorType="light"
-            items={tradePeriodItems}
-            placeholder="거래방식"
-            onChange={handleTradePeriodChange}
-          />
-          <PriceDialog
-            applyPrice={applyPrice}
-            handleMaxPriceInputChange={handleMaxPriceInputChange}
-            handleMinPriceInputChange={handleMinPriceInputChange}
-            handlePriceApplyClick={handlePriceApplyClick}
-            maxPriceValue={maxPriceValue}
-            minPriceValue={minPriceValue}
-          />
+            <PriceDialog
+              applyPrice={applyPrice}
+              handleMaxPriceInputChange={handleMaxPriceInputChange}
+              handleMinPriceInputChange={handleMinPriceInputChange}
+              handlePriceApplyClick={handlePriceApplyClick}
+              maxPriceValue={maxPriceValue}
+              minPriceValue={minPriceValue}
+            />
+            <select>
+              <option value="">거래방식</option>
+              <option value="ㅂ">직거래</option>
+              <option value="택배">택배</option>
+            </select>
+          </Styled.LeftSelectSlider>
         </Styled.LeftSelectWrapper>
         <Styled.RightSelectWrapper>
           {disDesktop && <Styled.ProductCount>전체 999개</Styled.ProductCount>}

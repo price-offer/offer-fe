@@ -8,8 +8,8 @@ type SelectItemsType = {
 }
 
 export type ApplyPriceType = {
-  minPrice: number
-  maxPrice: number
+  minPrice: number | null
+  maxPrice: number | null
 }
 
 type ReturnType = {
@@ -65,8 +65,8 @@ const useSelectBoxFilter = (): ReturnType => {
   const [minPriceValue, setMinPriceValue] = useState<string>('')
   const [maxPriceValue, setMaxPriceValue] = useState<string>('')
   const [applyPrice, setApplyPrice] = useState<ApplyPriceType>({
-    minPrice: 0,
-    maxPrice: 0
+    minPrice: null,
+    maxPrice: null
   })
 
   const handleTradePeriodSelectChange: SelectOnChangeHandler<{

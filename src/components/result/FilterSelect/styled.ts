@@ -12,9 +12,24 @@ const SelectWrapper = styled.div`
 
     margin-top: 25px;
   }
+
+  div::-webkit-scrollbar {
+    display: none;
+  }
+
+  div {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 `
 
 const LeftSelectWrapper = styled.div`
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    overflow: scroll;
+  }
+`
+
+const LeftSelectSlider = styled.div`
   display: flex;
   gap: 8px;
 
@@ -62,6 +77,7 @@ export const Styled = {
   SelectWrapper,
   LeftSelectWrapper,
   CategorySelect,
+  LeftSelectSlider,
   TradePeriodSelect,
   RightSelectWrapper,
   PriceFilterSelect,

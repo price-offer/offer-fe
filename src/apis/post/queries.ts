@@ -18,6 +18,7 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
   useInfiniteQuery<GetPostsRes>({
     queryKey: ['getPosts'],
     queryFn: () => getPosts(params),
+    refetchOnMount: 'always',
     initialPageParam: null,
     getNextPageParam: lastPage =>
       lastPage?.hasNext

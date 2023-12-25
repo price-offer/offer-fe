@@ -1,6 +1,10 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getMemberProfile, getMyProfile } from './apis'
-import { initialMyProfile } from './data'
+import { initialMemberProfile, initialMyProfile } from './data'
+
+export type ProfileQueryResult =
+  | ReturnType<typeof useGetMyProfileQuery>
+  | ReturnType<typeof useGetMemberProfileQuery>
 
 export const useGetMyProfileQuery = (accessToken?: string) =>
   useQuery({
@@ -11,7 +15,9 @@ export const useGetMyProfileQuery = (accessToken?: string) =>
   })
 
 export const useGetMemberProfileQuery = (memberId = '') =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['memberProfile', memberId],
-    queryFn: () => getMemberProfile(Number(memberId))
+    queryFn: () => getMemberProfile(Number(memberId)),
+    enabled: Boolean(memberId),
+    initialData: initialMemberProfile
   })

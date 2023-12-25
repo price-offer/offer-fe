@@ -8,3 +8,13 @@ export const initialMyProfile = {
   reviewCount: 0,
   likeProductCount: 0
 }
+
+export const initialMemberProfile = {
+  id: 0,
+  nickname: '',
+  profileImageUrl: '',
+  offerLevel: 0,
+  sellingProductCount: 0,
+  soldProductCount: 0,
+  reviewCount: 0
+}

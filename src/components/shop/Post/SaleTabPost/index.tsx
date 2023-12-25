@@ -18,7 +18,8 @@ const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
     likeCount,
     createdAt,
     hasToken,
-    onChangeTradeStatus
+    onChangeTradeStatus,
+    hasReview
   } = props
   const isSoldOut = tradeStatus === 'SOLD'
 
@@ -27,9 +28,6 @@ const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
   > = item => {
     onChangeTradeStatus?.(id, item)
   }
-
-  // Sample Value
-  const isReviewed = false
 
   return (
     <Styled.Container className={className}>
@@ -64,10 +62,10 @@ const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
       {hasToken && isSoldOut && (
         <Styled.ReviewButtonWrapper>
           <Styled.ReviewButton
-            isReviewed={isReviewed}
+            hasReview={hasReview}
             size="small"
             styleType="outline">
-            {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
+            {hasReview ? '보낸 후기 보기' : '후기 보내기'}
           </Styled.ReviewButton>
         </Styled.ReviewButtonWrapper>
       )}

@@ -25,7 +25,8 @@ const posts: PostSummary[] = Array.from({ length: 10 }, () => 0).map(
     liked: true,
     tradeStatus: 'SELLING',
     likeCount: 0,
-    createdAt: ''
+    createdAt: '',
+    hasReview: false
   })
 )
 

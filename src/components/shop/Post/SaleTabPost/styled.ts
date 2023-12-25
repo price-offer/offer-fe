@@ -160,9 +160,9 @@ const ReviewButtonWrapper = styled.div`
     }
   `}
 `
-const ReviewButton = styled(Button)<{ isReviewed: boolean }>`
-  ${({ theme, isReviewed }): string => `
-    color: ${isReviewed ? theme.colors.grayScale70 : theme.colors.brandPrimary};
+const ReviewButton = styled(Button)<{ hasReview: boolean }>`
+  ${({ theme, hasReview }): string => `
+    color: ${hasReview ? theme.colors.grayScale70 : theme.colors.brandPrimary};
     margin-right: 20px;
 
     ${theme.mediaQuery.tablet} {

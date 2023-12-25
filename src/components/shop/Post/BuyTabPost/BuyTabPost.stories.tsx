@@ -23,7 +23,8 @@ export const Primary: StoryObj<BuyTabPost> = {
     liked: true,
     tradeStatus: 'SELLING',
     likeCount: 0,
-    createdAt: ''
+    createdAt: '',
+    hasReview: false
   },
   render: args => {
     const post = args as OfferSummary

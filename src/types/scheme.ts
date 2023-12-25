@@ -38,6 +38,7 @@ export type PostSummary = {
   tradeStatus: TradeStatusCodes
   likeCount: number
   createdAt: string
+  hasReview: boolean
 }
 export type PostSummaries = {
   posts: PostSummary[]

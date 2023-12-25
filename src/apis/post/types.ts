@@ -3,8 +3,7 @@ import type {
   OptionShape,
   PostDetail,
   PostSummaries,
-  SortOptionsShape,
-  TradeStatusType
+  SortOptionsShape
 } from '@types'
 
 export type GetPostRes = PostDetail
@@ -30,10 +29,9 @@ export type DeletePostRes = {
   // TODO: 정확한 타입 BE 확인 필요
 }
 
-// TODO: 정확한 타입 BE 확인 필요
 export type UpdateTradeStatusReq = {
   postId: number
-  request: TradeStatusType
+  tradeStatus: string
 }
 export type UpdateTradeStatusRes = number
 

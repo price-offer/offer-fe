@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
 import { ShopPageMainView } from './view/main'
-import { useProfile } from '@hooks'
+import { useGetMemberProfileQuery } from '@apis/member'
 
 export const getServerSideProps = (context: GetServerSidePropsContext) => {
   return {
@@ -15,9 +15,9 @@ type ShopPageProps = {
   memberId: string
 }
 const ShopPage = ({ memberId }: ShopPageProps): ReactElement => {
-  const { profile } = useProfile(memberId)
+  const memberProfile = useGetMemberProfileQuery(memberId)
 
-  return <ShopPageMainView profile={profile} />
+  return <ShopPageMainView hasToken={false} profile={memberProfile} />
 }
 
 export default ShopPage

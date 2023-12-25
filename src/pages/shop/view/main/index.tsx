@@ -3,17 +3,21 @@ import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import { pageTabs } from '../../pageTabs'
+import type { ProfileQueryResult } from '@apis'
 import { ProfileBox, Tabs } from '@components'
-import type { MyProfile, MemberProfile } from '@types'
 
 type ShopPageMainViewProps = {
-  profile: MyProfile | MemberProfile
+  hasToken: boolean
+  profile: ProfileQueryResult
 }
-export const ShopPageMainView = ({ profile }: ShopPageMainViewProps) => {
+export const ShopPageMainView = ({
+  profile,
+  hasToken
+}: ShopPageMainViewProps) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
 
   const handleTabClick = (
-    e: MouseEvent<HTMLDivElement>,
+    _: MouseEvent<HTMLDivElement>,
     index: number
   ): void => {
     setPageIndex(index)
@@ -21,7 +25,7 @@ export const ShopPageMainView = ({ profile }: ShopPageMainViewProps) => {
 
   return (
     <div>
-      <Styled.UserName>{profile.nickname}님의 거래 활동</Styled.UserName>
+      <Styled.UserName>{profile.data.nickname}님의 거래 활동</Styled.UserName>
       <Divider />
       <Tabs>
         <Styled.Layout>
@@ -42,8 +46,8 @@ export const ShopPageMainView = ({ profile }: ShopPageMainViewProps) => {
             {pageTabs.map(({ tab, panel }) => (
               <Tabs.Panel key={`${tab.code}-panel`}>
                 <Styled.TabPanelContent>
-                  <ProfileBox {...profile} />
-                  {panel({ memberId: profile.id })}
+                  <ProfileBox {...profile.data} />
+                  {panel({ profile, hasToken })}
                 </Styled.TabPanelContent>
               </Tabs.Panel>
             ))}

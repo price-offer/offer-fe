@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { ColorKeys } from '@offer-ui/react'
 import { Divider as DividerComponent } from '@offer-ui/react'
-import { Tabs, Tab as TabComponent } from '@components/common'
+import { Tabs, Tab as TabComponent } from '@components'
 
 const SearchOptionsWrapper = styled.div`
   ${({ theme }): string => `

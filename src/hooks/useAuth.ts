@@ -8,7 +8,7 @@ export const useAuth = () => {
   const router = useRouter()
   const accessToken = getCookie(env.AUTH_TOKEN_KEY)
   const user = useGetMyProfileQuery(accessToken)
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(user.isSuccess)
 
   const handleLogout = () => {
     deleteCookie(env.AUTH_TOKEN_KEY)

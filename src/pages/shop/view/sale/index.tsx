@@ -2,34 +2,46 @@ import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import type { GetPostsReq } from '@apis/post'
-import { useGetPostsQuery } from '@apis/post'
-import { Tabs } from '@components/common'
-import { SaleTabPostList } from '@components/shop/PostList'
+import type { GetPostsReq, ProfileQueryResult } from '@apis'
+import { usePostTradeStatusMutation, useGetPostsQuery } from '@apis'
+import type { SaleTabPostProps } from '@components'
+import { Tabs, SaleTabPostList } from '@components'
 import { SORT_OPTIONS, TRADE_STATUS } from '@constants'
-import type { TradeStatusCodes } from '@types'
-import { noop } from '@utils'
+import type { SortOption } from '@types'
 
 export type ShopPageSaleViewProps = {
-  memberId: number
+  hasToken: boolean
+  profile: ProfileQueryResult
 }
 export const ShopPageSaleView = ({
-  memberId
+  hasToken,
+  profile
 }: ShopPageSaleViewProps): ReactElement => {
-  const hasToken = true
-  const [tradeStatusCode, setTradeStatusCode] =
-    useState<TradeStatusCodes>('SELLING')
+  const [searchOptions, setSearchOptions] = useState<GetPostsReq>({
+    sellerId: profile.data.id,
+    tradeStatus: 'SELLING',
+    sort: 'CREATED_DATE_DESC'
+  })
 
-  const searchOptions = {
-    sellerId: memberId,
-    tradeStatus: tradeStatusCode
-  } as GetPostsReq
+  const posts = useGetPostsQuery(searchOptions)
+  const postTradeStatus = usePostTradeStatusMutation()
 
-  const { data: postsInfo } = useGetPostsQuery(searchOptions)
+  const handleChangeSearchOptions = (newOption: GetPostsReq) =>
+    setSearchOptions({
+      ...searchOptions,
+      ...newOption
+    })
 
-  const handleTabClick = (newTradeStatusCode: TradeStatusCodes) => () => {
-    setTradeStatusCode(newTradeStatusCode)
-  }
+  const handleChangeProductTradeStatus: SaleTabPostProps['onChangeTradeStatus'] =
+    async (postId, tradeStatus) => {
+      await postTradeStatus.mutateAsync({
+        postId,
+        tradeStatus: tradeStatus.code
+      })
+
+      await posts.refetch()
+      profile.refetch()
+    }
 
   return (
     <div>
@@ -39,12 +51,16 @@ export const ShopPageSaleView = ({
           <Styled.SearchOptionsWrapper>
             <Styled.TabsList>
               {TRADE_STATUS.map(tradeStatus => {
-                const isCurrent = tradeStatus.code === tradeStatusCode
+                const isCurrent = tradeStatus.code === searchOptions.tradeStatus
 
                 return (
                   <Styled.Tab
                     key={tradeStatus.code}
-                    onClick={handleTabClick(tradeStatus.code)}>
+                    onClick={() =>
+                      handleChangeSearchOptions({
+                        tradeStatus: tradeStatus.code
+                      })
+                    }>
                     <Styled.StatusButtonLabel>
                       <Styled.Circle isCurrent={isCurrent} />
                       <Styled.StatusButton isCurrent={isCurrent}>
@@ -53,8 +69,9 @@ export const ShopPageSaleView = ({
                         </Styled.Text>
                       </Styled.StatusButton>
                       <Styled.Text color="grayScale50">
-                        {/* MEMO: 거래 상태 갯수 */}
-                        {postsInfo?.posts.length}
+                        {tradeStatus.code === 'SELLING'
+                          ? profile.data.sellingProductCount
+                          : profile.data.soldProductCount}
                       </Styled.Text>
                     </Styled.StatusButtonLabel>
                   </Styled.Tab>
@@ -64,27 +81,22 @@ export const ShopPageSaleView = ({
             <SelectBox
               colorType="none"
               items={SORT_OPTIONS}
-              value="CREATED_DATE_DESC"
-              onChange={noop}
+              value={searchOptions.sort}
+              onChange={(option: SortOption) =>
+                handleChangeSearchOptions({ sort: option.code })
+              }
             />
           </Styled.SearchOptionsWrapper>
           <Styled.ProductListPanels>
-            <Tabs.Panel>
-              <SaleTabPostList
-                hasToken={hasToken}
-                // MEMO: Selling인 항목
-                posts={postsInfo?.posts || []}
-                onChangeTradeStatus={noop}
-              />
-            </Tabs.Panel>
-            <Tabs.Panel>
-              <SaleTabPostList
-                hasToken={hasToken}
-                // MEMO: Sold인 항목
-                posts={postsInfo?.posts || []}
-                onChangeTradeStatus={noop}
-              />
-            </Tabs.Panel>
+            {TRADE_STATUS.map(tradeStatus => (
+              <Tabs.Panel key={tradeStatus.code}>
+                <SaleTabPostList
+                  hasToken={hasToken}
+                  posts={posts.data?.posts || []}
+                  onChangeTradeStatus={handleChangeProductTradeStatus}
+                />
+              </Tabs.Panel>
+            ))}
           </Styled.ProductListPanels>
         </Tabs>
       </Styled.UserProductsWrapper>

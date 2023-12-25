@@ -1,4 +1,4 @@
-import { Badge, Text, Icon } from '@offer-ui/react'
+import { Badge, Text, Icon, useMedia } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProfileBoxProps } from './types'
@@ -13,6 +13,8 @@ const ProfileBox = ({
   soldProductCount,
   className
 }: ProfileBoxProps): ReactElement => {
+  const { desktop } = useMedia()
+
   return (
     <Styled.Container className={className}>
       <Styled.SettingsButton>
@@ -20,7 +22,11 @@ const ProfileBox = ({
       </Styled.SettingsButton>
       <Styled.ProfileWrapper>
         <Styled.UserWrapper>
-          <Styled.Avatar alt="avatar" src={profileImageUrl} />
+          <Styled.Avatar
+            alt="avatar"
+            size={desktop ? 'medium' : 'small'}
+            src={profileImageUrl}
+          />
           <Styled.NickNameRow>
             <Styled.NickName>{nickname}</Styled.NickName>
             <Badge colorType="orange">Lv.{offerLevel}</Badge>

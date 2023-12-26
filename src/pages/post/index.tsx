@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
-  // ImageUploader,
+  ImageUploader,
   Input,
   SelectBox,
   Text,
@@ -12,13 +12,14 @@ import {
 } from '@offer-ui/react'
 import type {
   ImageInfo,
-  // UploaderOnChangeHandler,
+  UploaderOnChangeHandler,
   SelectOnChangeHandler,
   InputProps
 } from '@offer-ui/react'
 import { useRouter } from 'next/router'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState } from 'react'
+import { useUploadImagesQuery } from '@apis/image/queries'
 import { useGetCategoriesQuery, useCreatePostMutation } from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
@@ -40,29 +41,23 @@ type PostFormStatus = {
 type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
-
-const MOCK_IMAGE_INFOS: ImageInfo[] = Array.from({ length: 4 }).map(
-  (_, idx) => ({
-    isRepresent: idx === 0,
-    id: String(idx),
-    url: 'https://picsum.photos/200/300'
-  })
-)
+const initialPostForm: PostFormStatus = {
+  imageInfos: [],
+  title: '',
+  category: '',
+  location: '',
+  productCondition: '',
+  tradeType: '',
+  description: '',
+  price: ''
+}
 
 const PostPage = (): ReactElement => {
-  const { mutateAsync: postProduct } = useCreatePostMutation()
+  const { mutateAsync: createPost } = useCreatePostMutation()
+  const { mutateAsync: postUploadImages } = useUploadImagesQuery()
   const { data: categoriesData } = useGetCategoriesQuery()
   const router = useRouter()
-  const [postForm, setPostForm] = useState<PostFormStatus>({
-    imageInfos: MOCK_IMAGE_INFOS,
-    title: '',
-    category: '',
-    location: '',
-    productCondition: '',
-    tradeType: '',
-    description: '',
-    price: ''
-  })
+  const [postForm, setPostForm] = useState<PostFormStatus>(initialPostForm)
 
   const InputSize = useResponsive<InputProps, 'width'>({
     desktop: '278px',
@@ -80,14 +75,14 @@ const PostPage = (): ReactElement => {
     })
   }
 
-  // const handleUpdateImageInfos: UploaderOnChangeHandler = ({
-  //   images
-  // }): void => {
-  //   setPostForm({
-  //     ...postForm,
-  //     imageInfos: images
-  //   })
-  // }
+  const handleUpdateImageInfos: UploaderOnChangeHandler = async ({
+    images: imageInfos
+  }) => {
+    setPostForm(prev => ({
+      ...prev,
+      imageInfos
+    }))
+  }
 
   const handleUpdatePostForm: HandleUpdatePostForm = (e): void => {
     const { name, value } = e.target
@@ -100,13 +95,23 @@ const PostPage = (): ReactElement => {
 
   const handlePostProduct = async () => {
     const { imageInfos, price, ...restInfos } = postForm
-    const imageUrls = imageInfos.map(({ url }) => url)
+    const imageFormData = new FormData()
 
-    const res = await postProduct({
+    imageInfos.forEach(info => {
+      if (info.file) {
+        imageFormData.append('files', info.file)
+      }
+    })
+
+    const { imageUrls } = await postUploadImages(imageFormData)
+    const thumbnailImageUrl = imageUrls?.at(0) || ''
+    const images = imageUrls?.slice(1) || []
+
+    const res = await createPost({
       ...restInfos,
-      imageUrls,
+      imageUrls: images,
       price: localeCurrencyToNumber(price),
-      thumbnailImageUrl: imageUrls[0] || ''
+      thumbnailImageUrl
     })
 
     router.replace(`/post/${res.id}`)
@@ -132,10 +137,10 @@ const PostPage = (): ReactElement => {
             </StyledTitleLength>
           </StyledTitleWrapper>
           <div>
-            {/* <ImageUploader
-              images={postForm.imageInfos || []}
+            <ImageUploader
+              images={postForm.imageInfos}
               onChange={handleUpdateImageInfos}
-            /> */}
+            />
           </div>
         </StyledPostingHeader>
         <StyledDivider gap={20} />

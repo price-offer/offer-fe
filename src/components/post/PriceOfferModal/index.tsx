@@ -65,7 +65,7 @@ export const PriceOfferModal = ({
     setOfferForm(nextOfferFrom)
   }
 
-  const handleChangeTradeArea = (name: TradeAreaKeys, value: number): void => {
+  const handleChangeTradeArea = (name: TradeAreaKeys, value: string): void => {
     setOfferForm(prev => ({
       ...prev,
       tradeArea: {
@@ -126,7 +126,7 @@ export const PriceOfferModal = ({
                 size="medium"
                 value={offerForm?.tradeArea?.city || ''}
                 onChange={(item): void =>
-                  handleChangeTradeArea('city', item.code)
+                  handleChangeTradeArea('city', item.name)
                 }
               />
             </div>
@@ -139,7 +139,7 @@ export const PriceOfferModal = ({
                   size="medium"
                   value={offerForm?.tradeArea?.county || ''}
                   onChange={(item): void =>
-                    handleChangeTradeArea('county', item.code)
+                    handleChangeTradeArea('county', item.name)
                   }
                 />
               </div>
@@ -151,7 +151,7 @@ export const PriceOfferModal = ({
                   size="medium"
                   value={offerForm?.tradeArea?.town || ''}
                   onChange={(item): void =>
-                    handleChangeTradeArea('town', item.code)
+                    handleChangeTradeArea('town', item.name)
                   }
                 />
               </div>

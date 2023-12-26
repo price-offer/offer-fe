@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { getPostOffers, postOfferPrice } from './apis'
+import { getPostOffers, createOffer } from './apis'
 import type { CreateOfferReq } from './types'
 
 export const useGetPostOffersQuery = (postId: number) =>
@@ -8,7 +8,7 @@ export const useGetPostOffersQuery = (postId: number) =>
     queryFn: () => getPostOffers(postId)
   })
 
-export const usePostOfferPriceMutation = () =>
+export const useCreateOfferMutation = () =>
   useMutation({
-    mutationFn: (params: CreateOfferReq) => postOfferPrice(params)
+    mutationFn: (params: CreateOfferReq) => createOffer(params)
   })

@@ -11,7 +11,7 @@ export const getPostOffers = (postId: number) =>
     page: 0
   })
 
-export const postOfferPrice = (params: CreateOfferReq) =>
+export const createOffer = (params: CreateOfferReq) =>
   http.post<CreateOfferReq, CreateOfferReq>(
     `/posts/${params.postId}/offers`,
     params

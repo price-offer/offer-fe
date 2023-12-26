@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { PriceOfferCardProps } from './types'
 import { PriceOfferModal } from '../PriceOfferModal'
+import type { OfferForm } from '../PriceOfferModal/types'
 import { UserProfile } from '../UserProfile'
 import { useUpdateLikeStatusMutation } from '@apis/like'
-import { useGetPostOffersQuery } from '@apis/offer'
+import { useGetPostOffersQuery, useCreateOfferMutation } from '@apis/offer'
 import { useGetPostQuery } from '@apis/post'
+import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { useModal } from '@hooks'
 
 const PriceOfferCard = ({
@@ -17,6 +19,8 @@ const PriceOfferCard = ({
   const postOffersQuery = useGetPostOffersQuery(postId)
   const postQuery = useGetPostQuery(postId)
   const likeStatusMutation = useUpdateLikeStatusMutation()
+  const offerMutation = useCreateOfferMutation()
+
   const {
     isOpen: isOfferModalOpen,
     openModal: openOfferModal,
@@ -52,6 +56,25 @@ const PriceOfferCard = ({
     }))
 
     await likeStatusMutation.mutateAsync(postId)
+  }
+
+  const handleClickOffer = async ({
+    price,
+    tradeType,
+    tradeArea
+  }: OfferForm) => {
+    const offerInfo = {
+      postId,
+      // TODO: post 보내기 merge 후 number로 변환하는 유틸 적용
+      price: Number(price) ?? 0,
+      tradeType: tradeType ?? '',
+      location: `${tradeArea?.city} ${tradeArea?.county} ${tradeArea?.town}`
+    }
+
+    closeOfferModal()
+
+    await offerMutation.mutateAsync(offerInfo)
+    postOffersQuery.refetch()
   }
 
   return (
@@ -98,7 +121,7 @@ const PriceOfferCard = ({
                 }) => (
                   <Styled.Offer key={id}>
                     <UserProfile
-                      date={date}
+                      date={getTimeDiffText(date)}
                       image={profileImageUrl}
                       level={level}
                       location={location}
@@ -106,7 +129,7 @@ const PriceOfferCard = ({
                       tradeType={tradeType}
                       type="offer"
                     />
-                    <Text styleType="body01B">{price}원</Text>
+                    <Text styleType="body01B">{toLocaleCurrency(price)}원</Text>
                   </Styled.Offer>
                 )
               )}
@@ -137,6 +160,10 @@ const PriceOfferCard = ({
             </Styled.MessageButton>
           ) : (
             <Styled.MessageButton
+              disabled={
+                postOffersQuery.data?.offerCountOfCurrentMember ===
+                postOffersQuery.data?.maximumOfferCount
+              }
               size="large"
               onClick={() => {
                 openOfferModal()
@@ -146,7 +173,11 @@ const PriceOfferCard = ({
           )}
         </Styled.CardFooter>
       </Styled.OfferPriceCardWrapper>
-      <PriceOfferModal isOpen={isOfferModalOpen} onClose={closeOfferModal} />
+      <PriceOfferModal
+        isOpen={isOfferModalOpen}
+        onClickOffer={handleClickOffer}
+        onClose={closeOfferModal}
+      />
     </>
   )
 }

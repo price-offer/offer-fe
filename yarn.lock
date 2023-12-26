@@ -1864,10 +1864,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@offer-ui/react@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.2.4.tgz#7852ef70c308e2bde6e2dc0a043ed64524473851"
-  integrity sha512-P9UPXH3oRi9tIRwccsxyIdSBMlDxnFvZNmxPv1BQV7NUzogmNzDf8dfQ+5w8m5v74mOrFCDIgVXSqPPDplBTkw==
+"@offer-ui/react@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@offer-ui/react/-/react-0.2.6.tgz#149442e20b0890dc443cc330cf5571b306cab703"
+  integrity sha512-KIW2kTI2/MBG73vDXb48hJ75T1idvBnWPIooKcKaOD6+z463iLMLU1d5cs+XLDlDe6k7//FHbxwMuij77NYqLA==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -10125,6 +10125,11 @@ react-inspector@^6.0.0:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-6.0.2.tgz#aa3028803550cb6dbd7344816d5c80bf39d07e9d"
   integrity sha512-x+b7LxhmHXjHoU/VrFAzw5iutsILRoYyDq97EDYdFpPLcvqtEzk4ZSZSQjnFPbr5T57tLXnHcqFYoN1pI6u8uQ==
+
+react-intersection-observer@^9.5.3:
+  version "9.5.3"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.5.3.tgz#f47a31ed3a0359cbbfdb91a53d7470ac2ab7b3c7"
+  integrity sha512-NJzagSdUPS5rPhaLsHXYeJbsvdpbJwL6yCHtMk91hc0ufQ2BnXis+0QQ9NBh6n9n+Q3OyjR6OQLShYbaNBkThQ==
 
 react-is@18.1.0:
   version "18.1.0"

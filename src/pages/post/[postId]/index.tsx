@@ -5,7 +5,7 @@ import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
 import { useGetPostOffersQuery } from '@apis/offer'
-import { useGetPostDetailQuery } from '@apis/post'
+import { useGetPostQuery } from '@apis/post'
 import { formatDate, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
 import { TRADE_STATUS } from '@constants'
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
-  const postDetailQuery = useGetPostDetailQuery(postId)
+  const postDetailQuery = useGetPostQuery(postId)
   const postOffersQuery = useGetPostOffersQuery(postId)
   const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
   const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({

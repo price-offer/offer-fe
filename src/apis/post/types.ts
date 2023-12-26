@@ -38,15 +38,15 @@ export type UpdateTradeStatusReq = {
 export type UpdateTradeStatusRes = number
 
 export type GetPostsReq = {
-  sort: string
-  tradeType: string
-  category: string
-  sellerId: number
-  tradeStatus: string
-  minPrice: number
-  maxPrice: number
-  lastId: number
-  limit: number
+  sort?: string
+  tradeType?: string
+  category?: string
+  sellerId?: number
+  tradeStatus?: string
+  minPrice?: number
+  maxPrice?: number
+  lastId?: number | null
+  limit?: number
 }
 export type GetPostsRes = PostSummaries
 
@@ -69,4 +69,4 @@ export type GetSortOptionsReq = {
 }
 export type GetSortOptionsRes = SortOptionsShape
 
-export type GetCategoriesRes = OptionShape[]
+export type GetCategoriesRes = (OptionShape & { imageUrl: string })[]

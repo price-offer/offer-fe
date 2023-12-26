@@ -62,7 +62,7 @@ export type MyProfile = MemberProfile & {
 }
 
 export type ImagesUpload = {
-  imagesUrls: string[]
+  imageUrls: string[]
 }
 export type ImageUpload = {
   imageUrl: string

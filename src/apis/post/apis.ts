@@ -1,7 +1,7 @@
 import type {
-  GetCategoriesRes,
   CreatePostReq,
   CreatePostRes,
+  GetCategoriesRes,
   GetPostsReq,
   GetPostsRes
 } from './types'

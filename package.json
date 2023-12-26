@@ -20,7 +20,7 @@
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "@offer-ui/react": "^0.2.4",
+    "@offer-ui/react": "^0.2.6",
     "@suspensive/react": "^1.20.7",
     "@tanstack/react-query": "^5.8.3",
     "axios": "^1.2.3",
@@ -73,10 +73,10 @@
     "jotai": "^2.5.1",
     "jsdom": "^20.0.3",
     "lint-staged": "^13.0.3",
-    "msw": "^2.0.1",
     "postcss": "^8.4.27",
     "postcss-syntax": "^0.36.2",
     "prettier": "2.7.1",
+    "react-intersection-observer": "^9.5.3",
     "storybook": "^7.5.1",
     "stylelint": "^15.10.2",
     "stylelint-config-standard": "^34.0.0",
@@ -95,8 +95,5 @@
     "node": ">=18.17.1"
   },
   "lint-staged": {},
-  "msw": {
-    "workerDirectory": "public"
-  },
   "packageManager": "yarn@1.22.19"
 }

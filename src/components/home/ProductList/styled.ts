@@ -36,7 +36,12 @@ const ProductListWrapper = styled.div`
   }
 `
 
+const LastFooter = styled.div`
+  height: 20px;
+`
+
 export const Styled = {
   NewProductTitle,
-  ProductListWrapper
+  ProductListWrapper,
+  LastFooter
 }

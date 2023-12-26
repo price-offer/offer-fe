@@ -3,28 +3,11 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
-import { useGetPostDetailQuery } from '@apis/post'
-import { formatDate, toLocaleCurrency } from '@utils/format'
+import type { ReactElement } from 'react'
+import { useGetPostQuery } from '@apis/post'
+import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
-import {
-  PRODUCT_CONDITION_LABEL,
-  TRADE_STATUS,
-  TRADE_TYPE_LABEL
-} from '@constants'
-
-// TODO: api에 작성자 데이터 추가되면 제거
-const AUTHOR_MOCK = {
-  id: 1,
-  email: 'shinyojeong@naver.com',
-  offerLevel: 1,
-  nickname: '효정',
-  profileImageUrl: 'https://picsum.photos/200/300',
-  address: '서울시 고백구 행복동'
-}
-const CATEGORY_MOCK = {
-  code: 'ALL',
-  name: '전체'
-}
+import { TRADE_STATUS } from '@constants'
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -35,30 +18,27 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   }
 })
 
-const PostDetailPage = ({ postId }: Props) => {
+const PostDetailPage = ({ postId }: Props): ReactElement => {
+  const postQuery = useGetPostQuery(postId)
   const isAuthor = false
-  const postDetailQuery = useGetPostDetailQuery(postId)
-  const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
-  const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
+  const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     url
   }))
   const postInfoList = [
     {
       label: '작성일',
-      // TODO: 주영님이 만든 유틸 적용하기
-      value: formatDate(postDetailQuery.data?.createdAt || '', 'A H:m')
+      value: getTimeDiffText(postQuery.data?.createdAt || '')
     },
     {
       label: '상품 상태',
-      value:
-        PRODUCT_CONDITION_LABEL[postDetailQuery.data?.productCondition || '']
+      value: postQuery.data?.productCondition || ''
     },
     {
       label: '거래 방식',
-      value: TRADE_TYPE_LABEL[postDetailQuery.data?.tradeType || '']
+      value: postQuery.data?.tradeType || ''
     },
-    { label: '거래 지역', value: postDetailQuery.data?.location }
+    { label: '거래 지역', value: postQuery.data?.location }
   ]
 
   return (
@@ -74,7 +54,7 @@ const PostDetailPage = ({ postId }: Props) => {
                 <>
                   <ProductConditionSelectBox
                     items={TRADE_STATUS}
-                    value={postDetailQuery.data?.tradeStatus}
+                    value={postQuery.data?.tradeStatus}
                     onChange={(): void => {
                       // do something
                     }}
@@ -83,18 +63,18 @@ const PostDetailPage = ({ postId }: Props) => {
                 </>
               ) : (
                 <ProductConditionBadge>
-                  {postDetailQuery.data?.tradeStatus}
+                  {postQuery.data?.tradeStatus}
                 </ProductConditionBadge>
               )}
             </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
-              {CATEGORY_MOCK.name}
+              {postQuery.data?.category.name || ''}
             </Text>
             <PostName styleType="headline01B" tag="p">
-              {postDetailQuery.data?.title || ''}
+              {postQuery.data?.title || ''}
             </PostName>
             <Text styleType="display01B" tag="p">
-              {postPrice}
+              {toLocaleCurrency(Number(postQuery.data?.price))}
               <Text styleType="subtitle01M">원</Text>
             </Text>
           </div>
@@ -106,14 +86,14 @@ const PostDetailPage = ({ postId }: Props) => {
                 <PostField key={label} label={label} value={value || ''} />
               ))}
             </TransactionContainer>
-            <Description>{postDetailQuery.data?.description}</Description>
+            <Description>{postQuery.data?.description}</Description>
           </div>
           <Divider gap={16} />
           <UserProfile
-            image={AUTHOR_MOCK.profileImageUrl}
-            level={AUTHOR_MOCK.offerLevel}
-            location={AUTHOR_MOCK.address}
-            nickName={AUTHOR_MOCK.nickname}
+            image={postQuery.data?.seller.profileImageUrl}
+            level={postQuery.data?.seller.offerLevel || 0}
+            location={postQuery.data?.seller.nickname || ''}
+            nickName={postQuery.data?.seller.nickname || ''}
             type="basic"
           />
         </Content>

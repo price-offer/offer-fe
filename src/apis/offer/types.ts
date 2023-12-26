@@ -1,36 +1,22 @@
-import type { TradeTypeCodes } from '@types'
-export type GetPostOfferReq = {
+import type { CommonCreation, Offers, OfferSummaries } from '@types'
+
+export type GetPostOffersReq = {
   postId: number
   page: number
 }
+export type GetPostOffersRes = Offers
 
-export type GetPostOfferRes = {
-  totalSize: number
+export type CreateOfferReq = {
   postId: number
-  offers: {
-    id: number
-    offerer: {
-      id: number
-      nickname: string
-      location: string
-      level: string
-      tradeType: TradeTypeCodes
-      profileImageUrl: string
-    }
-    price: number
-    createdAt: string
-  }[]
-  offerCountOfCurrentMember: number
-  maximumOfferCount: number
-}
-
-export type PostOfferPriceReq = {
   price: number
-  tradeType: TradeTypeCodes
+  tradeType: string
   location: string
 }
+export type CreateOfferRes = CommonCreation
 
-export type PostOfferPriceRes = {
-  id: number
-  createdAt: string
+export type GetMyOffersReq = {
+  sort: string
+  lastId: number
+  limit: number
 }
+export type GetMyOffersRes = OfferSummaries

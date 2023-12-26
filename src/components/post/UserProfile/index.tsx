@@ -2,7 +2,6 @@ import { Avatar, Badge, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { UserProfileProps } from './types'
-import { TRADE_TYPE_LABEL } from '@constants/app'
 
 const UserProfile = ({
   nickName,
@@ -30,7 +29,7 @@ const UserProfile = ({
         </Styled.UserName>
         <Text color="grayScale70" styleType="caption01M" tag="p">
           {location}
-          {isOfferProfile && ` · ${TRADE_TYPE_LABEL[tradeType]}`}
+          {isOfferProfile && ` · ${tradeType}`}
         </Text>
         {isOfferProfile && (
           <Text color="grayScale70" styleType="caption01M" tag="p">

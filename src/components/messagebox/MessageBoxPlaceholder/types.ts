@@ -1,5 +1,4 @@
 import type { ColorKeys } from '@styles/themes'
-import type { StyledProps } from '@types'
 
 export type MessageBoxPlaceholderProps = {
   color?: ColorKeys

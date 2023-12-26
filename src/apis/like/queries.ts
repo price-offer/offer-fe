@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import { putPostLike } from './apis'
+import { updateLikeStatus } from './apis'
 
-export const usePutPostLikeMutation = () =>
+export const useUpdateLikeStatusMutation = () =>
   useMutation({
-    mutationFn: (postId: number) => putPostLike(postId)
+    mutationFn: (postId: number) => updateLikeStatus(postId)
   })

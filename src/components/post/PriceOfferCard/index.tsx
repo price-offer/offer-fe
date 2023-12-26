@@ -1,20 +1,22 @@
 import { Divider, SelectBox, Text, Icon } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { PriceOfferCardProps } from './types'
 import { PriceOfferModal } from '../PriceOfferModal'
 import { UserProfile } from '../UserProfile'
-import { usePutPostLikeMutation } from '@apis/like'
+import { useUpdateLikeStatusMutation } from '@apis/like'
 import { useGetPostOffersQuery } from '@apis/offer'
+import { useGetPostQuery } from '@apis/post'
 import { useModal } from '@hooks'
 
 const PriceOfferCard = ({
   postId,
-  isAuthor
+  isSeller
 }: PriceOfferCardProps): ReactElement => {
   const postOffersQuery = useGetPostOffersQuery(postId)
-  const postLikeMutation = usePutPostLikeMutation()
+  const postQuery = useGetPostQuery(postId)
+  const likeStatusMutation = useUpdateLikeStatusMutation()
   const {
     isOpen: isOfferModalOpen,
     openModal: openOfferModal,
@@ -24,6 +26,14 @@ const PriceOfferCard = ({
     status: false,
     count: 0
   })
+
+  useEffect(() => {
+    setLikePost({
+      status: Boolean(postQuery.data?.liked),
+      count: postQuery.data?.totalLikeCount || 0
+    })
+  }, [postQuery.isSuccess])
+
   const offers =
     postOffersQuery.data?.offers.map(({ id, offerer, createdAt, price }) => ({
       ...offerer,
@@ -41,7 +51,7 @@ const PriceOfferCard = ({
       count: status ? count - 1 : count + 1
     }))
 
-    await postLikeMutation.mutateAsync(postId)
+    await likeStatusMutation.mutateAsync(postId)
   }
 
   return (
@@ -112,16 +122,19 @@ const PriceOfferCard = ({
         <Divider />
         <Styled.CardFooter>
           <Styled.LikeButton role="button" onClick={handleClickLike}>
-            {/* TODO: Icon outline에 색상 넣을 수 있도록 수정 후 반영 */}
             {likePost.status ? (
               <Icon color="brandPrimary" type="heartFill" />
             ) : (
-              <Icon fill="grayScale90" type="heartFill" />
+              <Icon color="grayScale90" type="heart" />
             )}
             <Text styleType="body01B">{likePost.count}</Text>
           </Styled.LikeButton>
-          {isAuthor ? (
-            <Styled.MessageButton size="large">쪽지하기</Styled.MessageButton>
+          {isSeller ? (
+            <Styled.MessageButton
+              disabled={!postOffersQuery.data?.totalSize}
+              size="large">
+              쪽지하기
+            </Styled.MessageButton>
           ) : (
             <Styled.MessageButton
               size="large"

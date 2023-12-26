@@ -8,6 +8,7 @@ import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
 import { TRADE_STATUS } from '@constants'
+import { useAuth } from '@hooks'
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -20,7 +21,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postQuery = useGetPostQuery(postId)
-  const isAuthor = false
+  const { user } = useAuth()
+
+  const isSeller = user.id === postQuery.data?.seller.id
   const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     url
@@ -50,7 +53,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         <Content>
           <div>
             <ProductCondition>
-              {isAuthor ? (
+              {isSeller ? (
                 <>
                   <ProductConditionSelectBox
                     items={TRADE_STATUS}
@@ -99,7 +102,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         </Content>
       </Main>
       <MainDivider size="bold" />
-      <PriceOfferCard isAuthor={isAuthor} postId={postId} />
+      <PriceOfferCard isSeller={isSeller} postId={postId} />
     </Layout>
   )
 }

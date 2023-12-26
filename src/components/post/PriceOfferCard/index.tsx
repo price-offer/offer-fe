@@ -9,18 +9,18 @@ import { UserProfile } from '../UserProfile'
 import { useUpdateLikeStatusMutation } from '@apis/like'
 import { useGetPostOffersQuery, useCreateOfferMutation } from '@apis/offer'
 import { useGetPostQuery } from '@apis/post'
+import { SORT_OPTIONS } from '@constants/app'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { useModal } from '@hooks'
+import type { SortOption, SortOptionCodes } from '@types'
 
 const PriceOfferCard = ({
   postId,
   isSeller
 }: PriceOfferCardProps): ReactElement => {
-  const postOffersQuery = useGetPostOffersQuery(postId)
-  const postQuery = useGetPostQuery(postId)
-  const likeStatusMutation = useUpdateLikeStatusMutation()
-  const offerMutation = useCreateOfferMutation()
-
+  const [sortOption, setSortOption] = useState<SortOptionCodes>(
+    SORT_OPTIONS[0].code
+  )
   const {
     isOpen: isOfferModalOpen,
     openModal: openOfferModal,
@@ -30,6 +30,11 @@ const PriceOfferCard = ({
     status: false,
     count: 0
   })
+
+  const postOffersQuery = useGetPostOffersQuery({ postId, sort: sortOption })
+  const postQuery = useGetPostQuery(postId)
+  const likeStatusMutation = useUpdateLikeStatusMutation()
+  const offerMutation = useCreateOfferMutation()
 
   useEffect(() => {
     setLikePost({
@@ -48,6 +53,10 @@ const PriceOfferCard = ({
     })) || []
   const offerCount = offers.length
   const hasOffer = Boolean(offerCount)
+
+  const handleChangeSortOption = ({ code }: SortOption) => {
+    setSortOption(code)
+  }
 
   const handleClickLike = async () => {
     setLikePost(({ status, count }) => ({
@@ -93,14 +102,9 @@ const PriceOfferCard = ({
           </Styled.CardTitle>
           {hasOffer && (
             <SelectBox
-              items={[
-                { code: 1, name: '최신순' },
-                { code: 2, name: '높은 가격순' }
-              ]}
-              value={2}
-              onChange={(): void => {
-                // do something
-              }}
+              items={SORT_OPTIONS}
+              value={sortOption}
+              onChange={handleChangeSortOption}
             />
           )}
         </Styled.CardHeader>

@@ -5,11 +5,11 @@ import type {
 } from './types'
 import { http } from '@utils/http'
 
-export const getPostOffers = (postId: number) =>
-  http.get<GetPostOffersReq, GetPostOffersRes>(`/posts/${postId}/offers`, {
-    postId,
-    page: 0
-  })
+export const getPostOffers = (params: GetPostOffersReq) =>
+  http.get<GetPostOffersReq, GetPostOffersRes>(
+    `/posts/${params.postId}/offers`,
+    params
+  )
 
 export const createOffer = (params: CreateOfferReq) =>
   http.post<CreateOfferReq, CreateOfferReq>(

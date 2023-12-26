@@ -27,6 +27,19 @@ export type PostDetail = {
   tradeStatus: TradeStatusCodes
   productCondition: ProductConditionCodes
   createdAt: string
+  seller: {
+    id: number
+    profileImageUrl: string
+    nickname: string
+    offerLevel: number
+  }
+  category: {
+    code: string
+    name: string
+    imageUrl: string
+  }
+  liked: true
+  totalLikeCount: number
 }
 export type PostSummary = {
   id: number
@@ -56,6 +69,7 @@ export type MemberProfile = {
   soldProductCount: number
   reviewCount: number
 }
+
 // TODO: scheme 확인 필요 MemberProfileRes로 노출되는 현상
 export type MyProfile = MemberProfile & {
   likeProductCount: number

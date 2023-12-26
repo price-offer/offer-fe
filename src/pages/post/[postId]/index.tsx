@@ -6,23 +6,9 @@ import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
 import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostQuery } from '@apis/post'
-import { formatDate, toLocaleCurrency } from '@utils/format'
+import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { PostField, UserProfile, PriceOfferCard } from '@components'
 import { TRADE_STATUS } from '@constants'
-
-// TODO: api에 작성자 데이터 추가되면 제거
-const AUTHOR_MOCK = {
-  id: 1,
-  email: 'shinyojeong@naver.com',
-  offerLevel: 1,
-  nickname: '효정',
-  profileImageUrl: 'https://picsum.photos/200/300',
-  address: '서울시 고백구 행복동'
-}
-const CATEGORY_MOCK = {
-  code: 'ALL',
-  name: '전체'
-}
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -34,28 +20,27 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
-  const postDetailQuery = useGetPostQuery(postId)
+  const postQuery = useGetPostQuery(postId)
   const postOffersQuery = useGetPostOffersQuery(postId)
-  const postPrice = toLocaleCurrency(Number(postDetailQuery.data?.price))
-  const postImages = postDetailQuery.data?.imageUrls.map((url, idx) => ({
+  const postPrice = toLocaleCurrency(Number(postQuery.data?.price))
+  const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     url
   }))
   const postInfoList = [
     {
       label: '작성일',
-      // TODO: 주영님이 만든 유틸 적용하기
-      value: formatDate(postDetailQuery.data?.createdAt || '', 'A H:m')
+      value: getTimeDiffText(postQuery.data?.createdAt || '')
     },
     {
       label: '상품 상태',
-      value: postDetailQuery.data?.productCondition || ''
+      value: postQuery.data?.productCondition || ''
     },
     {
       label: '거래 방식',
-      value: postDetailQuery.data?.tradeType || ''
+      value: postQuery.data?.tradeType || ''
     },
-    { label: '거래 지역', value: postDetailQuery.data?.location }
+    { label: '거래 지역', value: postQuery.data?.location }
   ]
   const offers = postOffersQuery.data?.offers.map(
     ({ id, offerer, createdAt, price }) => ({
@@ -78,7 +63,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
             <ProductCondition>
               <ProductConditionSelectBox
                 items={TRADE_STATUS}
-                value={postDetailQuery.data?.tradeStatus}
+                value={postQuery.data?.tradeStatus}
                 onChange={(): void => {
                   // do something
                 }}
@@ -86,10 +71,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
               <IconButton icon="more" size={24} />
             </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
-              {CATEGORY_MOCK.name}
+              {postQuery.data?.category.name || ''}
             </Text>
             <PostName styleType="headline01B" tag="p">
-              {postDetailQuery.data?.title || ''}
+              {postQuery.data?.title || ''}
             </PostName>
             <Text styleType="display01B" tag="p">
               {postPrice}
@@ -104,22 +89,22 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                 <PostField key={label} label={label} value={value || ''} />
               ))}
             </TransactionContainer>
-            <Description>{postDetailQuery.data?.description}</Description>
+            <Description>{postQuery.data?.description}</Description>
           </div>
           <Divider gap={16} />
           <UserProfile
-            image={AUTHOR_MOCK.profileImageUrl}
-            level={AUTHOR_MOCK.offerLevel}
-            location={AUTHOR_MOCK.address}
-            nickName={AUTHOR_MOCK.nickname}
+            image={postQuery.data?.seller.profileImageUrl}
+            level={postQuery.data?.seller.offerLevel || 0}
+            location={postQuery.data?.seller.nickname || ''}
+            nickName={postQuery.data?.seller.nickname || ''}
             type="basic"
           />
         </Content>
       </Main>
       <MainDivider size="bold" />
       <PriceOfferCard
-        isLike={false}
-        likeCount={postOffersQuery.data?.offerCountOfCurrentMember || 0}
+        isLike={Boolean(postQuery.data?.liked)}
+        likeCount={postQuery.data?.totalLikeCount || 0}
         offerList={offers || []}
       />
     </Layout>

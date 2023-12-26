@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postQuery = useGetPostQuery(postId)
   const postOffersQuery = useGetPostOffersQuery(postId)
-  const postPrice = toLocaleCurrency(Number(postQuery.data?.price))
+
   const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     url
@@ -77,7 +77,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
               {postQuery.data?.title || ''}
             </PostName>
             <Text styleType="display01B" tag="p">
-              {postPrice}
+              {toLocaleCurrency(Number(postQuery.data?.price))}
               <Text styleType="subtitle01M">원</Text>
             </Text>
           </div>

@@ -14,7 +14,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 23,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -24,7 +24,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 22343,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -34,7 +34,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 2223433,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -44,7 +44,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 224323,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -54,7 +54,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 215913,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -64,7 +64,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 217813,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -74,7 +74,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 210913,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -84,7 +84,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 215613,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -94,7 +94,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 211473,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -104,7 +104,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 2187913,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -114,7 +114,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 214513,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -124,7 +124,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 215613,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -134,7 +134,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 277113,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,
@@ -144,7 +144,7 @@ const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 21138,
     nickname: '신효정',
-    level: 23,
+    level: '23',
     location: '시당구 동작동',
     date: '1시간 전',
     price: 234233,

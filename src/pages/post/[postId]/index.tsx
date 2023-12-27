@@ -43,12 +43,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     { label: '거래 지역', value: postQuery.data?.location }
   ]
   const offers = postOffersQuery.data?.offers.map(
-    ({ id, offerer, createdAt, price }) => ({
+    ({ offerer, createdAt, ...offer }) => ({
       ...offerer,
-      level: Number(offerer.level),
-      id,
       date: createdAt,
-      price
+      ...offer
     })
   )
 
@@ -94,7 +92,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
           <Divider gap={16} />
           <UserProfile
             image={postQuery.data?.seller.profileImageUrl}
-            level={postQuery.data?.seller.offerLevel || 0}
+            level={String(postQuery.data?.seller.offerLevel) || '0'}
             location={postQuery.data?.seller.nickname || ''}
             nickName={postQuery.data?.seller.nickname || ''}
             type="basic"

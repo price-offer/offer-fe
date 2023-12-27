@@ -31,7 +31,7 @@ export type PostDetail = {
     id: number
     profileImageUrl: string
     nickname: string
-    offerLevel: number
+    offerLevel: string
   }
   category: {
     code: string
@@ -116,7 +116,7 @@ export type Offer = {
   createdAt: string
 }
 export type Offerer = {
-  id: 0
+  id: number
   nickname: string
   location: string
   level: string

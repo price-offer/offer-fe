@@ -46,12 +46,10 @@ type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
 
-const checkCompleteForm = (
+const isCompleteForm = (
   postForm: PostFormStatus
 ): postForm is Required<PostFormStatus> =>
-  Object.values(postForm)
-    .map(value => Boolean(value))
-    .reduce((prev, cur) => prev && cur, true)
+  Object.values(postForm).every(value => Boolean(value))
 
 const PostPage = (): ReactElement => {
   const postMutation = useCreatePostMutation()
@@ -64,8 +62,6 @@ const PostPage = (): ReactElement => {
     desktop: '278px',
     tablet: '100%'
   })
-
-  const isCompleteForm = checkCompleteForm(postForm)
 
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
     setPostForm({
@@ -93,7 +89,7 @@ const PostPage = (): ReactElement => {
   }
 
   const handlePostProduct = async () => {
-    if (!checkCompleteForm(postForm)) {
+    if (!isCompleteForm(postForm)) {
       return
     }
 
@@ -203,7 +199,7 @@ const PostPage = (): ReactElement => {
       </StyledFormWrapper>
       <StyledButtonWrapper>
         <Button
-          disabled={!isCompleteForm}
+          disabled={!isCompleteForm(postForm)}
           styleType="solidPrimary"
           onClick={handlePostProduct}>
           확인

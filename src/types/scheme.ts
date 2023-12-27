@@ -76,7 +76,7 @@ export type MyProfile = MemberProfile & {
 }
 
 export type ImagesUpload = {
-  imagesUrls: string[]
+  imageUrls: string[]
 }
 export type ImageUpload = {
   imageUrl: string
@@ -116,7 +116,7 @@ export type Offer = {
   createdAt: string
 }
 export type Offerer = {
-  id: 0
+  id: number
   nickname: string
   location: string
   level: string

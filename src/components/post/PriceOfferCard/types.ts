@@ -1,17 +1,11 @@
-import type { TradeTypeCodes } from '@types'
+import type { Offerer } from '@types'
 
 export type PriceOfferCardProps = {
   isSeller: boolean
   postId: number
 }
 
-export type Offer = {
-  id: number
-  nickname: string
-  level: number
-  location: string
+export type Offer = Offerer & {
   date: string
   price: number
-  profileImageUrl: string
-  tradeType: TradeTypeCodes
 }

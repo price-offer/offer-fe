@@ -28,15 +28,7 @@ import { TRADE_TYPES, PRODUCT_CONDITIONS } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormStatus = Partial<
-  Pick<
-    CreatePostReq,
-    | 'title'
-    | 'description'
-    | 'location'
-    | 'category'
-    | 'tradeType'
-    | 'productCondition'
-  >
+  Omit<CreatePostReq, 'price' | 'thumbnailImageUrl' | 'imageUrls'>
 > & {
   price?: string
   imageInfos?: ImageInfo[]

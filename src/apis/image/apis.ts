@@ -1,5 +1,8 @@
-import type { PostUploadImagesRes } from './types'
+import type { CreateUploadImagesReq, CreateUploadImagesRes } from './types'
 import { http } from '@utils/http'
 
-export const postUploadImages = (files: FormData) =>
-  http.post<FormData, PostUploadImagesRes>('/upload-images', files)
+export const createUploadImages = (files: CreateUploadImagesReq) =>
+  http.post<CreateUploadImagesReq, CreateUploadImagesRes>(
+    '/upload-images',
+    files
+  )

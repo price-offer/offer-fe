@@ -60,4 +60,4 @@ export const toQueryString = (value: {
     .slice(0, -1)
 
 export const localeCurrencyToNumber = (value: string) =>
-  Number(value.replace(',', ''))
+  Number(value.replaceAll(',', ''))

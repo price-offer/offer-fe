@@ -19,7 +19,7 @@ import type {
 import { useRouter } from 'next/router'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState } from 'react'
-import { useUploadImagesQuery } from '@apis/image/queries'
+import { useCreateUploadImagesMutation } from '@apis/image'
 import { useGetCategoriesQuery, useCreatePostMutation } from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
@@ -53,9 +53,9 @@ const initialPostForm: PostFormStatus = {
 }
 
 const PostPage = (): ReactElement => {
-  const { mutateAsync: createPost } = useCreatePostMutation()
-  const { mutateAsync: postUploadImages } = useUploadImagesQuery()
-  const { data: categoriesData } = useGetCategoriesQuery()
+  const postMutation = useCreatePostMutation()
+  const uploadImagesQuery = useCreateUploadImagesMutation()
+  const categoriesQuery = useGetCategoriesQuery()
   const router = useRouter()
   const [postForm, setPostForm] = useState<PostFormStatus>(initialPostForm)
 
@@ -75,7 +75,7 @@ const PostPage = (): ReactElement => {
     })
   }
 
-  const handleUpdateImageInfos: UploaderOnChangeHandler = async ({
+  const handleUpdateImageInfos: UploaderOnChangeHandler = ({
     images: imageInfos
   }) => {
     setPostForm(prev => ({
@@ -94,21 +94,18 @@ const PostPage = (): ReactElement => {
   }
 
   const handlePostProduct = async () => {
-    const { imageInfos, price, ...restInfos } = postForm
+    const { imageInfos, price, ...post } = postForm
     const imageFormData = new FormData()
 
-    imageInfos.forEach(info => {
-      if (info.file) {
-        imageFormData.append('files', info.file)
-      }
-    })
+    imageInfos.forEach(
+      info => info.file && imageFormData.append('files', info.file)
+    )
 
-    const { imageUrls } = await postUploadImages(imageFormData)
-    const thumbnailImageUrl = imageUrls?.at(0) || ''
-    const images = imageUrls?.slice(1) || []
+    const { imageUrls } = await uploadImagesQuery.mutateAsync(imageFormData)
+    const [thumbnailImageUrl, ...images] = imageUrls || []
 
-    const res = await createPost({
-      ...restInfos,
+    const res = await postMutation.mutateAsync({
+      ...post,
       imageUrls: images,
       price: localeCurrencyToNumber(price),
       thumbnailImageUrl
@@ -153,7 +150,7 @@ const PostPage = (): ReactElement => {
         <StyledPostForms>
           <PostForm label="카테고리">
             <SelectBox
-              items={categoriesData || []}
+              items={categoriesQuery.data || []}
               placeholder="선택"
               size="small"
               onChange={handleUpdateCategory}

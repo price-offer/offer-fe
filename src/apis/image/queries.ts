@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
-import { postUploadImages } from './apis'
+import { createUploadImages } from './apis'
+import type { CreateUploadImagesReq } from './types'
 
-export const useUploadImagesQuery = () =>
+export const useCreateUploadImagesMutation = () =>
   useMutation({
-    mutationFn: (files: FormData) => postUploadImages(files)
+    mutationFn: (files: CreateUploadImagesReq) => createUploadImages(files)
   })

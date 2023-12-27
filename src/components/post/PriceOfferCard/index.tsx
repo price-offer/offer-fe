@@ -6,11 +6,14 @@ import type { PriceOfferCardProps } from './types'
 import { PriceOfferModal } from '../PriceOfferModal'
 import type { OfferForm } from '../PriceOfferModal/types'
 import { UserProfile } from '../UserProfile'
-import { useUpdateLikeStatusMutation } from '@apis/like'
-import { useGetPostOffersQuery, useCreateOfferMutation } from '@apis/offer'
-import { useGetPostQuery } from '@apis/post'
-import { SORT_OPTIONS } from '@constants/app'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import {
+  useUpdateLikeStatusMutation,
+  useGetPostQuery,
+  useGetPostOffersQuery,
+  useCreateOfferMutation
+} from '@apis'
+import { SORT_OPTIONS } from '@constants'
 import { useModal } from '@hooks'
 import type { SortOption, SortOptionCodes } from '@types'
 
@@ -18,20 +21,19 @@ const PriceOfferCard = ({
   postId,
   isSeller
 }: PriceOfferCardProps): ReactElement => {
-  const [sortOption, setSortOption] = useState<SortOptionCodes>(
+  const [sortOptionCode, setSortOptionCode] = useState<SortOptionCodes>(
     SORT_OPTIONS[0].code
   )
-  const {
-    isOpen: isOfferModalOpen,
-    openModal: openOfferModal,
-    closeModal: closeOfferModal
-  } = useModal()
+  const offerModal = useModal()
   const [likePost, setLikePost] = useState({
     status: false,
     count: 0
   })
 
-  const postOffersQuery = useGetPostOffersQuery({ postId, sort: sortOption })
+  const postOffersQuery = useGetPostOffersQuery({
+    postId,
+    sort: sortOptionCode
+  })
   const postQuery = useGetPostQuery(postId)
   const likeStatusMutation = useUpdateLikeStatusMutation()
   const offerMutation = useCreateOfferMutation()
@@ -41,21 +43,20 @@ const PriceOfferCard = ({
       status: Boolean(postQuery.data?.liked),
       count: postQuery.data?.totalLikeCount || 0
     })
-  }, [postQuery.isSuccess])
+  }, [postQuery])
 
   const offers =
-    postOffersQuery.data?.offers.map(({ id, offerer, createdAt, price }) => ({
+    postOffersQuery.data?.offers.map(({ offerer, createdAt, ...offer }) => ({
       ...offerer,
       level: Number(offerer.level),
-      id,
       date: createdAt,
-      price
+      ...offer
     })) || []
   const offerCount = offers.length
   const hasOffer = Boolean(offerCount)
 
   const handleChangeSortOption = ({ code }: SortOption) => {
-    setSortOption(code)
+    setSortOptionCode(code)
   }
 
   const handleClickLike = async () => {
@@ -80,7 +81,7 @@ const PriceOfferCard = ({
       location: `${tradeArea?.city} ${tradeArea?.county} ${tradeArea?.town}`
     }
 
-    closeOfferModal()
+    offerModal.closeModal()
 
     await offerMutation.mutateAsync(offerInfo)
     postOffersQuery.refetch()
@@ -103,7 +104,7 @@ const PriceOfferCard = ({
           {hasOffer && (
             <SelectBox
               items={SORT_OPTIONS}
-              value={sortOption}
+              value={sortOptionCode}
               onChange={handleChangeSortOption}
             />
           )}
@@ -170,7 +171,7 @@ const PriceOfferCard = ({
               }
               size="large"
               onClick={() => {
-                openOfferModal()
+                offerModal.openModal()
               }}>{`가격 제안하기(${
               postOffersQuery.data?.offerCountOfCurrentMember || 0
             }/2)`}</Styled.MessageButton>
@@ -178,9 +179,9 @@ const PriceOfferCard = ({
         </Styled.CardFooter>
       </Styled.OfferPriceCardWrapper>
       <PriceOfferModal
-        isOpen={isOfferModalOpen}
+        isOpen={offerModal.isOpen}
         onClickOffer={handleClickOffer}
-        onClose={closeOfferModal}
+        onClose={offerModal.closeModal}
       />
     </>
   )

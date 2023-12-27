@@ -2,7 +2,6 @@ import type { CommonCreation, Offers, OfferSummaries } from '@types'
 
 export type GetPostOffersReq = {
   postId: number
-  page: number
 }
 export type GetPostOffersRes = Offers
 

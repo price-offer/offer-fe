@@ -15,8 +15,8 @@ export const Default: StoryObj<UserProfile> = {
     image: 'https://picsum.photos/200/300',
     nickName: '신효정',
     location: '동작구 사당동',
-    level: 1,
-    transactionType: 'all',
+    level: '1',
+    tradeType: 'ALL',
     date: '1시간 전',
     type: 'offer'
   },

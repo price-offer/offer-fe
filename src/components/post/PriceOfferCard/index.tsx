@@ -50,25 +50,25 @@ const PriceOfferCard = ({
             {offerList.map(
               ({
                 id,
-                name,
+                nickname,
                 level,
-                tradeArea,
+                location,
                 date,
-                profileUrl,
-                tradeMethod,
-                offerPrice
+                profileImageUrl,
+                tradeType,
+                price
               }) => (
                 <Styled.Offer key={id}>
                   <UserProfile
                     date={date}
-                    image={profileUrl}
+                    image={profileImageUrl}
                     level={level}
-                    location={tradeArea}
-                    nickName={name}
-                    transactionType={tradeMethod}
+                    location={location}
+                    nickName={nickname}
+                    tradeType={tradeType}
                     type="offer"
                   />
-                  <Text styleType="body01B">{offerPrice}원</Text>
+                  <Text styleType="body01B">{price}원</Text>
                 </Styled.Offer>
               )
             )}

@@ -13,143 +13,143 @@ export default meta
 const OFFERLISTS_MOCKS: PriceOfferCardProps['offerList'] = [
   {
     id: 23,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 22343,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 2223433,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 224323,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 215913,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 217813,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 210913,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 215613,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 211473,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 2187913,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 214513,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 215613,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 277113,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   },
   {
     id: 21138,
-    name: '신효정',
-    level: 23,
-    tradeArea: '시당구 동작동',
+    nickname: '신효정',
+    level: '23',
+    location: '시당구 동작동',
     date: '1시간 전',
-    offerPrice: 234233,
-    profileUrl: '',
-    tradeMethod: 'all'
+    price: 234233,
+    profileImageUrl: '',
+    tradeType: 'ALL'
   }
 ]
 export const Default: StoryObj<PriceOfferCard> = {

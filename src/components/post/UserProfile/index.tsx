@@ -2,7 +2,6 @@ import { Avatar, Badge, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { UserProfileProps } from './types'
-import { TRANSACTION_TYPE } from './types'
 
 const UserProfile = ({
   nickName,
@@ -10,7 +9,7 @@ const UserProfile = ({
   location,
   level,
   date = '',
-  transactionType = 'all',
+  tradeType = 'ALL',
   type = 'basic'
 }: UserProfileProps): ReactElement => {
   const isOfferProfile = type === 'offer'
@@ -30,7 +29,7 @@ const UserProfile = ({
         </Styled.UserName>
         <Text color="grayScale70" styleType="caption01M" tag="p">
           {location}
-          {isOfferProfile && ` · ${TRANSACTION_TYPE[transactionType]}`}
+          {isOfferProfile && ` · ${tradeType}`}
         </Text>
         {isOfferProfile && (
           <Text color="grayScale70" styleType="caption01M" tag="p">

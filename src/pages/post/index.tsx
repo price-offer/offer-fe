@@ -20,53 +20,52 @@ import { useRouter } from 'next/router'
 import type { ReactElement, ChangeEventHandler } from 'react'
 import { useState } from 'react'
 import { useCreateUploadImagesMutation } from '@apis/image'
+import type { CreatePostReq } from '@apis/post'
 import { useGetCategoriesQuery, useCreatePostMutation } from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
 import { TRADE_TYPES, PRODUCT_CONDITIONS } from '@constants'
 import { useResponsive } from '@hooks'
-import type { ProductConditionCodes, TradeTypeCodes } from '@types'
 
-type PostFormStatus = {
-  title: string
-  imageInfos: ImageInfo[]
-  category: string
-  price: string
-  location: string
-  productCondition: ProductConditionCodes | ''
-  tradeType: TradeTypeCodes | ''
-  description: string
+type PostFormStatus = Partial<
+  Pick<
+    CreatePostReq,
+    | 'title'
+    | 'description'
+    | 'location'
+    | 'category'
+    | 'tradeType'
+    | 'productCondition'
+  >
+> & {
+  price?: string
+  imageInfos?: ImageInfo[]
 }
 
 type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
-const initialPostForm: PostFormStatus = {
-  imageInfos: [],
-  title: '',
-  category: '',
-  location: '',
-  productCondition: '',
-  tradeType: '',
-  description: '',
-  price: ''
-}
+
+const checkCompleteForm = (
+  postForm: PostFormStatus
+): postForm is Required<PostFormStatus> =>
+  Object.values(postForm)
+    .map(value => Boolean(value))
+    .reduce((prev, cur) => prev && cur, true)
 
 const PostPage = (): ReactElement => {
   const postMutation = useCreatePostMutation()
   const uploadImagesQuery = useCreateUploadImagesMutation()
   const categoriesQuery = useGetCategoriesQuery()
   const router = useRouter()
-  const [postForm, setPostForm] = useState<PostFormStatus>(initialPostForm)
+  const [postForm, setPostForm] = useState<PostFormStatus>({})
 
   const InputSize = useResponsive<InputProps, 'width'>({
     desktop: '278px',
     tablet: '100%'
   })
 
-  const isCompleteForm = Object.values(postForm)
-    .map(value => Boolean(value))
-    .reduce((prev, cur) => prev && cur, true)
+  const isCompleteForm = checkCompleteForm(postForm)
 
   const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
     setPostForm({
@@ -94,6 +93,10 @@ const PostPage = (): ReactElement => {
   }
 
   const handlePostProduct = async () => {
+    if (!checkCompleteForm(postForm)) {
+      return
+    }
+
     const { imageInfos, price, ...post } = postForm
     const imageFormData = new FormData()
 
@@ -130,12 +133,12 @@ const PostPage = (): ReactElement => {
               onChange={handleUpdatePostForm}
             />
             <StyledTitleLength styleType="subtitle01M">
-              {postForm.title.length}/40
+              {postForm.title?.length}/40
             </StyledTitleLength>
           </StyledTitleWrapper>
           <div>
             <ImageUploader
-              images={postForm.imageInfos}
+              images={postForm.imageInfos || []}
               onChange={handleUpdateImageInfos}
             />
           </div>

@@ -1,6 +1,11 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { getCategories, getPosts } from './apis'
-import type { GetPostsReq, GetPostsRes } from './types'
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import { getCategories, createPost, getPosts } from './apis'
+import type { CreatePostReq, GetPostsReq, GetPostsRes } from './types'
+
+export const useCreatePostMutation = () =>
+  useMutation({
+    mutationFn: (param: CreatePostReq) => createPost(param)
+  })
 
 export const useGetCategoriesQuery = () =>
   useQuery({

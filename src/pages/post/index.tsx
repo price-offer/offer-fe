@@ -27,7 +27,7 @@ import { PostForm } from '@components'
 import { TRADE_TYPES, PRODUCT_CONDITIONS } from '@constants'
 import { useResponsive } from '@hooks'
 
-type PostFormStatus = Partial<
+type PostFormState = Partial<
   Omit<CreatePostReq, 'price' | 'thumbnailImageUrl' | 'imageUrls'>
 > & {
   price?: string
@@ -37,7 +37,7 @@ type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
 
-const postFormKeys: (keyof PostFormStatus)[] = [
+const postFormKeys: (keyof PostFormState)[] = [
   'title',
   'description',
   'location',
@@ -49,8 +49,8 @@ const postFormKeys: (keyof PostFormStatus)[] = [
 ]
 
 const isCompleteForm = (
-  postForm: PostFormStatus
-): postForm is Required<PostFormStatus> =>
+  postForm: PostFormState
+): postForm is Required<PostFormState> =>
   postFormKeys.every(key => Boolean(postForm[key]))
 
 const PostPage = (): ReactElement => {
@@ -58,7 +58,7 @@ const PostPage = (): ReactElement => {
   const uploadImagesQuery = useCreateUploadImagesMutation()
   const categoriesQuery = useGetCategoriesQuery()
   const router = useRouter()
-  const [postForm, setPostForm] = useState<PostFormStatus>({})
+  const [postForm, setPostForm] = useState<PostFormState>({})
 
   const InputSize = useResponsive<InputProps, 'width'>({
     desktop: '278px',

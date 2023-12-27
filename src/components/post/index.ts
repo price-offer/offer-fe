@@ -1,5 +1,5 @@
 export * from './PostForm'
-export * from './PostFields'
+export * from './PostFieldList'
 export * from './PriceOfferCard'
 export * from './PriceOfferModal'
 export * from './UserProfile'

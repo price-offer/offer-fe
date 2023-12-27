@@ -3,7 +3,7 @@ export type PostField = {
   value: string
 }
 
-export type PostFieldsProps = {
+export type PostFieldListProps = {
   date: string
   location: string
   productCondition: string
@@ -11,4 +11,4 @@ export type PostFieldsProps = {
   height?: number
 }
 
-export type StyledTextWrapperProps = StyledProps<PostFieldsProps, 'height'>
+export type StyledTextWrapperProps = StyledProps<PostFieldListProps, 'height'>

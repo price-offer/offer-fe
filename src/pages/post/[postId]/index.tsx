@@ -7,7 +7,7 @@ import type { ReactElement } from 'react'
 import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
-import { UserProfile, PriceOfferCard, PostFields } from '@components'
+import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
 
 type Props = { postId: number }
@@ -68,7 +68,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
           <div>
             <Text styleType="headline02B">상품 정보</Text>
             <TransactionContainer>
-              <PostFields
+              <PostFieldList
                 date={getTimeDiffText(postQuery.data?.createdAt || '')}
                 location={postQuery.data?.location || ''}
                 productCondition={postQuery.data?.productCondition || ''}

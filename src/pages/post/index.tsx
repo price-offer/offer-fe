@@ -41,15 +41,25 @@ type PostFormStatus = Partial<
   price?: string
   imageInfos?: ImageInfo[]
 }
-
 type HandleUpdatePostForm = ChangeEventHandler<
   HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
 >
 
+const postFormKeys: (keyof PostFormStatus)[] = [
+  'title',
+  'description',
+  'location',
+  'category',
+  'tradeType',
+  'productCondition',
+  'price',
+  'imageInfos'
+]
+
 const isCompleteForm = (
   postForm: PostFormStatus
 ): postForm is Required<PostFormStatus> =>
-  Object.values(postForm).every(value => Boolean(value))
+  postFormKeys.every(key => Boolean(postForm[key]))
 
 const PostPage = (): ReactElement => {
   const postMutation = useCreatePostMutation()

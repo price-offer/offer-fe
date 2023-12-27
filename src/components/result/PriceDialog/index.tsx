@@ -3,7 +3,7 @@ import type { ReactElement, MouseEvent } from 'react'
 import { useState, useEffect } from 'react'
 import { Styled } from './styled'
 import type { PriceDialogProps } from './types'
-
+import { toLocaleCurrency } from '@utils'
 const PriceDialog = ({
   minPriceValue,
   maxPriceValue,
@@ -37,9 +37,18 @@ const PriceDialog = ({
           onClick={() => {
             setIsOpen(!isOpen)
           }}>
-          {isApplied
-            ? `${applyPrice.minPrice}원~${applyPrice.maxPrice}원`
-            : '가격'}
+          {isApplied ? (
+            <>
+              가격
+              <Styled.ApplyPrice>
+                {`${toLocaleCurrency(
+                  Number(applyPrice.minPrice)
+                )}원~${toLocaleCurrency(Number(applyPrice.maxPrice))}원`}
+              </Styled.ApplyPrice>
+            </>
+          ) : (
+            '가격'
+          )}
           <Styled.PriceArrowDown type="chevronDown" />
         </Styled.PriceDialogWrapper>
         {isOpen ? (
@@ -55,6 +64,7 @@ const PriceDialog = ({
                 <Styled.InputWrapper>
                   <Styled.MinimumInput
                     isPrice
+                    maxLength={13}
                     placeholder="최소 금액"
                     value={minPriceValue}
                     onChange={handleMinPriceInputChange}
@@ -62,6 +72,7 @@ const PriceDialog = ({
                   ~
                   <Styled.MaximumInput
                     isPrice
+                    maxLength={13}
                     placeholder="최대 금액"
                     value={maxPriceValue}
                     onChange={handleMaxPriceInputChange}
@@ -94,6 +105,7 @@ const PriceDialog = ({
                 <Styled.InputWrapper>
                   <Styled.MinimumInput
                     isPrice
+                    maxLength={13}
                     placeholder="최소 금액"
                     value={minPriceValue}
                     onChange={handleMinPriceInputChange}
@@ -101,6 +113,7 @@ const PriceDialog = ({
                   ~
                   <Styled.MaximumInput
                     isPrice
+                    maxLength={13}
                     placeholder="최대 금액"
                     value={maxPriceValue}
                     onChange={handleMaxPriceInputChange}

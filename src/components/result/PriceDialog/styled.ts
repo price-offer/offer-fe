@@ -77,6 +77,13 @@ const PriceDialog = styled.div`
 const Price = styled.div`
   ${({ theme }): string => theme.fonts.body01B};
 `
+
+const ApplyPrice = styled.div`
+  margin-right: 4px;
+
+  ${({ theme }): string => theme.fonts.body02B};
+  color: ${({ theme }): string => theme.colors.brandPrimary};
+`
 const InputWrapper = styled.div`
   display: flex;
   gap: 8px;
@@ -131,6 +138,7 @@ export const Styled = {
   Dim,
   PriceDialog,
   Price,
+  ApplyPrice,
   InputWrapper,
   MinimumInput,
   MaximumInput,

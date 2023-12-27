@@ -24,18 +24,23 @@ const SelectWrapper = styled.div`
 `
 
 const LeftSelectWrapper = styled.div`
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    overflow: scroll;
-  }
-`
-
-const LeftSelectSlider = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-
-  min-width: max-content;
 `
 const CategorySelect = styled(SelectBox)`
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    display: none;
+  }
+
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    display: inline;
+  }
+
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    display: inline;
+  }
+
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
@@ -69,6 +74,17 @@ const PriceFilterSelect = styled(SelectBox)`
 `
 
 const ProductCount = styled.div`
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    display: none;
+  }
+
+  ${({ theme }): string => theme.mediaQuery.mobile} {
+    display: inline;
+  }
+
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    display: inline;
+  }
   margin-right: auto;
   ${({ theme }): string => theme.fonts.body01B}
 `
@@ -77,7 +93,6 @@ export const Styled = {
   SelectWrapper,
   LeftSelectWrapper,
   CategorySelect,
-  LeftSelectSlider,
   TradePeriodSelect,
   RightSelectWrapper,
   PriceFilterSelect,

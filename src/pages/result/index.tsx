@@ -61,12 +61,19 @@ const Result: NextPage = () => {
     category: categoryFilterOption,
     minPrice: applyPrice.minPrice,
     maxPrice: applyPrice.maxPrice,
-    tradeType: selectedTradePeriodValue
+    tradeType: selectedTradePeriodValue,
+    sort: selectedSortPriceValue
   })
 
   useEffect(() => {
     refetch()
-  }, [applyPrice, selectedCategoryValue, selectedTradePeriodValue, refetch])
+  }, [
+    applyPrice,
+    selectedCategoryValue,
+    selectedTradePeriodValue,
+    selectedSortPriceValue,
+    refetch
+  ])
 
   return (
     <Layout>

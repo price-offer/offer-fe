@@ -7,7 +7,7 @@ import type { ReactElement } from 'react'
 import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
-import { PostField, UserProfile, PriceOfferCard } from '@components'
+import { UserProfile, PriceOfferCard, PostFields } from '@components'
 import { TRADE_STATUS } from '@constants'
 
 type Props = { postId: number }
@@ -27,21 +27,6 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     id: idx,
     url
   }))
-  const postInfoList = [
-    {
-      label: '작성일',
-      value: getTimeDiffText(postQuery.data?.createdAt || '')
-    },
-    {
-      label: '상품 상태',
-      value: postQuery.data?.productCondition || ''
-    },
-    {
-      label: '거래 방식',
-      value: postQuery.data?.tradeType || ''
-    },
-    { label: '거래 지역', value: postQuery.data?.location }
-  ]
   const offers = postOffersQuery.data?.offers.map(
     ({ offerer, createdAt, ...offer }) => ({
       ...offerer,
@@ -83,9 +68,12 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
           <div>
             <Text styleType="headline02B">상품 정보</Text>
             <TransactionContainer>
-              {postInfoList.map(({ label, value }) => (
-                <PostField key={label} label={label} value={value || ''} />
-              ))}
+              <PostFields
+                date={getTimeDiffText(postQuery.data?.createdAt || '')}
+                location={postQuery.data?.location || ''}
+                productCondition={postQuery.data?.productCondition || ''}
+                tradeType={postQuery.data?.tradeType || ''}
+              />
             </TransactionContainer>
             <Description>{postQuery.data?.description}</Description>
           </div>

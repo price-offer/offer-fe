@@ -58,19 +58,3 @@ export const toQueryString = (value: {
   Object.entries(value)
     .reduce((query, [key, value]) => `${query}${key}=${value}&`, '?')
     .slice(0, -1)
-
-export const toLabelObject = <
-  T extends readonly {
-    code: string
-    name: string
-  }[]
->(
-  constant: T
-) =>
-  constant.reduce<{ [key: string]: string }>(
-    (result, { code, name }) => ({
-      ...result,
-      [code]: name
-    }),
-    {}
-  )

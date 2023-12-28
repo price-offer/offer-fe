@@ -138,6 +138,9 @@ export type OfferSummary = {
   thumbnailImageUrl: string
   tradeStatus: TradeStatusType
   createdAt: string
+  reviewAvailable: boolean
+  hasReview: boolean
+  review: ReviewInfo
 }
 
 /** Message */

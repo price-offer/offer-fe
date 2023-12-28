@@ -1,7 +1,9 @@
 import type { PostSummary } from '@types'
 
-export type GetsReq = {
-  page: number
+export type GetLikedPostsReq = {
+  sort: string
+  lastId: number
+  limit: number
 }
 export type GetLikedPostsRes = PostSummary[]
 

@@ -144,12 +144,8 @@ const setStyleByToken = (theme: Theme, hasToken: boolean) => {
 
   return `
     ${theme.mediaQuery.desktop} {
-      :nth-of-type(1) {
-        grid-area: auto;
-      }
-      :nth-of-type(2) {
-        grid-area: auto;
-      }
+      :nth-of-type(1),
+      :nth-of-type(2),
       :nth-of-type(3) {
         grid-area: auto;
       }
@@ -165,19 +161,12 @@ const setStyleByToken = (theme: Theme, hasToken: boolean) => {
       :nth-of-type(3) {
         grid-area: review;
       }
-      :nth-of-type(4) {
-        display: none;
-      }
     }
 
     ${theme.mediaQuery.mobile} {
       min-width: 90px;
-      :nth-of-type(1) {
-        grid-area: auto;
-      }
-      :nth-of-type(2) {
-        grid-area: auto;
-      }
+      :nth-of-type(1),
+      :nth-of-type(2),
       :nth-of-type(3) {
         grid-area: auto;
       }

@@ -12,11 +12,7 @@ const UserName = styled.p`
 
     ${theme.mediaQuery.tablet} {
       ${theme.fonts.body01B};
-      margin: 16px auto;
-    }
-
-    ${theme.mediaQuery.mobile} {
-      margin-left: 16px;
+      margin: 16px;
     }
   `}
 `

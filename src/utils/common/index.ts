@@ -24,5 +24,5 @@ export const splitObject = <T extends UnknownObject>(
   object: T
 ): SplittedObjectArray<T> =>
   Object.entries(object).map(([key, value]) => ({
-    [key]: value
+    [key as string]: value
   })) as SplittedObjectArray<T>

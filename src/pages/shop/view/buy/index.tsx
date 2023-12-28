@@ -6,10 +6,13 @@ import { sortItems } from './types'
 import { Tabs } from '@components/common'
 import { BuyTabPostList } from '@components/shop/PostList'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
-import type { TradeBuyActivityCodes } from '@types'
+import type { TradeBuyActivityCodes, TradeBuyActivityNames } from '@types'
 import { noop } from '@utils'
 
-const tradeBuyActivityList = Object.entries(TRADE_ACTIVITY_TYPES.buy)
+const tradeBuyActivityList = Object.entries<
+  TradeBuyActivityCodes,
+  TradeBuyActivityNames
+>(TRADE_ACTIVITY_TYPES.buy)
 
 const getArticles = () => {
   return []

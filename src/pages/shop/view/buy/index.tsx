@@ -26,11 +26,7 @@ export const ShopPageBuyView = (): ReactElement => {
     useState<TradeBuyActivityCodes>('like')
 
   const offers = useGetMyOffersQuery({ sort: sortOptionCode })
-  const likedPosts = useGetLikedPostsQuery({
-    sort: sortOptionCode,
-    lastId: 0,
-    limit: 100
-  })
+  const likedPosts = useGetLikedPostsQuery({ sort: sortOptionCode })
 
   const handleChangeSortOption = (newSortOption: SortOption) => {
     setSortOptionCode(newSortOption.code)

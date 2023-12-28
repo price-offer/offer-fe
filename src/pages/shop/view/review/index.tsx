@@ -4,8 +4,12 @@ import { Styled } from './styled'
 import { Tabs } from '@components/common'
 import { ReviewTabPostList } from '@components/shop/PostList'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
+import type { TradeReviewActivityCodes, TradeReviewActivityNames } from '@types'
 
-const tradeReviewActivityList = Object.entries(TRADE_ACTIVITY_TYPES.review)
+const tradeReviewActivityList = Object.entries<
+  TradeReviewActivityCodes,
+  TradeReviewActivityNames
+>(TRADE_ACTIVITY_TYPES.review)
 
 const getReviews = () => {
   return []

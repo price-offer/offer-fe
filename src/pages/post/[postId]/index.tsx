@@ -4,11 +4,11 @@ import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
-import { useGetPostOffersQuery } from '@apis/offer'
 import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
+import { useAuth } from '@hooks'
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -21,19 +21,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postQuery = useGetPostQuery(postId)
-  const postOffersQuery = useGetPostOffersQuery(postId)
+  const { user } = useAuth()
 
+  const isSeller = user.id === postQuery.data?.seller.id
   const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     url
   }))
-  const offers = postOffersQuery.data?.offers.map(
-    ({ offerer, createdAt, ...offer }) => ({
-      ...offerer,
-      date: createdAt,
-      ...offer
-    })
-  )
 
   return (
     <Layout>
@@ -44,14 +38,22 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         <Content>
           <div>
             <ProductCondition>
-              <ProductConditionSelectBox
-                items={TRADE_STATUS}
-                value={postQuery.data?.tradeStatus}
-                onChange={(): void => {
-                  // do something
-                }}
-              />
-              <IconButton icon="more" size={24} />
+              {isSeller ? (
+                <>
+                  <ProductConditionSelectBox
+                    items={TRADE_STATUS}
+                    value={postQuery.data?.tradeStatus}
+                    onChange={(): void => {
+                      // do something
+                    }}
+                  />
+                  <IconButton icon="more" size={24} />
+                </>
+              ) : (
+                <ProductConditionBadge>
+                  {postQuery.data?.tradeStatus}
+                </ProductConditionBadge>
+              )}
             </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
               {postQuery.data?.category.name || ''}
@@ -80,7 +82,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
           <Divider gap={16} />
           <UserProfile
             image={postQuery.data?.seller.profileImageUrl}
-            level={String(postQuery.data?.seller.offerLevel) || '0'}
+            level={postQuery.data?.seller.offerLevel || 0}
             location={postQuery.data?.seller.nickname || ''}
             nickName={postQuery.data?.seller.nickname || ''}
             type="basic"
@@ -88,11 +90,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         </Content>
       </Main>
       <MainDivider size="bold" />
-      <PriceOfferCard
-        isLike={Boolean(postQuery.data?.liked)}
-        likeCount={postQuery.data?.totalLikeCount || 0}
-        offerList={offers || []}
-      />
+      <PriceOfferCard isSeller={isSeller} postId={postId} />
     </Layout>
   )
 }
@@ -108,6 +106,7 @@ const Layout = styled.div`
 
   width: 100%;
   max-width: 1200px;
+  height: fit-content;
   margin: 0 auto 15px;
   padding-top: 20px;
 
@@ -179,6 +178,22 @@ const ProductConditionSelectBox = styled(SelectBox)`
     }
   `}
 `
+
+const ProductConditionBadge = styled.div`
+  margin-bottom: 20px;
+  padding: 4px 8px 3px;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.radius.round4};
+
+    background-color: ${theme.colors.black};
+
+    color: ${theme.colors.white};
+
+    ${theme.fonts.body02B}
+  `}
+`
+
 const TransactionContainer = styled.div`
   display: flex;
   justify-content: space-between;

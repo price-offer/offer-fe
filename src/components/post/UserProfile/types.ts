@@ -5,7 +5,7 @@ export type UserProfileProps = {
   nickName: string
   location: string
   type: 'offer' | 'basic'
-  level: string
+  level: number
   date?: string
   tradeType?: TradeTypeCodes
 }

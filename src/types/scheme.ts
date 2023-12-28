@@ -31,7 +31,7 @@ export type PostDetail = {
     id: number
     profileImageUrl: string
     nickname: string
-    offerLevel: string
+    offerLevel: number
   }
   category: {
     code: string

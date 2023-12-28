@@ -1,9 +1,8 @@
 import type { Offerer } from '@types'
 
 export type PriceOfferCardProps = {
-  offerList: Offer[]
-  likeCount: number
-  isLike: boolean
+  isSeller: boolean
+  postId: number
 }
 
 export type Offer = Offerer & {

@@ -54,7 +54,11 @@ export const ShopPageBuyView = (): ReactElement => {
                       <Styled.StatusButton isCurrent={isCurrent} type="button">
                         <Styled.Text isCurrent={isCurrent}>{name}</Styled.Text>
                       </Styled.StatusButton>
-                      <Styled.Text color="grayScale50">1</Styled.Text>
+                      <Styled.Text color="grayScale50">
+                        {code === 'like'
+                          ? likedPosts.data?.posts.length
+                          : offers.data?.offers.length}
+                      </Styled.Text>
                     </Styled.StatusButtonLabel>
                   </Styled.Tab>
                 )

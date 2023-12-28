@@ -50,7 +50,7 @@ export const ShopPageSaleView = ({
     function fetchProfileOnMount() {
       handleChangeSearchOptions({ sellerId: profile.data.id })
     },
-    [handleChangeSearchOptions, profile.data.id]
+    [profile.data.id]
   )
 
   return (

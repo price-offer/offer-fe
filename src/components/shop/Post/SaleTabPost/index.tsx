@@ -21,7 +21,7 @@ const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
     onChangeTradeStatus,
     hasReview
   } = props
-  const isSoldOut = tradeStatus === 'SOLD'
+  const isSoldOut = tradeStatus.code === 'SOLD'
 
   const handleChangeTradeStatus: SelectOnChangeHandler<
     TradeStatusType
@@ -36,7 +36,7 @@ const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
         {hasToken ? (
           <Styled.SelectBox
             items={TRADE_STATUS}
-            value={tradeStatus}
+            value={tradeStatus.code}
             onChange={handleChangeTradeStatus}
           />
         ) : (

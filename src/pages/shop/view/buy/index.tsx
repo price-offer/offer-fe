@@ -1,42 +1,43 @@
 import { SelectBox } from '@offer-ui/react'
-import type { ReactElement, MouseEvent } from 'react'
+import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import { sortItems } from './types'
+import { useGetLikedPostsQuery } from '@apis/like'
+import { useGetMyOffersQuery } from '@apis/offer'
 import { Tabs } from '@components/common'
 import { BuyTabPostList } from '@components/shop/PostList'
-import { TRADE_ACTIVITY_TYPES } from '@constants'
-import type { TradeBuyActivityCodes, TradeBuyActivityNames } from '@types'
-import { noop } from '@utils'
+import { TRADE_ACTIVITY_TYPES, SORT_OPTIONS } from '@constants'
+import type {
+  SortOption,
+  SortOptionCodes,
+  TradeBuyActivityCodes,
+  TradeBuyActivityNames
+} from '@types'
 
 const tradeBuyActivityList = Object.entries<
   TradeBuyActivityCodes,
   TradeBuyActivityNames
 >(TRADE_ACTIVITY_TYPES.buy)
 
-const getArticles = () => {
-  return []
-}
+export const ShopPageBuyView = (): ReactElement => {
+  const [sortOptionCode, setSortOptionCode] =
+    useState<SortOptionCodes>('CREATED_DATE_DESC')
+  const [activityType, setActivityType] =
+    useState<TradeBuyActivityCodes>('like')
 
-export type ShopPageBuyViewProps = {
-  memberId: number
-}
+  const offers = useGetMyOffersQuery({ sort: sortOptionCode })
+  const likedPosts = useGetLikedPostsQuery({
+    sort: sortOptionCode,
+    lastId: 0,
+    limit: 100
+  })
 
-export const ShopPageBuyView = ({
-  memberId
-}: ShopPageBuyViewProps): ReactElement => {
-  const [tabIndex, setTabIndex] = useState<number>(0)
-  const [articles] = useState<any>(getArticles())
-
-  // eslint-disable-next-line no-console
-  console.log(memberId)
-
-  const handleTabClick = (
-    e: MouseEvent<HTMLDivElement>,
-    index: number
-  ): void => {
-    setTabIndex(index)
+  const handleChangeSortOption = (newSortOption: SortOption) => {
+    setSortOptionCode(newSortOption.code)
   }
+  const handleChangeActivityType =
+    (newActivityType: TradeBuyActivityCodes) => (): void =>
+      setActivityType(newActivityType)
 
   return (
     <div>
@@ -45,19 +46,17 @@ export const ShopPageBuyView = ({
         <Tabs>
           <Styled.SearchOptionsWrapper>
             <Styled.TabsList>
-              {tradeBuyActivityList.map((tradeBuyActivity, index) => {
-                const isCurrent = tabIndex === index
+              {tradeBuyActivityList.map(([code, name]) => {
+                const isCurrent = code === activityType
 
                 return (
                   <Styled.Tab
-                    key={tradeBuyActivity[0]}
-                    onClick={handleTabClick}>
+                    key={`${code}-tab`}
+                    onClick={handleChangeActivityType(code)}>
                     <Styled.StatusButtonLabel>
                       <Styled.Circle isCurrent={isCurrent} />
                       <Styled.StatusButton isCurrent={isCurrent} type="button">
-                        <Styled.Text isCurrent={isCurrent}>
-                          {tradeBuyActivity[1]}
-                        </Styled.Text>
+                        <Styled.Text isCurrent={isCurrent}>{name}</Styled.Text>
                       </Styled.StatusButton>
                       <Styled.Text color="grayScale50">1</Styled.Text>
                     </Styled.StatusButtonLabel>
@@ -67,26 +66,22 @@ export const ShopPageBuyView = ({
             </Styled.TabsList>
             <SelectBox
               colorType="none"
-              items={sortItems}
-              value="recently"
-              onChange={noop}
+              items={SORT_OPTIONS}
+              value={sortOptionCode}
+              onChange={handleChangeSortOption}
             />
           </Styled.SearchOptionsWrapper>
           <Styled.ProductListPanels>
             <Tabs.Panel>
               <BuyTabPostList
-                activityType={
-                  tradeBuyActivityList[tabIndex][0] as TradeBuyActivityCodes
-                }
-                posts={articles || []}
+                activityType="like"
+                posts={likedPosts.data?.posts || []}
               />
             </Tabs.Panel>
             <Tabs.Panel>
               <BuyTabPostList
-                activityType={
-                  tradeBuyActivityList[tabIndex][0] as TradeBuyActivityCodes
-                }
-                posts={articles || []}
+                activityType="offer"
+                posts={offers.data?.offers || []}
               />
             </Tabs.Panel>
           </Styled.ProductListPanels>

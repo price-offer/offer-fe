@@ -1,25 +1,19 @@
 import type { ReactElement } from 'react'
 import type { LikeTabPanelProps } from './types'
 import { Styled } from '../styled'
-import { toLocaleCurrency } from '@utils'
+import { toLocaleCurrency, getTimeDiffText } from '@utils'
 
-const LikeTabPanel = (props: LikeTabPanelProps): ReactElement => {
-  const {
-    className,
-    // sellerNickName,
-    id: postId,
-    thumbnailImageUrl,
-    title = '',
-    // startPrice,
-    tradeStatus,
-    createdAt,
-    likeCount
-  } = props
-
-  // TODO: API Scheme 변경 필요
-  const sellerNickName = ''
-  const startPrice = 0
-
+const LikeTabPanel = ({
+  className,
+  seller,
+  id: postId,
+  thumbnailImageUrl,
+  title = '',
+  price,
+  tradeStatus,
+  createdAt,
+  likeCount
+}: LikeTabPanelProps): ReactElement => {
   return (
     <Styled.Container className={className}>
       <Styled.ProductWrapper>
@@ -29,17 +23,17 @@ const LikeTabPanel = (props: LikeTabPanelProps): ReactElement => {
         />
         <Styled.ProductMetaWrapper>
           <Styled.SellerName styleType="body02R">
-            {sellerNickName}
+            {seller.nickname}
           </Styled.SellerName>
           <Styled.ProductName styleType="body02M">{title}</Styled.ProductName>
           <Styled.ProductInfoWrapper>
-            <Styled.Price>
-              시작가: {startPrice ? toLocaleCurrency(startPrice) : ''}원
-            </Styled.Price>
+            <Styled.Price>시작가: {toLocaleCurrency(price)}원</Styled.Price>
             <Styled.TradeStatusName styleType="body02R">
               {tradeStatus.name}
             </Styled.TradeStatusName>
-            <Styled.Date styleType="body02R">{createdAt}</Styled.Date>
+            <Styled.Date styleType="body02R">
+              {getTimeDiffText(createdAt)}
+            </Styled.Date>
           </Styled.ProductInfoWrapper>
         </Styled.ProductMetaWrapper>
       </Styled.ProductWrapper>

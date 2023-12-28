@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react'
-import type { ShopPageBuyViewProps } from './view/buy'
 import { ShopPageBuyView } from './view/buy'
 import type { ShopPageReviewViewProps } from './view/review'
 import { ShopPageReviewView } from './view/review'
@@ -28,7 +27,7 @@ export const pageTabs: PageTab[] = [
       code: 'buy',
       name: '구매'
     },
-    panel: (props: ShopPageBuyViewProps) => ShopPageBuyView(props)
+    panel: ShopPageBuyView
   },
   {
     tab: {

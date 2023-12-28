@@ -3,7 +3,6 @@ import type { CommonCreation, ReviewInfo } from '@types'
 export type GetReviewsReq = {
   memberId: number
   role?: string
-  sort: string
   lastId: number
   limit: number
 }

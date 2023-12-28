@@ -143,17 +143,31 @@ const setStyleByToken = (theme: Theme, hasToken: boolean) => {
   }
 
   return `
-    :nth-of-type(1) {
-      grid-area: sold;
+    ${theme.mediaQuery.desktop} {
+      :nth-of-type(1) {
+        grid-area: auto;
+      }
+      :nth-of-type(2) {
+        grid-area: auto;
+      }
+      :nth-of-type(3) {
+        grid-area: auto;
+      }
     }
-    :nth-of-type(2) {
-      grid-area: sell;
-    }
-    :nth-of-type(3) {
-      grid-area: review;
-    }
-    :nth-of-type(4) {
-      display: none;
+
+    ${theme.mediaQuery.tablet} {
+      :nth-of-type(1) {
+        grid-area: sold;
+      }
+      :nth-of-type(2) {
+        grid-area: sell;
+      }
+      :nth-of-type(3) {
+        grid-area: review;
+      }
+      :nth-of-type(4) {
+        display: none;
+      }
     }
 
     ${theme.mediaQuery.mobile} {

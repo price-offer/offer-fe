@@ -1,25 +1,25 @@
 import type { ReactElement } from 'react'
 import type { OfferTabPanelProps } from './types'
 import { Styled } from '../styled'
-import { toLocaleCurrency } from '@utils'
+import { toLocaleCurrency, getTimeDiffText } from '@utils'
 
 const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
   const {
     className,
-    // sellerNickName,
     postId,
     thumbnailImageUrl,
     // title = '',
     offerPrice,
     tradeStatus,
-    createdAt
-    // isReviewed
+    createdAt,
+    hasReview
   } = props
 
   // TODO: API Scheme 변경 필요
-  const sellerNickName = ''
+  const seller = {
+    nickName: ''
+  }
   const title = ''
-  const isReviewed = false
 
   return (
     <Styled.Container className={className}>
@@ -30,7 +30,7 @@ const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
         />
         <Styled.ProductMetaWrapper>
           <Styled.SellerName styleType="body02R">
-            {sellerNickName}
+            {seller.nickName}
           </Styled.SellerName>
           <Styled.ProductName styleType="body02M">{title}</Styled.ProductName>
           <Styled.ProductInfoWrapper>
@@ -40,16 +40,18 @@ const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
             <Styled.TradeStatusName styleType="body02R">
               {tradeStatus.name}
             </Styled.TradeStatusName>
-            <Styled.Date styleType="body02R">{createdAt}</Styled.Date>
+            <Styled.Date styleType="body02R">
+              {getTimeDiffText(createdAt)}
+            </Styled.Date>
           </Styled.ProductInfoWrapper>
         </Styled.ProductMetaWrapper>
       </Styled.ProductWrapper>
       <Styled.ReviewButtonWrapper>
         <Styled.ReviewButton
-          isReviewed={isReviewed}
+          hasReview={hasReview}
           size="small"
           styleType="outline">
-          {isReviewed ? '보낸 후기 보기' : '후기 보내기'}
+          {hasReview ? '보낸 후기 보기' : '후기 보내기'}
         </Styled.ReviewButton>
       </Styled.ReviewButtonWrapper>
     </Styled.Container>

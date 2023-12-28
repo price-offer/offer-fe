@@ -11,7 +11,7 @@ export type OptionShape = Readonly<{
 }>
 
 /** Post  */
-export type Seller = {
+export type SellerDetail = {
   id: number
   profileImageUrl: string
   nickname: string
@@ -36,9 +36,9 @@ export type PostDetail = {
   tradeStatus: TradeStatusType
   productCondition: ProductCondition
   createdAt: string
-  seller: Seller
+  seller: SellerDetail
   category: Category
-  liked: true
+  liked: boolean
   totalLikeCount: number
 }
 export type PostSummary = {
@@ -51,6 +51,10 @@ export type PostSummary = {
   tradeStatus: TradeStatusType
   likeCount: number
   createdAt: string
+  seller: SellerDetail
+  category: Category
+  review: ReviewInfo
+  hasReview: boolean
 }
 export type PostSummaries = {
   posts: PostSummary[]

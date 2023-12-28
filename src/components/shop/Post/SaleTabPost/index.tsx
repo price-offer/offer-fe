@@ -5,7 +5,7 @@ import { Styled } from './styled'
 import type { SaleTabPostProps } from './types'
 import { TRADE_STATUS } from '@constants'
 import type { TradeStatusType } from '@types'
-import { toLocaleCurrency } from '@utils'
+import { toLocaleCurrency, getTimeDiffText } from '@utils'
 
 const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
   const {
@@ -54,7 +54,7 @@ const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
               <Text styleType="body02R">{likeCount}</Text>
             </Styled.FavoriteWrapper>
             <Styled.Date hasToken={hasToken} styleType="body02R">
-              {createdAt}
+              {getTimeDiffText(createdAt)}
             </Styled.Date>
           </Styled.ProductInfoWrapper>
         </Styled.ProductMetaWrapper>

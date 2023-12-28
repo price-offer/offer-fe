@@ -23,7 +23,8 @@ export const ShopPageReviewView = ({
 
   const reviews = useGetReviewsQuery({
     memberId: profile.data.id,
-    page: 1,
+    lastId: 0,
+    limit: 100,
     role: reviewType
   })
 

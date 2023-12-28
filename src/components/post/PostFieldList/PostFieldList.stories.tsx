@@ -13,8 +13,8 @@ export default meta
 export const Default: StoryObj<PostFieldList> = {
   args: {
     date: '1시간 전',
-    productCondition: '새상품',
-    tradeType: '직거래',
+    productCondition: { code: 'NEW', name: '새상품' },
+    tradeType: { code: 'FACE_TO_FACE', name: '직거래' },
     location: '관악구'
   },
   render: args => <PostFieldListComponent {...args} />

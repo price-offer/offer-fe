@@ -17,11 +17,11 @@ const PostFieldList = ({
     },
     {
       label: '상품 상태',
-      value: productCondition
+      value: productCondition?.code || ''
     },
     {
       label: '거래 방식',
-      value: tradeType
+      value: tradeType?.code || ''
     },
     { label: '거래 지역', value: location }
   ]

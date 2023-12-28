@@ -1,9 +1,7 @@
 import type { ReactElement } from 'react'
 import type { LikeTabPanelProps } from './types'
 import { Styled } from '../styled'
-
-import { TRADE_STATUS } from '@constants/app'
-import { find, toLocaleCurrency } from '@utils'
+import { toLocaleCurrency } from '@utils'
 
 const LikeTabPanel = (props: LikeTabPanelProps): ReactElement => {
   const {
@@ -17,7 +15,6 @@ const LikeTabPanel = (props: LikeTabPanelProps): ReactElement => {
     createdAt,
     likeCount
   } = props
-  const tradeStatusOption = find(TRADE_STATUS, { code: tradeStatus })
 
   // TODO: API Scheme 변경 필요
   const sellerNickName = ''
@@ -40,7 +37,7 @@ const LikeTabPanel = (props: LikeTabPanelProps): ReactElement => {
               시작가: {startPrice ? toLocaleCurrency(startPrice) : ''}원
             </Styled.Price>
             <Styled.TradeStatusName styleType="body02R">
-              {tradeStatusOption.name}
+              {tradeStatus.name}
             </Styled.TradeStatusName>
             <Styled.Date styleType="body02R">{createdAt}</Styled.Date>
           </Styled.ProductInfoWrapper>

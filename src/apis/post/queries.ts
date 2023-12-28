@@ -35,7 +35,8 @@ export const useGetCategoriesQuery = () =>
 export const useGetPostsQuery = (searchOptions: GetPostsReq) =>
   useQuery({
     queryKey: ['posts', searchOptions],
-    queryFn: () => getPosts(searchOptions)
+    queryFn: () => getPosts(searchOptions),
+    enabled: typeof searchOptions.sellerId === 'number'
   })
 
 export const useGetInfinitePostsQuery = (params: GetPostsReq) =>

@@ -1,6 +1,6 @@
 import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Styled } from './styled'
 import type { GetPostsReq, ProfileQueryResult } from '@apis'
 import { usePostTradeStatusMutation, useGetPostsQuery } from '@apis'
@@ -18,7 +18,7 @@ export const ShopPageSaleView = ({
   profile
 }: ShopPageSaleViewProps): ReactElement => {
   const [searchOptions, setSearchOptions] = useState<GetPostsReq>({
-    sellerId: profile.data.id,
+    sellerId: profile.data.nickname ? profile.data.id : undefined,
     tradeStatus: 'SELLING',
     sort: 'CREATED_DATE_DESC'
   })
@@ -26,12 +26,15 @@ export const ShopPageSaleView = ({
   const posts = useGetPostsQuery(searchOptions)
   const postTradeStatus = usePostTradeStatusMutation()
 
-  const handleChangeSearchOptions = (newOption: GetPostsReq) =>
-    setSearchOptions({
-      ...searchOptions,
-      ...newOption
-    })
-
+  const handleChangeSearchOptions = useCallback(
+    (newOption: GetPostsReq) => {
+      setSearchOptions({
+        ...searchOptions,
+        ...newOption
+      })
+    },
+    [searchOptions]
+  )
   const handleChangeProductTradeStatus: SaleTabPostProps['onChangeTradeStatus'] =
     async (postId, tradeStatus) => {
       await postTradeStatus.mutateAsync({
@@ -42,6 +45,13 @@ export const ShopPageSaleView = ({
       await posts.refetch()
       profile.refetch()
     }
+
+  useEffect(
+    function fetchProfileOnMount() {
+      handleChangeSearchOptions({ sellerId: profile.data.id })
+    },
+    [handleChangeSearchOptions, profile.data.id]
+  )
 
   return (
     <div>

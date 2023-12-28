@@ -1,3 +1,4 @@
+import type { Theme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Avatar as AvatarComponent } from '@offer-ui/react'
 
@@ -103,15 +104,20 @@ const NickName = styled.span`
     }
   `}
 `
-const UserProductWrapper = styled.div`
-  ${({ theme }): string => `
+const UserProductWrapper = styled.div<{ hasToken: boolean }>`
+  ${({ theme, hasToken }): string => `
     display: grid;
     background-color: ${theme.colors.bgGray01};
     gap: 16px;
     padding: 16px 20px;
 
     ${theme.mediaQuery.tablet} {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      ${
+        hasToken
+          ? 'grid-template-columns: 1fr 1fr 1fr 1fr;'
+          : 'grid-template-areas: ". sell sold review .";'
+      }
+
       gap: 93px;
       padding: 24px 40px;
       min-width: 684px;
@@ -119,14 +125,54 @@ const UserProductWrapper = styled.div`
 
     ${theme.mediaQuery.mobile} {
       grid-template-columns: 1fr 1fr;
+      grid-template-areas: none;
       gap: 44px;
       min-width: 300px;
       padding: 20px 36px;
     }
   `}
 `
-const UserProductRow = styled.div`
-  ${({ theme }): string => `
+
+const setStyleByToken = (theme: Theme, hasToken: boolean) => {
+  if (hasToken) {
+    return `
+      ${theme.mediaQuery.mobile} {
+        min-width: 90px;
+      }
+    `
+  }
+
+  return `
+    :nth-of-type(1) {
+      grid-area: sold;
+    }
+    :nth-of-type(2) {
+      grid-area: sell;
+    }
+    :nth-of-type(3) {
+      grid-area: review;
+    }
+    :nth-of-type(4) {
+      display: none;
+    }
+
+    ${theme.mediaQuery.mobile} {
+      min-width: 90px;
+      :nth-of-type(1) {
+        grid-area: auto;
+      }
+      :nth-of-type(2) {
+        grid-area: auto;
+      }
+      :nth-of-type(3) {
+        grid-area: auto;
+      }
+    }
+  }
+  `
+}
+const UserProductRow = styled.div<{ hasToken: boolean }>`
+  ${({ theme, hasToken }) => `
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -135,9 +181,7 @@ const UserProductRow = styled.div`
       min-width: 85px;
     }
 
-    ${theme.mediaQuery.mobile} {
-      min-width: 90px;
-    }
+    ${setStyleByToken(theme, hasToken)}
   `}
 `
 const UserProductTitleWrapper = styled.p`

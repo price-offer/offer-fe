@@ -30,27 +30,31 @@ export const ShopPageMainView = ({
       <Tabs>
         <Styled.Layout>
           <Tabs.List>
-            {pageTabs.map(({ tab }, index) => (
-              <Styled.Tab
-                key={`${tab.code}-tab`}
-                isSelected={pageIndex === index}
-                onClick={handleTabClick}>
-                {tab.name}
-              </Styled.Tab>
-            ))}
+            {pageTabs
+              .filter(pageTab => (hasToken ? true : pageTab.tab.code !== 'buy'))
+              .map(({ tab }, index) => (
+                <Styled.Tab
+                  key={`${tab.code}-tab`}
+                  isSelected={pageIndex === index}
+                  onClick={handleTabClick}>
+                  {tab.name}
+                </Styled.Tab>
+              ))}
           </Tabs.List>
         </Styled.Layout>
         <Divider />
         <Styled.Layout>
           <Styled.TabPanels>
-            {pageTabs.map(({ tab, panel }) => (
-              <Tabs.Panel key={`${tab.code}-panel`}>
-                <Styled.TabPanelContent>
-                  <ProfileBox {...profile.data} />
-                  {panel({ profile, hasToken })}
-                </Styled.TabPanelContent>
-              </Tabs.Panel>
-            ))}
+            {pageTabs
+              .filter(pageTab => (hasToken ? true : pageTab.tab.code !== 'buy'))
+              .map(({ tab, panel }) => (
+                <Tabs.Panel key={`${tab.code}-panel`}>
+                  <Styled.TabPanelContent>
+                    <ProfileBox {...profile.data} hasToken={hasToken} />
+                    {panel({ profile, hasToken })}
+                  </Styled.TabPanelContent>
+                </Tabs.Panel>
+              ))}
           </Styled.TabPanels>
         </Styled.Layout>
       </Tabs>

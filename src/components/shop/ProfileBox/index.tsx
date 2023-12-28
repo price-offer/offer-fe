@@ -6,12 +6,13 @@ import type { ProfileBoxProps } from './types'
 const ProfileBox = ({
   nickname,
   profileImageUrl,
-  likeProductCount,
+  likeProductCount = 0,
   offerLevel,
   reviewCount,
   sellingProductCount,
   soldProductCount,
-  className
+  className,
+  hasToken
 }: ProfileBoxProps): ReactElement => {
   const { desktop } = useMedia()
 
@@ -32,29 +33,29 @@ const ProfileBox = ({
             <Badge colorType="orange">Lv.{offerLevel}</Badge>
           </Styled.NickNameRow>
         </Styled.UserWrapper>
-        <Styled.UserProductWrapper>
-          <Styled.UserProductRow>
+        <Styled.UserProductWrapper hasToken={hasToken}>
+          <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="store" />
               <Text styleType="caption01M">판매중</Text>
             </Styled.UserProductTitleWrapper>
             <Text styleType="caption01M">{sellingProductCount}개</Text>
           </Styled.UserProductRow>
-          <Styled.UserProductRow>
+          <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="checkCircle" />
               <Text styleType="caption01M">거래완료</Text>
             </Styled.UserProductTitleWrapper>
             <Text styleType="caption01M">{soldProductCount}개</Text>
           </Styled.UserProductRow>
-          <Styled.UserProductRow>
+          <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="smile" />
               <Text styleType="caption01M">거래후기</Text>
             </Styled.UserProductTitleWrapper>
             <Text styleType="caption01M">{reviewCount}개</Text>
           </Styled.UserProductRow>
-          <Styled.UserProductRow>
+          <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="heart" />
               <Text styleType="caption01M">관심상품</Text>

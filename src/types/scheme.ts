@@ -1,8 +1,4 @@
-import type {
-  ProductConditionCodes,
-  TradeStatusCodes,
-  TradeTypeCodes
-} from './service'
+import type { ProductCondition, TradeStatusType, TradeType } from './service'
 
 /** Common */
 export type CommonCreation = {
@@ -15,6 +11,19 @@ export type OptionShape = Readonly<{
 }>
 
 /** Post  */
+export type Seller = {
+  id: number
+  profileImageUrl: string
+  nickname: string
+  offerLevel: number
+}
+
+export type Category = {
+  code: string
+  name: string
+  imageUrl: string
+}
+
 export type PostDetail = {
   id: number
   title: string
@@ -23,21 +32,12 @@ export type PostDetail = {
   imageUrls: string[]
   price: number
   location: string
-  tradeType: TradeTypeCodes
-  tradeStatus: TradeStatusCodes
-  productCondition: ProductConditionCodes
+  tradeType: TradeType
+  tradeStatus: TradeStatusType
+  productCondition: ProductCondition
   createdAt: string
-  seller: {
-    id: number
-    profileImageUrl: string
-    nickname: string
-    offerLevel: number
-  }
-  category: {
-    code: string
-    name: string
-    imageUrl: string
-  }
+  seller: Seller
+  category: Category
   liked: true
   totalLikeCount: number
 }
@@ -48,7 +48,7 @@ export type PostSummary = {
   location: string
   thumbnailImageUrl: string
   liked: boolean
-  tradeStatus: TradeStatusCodes
+  tradeStatus: TradeStatusType
   likeCount: number
   createdAt: string
 }
@@ -120,7 +120,7 @@ export type Offerer = {
   nickname: string
   location: string
   level: string
-  tradeType: TradeTypeCodes
+  tradeType: TradeType
   profileImageUrl: string
 }
 export type OfferSummaries = {
@@ -132,7 +132,7 @@ export type OfferSummary = {
   postId: number
   offerPrice: number
   thumbnailImageUrl: string
-  tradeStatus: TradeStatusCodes
+  tradeStatus: TradeStatusType
   createdAt: string
 }
 

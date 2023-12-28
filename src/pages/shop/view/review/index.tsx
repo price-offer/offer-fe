@@ -1,8 +1,9 @@
-import type { ReactElement, MouseEvent } from 'react'
+import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import { Tabs } from '@components/common'
-import { ReviewTabPostList } from '@components/shop/PostList'
+import type { ProfileQueryResult } from '@apis'
+import { useGetReviewsQuery } from '@apis'
+import { Tabs, ReviewTabPostList } from '@components'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
 import type { TradeReviewActivityCodes, TradeReviewActivityNames } from '@types'
 
@@ -11,29 +12,25 @@ const tradeReviewActivityList = Object.entries<
   TradeReviewActivityNames
 >(TRADE_ACTIVITY_TYPES.review)
 
-const getReviews = () => {
-  return []
-}
-
 export type ShopPageReviewViewProps = {
-  memberId: number
+  profile: ProfileQueryResult
 }
 
 export const ShopPageReviewView = ({
-  memberId
+  profile
 }: ShopPageReviewViewProps): ReactElement => {
-  const [tabIndex, setTabIndex] = useState<number>(0)
-  const [reviews] = useState<any>(getReviews())
+  const [reviewType, setReviewType] = useState<TradeReviewActivityCodes>('ALL')
 
-  // eslint-disable-next-line no-console
-  console.log(memberId)
+  const reviews = useGetReviewsQuery({
+    memberId: profile.data.id,
+    page: 1,
+    role: reviewType
+  })
 
-  const handleTabClick = (
-    e: MouseEvent<HTMLDivElement>,
-    index: number
-  ): void => {
-    setTabIndex(index)
-  }
+  const handleChangeReviewType =
+    (newReviewType: TradeReviewActivityCodes) => () => {
+      setReviewType(newReviewType)
+    }
 
   return (
     <div>
@@ -42,21 +39,21 @@ export const ShopPageReviewView = ({
         <Tabs>
           <Styled.SearchOptionsWrapper>
             <Styled.TabsList>
-              {tradeReviewActivityList.map((tradeReviewActivity, index) => {
-                const isCurrent = tabIndex === index
+              {tradeReviewActivityList.map(([code, name]) => {
+                const isCurrent = code === reviewType
 
                 return (
                   <Styled.Tab
-                    key={tradeReviewActivity[0]}
-                    onClick={handleTabClick}>
+                    key={`${code}-tab`}
+                    onClick={handleChangeReviewType(code)}>
                     <Styled.StatusButtonLabel>
                       <Styled.Circle isCurrent={isCurrent} />
                       <Styled.StatusButton isCurrent={isCurrent} type="button">
-                        <Styled.Text isCurrent={isCurrent}>
-                          {tradeReviewActivity[1]}
-                        </Styled.Text>
+                        <Styled.Text isCurrent={isCurrent}>{name}</Styled.Text>
                       </Styled.StatusButton>
-                      <Styled.Text color="grayScale50">1</Styled.Text>
+                      <Styled.Text color="grayScale50">
+                        {reviews.data?.length}
+                      </Styled.Text>
                     </Styled.StatusButtonLabel>
                   </Styled.Tab>
                 )
@@ -65,13 +62,13 @@ export const ShopPageReviewView = ({
           </Styled.SearchOptionsWrapper>
           <Styled.ProductListPanels>
             <Tabs.Panel>
-              <ReviewTabPostList reviews={reviews} />
+              <ReviewTabPostList reviews={reviews.data || []} />
             </Tabs.Panel>
             <Tabs.Panel>
-              <ReviewTabPostList reviews={reviews} />
+              <ReviewTabPostList reviews={reviews.data || []} />
             </Tabs.Panel>
             <Tabs.Panel>
-              <ReviewTabPostList reviews={reviews} />
+              <ReviewTabPostList reviews={reviews.data || []} />
             </Tabs.Panel>
           </Styled.ProductListPanels>
         </Tabs>

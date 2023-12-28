@@ -63,9 +63,9 @@ export const TRADE_ACTIVITY_TYPES = {
     offer: '가격제안'
   },
   review: {
-    all: '전체후기',
-    buyer: '구매자 후기',
-    seller: '판매자 후기'
+    ALL: '전체후기',
+    BUYER: '구매자 후기',
+    SELLER: '판매자 후기'
   }
 } as const
 

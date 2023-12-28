@@ -4,6 +4,7 @@ import React from 'react'
 import { Styled } from './styled'
 import type { ReviewTabPostProps } from './types'
 import { ICON_META } from './types'
+import { getTimeDiffText } from '@utils/format'
 
 const ReviewTabPost = ({
   reviewer,
@@ -31,7 +32,7 @@ const ReviewTabPost = ({
               </Styled.Badge>
             </Styled.NickNameWrapper>
             <Text color="grayScale30" styleType="caption01M">
-              {createdDate}
+              {getTimeDiffText(createdDate)}
             </Text>
           </Styled.Meta>
           <Styled.PostTitle color="grayScale50" styleType="body02R">

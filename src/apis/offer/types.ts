@@ -1,8 +1,13 @@
-import type { CommonCreation, Offers, OfferSummaries } from '@types'
+import type {
+  CommonCreation,
+  Offers,
+  OfferSummaries,
+  SortOptionCodes
+} from '@types'
 
 export type GetPostOffersReq = {
   postId: number
-  page: number
+  sort: SortOptionCodes
 }
 export type GetPostOffersRes = Offers
 

@@ -7,7 +7,7 @@ type UseModalReturnType = {
   toggle(): void
 }
 
-const useModal = (): UseModalReturnType => {
+export const useModal = (): UseModalReturnType => {
   const [isOpen, setIsOpen] = useState(false)
 
   return {
@@ -17,5 +17,3 @@ const useModal = (): UseModalReturnType => {
     toggle: () => setIsOpen(!isOpen)
   }
 }
-
-export default useModal

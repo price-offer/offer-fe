@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ReadReviewModalProps } from './Read/types'
 import { ReviewModal } from '.'
-import useModal from '@hooks/useModal'
+import { useModal } from '@hooks'
 
 type ReadReviewModal = typeof ReadReviewModalComponent
 

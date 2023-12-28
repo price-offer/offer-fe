@@ -1,9 +1,8 @@
 import type { ImagesUpload, ImageUpload } from '@types'
 
-export type PostUploadImagesReq = {
-  files: string[]
-}
-export type PostUploadImagesRes = ImagesUpload
+export type CreateUploadImagesReq = FormData
+
+export type CreateUploadImagesRes = ImagesUpload
 
 export type PostUploadImageReq = {
   file: string

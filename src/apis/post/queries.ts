@@ -1,12 +1,30 @@
 import type { DefaultError } from '@tanstack/react-query'
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
-import { getCategories, getPosts, updatePostTradeStatus } from './apis'
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import {
+  getPost,
+  getCategories,
+  createPost,
+  getPosts,
+  updatePostTradeStatus
+} from './apis'
 import type {
+  CreatePostReq,
   GetPostsReq,
   GetPostsRes,
   UpdateTradeStatusReq,
   UpdateTradeStatusRes
 } from './types'
+
+export const useCreatePostMutation = () =>
+  useMutation({
+    mutationFn: (param: CreatePostReq) => createPost(param)
+  })
+
+export const useGetPostQuery = (id: number) =>
+  useQuery({
+    queryKey: ['getPost', id],
+    queryFn: () => getPost(id)
+  })
 
 export const useGetCategoriesQuery = () =>
   useQuery({

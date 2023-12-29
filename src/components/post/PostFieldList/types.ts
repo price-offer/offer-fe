@@ -1,4 +1,4 @@
-import type { ProductCondition, TradeType } from '@types'
+import type { ProductConditionCodes, TradeTypeCodes } from '@types'
 
 export type PostField = {
   label: string
@@ -8,8 +8,8 @@ export type PostField = {
 export type PostFieldListProps = {
   date: string
   location: string
-  productCondition?: ProductCondition
-  tradeType?: TradeType
+  productCondition?: ProductConditionCodes
+  tradeType?: TradeTypeCodes
   height?: number
 }
 

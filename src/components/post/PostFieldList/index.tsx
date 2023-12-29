@@ -4,8 +4,8 @@ import { Styled } from './styled'
 import type { PostFieldListProps } from './types'
 
 const PostFieldList = ({
-  productCondition,
-  tradeType,
+  productCondition = 'NEW',
+  tradeType = 'ALL',
   date,
   location,
   height = 50
@@ -17,11 +17,11 @@ const PostFieldList = ({
     },
     {
       label: '상품 상태',
-      value: productCondition?.code || ''
+      value: productCondition
     },
     {
       label: '거래 방식',
-      value: tradeType?.code || ''
+      value: tradeType
     },
     { label: '거래 지역', value: location }
   ]

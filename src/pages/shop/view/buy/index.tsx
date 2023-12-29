@@ -2,10 +2,12 @@ import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import { useGetLikedPostsQuery } from '@apis/like'
-import { useGetMyOffersQuery } from '@apis/offer'
-import { Tabs } from '@components/common'
-import { BuyTabPostList } from '@components/shop/PostList'
+import {
+  useGetMyOffersQuery,
+  useGetLikedPostsQuery,
+  useUpdateLikeStatusMutation
+} from '@apis'
+import { Tabs, BuyTabPostList } from '@components'
 import { TRADE_ACTIVITY_TYPES, SORT_OPTIONS } from '@constants'
 import type {
   SortOption,
@@ -27,6 +29,7 @@ export const ShopPageBuyView = (): ReactElement => {
 
   const offers = useGetMyOffersQuery({ sort: sortOptionCode })
   const likedPosts = useGetLikedPostsQuery({ sort: sortOptionCode })
+  const likeStatusMutation = useUpdateLikeStatusMutation()
 
   const handleChangeSortOption = (newSortOption: SortOption) => {
     setSortOptionCode(newSortOption.code)
@@ -34,6 +37,11 @@ export const ShopPageBuyView = (): ReactElement => {
   const handleChangeActivityType =
     (newActivityType: TradeBuyActivityCodes) => (): void =>
       setActivityType(newActivityType)
+
+  const handleChangeProductLikeStatus = async (postId: number) => {
+    await likeStatusMutation.mutateAsync(postId)
+    likedPosts.refetch()
+  }
 
   return (
     <div>
@@ -76,6 +84,7 @@ export const ShopPageBuyView = (): ReactElement => {
               <BuyTabPostList
                 activityType="like"
                 posts={likedPosts.data?.posts || []}
+                onChangeProductLikeStatus={handleChangeProductLikeStatus}
               />
             </Tabs.Panel>
             <Tabs.Panel>

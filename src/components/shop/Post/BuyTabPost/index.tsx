@@ -9,7 +9,14 @@ const BuyTabPost = (props: BuyTabPostProps): ReactElement => {
 
   return (
     <>
-      {isOfferType ? <OfferTabPanel {...props} /> : <LikeTabPanel {...props} />}
+      {isOfferType ? (
+        <OfferTabPanel {...props} />
+      ) : (
+        <LikeTabPanel
+          {...props}
+          onChangeLikeStatus={props.onChangeProductLikeStatus}
+        />
+      )}
     </>
   )
 }

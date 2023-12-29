@@ -1,4 +1,5 @@
 import { Text } from '@offer-ui/react'
+import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { BuyTabPostList as BuyTabPostListComponent } from './index'
@@ -18,6 +19,10 @@ const PrimaryWithHooks = () => {
   const [activityType, setActivityType] =
     useState<TradeBuyActivityCodes>('offer')
 
+  const handleChangeLikeStatus = (postId: number) => {
+    action('change like status')(postId)
+  }
+
   return (
     <>
       <button type="button" onClick={(): void => setActivityType('offer')}>
@@ -31,7 +36,11 @@ const PrimaryWithHooks = () => {
           {TRADE_ACTIVITY_TYPES.buy[activityType]}
         </Text>
       </div>
-      <BuyTabPostListComponent activityType="like" posts={[]} />
+      <BuyTabPostListComponent
+        activityType="like"
+        posts={[]}
+        onChangeProductLikeStatus={handleChangeLikeStatus}
+      />
     </>
   )
 }

@@ -12,8 +12,13 @@ const LikeTabPanel = ({
   price,
   tradeStatus,
   createdAt,
-  likeCount
+  likeCount,
+  onChangeLikeStatus
 }: LikeTabPanelProps): ReactElement => {
+  const handleChangeLikeStatus = () => {
+    onChangeLikeStatus(postId)
+  }
+
   return (
     <Styled.Container className={className}>
       <Styled.ProductWrapper>
@@ -37,7 +42,11 @@ const LikeTabPanel = ({
           </Styled.ProductInfoWrapper>
         </Styled.ProductMetaWrapper>
       </Styled.ProductWrapper>
-      <Styled.LikeButton color="grayScale90" size="small" styleType="outline">
+      <Styled.LikeButton
+        color="grayScale90"
+        size="small"
+        styleType="outline"
+        onClick={handleChangeLikeStatus}>
         관심 {likeCount}
       </Styled.LikeButton>
     </Styled.Container>

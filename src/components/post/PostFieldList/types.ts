@@ -1,13 +1,15 @@
+import type { ProductConditionNames, TradeTypeNames } from '@types'
+
 export type PostField = {
-  label: string
-  value: string
+  title: string
+  description: string
 }
 
 export type PostFieldListProps = {
   date: string
   location: string
-  productCondition: string
-  tradeType: string
+  productCondition?: ProductConditionNames
+  tradeType?: TradeTypeNames
   height?: number
 }
 

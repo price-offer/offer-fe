@@ -3,7 +3,8 @@ import type { CommonCreation, ReviewInfo } from '@types'
 export type GetReviewsReq = {
   memberId: number
   role?: string
-  page: number
+  lastId: number
+  limit: number
 }
 export type GetReviewsRes = ReviewInfo
 

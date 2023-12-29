@@ -21,7 +21,7 @@ export const Primary: StoryObj<BuyTabPost> = {
     location: '서울시',
     thumbnailImageUrl: '',
     liked: true,
-    tradeStatus: 'SELLING',
+    tradeStatus: { code: 'SELLING', name: '판매중' },
     likeCount: 0,
     createdAt: ''
   },

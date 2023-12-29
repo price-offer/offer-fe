@@ -1,4 +1,4 @@
-import type { TradeTypeCodes } from '@types'
+import type { TradeTypeNames } from '@types'
 
 export type UserProfileProps = {
   image?: string
@@ -7,5 +7,5 @@ export type UserProfileProps = {
   type: 'offer' | 'basic'
   level: number
   date?: string
-  tradeType?: TradeTypeCodes
+  tradeType?: TradeTypeNames
 }

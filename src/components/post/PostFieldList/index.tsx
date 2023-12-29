@@ -4,38 +4,38 @@ import { Styled } from './styled'
 import type { PostFieldListProps } from './types'
 
 const PostFieldList = ({
-  productCondition,
-  tradeType,
+  productCondition = '새상품',
+  tradeType = '직거래/택배거래',
   date,
   location,
   height = 50
 }: PostFieldListProps): ReactElement => {
   const fields = [
     {
-      label: '작성일',
-      value: date
+      title: '작성일',
+      description: date
     },
     {
-      label: '상품 상태',
-      value: productCondition
+      title: '상품 상태',
+      description: productCondition
     },
     {
-      label: '거래 방식',
-      value: tradeType
+      title: '거래 방식',
+      description: tradeType
     },
-    { label: '거래 지역', value: location }
+    { title: '거래 지역', description: location }
   ]
 
   return (
     <>
-      {fields.map(({ label, value }) => (
-        <Styled.PostFieldList key={label}>
+      {fields.map(({ title, description }) => (
+        <Styled.PostFieldList key={title}>
           <Divider direction="vertical" length={`${height}px`} />
           <Styled.TextWrapper height={height}>
             <Text color="grayScale70" styleType="body02M">
-              {label}
+              {title}
             </Text>
-            <Text styleType="subtitle01B">{value}</Text>
+            <Text styleType="subtitle01B">{description}</Text>
           </Styled.TextWrapper>
         </Styled.PostFieldList>
       ))}

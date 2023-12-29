@@ -21,7 +21,7 @@ const TABS = {
 } as const
 
 const TabKeys = Object.keys(TABS) as TabType[]
-const TabEntries = Object.entries(TABS)
+const TabEntries = Object.entries<TabType, ValueOf<typeof TABS>>(TABS)
 
 const MessageBoxPage = (): ReactElement => {
   const [tab, setTab] = useState<TabType>('all')

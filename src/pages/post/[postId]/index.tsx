@@ -42,7 +42,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                 <>
                   <ProductConditionSelectBox
                     items={TRADE_STATUS}
-                    value={postQuery.data?.tradeStatus}
+                    value={postQuery.data?.tradeStatus.code}
                     onChange={(): void => {
                       // do something
                     }}
@@ -51,7 +51,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                 </>
               ) : (
                 <ProductConditionBadge>
-                  {postQuery.data?.tradeStatus}
+                  {postQuery.data?.tradeStatus.code}
                 </ProductConditionBadge>
               )}
             </ProductCondition>
@@ -73,8 +73,8 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
               <PostFieldList
                 date={getTimeDiffText(postQuery.data?.createdAt || '')}
                 location={postQuery.data?.location || ''}
-                productCondition={postQuery.data?.productCondition || ''}
-                tradeType={postQuery.data?.tradeType || ''}
+                productCondition={postQuery.data?.productCondition.name}
+                tradeType={postQuery.data?.tradeType.name}
               />
             </TransactionContainer>
             <Description>{postQuery.data?.description}</Description>

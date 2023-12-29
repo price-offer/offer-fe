@@ -131,7 +131,7 @@ const PriceOfferCard = ({
                       level={level}
                       location={location}
                       nickName={nickname}
-                      tradeType={tradeType}
+                      tradeType={tradeType.name}
                       type="offer"
                     />
                     <Text styleType="body01B">{toLocaleCurrency(price)}원</Text>

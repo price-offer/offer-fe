@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { SaleTabPostProps } from './types'
 import { SaleTabPost as SaleTabPostComponent } from './index'
 import { TRADE_STATUS } from '@constants'
-import type { TradeStatusCodes, TradeStatusType } from '@types'
+import type { TradeStatusType } from '@types'
 
 type SaleTabPost = typeof SaleTabPostComponent
 
@@ -17,8 +17,8 @@ const meta: Meta<SaleTabPost> = {
 export default meta
 
 const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
-  const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>(
-    TRADE_STATUS[1].code
+  const [tradeStatus, setTradeStatus] = useState<TradeStatusType>(
+    TRADE_STATUS[1]
   )
 
   return (
@@ -26,12 +26,12 @@ const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
       <div>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[0].code)}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[0])}>
           판매중
         </button>
         <button
           type="button"
-          onClick={(): void => setTradeStatus(TRADE_STATUS[1].code)}>
+          onClick={(): void => setTradeStatus(TRADE_STATUS[1])}>
           거래 완료
         </button>
       </div>
@@ -66,7 +66,7 @@ export const Primary: StoryObj<SaleTabPost> = {
     title: '상품 이름 상품 이름',
     price: 36500,
     location: '서울시 강남구',
-    tradeStatus: TRADE_STATUS[1].code,
+    tradeStatus: TRADE_STATUS[1],
     createdAt: '2021-12-10T14:25:30',
     // isLiked: false,
     likeCount: 0,

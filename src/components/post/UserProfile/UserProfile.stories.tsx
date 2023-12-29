@@ -16,7 +16,7 @@ export const Default: StoryObj<UserProfile> = {
     nickName: '신효정',
     location: '동작구 사당동',
     level: 1,
-    tradeType: { code: 'ALL', name: '직거래/택배거래' },
+    tradeType: '직거래/택배거래',
     date: '1시간 전',
     type: 'offer'
   },

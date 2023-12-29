@@ -73,8 +73,8 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
               <PostFieldList
                 date={getTimeDiffText(postQuery.data?.createdAt || '')}
                 location={postQuery.data?.location || ''}
-                productCondition={postQuery.data?.productCondition.code}
-                tradeType={postQuery.data?.tradeType.code}
+                productCondition={postQuery.data?.productCondition.name}
+                tradeType={postQuery.data?.tradeType.name}
               />
             </TransactionContainer>
             <Description>{postQuery.data?.description}</Description>

@@ -9,7 +9,7 @@ const UserProfile = ({
   location,
   level,
   date = '',
-  tradeType = { code: 'ALL', name: '직거래/택배거래' },
+  tradeType = '직거래/택배거래',
   type = 'basic'
 }: UserProfileProps): ReactElement => {
   const isOfferProfile = type === 'offer'

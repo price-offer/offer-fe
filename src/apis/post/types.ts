@@ -3,8 +3,10 @@ import type {
   OptionShape,
   PostDetail,
   PostSummaries,
+  ProductConditionCodes,
   SortOptionsShape,
-  TradeStatusType
+  TradeStatusType,
+  TradeTypeCodes
 } from '@types'
 
 export type GetPostRes = PostDetail
@@ -14,9 +16,9 @@ export type UpdatePostReq = {
   category: string
   price: number
   location: string
-  productCondition: string
-  tradeStatus: string
-  tradeType: string
+  productCondition: ProductConditionCodes
+  tradeStatus: TradeStatusType
+  tradeType: TradeTypeCodes
   thumbnailImageUrl: string
   imageUrls: string[]
   description: string
@@ -55,8 +57,8 @@ export type CreatePostReq = {
   category: string
   price: number
   location: string
-  productCondition: string
-  tradeType: string
+  productCondition: ProductConditionCodes
+  tradeType: TradeTypeCodes
   thumbnailImageUrl: string
   imageUrls: string[]
   description: string

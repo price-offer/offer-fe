@@ -1,9 +1,11 @@
-import type { PostSummary } from '@types'
+import type { PostSummaries } from '@types'
 
-export type GetsReq = {
-  page: number
+export type GetLikedPostsReq = {
+  sort: string
+  lastId: number
+  limit: number
 }
-export type GetLikedPostsRes = PostSummary[]
+export type GetLikedPostsRes = PostSummaries
 
 export type UpdateLikeStatusReq = {
   postId: number

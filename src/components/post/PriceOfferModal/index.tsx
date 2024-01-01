@@ -19,34 +19,43 @@ const MOCK_CITY = [
 
 export const PriceOfferModal = ({
   onClickOffer,
+  onClose,
   ...props
 }: PriceOfferModalProps): ReactElement => {
   const [offerForm, setOfferForm] = useState<OfferForm>({})
-  const isTradeDirection = offerForm?.tradeMethod !== 4
-  const isRequiredFormFilled = offerForm.price && offerForm.tradeMethod
+  const isTradeDirection = offerForm?.tradeType !== 'SHIPPING'
+  const offerPrice = Number(offerForm.price?.replaceAll(',', ''))
+  const isRequiredFormFilled =
+    Boolean(offerPrice) && Boolean(offerForm.tradeType)
   const isDirectionFormFilled =
-    offerForm?.tradeArea?.city &&
-    offerForm?.tradeArea?.county &&
-    offerForm?.tradeArea?.town
+    Boolean(offerForm?.tradeArea?.city) &&
+    Boolean(offerForm?.tradeArea?.county) &&
+    Boolean(offerForm?.tradeArea?.town)
+
   const canOffer = isTradeDirection
     ? isRequiredFormFilled && isDirectionFormFilled
     : isRequiredFormFilled
 
   const handleChangePrice: ChangeEventHandler<HTMLInputElement> = e => {
-    const formattedValue = Number(e.target.value.split(',').join(''))
-
     setOfferForm(prev => ({
       ...prev,
-      price: formattedValue
+      price: e.target.value
     }))
   }
 
-  const handleChangeTradeMethod: ChangeEventHandler<HTMLFormElement> = e => {
-    const tradeMethod = Number(e.target.value)
-    const isTradeParcel = tradeMethod === 4
+  const handleCloseModal = () => {
+    onClose?.()
+
+    // ods Radio 컴포넌트 수정 후 reset 잘 이루어지는지 확인하기
+    setOfferForm({})
+  }
+
+  const handleChangeTradeType: ChangeEventHandler<HTMLFormElement> = e => {
+    const tradeType = e.target.value
+    const isTradeParcel = tradeType === 'SHIPPING'
     const nextOfferFrom = {
       ...offerForm,
-      tradeMethod
+      tradeType
     }
 
     if (isTradeParcel) {
@@ -56,7 +65,7 @@ export const PriceOfferModal = ({
     setOfferForm(nextOfferFrom)
   }
 
-  const handleChangeTradeArea = (name: TradeAreaKeys, value: number): void => {
+  const handleChangeTradeArea = (name: TradeAreaKeys, value: string): void => {
     setOfferForm(prev => ({
       ...prev,
       tradeArea: {
@@ -71,10 +80,15 @@ export const PriceOfferModal = ({
   }
 
   return (
-    <Styled.PriceOfferModal {...props}>
+    <Styled.PriceOfferModal onClose={handleCloseModal} {...props}>
       <Styled.Header>
         <Styled.CloseIconWrapper>
-          <IconButton color="grayScale30" icon="close" size={24} />
+          <IconButton
+            color="grayScale30"
+            icon="close"
+            size={24}
+            onClick={handleCloseModal}
+          />
         </Styled.CloseIconWrapper>
         <Styled.Title>가격을 제안해볼까요?</Styled.Title>
         <Styled.Description>
@@ -87,7 +101,7 @@ export const PriceOfferModal = ({
           <Input
             isPrice
             placeholder="제안할 가격을 적어주세요"
-            value={offerForm.price}
+            value={offerForm.price || ''}
             onChange={handleChangePrice}
           />
         </div>
@@ -98,7 +112,7 @@ export const PriceOfferModal = ({
             direction="horizontal"
             formName="trade-method"
             items={TRADE_TYPES}
-            onChange={handleChangeTradeMethod}
+            onChange={handleChangeTradeType}
           />
         </div>
         {isTradeDirection && (
@@ -110,9 +124,9 @@ export const PriceOfferModal = ({
                 items={MOCK_CITY}
                 placeholder="선택"
                 size="medium"
-                value={offerForm?.tradeArea?.city}
+                value={offerForm?.tradeArea?.city || ''}
                 onChange={(item): void =>
-                  handleChangeTradeArea('city', item.code)
+                  handleChangeTradeArea('city', item.name)
                 }
               />
             </div>
@@ -123,9 +137,9 @@ export const PriceOfferModal = ({
                   items={MOCK_CITY}
                   placeholder="선택"
                   size="medium"
-                  value={offerForm?.tradeArea?.county}
+                  value={offerForm?.tradeArea?.county || ''}
                   onChange={(item): void =>
-                    handleChangeTradeArea('county', item.code)
+                    handleChangeTradeArea('county', item.name)
                   }
                 />
               </div>
@@ -135,9 +149,9 @@ export const PriceOfferModal = ({
                   items={MOCK_CITY}
                   placeholder="선택"
                   size="medium"
-                  value={offerForm?.tradeArea?.town}
+                  value={offerForm?.tradeArea?.town || ''}
                   onChange={(item): void =>
-                    handleChangeTradeArea('town', item.code)
+                    handleChangeTradeArea('town', item.name)
                   }
                 />
               </div>

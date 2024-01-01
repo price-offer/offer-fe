@@ -11,8 +11,8 @@ import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
 import { OAUTH_URL } from '@constants/oauth'
 import { useAuth } from '@hooks/useAuth'
-import useModal from '@hooks/useModal'
 import { IMAGE } from '@constants'
+import { useModal } from '@hooks'
 
 const PREVENT_ACTIVE_PATHS = ['/post']
 

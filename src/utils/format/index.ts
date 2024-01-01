@@ -58,3 +58,6 @@ export const toQueryString = (value: {
   Object.entries(value)
     .reduce((query, [key, value]) => `${query}${key}=${value}&`, '?')
     .slice(0, -1)
+
+export const localeCurrencyToNumber = (value: string) =>
+  Number(value.replaceAll(',', ''))

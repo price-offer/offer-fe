@@ -2,7 +2,6 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
 import { useState, type ReactElement, useEffect } from 'react'
-import useModal from '@hooks/useModal'
 import {
   MessagePreview,
   Tabs,
@@ -11,6 +10,7 @@ import {
   MessageBoxPlaceholder
 } from '@components'
 import { IMAGE } from '@constants'
+import { useModal } from '@hooks'
 
 type TabType = 'all' | 'buy' | 'sell'
 
@@ -21,7 +21,7 @@ const TABS = {
 } as const
 
 const TabKeys = Object.keys(TABS) as TabType[]
-const TabEntries = Object.entries(TABS)
+const TabEntries = Object.entries<TabType, ValueOf<typeof TABS>>(TABS)
 
 const MessageBoxPage = (): ReactElement => {
   const [tab, setTab] = useState<TabType>('all')

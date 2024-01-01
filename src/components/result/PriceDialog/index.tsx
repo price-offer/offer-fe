@@ -15,8 +15,7 @@ const PriceDialog = ({
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { desktop } = useMedia()
 
-  const isApplied =
-    applyPrice.maxPrice !== undefined && applyPrice.minPrice !== undefined
+  const isApplied = applyPrice.maxPrice && applyPrice.minPrice
 
   useEffect(() => {
     setIsOpen(isOpen)

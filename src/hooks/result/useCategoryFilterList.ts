@@ -17,7 +17,7 @@ type ReturnType = {
 }
 
 const useCategoryFilterList = (): ReturnType => {
-  const { data: categories, isSuccess } = useGetCategoriesQuery()
+  const categories = useGetCategoriesQuery()
   const [list, setList] = useState<CheckItemType[]>([
     {
       code: '',
@@ -33,15 +33,15 @@ const useCategoryFilterList = (): ReturnType => {
   const defaultCategory = searchParams.get('category')
 
   useEffect(() => {
-    if (isSuccess) {
+    if (categories.isSuccess) {
       const categoryList = transRateUseToCategorySelectBoxData(
-        categories,
+        categories.data,
         defaultCategory
       )
       setList(categoryList)
       setSelectedCategoryValue(defaultCategory ? defaultCategory : 'ALL')
     }
-  }, [categories, defaultCategory, isSuccess])
+  }, [categories.data, defaultCategory, categories.isSuccess])
 
   const onCheckItem = (name: string): void => {
     setList(prevList =>

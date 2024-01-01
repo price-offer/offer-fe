@@ -2,7 +2,7 @@ import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useGetCategoriesQuery } from '@apis/post'
-import { manipulateArray } from '@utils/result'
+import { transRateUseToCategorySelectBoxData } from '@utils/result'
 export type CheckItemType = {
   code: string
   name: string
@@ -34,8 +34,11 @@ const useCategoryFilterList = (): ReturnType => {
 
   useEffect(() => {
     if (isSuccess) {
-      const cateGoryList = manipulateArray(categories, defaultCategory)
-      setList(cateGoryList)
+      const categoryList = transRateUseToCategorySelectBoxData(
+        categories,
+        defaultCategory
+      )
+      setList(categoryList)
       setSelectedCategoryValue(defaultCategory ? defaultCategory : 'ALL')
     }
   }, [categories, defaultCategory, isSuccess])

@@ -50,12 +50,7 @@ const Result: NextPage = () => {
   const categoryFilterOption =
     selectedCategoryValue === 'ALL' ? null : selectedCategoryValue
 
-  const {
-    data: postList,
-    fetchNextPage,
-    hasNextPage,
-    refetch
-  } = useGetInfinitePostsQuery({
+  const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_POST_PAGE_NUMBER,
     category: categoryFilterOption,
@@ -65,20 +60,29 @@ const Result: NextPage = () => {
     sort: selectedSortPriceValue
   })
 
+  const postSummaries = infinitePosts?.data?.pages?.reduce(
+    (acc, cur) => acc + cur?.posts?.length,
+    0
+  )
+
   useEffect(() => {
-    refetch()
+    infinitePosts?.refetch()
   }, [
     applyPrice,
     selectedCategoryValue,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    refetch
+    infinitePosts?.refetch,
+    infinitePosts
   ])
 
   return (
     <Layout>
       <ResultWrapper>
-        <ResultHeader postData={postList?.pages} searchResult="###" />
+        <ResultHeader
+          postSummaries={Number(postSummaries)}
+          searchResult="###"
+        />
         {isDesktop && (
           <CategorySlideFilter
             cateGoryList={checkFilterList}
@@ -96,7 +100,7 @@ const Result: NextPage = () => {
           handleTradePeriodChange={handleTradePeriodSelectChange}
           maxPriceValue={maxPriceValue}
           minPriceValue={minPriceValue}
-          postData={postList?.pages}
+          postSummaries={Number(postSummaries)}
           selectedCategoryValue={selectedCategoryValue}
           selectedSortPriceValue={selectedSortPriceValue}
           selectedTradePeriodValue={selectedTradePeriodValue}
@@ -104,9 +108,9 @@ const Result: NextPage = () => {
           tradePeriodItems={tradePeriodItems}
         />
         <ProductList
-          fetchNextPage={fetchNextPage}
-          hasNextPage={hasNextPage}
-          postData={postList?.pages}
+          fetchNextPage={infinitePosts?.fetchNextPage}
+          hasNextPage={infinitePosts?.hasNextPage}
+          postData={infinitePosts?.data?.pages}
         />
       </ResultWrapper>
     </Layout>

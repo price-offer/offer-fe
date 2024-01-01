@@ -1,7 +1,7 @@
 import type { GetCategoriesRes } from '@apis/post'
 import type { CheckItemType } from '@hooks/result/useCategoryFilterList'
 
-export const manipulateArray = (
+export const transRateUseToCategorySelectBoxData = (
   categories: GetCategoriesRes,
   searchParams: string | null
 ) => {

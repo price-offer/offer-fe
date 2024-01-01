@@ -4,7 +4,6 @@ import type {
   PostDetail,
   PostSummaries,
   ProductConditionCodes,
-  SortOptionsShape,
   TradeStatusType,
   TradeTypeCodes
 } from '@types'
@@ -64,11 +63,5 @@ export type CreatePostReq = {
   description: string
 }
 export type CreatePostRes = CommonCreation
-
-// TODO: 정확한 타입 BE 확인 필요
-export type GetSortOptionsReq = {
-  type: 'OFFER' | 'POST'
-}
-export type GetSortOptionsRes = SortOptionsShape
 
 export type GetCategoriesRes = (OptionShape & { imageUrl: string })[]

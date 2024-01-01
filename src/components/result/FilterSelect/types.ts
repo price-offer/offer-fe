@@ -1,7 +1,8 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import type { ChangeEventHandler } from 'react'
-import type { GetPostsRes } from '@apis/post'
-import type { ApplyPriceType } from '@hooks/result/useSelectBoxFilter'
+import type { TRADE_TYPES } from '@constants/app'
+import type { GetPostsRes } from '@apis'
+import type { ApplyPriceType } from '@hooks'
 
 export type FilterSelectProps = {
   applyPrice: ApplyPriceType
@@ -11,10 +12,7 @@ export type FilterSelectProps = {
     name: string
     selected: boolean
   }[]
-  tradePeriodItems: {
-    code: string
-    name: string
-  }[]
+  tradePeriodItems: typeof TRADE_TYPES
   sortPriceItems: {
     code: string
     name: string
@@ -24,6 +22,7 @@ export type FilterSelectProps = {
   selectedSortPriceValue: string
   minPriceValue: string
   maxPriceValue: string
+  postSummaries: number
   handleSortPriceChange: SelectOnChangeHandler
   handleCategoryChange: SelectOnChangeHandler
   handleTradePeriodChange: SelectOnChangeHandler

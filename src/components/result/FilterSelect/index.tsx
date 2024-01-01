@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { FilterSelectProps } from './types'
 import { PriceDialog } from '../PriceDialog'
-import { useGetSortOptions } from '@apis/post/queries'
+import { SORT_OPTIONS } from '@constants/app'
 const FilterSelect = ({
   categoryItems,
   tradePeriodItems,
@@ -11,7 +11,7 @@ const FilterSelect = ({
   minPriceValue,
   maxPriceValue,
   applyPrice,
-  postData,
+  postSummaries,
   handleSortPriceChange,
   handleCategoryChange,
   handleTradePeriodChange,
@@ -19,18 +19,6 @@ const FilterSelect = ({
   handleMaxPriceInputChange,
   handlePriceApplyClick
 }: FilterSelectProps): ReactElement => {
-  const { data: priceSortOptions, isLoading } = useGetSortOptions({
-    type: 'POST'
-  })
-
-  const postCount =
-    postData && postData.reduce((acc, cur) => acc + cur.posts.length, 0)
-
-  if (isLoading) {
-    // 로딩
-    return <></>
-  }
-
   return (
     <>
       <Styled.SelectWrapper>
@@ -59,10 +47,12 @@ const FilterSelect = ({
           />
         </Styled.LeftSelectWrapper>
         <Styled.RightSelectWrapper>
-          <Styled.ProductCount>전체 {postCount}개</Styled.ProductCount>
+          <Styled.ProductCount>
+            전체 {postSummaries && postSummaries}개
+          </Styled.ProductCount>
           <Styled.PriceFilterSelect
             colorType="none"
-            items={priceSortOptions}
+            items={SORT_OPTIONS}
             placeholder="높은 가격순"
             onChange={handleSortPriceChange}
           />

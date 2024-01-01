@@ -14,7 +14,7 @@ export type ApplyPriceType = {
 }
 
 type ReturnType = {
-  tradePeriodItems: any
+  tradePeriodItems: typeof TRADE_TYPES
   sortPriceItems: SelectItemsType[]
   selectedTradePeriodValue: string
   selectedSortPriceValue: string
@@ -80,7 +80,6 @@ const useSelectBoxFilter = (): ReturnType => {
   }
 
   const handlePriceApplyClick = (): void => {
-    //필터적용
     setApplyPrice({
       minPrice: Number(minPriceValue.replace(/,/g, '')),
       maxPrice: Number(maxPriceValue.replace(/,/g, ''))

@@ -37,10 +37,6 @@ const CategorySelect = styled(SelectBox)`
     display: inline;
   }
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    display: inline;
-  }
-
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
@@ -76,10 +72,6 @@ const PriceFilterSelect = styled(SelectBox)`
 const ProductCount = styled.div`
   ${({ theme }): string => theme.mediaQuery.desktop} {
     display: none;
-  }
-
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    display: inline;
   }
 
   ${({ theme }): string => theme.mediaQuery.tablet} {

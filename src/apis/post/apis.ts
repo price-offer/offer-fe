@@ -2,7 +2,6 @@ import type {
   GetCategoriesRes,
   GetPostsReq,
   GetPostsRes,
-  GetSortOptionsReq,
   GetPostRes,
   CreatePostReq,
   CreatePostRes
@@ -20,6 +19,3 @@ export const getCategories = () =>
 
 export const getPosts = (params: GetPostsReq) =>
   http.get<GetPostsReq, GetPostsRes>('/posts', params)
-
-export const getSortOption = (params: GetSortOptionsReq) =>
-  http.get<GetSortOptionsReq, GetPostsRes>(`/sorts?type=${params.type}`)

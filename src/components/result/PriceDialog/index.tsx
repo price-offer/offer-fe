@@ -30,6 +30,10 @@ const PriceDialog = ({
     setIsOpen(false)
   }
 
+  const handleCloseDialog = () => {
+    setIsOpen(false)
+  }
+
   return (
     <>
       <Styled.Wrapper>
@@ -54,11 +58,7 @@ const PriceDialog = ({
         {isOpen ? (
           desktop ? (
             <>
-              <Styled.DialogOverlay
-                onClick={() => {
-                  setIsOpen(false)
-                }}
-              />
+              <Styled.DialogOverlay onClick={handleCloseDialog} />
               <Styled.PriceDialog onClick={handleDialogClick}>
                 <Styled.Price>가격</Styled.Price>
                 <Styled.InputWrapper>
@@ -96,10 +96,7 @@ const PriceDialog = ({
               </Styled.PriceDialog>
             </>
           ) : (
-            <Styled.Dim
-              onClick={() => {
-                setIsOpen(false)
-              }}>
+            <Styled.Dim onClick={handleCloseDialog}>
               <Styled.PriceDialog onClick={handleDialogClick}>
                 <Styled.Price>가격</Styled.Price>
                 <Styled.InputWrapper>
@@ -123,9 +120,7 @@ const PriceDialog = ({
                 <Styled.ButtonWrapper>
                   <Styled.CancelButton
                     styleType="ghost"
-                    onClick={() => {
-                      setIsOpen(false)
-                    }}>
+                    onClick={handleCloseDialog}>
                     취소
                   </Styled.CancelButton>
                   <Styled.ApplyButton

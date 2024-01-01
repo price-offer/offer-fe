@@ -72,8 +72,7 @@ const Result: NextPage = () => {
     selectedCategoryValue,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    infinitePosts?.refetch,
-    infinitePosts
+    infinitePosts?.refetch
   ])
 
   return (

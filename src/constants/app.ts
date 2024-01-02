@@ -3,6 +3,10 @@ export const SORT_OPTIONS = [
   { code: 'CREATED_DATE_DESC', name: '최신순' },
   {
     code: 'PRICE_DESC',
+    name: '높은 가격순'
+  },
+  {
+    code: 'PRICE_ASC',
     name: '낮은 가격순'
   }
 ] as const

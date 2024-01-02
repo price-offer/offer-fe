@@ -7,7 +7,7 @@ import { ICON_META } from './types'
 import { getTimeDiffText } from '@utils/format'
 
 const ReviewTabPost = ({
-  reviewer,
+  reviewTargetMember,
   post,
   score,
   content,
@@ -18,16 +18,16 @@ const ReviewTabPost = ({
 
   return (
     <Styled.Wrapper className={className}>
-      <Styled.Avatar alt="avatar" src={reviewer.profileImageUrl} />
+      <Styled.Avatar alt="avatar" src={reviewTargetMember.profileImageUrl} />
       <Styled.ContentWrapper>
         <Styled.ContentHeader>
           <Styled.Meta>
             <Styled.NickNameWrapper>
               <Styled.NickName styleType="body02B">
-                {reviewer.nickname}
+                {reviewTargetMember.nickname}
               </Styled.NickName>
               <Styled.Badge colorType="orange">
-                {/* Lv.{reviewer.offerLevel} */}
+                {/* Lv.{reviewTargetMember.offerLevel} */}
                 Lv.{offerLevel}
               </Styled.Badge>
             </Styled.NickNameWrapper>

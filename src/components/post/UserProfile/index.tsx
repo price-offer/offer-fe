@@ -1,4 +1,4 @@
-import { Avatar, Badge, Text } from '@offer-ui/react'
+import { Avatar, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { UserProfileProps } from './types'
@@ -22,10 +22,10 @@ const UserProfile = ({
           <Text styleType="body02B" tag="p">
             {nickName}
           </Text>
-          <Badge colorType="orange">
+          <Styled.LevelBadge colorType="orange">
             Lv.
             {level}
-          </Badge>
+          </Styled.LevelBadge>
         </Styled.UserName>
         <Text color="grayScale70" styleType="caption01M" tag="p">
           {location}

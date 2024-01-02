@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Badge } from '@offer-ui/react'
 
 const UserProfile = styled.div`
   display: flex;
@@ -16,8 +17,13 @@ const UserName = styled.div`
   gap: 8px;
 `
 
+const LevelBadge = styled(Badge)`
+  height: fit-content;
+`
+
 export const Styled = {
   UserProfile,
   ProfileText,
-  UserName
+  UserName,
+  LevelBadge
 }

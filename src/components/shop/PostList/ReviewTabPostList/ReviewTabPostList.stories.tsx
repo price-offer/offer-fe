@@ -13,10 +13,11 @@ export default meta
 const REVIEWS_MOCK = [
   {
     id: 6,
-    reviewer: {
+    reviewTargetMember: {
       id: 1,
       profileImageUrl: '',
-      nickname: '닉네임'
+      nickname: '닉네임',
+      offerLevel: 1
     },
     score: 0,
     post: {
@@ -28,10 +29,11 @@ const REVIEWS_MOCK = [
   },
   {
     id: 7,
-    reviewer: {
+    reviewTargetMember: {
       id: 1,
       profileImageUrl: '',
-      nickname: '닉네임'
+      nickname: '닉네임',
+      offerLevel: 1
     },
     score: 1,
     post: {
@@ -43,10 +45,11 @@ const REVIEWS_MOCK = [
   },
   {
     id: 6,
-    reviewer: {
+    reviewTargetMember: {
       id: 1,
       profileImageUrl: '',
-      nickname: '닉네임'
+      nickname: '닉네임',
+      offerLevel: 1
     },
     score: 2,
     post: {

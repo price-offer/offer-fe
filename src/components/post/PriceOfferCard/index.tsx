@@ -1,5 +1,5 @@
-import { Divider, SelectBox, Text, Icon } from '@offer-ui/react'
-import type { ReactElement } from 'react'
+import { Divider, SelectBox, Text, Icon, Radio } from '@offer-ui/react'
+import type { ChangeEvent, ReactElement } from 'react'
 import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { PriceOfferCardProps } from './types'
@@ -24,6 +24,7 @@ const PriceOfferCard = ({
   const [sortOptionCode, setSortOptionCode] = useState<SortOptionCodes>(
     SORT_OPTIONS[0].code
   )
+  const [selectedOffer, setSelectedOffer] = useState<number | null>(null)
   const offerModal = useModal()
   const [likePost, setLikePost] = useState({
     status: false,
@@ -66,6 +67,12 @@ const PriceOfferCard = ({
     }))
 
     await likeStatusMutation.mutateAsync(postId)
+  }
+
+  const handleChangeOffer = (e: ChangeEvent<HTMLFormElement>) => {
+    const offerId = Number(e.target.value)
+
+    setSelectedOffer(offerId)
   }
 
   const handleClickOffer = async ({
@@ -112,7 +119,10 @@ const PriceOfferCard = ({
         <Styled.Divider />
         {hasOffer ? (
           <Styled.CardBody>
-            <Styled.OfferListBox>
+            <Styled.OfferListBox
+              direction="vertical"
+              formName="offer"
+              onChange={handleChangeOffer}>
               {offers.map(
                 ({
                   id,
@@ -123,20 +133,33 @@ const PriceOfferCard = ({
                   profileImageUrl,
                   tradeType,
                   price
-                }) => (
-                  <Styled.Offer key={id}>
-                    <UserProfile
-                      date={getTimeDiffText(date)}
-                      image={profileImageUrl}
-                      level={level}
-                      location={location}
-                      nickName={nickname}
-                      tradeType={tradeType.name}
-                      type="offer"
-                    />
-                    <Text styleType="body01B">{toLocaleCurrency(price)}원</Text>
-                  </Styled.Offer>
-                )
+                }) => {
+                  const isSelected = selectedOffer === id
+
+                  return (
+                    <Styled.Offer key={id} isSelected={isSelected}>
+                      <Radio.Input
+                        checked={isSelected}
+                        formName="offer"
+                        value={String(id)}
+                      />
+                      <Styled.OfferContent>
+                        <UserProfile
+                          date={getTimeDiffText(date)}
+                          image={profileImageUrl}
+                          level={level}
+                          location={location}
+                          nickName={nickname}
+                          tradeType={tradeType.name}
+                          type="offer"
+                        />
+                        <Text styleType="body01B">
+                          {toLocaleCurrency(price)}원
+                        </Text>
+                      </Styled.OfferContent>
+                    </Styled.Offer>
+                  )
+                }
               )}
             </Styled.OfferListBox>
           </Styled.CardBody>

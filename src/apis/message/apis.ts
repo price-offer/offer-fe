@@ -1,16 +1,16 @@
 import type {
-  GetMessageListReq,
-  GetMessageListRes,
-  GetMessageRoomReq,
-  GetMessageRoomRes
+  GetMessageRoomsReq,
+  GetMessageRoomsRes,
+  GetMessageReq,
+  GetMessageRes
 } from './types'
 import { http } from '@utils/http'
 
-export const getMessageList = (params: GetMessageListReq) =>
-  http.get<GetMessageListReq, GetMessageListRes>('/msgrooms', params)
+export const getMessageRooms = (params: GetMessageRoomsReq) =>
+  http.get<GetMessageRoomsReq, GetMessageRoomsRes>('/msgrooms', params)
 
-export const getMessageRoom = (params: GetMessageRoomReq) =>
-  http.get<GetMessageRoomReq, GetMessageRoomRes>(
+export const getMessage = (params: GetMessageReq) =>
+  http.get<GetMessageReq, GetMessageRes>(
     `/msgrooms/${params.msgRoomId}/msgs`,
     params
   )

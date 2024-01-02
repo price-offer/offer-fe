@@ -6,14 +6,13 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { SearchArea } from './SearchArea'
 import { SideBar } from './SideBar'
-import { HeaderSkeleton } from './skeleton'
 import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
 import { OAUTH_URL } from '@constants/oauth'
 import { useAuth } from '@hooks/useAuth'
-import useModal from '@hooks/useModal'
 import { IMAGE } from '@constants'
+import { useModal } from '@hooks'
 
 const PREVENT_ACTIVE_PATHS = ['/post']
 
@@ -63,7 +62,7 @@ const Header = (): ReactElement => {
                     styleType="ghost"
                     type="button"
                     width="76px">
-                    <Styled.TextLink href="/mypage">
+                    <Styled.TextLink href="/shop">
                       나의 거래활동
                     </Styled.TextLink>
                   </Styled.HeaderAuthButton>
@@ -182,4 +181,4 @@ const Header = (): ReactElement => {
   )
 }
 
-export { Header, HeaderSkeleton }
+export { Header }

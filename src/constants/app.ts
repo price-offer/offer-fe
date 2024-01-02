@@ -1,61 +1,21 @@
-import type { KeyOf, ValueOf } from '@types'
-
-/** 나의 거래 활동 */
-export type TradeActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE>
-export type TradeActivityName = '판매' | '구매' | '후기'
-
-/** 나의 거래 활동 - 판매 */
-export type TradeSaleActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['sale']>
-export type TradeSaleActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['sale']>
-
-/** 나의 거래 활동 - 구매 */
-export type TradeBuyActivityType = KeyOf<typeof TRADE_ACTIVITY_TYPE['buy']>
-export type TradeBuyActivityName = ValueOf<typeof TRADE_ACTIVITY_TYPE['buy']>
-
-/** 나의 거래 활동 - 리뷰 */
-export type TradeReviewActivityType = KeyOf<
-  typeof TRADE_ACTIVITY_TYPE['review']
->
-export type TradeReviewActivityName = ValueOf<
-  typeof TRADE_ACTIVITY_TYPE['review']
->
-
-export const TRADE_ACTIVITY_TYPE = {
-  sale: {
-    sale: '판매중',
-    soldOut: '거래완료'
-  },
-  buy: {
-    like: '관심상품',
-    offer: '가격제안'
-  },
-  review: {
-    all: '전체후기',
-    buyer: '구매자 후기',
-    seller: '판매자 후기'
-  }
-} as const
-
-export const TRADE_STATUS = [
+/* Server */
+export const SORT_OPTIONS = [
+  { code: 'CREATED_DATE_DESC', name: '최신순' },
   {
-    code: 'SELLING',
-    name: '판매중'
-  },
-  {
-    code: 'SOLD',
-    name: '거래완료'
+    code: 'PRICE_DESC',
+    name: '낮은 가격순'
   }
 ] as const
 
-export const SORT_TYPE = [
-  { name: 'RECENT_CREATED', exposureTitle: '최신순' },
+export const SORT_TYPES = [
+  { code: 'OFFER', name: '가격제안 정렬' },
   {
-    name: 'LOW_PRICE',
-    exposureTitle: '낮은 가격순'
+    code: 'POST',
+    name: '게시글 정렬'
   }
 ] as const
 
-export const TRADE_TYPE = [
+export const TRADE_TYPES = [
   {
     code: 'FACE_TO_FACE',
     name: '직거래'
@@ -70,7 +30,18 @@ export const TRADE_TYPE = [
   }
 ] as const
 
-export const PRODUCT_CONDITION = [
+export const TRADE_STATUS = [
+  {
+    code: 'SELLING',
+    name: '판매중'
+  },
+  {
+    code: 'SOLD',
+    name: '거래완료'
+  }
+] as const
+
+export const PRODUCT_CONDITIONS = [
   {
     code: 'NEW',
     name: '새상품'
@@ -80,6 +51,23 @@ export const PRODUCT_CONDITION = [
     name: '중고상품'
   }
 ] as const
+
+/* Client */
+export const TRADE_ACTIVITY_TYPES = {
+  sale: {
+    sale: '판매중',
+    soldOut: '거래완료'
+  },
+  buy: {
+    like: '관심상품',
+    offer: '가격제안'
+  },
+  review: {
+    all: '전체후기',
+    buyer: '구매자 후기',
+    seller: '판매자 후기'
+  }
+} as const
 
 export const CATEGORIES = [
   {

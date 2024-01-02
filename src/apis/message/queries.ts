@@ -1,21 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { getMessageList, getMessageRoom } from './apis'
-import type { GetMessageRoomReq } from './types'
+import { getMessageRooms, getMessage } from './apis'
+import type { GetMessageReq } from './types'
 
-export const useGetMessageListQuery = (page?: number) =>
+export const useGetMessageRooms = (page?: number) =>
   useQuery({
-    queryKey: ['getMessageList'],
-    queryFn: () => getMessageList({ page: page || 0 })
+    queryKey: ['getMessageRooms'],
+    queryFn: () => getMessageRooms({ page: page || 0 })
   })
 
-export const useGetMessageRoomQuery = ({
-  msgRoomId,
-  ...res
-}: GetMessageRoomReq) =>
+export const useGetMessageQuery = ({ msgRoomId, ...res }: GetMessageReq) =>
   useQuery({
-    queryKey: ['getMessageRoom', msgRoomId],
+    queryKey: ['getMessage', msgRoomId],
     queryFn: () =>
-      getMessageRoom({
+      getMessage({
         msgRoomId,
         ...res
       }),

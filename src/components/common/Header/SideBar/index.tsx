@@ -16,7 +16,7 @@ const NAV_DATA: NavDataType = [
   },
   {
     content: '나의 거래활동',
-    url: '/mypage',
+    url: '/shop',
     iconType: 'store'
   },
   {

@@ -1,35 +1,24 @@
-export type GetMessageListReq = {
+import type { CommonCreation, MessageRoomInfo, MessageInfo } from '@types'
+
+export type GetMessageRoomsReq = {
   page: number
 }
+export type GetMessageRoomsRes = MessageRoomInfo[]
 
-export type GetMessageListRes = {
-  id: number
-  partner: {
-    id: number
-    imageUrl: string
-    nickname: string
-  }
-  post: {
-    id: number
-    title: string
-  }
-  offerPrice: number
-  lastContent: string
-  notReadCnt: number
-  lastSendTime: string
-}[]
+export type CreateMessageRoomReq = {
+  targetMemberId: number
+  offerId: number
+}
+export type CreateMessageRoomRes = CommonCreation
 
-export type GetMessageRoomReq = {
-  msgRoomId: number | null
+export type GetMessageReq = {
+  msgRoomId: number
   page: number
 }
+export type GetMessageRes = MessageInfo[]
 
-export type GetMessageRoomRes = {
+export type CreateMessageReq = {
+  msgRoomId: number
   content: string
-  member: {
-    id: number
-    imageUrl: string
-    nickname: string
-  }
-  sendTime: string
-}[]
+}
+export type CreateMessageRes = CommonCreation

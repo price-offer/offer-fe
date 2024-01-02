@@ -2,8 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
 import { useState, type ReactElement, useEffect } from 'react'
-import { useGetMessageListQuery } from '@apis/message'
-import useModal from '@hooks/useModal'
+import { useGetMessageRooms } from '@apis'
 import {
   MessagePreview,
   Tabs,
@@ -12,6 +11,7 @@ import {
   MessageBoxPlaceholder
 } from '@components'
 import { IMAGE } from '@constants'
+import { useModal } from '@hooks'
 
 type TabType = 'all' | 'buy' | 'sell'
 
@@ -22,15 +22,15 @@ const TABS = {
 } as const
 
 const TabKeys = Object.keys(TABS) as TabType[]
-const TabEntries = Object.entries(TABS)
+const TabEntries = Object.entries<TabType, ValueOf<typeof TABS>>(TABS)
 
 const MessageBoxPage = (): ReactElement => {
-  const getMessageListQuery = useGetMessageListQuery()
+  const messageRoomsQuery = useGetMessageRooms()
   const [tab, setTab] = useState<TabType>('all')
   const [roomId, setRoomId] = useState<number | null>(null)
   const { isOpen, openModal, closeModal } = useModal()
   const { desktop, mobile, tablet } = useMedia()
-  const messageList = getMessageListQuery.data || []
+  const messageList = messageRoomsQuery.data || []
   const messageCount = messageList.length
 
   const handleChangeTab = (currentIndex: number, nextIndex: number) => {

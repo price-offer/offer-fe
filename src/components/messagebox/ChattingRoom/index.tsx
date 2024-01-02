@@ -2,12 +2,12 @@ import { Image, IconButton, Input } from '@offer-ui/react'
 import { Styled } from './styled'
 import type { ChattingRoomProps } from './types'
 import { Chatting } from '../Chatting'
-import { useGetMessageRoomQuery } from '@apis/message'
-import { useAuth } from '@hooks/useAuth'
 import { toLocaleCurrency } from '@utils/format'
+import { useGetMessageQuery } from '@apis'
+import { useAuth } from '@hooks'
 
 export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
-  const getMessageRoomQuery = useGetMessageRoomQuery({
+  const messageQuery = useGetMessageQuery({
     msgRoomId: id,
     page: 0
   })
@@ -42,7 +42,7 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
         </Styled.ProductTextContainer>
       </Styled.ProductInfo>
       <Styled.ChattingWrapper>
-        <Chatting messages={getMessageRoomQuery.data || []} userId={user.id} />
+        <Chatting messages={messageQuery.data || []} userId={user.id} />
       </Styled.ChattingWrapper>
       <Styled.InputWrapper>
         <Input styleType="chatting" />

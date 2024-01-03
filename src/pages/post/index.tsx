@@ -72,10 +72,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const PostPage = ({ type, editPostId }: Props): ReactElement => {
-  const postMutation = useCreatePostMutation()
+  const createPostMutation = useCreatePostMutation()
   const getPostQuery = useGetPostQuery(editPostId)
-  const uploadImagesMutation = useCreateUploadImagesMutation()
-  const categoriesQuery = useGetCategoriesQuery()
+  const createUploadImagesMutation = useCreateUploadImagesMutation()
+  const getCategoriesQuery = useGetCategoriesQuery()
   const updatePostMutation = useUpdatePostMutation(editPostId)
   const router = useRouter()
 
@@ -112,7 +112,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
       const imageFormData = getImageFormData(imageFiles)
 
       const { imageUrls: newImageUrls } =
-        await uploadImagesMutation.mutateAsync(imageFormData)
+        await createUploadImagesMutation.mutateAsync(imageFormData)
 
       imageUrls = imageUrls.concat(newImageUrls)
     }
@@ -129,10 +129,10 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
     if (type === 'update') {
       await updatePostMutation.mutateAsync({
         ...nextPost,
-        tradeStatus: TRADE_STATUS[0].code
+        tradeStatus: getPostQuery.data?.tradeStatus.code || TRADE_STATUS[0].code
       })
     } else {
-      const res = await postMutation.mutateAsync(nextPost)
+      const res = await createPostMutation.mutateAsync(nextPost)
 
       postId = res.id
     }
@@ -213,7 +213,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
         <StyledPostForms>
           <PostForm label="카테고리">
             <SelectBox
-              items={categoriesQuery.data || []}
+              items={getCategoriesQuery.data || []}
               placeholder="선택"
               size="small"
               value={postForm.category}

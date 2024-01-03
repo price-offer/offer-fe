@@ -43,7 +43,7 @@ const PriceOfferCard = ({
       status: Boolean(postQuery.data?.liked),
       count: postQuery.data?.totalLikeCount || 0
     })
-  }, [postQuery])
+  }, [postQuery.data])
 
   const offers =
     postOffersQuery.data?.offers.map(({ offerer, createdAt, ...offer }) => ({

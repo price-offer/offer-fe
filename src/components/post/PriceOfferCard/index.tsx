@@ -7,7 +7,12 @@ import type { PriceOfferCardProps } from './types'
 import { PriceOfferModal } from '../PriceOfferModal'
 import type { OfferForm } from '../PriceOfferModal/types'
 import { UserProfile } from '../UserProfile'
-import { getTimeDiffText, toLocaleCurrency, toQueryString } from '@utils/format'
+import {
+  getTimeDiffText,
+  localeCurrencyToNumber,
+  toLocaleCurrency,
+  toQueryString
+} from '@utils/format'
 import {
   useUpdateLikeStatusMutation,
   useGetPostQuery,
@@ -87,8 +92,7 @@ const PriceOfferCard = ({
   }: OfferForm) => {
     const offerInfo = {
       postId,
-      // TODO: post 보내기 merge 후 number로 변환하는 유틸 적용
-      price: Number(price) ?? 0,
+      price: localeCurrencyToNumber(price || '0'),
       tradeType: tradeType ?? '',
       location: `${tradeArea?.city} ${tradeArea?.county} ${tradeArea?.town}`
     }

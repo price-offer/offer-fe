@@ -87,7 +87,10 @@ export type ImageUpload = {
 }
 
 /** Review */
-export type ReviewInfo = Review[]
+export type ReviewInfo = {
+  hasNext: boolean
+  reviews: Review[]
+}
 export type Review = {
   id: number
   reviewTargetMember: ReviewTargetMember

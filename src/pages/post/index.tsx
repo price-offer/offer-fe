@@ -16,15 +16,21 @@ import type {
   SelectOnChangeHandler,
   InputProps
 } from '@offer-ui/react'
+import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement, ChangeEventHandler } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCreateUploadImagesMutation } from '@apis/image'
 import type { CreatePostReq } from '@apis/post'
-import { useGetCategoriesQuery, useCreatePostMutation } from '@apis/post'
+import {
+  useGetCategoriesQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useGetPostQuery
+} from '@apis/post'
 import { localeCurrencyToNumber } from '@utils/format'
 import { PostForm } from '@components'
-import { TRADE_TYPES, PRODUCT_CONDITIONS } from '@constants'
+import { TRADE_TYPES, PRODUCT_CONDITIONS, TRADE_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormState = Partial<
@@ -53,11 +59,24 @@ const isCompleteForm = (
 ): postForm is Required<PostFormState> =>
   postFormKeys.every(key => Boolean(postForm[key]))
 
-const PostPage = (): ReactElement => {
+type Props = { editPostId: number; type: string }
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query
+}) => ({
+  props: {
+    editPostId: Number(query.postId),
+    type: query.type as string
+  }
+})
+
+const PostPage = ({ type, editPostId }: Props): ReactElement => {
   const postMutation = useCreatePostMutation()
+  const getPostQuery = useGetPostQuery(editPostId)
   const uploadImagesQuery = useCreateUploadImagesMutation()
   const categoriesQuery = useGetCategoriesQuery()
+  const updatePostMutation = useUpdatePostMutation(editPostId)
   const router = useRouter()
+
   const [postForm, setPostForm] = useState<PostFormState>({})
 
   const InputSize = useResponsive<InputProps, 'width'>({
@@ -72,12 +91,27 @@ const PostPage = (): ReactElement => {
     })
   }
 
-  const handleUpdateImageInfos: UploaderOnChangeHandler = ({
-    images: imageInfos
+  const handleUpdateImageInfos: UploaderOnChangeHandler = async ({
+    images
   }) => {
+    const imageFormData = new FormData()
+
+    images.forEach(
+      info => info.file && imageFormData.append('files', info.file)
+    )
+
+    const { imageUrls } = await uploadImagesQuery.mutateAsync(imageFormData)
+    const imageInfos = postForm.imageInfos || []
+    const newImageInfos = imageUrls.map((url, idx) => ({
+      id: String(idx + imageInfos.length),
+      url
+    }))
+
+    const nextImageInfos = [...imageInfos, ...newImageInfos]
+
     setPostForm(prev => ({
       ...prev,
-      imageInfos
+      imageInfos: nextImageInfos
     }))
   }
 
@@ -95,25 +129,64 @@ const PostPage = (): ReactElement => {
       return
     }
 
+    let postId = editPostId
     const { imageInfos, price, ...post } = postForm
-    const imageFormData = new FormData()
+    const [thumbnailImageUrl, ...images] = imageInfos || []
+    const imageUrls = images.map(info => info.url)
 
-    imageInfos.forEach(
-      info => info.file && imageFormData.append('files', info.file)
-    )
-
-    const { imageUrls } = await uploadImagesQuery.mutateAsync(imageFormData)
-    const [thumbnailImageUrl, ...images] = imageUrls || []
-
-    const res = await postMutation.mutateAsync({
+    const nextPost = {
       ...post,
-      imageUrls: images,
+      imageUrls,
       price: localeCurrencyToNumber(price),
-      thumbnailImageUrl
-    })
+      thumbnailImageUrl: thumbnailImageUrl.url
+    }
 
-    router.replace(`/post/${res.id}`)
+    if (type === 'update') {
+      await updatePostMutation.mutateAsync({
+        ...nextPost,
+        tradeStatus: TRADE_STATUS[0].code
+      })
+    } else {
+      const res = await postMutation.mutateAsync(nextPost)
+      postId = res.id
+    }
+
+    router.replace(`/post/${postId}`)
   }
+
+  useEffect(() => {
+    if (getPostQuery.data) {
+      const {
+        category,
+        tradeType,
+        productCondition,
+        imageUrls,
+        thumbnailImageUrl,
+        price,
+        ...post
+      } = getPostQuery.data
+      const imageInfos =
+        imageUrls.map((url, idx) => ({
+          id: String(idx + 1),
+          url
+        })) || []
+      const thumbnailImageInfo = {
+        id: '0',
+        isRepresent: true,
+        url: thumbnailImageUrl || ''
+      }
+      const initialPostForm = {
+        category: category.code,
+        tradeType: tradeType.code,
+        productCondition: productCondition.code,
+        price: String(price),
+        imageInfos: [thumbnailImageInfo, ...imageInfos],
+        ...post
+      }
+
+      setPostForm(initialPostForm)
+    }
+  }, [getPostQuery.data])
 
   return (
     <StyledPostPage>
@@ -128,6 +201,7 @@ const PostPage = (): ReactElement => {
               name="title"
               placeholder="제목을 입력해주세요(40자 이내)"
               styleType="edit"
+              value={postForm.title}
               onChange={handleUpdatePostForm}
             />
             <StyledTitleLength styleType="subtitle01M">
@@ -154,6 +228,7 @@ const PostPage = (): ReactElement => {
               items={categoriesQuery.data || []}
               placeholder="선택"
               size="small"
+              value={postForm.category}
               onChange={handleUpdateCategory}
             />
           </PostForm>
@@ -162,6 +237,7 @@ const PostPage = (): ReactElement => {
               isPrice
               name="price"
               placeholder="시작가를 입력하세요"
+              value={postForm.price}
               width={InputSize}
               onChange={handleUpdatePostForm}
             />
@@ -170,6 +246,7 @@ const PostPage = (): ReactElement => {
             <Input
               name="location"
               placeholder="ex. 동작구 사당동"
+              value={postForm.location}
               width={InputSize}
               onChange={handleUpdatePostForm}
             />
@@ -179,6 +256,7 @@ const PostPage = (): ReactElement => {
               direction="horizontal"
               formName="productCondition"
               items={PRODUCT_CONDITIONS}
+              selectedValue={postForm.productCondition}
               onChange={handleUpdatePostForm}
             />
           </StyledRadioPostForm>
@@ -187,6 +265,7 @@ const PostPage = (): ReactElement => {
               direction="horizontal"
               formName="tradeType"
               items={TRADE_TYPES}
+              selectedValue={postForm.tradeType}
               onChange={handleUpdatePostForm}
             />
           </StyledRadioPostForm>
@@ -196,7 +275,11 @@ const PostPage = (): ReactElement => {
           <Text color="grayScale70" styleType="body01M">
             상품 설명
           </Text>
-          <StyledTextarea name="description" onChange={handleUpdatePostForm} />
+          <StyledTextarea
+            name="description"
+            value={postForm.description}
+            onChange={handleUpdatePostForm}
+          />
         </StyledTextareaWrapper>
       </StyledFormWrapper>
       <StyledButtonWrapper>

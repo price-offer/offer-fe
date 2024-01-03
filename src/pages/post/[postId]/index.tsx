@@ -113,6 +113,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                           <DialogButtonContainer>
                             <Link
                               href={`/post${toQueryString({
+                                type: 'update',
                                 postId
                               })}`}>
                               <DialogButton>수정하기</DialogButton>

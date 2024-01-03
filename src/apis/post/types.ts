@@ -26,9 +26,7 @@ export type UpdatePostReq = {
 }
 export type UpdatePostRes = PostDetail
 
-export type DeletePostReq = {
-  postId: number
-}
+export type DeletePostReq = number
 export type DeletePostRes = {
   // TODO: 정확한 타입 BE 확인 필요
 }

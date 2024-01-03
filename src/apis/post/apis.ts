@@ -6,7 +6,9 @@ import type {
   GetPostsReq,
   GetPostsRes,
   UpdateTradeStatusReq,
-  UpdateTradeStatusRes
+  UpdateTradeStatusRes,
+  DeletePostReq,
+  DeletePostRes
 } from './types'
 import { http } from '@utils/http'
 
@@ -30,3 +32,6 @@ export const updateTradeStatus = (
     `/posts/trade-status/${postId}`,
     params
   )
+
+export const deletePost = (postId: DeletePostReq) =>
+  http.delete<DeletePostRes>(`/posts/${postId}`)

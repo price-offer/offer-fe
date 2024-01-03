@@ -4,10 +4,12 @@ import {
   getCategories,
   createPost,
   getPosts,
-  updateTradeStatus
+  updateTradeStatus,
+  deletePost
 } from './apis'
 import type {
   CreatePostReq,
+  DeletePostReq,
   GetPostsReq,
   GetPostsRes,
   UpdateTradeStatusReq
@@ -51,4 +53,9 @@ export const useUpdateTradeStatusMutation = (postId: number) =>
   useMutation({
     mutationFn: (params: UpdateTradeStatusReq) =>
       updateTradeStatus(postId, params)
+  })
+
+export const useDeletePostMutation = (postId: DeletePostReq) =>
+  useMutation({
+    mutationFn: () => deletePost(postId)
   })

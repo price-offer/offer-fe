@@ -88,13 +88,17 @@ export type ImageUpload = {
 
 /** Review */
 export type ReviewInfo = {
+  hasNext: boolean
+  reviews: Review[]
+}
+export type Review = {
   id: number
   reviewTargetMember: ReviewTargetMember
   score: number
   post: PostBrief
   content: string
   createdDate: string
-}[]
+}
 export type ReviewTargetMember = {
   id: number
   profileImageUrl: string

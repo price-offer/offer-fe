@@ -139,7 +139,8 @@ export type OfferSummaries = {
 export type OfferSummary = {
   offerId: number
   postId: number
-  sellerNickname: string
+  seller: SellerDetail
+  sellerNickname: string // TODO: 곧 deprecated 예정
   title: string
   offerPrice: number
   thumbnailImageUrl: string

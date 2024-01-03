@@ -3,10 +3,11 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
+import Link from 'next/link'
 import { useState, type ReactElement, useEffect } from 'react'
-import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import { getTimeDiffText, toLocaleCurrency, toQueryString } from '@utils/format'
 import { useGetPostQuery, useUpdateTradeStatusMutation } from '@apis'
-import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
+import { UserProfile, PriceOfferCard, PostFieldList, Dialog } from '@components'
 import { TRADE_STATUS } from '@constants'
 import { useAuth } from '@hooks'
 import type { TradeStatusCodes, TradeStatusType } from '@types'
@@ -23,8 +24,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postQuery = useGetPostQuery(postId)
   const tradeStatusMutation = useUpdateTradeStatusMutation(postId)
-  const { user } = useAuth()
   const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
+  const [isOpenDialog, setIsOpenDialog] = useState(false)
+  const { user } = useAuth()
 
   const isSeller = user.id === postQuery.data?.seller.id
   const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
@@ -40,6 +42,14 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     await tradeStatusMutation.mutateAsync({
       tradeStatus: nextStatusCode
     })
+  }
+
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false)
+  }
+
+  const handleClickMore = () => {
+    setIsOpenDialog(true)
   }
 
   useEffect(() => {
@@ -65,7 +75,31 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                     value={tradeStatus}
                     onChange={handleChangeTradeStatus}
                   />
-                  <IconButton icon="more" size={24} />
+                  <MoreButtonWrapper>
+                    <IconButton
+                      icon="more"
+                      size={24}
+                      onClick={handleClickMore}
+                    />
+                    {isOpenDialog && (
+                      <Dialog
+                        dialogPositionStyle={{
+                          top: '34px',
+                          right: '0'
+                        }}
+                        onClose={handleCloseDialog}>
+                        <DialogButtonContainer>
+                          <Link
+                            href={`/post${toQueryString({
+                              postId
+                            })}`}>
+                            <DialogButton>수정하기</DialogButton>
+                          </Link>
+                          <DialogButton>삭제하기</DialogButton>
+                        </DialogButtonContainer>
+                      </Dialog>
+                    )}
+                  </MoreButtonWrapper>
                 </>
               ) : (
                 <ProductConditionBadge>
@@ -182,6 +216,30 @@ const Content = styled.div`
       padding: 0 16px;
     }
   `}
+`
+
+const MoreButtonWrapper = styled.div`
+  position: relative;
+`
+
+const DialogButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+`
+
+const DialogButton = styled.button`
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+
+  background-color: transparent;
+
+  text-align: left;
+
+  cursor: pointer;
 `
 
 const ProductConditionSelectBox = styled(SelectBox)`

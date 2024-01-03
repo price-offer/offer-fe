@@ -5,13 +5,15 @@ import {
   createPost,
   getPosts,
   updateTradeStatus,
-  deletePost
+  deletePost,
+  updatePost
 } from './apis'
 import type {
   CreatePostReq,
   DeletePostReq,
   GetPostsReq,
   GetPostsRes,
+  UpdatePostReq,
   UpdateTradeStatusReq
 } from './types'
 
@@ -20,10 +22,16 @@ export const useCreatePostMutation = () =>
     mutationFn: (param: CreatePostReq) => createPost(param)
   })
 
+export const useUpdatePostMutation = (postId: number) =>
+  useMutation({
+    mutationFn: (param: UpdatePostReq) => updatePost(postId, param)
+  })
+
 export const useGetPostQuery = (id: number) =>
   useQuery({
     queryKey: ['getPost', id],
-    queryFn: () => getPost(id)
+    queryFn: () => getPost(id),
+    enabled: Boolean(id)
   })
 
 export const useGetCategoriesQuery = () =>

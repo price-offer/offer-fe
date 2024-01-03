@@ -8,7 +8,9 @@ import type {
   UpdateTradeStatusReq,
   UpdateTradeStatusRes,
   DeletePostReq,
-  DeletePostRes
+  DeletePostRes,
+  UpdatePostReq,
+  UpdatePostRes
 } from './types'
 import { http } from '@utils/http'
 
@@ -17,6 +19,9 @@ export const getPost = (id: number) =>
 
 export const createPost = (param: CreatePostReq) =>
   http.post<CreatePostReq, CreatePostRes>('/posts', param)
+
+export const updatePost = (postId: number, param: UpdatePostReq) =>
+  http.put<UpdatePostReq, UpdatePostRes>(`/posts/${postId}`, param)
 
 export const getCategories = () =>
   http.get<null, GetCategoriesRes>('/categories')

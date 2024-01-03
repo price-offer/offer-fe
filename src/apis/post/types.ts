@@ -6,7 +6,6 @@ import type {
   ProductConditionCodes,
   SortOptionsShape,
   TradeStatusCodes,
-  TradeStatusType,
   TradeTypeCodes
 } from '@types'
 
@@ -18,7 +17,7 @@ export type UpdatePostReq = {
   price: number
   location: string
   productCondition: ProductConditionCodes
-  tradeStatus: TradeStatusType
+  tradeStatus: TradeStatusCodes
   tradeType: TradeTypeCodes
   thumbnailImageUrl: string
   imageUrls: string[]

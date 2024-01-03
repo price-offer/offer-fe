@@ -1,6 +1,17 @@
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query'
-import { getPost, getCategories, createPost, getPosts } from './apis'
-import type { CreatePostReq, GetPostsReq, GetPostsRes } from './types'
+import {
+  getPost,
+  getCategories,
+  createPost,
+  getPosts,
+  updateTradeStatus
+} from './apis'
+import type {
+  CreatePostReq,
+  GetPostsReq,
+  GetPostsRes,
+  UpdateTradeStatusReq
+} from './types'
 
 export const useCreatePostMutation = () =>
   useMutation({
@@ -34,4 +45,10 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
       lastPage?.hasNext
         ? lastPage.posts[lastPage.posts.length - 1].id
         : undefined
+  })
+
+export const useUpdateTradeStatusMutation = (postId: number) =>
+  useMutation({
+    mutationFn: (params: UpdateTradeStatusReq) =>
+      updateTradeStatus(postId, params)
   })

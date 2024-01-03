@@ -88,17 +88,22 @@ export type ImageUpload = {
 
 /** Review */
 export type ReviewInfo = {
+  hasNext: boolean
+  reviews: Review[]
+}
+export type Review = {
   id: number
-  reviewer: ReviewerBrief
+  reviewTargetMember: ReviewTargetMember
   score: number
   post: PostBrief
   content: string
   createdDate: string
-}[]
-export type ReviewerBrief = {
+}
+export type ReviewTargetMember = {
   id: number
   profileImageUrl: string
   nickname: string
+  offerLevel: number
 }
 export type PostBrief = {
   id: number
@@ -134,6 +139,8 @@ export type OfferSummaries = {
 export type OfferSummary = {
   offerId: number
   postId: number
+  sellerNickname: string
+  title: string
   offerPrice: number
   thumbnailImageUrl: string
   tradeStatus: TradeStatusType

@@ -3,12 +3,13 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
-import type { ReactElement } from 'react'
-import { useGetPostQuery } from '@apis/post'
+import { useState, type ReactElement, useEffect } from 'react'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import { useGetPostQuery, useUpdateTradeStatusMutation } from '@apis'
 import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
 import { useAuth } from '@hooks'
+import type { TradeStatusCodes, TradeStatusType } from '@types'
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -21,13 +22,31 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postQuery = useGetPostQuery(postId)
+  const tradeStatusMutation = useUpdateTradeStatusMutation(postId)
   const { user } = useAuth()
+  const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
 
   const isSeller = user.id === postQuery.data?.seller.id
   const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     url
   }))
+
+  const handleChangeTradeStatus = async (status: TradeStatusType) => {
+    const nextStatusCode = status.code
+
+    setTradeStatus(nextStatusCode)
+
+    await tradeStatusMutation.mutateAsync({
+      tradeStatus: nextStatusCode
+    })
+  }
+
+  useEffect(() => {
+    if (postQuery.data) {
+      setTradeStatus(postQuery.data.tradeStatus.code)
+    }
+  }, [postQuery.data])
 
   return (
     <Layout>
@@ -41,11 +60,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
               {isSeller ? (
                 <>
                   <ProductConditionSelectBox
+                    colorType="dark"
                     items={TRADE_STATUS}
-                    value={postQuery.data?.tradeStatus.code}
-                    onChange={(): void => {
-                      // do something
-                    }}
+                    value={tradeStatus}
+                    onChange={handleChangeTradeStatus}
                   />
                   <IconButton icon="more" size={24} />
                 </>

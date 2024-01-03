@@ -87,14 +87,15 @@ export type ImageUpload = {
 }
 
 /** Review */
-export type ReviewInfo = {
+export type ReviewInfo = Review[]
+export type Review = {
   id: number
   reviewTargetMember: ReviewTargetMember
   score: number
   post: PostBrief
   content: string
   createdDate: string
-}[]
+}
 export type ReviewTargetMember = {
   id: number
   profileImageUrl: string

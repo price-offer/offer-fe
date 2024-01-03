@@ -10,25 +10,20 @@ import {
   Button,
   Divider
 } from '@offer-ui/react'
-import type {
-  ImageInfo,
-  UploaderOnChangeHandler,
-  SelectOnChangeHandler,
-  InputProps
-} from '@offer-ui/react'
+import type { ImageInfo, InputProps } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import type { ReactElement, ChangeEventHandler } from 'react'
+import type { ReactElement } from 'react'
 import { useEffect, useState } from 'react'
-import { useCreateUploadImagesMutation } from '@apis/image'
-import type { CreatePostReq } from '@apis/post'
+import { localeCurrencyToNumber } from '@utils/format'
+import type { CreatePostReq } from '@apis'
 import {
   useGetCategoriesQuery,
   useCreatePostMutation,
   useUpdatePostMutation,
-  useGetPostQuery
-} from '@apis/post'
-import { localeCurrencyToNumber } from '@utils/format'
+  useGetPostQuery,
+  useCreateUploadImagesMutation
+} from '@apis'
 import { PostForm } from '@components'
 import { TRADE_TYPES, PRODUCT_CONDITIONS, TRADE_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
@@ -39,9 +34,8 @@ type PostFormState = Partial<
   price?: string
   imageInfos?: ImageInfo[]
 }
-type HandleUpdatePostForm = ChangeEventHandler<
-  HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
->
+type PostFormStateKeys = KeyOf<PostFormState>
+type PostFormStateValues = ValueOf<PostFormState>
 
 const postFormKeys: (keyof PostFormState)[] = [
   'title',
@@ -59,20 +53,28 @@ const isCompleteForm = (
 ): postForm is Required<PostFormState> =>
   postFormKeys.every(key => Boolean(postForm[key]))
 
+const getImageFormData = (files: File[]) => {
+  const imageFormData = new FormData()
+
+  files.forEach(file => imageFormData.append('files', file))
+
+  return imageFormData
+}
+
 type Props = { editPostId: number; type: string }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   query
 }) => ({
   props: {
     editPostId: Number(query.postId),
-    type: query.type as string
+    type: (query.type as string) || ''
   }
 })
 
 const PostPage = ({ type, editPostId }: Props): ReactElement => {
   const postMutation = useCreatePostMutation()
   const getPostQuery = useGetPostQuery(editPostId)
-  const uploadImagesQuery = useCreateUploadImagesMutation()
+  const uploadImagesMutation = useCreateUploadImagesMutation()
   const categoriesQuery = useGetCategoriesQuery()
   const updatePostMutation = useUpdatePostMutation(editPostId)
   const router = useRouter()
@@ -84,40 +86,10 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
     tablet: '100%'
   })
 
-  const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
-    setPostForm({
-      ...postForm,
-      category: code
-    })
-  }
-
-  const handleUpdateImageInfos: UploaderOnChangeHandler = async ({
-    images
-  }) => {
-    const imageFormData = new FormData()
-
-    images.forEach(
-      info => info.file && imageFormData.append('files', info.file)
-    )
-
-    const { imageUrls } = await uploadImagesQuery.mutateAsync(imageFormData)
-    const imageInfos = postForm.imageInfos || []
-    const newImageInfos = imageUrls.map((url, idx) => ({
-      id: String(idx + imageInfos.length),
-      url
-    }))
-
-    const nextImageInfos = [...imageInfos, ...newImageInfos]
-
-    setPostForm(prev => ({
-      ...prev,
-      imageInfos: nextImageInfos
-    }))
-  }
-
-  const handleUpdatePostForm: HandleUpdatePostForm = (e): void => {
-    const { name, value } = e.target
-
+  const handleUpdatePostForm = (
+    name: PostFormStateKeys,
+    value: PostFormStateValues
+  ): void => {
     setPostForm({
       ...postForm,
       [name]: value
@@ -129,16 +101,29 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
       return
     }
 
-    let postId = editPostId
     const { imageInfos, price, ...post } = postForm
-    const [thumbnailImageUrl, ...images] = imageInfos || []
-    const imageUrls = images.map(info => info.url)
+    const imageFiles = imageInfos
+      .filter(({ file }) => Boolean(file))
+      .map(({ file }) => file) as File[]
+    let imageUrls = imageInfos.filter(({ file }) => !file).map(({ url }) => url)
+    let postId = editPostId
+
+    if (imageFiles.length > 0) {
+      const imageFormData = getImageFormData(imageFiles)
+
+      const { imageUrls: newImageUrls } =
+        await uploadImagesMutation.mutateAsync(imageFormData)
+
+      imageUrls = imageUrls.concat(newImageUrls)
+    }
+
+    const [thumbnailImageUrl, ...images] = imageUrls || []
 
     const nextPost = {
       ...post,
-      imageUrls,
+      imageUrls: images,
       price: localeCurrencyToNumber(price),
-      thumbnailImageUrl: thumbnailImageUrl.url
+      thumbnailImageUrl: thumbnailImageUrl
     }
 
     if (type === 'update') {
@@ -148,6 +133,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
       })
     } else {
       const res = await postMutation.mutateAsync(nextPost)
+
       postId = res.id
     }
 
@@ -202,7 +188,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               placeholder="제목을 입력해주세요(40자 이내)"
               styleType="edit"
               value={postForm.title}
-              onChange={handleUpdatePostForm}
+              onChange={e => handleUpdatePostForm('title', e.target.value)}
             />
             <StyledTitleLength styleType="subtitle01M">
               {postForm.title?.length}/40
@@ -211,7 +197,9 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
           <div>
             <ImageUploader
               images={postForm.imageInfos || []}
-              onChange={handleUpdateImageInfos}
+              onChange={({ images }) =>
+                handleUpdatePostForm('imageInfos', images)
+              }
             />
           </div>
         </StyledPostingHeader>
@@ -229,7 +217,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               placeholder="선택"
               size="small"
               value={postForm.category}
-              onChange={handleUpdateCategory}
+              onChange={({ code }) => handleUpdatePostForm('category', code)}
             />
           </PostForm>
           <PostForm label="시작가">
@@ -239,7 +227,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               placeholder="시작가를 입력하세요"
               value={postForm.price}
               width={InputSize}
-              onChange={handleUpdatePostForm}
+              onChange={e => handleUpdatePostForm('price', e.target.value)}
             />
           </PostForm>
           <PostForm label="거래 지역">
@@ -248,7 +236,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               placeholder="ex. 동작구 사당동"
               value={postForm.location}
               width={InputSize}
-              onChange={handleUpdatePostForm}
+              onChange={e => handleUpdatePostForm('location', e.target.value)}
             />
           </PostForm>
           <StyledRadioPostForm label="상품 상태">
@@ -257,7 +245,9 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               formName="productCondition"
               items={PRODUCT_CONDITIONS}
               selectedValue={postForm.productCondition}
-              onChange={handleUpdatePostForm}
+              onChange={e =>
+                handleUpdatePostForm('productCondition', e.target.value)
+              }
             />
           </StyledRadioPostForm>
           <StyledRadioPostForm label="거래 방법">
@@ -266,7 +256,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               formName="tradeType"
               items={TRADE_TYPES}
               selectedValue={postForm.tradeType}
-              onChange={handleUpdatePostForm}
+              onChange={e => handleUpdatePostForm('tradeType', e.target.value)}
             />
           </StyledRadioPostForm>
         </StyledPostForms>
@@ -278,7 +268,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
           <StyledTextarea
             name="description"
             value={postForm.description}
-            onChange={handleUpdatePostForm}
+            onChange={e => handleUpdatePostForm('description', e.target.value)}
           />
         </StyledTextareaWrapper>
       </StyledFormWrapper>

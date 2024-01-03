@@ -50,7 +50,11 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   const { user } = useAuth()
 
   const isSeller = user.id === getPostQuery.data?.seller.id
-  const postImages = getPostQuery.data?.imageUrls.map((url, idx) => ({
+  const totalImages = [
+    getPostQuery.data?.thumbnailImageUrl || '',
+    ...(getPostQuery.data?.imageUrls || [])
+  ]
+  const postImages = totalImages.map((url, idx) => ({
     id: idx,
     url
   }))

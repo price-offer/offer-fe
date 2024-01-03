@@ -1,4 +1,5 @@
 import { Divider, SelectBox, Text, Icon, Radio } from '@offer-ui/react'
+import { useRouter } from 'next/router'
 import type { ChangeEvent, ReactElement } from 'react'
 import { useEffect, useState } from 'react'
 import { Styled } from './styled'
@@ -6,12 +7,13 @@ import type { PriceOfferCardProps } from './types'
 import { PriceOfferModal } from '../PriceOfferModal'
 import type { OfferForm } from '../PriceOfferModal/types'
 import { UserProfile } from '../UserProfile'
-import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import { getTimeDiffText, toLocaleCurrency, toQueryString } from '@utils/format'
 import {
   useUpdateLikeStatusMutation,
   useGetPostQuery,
   useGetPostOffersQuery,
-  useCreateOfferMutation
+  useCreateOfferMutation,
+  useCreateMessageRoomMutation
 } from '@apis'
 import { SORT_OPTIONS } from '@constants'
 import { useModal } from '@hooks'
@@ -25,29 +27,32 @@ const PriceOfferCard = ({
     SORT_OPTIONS[0].code
   )
   const [selectedOffer, setSelectedOffer] = useState<number | null>(null)
-  const offerModal = useModal()
   const [likePost, setLikePost] = useState({
     status: false,
     count: 0
   })
 
-  const postOffersQuery = useGetPostOffersQuery({
+  const router = useRouter()
+  const offerModal = useModal()
+
+  const getPostOffersQuery = useGetPostOffersQuery({
     postId,
     sort: sortOptionCode
   })
-  const postQuery = useGetPostQuery(postId)
-  const likeStatusMutation = useUpdateLikeStatusMutation()
-  const offerMutation = useCreateOfferMutation()
+  const getPostQuery = useGetPostQuery(postId)
+  const createMessageRoomMutation = useCreateMessageRoomMutation()
+  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
+  const createOfferMutation = useCreateOfferMutation()
 
   useEffect(() => {
     setLikePost({
-      status: Boolean(postQuery.data?.liked),
-      count: postQuery.data?.totalLikeCount || 0
+      status: Boolean(getPostQuery.data?.liked),
+      count: getPostQuery.data?.totalLikeCount || 0
     })
-  }, [postQuery.data])
+  }, [getPostQuery.data])
 
   const offers =
-    postOffersQuery.data?.offers.map(({ offerer, createdAt, ...offer }) => ({
+    getPostOffersQuery.data?.offers.map(({ offerer, createdAt, ...offer }) => ({
       ...offerer,
       level: Number(offerer.level),
       date: createdAt,
@@ -66,7 +71,7 @@ const PriceOfferCard = ({
       count: status ? count - 1 : count + 1
     }))
 
-    await likeStatusMutation.mutateAsync(postId)
+    await updateLikeStatusMutation.mutateAsync(postId)
   }
 
   const handleChangeOffer = (e: ChangeEvent<HTMLFormElement>) => {
@@ -90,8 +95,22 @@ const PriceOfferCard = ({
 
     offerModal.closeModal()
 
-    await offerMutation.mutateAsync(offerInfo)
-    postOffersQuery.refetch()
+    await createOfferMutation.mutateAsync(offerInfo)
+    getPostOffersQuery.refetch()
+  }
+
+  const handleClickStartMessage = async () => {
+    if (selectedOffer) {
+      const res = await createMessageRoomMutation.mutateAsync({
+        offerId: selectedOffer
+      })
+
+      router.push(
+        `/messagebox${toQueryString({
+          roomId: res.id
+        })}`
+      )
+    }
   }
 
   return (
@@ -182,21 +201,22 @@ const PriceOfferCard = ({
           </Styled.LikeButton>
           {isSeller ? (
             <Styled.MessageButton
-              disabled={!postOffersQuery.data?.totalSize}
-              size="large">
+              disabled={!selectedOffer}
+              size="large"
+              onClick={handleClickStartMessage}>
               쪽지하기
             </Styled.MessageButton>
           ) : (
             <Styled.MessageButton
               disabled={
-                postOffersQuery.data?.offerCountOfCurrentMember ===
-                postOffersQuery.data?.maximumOfferCount
+                getPostOffersQuery.data?.offerCountOfCurrentMember ===
+                getPostOffersQuery.data?.maximumOfferCount
               }
               size="large"
               onClick={() => {
                 offerModal.openModal()
               }}>{`가격 제안하기(${
-              postOffersQuery.data?.offerCountOfCurrentMember || 0
+              getPostOffersQuery.data?.offerCountOfCurrentMember || 0
             }/2)`}</Styled.MessageButton>
           )}
         </Styled.CardFooter>

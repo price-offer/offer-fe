@@ -128,7 +128,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                   </>
                 ) : (
                   <ProductConditionBadge>
-                    {getPostQuery.data?.tradeStatus.code}
+                    {getPostQuery.data?.tradeStatus.name}
                   </ProductConditionBadge>
                 )}
               </ProductCondition>

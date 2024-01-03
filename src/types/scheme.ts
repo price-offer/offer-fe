@@ -53,7 +53,7 @@ export type PostSummary = {
   createdAt: string
   seller: SellerDetail
   category: Category
-  review: ReviewInfo
+  review: Review
   hasReview: boolean
 }
 export type PostSummaries = {
@@ -147,7 +147,7 @@ export type OfferSummary = {
   createdAt: string
   reviewAvailable: boolean
   hasReview: boolean
-  review: ReviewInfo
+  review: Review
 }
 
 /** Message */

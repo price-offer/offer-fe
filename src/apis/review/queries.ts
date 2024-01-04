@@ -1,41 +1,43 @@
-import { useQuery } from '@tanstack/react-query'
-// import { getReviews } from './apis'
-import type { GetReviewsReq } from './types'
-import type { ReviewInfo } from '@types'
+import type { DefaultError } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { createReviews, getReviews } from './apis'
+import { initialAllReviewLengths, initialReviews } from './data'
+import type { CreateReviewReq, CreateReviewRes, GetReviewsReq } from './types'
+
+// 리뷰 갯수 조회 api 임시 대체
+export const useGetReviewsLengthQuery = (memberId: number) =>
+  useQuery({
+    queryKey: ['allReviews', memberId],
+    queryFn: async () => {
+      const searchOptions = {
+        memberId,
+        lastId: 0,
+        limit: 100
+      }
+
+      const all = await getReviews({ ...searchOptions, role: 'ALL' })
+      const buyer = await getReviews({ ...searchOptions, role: 'BUYER' })
+      const seller = await getReviews({ ...searchOptions, role: 'SELLER' })
+
+      return {
+        ALL: all.reviews.length,
+        BUYER: buyer.reviews.length,
+        SELLER: seller.reviews.length
+      }
+    },
+    enabled: Boolean(memberId),
+    initialData: initialAllReviewLengths
+  })
 
 export const useGetReviewsQuery = (searchOptions: GetReviewsReq) =>
   useQuery({
     queryKey: ['reviews', searchOptions],
-    queryFn: () => {
-      const getMockScore = () => {
-        if (searchOptions.role === 'ALL') {
-          return 0
-        } else if (searchOptions.role === 'SELLER') {
-          return 1
-        }
+    queryFn: async () => getReviews({ ...searchOptions }),
+    enabled: Boolean(searchOptions.memberId),
+    initialData: initialReviews
+  })
 
-        return 2
-      }
-
-      const mockData: ReviewInfo = [
-        {
-          id: 0,
-          reviewer: {
-            id: 0,
-            profileImageUrl: 'string',
-            nickname: 'string'
-          },
-          score: getMockScore(),
-          post: {
-            id: 0,
-            title: 'string'
-          },
-          content: 'string',
-          createdDate: '2023-12-28T14:15:45.027Z'
-        }
-      ]
-
-      return mockData
-      // getReviews(searchOptions)
-    }
+export const useReviewsMutation = () =>
+  useMutation<CreateReviewRes, DefaultError, CreateReviewReq>({
+    mutationFn: payload => createReviews(payload)
   })

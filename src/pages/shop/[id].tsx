@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
-import { ShopPageMainView } from './panel/main'
+import { ShopPageView } from './view'
 
 export const getServerSideProps = (context: GetServerSidePropsContext) => ({
   props: {
@@ -12,7 +12,7 @@ type ShopPageProps = {
   memberId: string
 }
 const ShopPage = ({ memberId }: ShopPageProps): ReactElement => {
-  return <ShopPageMainView memberId={Number(memberId)} />
+  return <ShopPageView memberId={Number(memberId)} />
 }
 
 export default ShopPage

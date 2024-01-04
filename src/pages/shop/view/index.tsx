@@ -2,15 +2,15 @@ import { Divider } from '@offer-ui/react'
 import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import { pageTabs } from '../../pageTabs'
+import { pageTabs } from '../pageTabs'
 import { useGetProfileQuery } from '@apis'
 import { ProfileBox, Tabs } from '@components'
 import { isNumber } from '@utils'
 
-type ShopPageMainViewProps = {
+type ShopPageViewProps = {
   memberId: number | null
 }
-export const ShopPageMainView = ({ memberId }: ShopPageMainViewProps) => {
+export const ShopPageView = ({ memberId }: ShopPageViewProps) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
   const profile = useGetProfileQuery(memberId)
   const hasToken = !isNumber(memberId)

@@ -1,7 +1,7 @@
-import { ShopPageMainView } from './panel/main'
+import { ShopPageView } from './view'
 
 const MyShopPage = () => {
-  return <ShopPageMainView memberId={null} />
+  return <ShopPageView memberId={null} />
 }
 
 export default MyShopPage

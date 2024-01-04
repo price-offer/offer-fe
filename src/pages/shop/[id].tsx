@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
-import { ShopPageMainView } from './view/main'
+import { ShopPageMainView } from './panel/main'
 
 export const getServerSideProps = (context: GetServerSidePropsContext) => ({
   props: {

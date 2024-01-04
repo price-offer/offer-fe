@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
-import { ShopPageBuyView } from './view/buy'
-import type { ShopPageReviewViewProps } from './view/review'
-import { ShopPageReviewView } from './view/review'
-import type { ShopPageSaleViewProps } from './view/sale'
-import { ShopPageSaleView } from './view/sale'
+import { ShopPageBuyView } from './panel/buy'
+import type { ShopPageReviewViewProps } from './panel/review'
+import { ShopPageReviewView } from './panel/review'
+import type { ShopPageSaleViewProps } from './panel/sale'
+import { ShopPageSaleView } from './panel/sale'
 import type { TradeActivityNames, TradeActivityCodes } from '@types'
 
 type PageTab = {

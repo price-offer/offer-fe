@@ -1,4 +1,4 @@
-import { ShopPageMainView } from './view/main'
+import { ShopPageMainView } from './panel/main'
 
 const MyShopPage = () => {
   return <ShopPageMainView memberId={null} />

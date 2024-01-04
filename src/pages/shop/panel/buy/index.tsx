@@ -13,7 +13,7 @@ import type {
   TradeBuyActivityNames
 } from '@types'
 
-const tradeBuyActivityList = Object.entries<
+const tradeBuyActivityTabs = Object.entries<
   TradeBuyActivityCodes,
   TradeBuyActivityNames
 >(TRADE_ACTIVITY_TYPES.buy)
@@ -38,7 +38,7 @@ export const ShopPageBuyPanel = () => {
         <Tabs>
           <Styled.SearchOptionsWrapper>
             <Styled.TabsList>
-              {tradeBuyActivityList.map(([code, name]) => {
+              {tradeBuyActivityTabs.map(([code, name]) => {
                 const isCurrent = code === activityType
 
                 return (

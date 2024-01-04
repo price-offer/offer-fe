@@ -2,7 +2,7 @@ import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import type { SaleTabPostListProps } from './types'
-import { SaleTabPost } from '@components/shop/Post'
+import { SaleTabPost } from '../SaleTabPost'
 
 const SaleTabPostList = ({
   posts,

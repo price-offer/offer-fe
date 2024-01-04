@@ -1,4 +1,4 @@
-import type { LikeTabPostProps } from '@components/shop/Post'
+import type { LikeTabPostProps } from '../LikeTabPost'
 import type { PostSummary } from '@types'
 
 export type LikePostListProps = {

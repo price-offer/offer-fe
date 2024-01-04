@@ -1,4 +1,4 @@
-import type { SaleTabPostProps } from '@components/shop/Post/SaleTabPost'
+import type { SaleTabPostProps } from '@components/shop/sale/SaleTabPost'
 import type { PostSummary } from '@types'
 
 export type SaleTabPostListProps = {

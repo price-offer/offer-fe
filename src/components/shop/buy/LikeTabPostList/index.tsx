@@ -2,7 +2,7 @@ import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import type { LikePostListProps } from './types'
-import { LikeTabPost } from '@components/shop/Post'
+import { LikeTabPost } from '../LikeTabPost'
 
 const LikeTabPostList = ({
   className,

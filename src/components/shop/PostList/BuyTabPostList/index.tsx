@@ -16,22 +16,37 @@ const BuyTabPostList = (props: BuyTabPostListProps): ReactElement => {
 
   return (
     <ul className={props.className}>
-      {props.posts.map((post, index) => (
-        <Fragment key={getPostId(post)}>
-          {isOfferPost(post) ? (
-            <BuyTabPost activityType="offer" {...post} />
-          ) : (
-            <BuyTabPost
-              activityType="like"
-              {...post}
-              onChangeProductLikeStatus={
-                isLikedProps(props) ? props.onChangeProductLikeStatus : noop
-              }
-            />
-          )}
-          {index !== props.posts.length - 1 && <Divider size="bold" />}
-        </Fragment>
-      ))}
+      {props.posts.map((post, index) => {
+        return (
+          <Fragment key={getPostId(post)}>
+            {isOfferPost(post) ? (
+              <BuyTabPost
+                activityType="offer"
+                {...post}
+                onClickReadReview={
+                  !isLikedProps(props)
+                    ? () => props.onClickReadReview(post.review)
+                    : noop
+                }
+                onClickWriteReview={
+                  !isLikedProps(props)
+                    ? () => props.onClickWriteReview(post)
+                    : noop
+                }
+              />
+            ) : (
+              <BuyTabPost
+                activityType="like"
+                {...post}
+                onChangeProductLikeStatus={
+                  isLikedProps(props) ? props.onChangeProductLikeStatus : noop
+                }
+              />
+            )}
+            {index !== props.posts.length - 1 && <Divider size="bold" />}
+          </Fragment>
+        )
+      })}
     </ul>
   )
 }

@@ -2,6 +2,7 @@ import { Text } from '@offer-ui/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { BuyTabPostProps } from './types'
 import { BuyTabPost as BuyTabPostComponent } from './index'
+import { noop } from '@utils/common'
 import type { OfferSummary } from '@types'
 
 type BuyTabPost = typeof BuyTabPostComponent
@@ -32,7 +33,12 @@ export const Primary: StoryObj<BuyTabPost> = {
     return (
       <>
         <Text styleType="subtitle01B">가격제안</Text>
-        <BuyTabPostComponent {...post} activityType="offer" />
+        <BuyTabPostComponent
+          {...post}
+          activityType="offer"
+          onClickReadReview={noop}
+          onClickWriteReview={noop}
+        />
         {/* TODO: 타입 이슈 디버깅 후 다시 확인 */}
         {/* <Text styleType="subtitle01B">관심상품</Text>
         <BuyTabPostComponent {...args} /> */}

@@ -8,18 +8,19 @@ const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
     className,
     postId,
     thumbnailImageUrl,
-    // title = '',
+    title,
+    seller,
     offerPrice,
     tradeStatus,
     createdAt,
-    hasReview
+    hasReview,
+    onClickReadReview,
+    onClickWriteReview
   } = props
 
-  // TODO: API Scheme 변경 필요
-  const seller = {
-    nickName: ''
+  const handleClickReviewButton = () => {
+    hasReview ? onClickReadReview() : onClickWriteReview()
   }
-  const title = ''
 
   return (
     <Styled.Container className={className}>
@@ -30,7 +31,7 @@ const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
         />
         <Styled.ProductMetaWrapper>
           <Styled.SellerName styleType="body02R">
-            {seller.nickName}
+            {seller.nickname}
           </Styled.SellerName>
           <Styled.ProductName styleType="body02M">{title}</Styled.ProductName>
           <Styled.ProductInfoWrapper>
@@ -50,7 +51,8 @@ const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
         <Styled.ReviewButton
           hasReview={hasReview}
           size="small"
-          styleType="outline">
+          styleType="outline"
+          onClick={handleClickReviewButton}>
           {hasReview ? '보낸 후기 보기' : '후기 보내기'}
         </Styled.ReviewButton>
       </Styled.ReviewButtonWrapper>

@@ -2,19 +2,25 @@ import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
+import { useModal } from '@hooks/useModal'
 import {
   useGetMyOffersQuery,
   useGetLikedPostsQuery,
-  useUpdateLikeStatusMutation
+  useUpdateLikeStatusMutation,
+  useReviewsMutation
 } from '@apis'
-import { Tabs, BuyTabPostList } from '@components'
+import type { ReviewState } from '@components'
+import { Tabs, BuyTabPostList, ReviewModal } from '@components'
 import { TRADE_ACTIVITY_TYPES, SORT_OPTIONS } from '@constants'
 import type {
+  OfferSummary,
+  Review,
   SortOption,
   SortOptionCodes,
   TradeBuyActivityCodes,
   TradeBuyActivityNames
 } from '@types'
+import { isNumber } from '@utils'
 
 const tradeBuyActivityList = Object.entries<
   TradeBuyActivityCodes,
@@ -26,10 +32,20 @@ export const ShopPageBuyView = (): ReactElement => {
     useState<SortOptionCodes>('CREATED_DATE_DESC')
   const [activityType, setActivityType] =
     useState<TradeBuyActivityCodes>('like')
+  const [readReviewContent, setReadReviewContent] = useState<Review>(
+    {} as Review
+  )
+  const [writeReviewContent, setWriteReviewContent] = useState<OfferSummary>(
+    {} as OfferSummary
+  )
+
+  const readReviewModal = useModal()
+  const writeReviewModal = useModal()
 
   const offers = useGetMyOffersQuery({ sort: sortOptionCode })
   const likedPosts = useGetLikedPostsQuery({ sort: sortOptionCode })
   const likeStatusMutation = useUpdateLikeStatusMutation()
+  const reviewsMutation = useReviewsMutation()
 
   const handleChangeSortOption = (newSortOption: SortOption) => {
     setSortOptionCode(newSortOption.code)
@@ -39,8 +55,31 @@ export const ShopPageBuyView = (): ReactElement => {
       setActivityType(newActivityType)
 
   const handleChangeProductLikeStatus = async (postId: number) => {
-    await likeStatusMutation.mutateAsync(postId)
+    await likeStatusMutation.mutateAsync({ postId })
     likedPosts.refetch()
+  }
+
+  const handleOpenReadReview = (review: Review) => {
+    setReadReviewContent(review)
+    readReviewModal.openModal()
+  }
+  const handleOpenWriteReview = (offer: OfferSummary) => {
+    setWriteReviewContent(offer)
+    writeReviewModal.openModal()
+  }
+  const handleConfirmWriteReview = async (reviewState: ReviewState) => {
+    if (!isNumber(reviewState.reviewScore)) {
+      return
+    }
+
+    await reviewsMutation.mutateAsync({
+      targetMemberId: writeReviewContent.seller.id,
+      postId: writeReviewContent.postId,
+      score: reviewState.reviewScore,
+      content: reviewState.reviewText
+    })
+    await offers.refetch()
+    writeReviewModal.closeModal()
   }
 
   return (
@@ -91,11 +130,26 @@ export const ShopPageBuyView = (): ReactElement => {
               <BuyTabPostList
                 activityType="offer"
                 posts={offers.data?.offers || []}
+                onClickReadReview={handleOpenReadReview}
+                onClickWriteReview={handleOpenWriteReview}
               />
             </Tabs.Panel>
           </Styled.ProductListPanels>
         </Tabs>
       </Styled.UserProductsWrapper>
+      <ReviewModal.Read
+        {...readReviewContent}
+        isOpen={readReviewModal.isOpen}
+        onClose={readReviewModal.closeModal}
+        onConfirm={readReviewModal.closeModal}
+      />
+      <ReviewModal.Write
+        isOpen={writeReviewModal.isOpen}
+        nickname={writeReviewContent.seller?.nickname}
+        productName={writeReviewContent.title}
+        onClose={writeReviewModal.closeModal}
+        onConfirm={handleConfirmWriteReview}
+      />
     </div>
   )
 }

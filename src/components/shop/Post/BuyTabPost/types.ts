@@ -1,4 +1,5 @@
 import type { LikeTabPanelProps } from './likeTabPanel'
+import type { OfferTabPanelProps } from './offerTabPanel'
 import type { OfferSummary, PostSummary, TradeBuyActivityCodes } from '@types'
 
 export type BuyTabPostProps = { className?: string } & (
@@ -12,4 +13,6 @@ export type LikeActivityProps = {
 } & PostSummary
 export type OfferActivityProps = {
   activityType: Extract<TradeBuyActivityCodes, 'offer'>
+  onClickWriteReview: OfferTabPanelProps['onClickWriteReview']
+  onClickReadReview: OfferTabPanelProps['onClickReadReview']
 } & OfferSummary

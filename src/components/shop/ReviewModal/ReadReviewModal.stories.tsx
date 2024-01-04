@@ -30,7 +30,7 @@ export const Default: StoryObj<ReadReviewModal> = {
     nickname: '닉네임',
     productName: '상품이름',
     content: '리뷰',
-    score: 'smile'
+    score: 2
   },
   render: args => <DefaultWithHooks {...args} />
 }

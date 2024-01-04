@@ -1,7 +1,7 @@
-import type { CommonReviewModalProps, Score } from '../types'
+import type { CommonReviewModalProps } from '../types'
+import type { Review } from '@types'
 
-export type ReadReviewModalProps = CommonReviewModalProps & {
-  score: Score
-  content: string
-  onConfirm(): void
-}
+export type ReadReviewModalProps = Partial<CommonReviewModalProps> &
+  Review & {
+    onConfirm(): void
+  }

@@ -93,11 +93,13 @@ const ReviewState = styled.button<StyledReviewStateProps>`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  place-items: center center;
 
   border: none;
 
   background: none;
+
+  cursor: pointer;
+  place-items: center center;
 
   * {
     color: ${({ isFill, theme }): string =>
@@ -109,6 +111,8 @@ const ReviewState = styled.button<StyledReviewStateProps>`
 const ReviewIcon = styled(Icon)`
   width: 40px;
   height: 40px;
+
+  cursor: pointer;
 `
 
 const ReadModeReviewContent = styled.div`

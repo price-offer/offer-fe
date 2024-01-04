@@ -1,6 +1,6 @@
-import type { ModalProps, IconType } from '@offer-ui/react'
+import type { ModalProps } from '@offer-ui/react'
 
-export type Score = Extract<IconType, 'smile' | 'meh' | 'sad'>
+export type Score = 0 | 1 | 2
 
 export type ScoreState = Score | null
 
@@ -9,7 +9,7 @@ export type CommonReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
   productName: string
 }
 
-export type SCORE = {
+export type ScoreOptions = {
   state: Score
   text: string
 }[]

@@ -1,6 +1,6 @@
 import type { CommonReviewModalProps, ScoreState } from '../types'
 
-export type WriteReviewModalProps = CommonReviewModalProps & {
+export type WriteReviewModalProps = Partial<CommonReviewModalProps> & {
   onConfirm(state: ReviewState): void
 }
 

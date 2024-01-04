@@ -53,7 +53,7 @@ export type PostSummary = {
   createdAt: string
   seller: SellerDetail
   category: Category
-  review: ReviewInfo
+  review: Review
   hasReview: boolean
 }
 export type PostSummaries = {
@@ -88,17 +88,22 @@ export type ImageUpload = {
 
 /** Review */
 export type ReviewInfo = {
+  hasNext: boolean
+  reviews: Review[]
+}
+export type Review = {
   id: number
-  reviewer: ReviewerBrief
+  reviewTargetMember: ReviewTargetMember
   score: number
   post: PostBrief
   content: string
   createdDate: string
-}[]
-export type ReviewerBrief = {
+}
+export type ReviewTargetMember = {
   id: number
   profileImageUrl: string
   nickname: string
+  offerLevel: number
 }
 export type PostBrief = {
   id: number
@@ -134,13 +139,15 @@ export type OfferSummaries = {
 export type OfferSummary = {
   offerId: number
   postId: number
+  seller: SellerDetail
+  title: string
   offerPrice: number
   thumbnailImageUrl: string
   tradeStatus: TradeStatusType
   createdAt: string
   reviewAvailable: boolean
   hasReview: boolean
-  review: ReviewInfo
+  review: Review
 }
 
 /** Message */

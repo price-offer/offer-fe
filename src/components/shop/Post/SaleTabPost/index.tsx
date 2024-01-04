@@ -1,4 +1,3 @@
-import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { Icon, Text } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
@@ -7,25 +6,22 @@ import { TRADE_STATUS } from '@constants'
 import type { TradeStatusType } from '@types'
 import { toLocaleCurrency, getTimeDiffText } from '@utils'
 
-const SaleTabPost = (props: SaleTabPostProps): ReactElement => {
-  const {
-    className,
-    id,
-    title,
-    price,
-    thumbnailImageUrl,
-    tradeStatus,
-    likeCount,
-    createdAt,
-    hasToken,
-    onChangeTradeStatus,
-    hasReview
-  } = props
+const SaleTabPost = ({
+  className,
+  id,
+  title,
+  price,
+  thumbnailImageUrl,
+  tradeStatus,
+  likeCount,
+  createdAt,
+  hasToken,
+  onChangeTradeStatus,
+  hasReview
+}: SaleTabPostProps): ReactElement => {
   const isSoldOut = tradeStatus.code === 'SOLD'
 
-  const handleChangeTradeStatus: SelectOnChangeHandler<
-    TradeStatusType
-  > = item => {
+  const handleChangeTradeStatus = (item: TradeStatusType) => {
     onChangeTradeStatus?.(id, item)
   }
 

@@ -65,7 +65,7 @@ const PriceOfferCard = ({
       count: status ? count - 1 : count + 1
     }))
 
-    await likeStatusMutation.mutateAsync(postId)
+    await likeStatusMutation.mutateAsync({ postId })
   }
 
   const handleClickOffer = async ({

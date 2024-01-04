@@ -3,18 +3,16 @@ import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import { pageTabs } from '../../pageTabs'
-import type { ProfileQueryResult } from '@apis'
+import { useGetProfileQuery } from '@apis'
 import { ProfileBox, Tabs } from '@components'
 
 type ShopPageMainViewProps = {
-  hasToken: boolean
-  profile: ProfileQueryResult
+  memberId: number | null
 }
-export const ShopPageMainView = ({
-  profile,
-  hasToken
-}: ShopPageMainViewProps) => {
+export const ShopPageMainView = ({ memberId }: ShopPageMainViewProps) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
+  const profile = useGetProfileQuery(memberId)
+  const hasToken = !!memberId
 
   const handleTabClick = (
     _: MouseEvent<HTMLDivElement>,

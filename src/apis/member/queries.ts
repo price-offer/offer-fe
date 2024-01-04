@@ -6,6 +6,19 @@ export type ProfileQueryResult =
   | ReturnType<typeof useGetMyProfileQuery>
   | ReturnType<typeof useGetMemberProfileQuery>
 
+export const useGetProfileQuery = (memberId: null | number) =>
+  useQuery({
+    queryKey: ['profile', memberId],
+    queryFn: () => {
+      if (!memberId) {
+        return getMyProfile()
+      }
+
+      return getMemberProfile(memberId)
+    },
+    initialData: memberId ? initialMemberProfile : initialMyProfile
+  })
+
 export const useGetMyProfileQuery = (accessToken?: string) =>
   useQuery({
     queryKey: ['myProfile', accessToken],

@@ -13,10 +13,11 @@ export default meta
 export const Primary: StoryObj<ReviewTabPost> = {
   args: {
     id: 6,
-    reviewer: {
+    reviewTargetMember: {
       id: 1,
       profileImageUrl: '',
-      nickname: '닉네임'
+      nickname: '닉네임',
+      offerLevel: 1
     },
     score: 0,
     post: {

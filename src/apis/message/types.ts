@@ -6,7 +6,6 @@ export type GetMessageRoomsReq = {
 export type GetMessageRoomsRes = MessageRoomInfo[]
 
 export type CreateMessageRoomReq = {
-  targetMemberId: number
   offerId: number
 }
 export type CreateMessageRoomRes = CommonCreation

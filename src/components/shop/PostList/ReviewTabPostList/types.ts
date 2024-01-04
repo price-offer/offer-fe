@@ -1,6 +1,6 @@
-import type { ReviewInfo } from '@types'
+import type { Review } from '@types'
 
 export type ReviewTabPostListProps = {
-  reviews: ReviewInfo
+  reviews: Review[]
   className?: string
 }

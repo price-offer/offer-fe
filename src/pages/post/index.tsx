@@ -149,7 +149,9 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
         imageUrls,
         thumbnailImageUrl,
         price,
-        ...post
+        title,
+        description,
+        location
       } = getPostQuery.data
       const imageInfos =
         imageUrls.map((url, idx) => ({
@@ -161,13 +163,15 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
         isRepresent: true,
         url: thumbnailImageUrl || ''
       }
-      const initialPostForm = {
+      const initialPostForm: PostFormState = {
         category: category.code,
         tradeType: tradeType.code,
         productCondition: productCondition.code,
         price: String(price),
         imageInfos: [thumbnailImageInfo, ...imageInfos],
-        ...post
+        title,
+        description,
+        location
       }
 
       setPostForm(initialPostForm)

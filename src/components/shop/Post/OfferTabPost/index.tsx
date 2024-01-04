@@ -1,23 +1,21 @@
 import type { ReactElement } from 'react'
-import type { OfferTabPanelProps } from './types'
-import { Styled } from '../styled'
+import { Styled } from './styled'
+import type { OfferTabPostProps } from './types'
 import { toLocaleCurrency, getTimeDiffText } from '@utils'
 
-const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
-  const {
-    className,
-    postId,
-    thumbnailImageUrl,
-    title,
-    seller,
-    offerPrice,
-    tradeStatus,
-    createdAt,
-    hasReview,
-    onClickReadReview,
-    onClickWriteReview
-  } = props
-
+const OfferTabPost = ({
+  className,
+  postId,
+  thumbnailImageUrl,
+  title,
+  seller,
+  offerPrice,
+  tradeStatus,
+  createdAt,
+  hasReview,
+  onClickReadReview,
+  onClickWriteReview
+}: OfferTabPostProps): ReactElement => {
   const handleClickReviewButton = () => {
     hasReview ? onClickReadReview() : onClickWriteReview()
   }
@@ -60,4 +58,4 @@ const OfferTabPanel = (props: OfferTabPanelProps): ReactElement => {
   )
 }
 
-export { OfferTabPanel, OfferTabPanelProps }
+export { OfferTabPost, OfferTabPostProps }

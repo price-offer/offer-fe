@@ -2,7 +2,7 @@ import { Divider } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Fragment } from 'react'
 import type { OfferPostListProps } from './types'
-import { BuyTabPost } from '@components/shop/Post'
+import { OfferTabPost } from '@components/shop/Post'
 
 const OfferTabPostList = ({
   className,
@@ -13,8 +13,7 @@ const OfferTabPostList = ({
   <ul className={className}>
     {posts.map((post, index) => (
       <Fragment key={post.postId}>
-        <BuyTabPost
-          activityType="offer"
+        <OfferTabPost
           {...post}
           onClickReadReview={() => onClickReadReview(post.review)}
           onClickWriteReview={() => onClickWriteReview(post)}

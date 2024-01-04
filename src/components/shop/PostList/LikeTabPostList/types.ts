@@ -1,8 +1,8 @@
-import type { LikeActivityProps } from '@components/shop/Post/BuyTabPost/types'
+import type { LikeTabPostProps } from '@components/shop/Post'
 import type { PostSummary } from '@types'
 
 export type LikePostListProps = {
   className?: string
   posts: PostSummary[]
-  onChangeProductLikeStatus: LikeActivityProps['onChangeProductLikeStatus']
+  onChangeProductLikeStatus: LikeTabPostProps['onChangeLikeStatus']
 }

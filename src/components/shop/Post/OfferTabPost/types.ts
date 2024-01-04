@@ -1,6 +1,6 @@
 import type { OfferSummary } from '@types'
 
-export type OfferTabPanelProps = OfferSummary & {
+export type OfferTabPostProps = OfferSummary & {
   className?: string
   onClickReadReview(): void
   onClickWriteReview(): void

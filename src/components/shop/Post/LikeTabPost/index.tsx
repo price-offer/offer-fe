@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
-import type { LikeTabPanelProps } from './types'
-import { Styled } from '../styled'
+import { Styled } from './styled'
+import type { LikeTabPostProps } from './types'
 import { toLocaleCurrency, getTimeDiffText } from '@utils'
 
-const LikeTabPanel = ({
+const LikeTabPost = ({
   className,
   seller,
   id: postId,
@@ -14,7 +14,7 @@ const LikeTabPanel = ({
   createdAt,
   likeCount,
   onChangeLikeStatus
-}: LikeTabPanelProps): ReactElement => {
+}: LikeTabPostProps): ReactElement => {
   const handleChangeLikeStatus = () => {
     onChangeLikeStatus(postId)
   }
@@ -53,4 +53,4 @@ const LikeTabPanel = ({
   )
 }
 
-export { LikeTabPanel, LikeTabPanelProps }
+export { LikeTabPost, LikeTabPostProps }

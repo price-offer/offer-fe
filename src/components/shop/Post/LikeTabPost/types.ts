@@ -1,6 +1,6 @@
 import type { PostSummary } from '@types'
 
-export type LikeTabPanelProps = PostSummary & {
+export type LikeTabPostProps = PostSummary & {
   className?: string
   onChangeLikeStatus(postId: number): void
 }

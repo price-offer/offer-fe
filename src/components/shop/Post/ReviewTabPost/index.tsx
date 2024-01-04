@@ -14,8 +14,6 @@ const ReviewTabPost = ({
   createdDate,
   className
 }: ReviewTabPostProps): ReactElement => {
-  const offerLevel = 1
-
   return (
     <Styled.Wrapper className={className}>
       <Styled.Avatar alt="avatar" src={reviewTargetMember.profileImageUrl} />
@@ -27,8 +25,7 @@ const ReviewTabPost = ({
                 {reviewTargetMember.nickname}
               </Styled.NickName>
               <Styled.Badge colorType="orange">
-                {/* Lv.{reviewTargetMember.offerLevel} */}
-                Lv.{offerLevel}
+                Lv.{reviewTargetMember.offerLevel}
               </Styled.Badge>
             </Styled.NickNameWrapper>
             <Text color="grayScale30" styleType="caption01M">

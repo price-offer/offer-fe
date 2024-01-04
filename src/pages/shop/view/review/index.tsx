@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import type { ProfileQueryResult } from '@apis'
-import { useGetReviewsQuery } from '@apis'
+import { useGetReviewsLengthQuery, useGetReviewsQuery } from '@apis'
 import { Tabs, ReviewTabPostList } from '@components'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
 import type { TradeReviewActivityCodes, TradeReviewActivityNames } from '@types'
@@ -21,6 +21,7 @@ export const ShopPageReviewView = ({
 }: ShopPageReviewViewProps): ReactElement => {
   const [reviewType, setReviewType] = useState<TradeReviewActivityCodes>('ALL')
 
+  const reviewsLength = useGetReviewsLengthQuery(profile.data.id)
   const reviews = useGetReviewsQuery({
     memberId: profile.data.id,
     lastId: 0,
@@ -53,7 +54,7 @@ export const ShopPageReviewView = ({
                         <Styled.Text isCurrent={isCurrent}>{name}</Styled.Text>
                       </Styled.StatusButton>
                       <Styled.Text color="grayScale50">
-                        {reviews.data?.length}
+                        {reviewsLength.data[code]}
                       </Styled.Text>
                     </Styled.StatusButtonLabel>
                   </Styled.Tab>
@@ -62,15 +63,11 @@ export const ShopPageReviewView = ({
             </Styled.TabsList>
           </Styled.SearchOptionsWrapper>
           <Styled.ProductListPanels>
-            <Tabs.Panel>
-              <ReviewTabPostList reviews={reviews.data || []} />
-            </Tabs.Panel>
-            <Tabs.Panel>
-              <ReviewTabPostList reviews={reviews.data || []} />
-            </Tabs.Panel>
-            <Tabs.Panel>
-              <ReviewTabPostList reviews={reviews.data || []} />
-            </Tabs.Panel>
+            {tradeReviewActivityList.map(([code]) => (
+              <Tabs.Panel key={`${code}-panel`}>
+                <ReviewTabPostList reviews={reviews.data.reviews} />
+              </Tabs.Panel>
+            ))}
           </Styled.ProductListPanels>
         </Tabs>
       </Styled.UserProductsWrapper>

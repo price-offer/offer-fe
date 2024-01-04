@@ -1,5 +1,4 @@
 import { SelectBox } from '@offer-ui/react'
-import type { ReactElement } from 'react'
 import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { GetPostsReq } from '@apis'
@@ -13,14 +12,14 @@ import { Tabs, SaleTabPostList } from '@components'
 import { SORT_OPTIONS, TRADE_STATUS } from '@constants'
 import type { SortOption } from '@types'
 
-export type ShopPageSaleViewProps = {
+export type ShopPageSalePanelProps = {
   hasToken: boolean
   memberId: number | null
 }
-export const ShopPageSaleView = ({
+export const ShopPageSalePanel = ({
   hasToken,
   memberId
-}: ShopPageSaleViewProps): ReactElement => {
+}: ShopPageSalePanelProps) => {
   const [searchOptions, setSearchOptions] = useState<GetPostsReq>({
     sellerId: memberId ? memberId : undefined,
     tradeStatus: 'SELLING',

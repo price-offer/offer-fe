@@ -1,5 +1,4 @@
 import { SelectBox } from '@offer-ui/react'
-import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import { LikePanelView } from './view/like'
@@ -19,7 +18,7 @@ const tradeBuyActivityList = Object.entries<
   TradeBuyActivityNames
 >(TRADE_ACTIVITY_TYPES.buy)
 
-export const ShopPageBuyView = (): ReactElement => {
+export const ShopPageBuyPanel = () => {
   const [sortOptionCode, setSortOptionCode] =
     useState<SortOptionCodes>('CREATED_DATE_DESC')
   const [activityType, setActivityType] =

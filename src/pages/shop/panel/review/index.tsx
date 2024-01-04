@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import {
@@ -15,13 +14,11 @@ const tradeReviewActivityList = Object.entries<
   TradeReviewActivityNames
 >(TRADE_ACTIVITY_TYPES.review)
 
-export type ShopPageReviewViewProps = {
+export type ShopPageReviewPanelProps = {
   memberId: number | null
 }
 
-export const ShopPageReviewView = ({
-  memberId
-}: ShopPageReviewViewProps): ReactElement => {
+export const ShopPageReviewPanel = ({ memberId }: ShopPageReviewPanelProps) => {
   const [reviewType, setReviewType] = useState<TradeReviewActivityCodes>('ALL')
 
   const profile = useGetProfileQuery(memberId)

@@ -1,8 +1,11 @@
 import type { ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
-import type { ProfileQueryResult } from '@apis'
-import { useGetReviewsLengthQuery, useGetReviewsQuery } from '@apis'
+import {
+  useGetProfileQuery,
+  useGetReviewsLengthQuery,
+  useGetReviewsQuery
+} from '@apis'
 import { Tabs, ReviewTabPostList } from '@components'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
 import type { TradeReviewActivityCodes, TradeReviewActivityNames } from '@types'
@@ -13,14 +16,15 @@ const tradeReviewActivityList = Object.entries<
 >(TRADE_ACTIVITY_TYPES.review)
 
 export type ShopPageReviewViewProps = {
-  profile: ProfileQueryResult
+  memberId: number | null
 }
 
 export const ShopPageReviewView = ({
-  profile
+  memberId
 }: ShopPageReviewViewProps): ReactElement => {
   const [reviewType, setReviewType] = useState<TradeReviewActivityCodes>('ALL')
 
+  const profile = useGetProfileQuery(memberId)
   const reviewsLength = useGetReviewsLengthQuery(profile.data.id)
   const reviews = useGetReviewsQuery({
     memberId: profile.data.id,

@@ -5,6 +5,7 @@ import { Styled } from './styled'
 import { pageTabs } from '../../pageTabs'
 import { useGetProfileQuery } from '@apis'
 import { ProfileBox, Tabs } from '@components'
+import { isNumber } from '@utils'
 
 type ShopPageMainViewProps = {
   memberId: number | null
@@ -12,7 +13,7 @@ type ShopPageMainViewProps = {
 export const ShopPageMainView = ({ memberId }: ShopPageMainViewProps) => {
   const [pageIndex, setPageIndex] = useState<number>(0)
   const profile = useGetProfileQuery(memberId)
-  const hasToken = !!memberId
+  const hasToken = !isNumber(memberId)
 
   const handleTabClick = (
     _: MouseEvent<HTMLDivElement>,
@@ -49,7 +50,7 @@ export const ShopPageMainView = ({ memberId }: ShopPageMainViewProps) => {
                 <Tabs.Panel key={`${tab.code}-panel`}>
                   <Styled.TabPanelContent>
                     <ProfileBox {...profile.data} hasToken={hasToken} />
-                    {panel({ profile, hasToken })}
+                    {panel({ hasToken, memberId })}
                   </Styled.TabPanelContent>
                 </Tabs.Panel>
               ))}

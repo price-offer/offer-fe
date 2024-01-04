@@ -2,8 +2,12 @@ import { SelectBox } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { useEffect, useState, useCallback } from 'react'
 import { Styled } from './styled'
-import type { GetPostsReq, ProfileQueryResult } from '@apis'
-import { usePostTradeStatusMutation, useGetPostsQuery } from '@apis'
+import type { GetPostsReq } from '@apis'
+import {
+  usePostTradeStatusMutation,
+  useGetPostsQuery,
+  useGetProfileQuery
+} from '@apis'
 import type { SaleTabPostProps } from '@components'
 import { Tabs, SaleTabPostList } from '@components'
 import { SORT_OPTIONS, TRADE_STATUS } from '@constants'
@@ -11,12 +15,13 @@ import type { SortOption } from '@types'
 
 export type ShopPageSaleViewProps = {
   hasToken: boolean
-  profile: ProfileQueryResult
+  memberId: number | null
 }
 export const ShopPageSaleView = ({
   hasToken,
-  profile
+  memberId
 }: ShopPageSaleViewProps): ReactElement => {
+  const profile = useGetProfileQuery(memberId)
   const [searchOptions, setSearchOptions] = useState<GetPostsReq>({
     sellerId: profile.data.nickname ? profile.data.id : undefined,
     tradeStatus: 'SELLING',

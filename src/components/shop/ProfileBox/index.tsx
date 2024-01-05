@@ -4,15 +4,10 @@ import { Styled } from './styled'
 import type { ProfileBoxProps } from './types'
 
 const ProfileBox = ({
-  nickname,
-  profileImageUrl,
-  likeProductCount = 0,
-  offerLevel,
-  reviewCount,
-  sellingProductCount,
-  soldProductCount,
   className,
-  hasToken
+  hasToken,
+  onClickEditButton,
+  ...profile
 }: ProfileBoxProps): ReactElement => {
   const { desktop } = useMedia()
 
@@ -20,7 +15,12 @@ const ProfileBox = ({
     <Styled.Container className={className}>
       {hasToken && (
         <Styled.SettingsButton>
-          <Icon color="grayScale30" size={24} type="setting" />
+          <Icon
+            color="grayScale30"
+            size={24}
+            type="setting"
+            onClick={onClickEditButton}
+          />
         </Styled.SettingsButton>
       )}
       <Styled.ProfileWrapper>
@@ -28,11 +28,11 @@ const ProfileBox = ({
           <Styled.Avatar
             alt="avatar"
             size={desktop ? 'medium' : 'small'}
-            src={profileImageUrl}
+            src={profile.profileImageUrl}
           />
           <Styled.NickNameRow>
-            <Styled.NickName>{nickname}</Styled.NickName>
-            <Badge colorType="orange">Lv.{offerLevel}</Badge>
+            <Styled.NickName>{profile.nickname}</Styled.NickName>
+            <Badge colorType="orange">Lv.{profile.offerLevel}</Badge>
           </Styled.NickNameRow>
         </Styled.UserWrapper>
         <Styled.UserProductWrapper hasToken={hasToken}>
@@ -41,21 +41,21 @@ const ProfileBox = ({
               <Icon color="grayScale30" size={16} type="store" />
               <Text styleType="caption01M">판매중</Text>
             </Styled.UserProductTitleWrapper>
-            <Text styleType="caption01M">{sellingProductCount}개</Text>
+            <Text styleType="caption01M">{profile.sellingProductCount}개</Text>
           </Styled.UserProductRow>
           <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="checkCircle" />
               <Text styleType="caption01M">거래완료</Text>
             </Styled.UserProductTitleWrapper>
-            <Text styleType="caption01M">{soldProductCount}개</Text>
+            <Text styleType="caption01M">{profile.soldProductCount}개</Text>
           </Styled.UserProductRow>
           <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="smile" />
               <Text styleType="caption01M">거래후기</Text>
             </Styled.UserProductTitleWrapper>
-            <Text styleType="caption01M">{reviewCount}개</Text>
+            <Text styleType="caption01M">{profile.reviewCount}개</Text>
           </Styled.UserProductRow>
           {hasToken && (
             <Styled.UserProductRow hasToken={hasToken}>
@@ -63,7 +63,7 @@ const ProfileBox = ({
                 <Icon color="grayScale30" size={16} type="heart" />
                 <Text styleType="caption01M">관심상품</Text>
               </Styled.UserProductTitleWrapper>
-              <Text styleType="caption01M">{likeProductCount}개</Text>
+              <Text styleType="caption01M">{profile.likeProductCount}개</Text>
             </Styled.UserProductRow>
           )}
         </Styled.UserProductWrapper>

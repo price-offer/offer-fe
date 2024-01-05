@@ -11,4 +11,7 @@ export type EditProfileModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
   validate: EditProfileValidate
   onValidateNickname(nickname: string): void
   onConfirm(profile: EditProfileForm): void
+  onChangeImage(
+    image: EditProfileForm['image']
+  ): Promise<EditProfileForm['image']>
 }

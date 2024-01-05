@@ -25,12 +25,16 @@ export const EditProfileModal = ({
   validate,
   onValidateNickname,
   onClose,
-  onConfirm
+  onConfirm,
+  onChangeImage
 }: EditProfileModalProps): ReactElement => {
   const [profileForm, setProfileForm] =
     useState<EditProfileForm>(initialProfileForm)
   const { uploaderRef, openUploader, changeImage } = useImageUploader({
-    onChange: image => setProfileForm({ ...profileForm, image })
+    onChange: async image => {
+      const uploadedImage = await onChangeImage(image)
+      setProfileForm({ ...profileForm, image: uploadedImage })
+    }
   })
 
   const handleChangeNickname = (nickname: string) => {
@@ -102,7 +106,10 @@ export const EditProfileModal = ({
         </Styled.EditNickName>
       </Styled.Body>
       <div>
-        <Button size="large" onClick={handleConfirm}>
+        <Button
+          disabled={!validate.isSuccess}
+          size="large"
+          onClick={handleConfirm}>
           저장
         </Button>
       </div>

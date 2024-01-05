@@ -2,50 +2,110 @@ import {
   IconButton,
   Avatar,
   Modal,
-  Input,
   Button,
   Text,
-  Icon
+  Icon,
+  useImageUploader
 } from '@offer-ui/react'
 import type { ReactElement } from 'react'
+import { useEffect, useState } from 'react'
 import { Styled } from './styled'
-import type { EditProfileModalProps } from './types'
+import type { EditProfileForm, EditProfileModalProps } from './types'
+import { LimitedInput } from '@components/common'
+
+const NICK_NAME_MAX_LENGTH = 20
+
+const initialProfileForm = {
+  image: { id: '', url: '', file: undefined },
+  nickname: ''
+}
 
 export const EditProfileModal = ({
   isOpen,
-  onClose
-}: EditProfileModalProps): ReactElement => (
-  <Modal isOpen={isOpen} onClose={onClose}>
-    <Styled.Header>
-      <Styled.CloseButtonWrapper>
-        <IconButton color="grayScale30" icon="close" size={24} />
-      </Styled.CloseButtonWrapper>
-      <p>프로필 수정</p>
-    </Styled.Header>
-    <Styled.Body>
-      <Styled.UploaderWrapper>
-        <Styled.AvatarWrapper>
-          <Avatar alt="" size="large" src="" />
-          <Styled.CameraIconButton>
-            <Icon color="white" size={12} type="camera" />
-          </Styled.CameraIconButton>
-        </Styled.AvatarWrapper>
-      </Styled.UploaderWrapper>
-      <Styled.EditNickName>
-        <Text color="grayScale70" styleType="body01M" tag="p">
-          닉네임
-        </Text>
-        <Input placeholder="닉네임을 입력해 주세요." />
-        <Text color="grayScale50" styleType="caption01M" tag="p">
-          0/20
-        </Text>
-        <Styled.DuplicateButton size="small" styleType="outline">
-          중복확인
-        </Styled.DuplicateButton>
-      </Styled.EditNickName>
-    </Styled.Body>
-    <div>
-      <Button size="large">저장</Button>
-    </div>
-  </Modal>
-)
+  validate,
+  onValidateNickname,
+  onClose,
+  onConfirm
+}: EditProfileModalProps): ReactElement => {
+  const [profileForm, setProfileForm] =
+    useState<EditProfileForm>(initialProfileForm)
+  const { uploaderRef, openUploader, changeImage } = useImageUploader({
+    onChange: image => setProfileForm({ ...profileForm, image })
+  })
+
+  const handleChangeNickname = (nickname: string) => {
+    setProfileForm({ ...profileForm, nickname })
+  }
+  const handleClickDuplicateButton = () => {
+    onValidateNickname(profileForm.nickname.trim())
+  }
+  const handleConfirm = () => {
+    onConfirm(profileForm)
+  }
+
+  useEffect(() => {
+    if (!isOpen) {
+      setProfileForm(initialProfileForm)
+      return
+    }
+  }, [isOpen])
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Styled.Header>
+        <Styled.CloseButtonWrapper>
+          <IconButton color="grayScale30" icon="close" size={24} />
+        </Styled.CloseButtonWrapper>
+        <p>프로필 수정</p>
+      </Styled.Header>
+      <Styled.Body>
+        <Styled.UploaderWrapper>
+          <Styled.AvatarWrapper onClick={openUploader}>
+            <Avatar alt="" size="large" src={profileForm.image.url} />
+            <Styled.CameraIconButton>
+              <Icon color="white" size={12} type="camera" />
+            </Styled.CameraIconButton>
+          </Styled.AvatarWrapper>
+          <Styled.UploaderInput
+            ref={uploaderRef}
+            accept="image/jpeg, image/png"
+            type="file"
+            onChange={changeImage}
+          />
+        </Styled.UploaderWrapper>
+        <Styled.EditNickName>
+          <Text color="grayScale70" styleType="body01M" tag="p">
+            닉네임
+          </Text>
+          <LimitedInput
+            maxLength={NICK_NAME_MAX_LENGTH}
+            placeholder="닉네임을 입력해 주세요."
+            value={profileForm.nickname}
+            onChangeValue={handleChangeNickname}
+          />
+          <Text color="grayScale50" styleType="caption01M" tag="p">
+            {profileForm.nickname.length}/{NICK_NAME_MAX_LENGTH}
+          </Text>
+          {!!validate.message && (
+            <Text
+              color={validate.isSuccess ? 'actSuccess' : 'actError'}
+              styleType="caption01M">
+              {validate.message}
+            </Text>
+          )}
+          <Styled.DuplicateButton
+            size="small"
+            styleType="outline"
+            onClick={handleClickDuplicateButton}>
+            중복확인
+          </Styled.DuplicateButton>
+        </Styled.EditNickName>
+      </Styled.Body>
+      <div>
+        <Button size="large" onClick={handleConfirm}>
+          저장
+        </Button>
+      </div>
+    </Modal>
+  )
+}

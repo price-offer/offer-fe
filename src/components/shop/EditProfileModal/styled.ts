@@ -32,6 +32,8 @@ const UploaderWrapper = styled.div`
 
 const AvatarWrapper = styled.div`
   position: relative;
+
+  cursor: pointer;
 `
 
 const CameraIconButton = styled.button`
@@ -66,6 +68,10 @@ const DuplicateButton = styled(Button)`
     `};
 `
 
+const UploaderInput = styled.input`
+  display: none;
+`
+
 export const Styled = {
   Header,
   CloseButtonWrapper,
@@ -74,5 +80,6 @@ export const Styled = {
   AvatarWrapper,
   CameraIconButton,
   EditNickName,
-  DuplicateButton
+  DuplicateButton,
+  UploaderInput
 }

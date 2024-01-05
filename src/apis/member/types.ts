@@ -7,18 +7,16 @@ export type GetMemberProfileReq = {
 }
 export type GetMemberProfileRes = MemberProfile
 
-export type UpdateMemberProfileReq = {
+export type UpdateMyProfileReq = {
   memberId: number
   nickname: string
   profileImageUrl: string
 }
-// TODO: 정확한 타입 BE 확인 필요
-export type UpdateMemberProfileRes = number
+export type UpdateMyProfileRes = number
 
-export type CheckValidNickNameReq = {
-  nickName: string
+export type CheckValidNicknameReq = {
+  nickname: string
 }
-// TODO: 정확한 타입 BE 확인 필요
-export type CheckValidNickNameRes = {
-  [key in string]: boolean
+export type CheckValidNicknameRes = {
+  duplicate: boolean
 }

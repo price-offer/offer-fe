@@ -4,7 +4,8 @@ import type {
   SORT_TYPES,
   TRADE_TYPES,
   TRADE_STATUS,
-  PRODUCT_CONDITIONS
+  PRODUCT_CONDITIONS,
+  VALID_NICKNAME_MESSAGE
 } from '@constants'
 
 /** 정렬 옵션  */
@@ -53,3 +54,6 @@ export type TradeBuyActivityNames = ValueOf<TradeActivityTypes['buy']>
 /** 나의 거래 활동 - 리뷰 */
 export type TradeReviewActivityCodes = KeyOf<TradeActivityTypes['review']>
 export type TradeReviewActivityNames = ValueOf<TradeActivityTypes['review']>
+
+/** 유효성 검사 메시지 */
+export type ValidNicknameMessages = ValueOf<typeof VALID_NICKNAME_MESSAGE>

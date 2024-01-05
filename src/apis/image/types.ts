@@ -4,9 +4,7 @@ export type CreateUploadImagesReq = FormData
 
 export type CreateUploadImagesRes = ImagesUpload
 
-export type PostUploadImageReq = {
-  file: string
-}
+export type PostUploadImageReq = FormData
 export type PostUploadImageRes = ImageUpload
 
 export type GetImageReq = {

@@ -14,6 +14,8 @@ type PageTab = {
   panel(props: unknown): ReactElement
 }
 
+export const tabList = ['sale', 'buy', 'review']
+
 export const pageTabs: PageTab[] = [
   {
     tab: {

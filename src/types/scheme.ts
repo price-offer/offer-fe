@@ -96,6 +96,11 @@ export type Review = {
   content: string
   createdDate: string
 }
+export type ReviewCount = {
+  all: number
+  seller: number
+  buyer: number
+}
 export type ReviewTargetMember = {
   id: number
   profileImageUrl: string

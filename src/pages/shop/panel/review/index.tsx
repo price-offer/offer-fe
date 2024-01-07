@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Styled } from './styled'
 import {
   useGetProfileQuery,
-  useGetReviewsLengthQuery,
+  useGetReviewsCountsQuery,
   useGetReviewsQuery
 } from '@apis'
 import { Tabs, ReviewTabPostList } from '@components'
@@ -22,7 +22,7 @@ export const ShopPageReviewPanel = ({ memberId }: ShopPageReviewPanelProps) => {
   const [reviewType, setReviewType] = useState<TradeReviewActivityCodes>('ALL')
 
   const profile = useGetProfileQuery(memberId)
-  const reviewsLength = useGetReviewsLengthQuery(profile.data.id)
+  const reviewsCounts = useGetReviewsCountsQuery(profile.data.id)
   const reviews = useGetReviewsQuery({
     memberId: profile.data.id,
     lastId: 0,
@@ -55,7 +55,7 @@ export const ShopPageReviewPanel = ({ memberId }: ShopPageReviewPanelProps) => {
                         <Styled.Text isCurrent={isCurrent}>{name}</Styled.Text>
                       </Styled.StatusButton>
                       <Styled.Text color="grayScale50">
-                        {reviewsLength.data[code]}
+                        {reviewsCounts.data[code]}
                       </Styled.Text>
                     </Styled.StatusButtonLabel>
                   </Styled.Tab>

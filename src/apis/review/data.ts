@@ -1,4 +1,4 @@
-export const initialAllReviewLengths = {
+export const initialReviewsCounts = {
   ALL: 0,
   SELLER: 0,
   BUYER: 0

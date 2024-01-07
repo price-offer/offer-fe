@@ -2,7 +2,7 @@ import { Divider } from '@offer-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Styled } from './styled'
-import { pageTabs } from '../pageTabs'
+import { pageTabs, tabList } from '../pageTabs'
 import { VALID_NICKNAME_MESSAGE } from '@constants/message'
 import {
   useCheckValidNicknameMutation,
@@ -26,6 +26,7 @@ type ShopPageViewProps = {
   currentTab: TradeActivityCodes
 }
 export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
+  const defaultTabIndex = tabList.findIndex(tab => tab === currentTab)
   const [currentPage, setCurrentPage] = useState<TradeActivityCodes>(currentTab)
   const [editProfileValidate, setEditProfileValidate] = useState(
     initialEditProfileValidate
@@ -107,7 +108,7 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
     <div>
       <Styled.UserName>{profile.data.nickname}님의 거래 활동</Styled.UserName>
       <Divider />
-      <Tabs>
+      <Tabs defaultTabIndex={defaultTabIndex}>
         <Styled.Layout>
           <Tabs.List>
             {pageTabs

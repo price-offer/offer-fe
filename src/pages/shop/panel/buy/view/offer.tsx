@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import { useModal } from '@hooks/useModal'
-import { useGetMyOffersQuery, useReviewsMutation } from '@apis'
+import {
+  useGetMyOffersQuery,
+  useGetReviewsCountsQuery,
+  useReviewsMutation
+} from '@apis'
 import type { ReviewState } from '@components'
 import { OfferTabPostList, ReviewModal } from '@components'
+import { useAuth } from '@hooks'
 import type { OfferSummary, Review, SortOptionCodes } from '@types'
 import { isNumber } from '@utils'
 
@@ -10,7 +15,9 @@ type OfferPanelViewProps = {
   sortOptionCode: SortOptionCodes
 }
 export const OfferPanelView = ({ sortOptionCode }: OfferPanelViewProps) => {
+  const { user } = useAuth()
   const offers = useGetMyOffersQuery({ sort: sortOptionCode })
+  const reviewsCounts = useGetReviewsCountsQuery(user.id)
   const reviewsMutation = useReviewsMutation()
 
   const readReviewModal = useModal()
@@ -39,6 +46,7 @@ export const OfferPanelView = ({ sortOptionCode }: OfferPanelViewProps) => {
       content: reviewState.reviewText
     })
     await offers.refetch()
+    await reviewsCounts.refetch()
     writeReviewModal.closeModal()
   }
 

@@ -171,6 +171,9 @@ export const ReviewButton = styled(Button)<{ hasReview: boolean }>`
     }
   `}
 `
+export const ReviewBlankButton = styled(Text)`
+  align-self: center;
+`
 export const LikeButton = styled(Button)`
   ${({ theme }): string => `
     color: ${theme.colors.grayScale90};
@@ -195,5 +198,6 @@ export const Styled = {
   Date,
   ReviewButtonWrapper,
   ReviewButton,
+  ReviewBlankButton,
   LikeButton
 }

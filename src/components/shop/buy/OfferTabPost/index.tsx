@@ -14,11 +14,13 @@ const OfferTabPost = ({
   createdAt,
   hasReview,
   onClickReadReview,
-  onClickWriteReview
+  onClickWriteReview,
+  reviewAvailable
 }: OfferTabPostProps): ReactElement => {
   const handleClickReviewButton = () => {
     hasReview ? onClickReadReview() : onClickWriteReview()
   }
+  const isShowReviewButton = hasReview || reviewAvailable
 
   return (
     <Styled.Container className={className}>
@@ -46,13 +48,19 @@ const OfferTabPost = ({
         </Styled.ProductMetaWrapper>
       </Styled.ProductWrapper>
       <Styled.ReviewButtonWrapper>
-        <Styled.ReviewButton
-          hasReview={hasReview}
-          size="small"
-          styleType="outline"
-          onClick={handleClickReviewButton}>
-          {hasReview ? '보낸 후기 보기' : '후기 보내기'}
-        </Styled.ReviewButton>
+        {isShowReviewButton ? (
+          <Styled.ReviewButton
+            hasReview={hasReview}
+            size="small"
+            styleType="outline"
+            onClick={handleClickReviewButton}>
+            {hasReview ? '보낸 후기 보기' : '후기 보내기'}
+          </Styled.ReviewButton>
+        ) : (
+          <Styled.ReviewBlankButton color="grayScale50" styleType="body02R">
+            -
+          </Styled.ReviewBlankButton>
+        )}
       </Styled.ReviewButtonWrapper>
     </Styled.Container>
   )

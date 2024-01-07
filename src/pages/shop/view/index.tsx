@@ -6,8 +6,8 @@ import { pageTabs } from '../pageTabs'
 import { VALID_NICKNAME_MESSAGE } from '@constants/message'
 import {
   useCheckValidNicknameMutation,
+  useCreateUploadImagesMutation,
   useGetProfileQuery,
-  usePostUploadImageMutation,
   useUpdateMyProfileMutation
 } from '@apis'
 import type { EditProfileForm } from '@components'
@@ -32,7 +32,7 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
   )
 
   const profile = useGetProfileQuery(memberId)
-  const postUploadImage = usePostUploadImageMutation()
+  const createUploadImage = useCreateUploadImagesMutation()
   const checkValidNickname = useCheckValidNicknameMutation()
   const updateMyProfile = useUpdateMyProfileMutation()
 
@@ -83,9 +83,9 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
 
     const imageFormData = new FormData()
     imageFormData.append('files', image.file)
-    const { imageUrl } = await postUploadImage.mutateAsync(imageFormData)
+    const { imageUrls } = await createUploadImage.mutateAsync(imageFormData)
 
-    return { id: image.id, file: image.file, url: imageUrl }
+    return { id: image.id, file: image.file, url: imageUrls[0] }
   }
 
   const handleCloseEditProfileModal = () => {

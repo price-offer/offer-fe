@@ -82,9 +82,6 @@ export type MyProfile = MemberProfile & {
 export type ImagesUpload = {
   imageUrls: string[]
 }
-export type ImageUpload = {
-  imageUrl: string
-}
 
 /** Review */
 export type ReviewInfo = {

@@ -1,11 +1,8 @@
-import type { ImagesUpload, ImageUpload } from '@types'
+import type { ImagesUpload } from '@types'
 
 export type CreateUploadImagesReq = FormData
 
 export type CreateUploadImagesRes = ImagesUpload
-
-export type PostUploadImageReq = FormData
-export type PostUploadImageRes = ImageUpload
 
 export type GetImageReq = {
   path: string

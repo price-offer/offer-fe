@@ -53,7 +53,7 @@ const ProfileBox = ({
           <Styled.UserProductRow hasToken={hasToken}>
             <Styled.UserProductTitleWrapper>
               <Icon color="grayScale30" size={16} type="smile" />
-              <Text styleType="caption01M">거래후기</Text>
+              <Text styleType="caption01M">받은후기</Text>
             </Styled.UserProductTitleWrapper>
             <Text styleType="caption01M">{profile.reviewCount}개</Text>
           </Styled.UserProductRow>

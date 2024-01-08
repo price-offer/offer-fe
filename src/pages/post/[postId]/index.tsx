@@ -1,14 +1,21 @@
 import { css } from '@emotion/react'
 import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
+import {
+  Carousel,
+  Divider,
+  Text,
+  IconButton,
+  SelectBox,
+  ImageModal
+} from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
 import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
-import { useAuth } from '@hooks'
+import { useAuth, useModal } from '@hooks'
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -22,76 +29,86 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const postQuery = useGetPostQuery(postId)
   const { user } = useAuth()
+  const imageModal = useModal()
 
   const isSeller = user.id === postQuery.data?.seller.id
-  const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
-    id: idx,
-    src: url
-  }))
+  const postImages =
+    postQuery.data?.imageUrls.map((url, idx) => ({
+      id: idx,
+      src: url
+    })) || []
 
   return (
-    <Layout>
-      <Main>
-        <div>
-          <Carousel images={postImages || []} isArrow name="post-carousel" />
-        </div>
-        <Content>
-          <div>
-            <ProductCondition>
-              {isSeller ? (
-                <>
-                  <ProductConditionSelectBox
-                    items={TRADE_STATUS}
-                    value={postQuery.data?.tradeStatus.code}
-                    onChange={(): void => {
-                      // do something
-                    }}
-                  />
-                  <IconButton icon="more" size={24} />
-                </>
-              ) : (
-                <ProductConditionBadge>
-                  {postQuery.data?.tradeStatus.code}
-                </ProductConditionBadge>
-              )}
-            </ProductCondition>
-            <Text color="grayScale70" styleType="body02M" tag="p">
-              {postQuery.data?.category.name || ''}
-            </Text>
-            <PostName styleType="headline01B" tag="p">
-              {postQuery.data?.title || ''}
-            </PostName>
-            <Text styleType="display01B" tag="p">
-              {toLocaleCurrency(Number(postQuery.data?.price))}
-              <Text styleType="subtitle01M">원</Text>
-            </Text>
+    <>
+      <Layout>
+        <Main>
+          <div onClick={imageModal.openModal}>
+            <Carousel images={postImages || []} isArrow name="post-carousel" />
           </div>
-          <Divider gap={16} />
-          <div>
-            <Text styleType="headline02B">상품 정보</Text>
-            <TransactionContainer>
-              <PostFieldList
-                date={getTimeDiffText(postQuery.data?.createdAt || '')}
-                location={postQuery.data?.location || ''}
-                productCondition={postQuery.data?.productCondition.name}
-                tradeType={postQuery.data?.tradeType.name}
-              />
-            </TransactionContainer>
-            <Description>{postQuery.data?.description}</Description>
-          </div>
-          <Divider gap={16} />
-          <UserProfile
-            image={postQuery.data?.seller.profileImageUrl}
-            level={postQuery.data?.seller.offerLevel || 0}
-            location={postQuery.data?.seller.nickname || ''}
-            nickName={postQuery.data?.seller.nickname || ''}
-            type="basic"
-          />
-        </Content>
-      </Main>
-      <MainDivider size="bold" />
-      <PriceOfferCard isSeller={isSeller} postId={postId} />
-    </Layout>
+          <Content>
+            <div>
+              <ProductCondition>
+                {isSeller ? (
+                  <>
+                    <ProductConditionSelectBox
+                      items={TRADE_STATUS}
+                      value={postQuery.data?.tradeStatus.code}
+                      onChange={(): void => {
+                        // do something
+                      }}
+                    />
+                    <IconButton icon="more" size={24} />
+                  </>
+                ) : (
+                  <ProductConditionBadge>
+                    {postQuery.data?.tradeStatus.code}
+                  </ProductConditionBadge>
+                )}
+              </ProductCondition>
+              <Text color="grayScale70" styleType="body02M" tag="p">
+                {postQuery.data?.category.name || ''}
+              </Text>
+              <PostName styleType="headline01B" tag="p">
+                {postQuery.data?.title || ''}
+              </PostName>
+              <Text styleType="display01B" tag="p">
+                {toLocaleCurrency(Number(postQuery.data?.price))}
+                <Text styleType="subtitle01M">원</Text>
+              </Text>
+            </div>
+            <Divider gap={16} />
+            <div>
+              <Text styleType="headline02B">상품 정보</Text>
+              <TransactionContainer>
+                <PostFieldList
+                  date={getTimeDiffText(postQuery.data?.createdAt || '')}
+                  location={postQuery.data?.location || ''}
+                  productCondition={postQuery.data?.productCondition.name}
+                  tradeType={postQuery.data?.tradeType.name}
+                />
+              </TransactionContainer>
+              <Description>{postQuery.data?.description}</Description>
+            </div>
+            <Divider gap={16} />
+            <UserProfile
+              image={postQuery.data?.seller.profileImageUrl}
+              level={postQuery.data?.seller.offerLevel || 0}
+              location={postQuery.data?.seller.nickname || ''}
+              nickName={postQuery.data?.seller.nickname || ''}
+              type="basic"
+            />
+          </Content>
+        </Main>
+        <MainDivider size="bold" />
+        <PriceOfferCard isSeller={isSeller} postId={postId} />
+      </Layout>
+      <ImageModal
+        images={postImages}
+        isOpen={imageModal.isOpen}
+        name="post-detail"
+        onClose={imageModal.closeModal}
+      />
+    </>
   )
 }
 

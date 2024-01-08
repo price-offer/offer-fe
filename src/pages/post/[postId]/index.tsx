@@ -162,6 +162,8 @@ const MainDivider = styled(Divider)`
   `}
 `
 const Main = styled.div`
+  width: 100%;
+
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {
       margin: 0;
@@ -197,7 +199,7 @@ const ProductConditionSelectBox = styled(SelectBox)`
 `
 
 const ProductConditionBadge = styled.div`
-  margin-bottom: 20px;
+  margin: 33px 0 16px;
   padding: 4px 8px 3px;
 
   ${({ theme }) => css`
@@ -208,6 +210,13 @@ const ProductConditionBadge = styled.div`
     color: ${theme.colors.white};
 
     ${theme.fonts.body02B}
+
+    ${theme.mediaQuery.tablet} {
+      margin: 20px 0;
+    }
+    ${theme.mediaQuery.mobile} {
+      margin: 20px 0;
+    }
   `}
 `
 

@@ -25,3 +25,6 @@ export const createMessage = (
     `/msgrooms/${messageRoomId}/msgs`,
     params
   )
+
+export const deleteMessageRoom = (messageRoomId: number) =>
+  http.delete<null>(`/msgrooms/${messageRoomId}`)

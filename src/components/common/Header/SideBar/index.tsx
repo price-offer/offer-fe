@@ -1,5 +1,4 @@
 import { Avatar, Divider, Icon, Badge } from '@offer-ui/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import React from 'react'
@@ -21,7 +20,7 @@ const NAV_DATA: NavDataType = [
   },
   {
     content: '쪽지함',
-    url: '/message',
+    url: '/messagebox',
     iconType: 'message'
   }
 ]
@@ -32,11 +31,19 @@ export const SideBar = ({ isOpen, onClose }: SideBarProps): ReactElement => {
 
   const handleClickLogin = () => {
     router.replace(OAUTH_URL.KAKAO)
+
+    onClose()
+  }
+
+  const handleClickButton = (url: string) => {
+    router.push(url)
+
     onClose()
   }
 
   const handleClickLogout = () => {
     handleLogout()
+
     onClose()
   }
 
@@ -64,14 +71,14 @@ export const SideBar = ({ isOpen, onClose }: SideBarProps): ReactElement => {
           )}
           <Divider direction="horizontal" gap={16} length="259px" />
           <Styled.SidebarMenuSection>
-            {NAV_DATA.map((item, index) => {
+            {NAV_DATA.map(({ iconType, content, url }) => {
               return (
-                <Link key={index} href={item.url}>
-                  <Styled.SidebarMenu>
-                    <Icon size={16} type={item.iconType} />
-                    {item.content}
-                  </Styled.SidebarMenu>
-                </Link>
+                <Styled.SidebarMenu
+                  key={content}
+                  onClick={() => handleClickButton(url)}>
+                  <Icon size={16} type={iconType} />
+                  {content}
+                </Styled.SidebarMenu>
               )
             })}
           </Styled.SidebarMenuSection>

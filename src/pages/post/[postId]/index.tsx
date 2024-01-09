@@ -26,7 +26,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   const isSeller = user.id === postQuery.data?.seller.id
   const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
-    url
+    src: url
   }))
 
   return (

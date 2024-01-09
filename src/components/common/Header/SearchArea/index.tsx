@@ -6,10 +6,7 @@ export const SearchArea = ({ onClose }: SearchAreaProps) => {
   return (
     <Styled.SearchAreaWrapper>
       <Styled.InputWrapper>
-        <Styled.SearchInput
-          placeholder="검색어를 입력하세요"
-          styleType="search"
-        />
+        <Styled.SearchInput placeholder="검색어를 입력하세요" />
         <Styled.CancelButton styleType="ghost" onClick={onClose}>
           취소
         </Styled.CancelButton>

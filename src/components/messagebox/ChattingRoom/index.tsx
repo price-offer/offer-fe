@@ -62,7 +62,7 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
         <Chatting messages={messageQuery.data || []} userId={user.id} />
       </Styled.ChattingWrapper>
       <Styled.InputWrapper>
-        <Input styleType="chatting" />
+        <Input.Chatting />
       </Styled.InputWrapper>
     </Styled.Container>
   )

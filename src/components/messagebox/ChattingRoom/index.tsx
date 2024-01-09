@@ -58,6 +58,10 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
     handleCloseRoom()
   }
 
+  const handleClickRefresh = async () => {
+    await getMessageQuery.refetch()
+  }
+
   const handleSubmitMessage = async (message: string) => {
     const res = await createMessageMutation.mutateAsync({
       content: message
@@ -91,7 +95,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
         <IconButton icon="arrowLeft" size={24} onClick={handleCloseRoom} />
         <Styled.Nickname>{user.nickname}</Styled.Nickname>
         <Styled.IconButtonContainer>
-          <IconButton icon="refresh" size={24} />
+          <IconButton icon="refresh" size={24} onClick={handleClickRefresh} />
           <Styled.MoreButtonWrapper>
             <IconButton icon="more" size={24} onClick={openModal} />
             {isOpen && (

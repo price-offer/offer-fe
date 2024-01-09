@@ -1,9 +1,11 @@
 import { Image, IconButton, Input } from '@offer-ui/react'
+import { useEffect, useRef, useState } from 'react'
 import { Styled } from './styled'
 import type { ChattingRoomProps } from './types'
 import { Chatting } from '../Chatting'
+import type { ChattingProps } from '../Chatting/types'
 import { toLocaleCurrency } from '@utils/format'
-import { useGetMessageQuery } from '@apis'
+import { useCreateMessageMutation, useGetMessageQuery } from '@apis'
 import { useAuth } from '@hooks'
 
 // TODO: messageRoom 정보조회 api 붙이고 제거
@@ -17,15 +19,46 @@ const POST_MOCK = {
 }
 
 export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
-  const messageQuery = useGetMessageQuery({
+  const getMessageQuery = useGetMessageQuery({
     msgRoomId: id,
     page: 0
   })
+  const createMessageMutation = useCreateMessageMutation(id)
+  const [messages, setMessages] = useState<ChattingProps['messages']>([])
   const { user } = useAuth()
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const senderInfo = {
+    id: user.id,
+    nickname: user.nickname,
+    imageUrl: user.profileImageUrl
+  }
 
   const handleCloseRoom = () => {
     onClose?.(id)
   }
+
+  const handleSubmitMessage = async (message: string) => {
+    const res = await createMessageMutation.mutateAsync({
+      content: message
+    })
+
+    setMessages(prev => [
+      ...prev,
+      {
+        member: senderInfo,
+        content: message,
+        sendTime: res.createdAt
+      }
+    ])
+
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+  }
+
+  useEffect(() => {
+    setMessages(getMessageQuery.data || [])
+  }, [getMessageQuery.data])
 
   return (
     <Styled.Container>
@@ -59,10 +92,10 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
         </Styled.ProductTextContainer>
       </Styled.ProductInfo>
       <Styled.ChattingWrapper>
-        <Chatting messages={messageQuery.data || []} userId={user.id} />
+        <Chatting messages={messages} userId={user.id} />
       </Styled.ChattingWrapper>
       <Styled.InputWrapper>
-        <Input.Chatting />
+        <Input.Chatting ref={inputRef} onSubmitValue={handleSubmitMessage} />
       </Styled.InputWrapper>
     </Styled.Container>
   )

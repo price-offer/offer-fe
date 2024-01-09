@@ -52,7 +52,7 @@ const InputWrapper = styled.div`
   }
 `
 
-const SearchInput = styled(Input)`
+const SearchInput = styled(Input.Search)`
   width: 426px;
   margin: 0;
   ${({ theme }): string => theme.mediaQuery.tablet || theme.mediaQuery.mobile} {

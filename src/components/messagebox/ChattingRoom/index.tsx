@@ -25,12 +25,19 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
   })
   const createMessageMutation = useCreateMessageMutation(id)
   const [messages, setMessages] = useState<ChattingProps['messages']>([])
-  const { user } = useAuth()
+  const chattingBoxRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const { user } = useAuth()
   const senderInfo = {
     id: user.id,
     nickname: user.nickname,
     imageUrl: user.profileImageUrl
+  }
+
+  const scrollToBottom = () => {
+    if (chattingBoxRef.current) {
+      chattingBoxRef.current.scrollTop = chattingBoxRef.current.scrollHeight
+    }
   }
 
   const handleCloseRoom = () => {
@@ -59,6 +66,10 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
   useEffect(() => {
     setMessages(getMessageQuery.data || [])
   }, [getMessageQuery.data])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   return (
     <Styled.Container>
@@ -91,7 +102,7 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
           </Styled.ProductItem>
         </Styled.ProductTextContainer>
       </Styled.ProductInfo>
-      <Styled.ChattingWrapper>
+      <Styled.ChattingWrapper ref={chattingBoxRef}>
         <Chatting messages={messages} userId={user.id} />
       </Styled.ChattingWrapper>
       <Styled.InputWrapper>

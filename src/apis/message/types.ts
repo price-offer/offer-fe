@@ -17,7 +17,6 @@ export type GetMessageReq = {
 export type GetMessageRes = MessageInfo[]
 
 export type CreateMessageReq = {
-  msgRoomId: number
   content: string
 }
 export type CreateMessageRes = CommonCreation

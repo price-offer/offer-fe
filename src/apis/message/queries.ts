@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
-import { getMessageRooms, getMessage } from './apis'
-import type { GetMessageReq } from './types'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { getMessageRooms, getMessage, createMessage } from './apis'
+import type { CreateMessageReq, GetMessageReq } from './types'
 
 export const useGetMessageRooms = (page?: number) =>
   useQuery({
@@ -17,4 +17,10 @@ export const useGetMessageQuery = ({ msgRoomId, ...res }: GetMessageReq) =>
         ...res
       }),
     enabled: Boolean(msgRoomId)
+  })
+
+export const useCreateMessageMutation = (messageRoomId: number) =>
+  useMutation({
+    mutationFn: (params: CreateMessageReq) =>
+      createMessage(messageRoomId, params)
   })

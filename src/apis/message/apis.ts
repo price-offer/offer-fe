@@ -2,7 +2,9 @@ import type {
   GetMessageRoomsReq,
   GetMessageRoomsRes,
   GetMessageReq,
-  GetMessageRes
+  GetMessageRes,
+  CreateMessageReq,
+  CreateMessageRes
 } from './types'
 import { http } from '@utils/http'
 
@@ -12,5 +14,14 @@ export const getMessageRooms = (params: GetMessageRoomsReq) =>
 export const getMessage = (params: GetMessageReq) =>
   http.get<GetMessageReq, GetMessageRes>(
     `/msgrooms/${params.msgRoomId}/msgs`,
+    params
+  )
+
+export const createMessage = (
+  messageRoomId: number,
+  params: CreateMessageReq
+) =>
+  http.post<CreateMessageReq, CreateMessageRes>(
+    `/msgrooms/${messageRoomId}/msgs`,
     params
   )

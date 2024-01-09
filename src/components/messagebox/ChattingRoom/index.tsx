@@ -39,7 +39,7 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
         <Chatting messages={MESSAGES_MOCK} userId={1} />
       </Styled.ChattingWrapper>
       <Styled.InputWrapper>
-        <Input styleType="chatting" />
+        <Input.Chatting />
       </Styled.InputWrapper>
     </Styled.Container>
   )

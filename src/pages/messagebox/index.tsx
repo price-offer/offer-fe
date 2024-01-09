@@ -40,13 +40,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
-  const messageRoomsQuery = useGetMessageRooms()
+  const getMessageRoomsQuery = useGetMessageRooms()
   const [tab, setTab] = useState<TabType>('all')
   const [roomId, setRoomId] = useState<RoomId>(defaultRoomId)
   const router = useRouter()
   const { isOpen, openModal, closeModal } = useModal()
   const { desktop, mobile, tablet } = useMedia()
-  const messageList = messageRoomsQuery.data || []
+  const messageList = getMessageRoomsQuery.data || []
   const messageCount = messageList.length
 
   const handleChangeTab = (currentIndex: number, nextIndex: number) => {
@@ -72,6 +72,7 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
   const handleCloseRoom = () => {
     setRoomId(null)
 
+    getMessageRoomsQuery.refetch()
     router.push(`/messagebox`)
 
     if (!desktop) {
@@ -138,7 +139,7 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
           </ListContainer>
           <DetailContainer>
             {roomId ? (
-              <ChattingRoom id={roomId} onClose={handleCloseRoom} />
+              <ChattingRoom roomId={roomId} onClose={handleCloseRoom} />
             ) : (
               <MessageBoxPlaceholder
                 image={{
@@ -154,7 +155,7 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
       </Page>
       {roomId && (
         <ChattingRoomModal isOpen={isOpen}>
-          <ChattingRoom id={roomId} onClose={handleCloseRoom} />
+          <ChattingRoom roomId={roomId} onClose={handleCloseRoom} />
         </ChattingRoomModal>
       )}
     </>

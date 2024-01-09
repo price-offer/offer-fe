@@ -4,9 +4,14 @@ import { Styled } from './styled'
 import type { ChattingRoomProps } from './types'
 import { Chatting } from '../Chatting'
 import type { ChattingProps } from '../Chatting/types'
+import { Dialog } from '@components/common'
 import { toLocaleCurrency } from '@utils/format'
-import { useCreateMessageMutation, useGetMessageQuery } from '@apis'
-import { useAuth } from '@hooks'
+import {
+  useCreateMessageMutation,
+  useDeleteMessageRoomMutation,
+  useGetMessageQuery
+} from '@apis'
+import { useAuth, useModal } from '@hooks'
 
 // TODO: messageRoom 정보조회 api 붙이고 제거
 const POST_MOCK = {
@@ -18,15 +23,17 @@ const POST_MOCK = {
   }
 }
 
-export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
+export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
   const getMessageQuery = useGetMessageQuery({
-    msgRoomId: id,
+    msgRoomId: roomId,
     page: 0
   })
-  const createMessageMutation = useCreateMessageMutation(id)
+  const createMessageMutation = useCreateMessageMutation(roomId)
+  const deleteMessageRoomMutation = useDeleteMessageRoomMutation(roomId)
   const [messages, setMessages] = useState<ChattingProps['messages']>([])
   const chattingBoxRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const { isOpen, openModal, closeModal } = useModal()
   const { user } = useAuth()
   const senderInfo = {
     id: user.id,
@@ -36,12 +43,19 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
 
   const scrollToBottom = () => {
     if (chattingBoxRef.current) {
-      chattingBoxRef.current.scrollTop = chattingBoxRef.current.scrollHeight
+      chattingBoxRef.current.scrollTop =
+        chattingBoxRef.current.scrollHeight + 40
     }
   }
 
   const handleCloseRoom = () => {
-    onClose?.(id)
+    onClose?.(roomId)
+  }
+
+  const handleDeleteRoom = async () => {
+    await deleteMessageRoomMutation.mutateAsync()
+
+    handleCloseRoom()
   }
 
   const handleSubmitMessage = async (message: string) => {
@@ -78,7 +92,21 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
         <Styled.Nickname>{user.nickname}</Styled.Nickname>
         <Styled.IconButtonContainer>
           <IconButton icon="refresh" size={24} />
-          <IconButton icon="more" size={24} />
+          <Styled.MoreButtonWrapper>
+            <IconButton icon="more" size={24} onClick={openModal} />
+            {isOpen && (
+              <Dialog
+                dialogPositionStyle={{
+                  top: '30px',
+                  right: '0'
+                }}
+                onClose={closeModal}>
+                <Styled.DeleteButton onClick={handleDeleteRoom}>
+                  쪽지함 나가기
+                </Styled.DeleteButton>
+              </Dialog>
+            )}
+          </Styled.MoreButtonWrapper>
         </Styled.IconButtonContainer>
       </Styled.Header>
       <Styled.ProductInfo>

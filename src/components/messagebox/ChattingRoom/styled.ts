@@ -34,6 +34,18 @@ const IconButtonContainer = styled.div`
   gap: 20px;
 `
 
+const MoreButtonWrapper = styled.div`
+  position: relative;
+`
+
+const DeleteButton = styled.button`
+  border: none;
+
+  background-color: transparent;
+
+  cursor: pointer;
+`
+
 const ProductInfo = styled.div`
   display: flex;
   gap: 8px;
@@ -106,6 +118,8 @@ export const Styled = {
   Header,
   Nickname,
   IconButtonContainer,
+  MoreButtonWrapper,
+  DeleteButton,
   ProductInfo,
   ProductTextContainer,
   ProductName,

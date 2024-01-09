@@ -6,7 +6,7 @@ export type MessagePreviewProps = {
     imageUrl: string
   }
   post: {
-    title: string
+    id: number
     imageUrl?: string
   }
   offerPrice: number

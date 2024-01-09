@@ -154,7 +154,8 @@ export type OfferSummary = {
 export type MessageRoomInfo = {
   id: number
   partner: PartnerBrief
-  post: PostBrief
+  // dto 변경되면 수정 예정
+  post: Pick<PostSummary, 'id'> & { imageUrl: string }
   offerPrice: number
   lastContent: string
   notReadCnt: number

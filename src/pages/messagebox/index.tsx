@@ -1,7 +1,10 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
+import type { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { useState, type ReactElement, useEffect } from 'react'
+import { toQueryString } from '@utils/format'
 import { useGetMessageRooms } from '@apis'
 import {
   MessagePreview,
@@ -14,6 +17,10 @@ import { IMAGE } from '@constants'
 import { useModal } from '@hooks'
 
 type TabType = 'all' | 'buy' | 'sell'
+type RoomId = number | null
+type Props = {
+  roomId: RoomId
+}
 
 const TABS = {
   all: '전체',
@@ -24,10 +31,19 @@ const TABS = {
 const TabKeys = Object.keys(TABS) as TabType[]
 const TabEntries = Object.entries<TabType, ValueOf<typeof TABS>>(TABS)
 
-const MessageBoxPage = (): ReactElement => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query
+}) => ({
+  props: {
+    roomId: query.roomId ? Number(query.roomId) : null
+  }
+})
+
+const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
   const messageRoomsQuery = useGetMessageRooms()
   const [tab, setTab] = useState<TabType>('all')
-  const [roomId, setRoomId] = useState<number | null>(null)
+  const [roomId, setRoomId] = useState<RoomId>(defaultRoomId)
+  const router = useRouter()
   const { isOpen, openModal, closeModal } = useModal()
   const { desktop, mobile, tablet } = useMedia()
   const messageList = messageRoomsQuery.data || []
@@ -42,6 +58,12 @@ const MessageBoxPage = (): ReactElement => {
   const handleSelectRoom = (id: number) => {
     setRoomId(id)
 
+    router.push(
+      `/messagebox${toQueryString({
+        roomId: String(id)
+      })}`
+    )
+
     if (!desktop) {
       openModal()
     }
@@ -50,13 +72,23 @@ const MessageBoxPage = (): ReactElement => {
   const handleCloseRoom = () => {
     setRoomId(null)
 
+    router.push(`/messagebox`)
+
     if (!desktop) {
       closeModal()
     }
   }
 
   useEffect(() => {
-    setRoomId(null)
+    if (desktop) {
+      closeModal()
+
+      return
+    }
+
+    if (roomId) {
+      openModal()
+    }
   }, [desktop, tablet, mobile])
 
   return (
@@ -87,11 +119,8 @@ const MessageBoxPage = (): ReactElement => {
                     key={id}
                     id={id}
                     isSelected={id === roomId}
-                    post={{
-                      title: post.title,
-                      imageUrl: ''
-                    }}
-                    onClick={handleSelectRoom}
+                    post={post}
+                    onClick={() => handleSelectRoom(id)}
                     {...resInfo}
                   />
                 ))

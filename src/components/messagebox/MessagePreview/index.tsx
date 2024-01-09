@@ -3,7 +3,7 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { MessagePreviewProps } from './types'
 import { IMAGE } from '@constants'
-import { toLocaleCurrency } from '@utils'
+import { getTimeDiffText, toLocaleCurrency } from '@utils'
 
 export const MessagePreview = ({
   id,
@@ -30,7 +30,7 @@ export const MessagePreview = ({
       </Styled.AvatarWrapper>
       <Styled.Content>
         <Styled.Nickname>{partner.nickname}</Styled.Nickname>
-        <Styled.Time>{lastSendTime}</Styled.Time>
+        <Styled.Time>{getTimeDiffText(lastSendTime)}</Styled.Time>
         <Styled.LastMessage>{lastContent}</Styled.LastMessage>
       </Styled.Content>
       <Styled.SubContent>

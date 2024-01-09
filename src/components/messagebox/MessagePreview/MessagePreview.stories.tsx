@@ -18,7 +18,7 @@ export const Default: StoryObj<MessagePreview> = {
       imageUrl: ''
     },
     post: {
-      title: '구매해요',
+      id: 1,
       imageUrl: ''
     },
     offerPrice: 123,

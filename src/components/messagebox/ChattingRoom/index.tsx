@@ -6,6 +6,16 @@ import { toLocaleCurrency } from '@utils/format'
 import { useGetMessageQuery } from '@apis'
 import { useAuth } from '@hooks'
 
+// TODO: messageRoom 정보조회 api 붙이고 제거
+const POST_MOCK = {
+  offerPrice: 10000,
+  post: {
+    title: '팔아요 !',
+    thumbnailImageUrl: '',
+    price: 12000
+  }
+}
+
 export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
   const messageQuery = useGetMessageQuery({
     msgRoomId: id,
@@ -28,16 +38,23 @@ export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
         </Styled.IconButtonContainer>
       </Styled.Header>
       <Styled.ProductInfo>
-        <Image alt="product" height="74px" src="" width="74px" />
+        <Image
+          alt={`${POST_MOCK.post.title}-image`}
+          height="74px"
+          src={POST_MOCK.post.thumbnailImageUrl}
+          width="74px"
+        />
         <Styled.ProductTextContainer>
-          <Styled.ProductName>마르니 플렛 로퍼(black)</Styled.ProductName>
+          <Styled.ProductName>{POST_MOCK.post.title}</Styled.ProductName>
           <Styled.ProductItem>
             <span>시작가</span>
-            <span>{toLocaleCurrency(15000)}원</span>
+            <span>{toLocaleCurrency(POST_MOCK.post.price)}원</span>
           </Styled.ProductItem>
           <Styled.ProductItem isOfferPrice>
             <span>제안가</span>
-            <Styled.OfferPrice> {toLocaleCurrency(15000)}원</Styled.OfferPrice>
+            <Styled.OfferPrice>
+              {toLocaleCurrency(POST_MOCK.offerPrice)}원
+            </Styled.OfferPrice>
           </Styled.ProductItem>
         </Styled.ProductTextContainer>
       </Styled.ProductInfo>

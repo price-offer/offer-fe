@@ -5,7 +5,7 @@ import type { ChattingProps } from './types'
 import { formatDate } from '@utils/format'
 
 export const getDate = (sendTime = '') => sendTime.split('T')[0]
-export const getTime = (sendTime = '') => formatDate(sendTime, 'A H:m')
+export const getTime = (sendTime = '') => formatDate(sendTime, 'A H:mm')
 
 // TODO: 상품 정보 버블 추가
 export const Chatting = ({
@@ -28,7 +28,7 @@ export const Chatting = ({
       const nextTime = getTime(nextMessage?.sendTime)
 
       const commonProps = {
-        time: formatDate(sendTime, 'A H:m'),
+        time: formatDate(sendTime, 'A H:mm'),
         isSectionStart:
           member.id !== prevMessage?.member.id || isPrevDateChanged,
         isSectionLast:

@@ -1,4 +1,4 @@
-import { Image, IconButton, Input } from '@offer-ui/react'
+import { Image, IconButton, Input, useMedia } from '@offer-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { Styled } from './styled'
 import type { ChattingRoomProps } from './types'
@@ -30,9 +30,10 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
   })
   const createMessageMutation = useCreateMessageMutation(roomId)
   const deleteMessageRoomMutation = useDeleteMessageRoomMutation(roomId)
-  const [messages, setMessages] = useState<ChattingProps['messages']>([])
   const chattingBoxRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const { desktop, tablet, mobile } = useMedia()
+  const [messages, setMessages] = useState<ChattingProps['messages']>([])
   const { isOpen, openModal, closeModal } = useModal()
   const { user } = useAuth()
   const senderInfo = {
@@ -42,9 +43,12 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
   }
 
   const scrollToBottom = () => {
-    if (chattingBoxRef.current) {
-      chattingBoxRef.current.scrollTop =
-        chattingBoxRef.current.scrollHeight + 40
+    if (!chattingBoxRef.current) {
+      return
+    }
+
+    if (chattingBoxRef.current.scrollHeight > 0) {
+      chattingBoxRef.current.scrollTop = chattingBoxRef.current.scrollHeight
     }
   }
 
@@ -58,7 +62,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
     handleCloseRoom()
   }
 
-  const handleClickRefresh = async () => {
+  const refetchMessage = async () => {
     await getMessageQuery.refetch()
   }
 
@@ -66,6 +70,10 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
     const res = await createMessageMutation.mutateAsync({
       content: message
     })
+
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
 
     setMessages(prev => [
       ...prev,
@@ -75,10 +83,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
         sendTime: res.createdAt
       }
     ])
-
-    if (inputRef.current) {
-      inputRef.current.value = ''
-    }
+    await refetchMessage()
   }
 
   useEffect(() => {
@@ -87,7 +92,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages])
+  }, [messages, desktop, tablet, mobile, chattingBoxRef.current?.scrollHeight])
 
   return (
     <Styled.Container>
@@ -95,7 +100,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
         <IconButton icon="arrowLeft" size={24} onClick={handleCloseRoom} />
         <Styled.Nickname>{user.nickname}</Styled.Nickname>
         <Styled.IconButtonContainer>
-          <IconButton icon="refresh" size={24} onClick={handleClickRefresh} />
+          <IconButton icon="refresh" size={24} onClick={refetchMessage} />
           <Styled.MoreButtonWrapper>
             <IconButton icon="more" size={24} onClick={openModal} />
             {isOpen && (

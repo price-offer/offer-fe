@@ -5,12 +5,16 @@ import {
   createMessage,
   deleteMessageRoom
 } from './apis'
-import type { CreateMessageReq, GetMessageReq } from './types'
+import type {
+  CreateMessageReq,
+  GetMessageReq,
+  GetMessageRoomsReq
+} from './types'
 
-export const useGetMessageRooms = (page?: number) =>
+export const useGetMessageRooms = (params: GetMessageRoomsReq) =>
   useQuery({
     queryKey: ['getMessageRooms'],
-    queryFn: () => getMessageRooms({ page: page || 0 })
+    queryFn: () => getMessageRooms(params)
   })
 
 export const useGetMessageQuery = ({ msgRoomId, ...res }: GetMessageReq) =>

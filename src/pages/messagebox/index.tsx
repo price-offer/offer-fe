@@ -13,23 +13,14 @@ import {
   ChattingRoom,
   MessageBoxPlaceholder
 } from '@components'
-import { IMAGE } from '@constants'
+import { IMAGE, MESSAGE_SORT_OPTIONS } from '@constants'
 import { useModal } from '@hooks'
+import type { MessageSortTypeCodes } from '@types'
 
-type TabType = 'all' | 'buy' | 'sell'
 type RoomId = number | null
 type Props = {
   roomId: RoomId
 }
-
-const TABS = {
-  all: '전체',
-  buy: '구매',
-  sell: '판매'
-} as const
-
-const TabKeys = Object.keys(TABS) as TabType[]
-const TabEntries = Object.entries<TabType, ValueOf<typeof TABS>>(TABS)
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   query
@@ -40,8 +31,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
-  const getMessageRoomsQuery = useGetMessageRooms()
-  const [tab, setTab] = useState<TabType>('all')
+  const [tab, setTab] = useState<MessageSortTypeCodes>('ALL')
+  const getMessageRoomsQuery = useGetMessageRooms({
+    page: 0,
+    sort: tab
+  })
   const [roomId, setRoomId] = useState<RoomId>(defaultRoomId)
   const router = useRouter()
   const { isOpen, openModal, closeModal } = useModal()
@@ -50,9 +44,9 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
   const messageCount = messageList.length
 
   const handleChangeTab = (currentIndex: number, nextIndex: number) => {
-    const nextTab = TabKeys[nextIndex]
+    const { code } = MESSAGE_SORT_OPTIONS[nextIndex]
 
-    setTab(nextTab)
+    setTab(code)
   }
 
   const handleSelectRoom = (id: number) => {
@@ -104,9 +98,9 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
               <div>
                 <Tabs onChange={handleChangeTab}>
                   <Tabs.List>
-                    {TabEntries.map(([key, value]) => (
-                      <Tab key={key}>
-                        <TabButton isSelected={key === tab}>{value}</TabButton>
+                    {MESSAGE_SORT_OPTIONS.map(({ code, name }) => (
+                      <Tab key={code}>
+                        <TabButton isSelected={code === tab}>{name}</TabButton>
                       </Tab>
                     ))}
                   </Tabs.List>

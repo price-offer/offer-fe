@@ -1,6 +1,12 @@
-import type { CommonCreation, MessageRoomInfo, MessageInfo } from '@types'
+import type {
+  CommonCreation,
+  MessageRoomInfo,
+  MessageInfo,
+  MessageSortTypeCodes
+} from '@types'
 
 export type GetMessageRoomsReq = {
+  sort: MessageSortTypeCodes
   page: number
 }
 export type GetMessageRoomsRes = MessageRoomInfo[]

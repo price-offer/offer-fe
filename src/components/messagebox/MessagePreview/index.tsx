@@ -46,7 +46,7 @@ export const MessagePreview = ({
           alt="product"
           fallbackSrc={IMAGE.CHECKBOARD}
           height="40px"
-          src={post.imageUrl || ''}
+          src={post.thumbnailImageUrl || ''}
           width="40px"
         />
       </Styled.ImageWrapper>

@@ -1,9 +1,9 @@
-import type { GetCategoriesRes } from '@apis/post'
 import type { CheckItemType } from '@hooks/result/useCategoryFilterList'
+import type { Categories, CategoryCodes } from '@types'
 
 export const transRateUseToCategorySelectBoxData = (
-  categories: GetCategoriesRes,
-  searchParams: string | null
+  categories: Categories,
+  searchParams: CategoryCodes | null
 ) => {
   const newArr: CheckItemType[] = categories.map(category => {
     const { ...rest } = category

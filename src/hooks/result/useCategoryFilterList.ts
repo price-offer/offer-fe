@@ -1,47 +1,46 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useGetCategoriesQuery } from '@apis/post'
 import { transRateUseToCategorySelectBoxData } from '@utils/result'
+import { CATEGORIES } from '@constants'
+import type { CategoryCodes, CategoryNames } from '@types'
 export type CheckItemType = {
-  code: string
-  name: string
+  code: CategoryCodes | 'ALL'
+  name: CategoryNames | '전체'
   selected: boolean
 }
 
 type ReturnType = {
-  selectedCategoryValue: string
+  selectedCategoryValue: CategoryCodes | 'ALL'
   handleCategorySelectChange: SelectOnChangeHandler
   checkFilterList: CheckItemType[]
   onCheckItem(name: string): void
 }
 
 export const useCategoryFilterList = (): ReturnType => {
-  const categories = useGetCategoriesQuery()
   const [list, setList] = useState<CheckItemType[]>([
     {
-      code: '',
-      name: '',
+      code: 'ALL',
+      name: '전체',
       selected: false
     }
   ])
 
-  const [selectedCategoryValue, setSelectedCategoryValue] =
-    useState<string>('ALL')
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState<
+    CategoryCodes | 'ALL'
+  >('ALL')
 
   const searchParams = useSearchParams()
-  const defaultCategory = searchParams.get('category')
+  const defaultCategory = searchParams.get('category') as CategoryCodes | null
 
   useEffect(() => {
-    if (categories.isSuccess) {
-      const categoryList = transRateUseToCategorySelectBoxData(
-        categories.data,
-        defaultCategory
-      )
-      setList(categoryList)
-      setSelectedCategoryValue(defaultCategory ? defaultCategory : 'ALL')
-    }
-  }, [categories.data, defaultCategory, categories.isSuccess])
+    const categoryList = transRateUseToCategorySelectBoxData(
+      CATEGORIES,
+      defaultCategory
+    )
+    setList(categoryList)
+    setSelectedCategoryValue(defaultCategory ? defaultCategory : 'ALL')
+  }, [defaultCategory])
 
   const onCheckItem = (name: string): void => {
     setList(prevList =>
@@ -62,8 +61,8 @@ export const useCategoryFilterList = (): ReturnType => {
     )
   }
   const handleCategorySelectChange: SelectOnChangeHandler<{
-    code: string
-    name: string
+    code: CategoryCodes | 'ALL'
+    name: CategoryNames | '전체'
   }> = item => {
     onCheckItem(item.name)
     setSelectedCategoryValue(item.code)

@@ -4,7 +4,8 @@ import type {
   SORT_TYPES,
   TRADE_TYPES,
   TRADE_STATUS,
-  PRODUCT_CONDITIONS
+  PRODUCT_CONDITIONS,
+  CATEGORIES
 } from '@constants'
 
 /** 정렬 옵션  */
@@ -36,6 +37,12 @@ export type ProductConditions = typeof PRODUCT_CONDITIONS
 export type ProductCondition = ValueOf<ProductConditions>
 export type ProductConditionCodes = ProductCondition['code']
 export type ProductConditionNames = ProductCondition['name']
+
+/** 카테고리목록 */
+export type Categories = typeof CATEGORIES
+export type CategoryType = ValueOf<Categories>
+export type CategoryCodes = CategoryType['code']
+export type CategoryNames = CategoryType['name']
 
 /** 나의 거래 활동 */
 export type TradeActivityTypes = typeof TRADE_ACTIVITY_TYPES

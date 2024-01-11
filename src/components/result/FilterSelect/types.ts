@@ -17,7 +17,7 @@ export type FilterSelectProps = {
   selectedCategoryValue: string
   selectedTradePeriodValue: TradeTypeCodes | ''
   selectedSortPriceValue: SortOptionCodes
-  postSummaries: number
+  postSummariesLength: number
   handleSortPriceChange: SelectOnChangeHandler
   handleCategoryChange: SelectOnChangeHandler
   handleTradePeriodChange: SelectOnChangeHandler

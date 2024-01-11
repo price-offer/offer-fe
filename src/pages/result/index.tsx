@@ -96,7 +96,7 @@ const Result: NextPage = () => {
           handleSortPriceChange={handleSortPriceSelectChange}
           handleTradePeriodChange={handleTradePeriodSelectChange}
           inputPrice={inputPrice}
-          postSummaries={Number(postSummaries)}
+          postSummariesLength={postSummaries && postSummaries}
           selectedCategoryValue={selectedCategoryValue}
           selectedSortPriceValue={selectedSortPriceValue}
           selectedTradePeriodValue={selectedTradePeriodValue}

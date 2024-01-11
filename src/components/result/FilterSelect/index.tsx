@@ -11,7 +11,7 @@ const FilterSelect = ({
   selectedSortPriceValue,
   inputPrice,
   applyPrice,
-  postSummaries,
+  postSummariesLength,
   handleSortPriceChange,
   handleCategoryChange,
   handleTradePeriodChange,
@@ -45,7 +45,7 @@ const FilterSelect = ({
         </Styled.LeftSelectWrapper>
         <Styled.RightSelectWrapper>
           <Styled.ProductCount>
-            전체 {postSummaries && postSummaries}개
+            전체 {postSummariesLength && postSummariesLength}개
           </Styled.ProductCount>
           <Styled.PriceFilterSelect
             colorType="none"

@@ -8,15 +8,14 @@ const FilterSelect = ({
   tradePeriodItems,
   selectedCategoryValue,
   selectedTradePeriodValue,
-  minPriceValue,
-  maxPriceValue,
+  selectedSortPriceValue,
+  inputPrice,
   applyPrice,
   postSummaries,
   handleSortPriceChange,
   handleCategoryChange,
   handleTradePeriodChange,
-  handleMinPriceInputChange,
-  handleMaxPriceInputChange,
+  handlePriceInputChange,
   handlePriceApplyClick
 }: FilterSelectProps): ReactElement => {
   return (
@@ -39,11 +38,9 @@ const FilterSelect = ({
           />
           <PriceDialog
             applyPrice={applyPrice}
-            handleMaxPriceInputChange={handleMaxPriceInputChange}
-            handleMinPriceInputChange={handleMinPriceInputChange}
             handlePriceApplyClick={handlePriceApplyClick}
-            maxPriceValue={maxPriceValue}
-            minPriceValue={minPriceValue}
+            handlePriceInputChange={handlePriceInputChange}
+            inputPrice={inputPrice}
           />
         </Styled.LeftSelectWrapper>
         <Styled.RightSelectWrapper>
@@ -53,7 +50,7 @@ const FilterSelect = ({
           <Styled.PriceFilterSelect
             colorType="none"
             items={SORT_OPTIONS}
-            placeholder="높은 가격순"
+            value={selectedSortPriceValue}
             onChange={handleSortPriceChange}
           />
         </Styled.RightSelectWrapper>

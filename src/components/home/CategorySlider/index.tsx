@@ -1,5 +1,5 @@
 import { useMedia } from '@offer-ui/react'
-import { useRouter } from 'next/navigation'
+
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
@@ -14,7 +14,6 @@ const CategorySlider = (): ReactElement => {
   const [isLast, setIsLast] = useState<boolean>(false)
   const [isMoveFromArrowButton, setIsMoveArrowButton] = useState<number>(0)
   const isFirstCategory = containerRef.current?.scrollLeft === 0
-  const router = useRouter()
 
   const { data: categories } = useGetCategoriesQuery()
 
@@ -112,21 +111,20 @@ const CategorySlider = (): ReactElement => {
             isMoveFromArrowButton={isMoveFromArrowButton}>
             {categories?.map(cateGory => {
               return (
-                <Styled.CategoryItem
-                  key={cateGory.name}
-                  onClick={() => {
-                    router.push(`/result?category=${cateGory.code}`)
-                  }}>
-                  <Styled.CategoryImgWrapper>
-                    <Styled.CategoryImg
-                      key={cateGory.name}
-                      alt={`category-${cateGory.name}`}
-                      height={58}
-                      src={cateGory.imageUrl}
-                      width={58}
-                    />
-                  </Styled.CategoryImgWrapper>
-                  <Styled.CateGoryName>{cateGory.name}</Styled.CateGoryName>
+                <Styled.CategoryItem key={cateGory.name}>
+                  <Styled.CategoryLink
+                    href={`/result?category=${cateGory.code}`}>
+                    <Styled.CategoryImgWrapper>
+                      <Styled.CategoryImg
+                        key={cateGory.name}
+                        alt={`category-${cateGory.name}`}
+                        height={58}
+                        src={cateGory.imageUrl}
+                        width={58}
+                      />
+                    </Styled.CategoryImgWrapper>
+                    <Styled.CateGoryName>{cateGory.name}</Styled.CateGoryName>
+                  </Styled.CategoryLink>
                 </Styled.CategoryItem>
               )
             })}

@@ -4,7 +4,7 @@ import type { ResultHeaderProps } from './types'
 
 const ResultHeader = ({
   searchResult,
-  postSummaries
+  postSummariesLength
 }: ResultHeaderProps): ReactElement => {
   return (
     <Styled.CategoryHeaderWrapper>
@@ -12,7 +12,7 @@ const ResultHeader = ({
         &quot;{searchResult}&quot;의 검색결과
       </Styled.CategoryHeader>
       <Styled.CategoryHeaderResultCount>
-        {postSummaries && postSummaries}개
+        {postSummariesLength && postSummariesLength}개
       </Styled.CategoryHeaderResultCount>
     </Styled.CategoryHeaderWrapper>
   )

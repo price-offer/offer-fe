@@ -16,7 +16,7 @@ type ReturnType = {
   onCheckItem(name: string): void
 }
 
-const useCategoryFilterList = (): ReturnType => {
+export const useCategoryFilterList = (): ReturnType => {
   const categories = useGetCategoriesQuery()
   const [list, setList] = useState<CheckItemType[]>([
     {
@@ -76,5 +76,3 @@ const useCategoryFilterList = (): ReturnType => {
     handleCategorySelectChange
   }
 }
-
-export default useCategoryFilterList

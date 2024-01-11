@@ -2,102 +2,82 @@ import type { SelectOnChangeHandler } from '@offer-ui/react'
 import type { ChangeEventHandler } from 'react'
 import { useState } from 'react'
 import { TRADE_TYPES } from '@constants/app'
-
-type SelectItemsType = {
-  code: string
-  name: string
-}
+import type {
+  TradeTypes,
+  TradeType,
+  SortOptionCodes,
+  TradeTypeCodes,
+  SortOption
+} from '@types'
 
 export type ApplyPriceType = {
-  minPrice: number | null
-  maxPrice: number | null
+  minPrice: number | undefined
+  maxPrice: number | undefined
 }
 
 type ReturnType = {
-  tradePeriodItems: typeof TRADE_TYPES
-  sortPriceItems: SelectItemsType[]
-  selectedTradePeriodValue: string
-  selectedSortPriceValue: string
-  minPriceValue: string
-  maxPriceValue: string
+  tradePeriodItems: TradeTypes
+  selectedTradePeriodValue: TradeTypeCodes | ''
+  selectedSortPriceValue: SortOptionCodes
+  inputPrice: ApplyPriceType
   applyPrice: ApplyPriceType
   handleTradePeriodSelectChange: SelectOnChangeHandler
   handleSortPriceSelectChange: SelectOnChangeHandler
-  handleMinPriceInputChange: ChangeEventHandler
-  handleMaxPriceInputChange: ChangeEventHandler
+  handlePriceInputChange: ChangeEventHandler
   handlePriceApplyClick(): void
 }
 
-const sortPriceItems = [
-  {
-    code: '높은 가격순',
-    name: '높은 가격순'
-  },
-  {
-    code: '낮은 가격순',
-    name: '낮은 가격순'
-  },
-  {
-    code: '최신순',
-    name: '최신순'
-  }
-]
-
-const useSelectBoxFilter = (): ReturnType => {
-  const [selectedTradePeriodValue, setSelectedTradePeriodValue] =
-    useState<string>('')
+export const useSelectBoxFilter = (): ReturnType => {
+  const [selectedTradePeriodValue, setSelectedTradePeriodValue] = useState<
+    TradeTypeCodes | ''
+  >('')
   const [selectedSortPriceValue, setSelectedSortPriceValue] =
-    useState<string>('')
-  const [minPriceValue, setMinPriceValue] = useState<string>('')
-  const [maxPriceValue, setMaxPriceValue] = useState<string>('')
+    useState<SortOptionCodes>('CREATED_DATE_DESC')
+  const [inputPrice, setInputPrice] = useState<ApplyPriceType>({
+    minPrice: undefined,
+    maxPrice: undefined
+  })
   const [applyPrice, setApplyPrice] = useState<ApplyPriceType>({
-    minPrice: null,
-    maxPrice: null
+    minPrice: undefined,
+    maxPrice: undefined
   })
 
-  const handleTradePeriodSelectChange: SelectOnChangeHandler<{
-    code: string
-    name: string
-  }> = item => {
+  const handleTradePeriodSelectChange: SelectOnChangeHandler<
+    TradeType
+  > = item => {
     setSelectedTradePeriodValue(item.code)
   }
 
-  const handleSortPriceSelectChange: SelectOnChangeHandler<{
-    code: string
-    name: string
-  }> = item => {
+  const handleSortPriceSelectChange: SelectOnChangeHandler<
+    SortOption
+  > = item => {
     setSelectedSortPriceValue(item.code)
   }
 
-  const handleMinPriceInputChange: ChangeEventHandler<HTMLInputElement> = e => {
-    const inputValue = e.target.value
-    setMinPriceValue(inputValue)
-  }
-
-  const handleMaxPriceInputChange: ChangeEventHandler<HTMLInputElement> = e => {
-    const inputValue = e.target.value
-    setMaxPriceValue(inputValue)
+  const handlePriceInputChange: ChangeEventHandler<HTMLInputElement> = e => {
+    const { name, value } = e.target
+    setInputPrice(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   const handlePriceApplyClick = (): void => {
     setApplyPrice({
-      minPrice: Number(minPriceValue.replace(/,/g, '')),
-      maxPrice: Number(maxPriceValue.replace(/,/g, ''))
+      minPrice: Number(String(inputPrice?.minPrice).replace(/,/g, '')),
+      maxPrice: Number(String(inputPrice?.maxPrice).replace(/,/g, ''))
     })
   }
 
   return {
     tradePeriodItems: TRADE_TYPES,
-    sortPriceItems,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    minPriceValue,
-    maxPriceValue,
+    inputPrice,
     applyPrice,
     handleTradePeriodSelectChange,
     handleSortPriceSelectChange,
-    handleMinPriceInputChange,
-    handleMaxPriceInputChange,
+    handlePriceInputChange,
     handlePriceApplyClick
   }
 }

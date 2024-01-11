@@ -1,15 +1,15 @@
 import styled from '@emotion/styled'
 import { useMedia } from '@offer-ui/react'
 import type { NextPage } from 'next'
-
 import { useEffect, useState } from 'react'
-import { useGetInfinitePostsQuery } from '@apis/post'
-import { ProductList } from '@components/home/ProductList'
-import { ResultHeader } from '@components/result/CategoryHeader'
-import { CategorySlideFilter } from '@components/result/CategorySlideFilter'
-import { FilterSelect } from '@components/result/FilterSelect'
-import useCategoryFilterList from '@hooks/result/useCategoryFilterList'
-import useSelectBoxFilter from '@hooks/result/useSelectBoxFilter'
+import { useGetInfinitePostsQuery } from '@apis'
+import {
+  ResultHeader,
+  ProductList,
+  CategorySlideFilter,
+  FilterSelect
+} from '@components'
+import { useCategoryFilterList, useSelectBoxFilter } from '@hooks'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
@@ -34,35 +34,34 @@ const Result: NextPage = () => {
 
   const {
     tradePeriodItems,
-    sortPriceItems,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    minPriceValue,
-    maxPriceValue,
+    inputPrice,
     applyPrice,
     handleTradePeriodSelectChange,
     handleSortPriceSelectChange,
-    handleMinPriceInputChange,
-    handleMaxPriceInputChange,
+    handlePriceInputChange,
     handlePriceApplyClick
   } = useSelectBoxFilter()
 
   const categoryFilterOption =
-    selectedCategoryValue === 'ALL' ? null : selectedCategoryValue
+    selectedCategoryValue === 'ALL' ? undefined : selectedCategoryValue
 
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_POST_PAGE_NUMBER,
     category: categoryFilterOption,
-    minPrice: applyPrice.minPrice,
-    maxPrice: applyPrice.maxPrice,
+    minPrice: applyPrice && applyPrice?.minPrice,
+    maxPrice: applyPrice && applyPrice?.maxPrice,
     tradeType: selectedTradePeriodValue,
     sort: selectedSortPriceValue
   })
 
-  const postSummaries = infinitePosts?.data?.pages?.reduce(
-    (acc, cur) => acc + cur?.posts?.length,
-    0
+  const postSummaries = Number(
+    infinitePosts?.data?.pages?.reduce(
+      (acc, cur) => acc + cur?.posts?.length,
+      0
+    )
   )
 
   useEffect(() => {
@@ -79,7 +78,7 @@ const Result: NextPage = () => {
     <Layout>
       <ResultWrapper>
         <ResultHeader
-          postSummaries={Number(postSummaries)}
+          postSummariesLength={postSummaries && postSummaries}
           searchResult="###"
         />
         {isDesktop && (
@@ -92,18 +91,15 @@ const Result: NextPage = () => {
           applyPrice={applyPrice}
           categoryItems={checkFilterList}
           handleCategoryChange={handleCategorySelectChange}
-          handleMaxPriceInputChange={handleMaxPriceInputChange}
-          handleMinPriceInputChange={handleMinPriceInputChange}
           handlePriceApplyClick={handlePriceApplyClick}
+          handlePriceInputChange={handlePriceInputChange}
           handleSortPriceChange={handleSortPriceSelectChange}
           handleTradePeriodChange={handleTradePeriodSelectChange}
-          maxPriceValue={maxPriceValue}
-          minPriceValue={minPriceValue}
+          inputPrice={inputPrice}
           postSummaries={Number(postSummaries)}
           selectedCategoryValue={selectedCategoryValue}
           selectedSortPriceValue={selectedSortPriceValue}
           selectedTradePeriodValue={selectedTradePeriodValue}
-          sortPriceItems={sortPriceItems}
           tradePeriodItems={tradePeriodItems}
         />
         <ProductList

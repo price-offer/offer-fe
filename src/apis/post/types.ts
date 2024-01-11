@@ -41,11 +41,11 @@ export type UpdateTradeStatusRes = number
 export type GetPostsReq = {
   sort?: string
   tradeType?: string
-  category?: string | null
+  category?: string
   sellerId?: number
   tradeStatus?: string
-  minPrice?: number | null
-  maxPrice?: number | null
+  minPrice?: number
+  maxPrice?: number
   lastId?: number | null
   limit?: number
 }

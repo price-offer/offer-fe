@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { IconButton } from '@offer-ui/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import type { CateGoryBoxWrapperProps } from './types'
 
 export const CategoryHeader = styled.div`
@@ -31,6 +32,14 @@ export const CateGoryWrapper = styled.div`
     scrollbar-width: none; /* Firefox */
   }
 `
+
+export const CategoryLink = styled(Link)`
+  background: transparent;
+
+  color: ${({ theme }) => theme.colors.grayScale90};
+  text-decoration: none;
+`
+
 export const CateGoryBoxWrapper = styled.div<CateGoryBoxWrapperProps>`
   display: flex;
   gap: 12px;
@@ -182,6 +191,7 @@ export const Styled = {
   CateGoryWrapper,
   CateGoryBoxWrapper,
   CateGoryBox,
+  CategoryLink,
   ArrowBox,
   LeftArrow,
   RightArrow,

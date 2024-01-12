@@ -4,31 +4,34 @@ import { Styled } from './styled'
 import type { ChattingProps } from './types'
 import { formatDate } from '@utils/format'
 
-export const getDate = (sendTime = '') => sendTime.split('T')[0]
-export const getTime = (sendTime = '') => formatDate(sendTime, 'A H:mm')
-
 // TODO: 상품 정보 버블 추가
 export const Chatting = ({
   userId,
   messages,
   receiverImageUrl
 }: ChattingProps) => {
-  const renderChattingItem = () =>
+  const renderChattingList = () =>
     messages.map(({ content, member, sendTime }, idx, list) => {
       const prevMessage = list.at(idx - 1)
       const nextMessage = list.at(idx + 1)
       const isSender = member.id === userId
 
-      const currentDate = getDate(sendTime)
-      const prevDate = getDate(prevMessage?.sendTime)
-      const nextDate = getDate(nextMessage?.sendTime)
+      const currentDate = formatDate(sendTime, 'YYYY년 M월 D일 dddd')
+      const prevDate = formatDate(
+        prevMessage?.sendTime || '',
+        'YYYY년 M월 D일 dddd'
+      )
+      const nextDate = formatDate(
+        nextMessage?.sendTime || '',
+        'YYYY년 M월 D일 dddd'
+      )
       const isPrevDateChanged = prevDate !== currentDate
       const isNextDateChanged = nextDate !== currentDate
-      const currentTime = getTime(sendTime)
-      const nextTime = getTime(nextMessage?.sendTime)
+      const currentTime = formatDate(sendTime, 'A H:mm')
+      const nextTime = formatDate(nextMessage?.sendTime || '', 'A H:mm')
 
       const commonProps = {
-        time: formatDate(sendTime, 'A H:mm'),
+        time: currentDate,
         isSectionStart:
           member.id !== prevMessage?.member.id || isPrevDateChanged,
         isSectionLast:
@@ -39,12 +42,10 @@ export const Chatting = ({
 
       return (
         // TODO: 메세지 키값 내려줄 수 있는지 확인하기
-        <div key={`${member.nickname}-${sendTime}`}>
+        <div key={`${member.nickname}-${currentDate}`}>
           {isPrevDateChanged && (
-            <Styled.DateWrapper key={sendTime}>
-              <Styled.ChattingDate>
-                {formatDate(sendTime, 'YYYY년 M월 D일 dddd')}
-              </Styled.ChattingDate>
+            <Styled.DateWrapper key={currentDate}>
+              <Styled.ChattingDate>{currentDate}</Styled.ChattingDate>
             </Styled.DateWrapper>
           )}
           {isSender ? (
@@ -58,5 +59,5 @@ export const Chatting = ({
       )
     })
 
-  return <Styled.Container>{renderChattingItem()}</Styled.Container>
+  return <Styled.Container>{renderChattingList()}</Styled.Container>
 }

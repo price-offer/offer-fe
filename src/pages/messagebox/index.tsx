@@ -5,7 +5,7 @@ import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { useState, type ReactElement, useEffect } from 'react'
 import { toQueryString } from '@utils/format'
-import { useGetMessageRooms } from '@apis'
+import { useGetMessageRoomsQuery } from '@apis'
 import {
   MessagePreview,
   Tabs,
@@ -31,22 +31,24 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
-  const [tab, setTab] = useState<MessageSortTypeCodes>('ALL')
-  const getMessageRoomsQuery = useGetMessageRooms({
+  const [sortType, setSortType] = useState<MessageSortTypeCodes>('ALL')
+  const getMessageRoomsQuery = useGetMessageRoomsQuery({
     page: 0,
-    sort: tab
+    sort: sortType
   })
+
   const [roomId, setRoomId] = useState<RoomId>(defaultRoomId)
   const router = useRouter()
   const { isOpen, openModal, closeModal } = useModal()
   const { desktop, mobile, tablet } = useMedia()
-  const messageList = getMessageRoomsQuery.data || []
-  const messageCount = messageList.length
 
-  const handleChangeTab = (currentIndex: number, nextIndex: number) => {
+  const messageList = getMessageRoomsQuery.data || []
+  const messagesCount = messageList.length
+
+  const handleChangeSortType = (currentIndex: number, nextIndex: number) => {
     const { code } = MESSAGE_SORT_OPTIONS[nextIndex]
 
-    setTab(code)
+    setSortType(code)
   }
 
   const handleSelectRoom = (id: number) => {
@@ -77,7 +79,6 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
   useEffect(() => {
     if (desktop) {
       closeModal()
-
       return
     }
 
@@ -93,14 +94,16 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
           <ListContainer>
             <ListHeader>
               <span>
-                내 쪽지함 <i>{messageCount}</i>
+                내 쪽지함 <i>{messagesCount}</i>
               </span>
               <div>
-                <Tabs onChange={handleChangeTab}>
+                <Tabs onChange={handleChangeSortType}>
                   <Tabs.List>
                     {MESSAGE_SORT_OPTIONS.map(({ code, name }) => (
                       <Tab key={code}>
-                        <TabButton isSelected={code === tab}>{name}</TabButton>
+                        <TabButton isSelected={code === sortType}>
+                          {name}
+                        </TabButton>
                       </Tab>
                     ))}
                   </Tabs.List>
@@ -108,7 +111,7 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
               </div>
             </ListHeader>
             <MessageList>
-              {messageCount > 0 ? (
+              {messagesCount > 0 ? (
                 messageList.map(({ id, post, ...resInfo }) => (
                   <MessagePreview
                     key={id}

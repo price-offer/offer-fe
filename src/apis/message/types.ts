@@ -23,6 +23,7 @@ export type GetMessageReq = {
 export type GetMessageRes = MessageInfo[]
 
 export type CreateMessageReq = {
+  messageRoomId: number
   content: string
 }
 export type CreateMessageRes = CommonCreation

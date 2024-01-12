@@ -28,14 +28,17 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
     msgRoomId: roomId,
     page: 0
   })
-  const createMessageMutation = useCreateMessageMutation(roomId)
+  const createMessageMutation = useCreateMessageMutation()
   const deleteMessageRoomMutation = useDeleteMessageRoomMutation(roomId)
+
   const chattingBoxRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const { desktop, tablet, mobile } = useMedia()
+
   const [messages, setMessages] = useState<ChattingProps['messages']>([])
+  const { desktop, tablet, mobile } = useMedia()
   const { isOpen, openModal, closeModal } = useModal()
   const { user } = useAuth()
+
   const senderInfo = {
     id: user.id,
     nickname: user.nickname,
@@ -62,13 +65,10 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
     handleCloseRoom()
   }
 
-  const refetchMessage = async () => {
-    await getMessageQuery.refetch()
-  }
-
-  const handleSubmitMessage = async (message: string) => {
+  const handleSubmitMessage = async (content: string) => {
     const res = await createMessageMutation.mutateAsync({
-      content: message
+      messageRoomId: roomId,
+      content
     })
 
     if (inputRef.current) {
@@ -79,11 +79,11 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
       ...prev,
       {
         member: senderInfo,
-        content: message,
+        content,
         sendTime: res.createdAt
       }
     ])
-    await refetchMessage()
+    await getMessageQuery.refetch()
   }
 
   useEffect(() => {
@@ -100,7 +100,11 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
         <IconButton icon="arrowLeft" size={24} onClick={handleCloseRoom} />
         <Styled.Nickname>{user.nickname}</Styled.Nickname>
         <Styled.IconButtonContainer>
-          <IconButton icon="refresh" size={24} onClick={refetchMessage} />
+          <IconButton
+            icon="refresh"
+            size={24}
+            onClick={async () => await getMessageQuery.refetch()}
+          />
           <Styled.MoreButtonWrapper>
             <IconButton icon="more" size={24} onClick={openModal} />
             {isOpen && (

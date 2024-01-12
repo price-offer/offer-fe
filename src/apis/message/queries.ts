@@ -11,7 +11,7 @@ import type {
   GetMessageRoomsReq
 } from './types'
 
-export const useGetMessageRooms = (params: GetMessageRoomsReq) =>
+export const useGetMessageRoomsQuery = (params: GetMessageRoomsReq) =>
   useQuery({
     queryKey: ['getMessageRooms'],
     queryFn: () => getMessageRooms(params)
@@ -25,13 +25,12 @@ export const useGetMessageQuery = ({ msgRoomId, ...res }: GetMessageReq) =>
         msgRoomId,
         ...res
       }),
-    enabled: Boolean(msgRoomId)
+    enabled: typeof msgRoomId === 'number'
   })
 
-export const useCreateMessageMutation = (messageRoomId: number) =>
+export const useCreateMessageMutation = () =>
   useMutation({
-    mutationFn: (params: CreateMessageReq) =>
-      createMessage(messageRoomId, params)
+    mutationFn: (params: CreateMessageReq) => createMessage(params)
   })
 
 export const useDeleteMessageRoomMutation = (messageRoomId: number) =>

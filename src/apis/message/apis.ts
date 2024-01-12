@@ -17,11 +17,8 @@ export const getMessage = (params: GetMessageReq) =>
     params
   )
 
-export const createMessage = (
-  messageRoomId: number,
-  params: CreateMessageReq
-) =>
-  http.post<CreateMessageReq, CreateMessageRes>(
+export const createMessage = ({ messageRoomId, ...params }: CreateMessageReq) =>
+  http.post<Omit<CreateMessageReq, 'messageRoomId'>, CreateMessageRes>(
     `/msgrooms/${messageRoomId}/msgs`,
     params
   )

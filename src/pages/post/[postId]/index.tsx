@@ -43,10 +43,12 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   const getPostQuery = useGetPostQuery(postId)
   const updateTradeStatusMutation = useUpdateTradeStatusMutation()
   const deletePostMutation = useDeletePostMutation(postId)
-  const router = useRouter()
+
   const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
-  const [isOpenDialog, setIsOpenDialog] = useState(false)
-  const { isOpen, openModal, closeModal } = useModal()
+  const router = useRouter()
+
+  const tradeStatusDialog = useModal()
+  const deleteModal = useModal()
   const { user } = useAuth()
 
   const isSeller = user.id === getPostQuery.data?.seller.id
@@ -76,14 +78,6 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     router.replace('/')
   }
 
-  const handleCloseDialog = () => {
-    setIsOpenDialog(false)
-  }
-
-  const handleClickMore = () => {
-    setIsOpenDialog(true)
-  }
-
   return (
     <>
       <Layout>
@@ -106,15 +100,15 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                       <IconButton
                         icon="more"
                         size={24}
-                        onClick={handleClickMore}
+                        onClick={tradeStatusDialog.openModal}
                       />
-                      {isOpenDialog && (
+                      {tradeStatusDialog.isOpen && (
                         <Dialog
                           dialogPositionStyle={{
                             top: '34px',
                             right: '0'
                           }}
-                          onClose={handleCloseDialog}>
+                          onClose={tradeStatusDialog.closeModal}>
                           <DialogButtonContainer>
                             <Link
                               href={`/post${toQueryString({
@@ -123,7 +117,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                               })}`}>
                               <DialogButton>수정하기</DialogButton>
                             </Link>
-                            <DialogButton onClick={openModal}>
+                            <DialogButton onClick={deleteModal.openModal}>
                               삭제하기
                             </DialogButton>
                           </DialogButtonContainer>
@@ -183,14 +177,14 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
             key="cancel"
             size="large"
             styleType="ghost"
-            onClick={closeModal}>
+            onClick={deleteModal.closeModal}>
             취소
           </Button>
         ]}
         description="삭제한 게시글은 복구할 수 없어요."
-        isOpen={isOpen}
+        isOpen={deleteModal.isOpen}
         title="게시글을 삭제하시겠어요?"
-        onClose={closeModal}
+        onClose={deleteModal.closeModal}
       />
     </>
   )

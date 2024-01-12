@@ -32,18 +32,14 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   const imageModal = useModal()
 
   const isSeller = user.id === postQuery.data?.seller.id
-  const postImages =
-    postQuery.data?.imageUrls.map((url, idx) => ({
-      id: idx,
-      src: url
-    })) || []
+  const postImages = postQuery.data?.postImages || []
 
   return (
     <>
       <Layout>
         <Main>
           <div onClick={imageModal.openModal}>
-            <Carousel images={postImages || []} isArrow name="post-carousel" />
+            <Carousel images={postImages} isArrow name="post-carousel" />
           </div>
           <Content>
             <div>

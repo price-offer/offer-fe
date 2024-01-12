@@ -1,17 +1,24 @@
-import { Divider, SelectBox, Text, Icon } from '@offer-ui/react'
-import type { ReactElement } from 'react'
+import { Divider, SelectBox, Text, Icon, Radio } from '@offer-ui/react'
+import { useRouter } from 'next/router'
+import type { ChangeEvent, ReactElement } from 'react'
 import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { PriceOfferCardProps } from './types'
 import { PriceOfferModal } from '../PriceOfferModal'
 import type { OfferForm } from '../PriceOfferModal/types'
 import { UserProfile } from '../UserProfile'
-import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import {
+  getTimeDiffText,
+  localeCurrencyToNumber,
+  toLocaleCurrency,
+  toQueryString
+} from '@utils/format'
 import {
   useUpdateLikeStatusMutation,
   useGetPostQuery,
   useGetPostOffersQuery,
-  useCreateOfferMutation
+  useCreateOfferMutation,
+  useCreateMessageRoomMutation
 } from '@apis'
 import { SORT_OPTIONS } from '@constants'
 import { useModal } from '@hooks'
@@ -24,29 +31,33 @@ const PriceOfferCard = ({
   const [sortOptionCode, setSortOptionCode] = useState<SortOptionCodes>(
     SORT_OPTIONS[0].code
   )
-  const offerModal = useModal()
+  const [selectedOffer, setSelectedOffer] = useState<number | null>(null)
   const [likePost, setLikePost] = useState({
     status: false,
     count: 0
   })
 
-  const postOffersQuery = useGetPostOffersQuery({
+  const router = useRouter()
+  const offerModal = useModal()
+
+  const getPostOffersQuery = useGetPostOffersQuery({
     postId,
     sort: sortOptionCode
   })
-  const postQuery = useGetPostQuery(postId)
-  const likeStatusMutation = useUpdateLikeStatusMutation()
-  const offerMutation = useCreateOfferMutation()
+  const getPostQuery = useGetPostQuery(postId)
+  const createMessageRoomMutation = useCreateMessageRoomMutation()
+  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
+  const createOfferMutation = useCreateOfferMutation()
 
   useEffect(() => {
     setLikePost({
-      status: Boolean(postQuery.data?.liked),
-      count: postQuery.data?.totalLikeCount || 0
+      status: Boolean(getPostQuery.data?.liked),
+      count: getPostQuery.data?.totalLikeCount || 0
     })
-  }, [postQuery])
+  }, [getPostQuery.data])
 
   const offers =
-    postOffersQuery.data?.offers.map(({ offerer, createdAt, ...offer }) => ({
+    getPostOffersQuery.data?.offers.map(({ offerer, createdAt, ...offer }) => ({
       ...offerer,
       level: Number(offerer.level),
       date: createdAt,
@@ -65,7 +76,13 @@ const PriceOfferCard = ({
       count: status ? count - 1 : count + 1
     }))
 
-    await likeStatusMutation.mutateAsync(postId)
+    await updateLikeStatusMutation.mutateAsync(postId)
+  }
+
+  const handleChangeOffer = (e: ChangeEvent<HTMLFormElement>) => {
+    const offerId = Number(e.target.value)
+
+    setSelectedOffer(offerId)
   }
 
   const handleClickOffer = async ({
@@ -75,16 +92,29 @@ const PriceOfferCard = ({
   }: OfferForm) => {
     const offerInfo = {
       postId,
-      // TODO: post 보내기 merge 후 number로 변환하는 유틸 적용
-      price: Number(price) ?? 0,
+      price: localeCurrencyToNumber(price || '0'),
       tradeType: tradeType ?? '',
       location: `${tradeArea?.city} ${tradeArea?.county} ${tradeArea?.town}`
     }
 
     offerModal.closeModal()
 
-    await offerMutation.mutateAsync(offerInfo)
-    postOffersQuery.refetch()
+    await createOfferMutation.mutateAsync(offerInfo)
+    getPostOffersQuery.refetch()
+  }
+
+  const handleClickStartMessage = async () => {
+    if (selectedOffer) {
+      const res = await createMessageRoomMutation.mutateAsync({
+        offerId: selectedOffer
+      })
+
+      router.push(
+        `/messagebox${toQueryString({
+          roomId: res.id
+        })}`
+      )
+    }
   }
 
   return (
@@ -112,7 +142,10 @@ const PriceOfferCard = ({
         <Styled.Divider />
         {hasOffer ? (
           <Styled.CardBody>
-            <Styled.OfferListBox>
+            <Styled.OfferListBox
+              direction="vertical"
+              formName="offer"
+              onChange={handleChangeOffer}>
               {offers.map(
                 ({
                   id,
@@ -123,20 +156,33 @@ const PriceOfferCard = ({
                   profileImageUrl,
                   tradeType,
                   price
-                }) => (
-                  <Styled.Offer key={id}>
-                    <UserProfile
-                      date={getTimeDiffText(date)}
-                      image={profileImageUrl}
-                      level={level}
-                      location={location}
-                      nickName={nickname}
-                      tradeType={tradeType.name}
-                      type="offer"
-                    />
-                    <Text styleType="body01B">{toLocaleCurrency(price)}원</Text>
-                  </Styled.Offer>
-                )
+                }) => {
+                  const isSelected = selectedOffer === id
+
+                  return (
+                    <Styled.Offer key={id} isSelected={isSelected}>
+                      <Radio.Input
+                        checked={isSelected}
+                        formName="offer"
+                        value={String(id)}
+                      />
+                      <Styled.OfferContent>
+                        <UserProfile
+                          date={getTimeDiffText(date)}
+                          image={profileImageUrl}
+                          level={level}
+                          location={location}
+                          nickName={nickname}
+                          tradeType={tradeType.name}
+                          type="offer"
+                        />
+                        <Text styleType="body01B">
+                          {toLocaleCurrency(price)}원
+                        </Text>
+                      </Styled.OfferContent>
+                    </Styled.Offer>
+                  )
+                }
               )}
             </Styled.OfferListBox>
           </Styled.CardBody>
@@ -159,21 +205,22 @@ const PriceOfferCard = ({
           </Styled.LikeButton>
           {isSeller ? (
             <Styled.MessageButton
-              disabled={!postOffersQuery.data?.totalSize}
-              size="large">
+              disabled={!selectedOffer}
+              size="large"
+              onClick={handleClickStartMessage}>
               쪽지하기
             </Styled.MessageButton>
           ) : (
             <Styled.MessageButton
               disabled={
-                postOffersQuery.data?.offerCountOfCurrentMember ===
-                postOffersQuery.data?.maximumOfferCount
+                getPostOffersQuery.data?.offerCountOfCurrentMember ===
+                getPostOffersQuery.data?.maximumOfferCount
               }
               size="large"
               onClick={() => {
                 offerModal.openModal()
               }}>{`가격 제안하기(${
-              postOffersQuery.data?.offerCountOfCurrentMember || 0
+              getPostOffersQuery.data?.offerCountOfCurrentMember || 0
             }/2)`}</Styled.MessageButton>
           )}
         </Styled.CardFooter>

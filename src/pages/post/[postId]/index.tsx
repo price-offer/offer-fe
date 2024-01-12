@@ -11,8 +11,8 @@ import {
 } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
-import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import { useGetPostQuery } from '@apis'
 import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
 import { useAuth, useModal } from '@hooks'
@@ -27,84 +27,82 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
-  const postQuery = useGetPostQuery(postId)
+  const getPostQuery = useGetPostQuery(postId)
   const { user } = useAuth()
   const imageModal = useModal()
 
-  const isSeller = user.id === postQuery.data?.seller.id
-  const postImages = postQuery.data?.postImages || []
+  const isSeller = user.id === getPostQuery.data?.seller.id
+  const postImages = getPostQuery.data?.postImages || []
 
   return (
-    <>
-      <Layout>
-        <Main>
-          <div onClick={imageModal.openModal}>
-            <Carousel images={postImages} isArrow name="post-carousel" />
+    <Layout>
+      <Main>
+        <div onClick={imageModal.openModal}>
+          <Carousel images={postImages || []} isArrow name="post-carousel" />
+        </div>
+        <Content>
+          <div>
+            <ProductCondition>
+              {isSeller ? (
+                <>
+                  <ProductConditionSelectBox
+                    items={TRADE_STATUS}
+                    value={getPostQuery.data?.tradeStatus.code}
+                    onChange={(): void => {
+                      // do something
+                    }}
+                  />
+                  <IconButton icon="more" size={24} />
+                </>
+              ) : (
+                <ProductConditionBadge>
+                  {getPostQuery.data?.tradeStatus.code}
+                </ProductConditionBadge>
+              )}
+            </ProductCondition>
+            <Text color="grayScale70" styleType="body02M" tag="p">
+              {getPostQuery.data?.category.name || ''}
+            </Text>
+            <PostName styleType="headline01B" tag="p">
+              {getPostQuery.data?.title || ''}
+            </PostName>
+            <Text styleType="display01B" tag="p">
+              {toLocaleCurrency(Number(getPostQuery.data?.price))}
+              <Text styleType="subtitle01M">원</Text>
+            </Text>
           </div>
-          <Content>
-            <div>
-              <ProductCondition>
-                {isSeller ? (
-                  <>
-                    <ProductConditionSelectBox
-                      items={TRADE_STATUS}
-                      value={postQuery.data?.tradeStatus.code}
-                      onChange={(): void => {
-                        // do something
-                      }}
-                    />
-                    <IconButton icon="more" size={24} />
-                  </>
-                ) : (
-                  <ProductConditionBadge>
-                    {postQuery.data?.tradeStatus.code}
-                  </ProductConditionBadge>
-                )}
-              </ProductCondition>
-              <Text color="grayScale70" styleType="body02M" tag="p">
-                {postQuery.data?.category.name || ''}
-              </Text>
-              <PostName styleType="headline01B" tag="p">
-                {postQuery.data?.title || ''}
-              </PostName>
-              <Text styleType="display01B" tag="p">
-                {toLocaleCurrency(Number(postQuery.data?.price))}
-                <Text styleType="subtitle01M">원</Text>
-              </Text>
-            </div>
-            <Divider gap={16} />
-            <div>
-              <Text styleType="headline02B">상품 정보</Text>
-              <TransactionContainer>
-                <PostFieldList
-                  date={getTimeDiffText(postQuery.data?.createdAt || '')}
-                  location={postQuery.data?.location || ''}
-                  productCondition={postQuery.data?.productCondition.name}
-                  tradeType={postQuery.data?.tradeType.name}
-                />
-              </TransactionContainer>
-              <Description>{postQuery.data?.description}</Description>
-            </div>
-            <Divider gap={16} />
-            <UserProfile
-              image={postQuery.data?.seller.profileImageUrl}
-              level={postQuery.data?.seller.offerLevel || 0}
-              location={postQuery.data?.seller.nickname || ''}
-              nickName={postQuery.data?.seller.nickname || ''}
-              type="basic"
-            />
-          </Content>
-        </Main>
-        <MainDivider size="bold" />
-        <PriceOfferCard isSeller={isSeller} postId={postId} />
-      </Layout>
+          <Divider gap={16} />
+          <div>
+            <Text styleType="headline02B">상품 정보</Text>
+            <TransactionContainer>
+              <PostFieldList
+                date={getTimeDiffText(getPostQuery.data?.createdAt || '')}
+                location={getPostQuery.data?.location || ''}
+                productCondition={getPostQuery.data?.productCondition.name}
+                tradeType={getPostQuery.data?.tradeType.name}
+              />
+            </TransactionContainer>
+            <Description>{getPostQuery.data?.description}</Description>
+          </div>
+          <Divider gap={16} />
+          <UserProfile
+            image={getPostQuery.data?.seller.profileImageUrl}
+            level={getPostQuery.data?.seller.offerLevel || 0}
+            location={getPostQuery.data?.seller.nickname || ''}
+            nickName={getPostQuery.data?.seller.nickname || ''}
+            type="basic"
+          />
+        </Content>
+      </Main>
+      <MainDivider size="bold" />
+      <PriceOfferCard isSeller={isSeller} postId={postId} />
       <ImageModal
         images={postImages}
         isOpen={imageModal.isOpen}
         name="post-detail"
         onClose={imageModal.closeModal}
       />
-    </>
+    </Layout>
   )
 }
 

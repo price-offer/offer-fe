@@ -31,7 +31,30 @@ export const useGetPostQuery = (id: number) =>
   useQuery({
     queryKey: ['getPost', id],
     queryFn: () => getPost(id),
-    enabled: Boolean(id)
+    enabled: typeof id === 'number',
+    select: data => ({
+      ...data,
+      postForm: {
+        category: data.category.code,
+        tradeType: data.tradeType.code,
+        productCondition: data.productCondition.code,
+        price: String(data.price),
+        imageInfos: [
+          {
+            id: '0',
+            isRepresent: true,
+            url: data.thumbnailImageUrl || ''
+          },
+          ...(data.imageUrls.map((url, idx) => ({
+            id: String(idx + 1),
+            url
+          })) || [])
+        ],
+        title: data.title,
+        description: data.description,
+        location: data.location
+      }
+    })
   })
 
 export const useGetCategoriesQuery = () =>

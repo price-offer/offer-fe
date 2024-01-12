@@ -17,15 +17,11 @@ export const useGetMessageRoomsQuery = (params: GetMessageRoomsReq) =>
     queryFn: () => getMessageRooms(params)
   })
 
-export const useGetMessageQuery = ({ msgRoomId, ...res }: GetMessageReq) =>
+export const useGetMessageQuery = (params: GetMessageReq) =>
   useQuery({
-    queryKey: ['getMessage', msgRoomId],
-    queryFn: () =>
-      getMessage({
-        msgRoomId,
-        ...res
-      }),
-    enabled: typeof msgRoomId === 'number'
+    queryKey: ['getMessage', params],
+    queryFn: () => getMessage(params),
+    enabled: typeof params.msgRoomId === 'number'
   })
 
 export const useCreateMessageMutation = () =>

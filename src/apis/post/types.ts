@@ -12,6 +12,7 @@ import type {
 export type GetPostRes = PostDetail
 
 export type UpdatePostReq = {
+  postId: number
   title: string
   category: string
   price: number
@@ -32,6 +33,7 @@ export type DeletePostRes = {
 
 // TODO: 정확한 타입 BE 확인 필요
 export type UpdateTradeStatusReq = {
+  postId: number
   tradeStatus: TradeStatusCodes
 }
 export type UpdateTradeStatusRes = number

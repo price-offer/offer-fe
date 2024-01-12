@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const getPostQuery = useGetPostQuery(postId)
-  const updateTradeStatusMutation = useUpdateTradeStatusMutation(postId)
+  const updateTradeStatusMutation = useUpdateTradeStatusMutation()
   const deletePostMutation = useDeletePostMutation(postId)
   const router = useRouter()
   const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
@@ -65,6 +65,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     setTradeStatus(nextStatusCode)
 
     await updateTradeStatusMutation.mutateAsync({
+      postId,
       tradeStatus: nextStatusCode
     })
   }

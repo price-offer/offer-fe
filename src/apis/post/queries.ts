@@ -22,9 +22,9 @@ export const useCreatePostMutation = () =>
     mutationFn: (param: CreatePostReq) => createPost(param)
   })
 
-export const useUpdatePostMutation = (postId: number) =>
+export const useUpdatePostMutation = () =>
   useMutation({
-    mutationFn: (param: UpdatePostReq) => updatePost(postId, param)
+    mutationFn: (params: UpdatePostReq) => updatePost(params)
   })
 
 export const useGetPostQuery = (id: number) =>
@@ -57,10 +57,9 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
         : undefined
   })
 
-export const useUpdateTradeStatusMutation = (postId: number) =>
+export const useUpdateTradeStatusMutation = () =>
   useMutation({
-    mutationFn: (params: UpdateTradeStatusReq) =>
-      updateTradeStatus(postId, params)
+    mutationFn: (params: UpdateTradeStatusReq) => updateTradeStatus(params)
   })
 
 export const useDeletePostMutation = (postId: DeletePostReq) =>

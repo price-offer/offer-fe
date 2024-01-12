@@ -76,7 +76,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
   const getPostQuery = useGetPostQuery(editPostId)
   const createUploadImagesMutation = useCreateUploadImagesMutation()
   const getCategoriesQuery = useGetCategoriesQuery()
-  const updatePostMutation = useUpdatePostMutation(editPostId)
+  const updatePostMutation = useUpdatePostMutation()
   const router = useRouter()
 
   const [postForm, setPostForm] = useState<PostFormState>({})
@@ -128,6 +128,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
 
     if (type === 'update') {
       await updatePostMutation.mutateAsync({
+        postId,
         ...nextPost,
         tradeStatus: getPostQuery.data?.tradeStatus.code || TRADE_STATUS[0].code
       })

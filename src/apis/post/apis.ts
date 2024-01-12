@@ -20,8 +20,11 @@ export const getPost = (id: number) =>
 export const createPost = (param: CreatePostReq) =>
   http.post<CreatePostReq, CreatePostRes>('/posts', param)
 
-export const updatePost = (postId: number, param: UpdatePostReq) =>
-  http.put<UpdatePostReq, UpdatePostRes>(`/posts/${postId}`, param)
+export const updatePost = ({ postId, ...params }: UpdatePostReq) =>
+  http.put<Omit<UpdatePostReq, 'postId'>, UpdatePostRes>(
+    `/posts/${postId}`,
+    params
+  )
 
 export const getCategories = () =>
   http.get<null, GetCategoriesRes>('/categories')
@@ -29,11 +32,11 @@ export const getCategories = () =>
 export const getPosts = (params: GetPostsReq) =>
   http.get<GetPostsReq, GetPostsRes>('/posts', params)
 
-export const updateTradeStatus = (
-  postId: number,
-  params: UpdateTradeStatusReq
-) =>
-  http.put<UpdateTradeStatusReq, UpdateTradeStatusRes>(
+export const updateTradeStatus = ({
+  postId,
+  ...params
+}: UpdateTradeStatusReq) =>
+  http.put<Omit<UpdateTradeStatusReq, 'postId'>, UpdateTradeStatusRes>(
     `/posts/trade-status/${postId}`,
     params
   )

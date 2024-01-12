@@ -188,9 +188,6 @@ const ProductConditionSelectBox = styled(SelectBox)`
     ${theme.mediaQuery.tablet} {
       margin: 20px 0;
     }
-    ${theme.mediaQuery.mobile} {
-      margin: 20px 0;
-    }
   `}
 `
 

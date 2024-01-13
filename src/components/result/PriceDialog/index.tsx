@@ -25,7 +25,7 @@ const PriceDialog = ({
 
   const handleClickApply = () => {
     handlePriceApplyClick()
-    handleCloseDialog()
+    setIsOpen(false)
   }
   return (
     <>

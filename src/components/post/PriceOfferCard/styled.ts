@@ -1,6 +1,11 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Button, Divider as DividerComponent, Text } from '@offer-ui/react'
+import {
+  Button,
+  Divider as DividerComponent,
+  Radio,
+  Text
+} from '@offer-ui/react'
 
 const OfferPriceCardWrapper = styled.div`
   ${({ theme }) => {
@@ -29,7 +34,7 @@ const OfferPriceCardWrapper = styled.div`
   }}
 `
 
-const OfferListBox = styled.div`
+const OfferListBox = styled(Radio)`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -88,16 +93,17 @@ const BlankCard = styled.div`
   height: 120px;
   padding: 20px 0;
 `
-const Offer = styled.div`
+const Offer = styled(Radio.Label)<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   padding: 20px;
-  border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale10}`};
   border-radius: ${({ theme }): string => theme.radius.round6};
 
-  ${({ theme }): string => `
+  ${({ theme, isSelected }) => css`
+    border: solid 1px
+      ${isSelected ? theme.colors.brandPrimary : theme.colors.grayScale10};
+
     ${theme.mediaQuery.tablet} {
       padding: 16px;
       border: none;
@@ -108,6 +114,14 @@ const Offer = styled.div`
       border-bottom: solid 1px ${theme.colors.grayScale10};
     }
   `}
+`
+
+const OfferContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
 `
 
 const CardBody = styled.div`
@@ -191,6 +205,7 @@ export const Styled = {
   Divider,
   BlankCard,
   Offer,
+  OfferContent,
   CardBody,
   CardFooter,
   MessageButton,

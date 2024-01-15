@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
-import { useGetPostQuery } from '@apis/post'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
+import { useGetPostQuery } from '@apis'
 import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
 import { useAuth } from '@hooks'
@@ -20,11 +20,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 })
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
-  const postQuery = useGetPostQuery(postId)
+  const getPostQuery = useGetPostQuery(postId)
   const { user } = useAuth()
 
-  const isSeller = user.id === postQuery.data?.seller.id
-  const postImages = postQuery.data?.imageUrls.map((url, idx) => ({
+  const isSeller = user.id === getPostQuery.data?.seller.id
+  const postImages = getPostQuery.data?.imageUrls.map((url, idx) => ({
     id: idx,
     src: url
   }))
@@ -42,7 +42,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                 <>
                   <ProductConditionSelectBox
                     items={TRADE_STATUS}
-                    value={postQuery.data?.tradeStatus.code}
+                    value={getPostQuery.data?.tradeStatus.code}
                     onChange={(): void => {
                       // do something
                     }}
@@ -51,18 +51,18 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                 </>
               ) : (
                 <ProductConditionBadge>
-                  {postQuery.data?.tradeStatus.code}
+                  {getPostQuery.data?.tradeStatus.code}
                 </ProductConditionBadge>
               )}
             </ProductCondition>
             <Text color="grayScale70" styleType="body02M" tag="p">
-              {postQuery.data?.category.name || ''}
+              {getPostQuery.data?.category.name || ''}
             </Text>
             <PostName styleType="headline01B" tag="p">
-              {postQuery.data?.title || ''}
+              {getPostQuery.data?.title || ''}
             </PostName>
             <Text styleType="display01B" tag="p">
-              {toLocaleCurrency(Number(postQuery.data?.price))}
+              {toLocaleCurrency(Number(getPostQuery.data?.price))}
               <Text styleType="subtitle01M">원</Text>
             </Text>
           </div>
@@ -71,20 +71,20 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
             <Text styleType="headline02B">상품 정보</Text>
             <TransactionContainer>
               <PostFieldList
-                date={getTimeDiffText(postQuery.data?.createdAt || '')}
-                location={postQuery.data?.location || ''}
-                productCondition={postQuery.data?.productCondition.name}
-                tradeType={postQuery.data?.tradeType.name}
+                date={getTimeDiffText(getPostQuery.data?.createdAt || '')}
+                location={getPostQuery.data?.location || ''}
+                productCondition={getPostQuery.data?.productCondition.name}
+                tradeType={getPostQuery.data?.tradeType.name}
               />
             </TransactionContainer>
-            <Description>{postQuery.data?.description}</Description>
+            <Description>{getPostQuery.data?.description}</Description>
           </div>
           <Divider gap={16} />
           <UserProfile
-            image={postQuery.data?.seller.profileImageUrl}
-            level={postQuery.data?.seller.offerLevel || 0}
-            location={postQuery.data?.seller.nickname || ''}
-            nickName={postQuery.data?.seller.nickname || ''}
+            image={getPostQuery.data?.seller.profileImageUrl}
+            level={getPostQuery.data?.seller.offerLevel || 0}
+            location={getPostQuery.data?.seller.nickname || ''}
+            nickName={getPostQuery.data?.seller.nickname || ''}
             type="basic"
           />
         </Content>

@@ -112,7 +112,7 @@ const PostPage = (): ReactElement => {
       thumbnailImageUrl
     })
 
-    router.replace(`/post/${res.id}`)
+    router.push(`/post/${res.id}`)
   }
 
   return (

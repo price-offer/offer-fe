@@ -3,12 +3,14 @@ import {
   getMessageRooms,
   getMessage,
   createMessage,
-  deleteMessageRoom
+  deleteMessageRoom,
+  createMessageRoom
 } from './apis'
 import type {
   CreateMessageReq,
   GetMessageReq,
-  GetMessageRoomsReq
+  GetMessageRoomsReq,
+  CreateMessageRoomReq
 } from './types'
 
 export const useGetMessageRoomsQuery = (params: GetMessageRoomsReq) =>
@@ -32,4 +34,9 @@ export const useCreateMessageMutation = () =>
 export const useDeleteMessageRoomMutation = (messageRoomId: number) =>
   useMutation({
     mutationFn: () => deleteMessageRoom(messageRoomId)
+  })
+
+export const useCreateMessageRoomMutation = () =>
+  useMutation({
+    mutationFn: (params: CreateMessageRoomReq) => createMessageRoom(params)
   })

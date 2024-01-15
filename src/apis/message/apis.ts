@@ -4,7 +4,9 @@ import type {
   GetMessageReq,
   GetMessageRes,
   CreateMessageReq,
-  CreateMessageRes
+  CreateMessageRes,
+  CreateMessageRoomReq,
+  CreateMessageRoomRes
 } from './types'
 import { http } from '@utils/http'
 
@@ -25,3 +27,6 @@ export const createMessage = ({ messageRoomId, ...params }: CreateMessageReq) =>
 
 export const deleteMessageRoom = (messageRoomId: number) =>
   http.delete<null>(`/msgrooms/${messageRoomId}`)
+
+export const createMessageRoom = (params: CreateMessageRoomReq) =>
+  http.post<CreateMessageRoomReq, CreateMessageRoomRes>('/msgrooms', params)

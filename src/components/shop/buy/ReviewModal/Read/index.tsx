@@ -1,7 +1,9 @@
 import type { ReactElement } from 'react'
 import type { ReadReviewModalProps } from './types'
-import { CommonTitleContainer, SCORE_OPTIONS, SCORE_STATE } from '..'
+import { CommonTitleContainer, SCORE_OPTIONS } from '..'
 import { Styled } from '../styled'
+import { SCORE } from '@constants'
+import type { ScoreNames } from '@types'
 
 export const Read = ({
   isOpen = true,
@@ -12,6 +14,8 @@ export const Read = ({
   post,
   content = '리뷰'
 }: ReadReviewModalProps): ReactElement => {
+  const scoreNames = Object.keys<ScoreNames>(SCORE)
+
   if (!reviewTargetMember) {
     return <></>
   }
@@ -24,7 +28,7 @@ export const Read = ({
       />
       <Styled.ReviewIconContainer>
         <Styled.ReviewState isFill>
-          <Styled.ReviewIcon type={`${SCORE_STATE[score]}`} />
+          <Styled.ReviewIcon type={`${scoreNames[score]}`} />
           <p>{SCORE_OPTIONS[score]?.text}</p>
         </Styled.ReviewState>
       </Styled.ReviewIconContainer>

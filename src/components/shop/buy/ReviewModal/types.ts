@@ -1,8 +1,7 @@
 import type { ModalProps } from '@offer-ui/react'
+import type { ScoreNames } from '@types'
 
-export type Score = 0 | 1 | 2
-
-export type ScoreState = Score | null
+export type ScoreState = ScoreNames | null
 
 export type CommonReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
   nickname: string
@@ -10,7 +9,7 @@ export type CommonReviewModalProps = Pick<ModalProps, 'isOpen' | 'onClose'> & {
 }
 
 export type ScoreOptions = {
-  state: Score
+  state: ScoreNames
   text: string
 }[]
 

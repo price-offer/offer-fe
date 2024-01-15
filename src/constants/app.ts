@@ -123,3 +123,9 @@ export const CATEGORIES = [
     name: '기타 중고물품'
   }
 ] as const
+
+export const SCORE = {
+  sad: 0,
+  meh: 1,
+  smile: 2
+} as const

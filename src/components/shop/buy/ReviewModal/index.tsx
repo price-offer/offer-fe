@@ -1,24 +1,20 @@
-import type { IconType } from '@offer-ui/react'
 import type { ReactElement } from 'react'
 import { Read } from './Read'
 import { Styled } from './styled'
 import type { CommonReviewModalProps, ScoreOptions } from './types'
 import { Write } from './Write'
 
-type Score = Extract<IconType, 'smile' | 'meh' | 'sad'>
-export const SCORE_STATE: Score[] = ['sad', 'meh', 'smile']
-
 export const SCORE_OPTIONS: ScoreOptions = [
   {
-    state: 2,
+    state: 'smile',
     text: '좋아요'
   },
   {
-    state: 1,
+    state: 'meh',
     text: '보통이에요'
   },
   {
-    state: 0,
+    state: 'sad',
     text: '별로에요'
   }
 ]

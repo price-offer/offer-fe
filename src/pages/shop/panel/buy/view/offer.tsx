@@ -7,9 +7,9 @@ import {
 } from '@apis'
 import type { ReviewState } from '@components'
 import { OfferTabPostList, ReviewModal } from '@components'
+import { SCORE } from '@constants'
 import { useAuth } from '@hooks'
 import type { OfferSummary, Review, SortOptionCodes } from '@types'
-import { isNumber } from '@utils'
 
 type OfferPanelViewProps = {
   sortOptionCode: SortOptionCodes
@@ -35,14 +35,14 @@ export const OfferPanelView = ({ sortOptionCode }: OfferPanelViewProps) => {
     writeReviewModal.openModal()
   }
   const handleConfirmWriteReview = async (reviewState: ReviewState) => {
-    if (!isNumber(reviewState.reviewScore)) {
+    if (!reviewState.reviewScore) {
       return
     }
 
     await reviewsMutation.mutateAsync({
       targetMemberId: writeReviewProps.seller.id,
       postId: writeReviewProps.postId,
-      score: reviewState.reviewScore,
+      score: SCORE[reviewState.reviewScore],
       content: reviewState.reviewText
     })
     await offers.refetch()

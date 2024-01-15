@@ -1,7 +1,7 @@
 import type { ChangeEventHandler, ReactElement } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { WriteReviewModalProps, ReviewState } from './types'
-import { CommonTitleContainer, SCORE_OPTIONS, SCORE_STATE } from '..'
+import { CommonTitleContainer, SCORE_OPTIONS } from '..'
 import { Styled } from '../styled'
 import type { ScoreState } from '../types'
 import { isNumber } from '@utils'
@@ -33,22 +33,17 @@ export const Write = ({
     onConfirm(reviewState)
   }
 
-  useEffect(
-    function resetReviewState() {
-      if (isOpen) {
-        return
-      }
+  const handleClose = () => {
+    onClose?.()
 
-      setReviewState({
-        reviewScore: null,
-        reviewText: ''
-      })
-    },
-    [isOpen]
-  )
+    setReviewState({
+      reviewScore: null,
+      reviewText: ''
+    })
+  }
 
   return (
-    <Styled.ReviewModal isOpen={isOpen} onClose={onClose}>
+    <Styled.ReviewModal isOpen={isOpen} onClose={handleClose}>
       <CommonTitleContainer nickname={nickname} productName={productName} />
       <Styled.ReviewIconContainer>
         {SCORE_OPTIONS.map(scoreItem => {
@@ -60,8 +55,8 @@ export const Write = ({
               <Styled.ReviewIcon
                 type={
                   reviewState.reviewScore === scoreItem.state
-                    ? `${SCORE_STATE[scoreItem.state]}Fill`
-                    : SCORE_STATE[scoreItem.state]
+                    ? `${scoreItem.state}Fill`
+                    : scoreItem.state
                 }
               />
               <p>{scoreItem.text}</p>

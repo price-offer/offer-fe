@@ -3,9 +3,8 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Styled } from './styled'
 import { pageTabs, tabList } from '../pageTabs'
-import { VALID_NICKNAME_MESSAGE } from '@constants/message'
+import { useValidateNickname } from '@hooks/useValidateNickname'
 import {
-  useCheckValidNicknameMutation,
   useCreateUploadImagesMutation,
   useGetProfileQuery,
   useUpdateMyProfileMutation
@@ -34,12 +33,12 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
 
   const profile = useGetProfileQuery(memberId)
   const createUploadImage = useCreateUploadImagesMutation()
-  const checkValidNickname = useCheckValidNicknameMutation()
   const updateMyProfile = useUpdateMyProfileMutation()
 
-  const hasToken = !isNumber(memberId)
+  const isLogin = !isNumber(memberId)
   const profileModal = useModal()
   const router = useRouter()
+  const validateNickname = useValidateNickname()
 
   const handleChangePage = (code: TradeActivityCodes) => (): void => {
     router.push(`${router.pathname}?tab=${code}`)
@@ -47,35 +46,8 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
   }
 
   const handleValidateNickname = async (nickname: string) => {
-    if (nickname.length === 0) {
-      setEditProfileValidate({
-        isSuccess: false,
-        message: VALID_NICKNAME_MESSAGE.EMPTY_ERROR
-      })
-      return
-    }
-
-    if (nickname.length < 2) {
-      setEditProfileValidate({
-        isSuccess: false,
-        message: VALID_NICKNAME_MESSAGE.MIN_LENGTH_ERROR
-      })
-      return
-    }
-
-    const { duplicate } = await checkValidNickname.mutateAsync(nickname)
-
-    if (duplicate) {
-      setEditProfileValidate({
-        isSuccess: false,
-        message: VALID_NICKNAME_MESSAGE.DUPLICATED_ERROR
-      })
-    } else {
-      setEditProfileValidate({
-        isSuccess: true,
-        message: VALID_NICKNAME_MESSAGE.SUCCESS
-      })
-    }
+    const validate = await validateNickname(nickname)
+    setEditProfileValidate(validate)
   }
   const handleChangeProfileImage = async (image: EditProfileForm['image']) => {
     if (!image.file) {
@@ -112,7 +84,7 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
         <Styled.Layout>
           <Tabs.List>
             {pageTabs
-              .filter(pageTab => (hasToken ? true : pageTab.tab.code !== 'buy'))
+              .filter(pageTab => (isLogin ? true : pageTab.tab.code !== 'buy'))
               .map(({ tab }) => (
                 <Styled.Tab
                   key={`${tab.code}-tab`}
@@ -127,16 +99,16 @@ export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
         <Styled.Layout>
           <Styled.TabPanels>
             {pageTabs
-              .filter(pageTab => (hasToken ? true : pageTab.tab.code !== 'buy'))
+              .filter(pageTab => (isLogin ? true : pageTab.tab.code !== 'buy'))
               .map(({ tab, panel }) => (
                 <Tabs.Panel key={`${tab.code}-panel`}>
                   <Styled.TabPanelContent>
                     <ProfileBox
                       {...profile.data}
-                      hasToken={hasToken}
+                      isLogin={isLogin}
                       onClickEditButton={profileModal.openModal}
                     />
-                    {panel({ hasToken, memberId })}
+                    {panel({ isLogin, memberId })}
                   </Styled.TabPanelContent>
                 </Tabs.Panel>
               ))}

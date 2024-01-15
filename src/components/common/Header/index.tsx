@@ -47,10 +47,7 @@ const Header = (): ReactElement => {
             </Link>
             {isActivePath && (
               <Styled.InputWrapper>
-                <Styled.SearchInput
-                  placeholder="검색어를 입력하세요"
-                  styleType="search"
-                />
+                <Styled.SearchInput placeholder="검색어를 입력하세요" />
               </Styled.InputWrapper>
             )}
           </Styled.LogoInputSection>

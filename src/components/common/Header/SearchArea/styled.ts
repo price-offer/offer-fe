@@ -18,7 +18,7 @@ const InputWrapper = styled.div`
   padding: 36px 16px;
 `
 
-const SearchInput = styled(Input)`
+const SearchInput = styled(Input.Search)`
   width: 100%;
   margin: 0;
 `

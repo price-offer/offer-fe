@@ -10,7 +10,7 @@ export const LikePanelView = ({ sortOptionCode }: LikePanelViewProps) => {
   const likeStatusMutation = useUpdateLikeStatusMutation()
 
   const handleChangeProductLikeStatus = async (postId: number) => {
-    await likeStatusMutation.mutateAsync({ postId })
+    await likeStatusMutation.mutateAsync(postId)
     likedPosts.refetch()
   }
 

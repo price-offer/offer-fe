@@ -10,6 +10,6 @@ export const useGetLikedPostsQuery = (searchOptions: GetLikedPostsReq) =>
   })
 
 export const useUpdateLikeStatusMutation = () =>
-  useMutation<null, DefaultError, UpdateLikeStatusReq>({
-    mutationFn: ({ postId }) => updateLikeStatus(postId)
+  useMutation<null, DefaultError, UpdateLikeStatusReq['postId']>({
+    mutationFn: postId => updateLikeStatus(postId)
   })

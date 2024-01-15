@@ -12,7 +12,8 @@ import {
 import type { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState, type ReactElement } from 'react'
+import { useState } from 'react'
+import type { ReactElement } from 'react'
 import { getTimeDiffText, toLocaleCurrency, toQueryString } from '@utils/format'
 import {
   useDeletePostMutation,
@@ -56,9 +57,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     getPostQuery.data?.thumbnailImageUrl || '',
     ...(getPostQuery.data?.imageUrls || [])
   ]
+
   const postImages = totalImages.map((url, idx) => ({
     id: idx,
-    url
+    src: url
   }))
 
   const handleChangeTradeStatus = async (status: TradeStatusType) => {

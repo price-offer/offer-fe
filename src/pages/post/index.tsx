@@ -159,7 +159,6 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               maxLength={40}
               name="title"
               placeholder="제목을 입력해주세요(40자 이내)"
-              styleType="edit"
               value={postForm.title}
               onChange={e => handleUpdatePostForm('title', e.target.value)}
             />
@@ -340,7 +339,7 @@ const StyledRadio = styled(Radio)`
   `}
 `
 
-const StyledTitleInput = styled(Input)`
+const StyledTitleInput = styled(Input.Edit)`
   ${({ theme }): string => `
     ${theme.input.edit.large}
 

@@ -48,14 +48,14 @@ const PrimaryWithHooks = (args: SaleTabPostListProps) => {
       <div>
         <Text styleType="subtitle01B">{tradeStatus.name}</Text>
       </div>
-      <SaleTabPostListComponent {...args} hasToken={token} posts={posts} />
+      <SaleTabPostListComponent {...args} isLogin={token} posts={posts} />
     </>
   )
 }
 
 export const Primary: StoryObj<SaleTabPostList> = {
   args: {
-    hasToken: true,
+    isLogin: true,
     posts: [],
     onChangeTradeStatus: (id: number, status: TradeStatusType): void => {
       action('onChangeTradeStatus')(id, status)

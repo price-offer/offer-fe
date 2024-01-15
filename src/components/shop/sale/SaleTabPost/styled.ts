@@ -19,11 +19,11 @@ const Container = styled.li`
     }
   `}
 `
-const ProductWrapper = styled.div<{ hasToken: boolean }>`
-  ${({ theme, hasToken }): string => `
+const ProductWrapper = styled.div<{ isLogin: boolean }>`
+  ${({ theme, isLogin }): string => `
     display: grid;
     flex: 1;
-    grid-template-columns: ${hasToken ? '90px 90px 1fr' : '90px 1fr'};
+    grid-template-columns: ${isLogin ? '90px 90px 1fr' : '90px 1fr'};
     align-items: center;
     gap: 16px;
     padding: 20px 0 20px 20px;
@@ -135,13 +135,13 @@ const FavoriteWrapper = styled.div<{ isOnlyOther: boolean }>`
     }
   `}
 `
-const Date = styled(Text)<{ hasToken: boolean }>`
-  ${({ theme, hasToken }): string => `
+const Date = styled(Text)<{ isLogin: boolean }>`
+  ${({ theme, isLogin }): string => `
     display: inline-block;
     color: ${theme.colors.grayScale50};
 
     ${theme.mediaQuery.tablet} {
-      display: ${hasToken ? 'none' : 'inline-block'};
+      display: ${isLogin ? 'none' : 'inline-block'};
       ${theme.fonts.caption01M};
       color: ${theme.colors.grayScale30};
     }

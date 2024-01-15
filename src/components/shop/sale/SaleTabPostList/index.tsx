@@ -6,7 +6,7 @@ import { SaleTabPost } from '../SaleTabPost'
 
 const SaleTabPostList = ({
   posts,
-  hasToken,
+  isLogin,
   onChangeTradeStatus,
   className
 }: SaleTabPostListProps): ReactElement => {
@@ -16,7 +16,7 @@ const SaleTabPostList = ({
         <Fragment key={post.id}>
           <SaleTabPost
             {...post}
-            hasToken={hasToken}
+            isLogin={isLogin}
             onChangeTradeStatus={onChangeTradeStatus}
           />
           {index !== posts.length - 1 && <Divider size="bold" />}

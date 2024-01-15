@@ -36,22 +36,17 @@ const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
         </button>
       </div>
       <Text styleType="subtitle01B">내 사용자</Text>
-      <SaleTabPostComponent {...args} hasToken tradeStatus={tradeStatus} />
-      <SaleTabPostComponent
-        {...args}
-        hasToken
-        // isReviewed
-        tradeStatus={tradeStatus}
-      />
+      <SaleTabPostComponent {...args} isLogin tradeStatus={tradeStatus} />
+      <SaleTabPostComponent {...args} isLogin tradeStatus={tradeStatus} />
       <Text styleType="subtitle01B">타 사용자</Text>
       <SaleTabPostComponent
         {...args}
-        hasToken={false}
+        isLogin={false}
         tradeStatus={tradeStatus}
       />
       <SaleTabPostComponent
         {...args}
-        hasToken={false}
+        isLogin={false}
         tradeStatus={tradeStatus}
       />
     </>
@@ -59,7 +54,7 @@ const PrimaryWithHooks: Story<SaleTabPostProps> = args => {
 }
 export const Primary: StoryObj<SaleTabPost> = {
   args: {
-    hasToken: false,
+    isLogin: false,
     // sellerNickName: 'sonny',
     id: 4,
     thumbnailImageUrl: '',

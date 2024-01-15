@@ -1,7 +1,7 @@
 import type { PostSummary, TradeStatusType } from '@types'
 
 export type SaleTabPostProps = {
-  hasToken: boolean
+  isLogin: boolean
   className?: string
   // tradeStatus 변경 시, 이벤트
   onChangeTradeStatus(productId: number, status: TradeStatusType): void

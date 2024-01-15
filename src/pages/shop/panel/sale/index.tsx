@@ -13,11 +13,11 @@ import { SORT_OPTIONS, TRADE_STATUS } from '@constants'
 import type { SortOption } from '@types'
 
 export type ShopPageSalePanelProps = {
-  hasToken: boolean
+  isLogin: boolean
   memberId: number | null
 }
 export const ShopPageSalePanel = ({
-  hasToken,
+  isLogin,
   memberId
 }: ShopPageSalePanelProps) => {
   const [searchOptions, setSearchOptions] = useState<GetPostsReq>({
@@ -108,7 +108,7 @@ export const ShopPageSalePanel = ({
             {TRADE_STATUS.map(tradeStatus => (
               <Tabs.Panel key={tradeStatus.code}>
                 <SaleTabPostList
-                  hasToken={hasToken}
+                  isLogin={isLogin}
                   posts={posts.data?.posts || []}
                   onChangeTradeStatus={handleChangeProductTradeStatus}
                 />

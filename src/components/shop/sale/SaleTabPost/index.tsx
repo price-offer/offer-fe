@@ -15,7 +15,7 @@ const SaleTabPost = ({
   tradeStatus,
   likeCount,
   createdAt,
-  hasToken,
+  isLogin,
   onChangeTradeStatus,
   hasReview
 }: SaleTabPostProps): ReactElement => {
@@ -27,9 +27,9 @@ const SaleTabPost = ({
 
   return (
     <Styled.Container className={className}>
-      <Styled.ProductWrapper hasToken={hasToken}>
+      <Styled.ProductWrapper isLogin={isLogin}>
         <Styled.ProductImg alt={`product${id}-img`} src={thumbnailImageUrl} />
-        {hasToken ? (
+        {isLogin ? (
           <Styled.SelectBox
             items={TRADE_STATUS}
             value={tradeStatus.code}
@@ -49,13 +49,13 @@ const SaleTabPost = ({
               <Icon color="grayScale50" size={14} type="heart" />
               <Text styleType="body02R">{likeCount}</Text>
             </Styled.FavoriteWrapper>
-            <Styled.Date hasToken={hasToken} styleType="body02R">
+            <Styled.Date isLogin={isLogin} styleType="body02R">
               {getTimeDiffText(createdAt)}
             </Styled.Date>
           </Styled.ProductInfoWrapper>
         </Styled.ProductMetaWrapper>
       </Styled.ProductWrapper>
-      {hasToken && isSoldOut && (
+      {isLogin && isSoldOut && (
         <Styled.ReviewButtonWrapper>
           <Styled.ReviewButton
             hasReview={hasReview}

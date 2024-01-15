@@ -114,8 +114,8 @@ const NickName = styled.span`
     }
   `}
 `
-const UserProductWrapper = styled.div<{ hasToken: boolean }>`
-  ${({ theme, hasToken }) => css`
+const UserProductWrapper = styled.div<{ isLogin: boolean }>`
+  ${({ theme, isLogin }) => css`
     display: grid;
     gap: 16px;
 
@@ -124,7 +124,7 @@ const UserProductWrapper = styled.div<{ hasToken: boolean }>`
     background-color: ${theme.colors.bgGray01};
 
     ${theme.mediaQuery.tablet} {
-      ${hasToken
+      ${isLogin
         ? 'grid-template-columns: 1fr 1fr 1fr 1fr;'
         : 'grid-template-areas: ". sell sold review .";'}
 
@@ -145,8 +145,8 @@ const UserProductWrapper = styled.div<{ hasToken: boolean }>`
   `}
 `
 
-const setStyleByToken = (theme: Theme, hasToken: boolean) => {
-  if (hasToken) {
+const setStyleByToken = (theme: Theme, isLogin: boolean) => {
+  if (isLogin) {
     return css`
       ${theme.mediaQuery.mobile} {
         min-width: 90px;
@@ -188,8 +188,8 @@ const setStyleByToken = (theme: Theme, hasToken: boolean) => {
     }
   `
 }
-const UserProductRow = styled.div<{ hasToken: boolean }>`
-  ${({ theme, hasToken }) => css`
+const UserProductRow = styled.div<{ isLogin: boolean }>`
+  ${({ theme, isLogin }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -198,7 +198,7 @@ const UserProductRow = styled.div<{ hasToken: boolean }>`
       min-width: 85px;
     }
 
-    ${setStyleByToken(theme, hasToken)}
+    ${setStyleByToken(theme, isLogin)}
   `}
 `
 const UserProductTitleWrapper = styled.p`

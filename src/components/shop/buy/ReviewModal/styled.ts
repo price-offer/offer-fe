@@ -5,11 +5,11 @@ import type { StyledReviewStateProps } from './types'
 const ReviewModal = styled(Modal)`
   width: 400px;
 
-  ${({ theme }): string => theme.mediaQuery.tablet} {
+  ${({ theme }) => theme.mediaQuery.tablet} {
     width: 320px;
   }
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
+  ${({ theme }) => theme.mediaQuery.mobile} {
     width: 320px;
   }
 `
@@ -28,40 +28,40 @@ const FirstSection = styled.div`
 `
 
 const NickName = styled.div`
-  color: ${({ theme }): string => theme.colors.brandPrimary};
-  ${({ theme }): string => theme.fonts.headline01B};
+  color: ${({ theme }) => theme.colors.brandPrimary};
+  ${({ theme }) => theme.fonts.headline01B};
 
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    ${({ theme }): string => theme.fonts.headline02B};
+  ${({ theme }) => theme.mediaQuery.tablet} {
+    ${({ theme }) => theme.fonts.headline02B};
   }
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    ${({ theme }): string => theme.fonts.headline02B};
+  ${({ theme }) => theme.mediaQuery.mobile} {
+    ${({ theme }) => theme.fonts.headline02B};
   }
 `
 
 const NormalText = styled.span`
-  ${({ theme }): string => theme.fonts.headline01B};
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    ${({ theme }): string => theme.fonts.headline02B};
+  ${({ theme }) => theme.fonts.headline01B};
+  ${({ theme }) => theme.mediaQuery.tablet} {
+    ${({ theme }) => theme.fonts.headline02B};
   }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    ${({ theme }): string => theme.fonts.headline02B};
+  ${({ theme }) => theme.mediaQuery.mobile} {
+    ${({ theme }) => theme.fonts.headline02B};
   }
 `
 
 const ProductText = styled.div`
   margin-top: 8px;
 
-  color: ${({ theme }): string => theme.colors.grayScale70};
-  ${({ theme }): string => theme.fonts.body01R};
+  color: ${({ theme }) => theme.colors.grayScale70};
+  ${({ theme }) => theme.fonts.body01R};
 
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    ${({ theme }): string => theme.fonts.body02R};
+  ${({ theme }) => theme.mediaQuery.tablet} {
+    ${({ theme }) => theme.fonts.body02R};
   }
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    ${({ theme }): string => theme.fonts.body02R};
+  ${({ theme }) => theme.mediaQuery.mobile} {
+    ${({ theme }) => theme.fonts.body02R};
   }
 `
 
@@ -75,13 +75,13 @@ const ReviewIconContainer = styled.div`
 
   cursor: pointer;
 
-  ${({ theme }): string => theme.mediaQuery.tablet} {
+  ${({ theme }) => theme.mediaQuery.tablet} {
     gap: 32px;
 
     margin: 24px 0;
   }
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
+  ${({ theme }) => theme.mediaQuery.mobile} {
     gap: 32px;
 
     margin: 24px 0;
@@ -102,9 +102,9 @@ const ReviewState = styled.button<StyledReviewStateProps>`
   place-items: center center;
 
   * {
-    color: ${({ isFill, theme }): string =>
+    color: ${({ isFill, theme }) =>
       isFill ? theme.colors.brandPrimary : theme.colors.grayScale30};
-    ${({ theme }): string => theme.fonts.body01M};
+    ${({ theme }) => theme.fonts.body01M};
   }
 `
 
@@ -120,8 +120,8 @@ const ReadModeReviewContent = styled.div`
   height: 120px;
   padding: 10px 12px;
 
-  background: ${({ theme }): string => theme.colors.bgGray02};
-  ${({ theme }): string => theme.fonts.body02M};
+  background: ${({ theme }) => theme.colors.bgGray02};
+  ${({ theme }) => theme.fonts.body02M};
 `
 
 const ReviewTextArea = styled(TextArea)`
@@ -132,11 +132,11 @@ const ReviewTextArea = styled(TextArea)`
 const ReviewSendButton = styled(Button)`
   height: 64px;
   margin-top: 40px;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
+  ${({ theme }) => theme.mediaQuery.tablet} {
     height: 48px;
   }
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
+  ${({ theme }) => theme.mediaQuery.mobile} {
     height: 48px;
   }
 `

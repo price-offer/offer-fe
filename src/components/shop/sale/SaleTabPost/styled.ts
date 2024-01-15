@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
   Image,
@@ -7,7 +8,7 @@ import {
 } from '@offer-ui/react'
 
 const Container = styled.li`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,17 +21,19 @@ const Container = styled.li`
   `}
 `
 const ProductWrapper = styled.div<{ isLogin: boolean }>`
-  ${({ theme, isLogin }): string => `
+  ${({ theme, isLogin }) => css`
     display: grid;
     flex: 1;
     grid-template-columns: ${isLogin ? '90px 90px 1fr' : '90px 1fr'};
-    align-items: center;
     gap: 16px;
+    align-items: center;
+
     padding: 20px 0 20px 20px;
 
     ${theme.mediaQuery.tablet} {
       grid-template-columns: 68px 1fr 90px;
       gap: 8px;
+
       padding: 16px 24px;
     }
 
@@ -41,10 +44,11 @@ const ProductWrapper = styled.div<{ isLogin: boolean }>`
   `}
 `
 const ProductImg = styled(Image)`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
+    order: 1;
+
     width: 90px;
     height: 90px;
-    order:1;
 
     ${theme.mediaQuery.tablet} {
       width: 68px;
@@ -53,7 +57,7 @@ const ProductImg = styled(Image)`
   `}
 `
 const SelectBox = styled(SelectBoxComponent)`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     order: 2;
 
     ${theme.mediaQuery.tablet} {
@@ -63,32 +67,35 @@ const SelectBox = styled(SelectBoxComponent)`
 `
 
 const ProductMetaWrapper = styled.div`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: flex;
     align-items: center;
     justify-content: space-around;
     order: 3;
 
     ${theme.mediaQuery.tablet} {
-      align-items: flex-start;
       flex-direction: column;
-      order: 2;
       gap: 4px;
+      align-items: flex-start;
+      order: 2;
     }
   `}
 `
 const ProductName = styled(Text)`
-  ${({ theme }): string => `
-    text-align: center;
-    width: 150px;
-    text-overflow: ellipsis;
+  ${({ theme }) => css`
     overflow: hidden;
+
+    width: 150px;
+
+    text-align: center;
+    text-overflow: ellipsis;
     white-space: nowrap;
     word-break: break-word;
 
     ${theme.mediaQuery.tablet} {
-      text-align: left;
       width: 460px;
+
+      text-align: left;
     }
 
     ${theme.mediaQuery.mobile} {
@@ -97,21 +104,21 @@ const ProductName = styled(Text)`
   `}
 `
 const ProductInfoWrapper = styled.div`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: flex;
+    gap: 12px;
     align-items: center;
     justify-content: space-around;
-    gap: 12px;
 
     ${theme.mediaQuery.tablet} {
-      align-items: flex-start;
       flex-direction: column;
       gap: 0;
+      align-items: flex-start;
     }
-`}
+  `}
 `
 const Price = styled.span`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     ${theme.fonts.body02R};
 
     ${theme.mediaQuery.tablet} {
@@ -121,12 +128,14 @@ const Price = styled.span`
   `}
 `
 const FavoriteWrapper = styled.div<{ isOnlyOther: boolean }>`
-  ${({ theme, isOnlyOther }): string => `
+  ${({ theme, isOnlyOther }) => css`
     display: ${isOnlyOther ? 'none' : 'flex'};
+    gap: 2px;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+
     width: 100px;
+
     color: ${theme.colors.grayScale50};
 
     ${theme.mediaQuery.tablet} {
@@ -136,8 +145,9 @@ const FavoriteWrapper = styled.div<{ isOnlyOther: boolean }>`
   `}
 `
 const Date = styled(Text)<{ isLogin: boolean }>`
-  ${({ theme, isLogin }): string => `
+  ${({ theme, isLogin }) => css`
     display: inline-block;
+
     color: ${theme.colors.grayScale50};
 
     ${theme.mediaQuery.tablet} {
@@ -148,11 +158,12 @@ const Date = styled(Text)<{ isLogin: boolean }>`
   `}
 `
 const ReviewButtonWrapper = styled.div`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    min-width: 120px;
     align-items: flex-end;
+
+    min-width: 120px;
 
     ${theme.mediaQuery.tablet} {
       display: flex;
@@ -161,17 +172,18 @@ const ReviewButtonWrapper = styled.div`
   `}
 `
 const ReviewButton = styled(Button)<{ hasReview: boolean }>`
-  ${({ theme, hasReview }): string => `
-    color: ${hasReview ? theme.colors.grayScale70 : theme.colors.brandPrimary};
+  ${({ theme, hasReview }) => css`
     margin-right: 20px;
+
+    color: ${hasReview ? theme.colors.grayScale70 : theme.colors.brandPrimary};
 
     ${theme.mediaQuery.tablet} {
       width: 100%;
+      margin-right: 0;
+      padding: 20px 0;
       border: none;
       border-top: 1px solid ${theme.colors.grayScale10};
       border-radius: 0;
-      padding: 20px 0;
-      margin-right: 0;
     }
   `}
 `

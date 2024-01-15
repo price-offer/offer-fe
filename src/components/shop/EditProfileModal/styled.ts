@@ -6,7 +6,7 @@ import { Button } from '@offer-ui/react'
 const Header = styled.div`
   text-align: center;
 
-  ${({ theme }): string => theme.fonts.headline01B}
+  ${({ theme }) => theme.fonts.headline01B}
 `
 
 const CloseButtonWrapper = styled.div`

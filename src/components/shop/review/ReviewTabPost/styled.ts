@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
   Avatar as AvatarComponent,
@@ -6,13 +7,14 @@ import {
 } from '@offer-ui/react'
 
 const Wrapper = styled.li`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: flex;
-    padding: 24px;
     gap: 8px;
 
+    padding: 24px;
+
     ${theme.mediaQuery.tablet} {
-      padding 16px 24px;
+      padding: 16px 24px;
     }
 
     ${theme.mediaQuery.mobile} {
@@ -41,11 +43,13 @@ const NickNameWrapper = styled.div`
 `
 
 const NickName = styled(Text)`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: inline-block;
-    max-width: 350px;
-    text-overflow: ellipsis;
     overflow: hidden;
+
+    max-width: 350px;
+
+    text-overflow: ellipsis;
     white-space: nowrap;
     word-break: break-word;
 
@@ -60,11 +64,13 @@ const Badge = styled(BadgeComponent)`
 `
 
 const PostTitle = styled(Text)`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: block;
-    margin-top: 4px;
-    text-overflow: ellipsis;
     overflow: hidden;
+
+    margin-top: 4px;
+
+    text-overflow: ellipsis;
     white-space: nowrap;
     word-break: break-word;
 

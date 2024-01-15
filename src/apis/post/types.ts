@@ -5,6 +5,7 @@ import type {
   PostSummaries,
   ProductConditionCodes,
   SortOptionsShape,
+  TradeStatusCodes,
   TradeStatusType,
   TradeTypeCodes
 } from '@types'
@@ -34,7 +35,7 @@ export type DeletePostRes = {
 
 export type UpdateTradeStatusReq = {
   postId: number
-  tradeStatus: string
+  tradeStatus: TradeStatusCodes
 }
 export type UpdateTradeStatusRes = number
 

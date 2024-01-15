@@ -8,7 +8,7 @@ import {
   useImageUploader
 } from '@offer-ui/react'
 import type { ReactElement } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Styled } from './styled'
 import type { EditProfileForm, EditProfileModalProps } from './types'
 import { LimitedInput } from '@components/common'
@@ -47,15 +47,13 @@ export const EditProfileModal = ({
     onConfirm(profileForm)
   }
 
-  useEffect(() => {
-    if (!isOpen) {
-      setProfileForm(initialProfileForm)
-      return
-    }
-  }, [isOpen])
+  const handleClose = () => {
+    onClose?.()
+    setProfileForm(initialProfileForm)
+  }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <Styled.Header>
         <Styled.CloseButtonWrapper>
           <IconButton color="grayScale30" icon="close" size={24} />

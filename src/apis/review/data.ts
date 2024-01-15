@@ -1,7 +1,13 @@
+import type { TradeReviewActivityCodes } from '@types'
+
+export type SelectReviewCounts = {
+  [key in TradeReviewActivityCodes]: number
+}
+
 export const initialReviewsCounts = {
-  ALL: 0,
-  SELLER: 0,
-  BUYER: 0
+  all: 0,
+  seller: 0,
+  buyer: 0
 }
 
 export const initialReviews = {

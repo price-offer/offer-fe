@@ -1,17 +1,20 @@
 import type { DefaultError } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { createReviews, getReviews, getReviewsCounts } from './apis'
+import type { SelectReviewCounts } from './data'
 import { initialReviewsCounts, initialReviews } from './data'
 import type { CreateReviewReq, CreateReviewRes, GetReviewsReq } from './types'
+import type { ReviewCount } from '@types'
 
 export const useGetReviewsCountsQuery = (memberId: number) =>
-  useQuery({
+  useQuery<ReviewCount, Error, SelectReviewCounts>({
     queryKey: ['reviewsCounts', memberId],
-    queryFn: async () => {
-      const { all, seller, buyer } = await getReviewsCounts({ memberId })
-
-      return { ALL: all, SELLER: seller, BUYER: buyer }
-    },
+    queryFn: async () => getReviewsCounts({ memberId }),
+    select: ({ all, seller, buyer }) => ({
+      ALL: all,
+      SELLER: seller,
+      BUYER: buyer
+    }),
     enabled: Boolean(memberId),
     initialData: initialReviewsCounts
   })

@@ -11,5 +11,6 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface ObjectConstructor {
     entries<T, K>(o: { [s: T]: K } | ArrayLike<T>): [T, K][]
+    keys<T = string>(o: object): T[]
   }
 }

@@ -82,9 +82,6 @@ export type MyProfile = MemberProfile & {
 export type ImagesUpload = {
   imageUrls: string[]
 }
-export type ImageUpload = {
-  imageUrl: string
-}
 
 /** Review */
 export type ReviewInfo = {
@@ -98,6 +95,11 @@ export type Review = {
   post: PostBrief
   content: string
   createdDate: string
+}
+export type ReviewCount = {
+  all: number
+  seller: number
+  buyer: number
 }
 export type ReviewTargetMember = {
   id: number
@@ -154,7 +156,7 @@ export type OfferSummary = {
 export type MessageRoomInfo = {
   id: number
   partner: PartnerBrief
-  post: PostBrief
+  post: Pick<PostSummary, 'id' | 'price' | 'thumbnailImageUrl'>
   offerPrice: number
   lastContent: string
   notReadCnt: number

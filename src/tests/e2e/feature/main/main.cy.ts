@@ -1,4 +1,4 @@
-import { cateGoryList } from '@hooks/result/useCategoryFilterList'
+import { CATEGORIES } from '@constants'
 
 const visitMainPage = (): void => {
   const URL = 'http://localhost:3000'
@@ -14,10 +14,7 @@ describe('첫 진입 페이지 ', () => {
   })
 
   it('카테고리 들이 보인다', () => {
-    cateGoryList.forEach(category => {
-      if (category.name == '전체' || category.name === '반려동물') {
-        return
-      }
+    CATEGORIES.forEach(category => {
       cy.contains(category.name).should('be.visible')
     })
   })

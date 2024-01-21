@@ -27,14 +27,16 @@ const UserProfile = ({
             {level}
           </Badge>
         </Styled.UserName>
-        <Text color="grayScale70" styleType="caption01M" tag="p">
-          {location}
-          {isOfferProfile && ` · ${tradeType}`}
-        </Text>
         {isOfferProfile && (
-          <Text color="grayScale70" styleType="caption01M" tag="p">
-            {date}
-          </Text>
+          <>
+            <Text color="grayScale70" styleType="caption01M" tag="p">
+              {location}
+              {` · ${tradeType}`}
+            </Text>
+            <Text color="grayScale70" styleType="caption01M" tag="p">
+              {date}
+            </Text>
+          </>
         )}
       </Styled.ProfileText>
     </Styled.UserProfile>

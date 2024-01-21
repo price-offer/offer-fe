@@ -1,10 +1,21 @@
-import { ShopPageMainView } from './view/main'
-import { useAuth } from '@hooks/useAuth'
+import type { GetServerSidePropsContext } from 'next/types'
+import { ShopPageView } from './view'
+import type { TradeActivityCodes } from '@types'
 
-const MyShopPage = () => {
-  const { user } = useAuth()
+export const getServerSideProps = ({ query }: GetServerSidePropsContext) => {
+  const { tab = 'sale' } = query
 
-  return <ShopPageMainView profile={user} />
+  return {
+    props: {
+      currentTab: tab
+    }
+  }
+}
+type MyShopPageProps = {
+  currentTab: TradeActivityCodes
+}
+const MyShopPage = ({ currentTab }: MyShopPageProps) => {
+  return <ShopPageView currentTab={currentTab} memberId={null} />
 }
 
 export default MyShopPage

@@ -12,16 +12,35 @@ const SelectWrapper = styled.div`
 
     margin-top: 25px;
   }
+
+  div::-webkit-scrollbar {
+    display: none;
+  }
+
+  div {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 `
 
 const LeftSelectWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 `
 const CategorySelect = styled(SelectBox)`
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    display: none;
+  }
+
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    display: inline;
+  }
+
   div:nth-of-type(1) {
     span {
       ${({ theme }): string => theme.fonts.body02B};
+      color: ${({ theme }): string => theme.colors.white};
     }
   }
 `
@@ -51,6 +70,13 @@ const PriceFilterSelect = styled(SelectBox)`
 `
 
 const ProductCount = styled.div`
+  ${({ theme }): string => theme.mediaQuery.desktop} {
+    display: none;
+  }
+
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    display: inline;
+  }
   margin-right: auto;
   ${({ theme }): string => theme.fonts.body01B}
 `

@@ -34,6 +34,18 @@ export const TRADE_TYPES = [
   }
 ] as const
 
+export const MESSAGE_SORT_OPTIONS = [
+  { code: 'ALL', name: '전체' },
+  {
+    code: 'BUY',
+    name: '구매'
+  },
+  {
+    code: 'SELL',
+    name: '판매'
+  }
+]
+
 export const TRADE_STATUS = [
   {
     code: 'SELLING',
@@ -67,9 +79,9 @@ export const TRADE_ACTIVITY_TYPES = {
     offer: '가격제안'
   },
   review: {
-    all: '전체후기',
-    buyer: '구매자 후기',
-    seller: '판매자 후기'
+    ALL: '전체후기',
+    BUYER: '구매자 후기',
+    SELLER: '판매자 후기'
   }
 } as const
 
@@ -123,3 +135,9 @@ export const CATEGORIES = [
     name: '기타 중고물품'
   }
 ] as const
+
+export const SCORE = {
+  sad: 0,
+  meh: 1,
+  smile: 2
+} as const

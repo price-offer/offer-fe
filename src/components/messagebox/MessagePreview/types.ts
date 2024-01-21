@@ -1,18 +1,6 @@
-export type MessagePreviewProps = {
-  id: number
-  userInfo: {
-    id: number
-    nickname: string
-    profileImageUrl: string | null
-  }
-  productInfo: {
-    price: number
-    productImageUrl: string | null
-  }
-  latestTalk: {
-    content: string
-    createdDate: string
-  }
+import type { MessageRoomInfo } from '@types'
+
+export type MessagePreviewProps = MessageRoomInfo & {
   isSelected?: boolean
   onClick?(id: number): void
 }

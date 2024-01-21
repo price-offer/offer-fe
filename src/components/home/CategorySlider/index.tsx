@@ -1,4 +1,5 @@
 import { useMedia } from '@offer-ui/react'
+
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
@@ -110,21 +111,20 @@ const CategorySlider = (): ReactElement => {
             isMoveFromArrowButton={isMoveFromArrowButton}>
             {categories?.map(cateGory => {
               return (
-                <Styled.CategoryItem
-                  key={cateGory.name}
-                  onClick={(): void => {
-                    alert(cateGory.name)
-                  }}>
-                  <Styled.CategoryImgWrapper>
-                    <Styled.CategoryImg
-                      key={cateGory.name}
-                      alt={`category-${cateGory.name}`}
-                      height={58}
-                      src={cateGory.imageUrl}
-                      width={58}
-                    />
-                  </Styled.CategoryImgWrapper>
-                  <Styled.CateGoryName>{cateGory.name}</Styled.CateGoryName>
+                <Styled.CategoryItem key={cateGory.name}>
+                  <Styled.CategoryLink
+                    href={`/result?category=${cateGory.code}`}>
+                    <Styled.CategoryImgWrapper>
+                      <Styled.CategoryImg
+                        key={cateGory.name}
+                        alt={`category-${cateGory.name}`}
+                        height={58}
+                        src={cateGory.imageUrl}
+                        width={58}
+                      />
+                    </Styled.CategoryImgWrapper>
+                    <Styled.CateGoryName>{cateGory.name}</Styled.CateGoryName>
+                  </Styled.CategoryLink>
                 </Styled.CategoryItem>
               )
             })}

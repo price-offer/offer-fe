@@ -1,92 +1,57 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
-import { useState } from 'react'
-
-type CheckItemType = {
-  code: string
-  name: string
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import {
+  initializeCategoriesWithAll,
+  updateSelectionInCategories
+} from '@utils/service/result'
+import { CATEGORIES } from '@constants'
+import type { CategoryCodes, CategoryNames } from '@types'
+export type CheckItemType = {
+  code: CategoryCodes | 'ALL'
+  name: CategoryNames | '전체'
   selected: boolean
 }
 
 type ReturnType = {
-  selectedCategoryValue: string
+  selectedCategoryValue: CategoryCodes | 'ALL'
   handleCategorySelectChange: SelectOnChangeHandler
   checkFilterList: CheckItemType[]
   onCheckItem(name: string): void
 }
 
-export const cateGoryList = [
-  {
-    code: '전체',
-    name: '전체',
-    selected: true
-  },
-  {
-    code: '남성패션/잡화',
-    name: '남성패션/잡화',
-    selected: false
-  },
-  {
-    code: '여성패션/잡화',
-    name: '여성패션/잡화',
-    selected: false
-  },
-  {
-    code: '게임',
-    name: '게임',
-    selected: false
-  },
-  {
-    code: '스포츠/레저',
-    name: '스포츠/레저',
-    selected: false
-  },
-  {
-    code: '장난감/취미',
-    name: '장난감/취미',
-    selected: false
-  },
-  {
-    code: '디지털기기',
-    name: '디지털기기',
-    selected: false
-  },
-  {
-    code: '자동차/공구',
-    name: '자동차/공구',
-    selected: false
-  },
-  {
-    code: '생활가전',
-    name: '생활가전',
-    selected: false
-  },
-  {
-    code: '가구/인테리어',
-    name: '가구/인테리어',
-    selected: false
-  },
-  {
-    code: '도서/티켓/음반',
-    name: '도서/티켓/음반',
-    selected: false
-  },
-  {
-    code: '반려동물',
-    name: '반려동물',
-    selected: false
-  }
-]
+export const useCategoryFilterList = (): ReturnType => {
+  const [list, setList] = useState<CheckItemType[]>([
+    {
+      code: 'ALL',
+      name: '전체',
+      selected: false
+    }
+  ])
 
-const useCategoryFilterList = (): ReturnType => {
-  const [list, setList] = useState<CheckItemType[]>(cateGoryList)
-  const [selectedCategoryValue, setSelectedCategoryValue] =
-    useState<string>('전체')
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState<
+    CategoryCodes | 'ALL'
+  >('ALL')
+
+  const searchParams = useSearchParams()
+  const defaultCategory = searchParams.get('category') as CategoryCodes | null
+
+  useEffect(() => {
+    const transRateCategories = initializeCategoriesWithAll(CATEGORIES)
+
+    const categoryList = updateSelectionInCategories(
+      transRateCategories,
+      defaultCategory
+    )
+    setList(categoryList)
+    setSelectedCategoryValue(defaultCategory ? defaultCategory : 'ALL')
+  }, [defaultCategory])
 
   const onCheckItem = (name: string): void => {
     setList(prevList =>
-      prevList.map(item => {
+      prevList?.map(item => {
         if (name === item.name) {
-          setSelectedCategoryValue(item.name)
+          setSelectedCategoryValue(item.code)
           return {
             ...item,
             selected: true
@@ -101,8 +66,8 @@ const useCategoryFilterList = (): ReturnType => {
     )
   }
   const handleCategorySelectChange: SelectOnChangeHandler<{
-    code: string
-    name: string
+    code: CategoryCodes | 'ALL'
+    name: CategoryNames | '전체'
   }> = item => {
     onCheckItem(item.name)
     setSelectedCategoryValue(item.code)
@@ -115,5 +80,3 @@ const useCategoryFilterList = (): ReturnType => {
     handleCategorySelectChange
   }
 }
-
-export default useCategoryFilterList

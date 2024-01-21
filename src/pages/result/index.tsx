@@ -1,14 +1,17 @@
 import styled from '@emotion/styled'
 import { useMedia } from '@offer-ui/react'
 import type { NextPage } from 'next'
-
 import { useEffect, useState } from 'react'
-import { ProductList } from '@components/home/ProductList'
-import { ResultHeader } from '@components/result/CategoryHeader'
-import { CategorySlideFilter } from '@components/result/CategorySlideFilter'
-import { FilterSelect } from '@components/result/FilterSelect'
-import useCategoryFilterList from '@hooks/result/useCategoryFilterList'
-import useSelectBoxFilter from '@hooks/result/useSelectBoxFilter'
+import { useGetInfinitePostsQuery } from '@apis'
+import {
+  ResultHeader,
+  ProductList,
+  CategorySlideFilter,
+  FilterSelect
+} from '@components'
+import { useCategoryFilterList, useSelectBoxFilter } from '@hooks'
+
+const DEFAULT_POST_PAGE_NUMBER = 8
 
 const Result: NextPage = () => {
   const { desktop } = useMedia()
@@ -31,49 +34,81 @@ const Result: NextPage = () => {
 
   const {
     tradePeriodItems,
-    sortPriceItems,
     selectedTradePeriodValue,
     selectedSortPriceValue,
-    minPriceValue,
-    maxPriceValue,
+    inputPrice,
+    applyPrice,
     handleTradePeriodSelectChange,
     handleSortPriceSelectChange,
-    handleMinPriceInputChange,
-    handleMaxPriceInputChange,
+    handlePriceInputChange,
     handlePriceApplyClick
   } = useSelectBoxFilter()
 
+  const categoryFilterOption =
+    selectedCategoryValue === 'ALL' ? undefined : selectedCategoryValue
+
+  const infinitePosts = useGetInfinitePostsQuery({
+    lastId: null,
+    limit: DEFAULT_POST_PAGE_NUMBER,
+    category: categoryFilterOption,
+    minPrice: applyPrice && applyPrice?.minPrice,
+    maxPrice: applyPrice && applyPrice?.maxPrice,
+    tradeType: selectedTradePeriodValue,
+    sort: selectedSortPriceValue
+  })
+
+  const postSummaries = Number(
+    infinitePosts?.data?.pages?.reduce(
+      (acc, cur) => acc + cur?.posts?.length,
+      0
+    )
+  )
+
+  useEffect(() => {
+    infinitePosts?.refetch()
+  }, [
+    applyPrice,
+    selectedCategoryValue,
+    selectedTradePeriodValue,
+    selectedSortPriceValue,
+    infinitePosts?.refetch
+  ])
+
   return (
-    <div>
-      <Layout>
-        <ResultWrapper>
-          <ResultHeader searchResult="###" />
-          {isDesktop && (
-            <CategorySlideFilter
-              cateGoryList={checkFilterList}
-              onCategoryClick={onCheckItem}
-            />
-          )}
-          <FilterSelect
-            categoryItems={checkFilterList}
-            handleCategoryChange={handleCategorySelectChange}
-            handleMaxPriceInputChange={handleMaxPriceInputChange}
-            handleMinPriceInputChange={handleMinPriceInputChange}
-            handlePriceApplyClick={handlePriceApplyClick}
-            handleSortPriceChange={handleSortPriceSelectChange}
-            handleTradePeriodChange={handleTradePeriodSelectChange}
-            maxPriceValue={maxPriceValue}
-            minPriceValue={minPriceValue}
-            selectedCategoryValue={selectedCategoryValue}
-            selectedSortPriceValue={selectedSortPriceValue}
-            selectedTradePeriodValue={selectedTradePeriodValue}
-            sortPriceItems={sortPriceItems}
-            tradePeriodItems={tradePeriodItems}
+    <Layout>
+      <ResultWrapper>
+        <ResultHeader
+          postSummariesLength={postSummaries && postSummaries}
+          searchResult="###"
+        />
+        {isDesktop && (
+          <CategorySlideFilter
+            cateGoryList={checkFilterList}
+            onCategoryClick={onCheckItem}
           />
-          <ProductList />
-        </ResultWrapper>
-      </Layout>
-    </div>
+        )}
+        <FilterSelect
+          applyPrice={applyPrice}
+          categoryItems={checkFilterList}
+          handleCategoryChange={handleCategorySelectChange}
+          handlePriceApplyClick={handlePriceApplyClick}
+          handlePriceInputChange={handlePriceInputChange}
+          handleSortPriceChange={handleSortPriceSelectChange}
+          handleTradePeriodChange={handleTradePeriodSelectChange}
+          inputPrice={inputPrice}
+          postSummariesLength={postSummaries && postSummaries}
+          selectedCategoryValue={selectedCategoryValue}
+          selectedSortPriceValue={selectedSortPriceValue}
+          selectedTradePeriodValue={selectedTradePeriodValue}
+          tradePeriodItems={tradePeriodItems}
+        />
+        <ProductList
+          fetchNextPage={infinitePosts?.fetchNextPage}
+          hasNextPage={infinitePosts?.hasNextPage}
+          postData={infinitePosts?.data?.pages}
+        />
+      </ResultWrapper>
+    </Layout>
   )
 }
 

@@ -1,71 +1,56 @@
-import { useMedia } from '@offer-ui/react'
-import { useEffect, useState } from 'react'
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import type { FilterSelectProps } from './types'
 import { PriceDialog } from '../PriceDialog'
-
+import { SORT_OPTIONS } from '@constants/app'
 const FilterSelect = ({
   categoryItems,
-  sortPriceItems,
   tradePeriodItems,
   selectedCategoryValue,
-  minPriceValue,
-  maxPriceValue,
+  selectedTradePeriodValue,
+  selectedSortPriceValue,
+  inputPrice,
+  applyPrice,
+  postSummariesLength,
   handleSortPriceChange,
   handleCategoryChange,
   handleTradePeriodChange,
-  handleMinPriceInputChange,
-  handleMaxPriceInputChange,
+  handlePriceInputChange,
   handlePriceApplyClick
 }: FilterSelectProps): ReactElement => {
-  const { tablet, mobile } = useMedia()
-
-  const [disDesktop, setDIsDesktop] = useState(false)
-
-  useEffect(() => {
-    if (tablet || mobile) {
-      setDIsDesktop(true)
-    } else {
-      setDIsDesktop(false)
-    }
-  }, [tablet, mobile])
-
   return (
     <>
       <Styled.SelectWrapper>
         <Styled.LeftSelectWrapper>
-          {disDesktop ? (
-            <Styled.CategorySelect
-              colorType="dark"
-              items={categoryItems}
-              placeholder="전체"
-              value={selectedCategoryValue}
-              onChange={handleCategoryChange}
-            />
-          ) : (
-            <></>
-          )}
+          <Styled.CategorySelect
+            colorType="dark"
+            items={categoryItems}
+            placeholder={selectedCategoryValue}
+            value={selectedCategoryValue}
+            onChange={handleCategoryChange}
+          />
           <Styled.TradePeriodSelect
             colorType="light"
             items={tradePeriodItems}
             placeholder="거래방식"
+            value={selectedTradePeriodValue}
             onChange={handleTradePeriodChange}
           />
           <PriceDialog
-            handleMaxPriceInputChange={handleMaxPriceInputChange}
-            handleMinPriceInputChange={handleMinPriceInputChange}
+            applyPrice={applyPrice}
             handlePriceApplyClick={handlePriceApplyClick}
-            maxPriceValue={maxPriceValue}
-            minPriceValue={minPriceValue}
+            handlePriceInputChange={handlePriceInputChange}
+            inputPrice={inputPrice}
           />
         </Styled.LeftSelectWrapper>
         <Styled.RightSelectWrapper>
-          {disDesktop && <Styled.ProductCount>전체 999개</Styled.ProductCount>}
+          <Styled.ProductCount>
+            전체 {postSummariesLength && postSummariesLength}개
+          </Styled.ProductCount>
           <Styled.PriceFilterSelect
             colorType="none"
-            items={sortPriceItems}
-            placeholder="높은 가격순"
+            items={SORT_OPTIONS}
+            value={selectedSortPriceValue}
             onChange={handleSortPriceChange}
           />
         </Styled.RightSelectWrapper>

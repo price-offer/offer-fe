@@ -1,10 +1,10 @@
 import type {
   GetCategoriesRes,
+  GetPostsReq,
+  GetPostsRes,
   GetPostRes,
   CreatePostReq,
   CreatePostRes,
-  GetPostsReq,
-  GetPostsRes,
   UpdateTradeStatusReq,
   UpdateTradeStatusRes,
   DeletePostReq,

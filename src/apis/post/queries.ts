@@ -4,7 +4,7 @@ import {
   getCategories,
   createPost,
   getPosts,
-  updateTradeStatus,
+  updatePostTradeStatus,
   deletePost,
   updatePost
 } from './apis'
@@ -73,15 +73,16 @@ export const useGetCategoriesQuery = () =>
     queryFn: getCategories
   })
 
-export const useGetPostsQuery = (params: GetPostsReq) =>
+export const useGetPostsQuery = (searchOptions: GetPostsReq) =>
   useQuery({
-    queryKey: ['getPosts'],
-    queryFn: () => getPosts(params)
+    queryKey: ['posts', searchOptions],
+    queryFn: () => getPosts(searchOptions),
+    enabled: typeof searchOptions.sellerId === 'number'
   })
 
 export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
   useInfiniteQuery<GetPostsRes>({
-    queryKey: ['getPosts'],
+    queryKey: ['infinitePosts'],
     queryFn: () => getPosts(params),
     initialPageParam: null,
     getNextPageParam: lastPage =>
@@ -92,7 +93,7 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
 
 export const useUpdateTradeStatusMutation = () =>
   useMutation({
-    mutationFn: (params: UpdateTradeStatusReq) => updateTradeStatus(params)
+    mutationFn: (params: UpdateTradeStatusReq) => updatePostTradeStatus(params)
   })
 
 export const useDeletePostMutation = (postId: DeletePostReq) =>

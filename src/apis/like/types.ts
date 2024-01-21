@@ -2,8 +2,8 @@ import type { PostSummaries } from '@types'
 
 export type GetLikedPostsReq = {
   sort: string
-  lastId: number
-  limit: number
+  lastId?: number
+  limit?: number
 }
 export type GetLikedPostsRes = PostSummaries
 

@@ -1,23 +1,25 @@
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
-import { ShopPageMainView } from './view/main'
-import { useProfile } from '@hooks'
+import { ShopPageView } from './view'
+import type { TradeActivityCodes } from '@types'
 
-export const getServerSideProps = (context: GetServerSidePropsContext) => {
+export const getServerSideProps = ({ query }: GetServerSidePropsContext) => {
+  const { id, tab = 'sale' } = query
+
   return {
     props: {
-      memberId: context.query.id
+      memberId: id,
+      currentTab: tab
     }
   }
 }
 
 type ShopPageProps = {
   memberId: string
+  currentTab: TradeActivityCodes
 }
-const ShopPage = ({ memberId }: ShopPageProps): ReactElement => {
-  const { profile } = useProfile(memberId)
-
-  return <ShopPageMainView profile={profile} />
+const ShopPage = ({ memberId, currentTab }: ShopPageProps): ReactElement => {
+  return <ShopPageView currentTab={currentTab} memberId={Number(memberId)} />
 }
 
 export default ShopPage

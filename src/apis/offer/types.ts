@@ -21,7 +21,7 @@ export type CreateOfferRes = CommonCreation
 
 export type GetMyOffersReq = {
   sort: string
-  lastId: number
-  limit: number
+  lastId?: number
+  limit?: number
 }
 export type GetMyOffersRes = OfferSummaries

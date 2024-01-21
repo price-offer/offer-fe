@@ -92,7 +92,7 @@ const BuyerInfo = styled.div`
 `
 
 const Nickname = styled.span`
-  ${({ theme }): string => theme.fonts.body02B}
+  ${({ theme }) => theme.fonts.body02B}
 `
 
 const OfferTime = styled.span`
@@ -141,7 +141,7 @@ const Footer = styled.div`
 `
 const SendReviewButton = styled(Button)`
   :disabled {
-    background-color: ${({ theme }): string => theme.colors.grayScale20};
+    background-color: ${({ theme }) => theme.colors.grayScale20};
   }
 `
 

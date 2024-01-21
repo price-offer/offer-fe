@@ -1,4 +1,4 @@
-import type { CommonCreation, ReviewInfo } from '@types'
+import type { CommonCreation, ReviewCount, ReviewInfo } from '@types'
 
 export type GetReviewsReq = {
   memberId: number
@@ -15,3 +15,8 @@ export type CreateReviewReq = {
   content: string
 }
 export type CreateReviewRes = CommonCreation
+
+export type GetReviewsCountsReq = {
+  memberId: number
+}
+export type GetReviewsCountsRes = ReviewCount

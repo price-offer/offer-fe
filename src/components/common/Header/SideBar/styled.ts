@@ -78,6 +78,8 @@ const SidebarMenu = styled.li`
   align-items: center;
   ${({ theme }): string => theme.fonts.body01B};
   color: ${({ theme }): string => theme.colors.grayScale90};
+
+  cursor: pointer;
 `
 
 const SidebarLogoutButton = styled.button`

@@ -154,7 +154,7 @@ export type OfferSummary = {
 export type MessageRoomInfo = {
   id: number
   partner: PartnerBrief
-  post: PostBrief
+  post: Pick<PostSummary, 'id' | 'price' | 'thumbnailImageUrl'>
   offerPrice: number
   lastContent: string
   notReadCnt: number

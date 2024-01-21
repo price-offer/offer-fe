@@ -1,7 +1,11 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal, useMedia } from '@offer-ui/react'
+import type { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { useState, type ReactElement, useEffect } from 'react'
+import { toQueryString } from '@utils/format'
+import { useGetMessageRoomsQuery } from '@apis'
 import {
   MessagePreview,
   Tabs,
@@ -9,34 +13,52 @@ import {
   ChattingRoom,
   MessageBoxPlaceholder
 } from '@components'
-import { IMAGE } from '@constants'
+import { IMAGE, MESSAGE_SORT_OPTIONS } from '@constants'
 import { useModal } from '@hooks'
+import type { MessageSortTypeCodes } from '@types'
 
-type TabType = 'all' | 'buy' | 'sell'
+type RoomId = number | null
+type Props = {
+  roomId: RoomId
+}
 
-const TABS = {
-  all: '전체',
-  buy: '구매',
-  sell: '판매'
-} as const
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query
+}) => ({
+  props: {
+    roomId: query.roomId ? Number(query.roomId) : null
+  }
+})
 
-const TabKeys = Object.keys(TABS) as TabType[]
-const TabEntries = Object.entries<TabType, ValueOf<typeof TABS>>(TABS)
+const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
+  const [sortType, setSortType] = useState<MessageSortTypeCodes>('ALL')
+  const getMessageRoomsQuery = useGetMessageRoomsQuery({
+    page: 0,
+    sort: sortType
+  })
 
-const MessageBoxPage = (): ReactElement => {
-  const [tab, setTab] = useState<TabType>('all')
-  const [roomId, setRoomId] = useState<number | null>(null)
+  const [roomId, setRoomId] = useState<RoomId>(defaultRoomId)
+  const router = useRouter()
   const { isOpen, openModal, closeModal } = useModal()
   const { desktop, mobile, tablet } = useMedia()
 
-  const handleChangeTab = (currentIndex: number, nextIndex: number) => {
-    const nextTab = TabKeys[nextIndex]
+  const messageList = getMessageRoomsQuery.data || []
+  const messagesCount = messageList.length
 
-    setTab(nextTab)
+  const handleChangeSortType = (currentIndex: number, nextIndex: number) => {
+    const { code } = MESSAGE_SORT_OPTIONS[nextIndex]
+
+    setSortType(code)
   }
 
   const handleSelectRoom = (id: number) => {
     setRoomId(id)
+
+    router.push(
+      `/messagebox${toQueryString({
+        roomId: String(id)
+      })}`
+    )
 
     if (!desktop) {
       openModal()
@@ -46,13 +68,23 @@ const MessageBoxPage = (): ReactElement => {
   const handleCloseRoom = () => {
     setRoomId(null)
 
+    getMessageRoomsQuery.refetch()
+    router.push(`/messagebox`)
+
     if (!desktop) {
       closeModal()
     }
   }
 
   useEffect(() => {
-    setRoomId(null)
+    if (desktop) {
+      closeModal()
+      return
+    }
+
+    if (roomId) {
+      openModal()
+    }
   }, [desktop, tablet, mobile])
 
   return (
@@ -62,14 +94,16 @@ const MessageBoxPage = (): ReactElement => {
           <ListContainer>
             <ListHeader>
               <span>
-                내 쪽지함 <i>{LIST_MOCK.length}</i>
+                내 쪽지함 <i>{messagesCount}</i>
               </span>
               <div>
-                <Tabs onChange={handleChangeTab}>
+                <Tabs onChange={handleChangeSortType}>
                   <Tabs.List>
-                    {TabEntries.map(([key, value]) => (
-                      <Tab key={key}>
-                        <TabButton isSelected={key === tab}>{value}</TabButton>
+                    {MESSAGE_SORT_OPTIONS.map(({ code, name }) => (
+                      <Tab key={code}>
+                        <TabButton isSelected={code === sortType}>
+                          {name}
+                        </TabButton>
                       </Tab>
                     ))}
                   </Tabs.List>
@@ -77,14 +111,15 @@ const MessageBoxPage = (): ReactElement => {
               </div>
             </ListHeader>
             <MessageList>
-              {LIST_MOCK.length > 0 ? (
-                LIST_MOCK.map(({ id, ...messageInfo }) => (
+              {messagesCount > 0 ? (
+                messageList.map(({ id, post, ...resInfo }) => (
                   <MessagePreview
                     key={id}
                     id={id}
                     isSelected={id === roomId}
-                    onClick={handleSelectRoom}
-                    {...messageInfo}
+                    post={post}
+                    onClick={() => handleSelectRoom(id)}
+                    {...resInfo}
                   />
                 ))
               ) : (
@@ -101,7 +136,7 @@ const MessageBoxPage = (): ReactElement => {
           </ListContainer>
           <DetailContainer>
             {roomId ? (
-              <ChattingRoom id={roomId} onClose={handleCloseRoom} />
+              <ChattingRoom roomId={roomId} onClose={handleCloseRoom} />
             ) : (
               <MessageBoxPlaceholder
                 image={{
@@ -117,7 +152,7 @@ const MessageBoxPage = (): ReactElement => {
       </Page>
       {roomId && (
         <ChattingRoomModal isOpen={isOpen}>
-          <ChattingRoom id={roomId} onClose={handleCloseRoom} />
+          <ChattingRoom roomId={roomId} onClose={handleCloseRoom} />
         </ChattingRoomModal>
       )}
     </>
@@ -247,178 +282,5 @@ const DetailContainer = styled.div`
     }
   `}
 `
-
-const LIST_MOCK = [
-  {
-    id: 1,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 2,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 3,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 4,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 5,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 6,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 7,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 8,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 9,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  },
-  {
-    id: 10,
-    userInfo: {
-      id: 1,
-      nickname: 'offerer',
-      profileImageUrl: null
-    },
-    productInfo: {
-      price: 123346,
-      productImageUrl: null
-    },
-    latestTalk: {
-      content:
-        '구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ? 구매 가능 할까요 ?',
-      createdDate: '2시간 전'
-    }
-  }
-]
 
 export default MessageBoxPage

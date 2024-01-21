@@ -1,114 +1,154 @@
-import { Image, IconButton, Input } from '@offer-ui/react'
+import { Image, IconButton, Input, useMedia } from '@offer-ui/react'
+import { useEffect, useRef, useState } from 'react'
 import { Styled } from './styled'
 import type { ChattingRoomProps } from './types'
 import { Chatting } from '../Chatting'
+import type { ChattingProps } from '../Chatting/types'
+import { Dialog } from '@components/common'
 import { toLocaleCurrency } from '@utils/format'
+import {
+  useCreateMessageMutation,
+  useDeleteMessageRoomMutation,
+  useGetMessageQuery
+} from '@apis'
+import { useAuth, useModal } from '@hooks'
 
-export const ChattingRoom = ({ id, onClose }: ChattingRoomProps) => {
-  // TODO: ChattingRoom Id를 통해서 컴포넌트 내부에서 패치하도록
+// TODO: messageRoom 정보조회 api 붙이고 제거
+const POST_MOCK = {
+  offerPrice: 10000,
+  post: {
+    title: '팔아요 !',
+    thumbnailImageUrl: '',
+    price: 12000
+  }
+}
+
+export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
+  const getMessageQuery = useGetMessageQuery({
+    msgRoomId: roomId,
+    page: 0
+  })
+  const createMessageMutation = useCreateMessageMutation()
+  const deleteMessageRoomMutation = useDeleteMessageRoomMutation(roomId)
+
+  const chattingBoxRef = useRef<HTMLDivElement | null>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  const [messages, setMessages] = useState<ChattingProps['messages']>([])
+  const { desktop, tablet, mobile } = useMedia()
+  const { isOpen, openModal, closeModal } = useModal()
+  const { user } = useAuth()
+
+  const senderInfo = {
+    id: user.id,
+    nickname: user.nickname,
+    imageUrl: user.profileImageUrl
+  }
+
+  const scrollToBottom = () => {
+    if (!chattingBoxRef.current) {
+      return
+    }
+
+    if (chattingBoxRef.current.scrollHeight > 0) {
+      chattingBoxRef.current.scrollTop = chattingBoxRef.current.scrollHeight
+    }
+  }
 
   const handleCloseRoom = () => {
-    onClose?.(id)
+    onClose?.(roomId)
   }
+
+  const handleDeleteRoom = async () => {
+    await deleteMessageRoomMutation.mutateAsync()
+
+    handleCloseRoom()
+  }
+
+  const handleSubmitMessage = async (content: string) => {
+    const res = await createMessageMutation.mutateAsync({
+      messageRoomId: roomId,
+      content
+    })
+
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+
+    setMessages(prev => [
+      ...prev,
+      {
+        member: senderInfo,
+        content,
+        sendTime: res.createdAt
+      }
+    ])
+    await getMessageQuery.refetch()
+  }
+
+  useEffect(() => {
+    setMessages(getMessageQuery.data || [])
+  }, [getMessageQuery.data])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, desktop, tablet, mobile])
 
   return (
     <Styled.Container>
       <Styled.Header>
         <IconButton icon="arrowLeft" size={24} onClick={handleCloseRoom} />
-        <Styled.Nickname>황금 효정</Styled.Nickname>
+        <Styled.Nickname>{user.nickname}</Styled.Nickname>
         <Styled.IconButtonContainer>
-          <IconButton icon="refresh" size={24} />
-          <IconButton icon="more" size={24} />
+          <IconButton
+            icon="refresh"
+            size={24}
+            onClick={() => getMessageQuery.refetch()}
+          />
+          <Styled.MoreButtonWrapper>
+            <IconButton icon="more" size={24} onClick={openModal} />
+            {isOpen && (
+              <Dialog
+                dialogPositionStyle={{
+                  top: '30px',
+                  right: '0'
+                }}
+                onClose={closeModal}>
+                <Styled.DeleteButton onClick={handleDeleteRoom}>
+                  쪽지함 나가기
+                </Styled.DeleteButton>
+              </Dialog>
+            )}
+          </Styled.MoreButtonWrapper>
         </Styled.IconButtonContainer>
       </Styled.Header>
       <Styled.ProductInfo>
-        <Image alt="product" height="74px" src="" width="74px" />
+        <Image
+          alt={`${POST_MOCK.post.title}-image`}
+          height="74px"
+          src={POST_MOCK.post.thumbnailImageUrl}
+          width="74px"
+        />
         <Styled.ProductTextContainer>
-          <Styled.ProductName>마르니 플렛 로퍼(black)</Styled.ProductName>
+          <Styled.ProductName>{POST_MOCK.post.title}</Styled.ProductName>
           <Styled.ProductItem>
             <span>시작가</span>
-            <span>{toLocaleCurrency(15000)}원</span>
+            <span>{toLocaleCurrency(POST_MOCK.post.price)}원</span>
           </Styled.ProductItem>
           <Styled.ProductItem isOfferPrice>
             <span>제안가</span>
-            <Styled.OfferPrice> {toLocaleCurrency(15000)}원</Styled.OfferPrice>
+            <Styled.OfferPrice>
+              {toLocaleCurrency(POST_MOCK.offerPrice)}원
+            </Styled.OfferPrice>
           </Styled.ProductItem>
         </Styled.ProductTextContainer>
       </Styled.ProductInfo>
-      <Styled.ChattingWrapper>
-        <Chatting messages={MESSAGES_MOCK} userId={1} />
+      <Styled.ChattingWrapper ref={chattingBoxRef}>
+        <Chatting messages={messages} userId={user.id} />
       </Styled.ChattingWrapper>
       <Styled.InputWrapper>
-        <Input.Chatting />
+        <Input.Chatting ref={inputRef} onSubmitValue={handleSubmitMessage} />
       </Styled.InputWrapper>
     </Styled.Container>
   )
 }
-
-const MESSAGES_MOCK = [
-  {
-    id: 10,
-    content: 'offer 쪽지1',
-    receiverId: 1,
-    senderId: 2,
-    createdDate: '2021-11-11T00:12:43'
-  },
-  {
-    id: 8,
-    content: 'offer 쪽지2',
-    receiverId: 1,
-    senderId: 2,
-    createdDate: '2021-12-15T00:13:49'
-  },
-  {
-    id: 6,
-    content:
-      ' offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3',
-    receiverId: 1,
-    senderId: 2,
-    createdDate: '2021-12-15T00:25:31'
-  },
-  {
-    id: 61,
-    content: 'offer 쪽지3',
-    receiverId: 2,
-    senderId: 1,
-    createdDate: '2021-12-15T01:45:41'
-  },
-  {
-    id: 62,
-    content: 'offer 쪽지3',
-    receiverId: 2,
-    senderId: 1,
-    createdDate: '2021-12-15T01:45:41'
-  },
-  {
-    id: 63,
-    content: 'offer 쪽지3',
-    receiverId: 2,
-    senderId: 1,
-    createdDate: '2021-12-15T01:45:41'
-  },
-  {
-    id: 64,
-    content: 'offer 쪽지3',
-    receiverId: 2,
-    senderId: 1,
-    createdDate: '2021-12-15T01:45:41'
-  },
-  {
-    id: 612,
-    content:
-      'offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3 offer 쪽지3',
-    receiverId: 2,
-    senderId: 1,
-    createdDate: '2021-12-15T01:45:41'
-  },
-  {
-    id: 699,
-    content: 'offer 쪽지3',
-    receiverId: 2,
-    senderId: 1,
-    createdDate: '2021-12-15T01:45:41'
-  }
-]

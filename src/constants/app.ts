@@ -34,6 +34,18 @@ export const TRADE_TYPES = [
   }
 ] as const
 
+export const MESSAGE_SORT_OPTIONS = [
+  { code: 'ALL', name: '전체' },
+  {
+    code: 'BUY',
+    name: '구매'
+  },
+  {
+    code: 'SELL',
+    name: '판매'
+  }
+]
+
 export const TRADE_STATUS = [
   {
     code: 'SELLING',

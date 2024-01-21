@@ -11,6 +11,6 @@ const meta: Meta<ChattingRoom> = {
 export default meta
 
 export const Default: StoryObj<ChattingRoom> = {
-  args: { id: 1 },
+  args: { roomId: 1 },
   render: args => <ChattingRoomComponent {...args} />
 }

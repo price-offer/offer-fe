@@ -5,7 +5,8 @@ import type {
   TRADE_TYPES,
   TRADE_STATUS,
   PRODUCT_CONDITIONS,
-  CATEGORIES
+  CATEGORIES,
+  MESSAGE_SORT_OPTIONS
 } from '@constants'
 
 /** 정렬 옵션  */
@@ -19,6 +20,12 @@ export type SortTypes = typeof SORT_TYPES
 export type SortType = ValueOf<SortTypes>
 export type SortTypeCodes = SortType['code']
 export type SortTypeNames = SortType['name']
+
+/** 정렬 타입 - 메세지 */
+export type MessageSortTypes = typeof MESSAGE_SORT_OPTIONS
+export type MessageSortType = ValueOf<MessageSortTypes>
+export type MessageSortTypeCodes = MessageSortType['code']
+export type MessageSortTypeNames = MessageSortType['name']
 
 /** 거래 방식  */
 export type TradeTypes = typeof TRADE_TYPES

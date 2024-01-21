@@ -6,8 +6,8 @@ import { EditProfileModal } from '../EditProfileModal'
 import type { EditProfileForm } from '../EditProfileModal/types'
 import { ProfileBox } from '../ProfileBox'
 import { Tabs } from '@components/common'
+import { pageTabs, tabList } from '@components/shop/pageTabs'
 import { useValidateNickname } from '@hooks/useValidateNickname'
-import { pageTabs, tabList } from '@pages/shop/pageTabs'
 import {
   useCreateUploadImagesMutation,
   useGetProfileQuery,

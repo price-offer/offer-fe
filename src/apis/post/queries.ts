@@ -10,7 +10,15 @@ export const useCreatePostMutation = () =>
 export const useGetPostQuery = (id: number) =>
   useQuery({
     queryKey: ['getPost', id],
-    queryFn: () => getPost(id)
+    queryFn: () => getPost(id),
+    select: data => ({
+      ...data,
+      postImages:
+        data.imageUrls.map((url, idx) => ({
+          id: idx,
+          src: url
+        })) || []
+    })
   })
 
 export const useGetCategoriesQuery = () =>

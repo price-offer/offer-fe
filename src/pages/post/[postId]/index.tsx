@@ -1,14 +1,21 @@
 import { css } from '@emotion/react'
 import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
+import {
+  Carousel,
+  Divider,
+  Text,
+  IconButton,
+  SelectBox,
+  ImageModal
+} from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import type { ReactElement } from 'react'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { useGetPostQuery } from '@apis'
 import { UserProfile, PriceOfferCard, PostFieldList } from '@components'
 import { TRADE_STATUS } from '@constants'
-import { useAuth } from '@hooks'
+import { useAuth, useModal } from '@hooks'
 
 type Props = { postId: number }
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -22,17 +29,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const getPostQuery = useGetPostQuery(postId)
   const { user } = useAuth()
+  const imageModal = useModal()
 
   const isSeller = user.id === getPostQuery.data?.seller.id
-  const postImages = getPostQuery.data?.imageUrls.map((url, idx) => ({
-    id: idx,
-    src: url
-  }))
+  const postImages = getPostQuery.data?.postImages || []
 
   return (
     <Layout>
       <Main>
-        <div>
+        <div onClick={imageModal.openModal}>
           <Carousel images={postImages || []} isArrow name="post-carousel" />
         </div>
         <Content>
@@ -91,6 +96,12 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
       </Main>
       <MainDivider size="bold" />
       <PriceOfferCard isSeller={isSeller} postId={postId} />
+      <ImageModal
+        images={postImages}
+        isOpen={imageModal.isOpen}
+        name="post-detail"
+        onClose={imageModal.closeModal}
+      />
     </Layout>
   )
 }
@@ -145,6 +156,8 @@ const MainDivider = styled(Divider)`
   `}
 `
 const Main = styled.div`
+  width: 100%;
+
   ${({ theme }): SerializedStyles => css`
     ${theme.mediaQuery.tablet} {
       margin: 0;
@@ -173,14 +186,11 @@ const ProductConditionSelectBox = styled(SelectBox)`
     ${theme.mediaQuery.tablet} {
       margin: 20px 0;
     }
-    ${theme.mediaQuery.mobile} {
-      margin: 20px 0;
-    }
   `}
 `
 
 const ProductConditionBadge = styled.div`
-  margin-bottom: 20px;
+  margin: 33px 0 16px;
   padding: 4px 8px 3px;
 
   ${({ theme }) => css`
@@ -191,6 +201,13 @@ const ProductConditionBadge = styled.div`
     color: ${theme.colors.white};
 
     ${theme.fonts.body02B}
+
+    ${theme.mediaQuery.tablet} {
+      margin: 20px 0;
+    }
+    ${theme.mediaQuery.mobile} {
+      margin: 20px 0;
+    }
   `}
 `
 

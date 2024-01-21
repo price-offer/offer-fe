@@ -1,7 +1,10 @@
 import type { SelectOnChangeHandler } from '@offer-ui/react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { transRateUseToCategorySelectBoxData } from '@utils/result'
+import {
+  initializeCategoriesWithAll,
+  updateSelectionInCategories
+} from '@utils/service/result'
 import { CATEGORIES } from '@constants'
 import type { CategoryCodes, CategoryNames } from '@types'
 export type CheckItemType = {
@@ -34,8 +37,10 @@ export const useCategoryFilterList = (): ReturnType => {
   const defaultCategory = searchParams.get('category') as CategoryCodes | null
 
   useEffect(() => {
-    const categoryList = transRateUseToCategorySelectBoxData(
-      CATEGORIES,
+    const transRateCategories = initializeCategoriesWithAll(CATEGORIES)
+
+    const categoryList = updateSelectionInCategories(
+      transRateCategories,
       defaultCategory
     )
     setList(categoryList)

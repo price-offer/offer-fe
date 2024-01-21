@@ -1,10 +1,7 @@
 import type { CheckItemType } from '@hooks/result/useCategoryFilterList'
 import type { Categories, CategoryCodes } from '@types'
 
-export const transRateUseToCategorySelectBoxData = (
-  categories: Categories,
-  searchParams: CategoryCodes | null
-) => {
+export const initializeCategoriesWithAll = (categories: Categories) => {
   const newArr: CheckItemType[] = categories.map(category => {
     const { ...rest } = category
     return { ...rest, selected: false }
@@ -12,18 +9,22 @@ export const transRateUseToCategorySelectBoxData = (
 
   newArr.unshift({ code: 'ALL', name: '전체', selected: false })
 
+  return newArr
+}
+
+export const updateSelectionInCategories = (
+  categories: CheckItemType[],
+  searchParams: CategoryCodes | null
+) => {
   if (searchParams === null) {
-    newArr[0].selected = true
+    return categories
   } else {
-    const updatedArr = newArr.map(item => {
+    return categories.map(item => {
       if (item.code === searchParams) {
         return { ...item, selected: true }
       } else {
-        return item
+        return { ...item, selected: false }
       }
     })
-    return updatedArr
   }
-
-  return newArr
 }

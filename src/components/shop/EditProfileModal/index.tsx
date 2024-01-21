@@ -7,11 +7,10 @@ import {
   Icon,
   useImageUploader
 } from '@offer-ui/react'
-import type { ReactElement } from 'react'
+import type { ChangeEventHandler, ReactElement } from 'react'
 import { useState } from 'react'
 import { Styled } from './styled'
 import type { EditProfileForm, EditProfileModalProps } from './types'
-import { LimitedInput } from '@components/common'
 
 const NICK_NAME_MAX_LENGTH = 20
 
@@ -37,8 +36,8 @@ export const EditProfileModal = ({
     }
   })
 
-  const handleChangeNickname = (nickname: string) => {
-    setProfileForm({ ...profileForm, nickname })
+  const handleChangeNickname: ChangeEventHandler<HTMLInputElement> = e => {
+    setProfileForm({ ...profileForm, nickname: e.target.value })
   }
   const handleClickDuplicateButton = () => {
     onValidateNickname(profileForm.nickname.trim())
@@ -79,11 +78,11 @@ export const EditProfileModal = ({
           <Text color="grayScale70" styleType="body01M" tag="p">
             닉네임
           </Text>
-          <LimitedInput
+          <input
             maxLength={NICK_NAME_MAX_LENGTH}
             placeholder="닉네임을 입력해 주세요."
             value={profileForm.nickname}
-            onChangeValue={handleChangeNickname}
+            onChange={handleChangeNickname}
           />
           <Text color="grayScale50" styleType="caption01M" tag="p">
             {profileForm.nickname.length}/{NICK_NAME_MAX_LENGTH}

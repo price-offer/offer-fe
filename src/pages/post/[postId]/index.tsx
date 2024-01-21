@@ -3,6 +3,7 @@ import type { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Carousel, Divider, Text, IconButton, SelectBox } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import { useGetPostQuery } from '@apis'
@@ -21,6 +22,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
 const PostDetailPage = ({ postId }: Props): ReactElement => {
   const getPostQuery = useGetPostQuery(postId)
+  const router = useRouter()
   const { user } = useAuth()
 
   const isSeller = user.id === getPostQuery.data?.seller.id
@@ -28,6 +30,12 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     id: idx,
     src: url
   }))
+
+  if (getPostQuery.isError) {
+    router.push('/403')
+
+    return <></>
+  }
 
   return (
     <Layout>

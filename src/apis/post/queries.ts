@@ -10,7 +10,8 @@ export const useCreatePostMutation = () =>
 export const useGetPostQuery = (id: number) =>
   useQuery({
     queryKey: ['getPost', id],
-    queryFn: () => getPost(id)
+    queryFn: () => getPost(id),
+    retry: false
   })
 
 export const useGetCategoriesQuery = () =>

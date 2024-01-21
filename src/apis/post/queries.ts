@@ -53,7 +53,17 @@ export const useGetPostQuery = (id: number) =>
         title: data.title,
         description: data.description,
         location: data.location
-      }
+      },
+      postImages: [
+        {
+          id: 0,
+          src: data.thumbnailImageUrl || ''
+        },
+        ...(data.imageUrls.map((url, idx) => ({
+          id: idx + 1,
+          src: url
+        })) || [])
+      ]
     })
   })
 

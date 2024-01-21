@@ -10,21 +10,22 @@ import {
   Button,
   Divider
 } from '@offer-ui/react'
-import type {
-  ImageInfo,
-  UploaderOnChangeHandler,
-  SelectOnChangeHandler,
-  InputProps
-} from '@offer-ui/react'
+import type { ImageInfo, InputProps } from '@offer-ui/react'
+import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import type { ReactElement, ChangeEventHandler } from 'react'
-import { useState } from 'react'
-import { useCreateUploadImagesMutation } from '@apis/image'
-import type { CreatePostReq } from '@apis/post'
-import { useGetCategoriesQuery, useCreatePostMutation } from '@apis/post'
+import type { ReactElement } from 'react'
+import { useEffect, useState } from 'react'
 import { localeCurrencyToNumber } from '@utils/format'
+import type { CreatePostReq } from '@apis'
+import {
+  useGetCategoriesQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useGetPostQuery,
+  useCreateUploadImagesMutation
+} from '@apis'
 import { PostForm } from '@components'
-import { TRADE_TYPES, PRODUCT_CONDITIONS } from '@constants'
+import { TRADE_TYPES, PRODUCT_CONDITIONS, TRADE_STATUS } from '@constants'
 import { useResponsive } from '@hooks'
 
 type PostFormState = Partial<
@@ -33,9 +34,8 @@ type PostFormState = Partial<
   price?: string
   imageInfos?: ImageInfo[]
 }
-type HandleUpdatePostForm = ChangeEventHandler<
-  HTMLTextAreaElement | HTMLInputElement | HTMLFormElement
->
+type PostFormStateKeys = KeyOf<PostFormState>
+type PostFormStateValues = ValueOf<PostFormState>
 
 const postFormKeys: (keyof PostFormState)[] = [
   'title',
@@ -53,11 +53,32 @@ const isCompleteForm = (
 ): postForm is Required<PostFormState> =>
   postFormKeys.every(key => Boolean(postForm[key]))
 
-const PostPage = (): ReactElement => {
-  const postMutation = useCreatePostMutation()
-  const uploadImagesQuery = useCreateUploadImagesMutation()
-  const categoriesQuery = useGetCategoriesQuery()
+const getImageFormData = (files: File[]) => {
+  const imageFormData = new FormData()
+
+  files.forEach(file => imageFormData.append('files', file))
+
+  return imageFormData
+}
+
+type Props = { editPostId: number; type: string }
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query
+}) => ({
+  props: {
+    editPostId: Number(query.postId),
+    type: (query.type as string) || ''
+  }
+})
+
+const PostPage = ({ type, editPostId }: Props): ReactElement => {
+  const createPostMutation = useCreatePostMutation()
+  const getPostQuery = useGetPostQuery(editPostId)
+  const createUploadImagesMutation = useCreateUploadImagesMutation()
+  const getCategoriesQuery = useGetCategoriesQuery()
+  const updatePostMutation = useUpdatePostMutation()
   const router = useRouter()
+
   const [postForm, setPostForm] = useState<PostFormState>({})
 
   const InputSize = useResponsive<InputProps, 'width'>({
@@ -65,25 +86,10 @@ const PostPage = (): ReactElement => {
     tablet: '100%'
   })
 
-  const handleUpdateCategory: SelectOnChangeHandler = ({ code }) => {
-    setPostForm({
-      ...postForm,
-      category: code
-    })
-  }
-
-  const handleUpdateImageInfos: UploaderOnChangeHandler = ({
-    images: imageInfos
-  }) => {
-    setPostForm(prev => ({
-      ...prev,
-      imageInfos
-    }))
-  }
-
-  const handleUpdatePostForm: HandleUpdatePostForm = (e): void => {
-    const { name, value } = e.target
-
+  const handleUpdatePostForm = (
+    name: PostFormStateKeys,
+    value: PostFormStateValues
+  ): void => {
     setPostForm({
       ...postForm,
       [name]: value
@@ -96,24 +102,50 @@ const PostPage = (): ReactElement => {
     }
 
     const { imageInfos, price, ...post } = postForm
-    const imageFormData = new FormData()
+    const imageFiles = imageInfos
+      .filter(({ file }) => Boolean(file))
+      .map(({ file }) => file) as File[]
+    let imageUrls = imageInfos.filter(({ file }) => !file).map(({ url }) => url)
+    let postId = editPostId
 
-    imageInfos.forEach(
-      info => info.file && imageFormData.append('files', info.file)
-    )
+    if (imageFiles.length > 0) {
+      const imageFormData = getImageFormData(imageFiles)
 
-    const { imageUrls } = await uploadImagesQuery.mutateAsync(imageFormData)
+      const { imageUrls: newImageUrls } =
+        await createUploadImagesMutation.mutateAsync(imageFormData)
+
+      imageUrls = imageUrls.concat(newImageUrls)
+    }
+
     const [thumbnailImageUrl, ...images] = imageUrls || []
 
-    const res = await postMutation.mutateAsync({
+    const nextPost = {
       ...post,
       imageUrls: images,
       price: localeCurrencyToNumber(price),
-      thumbnailImageUrl
-    })
+      thumbnailImageUrl: thumbnailImageUrl
+    }
 
-    router.push(`/post/${res.id}`)
+    if (type === 'update') {
+      await updatePostMutation.mutateAsync({
+        postId,
+        ...nextPost,
+        tradeStatus: getPostQuery.data?.tradeStatus.code || TRADE_STATUS[0].code
+      })
+    } else {
+      const res = await createPostMutation.mutateAsync(nextPost)
+
+      postId = res.id
+    }
+
+    router.replace(`/post/${postId}`)
   }
+
+  useEffect(() => {
+    if (getPostQuery.data) {
+      setPostForm(getPostQuery.data.postForm)
+    }
+  }, [getPostQuery.data])
 
   return (
     <StyledPostPage>
@@ -127,7 +159,8 @@ const PostPage = (): ReactElement => {
               maxLength={40}
               name="title"
               placeholder="제목을 입력해주세요(40자 이내)"
-              onChange={handleUpdatePostForm}
+              value={postForm.title}
+              onChange={e => handleUpdatePostForm('title', e.target.value)}
             />
             <StyledTitleLength styleType="subtitle01M">
               {postForm.title?.length}/40
@@ -136,7 +169,9 @@ const PostPage = (): ReactElement => {
           <div>
             <ImageUploader
               images={postForm.imageInfos || []}
-              onChange={handleUpdateImageInfos}
+              onChange={({ images }) =>
+                handleUpdatePostForm('imageInfos', images)
+              }
             />
           </div>
         </StyledPostingHeader>
@@ -150,10 +185,11 @@ const PostPage = (): ReactElement => {
         <StyledPostForms>
           <PostForm label="카테고리">
             <SelectBox
-              items={categoriesQuery.data || []}
+              items={getCategoriesQuery.data || []}
               placeholder="선택"
               size="small"
-              onChange={handleUpdateCategory}
+              value={postForm.category}
+              onChange={({ code }) => handleUpdatePostForm('category', code)}
             />
           </PostForm>
           <PostForm label="시작가">
@@ -161,16 +197,18 @@ const PostPage = (): ReactElement => {
               isPrice
               name="price"
               placeholder="시작가를 입력하세요"
+              value={postForm.price}
               width={InputSize}
-              onChange={handleUpdatePostForm}
+              onChange={e => handleUpdatePostForm('price', e.target.value)}
             />
           </PostForm>
           <PostForm label="거래 지역">
             <Input
               name="location"
               placeholder="ex. 동작구 사당동"
+              value={postForm.location}
               width={InputSize}
-              onChange={handleUpdatePostForm}
+              onChange={e => handleUpdatePostForm('location', e.target.value)}
             />
           </PostForm>
           <StyledRadioPostForm label="상품 상태">
@@ -178,7 +216,10 @@ const PostPage = (): ReactElement => {
               direction="horizontal"
               formName="productCondition"
               items={PRODUCT_CONDITIONS}
-              onChange={handleUpdatePostForm}
+              selectedValue={postForm.productCondition}
+              onChange={e =>
+                handleUpdatePostForm('productCondition', e.target.value)
+              }
             />
           </StyledRadioPostForm>
           <StyledRadioPostForm label="거래 방법">
@@ -186,7 +227,8 @@ const PostPage = (): ReactElement => {
               direction="horizontal"
               formName="tradeType"
               items={TRADE_TYPES}
-              onChange={handleUpdatePostForm}
+              selectedValue={postForm.tradeType}
+              onChange={e => handleUpdatePostForm('tradeType', e.target.value)}
             />
           </StyledRadioPostForm>
         </StyledPostForms>
@@ -195,7 +237,11 @@ const PostPage = (): ReactElement => {
           <Text color="grayScale70" styleType="body01M">
             상품 설명
           </Text>
-          <StyledTextarea name="description" onChange={handleUpdatePostForm} />
+          <StyledTextarea
+            name="description"
+            value={postForm.description}
+            onChange={e => handleUpdatePostForm('description', e.target.value)}
+          />
         </StyledTextareaWrapper>
       </StyledFormWrapper>
       <StyledButtonWrapper>

@@ -1,9 +1,12 @@
+import type { Theme } from '@emotion/react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Avatar as AvatarComponent } from '@offer-ui/react'
 
 const Container = styled.div`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     position: relative;
+
     width: 276px;
     height: 388px;
     padding: 26px;
@@ -23,12 +26,15 @@ const Container = styled.div`
   `}
 `
 const SettingsButton = styled.button`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     float: right;
-    cursor: pointer;
-    border: none;
-    background: none;
+
     margin-top: -6px;
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
 
     ${theme.mediaQuery.tablet} {
       margin-top: 0;
@@ -37,7 +43,7 @@ const SettingsButton = styled.button`
 `
 
 const ProfileWrapper = styled.div`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     margin-top: 28px;
 
     ${theme.mediaQuery.tablet} {
@@ -46,7 +52,7 @@ const ProfileWrapper = styled.div`
   `}
 `
 const Avatar = styled(AvatarComponent)`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     ${theme.avatar.medium};
 
     ${theme.mediaQuery.tablet} {
@@ -55,41 +61,46 @@ const Avatar = styled(AvatarComponent)`
   `}
 `
 const UserWrapper = styled.div`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
+
     margin-bottom: 24px;
 
     ${theme.mediaQuery.tablet} {
       flex-direction: row;
       align-items: flex-start;
+
       margin-bottom: 16px;
     }
-`}
+  `}
 `
 const NickNameRow = styled.div`
-  ${({ theme }): string => `
-  display: flex;
-  gap: 4px;
-  flex-direction: column;
-  margin-top: 14px;
-  align-items: center;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
 
-  ${theme.mediaQuery.tablet} {
-    margin-top: 0;
-    margin-left: 12px;
-    align-items: flex-start;
-  }
-`}
+    margin-top: 14px;
+
+    ${theme.mediaQuery.tablet} {
+      align-items: flex-start;
+
+      margin-top: 0;
+      margin-left: 12px;
+    }
+  `}
 `
 const NickName = styled.span`
-  ${({ theme }): string => `
+  ${({ theme }) => css`
+    overflow: hidden;
     ${theme.fonts.headline02B};
     width: 180px;
+
     text-align: center;
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
     word-break: break-word;
 
@@ -103,30 +114,82 @@ const NickName = styled.span`
     }
   `}
 `
-const UserProductWrapper = styled.div`
-  ${({ theme }): string => `
+const UserProductWrapper = styled.div<{ isLogin: boolean }>`
+  ${({ theme, isLogin }) => css`
     display: grid;
-    background-color: ${theme.colors.bgGray01};
     gap: 16px;
+
     padding: 16px 20px;
 
+    background-color: ${theme.colors.bgGray01};
+
     ${theme.mediaQuery.tablet} {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      ${isLogin
+        ? 'grid-template-columns: 1fr 1fr 1fr 1fr;'
+        : 'grid-template-areas: ". sell sold review .";'}
+
       gap: 93px;
-      padding: 24px 40px;
+
       min-width: 684px;
+      padding: 24px 40px;
     }
 
     ${theme.mediaQuery.mobile} {
+      grid-template-areas: none;
       grid-template-columns: 1fr 1fr;
       gap: 44px;
+
       min-width: 300px;
       padding: 20px 36px;
     }
   `}
 `
-const UserProductRow = styled.div`
-  ${({ theme }): string => `
+
+const setStyleByToken = (theme: Theme, isLogin: boolean) => {
+  if (isLogin) {
+    return css`
+      ${theme.mediaQuery.mobile} {
+        min-width: 90px;
+      }
+    `
+  }
+
+  return css`
+    ${theme.mediaQuery.desktop} {
+      :nth-of-type(1),
+      :nth-of-type(2),
+      :nth-of-type(3) {
+        grid-area: auto;
+      }
+    }
+
+    ${theme.mediaQuery.tablet} {
+      :nth-of-type(1) {
+        grid-area: sold;
+      }
+
+      :nth-of-type(2) {
+        grid-area: sell;
+      }
+
+      :nth-of-type(3) {
+        grid-area: review;
+      }
+    }
+
+    ${theme.mediaQuery.mobile} {
+      min-width: 90px;
+
+      :nth-of-type(1),
+      :nth-of-type(2),
+      :nth-of-type(3) {
+        grid-area: auto;
+      }
+    }
+  `
+}
+const UserProductRow = styled.div<{ isLogin: boolean }>`
+  ${({ theme, isLogin }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -135,9 +198,7 @@ const UserProductRow = styled.div`
       min-width: 85px;
     }
 
-    ${theme.mediaQuery.mobile} {
-      min-width: 90px;
-    }
+    ${setStyleByToken(theme, isLogin)}
   `}
 `
 const UserProductTitleWrapper = styled.p`

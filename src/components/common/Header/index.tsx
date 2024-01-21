@@ -59,7 +59,7 @@ const Header = (): ReactElement => {
                     styleType="ghost"
                     type="button"
                     width="76px">
-                    <Styled.TextLink href="/shop">
+                    <Styled.TextLink href="/shop?tab=sale">
                       나의 거래활동
                     </Styled.TextLink>
                   </Styled.HeaderAuthButton>

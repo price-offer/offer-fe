@@ -1,6 +1,31 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
-import { getMemberProfile, getMyProfile } from './apis'
-import { initialMyProfile } from './data'
+import type { DefaultError } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+  checkValidNickname,
+  getMemberProfile,
+  getMyProfile,
+  updateMyProfile
+} from './apis'
+import { initialMemberProfile, initialMyProfile } from './data'
+import type {
+  CheckValidNicknameReq,
+  CheckValidNicknameRes,
+  UpdateMyProfileReq,
+  UpdateMyProfileRes
+} from './types'
+
+export const useGetProfileQuery = (memberId: null | number) =>
+  useQuery({
+    queryKey: ['profile', memberId],
+    queryFn: () => {
+      if (!memberId) {
+        return getMyProfile()
+      }
+
+      return getMemberProfile(memberId)
+    },
+    initialData: memberId ? initialMemberProfile : initialMyProfile
+  })
 
 export const useGetMyProfileQuery = (accessToken?: string) =>
   useQuery({
@@ -10,8 +35,16 @@ export const useGetMyProfileQuery = (accessToken?: string) =>
     initialData: initialMyProfile
   })
 
-export const useGetMemberProfileQuery = (memberId = '') =>
-  useSuspenseQuery({
-    queryKey: ['memberProfile', memberId],
-    queryFn: () => getMemberProfile(Number(memberId))
+export const useUpdateMyProfileMutation = () =>
+  useMutation<UpdateMyProfileRes, DefaultError, UpdateMyProfileReq>({
+    mutationFn: payload => updateMyProfile(payload)
+  })
+
+export const useCheckValidNicknameMutation = () =>
+  useMutation<
+    CheckValidNicknameRes,
+    DefaultError,
+    CheckValidNicknameReq['nickname']
+  >({
+    mutationFn: nickname => checkValidNickname({ nickname })
   })

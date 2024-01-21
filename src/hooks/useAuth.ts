@@ -7,8 +7,8 @@ import { env } from '@constants'
 export const useAuth = () => {
   const router = useRouter()
   const accessToken = getCookie(env.AUTH_TOKEN_KEY)
-  const user = useGetMyProfileQuery(accessToken)
-  const [isLogin, setIsLogin] = useState(false)
+  const getMyProfileQuery = useGetMyProfileQuery(accessToken)
+  const [isLogin, setIsLogin] = useState(getMyProfileQuery.isSuccess)
 
   const handleLogout = () => {
     deleteCookie(env.AUTH_TOKEN_KEY)
@@ -23,8 +23,8 @@ export const useAuth = () => {
 
   return {
     isLogin,
-    isLoading: user.isLoading,
+    isLoading: getMyProfileQuery.isLoading,
     handleLogout,
-    user: user.data
+    user: getMyProfileQuery.data
   }
 }

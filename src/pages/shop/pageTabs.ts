@@ -1,10 +1,9 @@
 import type { ReactElement } from 'react'
-import type { ShopPageBuyViewProps } from './view/buy'
-import { ShopPageBuyView } from './view/buy'
-import type { ShopPageReviewViewProps } from './view/review'
-import { ShopPageReviewView } from './view/review'
-import type { ShopPageSaleViewProps } from './view/sale'
-import { ShopPageSaleView } from './view/sale'
+import { ShopPageBuyPanel } from './panel/buy'
+import type { ShopPageReviewPanelProps } from './panel/review'
+import { ShopPageReviewPanel } from './panel/review'
+import type { ShopPageSalePanelProps } from './panel/sale'
+import { ShopPageSalePanel } from './panel/sale'
 import type { TradeActivityNames, TradeActivityCodes } from '@types'
 
 type PageTab = {
@@ -15,26 +14,28 @@ type PageTab = {
   panel(props: unknown): ReactElement
 }
 
+export const tabList = ['sale', 'buy', 'review']
+
 export const pageTabs: PageTab[] = [
   {
     tab: {
       code: 'sale',
       name: '판매'
     },
-    panel: (props: ShopPageSaleViewProps) => ShopPageSaleView(props)
+    panel: (props: ShopPageSalePanelProps) => ShopPageSalePanel(props)
   },
   {
     tab: {
       code: 'buy',
       name: '구매'
     },
-    panel: (props: ShopPageBuyViewProps) => ShopPageBuyView(props)
+    panel: ShopPageBuyPanel
   },
   {
     tab: {
       code: 'review',
       name: '후기'
     },
-    panel: (props: ShopPageReviewViewProps) => ShopPageReviewView(props)
+    panel: (props: ShopPageReviewPanelProps) => ShopPageReviewPanel(props)
   }
 ]

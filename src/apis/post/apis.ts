@@ -32,7 +32,7 @@ export const getCategories = () =>
 export const getPosts = (params: GetPostsReq) =>
   http.get<GetPostsReq, GetPostsRes>('/posts', params)
 
-export const updateTradeStatus = ({
+export const updatePostTradeStatus = ({
   postId,
   ...params
 }: UpdateTradeStatusReq) =>

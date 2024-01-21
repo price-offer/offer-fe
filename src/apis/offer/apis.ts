@@ -1,9 +1,14 @@
 import type {
+  GetMyOffersReq,
+  GetMyOffersRes,
   GetPostOffersReq,
   CreateOfferReq,
   GetPostOffersRes
 } from './types'
 import { http } from '@utils/http'
+
+export const getMyOffers = (params: GetMyOffersReq) =>
+  http.get<GetMyOffersReq, GetMyOffersRes>('/posts/offers', params)
 
 export const getPostOffers = (params: GetPostOffersReq) =>
   http.get<GetPostOffersReq, GetPostOffersRes>(

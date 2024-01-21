@@ -1,9 +1,11 @@
 type Message = {
-  id: number
+  member: {
+    id: number
+    nickname: string
+    imageUrl: string
+  }
   content: string
-  receiverId: number
-  senderId: number
-  createdDate: string
+  sendTime: string
 }
 
 export type SendProps = {

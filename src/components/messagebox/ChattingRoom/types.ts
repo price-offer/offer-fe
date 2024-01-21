@@ -1,4 +1,4 @@
 export type ChattingRoomProps = {
-  id: number
+  roomId: number
   onClose?(id: number): void
 }

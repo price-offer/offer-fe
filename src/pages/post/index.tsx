@@ -26,7 +26,7 @@ import {
 } from '@apis'
 import { PostForm } from '@components'
 import { TRADE_TYPES, PRODUCT_CONDITIONS, TRADE_STATUS } from '@constants'
-import { useResponsive } from '@hooks'
+import { useAuth, useResponsive } from '@hooks'
 
 type PostFormState = Partial<
   Omit<CreatePostReq, 'price' | 'thumbnailImageUrl' | 'imageUrls'>
@@ -77,9 +77,10 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
   const createUploadImagesMutation = useCreateUploadImagesMutation()
   const getCategoriesQuery = useGetCategoriesQuery()
   const updatePostMutation = useUpdatePostMutation()
-  const router = useRouter()
 
   const [postForm, setPostForm] = useState<PostFormState>({})
+  const router = useRouter()
+  const { user } = useAuth()
 
   const InputSize = useResponsive<InputProps, 'width'>({
     desktop: '278px',
@@ -143,9 +144,22 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
 
   useEffect(() => {
     if (getPostQuery.data) {
+      const { seller } = getPostQuery.data
+
+      if (seller.id !== user.id) {
+        router.push('/403')
+        return
+      }
+
       setPostForm(getPostQuery.data.postForm)
     }
   }, [getPostQuery.data])
+
+  if (getPostQuery.isError) {
+    router.push('/403')
+
+    return <></>
+  }
 
   return (
     <StyledPostPage>

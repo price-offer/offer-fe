@@ -92,7 +92,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages, desktop, tablet, mobile, chattingBoxRef.current?.scrollHeight])
+  }, [messages, desktop, tablet, mobile])
 
   return (
     <Styled.Container>
@@ -103,7 +103,7 @@ export const ChattingRoom = ({ roomId, onClose }: ChattingRoomProps) => {
           <IconButton
             icon="refresh"
             size={24}
-            onClick={async () => await getMessageQuery.refetch()}
+            onClick={() => getMessageQuery.refetch()}
           />
           <Styled.MoreButtonWrapper>
             <IconButton icon="more" size={24} onClick={openModal} />

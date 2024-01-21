@@ -15,7 +15,7 @@ import type {
 
 export const useGetMessageRoomsQuery = (params: GetMessageRoomsReq) =>
   useQuery({
-    queryKey: ['getMessageRooms'],
+    queryKey: ['getMessageRooms', params],
     queryFn: () => getMessageRooms(params)
   })
 

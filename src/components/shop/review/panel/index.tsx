@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Styled } from './styled'
+import { ReviewTabPostList } from '../ReviewTabPostList'
+import { Tabs } from '@components/common'
 import {
   useGetProfileQuery,
   useGetReviewsCountsQuery,
   useGetReviewsQuery
 } from '@apis'
-import { Tabs, ReviewTabPostList } from '@components'
 import { TRADE_ACTIVITY_TYPES } from '@constants'
 import type { TradeReviewActivityCodes, TradeReviewActivityNames } from '@types'
 

@@ -1,5 +1,5 @@
+import { LikeTabPostList } from '@components/shop/buy/LikeTabPostList'
 import { useGetLikedPostsQuery, useUpdateLikeStatusMutation } from '@apis'
-import { LikeTabPostList } from '@components'
 import type { SortOptionCodes } from '@types'
 
 type LikePanelViewProps = {

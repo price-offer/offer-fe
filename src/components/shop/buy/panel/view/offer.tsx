@@ -1,12 +1,13 @@
 import { useState } from 'react'
+import { OfferTabPostList } from '@components/shop/buy/OfferTabPostList'
+import { ReviewModal } from '@components/shop/buy/ReviewModal'
+import type { ReviewState } from '@components/shop/buy/ReviewModal/Write/types'
 import { useModal } from '@hooks/useModal'
 import {
   useGetMyOffersQuery,
   useGetReviewsCountsQuery,
   useReviewsMutation
 } from '@apis'
-import type { ReviewState } from '@components'
-import { OfferTabPostList, ReviewModal } from '@components'
 import { SCORE } from '@constants'
 import { useAuth } from '@hooks'
 import type { OfferSummary, Review, SortOptionCodes } from '@types'

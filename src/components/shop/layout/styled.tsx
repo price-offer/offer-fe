@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Tab as TabComponent, Tabs } from '@components'
+import { Tab as TabComponent, Tabs } from '@components/common'
 
 const UserName = styled.p`
   ${({ theme }): string => `

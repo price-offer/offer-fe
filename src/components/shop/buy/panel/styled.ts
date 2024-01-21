@@ -1,10 +1,13 @@
 import styled from '@emotion/styled'
 import type { ColorKeys } from '@offer-ui/react'
 import { Divider as DividerComponent } from '@offer-ui/react'
-import { Tabs, Tab as TabComponent } from '@components'
+import { Tabs, Tab as TabComponent } from '@components/common'
 
 const SearchOptionsWrapper = styled.div`
   ${({ theme }): string => `
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px;
     border-bottom: 1px solid ${theme.colors.grayScale10};
 

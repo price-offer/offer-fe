@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { GetPostsReq } from '@apis'
 import {
-  usePostTradeStatusMutation,
+  useUpdateTradeStatusMutation,
   useGetPostsQuery,
   useGetProfileQuery
 } from '@apis'
@@ -28,7 +28,7 @@ export const ShopPageSalePanel = ({
 
   const profile = useGetProfileQuery(memberId)
   const posts = useGetPostsQuery(searchOptions)
-  const postTradeStatus = usePostTradeStatusMutation()
+  const updateTradeStatus = useUpdateTradeStatusMutation()
 
   useEffect(
     function fetchPostsOnMount() {
@@ -51,7 +51,7 @@ export const ShopPageSalePanel = ({
     })
   const handleChangeProductTradeStatus: SaleTabPostProps['onChangeTradeStatus'] =
     async (postId, tradeStatus) => {
-      await postTradeStatus.mutateAsync({
+      await updateTradeStatus.mutateAsync({
         postId,
         tradeStatus: tradeStatus.code
       })

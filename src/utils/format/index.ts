@@ -5,7 +5,7 @@ dayjs.locale('ko')
 
 const DATE_FORMAT = {
   'YYYY년 M월 D일 dddd': 'YYYY년 M월 D일 dddd',
-  'A H:m': 'A H:m'
+  'A H:mm': 'A H:mm'
 }
 
 export const formatDate = (

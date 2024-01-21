@@ -1,18 +1,20 @@
-import type { DefaultError } from '@tanstack/react-query'
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import {
   getPost,
   getCategories,
   createPost,
   getPosts,
-  updatePostTradeStatus
+  updatePostTradeStatus,
+  deletePost,
+  updatePost
 } from './apis'
 import type {
   CreatePostReq,
+  DeletePostReq,
   GetPostsReq,
   GetPostsRes,
-  UpdateTradeStatusReq,
-  UpdateTradeStatusRes
+  UpdatePostReq,
+  UpdateTradeStatusReq
 } from './types'
 
 export const useCreatePostMutation = () =>
@@ -20,10 +22,49 @@ export const useCreatePostMutation = () =>
     mutationFn: (param: CreatePostReq) => createPost(param)
   })
 
+export const useUpdatePostMutation = () =>
+  useMutation({
+    mutationFn: (params: UpdatePostReq) => updatePost(params)
+  })
+
 export const useGetPostQuery = (id: number) =>
   useQuery({
     queryKey: ['getPost', id],
-    queryFn: () => getPost(id)
+    queryFn: () => getPost(id),
+    enabled: typeof id === 'number',
+    select: data => ({
+      ...data,
+      postForm: {
+        category: data.category.code,
+        tradeType: data.tradeType.code,
+        productCondition: data.productCondition.code,
+        price: String(data.price),
+        imageInfos: [
+          {
+            id: '0',
+            isRepresent: true,
+            url: data.thumbnailImageUrl || ''
+          },
+          ...(data.imageUrls.map((url, idx) => ({
+            id: String(idx + 1),
+            url
+          })) || [])
+        ],
+        title: data.title,
+        description: data.description,
+        location: data.location
+      },
+      postImages: [
+        {
+          id: 0,
+          src: data.thumbnailImageUrl || ''
+        },
+        ...(data.imageUrls.map((url, idx) => ({
+          id: idx + 1,
+          src: url
+        })) || [])
+      ]
+    })
   })
 
 export const useGetCategoriesQuery = () =>
@@ -50,7 +91,12 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
         : undefined
   })
 
-export const usePostTradeStatusMutation = () =>
-  useMutation<UpdateTradeStatusRes, DefaultError, UpdateTradeStatusReq>({
-    mutationFn: params => updatePostTradeStatus(params)
+export const useUpdateTradeStatusMutation = () =>
+  useMutation({
+    mutationFn: (params: UpdateTradeStatusReq) => updatePostTradeStatus(params)
+  })
+
+export const useDeletePostMutation = (postId: DeletePostReq) =>
+  useMutation({
+    mutationFn: () => deletePost(postId)
   })

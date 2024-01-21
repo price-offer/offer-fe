@@ -1,5 +1,5 @@
 import type { GetServerSidePropsContext } from 'next/types'
-import { ShopPageView } from './view'
+import { ShopPageLayout } from '@components'
 import type { TradeActivityCodes } from '@types'
 
 export const getServerSideProps = ({ query }: GetServerSidePropsContext) => {
@@ -15,7 +15,7 @@ type MyShopPageProps = {
   currentTab: TradeActivityCodes
 }
 const MyShopPage = ({ currentTab }: MyShopPageProps) => {
-  return <ShopPageView currentTab={currentTab} memberId={null} />
+  return <ShopPageLayout currentTab={currentTab} memberId={null} />
 }
 
 export default MyShopPage

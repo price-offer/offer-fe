@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
-import { ShopPageBuyPanel } from './panel/buy'
-import type { ShopPageReviewPanelProps } from './panel/review'
-import { ShopPageReviewPanel } from './panel/review'
-import type { ShopPageSalePanelProps } from './panel/sale'
-import { ShopPageSalePanel } from './panel/sale'
+import { ShopPageBuyPanel } from '@components/shop/buy'
+import { ShopPageReviewPanel } from '@components/shop/review'
+import type { ShopPageReviewPanelProps } from '@components/shop/review'
+import { ShopPageSalePanel } from '@components/shop/sale'
+import type { ShopPageSalePanelProps } from '@components/shop/sale'
 import type { TradeActivityNames, TradeActivityCodes } from '@types'
 
 type PageTab = {
@@ -29,7 +29,7 @@ export const pageTabs: PageTab[] = [
       code: 'buy',
       name: '구매'
     },
-    panel: ShopPageBuyPanel
+    panel: () => ShopPageBuyPanel()
   },
   {
     tab: {

@@ -2,15 +2,17 @@ import { Divider } from '@offer-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Styled } from './styled'
-import { pageTabs, tabList } from '../pageTabs'
+import { EditProfileModal } from '../EditProfileModal'
+import type { EditProfileForm } from '../EditProfileModal/types'
+import { ProfileBox } from '../ProfileBox'
+import { Tabs } from '@components/common'
+import { pageTabs, tabList } from '@components/shop/pageTabs'
 import { useValidateNickname } from '@hooks/useValidateNickname'
 import {
   useCreateUploadImagesMutation,
   useGetProfileQuery,
   useUpdateMyProfileMutation
 } from '@apis'
-import type { EditProfileForm } from '@components'
-import { EditProfileModal, ProfileBox, Tabs } from '@components'
 import { useModal } from '@hooks'
 import type { TradeActivityCodes } from '@types'
 import { isNumber } from '@utils'
@@ -20,11 +22,14 @@ const initialEditProfileValidate = {
   message: ''
 }
 
-type ShopPageViewProps = {
+type ShopPageLayoutProps = {
   memberId: number | null
   currentTab: TradeActivityCodes
 }
-export const ShopPageView = ({ memberId, currentTab }: ShopPageViewProps) => {
+export const ShopPageLayout = ({
+  memberId,
+  currentTab
+}: ShopPageLayoutProps) => {
   const defaultTabIndex = tabList.findIndex(tab => tab === currentTab)
   const [currentPage, setCurrentPage] = useState<TradeActivityCodes>(currentTab)
   const [editProfileValidate, setEditProfileValidate] = useState(

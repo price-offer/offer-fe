@@ -1,14 +1,15 @@
 import { SelectBox } from '@offer-ui/react'
 import { useEffect, useState } from 'react'
 import { Styled } from './styled'
+import type { SaleTabPostProps } from '../SaleTabPost'
+import { SaleTabPostList } from '../SaleTabPostList'
+import { Tabs } from '@components/common'
 import type { GetPostsReq } from '@apis'
 import {
   useUpdateTradeStatusMutation,
   useGetPostsQuery,
   useGetProfileQuery
 } from '@apis'
-import type { SaleTabPostProps } from '@components'
-import { Tabs, SaleTabPostList } from '@components'
 import { SORT_OPTIONS, TRADE_STATUS } from '@constants'
 import type { SortOption } from '@types'
 

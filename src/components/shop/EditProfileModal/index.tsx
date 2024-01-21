@@ -55,7 +55,12 @@ export const EditProfileModal = ({
     <Modal isOpen={isOpen} onClose={handleClose}>
       <Styled.Header>
         <Styled.CloseButtonWrapper>
-          <IconButton color="grayScale30" icon="close" size={24} />
+          <IconButton
+            color="grayScale30"
+            icon="close"
+            size={24}
+            onClick={handleClose}
+          />
         </Styled.CloseButtonWrapper>
         <p>프로필 수정</p>
       </Styled.Header>

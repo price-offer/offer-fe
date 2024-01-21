@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
-import { ShopPageView } from './view'
+import { ShopPageLayout } from '@components'
 import type { TradeActivityCodes } from '@types'
 
 export const getServerSideProps = ({ query }: GetServerSidePropsContext) => {
@@ -19,7 +19,7 @@ type ShopPageProps = {
   currentTab: TradeActivityCodes
 }
 const ShopPage = ({ memberId, currentTab }: ShopPageProps): ReactElement => {
-  return <ShopPageView currentTab={currentTab} memberId={Number(memberId)} />
+  return <ShopPageLayout currentTab={currentTab} memberId={Number(memberId)} />
 }
 
 export default ShopPage

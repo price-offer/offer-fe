@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { Styled } from './styled'
 import { LikePanelView } from './view/like'
 import { OfferPanelView } from './view/offer'
+import { Tabs } from '@components/common'
 import { useGetMyOffersQuery, useGetLikedPostsQuery } from '@apis'
-import { Tabs } from '@components'
 import { TRADE_ACTIVITY_TYPES, SORT_OPTIONS } from '@constants'
 import type {
   SortOption,

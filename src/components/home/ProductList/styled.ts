@@ -18,22 +18,13 @@ const ProductListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  justify-content: start;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    grid-template-columns: repeat(4, minmax(10%, 166px));
     gap: 18px 20px;
-    justify-content: center;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    grid-template-columns: repeat(2, minmax(30%, 200px));
     gap: 15px 50px;
-    justify-content: center;
-  }
-
-  @media (width <= 510px) {
-    grid-template-columns: repeat(2, minmax(10%, 160px));
-    gap: 8px 20px;
-    justify-content: center;
   }
 `
 

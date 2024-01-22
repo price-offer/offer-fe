@@ -18,18 +18,18 @@ const SearchOptions = ({
           items={categories}
           placeholder="전체"
           value={searchOptions?.category || 'ALL'}
-          onChange={({ code }) => onChangeSearchOption('category')(code)}
+          onChange={({ code }) => onChangeSearchOption('category', code)}
         />
         <Styled.TradePeriodSelect
           colorType="light"
           items={TRADE_TYPES}
           placeholder="거래방식"
           value={searchOptions?.tradeType}
-          onChange={({ code }) => onChangeSearchOption('tradeType')(code)}
+          onChange={({ code }) => onChangeSearchOption('tradeType', code)}
         />
         <PriceDialog
           priceRange={searchOptions.priceRange}
-          onClickApply={onChangeSearchOption('priceRange')}
+          onClickApply={code => onChangeSearchOption('priceRange', code)}
         />
       </Styled.LeftSelectWrapper>
       <Styled.RightSelectWrapper>
@@ -38,7 +38,7 @@ const SearchOptions = ({
           colorType="none"
           items={SORT_OPTIONS}
           value={searchOptions.sort}
-          onChange={({ code }) => onChangeSearchOption('sort')(code)}
+          onChange={({ code }) => onChangeSearchOption('sort', code)}
         />
       </Styled.RightSelectWrapper>
     </Styled.SelectWrapper>

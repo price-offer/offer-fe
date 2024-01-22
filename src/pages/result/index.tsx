@@ -37,7 +37,7 @@ const ResultPage: NextPage = () => {
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
   const postsCount = 0
 
-  const handleChangeSearchOptions: OnChangeSearchOptions = name => value => {
+  const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
     setSearchOptions(prev => ({
       ...prev,
       [name]: value
@@ -52,7 +52,9 @@ const ResultPage: NextPage = () => {
           <CategorySlideFilter
             categories={categories}
             selectedCategory={searchOptions.category}
-            onClickCategory={handleChangeSearchOptions('category')}
+            onClickCategory={code =>
+              handleChangeSearchOptions('category', code)
+            }
           />
         </CategorySliderWrapper>
         <SearchOptions

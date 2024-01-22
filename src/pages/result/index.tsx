@@ -95,7 +95,7 @@ const Layout = styled.div`
 `
 
 const CategorySliderWrapper = styled.div`
-  /* TODO: useMedia를 사용한 조건부 런데링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
+  /* TODO: useMedia를 사용한 조건부 렌더링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
   ${({ theme }) => theme.mediaQuery.tablet} {
     display: none;
   }

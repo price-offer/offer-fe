@@ -77,7 +77,7 @@ const ResultPage: NextPage = ({
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
   const postsCount = 0
 
-  const handleChangeSearchOptions: OnChangeSearchOptions = name => value => {
+  const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
     const nextSearchOptions = {
       ...searchOptions,
       [name]: value
@@ -98,7 +98,9 @@ const ResultPage: NextPage = ({
           <CategorySlideFilter
             categories={categories}
             selectedCategory={searchOptions.category}
-            onClickCategory={handleChangeSearchOptions('category')}
+            onClickCategory={code =>
+              handleChangeSearchOptions('category', code)
+            }
           />
         </CategorySliderWrapper>
         <SearchOptions
@@ -139,7 +141,7 @@ const Layout = styled.div`
 `
 
 const CategorySliderWrapper = styled.div`
-  /* TODO: useMedia를 사용한 조건부 런데링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
+  /* TODO: useMedia를 사용한 조건부 렌더링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
   ${({ theme }) => theme.mediaQuery.tablet} {
     display: none;
   }

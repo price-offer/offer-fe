@@ -12,8 +12,8 @@ const ProductList = ({
   hasNextPage,
   fetchNextPage
 }: ProductListProps): ReactElement => {
-  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const [isFirstRender, setIsFirstRender] = useState<boolean>(false)
+  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const router = useRouter()
   const { ref: isLastPrdRef, inView } = useInView({
     threshold: 1

@@ -10,8 +10,9 @@ export type SearchOptionsState = {
   }
 }
 export type OnChangeSearchOptions = (
-  name: KeyOf<SearchOptionsState>
-) => (value: ValueOf<SearchOptionsState>) => void
+  name: KeyOf<SearchOptionsState>,
+  value: ValueOf<SearchOptionsState>
+) => void
 
 export type SearchOptionsProps = {
   categories: Pick<Category, 'code' | 'name'>[]

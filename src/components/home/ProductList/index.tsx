@@ -5,12 +5,14 @@ import { useInView } from 'react-intersection-observer'
 import { Styled } from './styled'
 import type { ProductListProps } from './types'
 import { ProductItem } from '../ProductItem'
+import { useUpdateLikeStatusMutation } from '@apis/like'
 
 const ProductList = ({
   postData,
   hasNextPage,
   fetchNextPage
 }: ProductListProps): ReactElement => {
+  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const [isFirstRender, setIsFirstRender] = useState<boolean>(false)
   const router = useRouter()
   const { ref: isLastPrdRef, inView } = useInView({
@@ -40,7 +42,8 @@ const ProductList = ({
             <ProductItem
               key={post.id}
               productItem={post}
-              onClick={() => router.push(`/post/${post.id}`)}
+              onClickLike={() => updateLikeStatusMutation.mutateAsync(post.id)}
+              onClickProduct={() => router.push(`/post/${post.id}`)}
             />
           ))
         )}

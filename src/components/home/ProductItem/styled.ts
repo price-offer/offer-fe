@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Image, ToggleButton } from '@offer-ui/react'
 
@@ -33,7 +34,11 @@ const HeartButton = styled(ToggleButton)`
   height: 24px;
   border-radius: 100%;
 
-  background-color: ${({ theme }): string => theme.colors.white};
+  ${({ theme }) => css`
+    z-index: ${theme.zIndex.common};
+
+    background-color: ${theme.colors.white};
+  `};
 `
 
 const ProductImgWrapper = styled.div`

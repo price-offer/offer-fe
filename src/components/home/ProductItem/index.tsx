@@ -1,14 +1,20 @@
-import type { ReactElement } from 'react'
+import type { MouseEvent, ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProductItemProps } from './types'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 
 const ProductItem = ({
   productItem,
-  onClick
+  onClickProduct,
+  onClickLike
 }: ProductItemProps): ReactElement => {
   const handleClickProduct = () => {
-    onClick?.()
+    onClickProduct?.()
+  }
+
+  const handleClickLike = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    onClickLike?.()
   }
 
   return (
@@ -21,9 +27,11 @@ const ProductItem = ({
         />
         <Styled.HeartButton
           icon="heart"
+          isToggle={productItem.liked}
           size={16}
           toggleColor="brandPrimary"
           toggleIcon="heartFill"
+          onClick={handleClickLike}
         />
       </Styled.ProductImgWrapper>
       <Styled.ProductItemTitle>{productItem.title}</Styled.ProductItemTitle>

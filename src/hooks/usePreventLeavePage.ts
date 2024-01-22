@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-
-const CONFIRM_MESSAGE = `사이트에서 나가시겠습니까?\n변경사항이 저장되지 않을 수 있습니다.`
+import { ALERT_MESSAGE } from '@constants'
 
 const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-  e.returnValue = CONFIRM_MESSAGE
+  e.returnValue = ALERT_MESSAGE.LEAVE_PAGE
 
-  return CONFIRM_MESSAGE
+  return ALERT_MESSAGE.LEAVE_PAGE
 }
 
 export const usePreventLeavePage = (isPrevent = true) => {
@@ -14,7 +13,7 @@ export const usePreventLeavePage = (isPrevent = true) => {
 
   useEffect(() => {
     const handleBeforeChangeRoute = (url: string) => {
-      if (router.pathname !== url && !confirm(CONFIRM_MESSAGE)) {
+      if (router.pathname !== url && !confirm(ALERT_MESSAGE.LEAVE_PAGE)) {
         router.events.emit('routeChangeError')
 
         throw `사이트 변경 취소`

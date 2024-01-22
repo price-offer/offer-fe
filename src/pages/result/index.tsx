@@ -17,8 +17,7 @@ const DEFAULT_POST_PAGE_NUMBER = 8
 
 const ResultPage: NextPage = () => {
   const getCategoriesQuery = useGetCategoriesQuery()
-  const categories =
-    getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
+  const categories = getCategoriesQuery.data?.summary || []
   const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
     sort: 'CREATED_DATE_DESC',
     priceRange: {

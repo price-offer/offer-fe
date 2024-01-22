@@ -204,7 +204,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
         <StyledPostForms>
           <PostForm label="카테고리">
             <SelectBox
-              items={getCategoriesQuery.data || []}
+              items={getCategoriesQuery.data?.origin || []}
               placeholder="선택"
               size="small"
               value={postForm.category}

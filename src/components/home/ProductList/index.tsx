@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -11,6 +12,7 @@ const ProductList = ({
   fetchNextPage
 }: ProductListProps): ReactElement => {
   const [isFirstRender, setIsFirstRender] = useState<boolean>(false)
+  const router = useRouter()
   const { ref: isLastPrdRef, inView } = useInView({
     threshold: 1
   })
@@ -34,8 +36,12 @@ const ProductList = ({
       <Styled.NewProductTitle>새로운 상품</Styled.NewProductTitle>
       <Styled.ProductListWrapper>
         {postData?.map(page =>
-          page?.posts?.map(item => (
-            <ProductItem key={item.id} productItem={item} />
+          page?.posts?.map(post => (
+            <ProductItem
+              key={post.id}
+              productItem={post}
+              onClick={() => router.push(`/post/${post.id}`)}
+            />
           ))
         )}
       </Styled.ProductListWrapper>

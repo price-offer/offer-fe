@@ -3,9 +3,16 @@ import { Styled } from './styled'
 import type { ProductItemProps } from './types'
 import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 
-const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
+const ProductItem = ({
+  productItem,
+  onClick
+}: ProductItemProps): ReactElement => {
+  const handleClickProduct = () => {
+    onClick?.()
+  }
+
   return (
-    <Styled.Container>
+    <Styled.Container onClick={handleClickProduct}>
       <Styled.ProductImgWrapper>
         <Styled.ProductImg
           key={productItem.id}

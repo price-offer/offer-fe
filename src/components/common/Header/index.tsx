@@ -1,4 +1,5 @@
 import { Avatar, Divider, IconButton, Button } from '@offer-ui/react'
+import { useSetAtom } from 'jotai'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -9,10 +10,9 @@ import { SideBar } from './SideBar'
 import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
-import { OAUTH_URL } from '@constants/oauth'
-import { useAuth } from '@hooks/useAuth'
-import { IMAGE } from '@constants'
-import { useModal } from '@hooks'
+import { searchKeywordAtom } from '@atoms'
+import { IMAGE, OAUTH_URL } from '@constants'
+import { useModal, useAuth } from '@hooks'
 
 const PREVENT_ACTIVE_PATHS = ['/post']
 
@@ -26,6 +26,7 @@ const Header = (): ReactElement => {
     logout: false,
     search: false
   })
+  const setSearchKeyword = useSetAtom(searchKeywordAtom)
 
   const handleOpenLoginModal = () => {
     openModal()
@@ -47,7 +48,10 @@ const Header = (): ReactElement => {
             </Link>
             {isActivePath && (
               <Styled.InputWrapper>
-                <Styled.SearchInput placeholder="검색어를 입력하세요" />
+                <Styled.SearchInput
+                  placeholder="검색어를 입력하세요"
+                  onSubmitValue={value => setSearchKeyword(value || '')}
+                />
               </Styled.InputWrapper>
             )}
           </Styled.LogoInputSection>

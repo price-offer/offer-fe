@@ -42,6 +42,7 @@ export type GetPostsReq = {
   category?: string
   sellerId?: number
   tradeStatus?: string
+  searchKeyword?: string
   minPrice?: number
   maxPrice?: number
   lastId?: number | null

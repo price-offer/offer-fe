@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useAtomValue } from 'jotai'
 import type { NextPage } from 'next'
 import { useState } from 'react'
 import type {
@@ -6,6 +7,7 @@ import type {
   OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
+import { searchKeywordAtom } from '@atoms'
 import {
   SearchOptions,
   ResultHeader,
@@ -25,6 +27,7 @@ const ResultPage: NextPage = () => {
       min: 0
     }
   })
+  const searchKeyword = useAtomValue(searchKeywordAtom)
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_POST_PAGE_NUMBER,
@@ -32,7 +35,8 @@ const ResultPage: NextPage = () => {
     minPrice: searchOptions.priceRange?.min,
     maxPrice: searchOptions.priceRange?.max,
     tradeType: searchOptions.tradeType,
-    sort: searchOptions.sort
+    sort: searchOptions.sort,
+    searchKeyword
   })
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
   const postsCount = 0

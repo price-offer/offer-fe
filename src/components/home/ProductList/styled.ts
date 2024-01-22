@@ -15,9 +15,10 @@ const NewProductTitle = styled.div`
 `
 
 const ProductListWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 31px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
     grid-template-columns: repeat(4, minmax(10%, 166px));
     gap: 18px 20px;

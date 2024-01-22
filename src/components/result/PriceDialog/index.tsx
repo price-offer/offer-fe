@@ -14,7 +14,7 @@ const PriceDialog = ({
   const priceDialog = useModal()
   const { desktop } = useMedia()
 
-  const isApplied = defaultPriceRange?.max && defaultPriceRange?.min
+  const isAppliedRange = defaultPriceRange?.max && defaultPriceRange?.min
 
   const handleChangePrice = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget
@@ -42,7 +42,7 @@ const PriceDialog = ({
   return (
     <Styled.Wrapper>
       <Styled.PriceDialogWrapper onClick={priceDialog.toggle}>
-        {isApplied ? (
+        {isAppliedRange ? (
           <>
             가격
             <Styled.ApplyPrice>

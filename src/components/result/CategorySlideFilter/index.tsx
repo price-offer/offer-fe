@@ -14,7 +14,7 @@ const CategorySlideFilter = ({
   const [startX, setStartX] = useState<number>(0)
   const [isLast, setIsLast] = useState<boolean>(false)
   const [moveDistanceFromArrow, setMoveDistanceFromArrow] = useState<number>(0)
-  const { desktop } = useMedia()
+  const { desktop: isDesktop } = useMedia()
 
   const isFirstCategory = containerRef.current?.scrollLeft === 0
 
@@ -23,7 +23,7 @@ const CategorySlideFilter = ({
   }
 
   const onDragStart: TouchEventHandler<HTMLDivElement> = e => {
-    if (!containerRef || !containerRef.current || desktop) {
+    if (!containerRef || !containerRef.current || isDesktop) {
       return
     }
 

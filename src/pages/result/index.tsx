@@ -2,14 +2,14 @@ import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { useState } from 'react'
 import type {
-  Filters,
-  HandleChangeFilter
-} from '@components/result/FilterSelect/types'
+  SearchOptionsState,
+  HandleChangeSearchOptions
+} from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
 import {
+  SearchOptions,
   ResultHeader,
   CategorySlideFilter,
-  FilterSelect,
   ProductList
 } from '@components'
 
@@ -19,7 +19,7 @@ const ResultPage: NextPage = () => {
   const getCategoriesQuery = useGetCategoriesQuery()
   const categories =
     getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
-  const [filters, setFilters] = useState<Filters>({
+  const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
     sort: 'CREATED_DATE_DESC',
     priceRange: {
       min: 0
@@ -28,17 +28,20 @@ const ResultPage: NextPage = () => {
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_POST_PAGE_NUMBER,
-    category: filters?.category,
-    minPrice: filters.priceRange?.min,
-    maxPrice: filters.priceRange?.max,
-    tradeType: filters.tradeType,
-    sort: filters.sort
+    category: searchOptions?.category,
+    minPrice: searchOptions.priceRange?.min,
+    maxPrice: searchOptions.priceRange?.max,
+    tradeType: searchOptions.tradeType,
+    sort: searchOptions.sort
   })
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-  const postCount = 0
+  const postsCount = 0
 
-  const handleChangeFilters: HandleChangeFilter = (name, value) => {
-    setFilters(prev => ({
+  const handleChangeSearchOptions: HandleChangeSearchOptions = (
+    name,
+    value
+  ) => {
+    setSearchOptions(prev => ({
       ...prev,
       [name]: value
     }))
@@ -47,19 +50,21 @@ const ResultPage: NextPage = () => {
   return (
     <Layout>
       <ResultWrapper>
-        <ResultHeader postCount={postCount} searchResult="###" />
+        <ResultHeader postsCount={postsCount} searchResult="###" />
         <CategorySliderWrapper>
           <CategorySlideFilter
             categories={categories}
-            selectedCategory={filters.category}
-            onClickCategory={code => handleChangeFilters('category', code)}
+            selectedCategory={searchOptions.category}
+            onClickCategory={code =>
+              handleChangeSearchOptions('category', code)
+            }
           />
         </CategorySliderWrapper>
-        <FilterSelect
+        <SearchOptions
           categories={categories}
-          filters={filters}
-          handleChangeFilters={handleChangeFilters}
-          postCount={postCount}
+          handleChangeSearchOptions={handleChangeSearchOptions}
+          postsCount={postsCount}
+          searchOptions={searchOptions}
         />
         <ProductList
           fetchNextPage={infinitePosts?.fetchNextPage}

@@ -7,7 +7,7 @@ const Container = styled.div`
 
   cursor: pointer;
 
-  ${({ theme }): string => theme.mediaQuery.mobile} {
+  ${({ theme }) => theme.mediaQuery.mobile} {
     flex: 1 0 44%;
   }
 `

@@ -21,6 +21,10 @@ const ProductList = ({
 
   const shouldFetchNextPage = inView && hasNextPage
 
+  const handleClickLike = (postId: number) => () => {
+    updateLikeStatusMutation.mutateAsync(postId)
+  }
+
   useEffect(() => {
     if (!shouldFetchNextPage) {
       return
@@ -42,7 +46,7 @@ const ProductList = ({
             <ProductItem
               key={post.id}
               productItem={post}
-              onClickLike={() => updateLikeStatusMutation.mutateAsync(post.id)}
+              onClickLike={handleClickLike(post.id)}
               onClickProduct={() => router.push(`/post/${post.id}`)}
             />
           ))

@@ -1,4 +1,4 @@
 export type ResultHeaderProps = {
   searchResult: string
-  postCount: number
+  postsCount: number
 }

@@ -1,15 +1,15 @@
 import type { ReactElement } from 'react'
 import { Styled } from './styled'
-import type { FilterSelectProps } from './types'
+import type { SearchOptionsProps } from './types'
 import { PriceDialog } from '../PriceDialog'
 import { SORT_OPTIONS, TRADE_TYPES } from '@constants'
 
-const FilterSelect = ({
+const SearchOptions = ({
   categories,
-  handleChangeFilters,
-  filters,
-  postCount = 0
-}: FilterSelectProps): ReactElement => {
+  handleChangeSearchOptions,
+  searchOptions,
+  postsCount = 0
+}: SearchOptionsProps): ReactElement => {
   return (
     <Styled.SelectWrapper>
       <Styled.LeftSelectWrapper>
@@ -17,33 +17,33 @@ const FilterSelect = ({
           colorType="dark"
           items={categories}
           placeholder="전체"
-          value={filters?.category || 'ALL'}
-          onChange={({ code }) => handleChangeFilters('category', code)}
+          value={searchOptions?.category || 'ALL'}
+          onChange={({ code }) => handleChangeSearchOptions('category', code)}
         />
         <Styled.TradePeriodSelect
           colorType="light"
           items={TRADE_TYPES}
           placeholder="거래방식"
-          value={filters?.tradeType}
-          onChange={({ code }) => handleChangeFilters('tradeType', code)}
+          value={searchOptions?.tradeType}
+          onChange={({ code }) => handleChangeSearchOptions('tradeType', code)}
         />
         <PriceDialog
-          priceRange={filters.priceRange}
+          priceRange={searchOptions.priceRange}
           onClickApply={priceRange => {
-            handleChangeFilters('priceRange', priceRange)
+            handleChangeSearchOptions('priceRange', priceRange)
           }}
         />
       </Styled.LeftSelectWrapper>
       <Styled.RightSelectWrapper>
-        <Styled.ProductCount>전체 {postCount}개</Styled.ProductCount>
+        <Styled.ProductCount>전체 {postsCount}개</Styled.ProductCount>
         <Styled.PriceFilterSelect
           colorType="none"
           items={SORT_OPTIONS}
-          value={filters.sort}
-          onChange={({ code }) => handleChangeFilters('sort', code)}
+          value={searchOptions.sort}
+          onChange={({ code }) => handleChangeSearchOptions('sort', code)}
         />
       </Styled.RightSelectWrapper>
     </Styled.SelectWrapper>
   )
 }
-export { FilterSelect, FilterSelectProps }
+export { SearchOptions, SearchOptionsProps }

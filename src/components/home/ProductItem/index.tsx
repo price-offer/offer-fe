@@ -8,17 +8,13 @@ const ProductItem = ({
   onClickProduct,
   onClickLike
 }: ProductItemProps): ReactElement => {
-  const handleClickProduct = () => {
-    onClickProduct?.()
-  }
-
   const handleClickLike = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     onClickLike?.()
   }
 
   return (
-    <Styled.Container onClick={handleClickProduct}>
+    <Styled.Container onClick={onClickProduct}>
       <Styled.ProductImgWrapper>
         <Styled.ProductImg
           key={productItem.id}

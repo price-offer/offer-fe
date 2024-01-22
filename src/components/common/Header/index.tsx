@@ -167,6 +167,7 @@ const Header = (): ReactElement => {
               search: false
             })
           }
+          onSubmitValue={handleSubmitValue}
         />
       )}
       <SideBar

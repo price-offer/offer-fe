@@ -9,14 +9,13 @@ export type SearchOptionsState = {
     max?: number
   }
 }
-export type HandleChangeSearchOptions = (
-  name: KeyOf<SearchOptionsState>,
-  value: ValueOf<SearchOptionsState>
-) => void
+export type OnChangeSearchOptions = (
+  name: KeyOf<SearchOptionsState>
+) => (value: ValueOf<SearchOptionsState>) => void
 
 export type SearchOptionsProps = {
   categories: Pick<Category, 'code' | 'name'>[]
   postsCount?: number
   searchOptions: SearchOptionsState
-  handleChangeSearchOptions: HandleChangeSearchOptions
+  onChangeSearchOption: OnChangeSearchOptions
 }

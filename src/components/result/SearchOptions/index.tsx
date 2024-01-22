@@ -6,9 +6,9 @@ import { SORT_OPTIONS, TRADE_TYPES } from '@constants'
 
 const SearchOptions = ({
   categories,
-  handleChangeSearchOptions,
   searchOptions,
-  postsCount = 0
+  postsCount = 0,
+  onChangeSearchOption
 }: SearchOptionsProps): ReactElement => {
   return (
     <Styled.SelectWrapper>
@@ -18,20 +18,18 @@ const SearchOptions = ({
           items={categories}
           placeholder="전체"
           value={searchOptions?.category || 'ALL'}
-          onChange={({ code }) => handleChangeSearchOptions('category', code)}
+          onChange={({ code }) => onChangeSearchOption('category')(code)}
         />
         <Styled.TradePeriodSelect
           colorType="light"
           items={TRADE_TYPES}
           placeholder="거래방식"
           value={searchOptions?.tradeType}
-          onChange={({ code }) => handleChangeSearchOptions('tradeType', code)}
+          onChange={({ code }) => onChangeSearchOption('tradeType')(code)}
         />
         <PriceDialog
           priceRange={searchOptions.priceRange}
-          onClickApply={priceRange => {
-            handleChangeSearchOptions('priceRange', priceRange)
-          }}
+          onClickApply={onChangeSearchOption('priceRange')}
         />
       </Styled.LeftSelectWrapper>
       <Styled.RightSelectWrapper>
@@ -40,7 +38,7 @@ const SearchOptions = ({
           colorType="none"
           items={SORT_OPTIONS}
           value={searchOptions.sort}
-          onChange={({ code }) => handleChangeSearchOptions('sort', code)}
+          onChange={({ code }) => onChangeSearchOption('sort')(code)}
         />
       </Styled.RightSelectWrapper>
     </Styled.SelectWrapper>

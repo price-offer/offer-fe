@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import { useState } from 'react'
 import type {
   SearchOptionsState,
-  HandleChangeSearchOptions
+  OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
 import {
@@ -36,10 +36,7 @@ const ResultPage: NextPage = () => {
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
   const postsCount = 0
 
-  const handleChangeSearchOptions: HandleChangeSearchOptions = (
-    name,
-    value
-  ) => {
+  const handleChangeSearchOptions: OnChangeSearchOptions = name => value => {
     setSearchOptions(prev => ({
       ...prev,
       [name]: value
@@ -54,16 +51,14 @@ const ResultPage: NextPage = () => {
           <CategorySlideFilter
             categories={categories}
             selectedCategory={searchOptions.category}
-            onClickCategory={code =>
-              handleChangeSearchOptions('category', code)
-            }
+            onClickCategory={handleChangeSearchOptions('category')}
           />
         </CategorySliderWrapper>
         <SearchOptions
           categories={categories}
-          handleChangeSearchOptions={handleChangeSearchOptions}
           postsCount={postsCount}
           searchOptions={searchOptions}
+          onChangeSearchOption={handleChangeSearchOptions}
         />
         <ProductList
           fetchNextPage={infinitePosts?.fetchNextPage}

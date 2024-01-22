@@ -10,6 +10,7 @@ import { SideBar } from './SideBar'
 import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
+import { toQueryString } from '@utils/format'
 import { searchKeywordAtom } from '@atoms'
 import { IMAGE, OAUTH_URL } from '@constants'
 import { useModal, useAuth } from '@hooks'
@@ -32,6 +33,17 @@ const Header = (): ReactElement => {
     openModal()
   }
 
+  const handleSubmitValue = (value?: string) => {
+    if (value) {
+      setSearchKeyword(value)
+      router.push(
+        `/result${toQueryString({
+          searchKeyword: value
+        })}`
+      )
+    }
+  }
+
   const handleClickLogin = () => {
     router.replace(OAUTH_URL.KAKAO)
   }
@@ -50,7 +62,7 @@ const Header = (): ReactElement => {
               <Styled.InputWrapper>
                 <Styled.SearchInput
                   placeholder="검색어를 입력하세요"
-                  onSubmitValue={value => setSearchKeyword(value || '')}
+                  onSubmitValue={handleSubmitValue}
                 />
               </Styled.InputWrapper>
             )}

@@ -16,6 +16,10 @@ import { IMAGE, OAUTH_URL } from '@constants'
 import { useModal, useAuth } from '@hooks'
 
 const PREVENT_ACTIVE_PATHS = ['/post']
+const initDialog = {
+  logout: false,
+  search: false
+}
 
 const Header = (): ReactElement => {
   const router = useRouter()
@@ -23,10 +27,7 @@ const Header = (): ReactElement => {
   const { isLogin, user, handleLogout } = useAuth()
   const { isOpen, openModal, closeModal } = useModal()
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
-  const [isOpenDialog, setIsOpenDialog] = useState({
-    logout: false,
-    search: false
-  })
+  const [isOpenDialog, setIsOpenDialog] = useState(initDialog)
   const setSearchKeyword = useSetAtom(searchKeywordAtom)
 
   const handleOpenLoginModal = () => {
@@ -48,16 +49,24 @@ const Header = (): ReactElement => {
     router.replace(OAUTH_URL.KAKAO)
   }
 
+  const handleClickLogo = () => {
+    setIsOpenDialog(initDialog)
+    router.push('/')
+  }
+
+  const handleClickSideBar = () => {
+    setIsOpenDialog(initDialog)
+    setIsOpenSideBar(true)
+  }
+
   return (
     <>
       <Styled.HeaderWrapper>
         <Styled.HeaderContent>
           <Styled.LogoInputSection>
-            <Link href="/">
-              <Styled.LogoButton styleType="ghost">
-                <Image alt="Logo" height={40} src={IMAGE.LOGO} width={72} />
-              </Styled.LogoButton>
-            </Link>
+            <Styled.LogoButton styleType="ghost" onClick={handleClickLogo}>
+              <Image alt="Logo" height={40} src={IMAGE.LOGO} width={72} />
+            </Styled.LogoButton>
             {isActivePath && (
               <Styled.InputWrapper>
                 <Styled.SearchInput
@@ -150,11 +159,7 @@ const Header = (): ReactElement => {
                 })
               }
             />
-            <IconButton
-              icon="menu"
-              size={24}
-              onClick={() => setIsOpenSideBar(true)}
-            />
+            <IconButton icon="menu" size={24} onClick={handleClickSideBar} />
           </Styled.MenuSection>
         </Styled.HeaderContent>
       </Styled.HeaderWrapper>

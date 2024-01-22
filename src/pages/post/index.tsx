@@ -11,6 +11,7 @@ import {
   Divider
 } from '@offer-ui/react'
 import type { ImageInfo, InputProps } from '@offer-ui/react'
+import { isEqual } from 'lodash'
 import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
@@ -26,7 +27,7 @@ import {
 } from '@apis'
 import { PostForm } from '@components'
 import { TRADE_TYPES, PRODUCT_CONDITIONS, TRADE_STATUS } from '@constants'
-import { useResponsive } from '@hooks'
+import { useAuth, usePreventLeavePage, useResponsive } from '@hooks'
 
 type PostFormState = Partial<
   Omit<CreatePostReq, 'price' | 'thumbnailImageUrl' | 'imageUrls'>
@@ -77,9 +78,14 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
   const createUploadImagesMutation = useCreateUploadImagesMutation()
   const getCategoriesQuery = useGetCategoriesQuery()
   const updatePostMutation = useUpdatePostMutation()
-  const router = useRouter()
 
+  const initialPostForm: PostFormState = getPostQuery.data?.postForm || {}
   const [postForm, setPostForm] = useState<PostFormState>({})
+  const hasChanged = !isEqual(initialPostForm, postForm)
+  const canPosting = hasChanged && isCompleteForm(postForm)
+  const router = useRouter()
+  const { user } = useAuth()
+  usePreventLeavePage(hasChanged)
 
   const InputSize = useResponsive<InputProps, 'width'>({
     desktop: '278px',
@@ -97,7 +103,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
   }
 
   const handlePostProduct = async () => {
-    if (!isCompleteForm(postForm)) {
+    if (!canPosting) {
       return
     }
 
@@ -143,9 +149,22 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
 
   useEffect(() => {
     if (getPostQuery.data) {
+      const { seller } = getPostQuery.data
+
+      if (seller.id !== user.id) {
+        router.push('/403')
+        return
+      }
+
       setPostForm(getPostQuery.data.postForm)
     }
   }, [getPostQuery.data])
+
+  if (getPostQuery.isError) {
+    router.push('/403')
+
+    return <></>
+  }
 
   return (
     <StyledPostPage>
@@ -246,7 +265,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
       </StyledFormWrapper>
       <StyledButtonWrapper>
         <Button
-          disabled={!isCompleteForm(postForm)}
+          disabled={!canPosting}
           styleType="solidPrimary"
           onClick={handlePostProduct}>
           확인

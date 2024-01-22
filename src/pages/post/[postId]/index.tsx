@@ -46,8 +46,8 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
   const updateTradeStatusMutation = useUpdateTradeStatusMutation()
   const deletePostMutation = useDeletePostMutation(postId)
 
-  const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
   const router = useRouter()
+  const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
 
   const tradeStatusDialog = useModal()
   const deleteModal = useModal()
@@ -72,6 +72,12 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     await deletePostMutation.mutateAsync()
 
     router.replace('/')
+  }
+
+  if (getPostQuery.isError) {
+    router.push('/403')
+
+    return <></>
   }
 
   return (

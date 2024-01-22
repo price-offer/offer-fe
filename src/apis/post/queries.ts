@@ -31,6 +31,7 @@ export const useGetPostQuery = (id: number) =>
   useQuery({
     queryKey: ['getPost', id],
     queryFn: () => getPost(id),
+    retry: false,
     enabled: typeof id === 'number',
     select: data => ({
       ...data,

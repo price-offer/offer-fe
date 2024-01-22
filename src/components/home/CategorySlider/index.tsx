@@ -109,7 +109,7 @@ const CategorySlider = (): ReactElement => {
           )}
           <Styled.CateGoryBoxWrapper
             isMoveFromArrowButton={isMoveFromArrowButton}>
-            {getCategoryQuery.data?.origin.map(({ code, name, imageUrl }) => {
+            {getCategoryQuery.data?.map(({ code, name, imageUrl }) => {
               return (
                 <Styled.CategoryItem key={name}>
                   <Styled.CategoryLink href={`/result?category=${code}`}>

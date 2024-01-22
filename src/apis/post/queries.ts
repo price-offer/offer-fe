@@ -71,11 +71,7 @@ export const useGetPostQuery = (id: number) =>
 export const useGetCategoriesQuery = () =>
   useQuery({
     queryKey: ['getCategories'],
-    queryFn: getCategories,
-    select: data => ({
-      origin: data,
-      summary: data?.map(({ code, name }) => ({ code, name }))
-    })
+    queryFn: getCategories
   })
 
 export const useGetPostsQuery = (searchOptions: GetPostsReq) =>

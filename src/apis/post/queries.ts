@@ -83,7 +83,7 @@ export const useGetPostsQuery = (searchOptions: GetPostsReq) =>
 
 export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
   useInfiniteQuery<GetPostsRes>({
-    queryKey: ['infinitePosts'],
+    queryKey: ['infinitePosts', params],
     queryFn: () => getPosts(params),
     initialPageParam: null,
     getNextPageParam: lastPage =>

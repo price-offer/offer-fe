@@ -1,37 +1,44 @@
-import type { ReactElement } from 'react'
+import type { MouseEvent, ReactElement } from 'react'
 import { Styled } from './styled'
 import type { ProductItemProps } from './types'
-import { getTimeDiffText } from '@utils/format'
+import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 
-const ProductItem = ({ productItem }: ProductItemProps): ReactElement => {
+const ProductItem = ({
+  productItem,
+  onClickProduct,
+  onClickLike
+}: ProductItemProps): ReactElement => {
+  const handleClickLike = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    onClickLike?.()
+  }
+
   return (
-    <>
-      <div>
-        <Styled.ProductImgWrapper>
-          <Styled.ProductImg
-            key={productItem.id}
-            alt={`productName-${productItem.title}`}
-            src={productItem.thumbnailImageUrl}
-            style={{ maxWidth: '276px' }}
-          />
-          <Styled.HeartButton
-            icon="heart"
-            size={16}
-            toggleColor="brandPrimary"
-            toggleIcon="heartFill"
-          />
-        </Styled.ProductImgWrapper>
-        <Styled.ProductItemTitle>{productItem.title}</Styled.ProductItemTitle>
-        <Styled.ProductItemStartPrice>시작가</Styled.ProductItemStartPrice>
-        &nbsp;
-        <Styled.ProductItemPrice>
-          {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
-        </Styled.ProductItemPrice>
-        <Styled.ProductItemAddress>
-          {productItem.location} {getTimeDiffText(productItem.createdAt)}
-        </Styled.ProductItemAddress>
-      </div>
-    </>
+    <Styled.Container onClick={onClickProduct}>
+      <Styled.ProductImgWrapper>
+        <Styled.ProductImg
+          key={productItem.id}
+          alt={`productName-${productItem.title}`}
+          src={productItem.thumbnailImageUrl}
+        />
+        <Styled.HeartButton
+          icon="heart"
+          isToggle={productItem.liked}
+          size={16}
+          toggleColor="brandPrimary"
+          toggleIcon="heartFill"
+          onClick={handleClickLike}
+        />
+      </Styled.ProductImgWrapper>
+      <Styled.ProductItemTitle>{productItem.title}</Styled.ProductItemTitle>
+      <Styled.ProductItemStartPrice>시작가</Styled.ProductItemStartPrice>
+      <Styled.ProductItemPrice>
+        {toLocaleCurrency(productItem.price)}원
+      </Styled.ProductItemPrice>
+      <Styled.ProductItemAddress>
+        {productItem.location} ⋅ {getTimeDiffText(productItem.createdAt)}
+      </Styled.ProductItemAddress>
+    </Styled.Container>
   )
 }
 export { ProductItem, ProductItemProps }

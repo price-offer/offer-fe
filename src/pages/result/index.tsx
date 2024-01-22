@@ -1,106 +1,67 @@
 import styled from '@emotion/styled'
-import { useMedia } from '@offer-ui/react'
 import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
-import { useGetInfinitePostsQuery } from '@apis'
+import { useState } from 'react'
+import type {
+  SearchOptionsState,
+  OnChangeSearchOptions
+} from '@components/result/SearchOptions/types'
+import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
 import {
+  SearchOptions,
   ResultHeader,
-  ProductList,
   CategorySlideFilter,
-  FilterSelect
+  ProductList
 } from '@components'
-import { useCategoryFilterList, useSelectBoxFilter } from '@hooks'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
-const Result: NextPage = () => {
-  const { desktop } = useMedia()
-  const [isDesktop, setIsDesktop] = useState(false)
-
-  useEffect(() => {
-    if (desktop) {
-      setIsDesktop(true)
-    } else {
-      setIsDesktop(false)
+const ResultPage: NextPage = () => {
+  const getCategoriesQuery = useGetCategoriesQuery()
+  const categories =
+    getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
+  const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
+    sort: 'CREATED_DATE_DESC',
+    priceRange: {
+      min: 0
     }
-  }, [desktop])
-
-  const {
-    checkFilterList,
-    onCheckItem,
-    selectedCategoryValue,
-    handleCategorySelectChange
-  } = useCategoryFilterList()
-
-  const {
-    tradePeriodItems,
-    selectedTradePeriodValue,
-    selectedSortPriceValue,
-    inputPrice,
-    applyPrice,
-    handleTradePeriodSelectChange,
-    handleSortPriceSelectChange,
-    handlePriceInputChange,
-    handlePriceApplyClick
-  } = useSelectBoxFilter()
-
-  const categoryFilterOption =
-    selectedCategoryValue === 'ALL' ? undefined : selectedCategoryValue
-
+  })
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_POST_PAGE_NUMBER,
-    category: categoryFilterOption,
-    minPrice: applyPrice && applyPrice?.minPrice,
-    maxPrice: applyPrice && applyPrice?.maxPrice,
-    tradeType: selectedTradePeriodValue,
-    sort: selectedSortPriceValue
+    category: searchOptions?.category,
+    minPrice: searchOptions.priceRange?.min,
+    maxPrice: searchOptions.priceRange?.max,
+    tradeType: searchOptions.tradeType,
+    sort: searchOptions.sort
   })
+  // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
+  const postsCount = 0
 
-  const postSummaries = Number(
-    infinitePosts?.data?.pages?.reduce(
-      (acc, cur) => acc + cur?.posts?.length,
-      0
-    )
-  )
-
-  useEffect(() => {
-    infinitePosts?.refetch()
-  }, [
-    applyPrice,
-    selectedCategoryValue,
-    selectedTradePeriodValue,
-    selectedSortPriceValue,
-    infinitePosts?.refetch
-  ])
+  const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
+    setSearchOptions(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
 
   return (
     <Layout>
       <ResultWrapper>
-        <ResultHeader
-          postSummariesLength={postSummaries && postSummaries}
-          searchResult="###"
-        />
-        {isDesktop && (
+        <ResultHeader postsCount={postsCount} searchResult="###" />
+        <CategorySliderWrapper>
           <CategorySlideFilter
-            cateGoryList={checkFilterList}
-            onCategoryClick={onCheckItem}
+            categories={categories}
+            selectedCategory={searchOptions.category}
+            onClickCategory={code =>
+              handleChangeSearchOptions('category', code)
+            }
           />
-        )}
-        <FilterSelect
-          applyPrice={applyPrice}
-          categoryItems={checkFilterList}
-          handleCategoryChange={handleCategorySelectChange}
-          handlePriceApplyClick={handlePriceApplyClick}
-          handlePriceInputChange={handlePriceInputChange}
-          handleSortPriceChange={handleSortPriceSelectChange}
-          handleTradePeriodChange={handleTradePeriodSelectChange}
-          inputPrice={inputPrice}
-          postSummariesLength={postSummaries && postSummaries}
-          selectedCategoryValue={selectedCategoryValue}
-          selectedSortPriceValue={selectedSortPriceValue}
-          selectedTradePeriodValue={selectedTradePeriodValue}
-          tradePeriodItems={tradePeriodItems}
+        </CategorySliderWrapper>
+        <SearchOptions
+          categories={categories}
+          postsCount={postsCount}
+          searchOptions={searchOptions}
+          onChangeSearchOption={handleChangeSearchOptions}
         />
         <ProductList
           fetchNextPage={infinitePosts?.fetchNextPage}
@@ -133,4 +94,11 @@ const Layout = styled.div`
   margin-top: 68px;
 `
 
-export default Result
+const CategorySliderWrapper = styled.div`
+  /* TODO: useMedia를 사용한 조건부 렌더링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
+  ${({ theme }) => theme.mediaQuery.tablet} {
+    display: none;
+  }
+`
+
+export default ResultPage

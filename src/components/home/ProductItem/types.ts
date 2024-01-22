@@ -8,4 +8,6 @@ export type ProductItemProps = {
     createdAt: string
     liked: boolean
   }
+  onClickProduct(): void
+  onClickLike(): void
 }

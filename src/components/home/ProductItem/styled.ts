@@ -1,17 +1,27 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Image, ToggleButton } from '@offer-ui/react'
 
+const Container = styled.div`
+  flex: 1 0 22%;
+
+  cursor: pointer;
+
+  ${({ theme }) => theme.mediaQuery.mobile} {
+    flex: 1 0 44%;
+  }
+`
+
 const ProductImg = styled(Image)`
   width: 100%;
+  max-width: none;
+
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 166px;
   }
+
   ${({ theme }): string => theme.mediaQuery.mobile} {
     height: 200px;
-  }
-
-  @media (width < 510px) {
-    height: 160px;
   }
 `
 
@@ -24,23 +34,15 @@ const HeartButton = styled(ToggleButton)`
   height: 24px;
   border-radius: 100%;
 
-  background-color: ${({ theme }): string => theme.colors.white};
+  ${({ theme }) => css`
+    z-index: ${theme.zIndex.common};
+
+    background-color: ${theme.colors.white};
+  `};
 `
 
 const ProductImgWrapper = styled.div`
   position: relative;
-
-  max-width: 276px;
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    max-width: 166px;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    max-width: 200px;
-  }
-
-  @media (width < 510px) {
-    max-width: 160px;
-  }
 `
 
 const ProductItemTitle = styled.div`
@@ -50,6 +52,8 @@ const ProductItemTitle = styled.div`
 `
 const ProductItemStartPrice = styled.span`
   ${({ theme }): string => theme.fonts.body02M};
+  margin-right: 4px;
+
   color: ${({ theme }): string => theme.colors.grayScale70};
 `
 
@@ -63,6 +67,7 @@ const ProductItemAddress = styled.div`
 `
 
 export const Styled = {
+  Container,
   ProductImg,
   HeartButton,
   ProductImgWrapper,

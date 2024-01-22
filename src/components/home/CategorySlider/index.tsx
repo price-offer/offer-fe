@@ -15,7 +15,7 @@ const CategorySlider = (): ReactElement => {
   const [isMoveFromArrowButton, setIsMoveArrowButton] = useState<number>(0)
   const isFirstCategory = containerRef.current?.scrollLeft === 0
 
-  const { data: categories } = useGetCategoriesQuery()
+  const getCategoryQuery = useGetCategoriesQuery()
 
   useEffect(() => {
     if (desktop) {
@@ -109,21 +109,20 @@ const CategorySlider = (): ReactElement => {
           )}
           <Styled.CateGoryBoxWrapper
             isMoveFromArrowButton={isMoveFromArrowButton}>
-            {categories?.map(cateGory => {
+            {getCategoryQuery.data?.map(({ code, name, imageUrl }) => {
               return (
-                <Styled.CategoryItem key={cateGory.name}>
-                  <Styled.CategoryLink
-                    href={`/result?category=${cateGory.code}`}>
+                <Styled.CategoryItem key={name}>
+                  <Styled.CategoryLink href={`/result?category=${code}`}>
                     <Styled.CategoryImgWrapper>
                       <Styled.CategoryImg
-                        key={cateGory.name}
-                        alt={`category-${cateGory.name}`}
+                        key={name}
+                        alt={`category-${name}`}
                         height={58}
-                        src={cateGory.imageUrl}
+                        src={imageUrl}
                         width={58}
                       />
                     </Styled.CategoryImgWrapper>
-                    <Styled.CateGoryName>{cateGory.name}</Styled.CateGoryName>
+                    <Styled.CateGoryName>{name}</Styled.CateGoryName>
                   </Styled.CategoryLink>
                 </Styled.CategoryItem>
               )

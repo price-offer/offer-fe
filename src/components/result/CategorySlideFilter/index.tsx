@@ -1,36 +1,32 @@
 import { useMedia } from '@offer-ui/react'
-import { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
 import type { CategorySlideFilterProps } from './types'
 
 const CategorySlideFilter = ({
-  cateGoryList,
-  onCategoryClick
+  categories,
+  selectedCategory = 'ALL',
+  onClickCategory
 }: CategorySlideFilterProps): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [isDrag, setIsDrag] = useState(false)
   const [startX, setStartX] = useState<number>(0)
-  const { desktop } = useMedia()
-  const [isDesktop, setIsDesktop] = useState(false)
   const [isLast, setIsLast] = useState<boolean>(false)
   const [moveDistanceFromArrow, setMoveDistanceFromArrow] = useState<number>(0)
+  const { desktop: isDesktop } = useMedia()
+
   const isFirstCategory = containerRef.current?.scrollLeft === 0
 
-  const handleCategoryClick = (name: string): void => {
-    onCategoryClick(name)
+  const handleCategoryClick = (code: string) => () => {
+    onClickCategory(code)
   }
-  useEffect(() => {
-    if (desktop) {
-      setIsDesktop(true)
-    } else {
-      setIsDesktop(false)
-    }
-  }, [desktop])
+
   const onDragStart: TouchEventHandler<HTMLDivElement> = e => {
     if (!containerRef || !containerRef.current || isDesktop) {
       return
     }
+
     setIsDrag(true)
     setStartX(e.touches[0].clientX + containerRef.current.scrollLeft)
   }
@@ -74,57 +70,54 @@ const CategorySlideFilter = ({
     },
     [isDrag, startX]
   )
+
   return (
-    <>
-      <Styled.CateGoryBoxWrapper>
-        <Styled.CateGoryBox
-          ref={containerRef}
-          onMouseUp={onDragEnd}
-          onTouchEnd={onDragEnd}
-          onTouchMove={isDrag ? onDragMove : undefined}
-          onTouchStart={onDragStart}>
-          {isFirstCategory ? (
-            <div />
-          ) : (
-            <Styled.LeftArrowWrapper>
-              <Styled.LeftArrow
-                color="black"
-                icon="arrowLeft"
-                size={16}
-                onClick={handleLeftArrowClick}
-              />
-            </Styled.LeftArrowWrapper>
-          )}
-          {isLast ? (
-            <div />
-          ) : (
-            <Styled.RightArrowWrapper>
-              <Styled.RightArrow
-                color="black"
-                icon="arrowLeft"
-                size={16}
-                onClick={handleRightArrowClick}
-              />
-            </Styled.RightArrowWrapper>
-          )}
-          <Styled.CateGoryItemWrapper
-            moveDistanceFromArrow={moveDistanceFromArrow}>
-            {cateGoryList.map(cateGory => (
-              <Styled.CategoryItem
-                key={cateGory.name}
-                selected={cateGory.selected}
-                onClick={(): void => {
-                  handleCategoryClick(cateGory.name)
-                }}>
-                <Styled.CateGoryName selected={cateGory.selected}>
-                  {cateGory.name}
-                </Styled.CateGoryName>
-              </Styled.CategoryItem>
-            ))}
-          </Styled.CateGoryItemWrapper>
-        </Styled.CateGoryBox>
-      </Styled.CateGoryBoxWrapper>
-    </>
+    <Styled.CateGoryBoxWrapper>
+      <Styled.CateGoryBox
+        ref={containerRef}
+        onMouseUp={onDragEnd}
+        onTouchEnd={onDragEnd}
+        onTouchMove={isDrag ? onDragMove : undefined}
+        onTouchStart={onDragStart}>
+        {isFirstCategory ? (
+          <div />
+        ) : (
+          <Styled.LeftArrowWrapper>
+            <Styled.LeftArrow
+              color="black"
+              icon="arrowLeft"
+              size={16}
+              onClick={handleLeftArrowClick}
+            />
+          </Styled.LeftArrowWrapper>
+        )}
+        {isLast ? (
+          <div />
+        ) : (
+          <Styled.RightArrowWrapper>
+            <Styled.RightArrow
+              color="black"
+              icon="arrowLeft"
+              size={16}
+              onClick={handleRightArrowClick}
+            />
+          </Styled.RightArrowWrapper>
+        )}
+        <Styled.CateGoryItemWrapper
+          moveDistanceFromArrow={moveDistanceFromArrow}>
+          {categories?.map(({ code, name }) => (
+            <Styled.CategoryItem
+              key={code}
+              selected={selectedCategory === code}
+              onClick={handleCategoryClick(code)}>
+              <Styled.CateGoryName selected={selectedCategory === code}>
+                {name}
+              </Styled.CateGoryName>
+            </Styled.CategoryItem>
+          ))}
+        </Styled.CateGoryItemWrapper>
+      </Styled.CateGoryBox>
+    </Styled.CateGoryBoxWrapper>
   )
 }
 export { CategorySlideFilter, CategorySlideFilterProps }

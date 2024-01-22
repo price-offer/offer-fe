@@ -1,5 +1,5 @@
 export * from './CategoryHeader'
 export * from './CategorySlideFilter'
-export * from './FilterSelect'
+export * from './SearchOptions'
 export * from './PriceDialog'
 export * from './PriceInput'

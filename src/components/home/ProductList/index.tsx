@@ -39,7 +39,6 @@ const ProductList = ({
 
   return (
     <>
-      <Styled.NewProductTitle>새로운 상품</Styled.NewProductTitle>
       <Styled.ProductListWrapper>
         {postData?.map(page =>
           page?.posts?.map(post => (

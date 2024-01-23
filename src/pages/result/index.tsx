@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
 import type { GetServerSideProps, NextPage } from 'next'
@@ -74,6 +75,7 @@ const ResultPage: NextPage = ({
     limit: DEFAULT_POST_PAGE_NUMBER,
     ...searchParams
   })
+
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
   const postsCount = 0
 
@@ -109,11 +111,20 @@ const ResultPage: NextPage = ({
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />
-        <ProductList
-          fetchNextPage={infinitePosts?.fetchNextPage}
-          hasNextPage={infinitePosts?.hasNextPage}
-          postData={infinitePosts?.data?.pages}
-        />
+        {postsCount > 0 ? (
+          <ProductList
+            fetchNextPage={infinitePosts?.fetchNextPage}
+            hasNextPage={infinitePosts?.hasNextPage}
+            postData={infinitePosts?.data?.pages}
+          />
+        ) : (
+          <Placeholder>
+            <PlaceholderTitle>검색 결과 없음</PlaceholderTitle>
+            <PlaceholderDescription>
+              찾으시는 검색 결과가 없어요
+            </PlaceholderDescription>
+          </Placeholder>
+        )}
       </ResultWrapper>
     </Layout>
   )
@@ -145,6 +156,28 @@ const CategorySliderWrapper = styled.div`
   ${({ theme }) => theme.mediaQuery.tablet} {
     display: none;
   }
+`
+
+const Placeholder = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 120px 0;
+
+  text-align: center;
+`
+
+const PlaceholderTitle = styled.p`
+  margin-bottom: 8px;
+
+  ${({ theme }) => theme.fonts.subtitle01B}
+`
+
+const PlaceholderDescription = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.grayScale70};
+
+    ${theme.fonts.body01M};
+  `}
 `
 
 export default ResultPage

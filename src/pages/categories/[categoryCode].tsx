@@ -4,9 +4,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import type {
   SearchOptionsState,
-  OnChangeSearchOptions,
-  SearchOptionsStateKeys,
-  SearchOptionStateValues
+  OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
 import { PostSection, ResultHeader } from '@components'
@@ -71,22 +69,20 @@ const Categories: NextPage = ({
     ...searchParams
   })
 
-  const getNextCategoryCode = (
-    name: SearchOptionsStateKeys,
-    value: SearchOptionStateValues
-  ) => (name === 'category' ? value : searchOptions.category)
-
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
-    const nextCategoryCode = getNextCategoryCode(name, value)
     const nextSearchOptions = {
       ...searchOptions,
       [name]: value
     }
+    const { category, priceRange, ...params } = nextSearchOptions
+
     setSearchOptions(nextSearchOptions)
 
     router.push(
-      `/categories/${nextCategoryCode}?${toQueryString({
-        ...searchParams
+      `/categories/${category}?${toQueryString({
+        ...params,
+        minPrice: priceRange.min,
+        maxPrice: priceRange.max
       })}`
     )
   }

@@ -53,12 +53,14 @@ export const toLocaleCurrency = (value: number): string => {
 }
 
 export const toQueryString = (object: {
-  [key: string]: string | number
+  [key: string]: string | number | undefined
 }): URLSearchParams => {
   const searchParams = new URLSearchParams()
 
   Object.entries(object).forEach(([key, value]) => {
-    searchParams.set(String(key), String(value))
+    if (value) {
+      searchParams.set(String(key), String(value))
+    }
   })
 
   return searchParams

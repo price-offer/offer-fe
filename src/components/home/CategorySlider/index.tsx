@@ -85,7 +85,7 @@ const CategorySlider = (): ReactElement => {
           onTouchMove={isDrag ? onDragMove : undefined}
           onTouchStart={onDragStart}>
           {isDesktop && (
-            <Styled.ArrowBox>
+            <>
               {isFirstCategory ? (
                 <div />
               ) : (
@@ -106,7 +106,7 @@ const CategorySlider = (): ReactElement => {
                   onClick={handleRightArrowClick}
                 />
               )}
-            </Styled.ArrowBox>
+            </>
           )}
           <Styled.CateGoryBoxWrapper
             isMoveFromArrowButton={isMoveFromArrowButton}>

@@ -19,6 +19,7 @@ const Home: NextPage = () => {
       <HomeWrapper>
         <HomeBanner />
         <CategorySlider />
+        <ProductTitle>새로운 상품</ProductTitle>
         <ProductList
           fetchNextPage={fetchNextPage}
           hasNextPage={hasNextPage}
@@ -48,6 +49,15 @@ const Layout = styled.div`
 
   width: 100%;
   margin-top: 68px;
+`
+
+const ProductTitle = styled.div`
+  ${({ theme }): string => theme.fonts.headline02B}
+  margin-top: 52px;
+  ${({ theme }): string => theme.mediaQuery.tablet} {
+    ${({ theme }): string => theme.fonts.subtitle01B}
+    margin-top: 40px;
+  }
 `
 
 export default Home

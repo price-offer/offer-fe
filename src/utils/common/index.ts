@@ -2,7 +2,7 @@ export const noop = (): void => undefined
 
 export const find = <T extends any[] | readonly any[]>(
   arr: T,
-  target: UnknownObject<string | number>
+  target: UnknownObject<string | number | undefined>
 ): T extends readonly any[] ? ValueOf<T> : undefined => {
   const result = arr.find(item => {
     const splittedArr = splitObject(item)

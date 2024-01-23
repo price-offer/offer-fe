@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -8,14 +7,9 @@ import type {
   OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
-import {
-  SearchOptions,
-  ResultHeader,
-  CategorySlideFilter,
-  ProductList
-} from '@components'
+import { PostSection, ResultHeader } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
-import { removeNullish, toQueryString } from '@utils'
+import { find, removeNullish, toQueryString } from '@utils'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
@@ -62,9 +56,7 @@ const Categories: NextPage = ({
 
   const categories =
     getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
-  const currentCategory = categories.find(
-    ({ code }) => code === searchOptions.category
-  )
+  const currentCategory = find(categories, { code: searchOptions.category })
 
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
@@ -95,35 +87,16 @@ const Categories: NextPage = ({
           postsCount={postsCount}
           resultMessage={currentCategory?.name || '전체'}
         />
-        <CategorySliderWrapper>
-          <CategorySlideFilter
-            categories={categories}
-            selectedCategory={searchOptions.category}
-            onClickCategory={code =>
-              handleChangeSearchOptions('category', code)
-            }
-          />
-        </CategorySliderWrapper>
-        <SearchOptions
-          categories={categories}
+        <PostSection
+          infinitePosts={{
+            fetchNextPage: infinitePosts?.fetchNextPage,
+            hasNextPage: infinitePosts?.hasNextPage,
+            postData: infinitePosts.data?.pages
+          }}
           postsCount={postsCount}
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />
-        {postsCount > 0 ? (
-          <ProductList
-            fetchNextPage={infinitePosts?.fetchNextPage}
-            hasNextPage={infinitePosts?.hasNextPage}
-            postData={infinitePosts?.data?.pages}
-          />
-        ) : (
-          <Placeholder>
-            <PlaceholderTitle>검색 결과 없음</PlaceholderTitle>
-            <PlaceholderDescription>
-              찾으시는 검색 결과가 없어요
-            </PlaceholderDescription>
-          </Placeholder>
-        )}
       </ResultWrapper>
     </Layout>
   )
@@ -148,35 +121,6 @@ const Layout = styled.div`
 
   width: 100%;
   margin-top: 68px;
-`
-
-const CategorySliderWrapper = styled.div`
-  /* TODO: useMedia를 사용한 조건부 렌더링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
-  ${({ theme }) => theme.mediaQuery.tablet} {
-    display: none;
-  }
-`
-
-const Placeholder = styled.div`
-  width: 100%;
-  height: 100%;
-  margin: 120px 0;
-
-  text-align: center;
-`
-
-const PlaceholderTitle = styled.p`
-  margin-bottom: 8px;
-
-  ${({ theme }) => theme.fonts.subtitle01B}
-`
-
-const PlaceholderDescription = styled.p`
-  ${({ theme }) => css`
-    color: ${theme.colors.grayScale70};
-
-    ${theme.fonts.body01M};
-  `}
 `
 
 export default Categories

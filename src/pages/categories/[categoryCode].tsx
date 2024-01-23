@@ -5,7 +5,8 @@ import { useState } from 'react'
 import type {
   SearchOptionsState,
   OnChangeSearchOptions,
-  SearchOptionsStateKeys
+  SearchOptionsStateKeys,
+  SearchOptionStateValues
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
 import { PostSection, ResultHeader } from '@components'
@@ -70,10 +71,13 @@ const Categories: NextPage = ({
     ...searchParams
   })
 
-  const getNextCategoryCode = (name: SearchOptionsStateKeys) =>
-    name === 'category' ? name : searchOptions.category
+  const getNextCategoryCode = (
+    name: SearchOptionsStateKeys,
+    value: SearchOptionStateValues
+  ) => (name === 'category' ? value : searchOptions.category)
 
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
+    const nextCategoryCode = getNextCategoryCode(name, value)
     const nextSearchOptions = {
       ...searchOptions,
       [name]: value
@@ -81,7 +85,7 @@ const Categories: NextPage = ({
     setSearchOptions(nextSearchOptions)
 
     router.push(
-      `/categories/${getNextCategoryCode(name)}?${toQueryString({
+      `/categories/${nextCategoryCode}?${toQueryString({
         ...searchParams
       })}`
     )

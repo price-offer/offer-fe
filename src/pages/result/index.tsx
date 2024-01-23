@@ -77,7 +77,7 @@ const ResultPage: NextPage = ({
   })
 
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-  const postsCount = 0
+  const postsCount = 10
 
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
     const nextSearchOptions = {

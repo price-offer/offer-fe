@@ -4,7 +4,8 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import type {
   SearchOptionsState,
-  OnChangeSearchOptions
+  OnChangeSearchOptions,
+  SearchOptionsStateKeys
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
 import { PostSection, ResultHeader } from '@components'
@@ -20,6 +21,7 @@ type CategoriesProps = {
   maxPrice?: number
   tradeType?: TradeTypeCodes
 }
+
 export const getServerSideProps: GetServerSideProps<CategoriesProps> = async ({
   query
 }) => ({
@@ -32,6 +34,9 @@ export const getServerSideProps: GetServerSideProps<CategoriesProps> = async ({
   }
 })
 
+// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
+const POSTS_COUNT_MOCK = 10
+
 const Categories: NextPage = ({
   category,
   sort,
@@ -39,13 +44,14 @@ const Categories: NextPage = ({
   maxPrice,
   tradeType
 }: CategoriesProps) => {
-  const getCategoriesQuery = useGetCategoriesQuery()
-  const router = useRouter()
   const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
     category,
     sort: 'CREATED_DATE_DESC',
     priceRange: {}
   })
+  const router = useRouter()
+
+  const getCategoriesQuery = useGetCategoriesQuery()
 
   const searchParams = removeNullish({
     minPrice: searchOptions.priceRange?.min ?? minPrice,
@@ -64,11 +70,10 @@ const Categories: NextPage = ({
     ...searchParams
   })
 
-  // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-  const postsCount = 10
+  const getNextCategoryCode = (name: SearchOptionsStateKeys) =>
+    name === 'category' ? name : searchOptions.category
 
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
-    const categoryCode = name === 'category' ? value : searchOptions.category
     const nextSearchOptions = {
       ...searchOptions,
       [name]: value
@@ -76,7 +81,9 @@ const Categories: NextPage = ({
     setSearchOptions(nextSearchOptions)
 
     router.push(
-      `/categories/${categoryCode}?${toQueryString({ ...searchParams })}`
+      `/categories/${getNextCategoryCode(name)}?${toQueryString({
+        ...searchParams
+      })}`
     )
   }
 
@@ -84,7 +91,7 @@ const Categories: NextPage = ({
     <Layout>
       <ResultWrapper>
         <ResultHeader
-          postsCount={postsCount}
+          postsCount={POSTS_COUNT_MOCK}
           resultMessage={currentCategory?.name || '전체'}
         />
         <PostSection
@@ -93,7 +100,7 @@ const Categories: NextPage = ({
             hasNextPage: infinitePosts?.hasNextPage,
             postData: infinitePosts.data?.pages
           }}
-          postsCount={postsCount}
+          postsCount={POSTS_COUNT_MOCK}
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />

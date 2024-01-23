@@ -10,8 +10,10 @@ export type SearchOptionsState = {
   }
 }
 
+export type SearchOptionsStateKeys = KeyOf<SearchOptionsState>
+
 export type OnChangeSearchOptions = (
-  name: KeyOf<SearchOptionsState>,
+  name: SearchOptionsStateKeys,
   value: ValueOf<SearchOptionsState>
 ) => void
 

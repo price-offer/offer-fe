@@ -4,6 +4,7 @@ import { Modal, useMedia } from '@offer-ui/react'
 import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { useState, type ReactElement, useEffect } from 'react'
+import { toQueryString } from '@utils/format'
 import { useGetMessageRoomsQuery } from '@apis'
 import {
   MessagePreview,
@@ -53,7 +54,11 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
   const handleSelectRoom = (id: number) => {
     setRoomId(id)
 
-    router.push(`/messagebox?${new URLSearchParams([['roomId', String(id)]])}`)
+    router.push(
+      `/messagebox?${toQueryString({
+        roomId: String(id)
+      })}`
+    )
 
     if (!desktop) {
       openModal()

@@ -52,6 +52,18 @@ export const toLocaleCurrency = (value: number): string => {
   return value.toLocaleString('kr')
 }
 
+export const toQueryString = (object: {
+  [key: string]: string | number
+}): URLSearchParams => {
+  const searchParams = new URLSearchParams()
+
+  Object.entries(object).forEach(([key, value]) => {
+    searchParams.set(String(key), String(value))
+  })
+
+  return searchParams
+}
+
 export const localeCurrencyToNumber = (value: string) =>
   Number(value.replaceAll(',', ''))
 

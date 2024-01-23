@@ -110,7 +110,7 @@ const PriceOfferCard = ({
       })
 
       router.push(
-        `/messagebox${toQueryString({
+        `/messagebox?${toQueryString({
           roomId: res.id
         })}`
       )

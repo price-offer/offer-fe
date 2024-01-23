@@ -38,7 +38,7 @@ const Header = (): ReactElement => {
     if (value) {
       setSearchKeyword(value)
       router.push(
-        `/result${toQueryString({
+        `/result?${toQueryString({
           searchKeyword: value
         })}`
       )

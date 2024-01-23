@@ -113,7 +113,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                           onClose={tradeStatusDialog.closeModal}>
                           <DialogButtonContainer>
                             <Link
-                              href={`/post${toQueryString({
+                              href={`/post?${toQueryString({
                                 type: 'edit',
                                 postId
                               })}`}>

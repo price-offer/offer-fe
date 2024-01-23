@@ -84,7 +84,7 @@ const ResultPage: NextPage = ({
     }
     setSearchOptions(nextSearchOptions)
 
-    router.push(`/result${toQueryString(searchParams)}`)
+    router.push(`/result?${toQueryString(searchParams)}`)
   }
 
   return (

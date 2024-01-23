@@ -4,6 +4,7 @@ import { IconButton } from '@offer-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { CateGoryBoxWrapperProps } from './types'
+import { theme } from '@styles'
 
 export const CategoryHeader = styled.div`
   ${({ theme }): string => theme.fonts.headline02B}
@@ -81,43 +82,46 @@ export const CateGoryBox = styled.div`
   }
 `
 
-export const ArrowBox = styled.div`
+const arrowStyle = css`
   position: absolute;
-  z-index: 999;
-  display: flex;
-  align-self: center;
-  justify-content: space-between;
+  top: 32px;
+  z-index: ${theme.zIndex.common};
 
-  width: 100%;
-  margin-bottom: 30px;
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+
+  background-color: ${theme.colors.white};
+
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
 `
 
 export const LeftArrow = styled(IconButton)`
-  width: 24px;
-  height: 24px;
-  border-radius: 100%;
+  left: 0;
 
-  background-color: ${({ theme }): string => theme.colors.white};
-
-  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
+  ${arrowStyle}
 `
 
 export const RightArrow = styled(IconButton)`
-  width: 24px;
-  height: 24px;
-  border-radius: 100%;
+  right: 0;
 
-  background-color: ${({ theme }): string => theme.colors.white};
-
-  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 25%));
+  ${arrowStyle}
 
   transform: scaleX(-1);
 `
 
-export const CategoryItem = styled.div`
+export const CategoryItem = styled.button`
+  display: flex;
+  justify-content: center;
+
   width: 100%;
   max-width: 108px;
   height: 118px;
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
 
   transition: 0.5s;
 
@@ -142,6 +146,7 @@ export const CategoryImgWrapper = styled.div`
   width: 108px;
   height: 86px;
 
+  cursor: pointer;
   ${({ theme }) => css`
     border-radius: ${theme.radius.round12};
 
@@ -192,7 +197,6 @@ export const Styled = {
   CateGoryBoxWrapper,
   CateGoryBox,
   CategoryLink,
-  ArrowBox,
   LeftArrow,
   RightArrow,
   CategoryItem,

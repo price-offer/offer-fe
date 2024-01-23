@@ -7,6 +7,10 @@ import { ProductList } from '../components/home/ProductList'
 import { useGetInfinitePostsQuery } from '@apis/post'
 import { CategorySlider, HomeBanner } from '@components'
 
+const DEFAULT_PER_PAGE = 8
+// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
+const POSTS_COUNTS_MOCK = 10
+
 const Home: NextPage = () => {
   const {
     data: postList,
@@ -14,12 +18,9 @@ const Home: NextPage = () => {
     hasNextPage
   } = useGetInfinitePostsQuery({
     lastId: null,
-    limit: 8
+    limit: DEFAULT_PER_PAGE
   })
   const router = useRouter()
-
-  // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-  const postsCount = 0
 
   return (
     <Layout>
@@ -27,7 +28,7 @@ const Home: NextPage = () => {
         <HomeBanner />
         <CategorySlider />
         <ProductTitle>새로운 상품</ProductTitle>
-        {postsCount > 0 ? (
+        {POSTS_COUNTS_MOCK > 0 ? (
           <ProductList
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}

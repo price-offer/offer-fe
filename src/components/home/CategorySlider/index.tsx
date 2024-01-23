@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
 import { useGetCategoriesQuery } from '@apis/post'
+import { SORT_OPTIONS } from '@constants/app'
+import { toQueryString } from '@utils/format'
 
 const CategorySlider = (): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -84,7 +86,7 @@ const CategorySlider = (): ReactElement => {
           onTouchMove={isDrag ? onDragMove : undefined}
           onTouchStart={onDragStart}>
           {isDesktop && (
-            <Styled.ArrowBox>
+            <>
               {isFirstCategory ? (
                 <div />
               ) : (
@@ -105,14 +107,17 @@ const CategorySlider = (): ReactElement => {
                   onClick={handleRightArrowClick}
                 />
               )}
-            </Styled.ArrowBox>
+            </>
           )}
           <Styled.CateGoryBoxWrapper
             isMoveFromArrowButton={isMoveFromArrowButton}>
             {getCategoryQuery.data?.map(({ code, name, imageUrl }) => {
               return (
                 <Styled.CategoryItem key={name}>
-                  <Styled.CategoryLink href={`/result?category=${code}`}>
+                  <Styled.CategoryLink
+                    href={`/categories/${code}?${toQueryString({
+                      sort: SORT_OPTIONS[0].code
+                    })}`}>
                     <Styled.CategoryImgWrapper>
                       <Styled.CategoryImg
                         key={name}

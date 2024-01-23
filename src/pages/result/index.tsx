@@ -14,6 +14,8 @@ import type { SortOptionCodes, TradeTypeCodes } from '@types'
 import { toQueryString, removeNullish } from '@utils'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
+// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
+const POST_COUNT_MOCK = 10
 
 type ResultPageProps = {
   keyword?: string
@@ -66,24 +68,31 @@ const ResultPage: NextPage = ({
     ...searchParams
   })
 
-  // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-  const postsCount = 10
+  const searchByResult = ({ priceRange, ...params }: SearchOptionsState) => {
+    router.push(
+      `/result?${toQueryString({
+        ...params,
+        minPrice: priceRange.min,
+        maxPrice: priceRange.max
+      })}`
+    )
+  }
 
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
-    const nextSearchOptions = {
+    const newSearchOptions = {
       ...searchOptions,
       [name]: value
     }
-    setSearchOptions(nextSearchOptions)
 
-    router.push(`/result?${toQueryString(searchParams)}`)
+    setSearchOptions(newSearchOptions)
+    searchByResult(newSearchOptions)
   }
 
   return (
     <Layout>
       <ResultWrapper>
         <ResultHeader
-          postsCount={postsCount}
+          postsCount={POST_COUNT_MOCK}
           resultMessage={`"${currentKeyword}"의 검색결과`}
         />
         <PostSection
@@ -92,7 +101,7 @@ const ResultPage: NextPage = ({
             hasNextPage: infinitePosts?.hasNextPage,
             postData: infinitePosts.data?.pages
           }}
-          postsCount={postsCount}
+          postsCount={POST_COUNT_MOCK}
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />

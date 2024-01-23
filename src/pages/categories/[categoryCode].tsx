@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useAtomValue } from 'jotai'
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -9,7 +8,6 @@ import type {
   OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
-import { searchKeywordAtom } from '@atoms'
 import {
   SearchOptions,
   ResultHeader,
@@ -21,20 +19,18 @@ import { removeNullish } from '@utils'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
-type ResultPageProps = {
-  keyword?: string
-  category?: string | null
+type CategoriesProps = {
+  category?: string
   sort?: SortOptionCodes
   minPrice?: number
   maxPrice?: number
   tradeType?: TradeTypeCodes
 }
-export const getServerSideProps: GetServerSideProps<ResultPageProps> = async ({
+export const getServerSideProps: GetServerSideProps<CategoriesProps> = async ({
   query
 }) => ({
   props: {
-    keyword: (query.keyword as string) || '',
-    category: (query.category as string) || null,
+    category: query.categoryCode as string,
     sort: (query.sort as SortOptionCodes) || 'CREATED_DATE_DESC',
     minPrice: Number(query.min_price),
     maxPrice: Number(query.max_price),
@@ -42,33 +38,33 @@ export const getServerSideProps: GetServerSideProps<ResultPageProps> = async ({
   }
 })
 
-const ResultPage: NextPage = ({
-  keyword,
+const Categories: NextPage = ({
   category,
   sort,
   minPrice,
   maxPrice,
   tradeType
-}: ResultPageProps) => {
+}: CategoriesProps) => {
   const getCategoriesQuery = useGetCategoriesQuery()
   const router = useRouter()
-  const searchKeyword = useAtomValue(searchKeywordAtom)
   const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
+    category,
     sort: 'CREATED_DATE_DESC',
     priceRange: {}
   })
-  const currentKeyword = searchKeyword ?? keyword
+
   const searchParams = removeNullish({
-    category: searchOptions?.category ?? category,
     minPrice: searchOptions.priceRange?.min ?? minPrice,
     maxPrice: searchOptions.priceRange?.max ?? maxPrice,
     tradeType: searchOptions.tradeType ?? tradeType,
-    sort: searchOptions.sort ?? sort,
-    searchKeyword: currentKeyword
+    sort: searchOptions.sort ?? sort
   })
 
   const categories =
     getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
+  const currentCategory = categories.find(
+    ({ code }) => code === searchOptions.category
+  )
 
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
@@ -80,6 +76,7 @@ const ResultPage: NextPage = ({
   const postsCount = 10
 
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
+    const categoryCode = name === 'category' ? value : searchOptions.category
     const nextSearchOptions = {
       ...searchOptions,
       [name]: value
@@ -91,7 +88,7 @@ const ResultPage: NextPage = ({
       String(value)
     ])
 
-    router.push(`/result?${new URLSearchParams(params)}`)
+    router.push(`/categories/${categoryCode}?${new URLSearchParams(params)}`)
   }
 
   return (
@@ -99,7 +96,7 @@ const ResultPage: NextPage = ({
       <ResultWrapper>
         <ResultHeader
           postsCount={postsCount}
-          resultMessage={`"${currentKeyword}"의 검색결과`}
+          resultMessage={currentCategory?.name || '전체'}
         />
         <CategorySliderWrapper>
           <CategorySlideFilter
@@ -185,4 +182,4 @@ const PlaceholderDescription = styled.p`
   `}
 `
 
-export default ResultPage
+export default Categories

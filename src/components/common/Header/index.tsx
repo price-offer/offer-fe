@@ -11,7 +11,7 @@ import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
 import { searchKeywordAtom } from '@atoms'
-import { IMAGE, OAUTH_URL } from '@constants'
+import { IMAGE, OAUTH_URL, SORT_OPTIONS } from '@constants'
 import { useModal, useAuth } from '@hooks'
 
 const PREVENT_ACTIVE_PATHS = ['/post']
@@ -36,7 +36,12 @@ const Header = (): ReactElement => {
   const handleSubmitValue = (value?: string) => {
     if (value) {
       setSearchKeyword(value)
-      router.push(`/result?${new URLSearchParams([['searchKeyword', value]])}`)
+      router.push(
+        `/result?${new URLSearchParams([
+          ['searchKeyword', value],
+          ['sort', SORT_OPTIONS[0].code]
+        ])}`
+      )
     }
   }
 

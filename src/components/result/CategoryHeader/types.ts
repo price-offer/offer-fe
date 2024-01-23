@@ -1,4 +1,4 @@
 export type ResultHeaderProps = {
-  searchResult: string
+  resultMessage: string
   postsCount: number
 }

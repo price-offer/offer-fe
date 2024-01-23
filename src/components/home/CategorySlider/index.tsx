@@ -5,6 +5,7 @@ import type { ReactElement, TouchEventHandler } from 'react'
 import { Styled } from './styled'
 import { useGetCategoriesQuery } from '@apis/post'
 import { SORT_OPTIONS } from '@constants/app'
+import { toQueryString } from '@utils/format'
 
 const CategorySlider = (): ReactElement => {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -114,9 +115,9 @@ const CategorySlider = (): ReactElement => {
               return (
                 <Styled.CategoryItem key={name}>
                   <Styled.CategoryLink
-                    href={`/categories/${code}?${new URLSearchParams([
-                      ['sort', SORT_OPTIONS[0].code]
-                    ])}`}>
+                    href={`/categories/${code}?${toQueryString({
+                      sort: SORT_OPTIONS[0].code
+                    })}`}>
                     <Styled.CategoryImgWrapper>
                       <Styled.CategoryImg
                         key={name}

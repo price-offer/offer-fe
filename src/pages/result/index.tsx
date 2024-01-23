@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useAtomValue } from 'jotai'
 import type { GetServerSideProps, NextPage } from 'next'
@@ -8,14 +7,9 @@ import type {
   SearchOptionsState,
   OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
-import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
+import { useGetInfinitePostsQuery } from '@apis'
 import { searchKeywordAtom } from '@atoms'
-import {
-  SearchOptions,
-  ResultHeader,
-  CategorySlideFilter,
-  ProductList
-} from '@components'
+import { ResultHeader, PostSection } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
 import { toQueryString, removeNullish } from '@utils'
 
@@ -50,7 +44,6 @@ const ResultPage: NextPage = ({
   maxPrice,
   tradeType
 }: ResultPageProps) => {
-  const getCategoriesQuery = useGetCategoriesQuery()
   const router = useRouter()
   const searchKeyword = useAtomValue(searchKeywordAtom)
   const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
@@ -66,9 +59,6 @@ const ResultPage: NextPage = ({
     sort: searchOptions.sort ?? sort,
     searchKeyword: currentKeyword
   })
-
-  const categories =
-    getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
 
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
@@ -96,35 +86,16 @@ const ResultPage: NextPage = ({
           postsCount={postsCount}
           resultMessage={`"${currentKeyword}"의 검색결과`}
         />
-        <CategorySliderWrapper>
-          <CategorySlideFilter
-            categories={categories}
-            selectedCategory={searchOptions.category}
-            onClickCategory={code =>
-              handleChangeSearchOptions('category', code)
-            }
-          />
-        </CategorySliderWrapper>
-        <SearchOptions
-          categories={categories}
+        <PostSection
+          infinitePosts={{
+            fetchNextPage: infinitePosts?.fetchNextPage,
+            hasNextPage: infinitePosts?.hasNextPage,
+            postData: infinitePosts.data?.pages
+          }}
           postsCount={postsCount}
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />
-        {postsCount > 0 ? (
-          <ProductList
-            fetchNextPage={infinitePosts?.fetchNextPage}
-            hasNextPage={infinitePosts?.hasNextPage}
-            postData={infinitePosts?.data?.pages}
-          />
-        ) : (
-          <Placeholder>
-            <PlaceholderTitle>검색 결과 없음</PlaceholderTitle>
-            <PlaceholderDescription>
-              찾으시는 검색 결과가 없어요
-            </PlaceholderDescription>
-          </Placeholder>
-        )}
       </ResultWrapper>
     </Layout>
   )
@@ -149,35 +120,6 @@ const Layout = styled.div`
 
   width: 100%;
   margin-top: 68px;
-`
-
-const CategorySliderWrapper = styled.div`
-  /* TODO: useMedia를 사용한 조건부 렌더링시 hydration 에러가 발생해 스타일로 우선 적용 했습니다. */
-  ${({ theme }) => theme.mediaQuery.tablet} {
-    display: none;
-  }
-`
-
-const Placeholder = styled.div`
-  width: 100%;
-  height: 100%;
-  margin: 120px 0;
-
-  text-align: center;
-`
-
-const PlaceholderTitle = styled.p`
-  margin-bottom: 8px;
-
-  ${({ theme }) => theme.fonts.subtitle01B}
-`
-
-const PlaceholderDescription = styled.p`
-  ${({ theme }) => css`
-    color: ${theme.colors.grayScale70};
-
-    ${theme.fonts.body01M};
-  `}
 `
 
 export default ResultPage

@@ -69,15 +69,11 @@ const Categories: NextPage = ({
     ...searchParams
   })
 
-  const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
-    const nextSearchOptions = {
-      ...searchOptions,
-      [name]: value
-    }
-    const { category, priceRange, ...params } = nextSearchOptions
-
-    setSearchOptions(nextSearchOptions)
-
+  const searchByCategory = ({
+    category,
+    priceRange,
+    ...params
+  }: SearchOptionsState) => {
     router.push(
       `/categories/${category}?${toQueryString({
         ...params,
@@ -85,6 +81,16 @@ const Categories: NextPage = ({
         maxPrice: priceRange.max
       })}`
     )
+  }
+
+  const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
+    const newSearchOptions = {
+      ...searchOptions,
+      [name]: value
+    }
+
+    setSearchOptions(newSearchOptions)
+    searchByCategory(newSearchOptions)
   }
 
   return (

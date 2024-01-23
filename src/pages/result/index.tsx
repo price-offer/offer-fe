@@ -13,7 +13,7 @@ import { ResultHeader, PostSection } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
 import { toQueryString, removeNullish } from '@utils'
 
-const DEFAULT_POST_PAGE_NUMBER = 8
+const DEFAULT_PER_PAGE = 8
 // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
 const POST_COUNT_MOCK = 10
 
@@ -64,7 +64,7 @@ const ResultPage: NextPage = ({
 
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
-    limit: DEFAULT_POST_PAGE_NUMBER,
+    limit: DEFAULT_PER_PAGE,
     ...searchParams
   })
 

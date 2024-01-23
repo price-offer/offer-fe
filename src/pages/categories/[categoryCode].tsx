@@ -11,7 +11,9 @@ import { PostSection, ResultHeader } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
 import { find, removeNullish, toQueryString } from '@utils'
 
-const DEFAULT_POST_PAGE_NUMBER = 8
+const DEFAULT_PER_PAGE = 8
+// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
+const POSTS_COUNT_MOCK = 10
 
 type CategoriesProps = {
   category?: string
@@ -32,9 +34,6 @@ export const getServerSideProps: GetServerSideProps<CategoriesProps> = async ({
     tradeType: (query.tradeType as TradeTypeCodes) || null
   }
 })
-
-// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-const POSTS_COUNT_MOCK = 10
 
 const Categories: NextPage = ({
   category,
@@ -65,7 +64,7 @@ const Categories: NextPage = ({
 
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
-    limit: DEFAULT_POST_PAGE_NUMBER,
+    limit: DEFAULT_PER_PAGE,
     ...searchParams
   })
 

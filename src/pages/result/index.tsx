@@ -16,11 +16,11 @@ import {
   ProductList
 } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
-import { toQueryString, removeUndefinedAndNull } from '@utils'
+import { toQueryString, removeNullish } from '@utils'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
-type Props = {
+type ResultPageProps = {
   keyword?: string
   category?: string | null
   sort?: SortOptionCodes
@@ -28,7 +28,7 @@ type Props = {
   maxPrice?: number
   tradeType?: TradeTypeCodes
 }
-export const getServerSideProps: GetServerSideProps<Props> = async ({
+export const getServerSideProps: GetServerSideProps<ResultPageProps> = async ({
   query
 }) => ({
   props: {
@@ -48,7 +48,7 @@ const ResultPage: NextPage = ({
   minPrice,
   maxPrice,
   tradeType
-}: Props) => {
+}: ResultPageProps) => {
   const getCategoriesQuery = useGetCategoriesQuery()
   const router = useRouter()
   const searchKeyword = useAtomValue(searchKeywordAtom)
@@ -57,7 +57,7 @@ const ResultPage: NextPage = ({
     priceRange: {}
   })
   const currentKeyword = searchKeyword ?? keyword
-  const searchParams = removeUndefinedAndNull({
+  const searchParams = removeNullish({
     category: searchOptions?.category ?? category,
     minPrice: searchOptions.priceRange?.min ?? minPrice,
     maxPrice: searchOptions.priceRange?.max ?? maxPrice,

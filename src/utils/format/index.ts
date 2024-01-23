@@ -62,7 +62,7 @@ export const toQueryString = (value: {
 export const localeCurrencyToNumber = (value: string) =>
   Number(value.replaceAll(',', ''))
 
-export const removeUndefinedAndNull = (obj: {
+export const removeNullish = (obj: {
   [key: string]: any
 }): { [key: string]: any } =>
   Object.keys(obj).reduce((acc, key) => {

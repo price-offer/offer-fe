@@ -15,7 +15,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import type { ReactElement } from 'react'
-import { getTimeDiffText, toLocaleCurrency, toQueryString } from '@utils/format'
+import { getTimeDiffText, toLocaleCurrency } from '@utils/format'
 import {
   useDeletePostMutation,
   useGetPostQuery,
@@ -113,10 +113,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
                           onClose={tradeStatusDialog.closeModal}>
                           <DialogButtonContainer>
                             <Link
-                              href={`/post${toQueryString({
-                                type: 'edit',
-                                postId
-                              })}`}>
+                              href={`/post?${new URLSearchParams([
+                                ['type', 'edit'],
+                                ['postId', String(postId)]
+                              ])}`}>
                               <DialogButton>수정하기</DialogButton>
                             </Link>
                             <DialogButton onClick={deleteModal.openModal}>

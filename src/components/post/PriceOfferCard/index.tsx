@@ -10,8 +10,7 @@ import { UserProfile } from '../UserProfile'
 import {
   getTimeDiffText,
   localeCurrencyToNumber,
-  toLocaleCurrency,
-  toQueryString
+  toLocaleCurrency
 } from '@utils/format'
 import {
   useUpdateLikeStatusMutation,
@@ -110,9 +109,7 @@ const PriceOfferCard = ({
       })
 
       router.push(
-        `/messagebox${toQueryString({
-          roomId: res.id
-        })}`
+        `/messagebox?${new URLSearchParams([['roomId', String(res.id)]])}`
       )
     }
   }

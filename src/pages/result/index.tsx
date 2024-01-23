@@ -16,7 +16,7 @@ import {
   ProductList
 } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
-import { toQueryString, removeNullish } from '@utils'
+import { removeNullish } from '@utils'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
@@ -84,7 +84,12 @@ const ResultPage: NextPage = ({
     }
     setSearchOptions(nextSearchOptions)
 
-    router.push(`/result${toQueryString(searchParams)}`)
+    const params = Object.entries(searchParams).map(([key, value]) => [
+      `${key}`,
+      String(value)
+    ])
+
+    router.push(`/result?${new URLSearchParams(params)}`)
   }
 
   return (

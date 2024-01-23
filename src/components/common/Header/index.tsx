@@ -10,7 +10,6 @@ import { SideBar } from './SideBar'
 import { Styled } from './styled'
 import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
-import { toQueryString } from '@utils/format'
 import { searchKeywordAtom } from '@atoms'
 import { IMAGE, OAUTH_URL } from '@constants'
 import { useModal, useAuth } from '@hooks'
@@ -37,11 +36,7 @@ const Header = (): ReactElement => {
   const handleSubmitValue = (value?: string) => {
     if (value) {
       setSearchKeyword(value)
-      router.push(
-        `/result${toQueryString({
-          searchKeyword: value
-        })}`
-      )
+      router.push(`/result?${new URLSearchParams([['searchKeyword', value]])}`)
     }
   }
 

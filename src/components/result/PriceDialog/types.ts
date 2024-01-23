@@ -1,5 +1,5 @@
 export type PriceRange = {
-  min: number
+  min?: number
   max?: number
 }
 

@@ -6,7 +6,7 @@ const OAUTH_ENDPOINT = {
 }
 
 export const OAUTH_URL = {
-  KAKAO: `${OAUTH_ENDPOINT.KAKAO}${toQueryString({
+  KAKAO: `${OAUTH_ENDPOINT.KAKAO}?${toQueryString({
     response_type: 'code',
     client_id: env.KAKAO_REST_API_KEY || '',
     redirect_uri: env.KAKAO_REDIRECT_URI || ''

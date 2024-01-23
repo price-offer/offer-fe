@@ -5,10 +5,14 @@ import { Image, ToggleButton } from '@offer-ui/react'
 const Container = styled.div`
   flex: 1 0 22%;
 
+  max-width: 22%;
+
   cursor: pointer;
 
   ${({ theme }) => theme.mediaQuery.mobile} {
     flex: 1 0 44%;
+
+    max-width: 44%;
   }
 `
 

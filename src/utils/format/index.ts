@@ -52,12 +52,27 @@ export const toLocaleCurrency = (value: number): string => {
   return value.toLocaleString('kr')
 }
 
-export const toQueryString = (value: {
+export const toQueryString = (object: {
   [key: string]: string | number
-}): string =>
-  Object.entries(value)
-    .reduce((query, [key, value]) => `${query}${key}=${value}&`, '?')
-    .slice(0, -1)
+}): URLSearchParams => {
+  const searchParams = new URLSearchParams()
+
+  Object.entries(object).forEach(([key, value]) => {
+    searchParams.set(String(key), String(value))
+  })
+
+  return searchParams
+}
 
 export const localeCurrencyToNumber = (value: string) =>
   Number(value.replaceAll(',', ''))
+
+export const removeNullish = (obj: {
+  [key: string]: any
+}): { [key: string]: any } =>
+  Object.keys(obj).reduce((acc, key) => {
+    if (obj[key] !== undefined && obj[key] !== null) {
+      acc[key] = obj[key]
+    }
+    return acc
+  }, {} as { [key: string]: any })

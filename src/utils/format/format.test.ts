@@ -25,6 +25,6 @@ describe('format/toQueryString', () => {
     const result = toQueryString(object)
 
     // Then
-    expect(result).toBe('?content_id=123&type=user')
+    expect(result).toBe('content_id=123&type=user')
   })
 })

@@ -5,7 +5,7 @@ export type SearchOptionsState = {
   category?: string
   tradeType?: TradeTypeCodes
   priceRange: {
-    min: number
+    min?: number
     max?: number
   }
 }

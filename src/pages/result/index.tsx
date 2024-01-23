@@ -1,53 +1,99 @@
 import styled from '@emotion/styled'
-import type { NextPage } from 'next'
+import { useAtomValue } from 'jotai'
+import type { GetServerSideProps, NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import type {
   SearchOptionsState,
   OnChangeSearchOptions
 } from '@components/result/SearchOptions/types'
 import { useGetCategoriesQuery, useGetInfinitePostsQuery } from '@apis'
+import { searchKeywordAtom } from '@atoms'
 import {
   SearchOptions,
   ResultHeader,
   CategorySlideFilter,
   ProductList
 } from '@components'
+import type { SortOptionCodes, TradeTypeCodes } from '@types'
+import { toQueryString, removeNullish } from '@utils'
 
 const DEFAULT_POST_PAGE_NUMBER = 8
 
-const ResultPage: NextPage = () => {
+type ResultPageProps = {
+  keyword?: string
+  category?: string | null
+  sort?: SortOptionCodes
+  minPrice?: number
+  maxPrice?: number
+  tradeType?: TradeTypeCodes
+}
+export const getServerSideProps: GetServerSideProps<ResultPageProps> = async ({
+  query
+}) => ({
+  props: {
+    keyword: (query.keyword as string) || '',
+    category: (query.category as string) || null,
+    sort: (query.sort as SortOptionCodes) || 'CREATED_DATE_DESC',
+    minPrice: Number(query.min_price),
+    maxPrice: Number(query.max_price),
+    tradeType: (query.tradeType as TradeTypeCodes) || null
+  }
+})
+
+const ResultPage: NextPage = ({
+  keyword,
+  category,
+  sort,
+  minPrice,
+  maxPrice,
+  tradeType
+}: ResultPageProps) => {
   const getCategoriesQuery = useGetCategoriesQuery()
-  const categories =
-    getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
+  const router = useRouter()
+  const searchKeyword = useAtomValue(searchKeywordAtom)
   const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
     sort: 'CREATED_DATE_DESC',
-    priceRange: {
-      min: 0
-    }
+    priceRange: {}
   })
+  const currentKeyword = searchKeyword ?? keyword
+  const searchParams = removeNullish({
+    category: searchOptions?.category ?? category,
+    minPrice: searchOptions.priceRange?.min ?? minPrice,
+    maxPrice: searchOptions.priceRange?.max ?? maxPrice,
+    tradeType: searchOptions.tradeType ?? tradeType,
+    sort: searchOptions.sort ?? sort,
+    searchKeyword: currentKeyword
+  })
+
+  const categories =
+    getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
+
   const infinitePosts = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_POST_PAGE_NUMBER,
-    category: searchOptions?.category,
-    minPrice: searchOptions.priceRange?.min,
-    maxPrice: searchOptions.priceRange?.max,
-    tradeType: searchOptions.tradeType,
-    sort: searchOptions.sort
+    ...searchParams
   })
   // TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
   const postsCount = 0
 
   const handleChangeSearchOptions: OnChangeSearchOptions = (name, value) => {
-    setSearchOptions(prev => ({
-      ...prev,
+    const nextSearchOptions = {
+      ...searchOptions,
       [name]: value
-    }))
+    }
+    setSearchOptions(nextSearchOptions)
+
+    router.push(`/result?${toQueryString(searchParams)}`)
   }
 
   return (
     <Layout>
       <ResultWrapper>
-        <ResultHeader postsCount={postsCount} searchResult="###" />
+        <ResultHeader
+          postsCount={postsCount}
+          searchResult={currentKeyword || ''}
+        />
         <CategorySliderWrapper>
           <CategorySlideFilter
             categories={categories}

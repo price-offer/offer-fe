@@ -55,7 +55,7 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
     setRoomId(id)
 
     router.push(
-      `/messagebox${toQueryString({
+      `/messagebox?${toQueryString({
         roomId: String(id)
       })}`
     )

@@ -4,6 +4,8 @@
     "paths": {
       "@apis/*": ["apis/*"],
       "@apis": ["apis"],
+      "@atoms/*": ["atoms/*"],
+      "@atoms": ["atoms"],
       "@mocks/*": ["mocks/*"],
       "@mocks": ["mocks"],
       "@assets/*": ["assets/*"],

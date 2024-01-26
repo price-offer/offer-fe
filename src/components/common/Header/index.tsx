@@ -26,7 +26,7 @@ const Header = (): ReactElement => {
   const isActivePath = !PREVENT_ACTIVE_PATHS.includes(router.pathname)
   const { isLogin, user, handleLogout } = useAuth()
   const loginModal = useModal()
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false)
+  const sidebarModal = useModal()
   const [isOpenDialog, setIsOpenDialog] = useState(initDialog)
   const setSearchKeyword = useSetAtom(searchKeywordAtom)
 
@@ -52,7 +52,7 @@ const Header = (): ReactElement => {
 
   const handleClickSideBar = () => {
     setIsOpenDialog(initDialog)
-    setIsOpenSideBar(true)
+    sidebarModal.openModal()
   }
 
   return (
@@ -173,8 +173,8 @@ const Header = (): ReactElement => {
       )}
       <SideBar
         isLogin={isLogin}
-        isOpen={isOpenSideBar}
-        onClose={() => setIsOpenSideBar(false)}
+        isOpen={sidebarModal.isOpen}
+        onClose={() => sidebarModal.closeModal()}
       />
       <LoginModal isOpen={loginModal.isOpen} onClose={loginModal.closeModal} />
     </>

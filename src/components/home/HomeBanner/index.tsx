@@ -3,6 +3,7 @@ import type { ReactElement } from 'react'
 import { Styled } from './styled'
 import { useAuth } from '@hooks/useAuth'
 import { LoginModal } from '@components'
+import { URL } from '@constants'
 import { useModal } from '@hooks'
 
 const HomeBanner = (): ReactElement => {
@@ -12,7 +13,7 @@ const HomeBanner = (): ReactElement => {
 
   const handleClickPosting = () => {
     if (isLogin) {
-      router.push('/post')
+      router.push(URL.POST)
 
       return
     }

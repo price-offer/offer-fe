@@ -85,6 +85,10 @@ const PriceOfferCard = ({
   }
 
   const handleChangeOffer = (e: ChangeEvent<HTMLFormElement>) => {
+    if (!isSeller) {
+      return
+    }
+
     const offerId = Number(e.target.value)
 
     setSelectedOffer(offerId)
@@ -165,12 +169,17 @@ const PriceOfferCard = ({
                   const isSelected = selectedOffer === id
 
                   return (
-                    <Styled.Offer key={id} isSelected={isSelected}>
-                      <Radio.Input
-                        checked={isSelected}
-                        formName="offer"
-                        value={String(id)}
-                      />
+                    <Styled.Offer
+                      key={id}
+                      isSelected={isSeller && isSelected}
+                      isSeller={isSeller}>
+                      {isSeller && (
+                        <Radio.Input
+                          checked={isSelected}
+                          formName="offer"
+                          value={String(id)}
+                        />
+                      )}
                       <Styled.OfferContent>
                         <UserProfile
                           date={getTimeDiffText(date)}

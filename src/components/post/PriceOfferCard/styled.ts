@@ -93,12 +93,17 @@ const BlankCard = styled.div`
   height: 120px;
   padding: 20px 0;
 `
-const Offer = styled(Radio.Label)<{ isSelected: boolean }>`
+const Offer = styled(Radio.Label)<{ isSeller: boolean; isSelected: boolean }>`
   display: flex;
   align-items: center;
 
   padding: 20px;
-  border-radius: ${({ theme }): string => theme.radius.round6};
+  ${({ theme, isSeller }) =>
+    css`
+      border-radius: ${theme.radius.round6};
+
+      cursor: ${isSeller ? 'cursor' : 'default'};
+    `};
 
   ${({ theme, isSelected }) => css`
     border: solid 1px

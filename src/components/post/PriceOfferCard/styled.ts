@@ -125,7 +125,7 @@ const OfferContent = styled.div`
 `
 
 const CardBody = styled.div`
-  height: 564px;
+  max-height: 564px;
   padding: 20px 16px;
 
   ${({ theme }): string => `

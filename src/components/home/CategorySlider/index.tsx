@@ -119,7 +119,11 @@ const CategorySlider = (): ReactElement => {
                       sort: SORT_OPTIONS[0].code
                     })}`}>
                     <Styled.CategoryImgWrapper>
-                      <Styled.CategoryImg url={imageUrl} />
+                      <Styled.CategoryImg
+                        aria-label={code}
+                        role="img"
+                        url={imageUrl}
+                      />
                     </Styled.CategoryImgWrapper>
                     <Styled.CateGoryName>{name}</Styled.CateGoryName>
                   </Styled.CategoryLink>

@@ -52,7 +52,7 @@ const PriceOfferCard = ({
 
   const offerDisabled =
     getPostOffersQuery.data?.offerCountOfCurrentMember ===
-      getPostOffersQuery.data?.maximumOfferCount || !isLogin
+    getPostOffersQuery.data?.maximumOfferCount
 
   useEffect(() => {
     setLikePost({
@@ -198,34 +198,38 @@ const PriceOfferCard = ({
             </Text>
           </Styled.BlankCard>
         )}
-        <Divider />
-        <Styled.CardFooter>
-          <Styled.LikeButton disabled={!isLogin} onClick={handleClickLike}>
-            {likePost.status ? (
-              <Icon color="brandPrimary" type="heartFill" />
-            ) : (
-              <Icon color="grayScale90" type="heart" />
-            )}
-            <Styled.LikeText>{likePost.count}</Styled.LikeText>
-          </Styled.LikeButton>
-          {isSeller ? (
-            <Styled.MessageButton
-              disabled={!selectedOffer}
-              size="large"
-              onClick={handleClickStartMessage}>
-              쪽지하기
-            </Styled.MessageButton>
-          ) : (
-            <Styled.MessageButton
-              disabled={offerDisabled}
-              size="large"
-              onClick={() => {
-                offerModal.openModal()
-              }}>{`가격 제안하기(${
-              getPostOffersQuery.data?.offerCountOfCurrentMember || 0
-            }/2)`}</Styled.MessageButton>
-          )}
-        </Styled.CardFooter>
+        {isLogin && (
+          <>
+            <Divider />
+            <Styled.CardFooter>
+              <Styled.LikeButton onClick={handleClickLike}>
+                {likePost.status ? (
+                  <Icon color="brandPrimary" type="heartFill" />
+                ) : (
+                  <Icon color="grayScale90" type="heart" />
+                )}
+                <Styled.LikeText>{likePost.count}</Styled.LikeText>
+              </Styled.LikeButton>
+              {isSeller ? (
+                <Styled.MessageButton
+                  disabled={!selectedOffer}
+                  size="large"
+                  onClick={handleClickStartMessage}>
+                  쪽지하기
+                </Styled.MessageButton>
+              ) : (
+                <Styled.MessageButton
+                  disabled={offerDisabled}
+                  size="large"
+                  onClick={() => {
+                    offerModal.openModal()
+                  }}>{`가격 제안하기(${
+                  getPostOffersQuery.data?.offerCountOfCurrentMember || 0
+                }/2)`}</Styled.MessageButton>
+              )}
+            </Styled.CardFooter>
+          </>
+        )}
       </Styled.OfferPriceCardWrapper>
       <PriceOfferModal
         isOpen={offerModal.isOpen}

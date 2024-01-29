@@ -178,24 +178,14 @@ const LikeButton = styled.button`
 
   width: 96px;
   height: 64px;
-  border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
+  ${({ theme }) =>
+    css`
+      border: solid 1px ${theme.colors.grayScale20};
+
+      background-color: ${theme.colors.white};
+    `};
 
   cursor: pointer;
-
-  &:disabled {
-    ${({ theme }) =>
-      css`
-        background-color: ${theme.colors.grayScale20};
-
-        color: ${theme.colors.white};
-
-        svg {
-          color: ${theme.colors.white};
-        }
-      `};
-
-    cursor: default;
-  }
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {

@@ -93,12 +93,17 @@ const BlankCard = styled.div`
   height: 120px;
   padding: 20px 0;
 `
-const Offer = styled(Radio.Label)<{ isSelected: boolean }>`
+const Offer = styled(Radio.Label)<{ isSeller: boolean; isSelected: boolean }>`
   display: flex;
   align-items: center;
 
   padding: 20px;
-  border-radius: ${({ theme }): string => theme.radius.round6};
+  ${({ theme, isSeller }) =>
+    css`
+      border-radius: ${theme.radius.round6};
+
+      cursor: ${isSeller ? 'cursor' : 'default'};
+    `};
 
   ${({ theme, isSelected }) => css`
     border: solid 1px
@@ -125,7 +130,7 @@ const OfferContent = styled.div`
 `
 
 const CardBody = styled.div`
-  height: 564px;
+  max-height: 564px;
   padding: 20px 16px;
 
   ${({ theme }): string => `
@@ -170,7 +175,7 @@ const MessageButton = styled(Button)`
     }
   `}
 `
-const LikeButton = styled.div`
+const LikeButton = styled.button`
   display: flex;
   gap: 4px;
   align-items: center;
@@ -178,7 +183,12 @@ const LikeButton = styled.div`
 
   width: 96px;
   height: 64px;
-  border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
+  ${({ theme }) =>
+    css`
+      border: solid 1px ${theme.colors.grayScale20};
+
+      background-color: ${theme.colors.white};
+    `};
 
   cursor: pointer;
 
@@ -196,6 +206,12 @@ const LikeButton = styled.div`
   `}
 `
 
+const LikeText = styled.span`
+  ${({ theme }) => css`
+    ${theme.fonts.body01B}
+  `}
+`
+
 export const Styled = {
   OfferPriceCardWrapper,
   OfferListBox,
@@ -209,5 +225,6 @@ export const Styled = {
   CardBody,
   CardFooter,
   MessageButton,
-  LikeButton
+  LikeButton,
+  LikeText
 }

@@ -21,7 +21,7 @@ import {
   useCreateMessageRoomMutation
 } from '@apis'
 import { SORT_OPTIONS } from '@constants'
-import { useModal } from '@hooks'
+import { useAuth, useModal } from '@hooks'
 import type { SortOption, SortOptionCodes } from '@types'
 
 const PriceOfferCard = ({
@@ -39,6 +39,7 @@ const PriceOfferCard = ({
 
   const router = useRouter()
   const offerModal = useModal()
+  const { isLogin } = useAuth()
 
   const getPostOffersQuery = useGetPostOffersQuery({
     postId,
@@ -48,6 +49,10 @@ const PriceOfferCard = ({
   const createMessageRoomMutation = useCreateMessageRoomMutation()
   const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const createOfferMutation = useCreateOfferMutation()
+
+  const isOfferDisabled =
+    getPostOffersQuery.data?.offerCountOfCurrentMember ===
+    getPostOffersQuery.data?.maximumOfferCount
 
   useEffect(() => {
     setLikePost({
@@ -80,6 +85,10 @@ const PriceOfferCard = ({
   }
 
   const handleChangeOffer = (e: ChangeEvent<HTMLFormElement>) => {
+    if (!isSeller) {
+      return
+    }
+
     const offerId = Number(e.target.value)
 
     setSelectedOffer(offerId)
@@ -160,12 +169,17 @@ const PriceOfferCard = ({
                   const isSelected = selectedOffer === id
 
                   return (
-                    <Styled.Offer key={id} isSelected={isSelected}>
-                      <Radio.Input
-                        checked={isSelected}
-                        formName="offer"
-                        value={String(id)}
-                      />
+                    <Styled.Offer
+                      key={id}
+                      isSelected={isSeller && isSelected}
+                      isSeller={isSeller}>
+                      {isSeller && (
+                        <Radio.Input
+                          checked={isSelected}
+                          formName="offer"
+                          value={String(id)}
+                        />
+                      )}
                       <Styled.OfferContent>
                         <UserProfile
                           date={getTimeDiffText(date)}
@@ -193,37 +207,36 @@ const PriceOfferCard = ({
             </Text>
           </Styled.BlankCard>
         )}
-        <Divider />
-        <Styled.CardFooter>
-          <Styled.LikeButton role="button" onClick={handleClickLike}>
-            {likePost.status ? (
-              <Icon color="brandPrimary" type="heartFill" />
-            ) : (
-              <Icon color="grayScale90" type="heart" />
-            )}
-            <Text styleType="body01B">{likePost.count}</Text>
-          </Styled.LikeButton>
-          {isSeller ? (
-            <Styled.MessageButton
-              disabled={!selectedOffer}
-              size="large"
-              onClick={handleClickStartMessage}>
-              쪽지하기
-            </Styled.MessageButton>
-          ) : (
-            <Styled.MessageButton
-              disabled={
-                getPostOffersQuery.data?.offerCountOfCurrentMember ===
-                getPostOffersQuery.data?.maximumOfferCount
-              }
-              size="large"
-              onClick={() => {
-                offerModal.openModal()
-              }}>{`가격 제안하기(${
-              getPostOffersQuery.data?.offerCountOfCurrentMember || 0
-            }/2)`}</Styled.MessageButton>
-          )}
-        </Styled.CardFooter>
+        {isLogin && (
+          <>
+            <Divider />
+            <Styled.CardFooter>
+              <Styled.LikeButton onClick={handleClickLike}>
+                {likePost.status ? (
+                  <Icon color="brandPrimary" type="heartFill" />
+                ) : (
+                  <Icon color="grayScale90" type="heart" />
+                )}
+                <Styled.LikeText>{likePost.count}</Styled.LikeText>
+              </Styled.LikeButton>
+              {isSeller ? (
+                <Styled.MessageButton
+                  disabled={!selectedOffer}
+                  size="large"
+                  onClick={handleClickStartMessage}>
+                  쪽지하기
+                </Styled.MessageButton>
+              ) : (
+                <Styled.MessageButton
+                  disabled={isOfferDisabled}
+                  size="large"
+                  onClick={offerModal.openModal}>{`가격 제안하기(${
+                  getPostOffersQuery.data?.offerCountOfCurrentMember || 0
+                }/2)`}</Styled.MessageButton>
+              )}
+            </Styled.CardFooter>
+          </>
+        )}
       </Styled.OfferPriceCardWrapper>
       <PriceOfferModal
         isOpen={offerModal.isOpen}

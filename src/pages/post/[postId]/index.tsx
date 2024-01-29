@@ -210,7 +210,7 @@ const Layout = styled.div`
   width: 100%;
   max-width: 1200px;
   height: fit-content;
-  margin: 0 auto 15px;
+  margin: 0 auto 120px;
   padding-top: 20px;
 
   ${({ theme }): SerializedStyles => css`

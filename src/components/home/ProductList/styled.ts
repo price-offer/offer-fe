@@ -14,7 +14,7 @@ const ProductListWrapper = styled.div`
     margin-top: 20px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    gap: 15px 50px;
+    gap: 8px 20px;
 
     margin-top: 16px;
   }

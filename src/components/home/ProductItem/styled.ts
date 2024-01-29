@@ -5,27 +5,28 @@ import { Image, ToggleButton } from '@offer-ui/react'
 const Container = styled.div`
   flex: 1 0 22%;
 
-  max-width: 22%;
+  max-width: 25%;
 
   cursor: pointer;
 
   ${({ theme }) => theme.mediaQuery.mobile} {
     flex: 1 0 44%;
 
-    max-width: 44%;
+    max-width: 48%;
   }
 `
 
 const ProductImg = styled(Image)`
   width: 100%;
   max-width: none;
+  height: 276px;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
     height: 166px;
   }
 
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    height: 200px;
+    height: 160px;
   }
 `
 

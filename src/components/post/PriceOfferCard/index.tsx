@@ -50,7 +50,7 @@ const PriceOfferCard = ({
   const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const createOfferMutation = useCreateOfferMutation()
 
-  const offerDisabled =
+  const isOfferDisabled =
     getPostOffersQuery.data?.offerCountOfCurrentMember ===
     getPostOffersQuery.data?.maximumOfferCount
 
@@ -228,11 +228,9 @@ const PriceOfferCard = ({
                 </Styled.MessageButton>
               ) : (
                 <Styled.MessageButton
-                  disabled={offerDisabled}
+                  disabled={isOfferDisabled}
                   size="large"
-                  onClick={() => {
-                    offerModal.openModal()
-                  }}>{`가격 제안하기(${
+                  onClick={offerModal.openModal}>{`가격 제안하기(${
                   getPostOffersQuery.data?.offerCountOfCurrentMember || 0
                 }/2)`}</Styled.MessageButton>
               )}

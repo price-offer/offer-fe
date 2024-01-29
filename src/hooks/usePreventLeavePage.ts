@@ -11,26 +11,30 @@ const handleBeforeUnload = (e: BeforeUnloadEvent) => {
 export const usePreventLeavePage = (isPrevent = true) => {
   const router = useRouter()
 
-  useEffect(() => {
-    const handleBeforeChangeRoute = (url: string) => {
-      if (router.pathname !== url && !confirm(ALERT_MESSAGE.LEAVE_PAGE)) {
-        router.events.emit('routeChangeError')
+  const handleBeforePopState = () => {
+    const userConfirmed = confirm(ALERT_MESSAGE.LEAVE_PAGE)
 
-        throw `사이트 변경 취소`
-      }
+    window.history.pushState(null, '', router.asPath)
+
+    if (userConfirmed) {
+      router.beforePopState(() => true)
+      router.back()
     }
 
+    return false
+  }
+
+  useEffect(() => {
     if (!isPrevent) {
       return
     }
 
     window.addEventListener('beforeunload', handleBeforeUnload)
-    router.events.on('routeChangeStart', handleBeforeChangeRoute)
+    router.beforePopState(handleBeforePopState)
 
     // eslint-disable-next-line consistent-return
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
-      router.events.off('routeChangeStart', handleBeforeChangeRoute)
     }
   }, [isPrevent])
 }

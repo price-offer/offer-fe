@@ -170,7 +170,7 @@ const MessageButton = styled(Button)`
     }
   `}
 `
-const LikeButton = styled.div`
+const LikeButton = styled.button`
   display: flex;
   gap: 4px;
   align-items: center;
@@ -181,6 +181,21 @@ const LikeButton = styled.div`
   border: ${({ theme }): string => `solid 1px ${theme.colors.grayScale20}`};
 
   cursor: pointer;
+
+  &:disabled {
+    ${({ theme }) =>
+      css`
+        background-color: ${theme.colors.grayScale20};
+
+        color: ${theme.colors.white};
+
+        svg {
+          color: ${theme.colors.white};
+        }
+      `};
+
+    cursor: default;
+  }
 
   ${({ theme }): string => `
     ${theme.mediaQuery.tablet} {
@@ -193,6 +208,12 @@ const LikeButton = styled.div`
       height: 48px;
       border-radius: ${theme.radius.round100};
     }
+  `}
+`
+
+const LikeText = styled.span`
+  ${({ theme }) => css`
+    ${theme.fonts.body01B}
   `}
 `
 
@@ -209,5 +230,6 @@ export const Styled = {
   CardBody,
   CardFooter,
   MessageButton,
-  LikeButton
+  LikeButton,
+  LikeText
 }

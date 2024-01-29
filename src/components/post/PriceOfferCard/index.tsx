@@ -21,7 +21,7 @@ import {
   useCreateMessageRoomMutation
 } from '@apis'
 import { SORT_OPTIONS } from '@constants'
-import { useModal } from '@hooks'
+import { useAuth, useModal } from '@hooks'
 import type { SortOption, SortOptionCodes } from '@types'
 
 const PriceOfferCard = ({
@@ -39,6 +39,7 @@ const PriceOfferCard = ({
 
   const router = useRouter()
   const offerModal = useModal()
+  const { isLogin } = useAuth()
 
   const getPostOffersQuery = useGetPostOffersQuery({
     postId,
@@ -48,6 +49,10 @@ const PriceOfferCard = ({
   const createMessageRoomMutation = useCreateMessageRoomMutation()
   const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const createOfferMutation = useCreateOfferMutation()
+
+  const offerDisabled =
+    getPostOffersQuery.data?.offerCountOfCurrentMember ===
+      getPostOffersQuery.data?.maximumOfferCount || !isLogin
 
   useEffect(() => {
     setLikePost({
@@ -195,13 +200,13 @@ const PriceOfferCard = ({
         )}
         <Divider />
         <Styled.CardFooter>
-          <Styled.LikeButton role="button" onClick={handleClickLike}>
+          <Styled.LikeButton disabled={!isLogin} onClick={handleClickLike}>
             {likePost.status ? (
               <Icon color="brandPrimary" type="heartFill" />
             ) : (
               <Icon color="grayScale90" type="heart" />
             )}
-            <Text styleType="body01B">{likePost.count}</Text>
+            <Styled.LikeText>{likePost.count}</Styled.LikeText>
           </Styled.LikeButton>
           {isSeller ? (
             <Styled.MessageButton
@@ -212,10 +217,7 @@ const PriceOfferCard = ({
             </Styled.MessageButton>
           ) : (
             <Styled.MessageButton
-              disabled={
-                getPostOffersQuery.data?.offerCountOfCurrentMember ===
-                getPostOffersQuery.data?.maximumOfferCount
-              }
+              disabled={offerDisabled}
               size="large"
               onClick={() => {
                 offerModal.openModal()

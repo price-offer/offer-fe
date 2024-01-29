@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Button, Input } from '@offer-ui/react'
 import Link from 'next/link'
@@ -120,14 +119,6 @@ const TextLink = styled(Link)`
   text-decoration: none;
 `
 
-const KaKaoButton = styled(Button)`
-  ${({ theme }) => css`
-    background: ${theme.colors.kakao};
-
-    color: ${theme.colors.grayScale90};
-  `};
-`
-
 export const Styled = {
   HeaderWrapper,
   HeaderContent,
@@ -141,6 +132,5 @@ export const Styled = {
   HeaderProfileSection,
   HeaderNickName,
   MenuSection,
-  TextLink,
-  KaKaoButton
+  TextLink
 }

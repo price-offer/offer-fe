@@ -79,12 +79,16 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
   const getCategoriesQuery = useGetCategoriesQuery()
   const updatePostMutation = useUpdatePostMutation()
 
-  const initialPostForm: PostFormState = getPostQuery.data?.postForm || {}
   const [postForm, setPostForm] = useState<PostFormState>({})
-  const hasChanged = !isEqual(initialPostForm, postForm)
-  const canPosting = hasChanged && isCompleteForm(postForm)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+
   const { user } = useAuth()
+
+  const initialPostForm: PostFormState = getPostQuery.data?.postForm || {}
+  const hasChanged = !isEqual(initialPostForm, postForm)
+  const canPosting = hasChanged && isCompleteForm(postForm) && !isLoading
+
   usePreventLeavePage(hasChanged)
 
   const InputSize = useResponsive<InputProps, 'width'>({
@@ -106,6 +110,8 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
     if (!canPosting) {
       return
     }
+
+    setIsLoading(true)
 
     const { imageInfos, price, ...post } = postForm
     const imageFiles = imageInfos
@@ -145,6 +151,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
     }
 
     router.replace(`/post/${postId}`)
+    setIsLoading(false)
   }
 
   useEffect(() => {

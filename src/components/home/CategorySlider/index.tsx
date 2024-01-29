@@ -120,11 +120,9 @@ const CategorySlider = (): ReactElement => {
                     })}`}>
                     <Styled.CategoryImgWrapper>
                       <Styled.CategoryImg
-                        key={name}
-                        alt={`category-${name}`}
-                        height={58}
-                        src={imageUrl}
-                        width={58}
+                        aria-label={code}
+                        role="img"
+                        url={imageUrl}
                       />
                     </Styled.CategoryImgWrapper>
                     <Styled.CateGoryName>{name}</Styled.CateGoryName>

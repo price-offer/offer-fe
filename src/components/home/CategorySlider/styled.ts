@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { IconButton } from '@offer-ui/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import type { CateGoryBoxWrapperProps } from './types'
 import { theme } from '@styles'
@@ -35,6 +34,10 @@ export const CateGoryWrapper = styled.div`
 `
 
 export const CategoryLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   background: transparent;
 
   color: ${({ theme }) => theme.colors.grayScale90};
@@ -139,15 +142,13 @@ export const CategoryItem = styled.button`
 `
 
 export const CategoryImgWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   width: 108px;
   height: 86px;
 
   cursor: pointer;
+
   ${({ theme }) => css`
+    padding: 10px;
     border-radius: ${theme.radius.round12};
 
     background-color: ${theme.colors.grayScale05};
@@ -155,27 +156,26 @@ export const CategoryImgWrapper = styled.div`
     ${theme.mediaQuery.tablet} {
       width: 80px;
       height: 80px;
+      padding: 8px;
     }
 
     ${theme.mediaQuery.mobile} {
       width: 60px;
       height: 60px;
+      padding: 4px;
     }
   `};
 `
 
-export const CategoryImg = styled(Image)`
-  border-radius: 12px;
+export const CategoryImg = styled.div<{ url: string }>`
+  ${({ url }) => css`
+    width: 100%;
+    height: 100%;
 
-  ${({ theme }): string => theme.mediaQuery.tablet} {
-    width: 52px;
-    height: 52px;
-  }
-  ${({ theme }): string => theme.mediaQuery.mobile} {
-    width: 40px;
-    height: 40px;
-  }
+    background: url(${url}) center/contain no-repeat;
+  `}
 `
+
 export const CateGoryName = styled.div`
   margin-top: 12px;
 

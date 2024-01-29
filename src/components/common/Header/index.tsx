@@ -8,11 +8,11 @@ import { useState } from 'react'
 import { SearchArea } from './SearchArea'
 import { SideBar } from './SideBar'
 import { Styled } from './styled'
-import { CommonModal } from '../CommonModal'
 import { Dialog } from '../Dialog'
+import { LoginModal } from '../LoginModal'
 import { toQueryString } from '@utils/format'
 import { searchKeywordAtom } from '@atoms'
-import { IMAGE, OAUTH_URL } from '@constants'
+import { IMAGE } from '@constants'
 import { useModal, useAuth } from '@hooks'
 
 const PREVENT_ACTIVE_PATHS = ['/post']
@@ -25,13 +25,13 @@ const Header = (): ReactElement => {
   const router = useRouter()
   const isActivePath = !PREVENT_ACTIVE_PATHS.includes(router.pathname)
   const { isLogin, user, handleLogout } = useAuth()
-  const { isOpen, openModal, closeModal } = useModal()
-  const [isOpenSideBar, setIsOpenSideBar] = useState(false)
+  const loginModal = useModal()
+  const sidebarModal = useModal()
   const [isOpenDialog, setIsOpenDialog] = useState(initDialog)
   const setSearchKeyword = useSetAtom(searchKeywordAtom)
 
   const handleOpenLoginModal = () => {
-    openModal()
+    loginModal.openModal()
   }
 
   const handleSubmitValue = (value?: string) => {
@@ -45,10 +45,6 @@ const Header = (): ReactElement => {
     }
   }
 
-  const handleClickLogin = () => {
-    router.replace(OAUTH_URL.KAKAO)
-  }
-
   const handleClickLogo = () => {
     setIsOpenDialog(initDialog)
     router.push('/')
@@ -56,7 +52,7 @@ const Header = (): ReactElement => {
 
   const handleClickSideBar = () => {
     setIsOpenDialog(initDialog)
-    setIsOpenSideBar(true)
+    sidebarModal.openModal()
   }
 
   return (
@@ -177,25 +173,10 @@ const Header = (): ReactElement => {
       )}
       <SideBar
         isLogin={isLogin}
-        isOpen={isOpenSideBar}
-        onClose={() => setIsOpenSideBar(false)}
+        isOpen={sidebarModal.isOpen}
+        onClose={() => sidebarModal.closeModal()}
       />
-      <CommonModal
-        buttons={[
-          <Styled.KaKaoButton
-            key="kakao-button"
-            color="kakao"
-            icon="kakao"
-            size="large"
-            onClick={handleClickLogin}>
-            카카오로 시작하기
-          </Styled.KaKaoButton>
-        ]}
-        hasLogo
-        isOpen={isOpen}
-        title={`가격을 제안해보세요\n경매식 중고거래, Offer!`}
-        onClose={closeModal}
-      />
+      <LoginModal isOpen={loginModal.isOpen} onClose={loginModal.closeModal} />
     </>
   )
 }

@@ -138,7 +138,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
       thumbnailImageUrl: thumbnailImageUrl
     }
 
-    if (type === 'update') {
+    if (type === 'edit') {
       await updatePostMutation.mutateAsync({
         postId,
         ...nextPost,

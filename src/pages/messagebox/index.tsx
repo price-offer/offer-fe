@@ -126,8 +126,8 @@ const MessageBoxPage = ({ roomId: defaultRoomId }: Props): ReactElement => {
                 <MessageBoxPlaceholder
                   image={{
                     url: IMAGE.MAIL,
-                    width: '90px',
-                    height: '90px'
+                    width: '81px',
+                    height: '67px'
                   }}
                   message={`쪽지 내역이 없어요.\n구매하고 싶은 상품에 가격을 제안해보세요.`}
                 />

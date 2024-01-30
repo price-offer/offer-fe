@@ -7,17 +7,14 @@ import { ProductList } from '../components/home/ProductList'
 import { useGetInfinitePostsQuery } from '@apis/post'
 import { CategorySlider, HomeBanner } from '@components'
 
-const DEFAULT_PER_PAGE = 8
-
 const Home: NextPage = () => {
   const router = useRouter()
 
-  const getInfinitePostQuery = useGetInfinitePostsQuery({
-    lastId: null,
-    limit: DEFAULT_PER_PAGE
+  const getInfinitePostsQuery = useGetInfinitePostsQuery({
+    lastId: null
   })
 
-  const postCount = getInfinitePostQuery.data?.totalPage || 0
+  const postCount = getInfinitePostsQuery.data?.totalPage || 0
 
   return (
     <Layout>
@@ -27,9 +24,9 @@ const Home: NextPage = () => {
         <ProductTitle>새로운 상품</ProductTitle>
         {postCount > 0 ? (
           <ProductList
-            fetchNextPage={getInfinitePostQuery.fetchNextPage}
-            hasNextPage={getInfinitePostQuery.hasNextPage}
-            postList={getInfinitePostQuery.data?.pages}
+            fetchNextPage={getInfinitePostsQuery.fetchNextPage}
+            hasNextPage={getInfinitePostsQuery.hasNextPage}
+            postList={getInfinitePostsQuery.data?.pages}
           />
         ) : (
           <Placeholder>

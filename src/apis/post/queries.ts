@@ -83,7 +83,10 @@ export const useGetPostsQuery = (searchOptions: GetPostsReq) =>
     enabled: typeof searchOptions.sellerId === 'number'
   })
 
-export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
+export const useGetInfinitePostsQuery = ({
+  limit = 8,
+  ...params
+}: GetPostsReq) =>
   useInfiniteQuery<
     GetPostsRes,
     DefaultError,
@@ -91,7 +94,7 @@ export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
   >({
     queryKey: ['getInfinitePosts', params],
     queryFn: ({ pageParam }) =>
-      getPosts({ ...params, lastId: pageParam as number }),
+      getPosts({ ...params, limit, lastId: pageParam as number }),
     initialPageParam: null,
     getNextPageParam: lastPage =>
       lastPage?.hasNext ? lastPage.posts.at(-1)?.id : undefined,

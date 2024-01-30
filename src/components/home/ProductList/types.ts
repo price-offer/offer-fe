@@ -6,7 +6,7 @@ import type {
 import type { GetPostsRes } from '@apis/post'
 
 export type ProductListProps = {
-  postData?: GetPostsRes[]
+  postList?: GetPostsRes[]
   hasNextPage?: boolean
   fetchNextPage?(
     options?: FetchNextPageOptions

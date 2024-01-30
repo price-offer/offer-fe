@@ -103,7 +103,7 @@ const Categories: NextPage = ({
           infinitePosts={{
             fetchNextPage: infinitePosts?.fetchNextPage,
             hasNextPage: infinitePosts?.hasNextPage,
-            postData: infinitePosts.data?.pages
+            postList: infinitePosts.data?.pages
           }}
           postsCount={POSTS_COUNT_MOCK}
           searchOptions={searchOptions}

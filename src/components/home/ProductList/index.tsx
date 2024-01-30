@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { Styled } from './styled'
 import type { ProductListProps } from './types'
@@ -8,14 +8,15 @@ import { ProductItem } from '../ProductItem'
 import { useUpdateLikeStatusMutation } from '@apis/like'
 
 const ProductList = ({
-  postData,
+  postList,
   hasNextPage,
   fetchNextPage
 }: ProductListProps): ReactElement => {
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(false)
-  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
   const router = useRouter()
-  const { ref: isLastPrdRef, inView } = useInView({
+
+  const updateLikeStatusMutation = useUpdateLikeStatusMutation()
+
+  const { ref: isLastPostRef, inView } = useInView({
     threshold: 1
   })
 
@@ -26,21 +27,13 @@ const ProductList = ({
   }
 
   useEffect(() => {
-    if (!shouldFetchNextPage) {
-      return
-    }
-    if (!isFirstRender) {
-      setIsFirstRender(true)
-      return
-    }
-
-    fetchNextPage && fetchNextPage()
-  }, [fetchNextPage, shouldFetchNextPage, isFirstRender])
+    fetchNextPage?.()
+  }, [fetchNextPage, shouldFetchNextPage])
 
   return (
     <>
       <Styled.ProductListWrapper>
-        {postData?.map(page =>
+        {postList?.map(page =>
           page?.posts?.map(post => (
             <ProductItem
               key={post.id}
@@ -51,7 +44,7 @@ const ProductList = ({
           ))
         )}
       </Styled.ProductListWrapper>
-      <Styled.LastFooter ref={isLastPrdRef} />
+      <Styled.LastFooter ref={isLastPostRef} />
     </>
   )
 }

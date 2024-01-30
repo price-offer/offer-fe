@@ -99,7 +99,7 @@ const ResultPage: NextPage = ({
           infinitePosts={{
             fetchNextPage: infinitePosts?.fetchNextPage,
             hasNextPage: infinitePosts?.hasNextPage,
-            postData: infinitePosts.data?.pages
+            postList: infinitePosts.data?.pages
           }}
           postsCount={POST_COUNT_MOCK}
           searchOptions={searchOptions}

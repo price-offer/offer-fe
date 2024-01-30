@@ -8,19 +8,16 @@ import { useGetInfinitePostsQuery } from '@apis/post'
 import { CategorySlider, HomeBanner } from '@components'
 
 const DEFAULT_PER_PAGE = 8
-// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-const POSTS_COUNTS_MOCK = 10
 
 const Home: NextPage = () => {
-  const {
-    data: postList,
-    fetchNextPage,
-    hasNextPage
-  } = useGetInfinitePostsQuery({
+  const router = useRouter()
+
+  const getInfinitePostQuery = useGetInfinitePostsQuery({
     lastId: null,
     limit: DEFAULT_PER_PAGE
   })
-  const router = useRouter()
+
+  const postCount = getInfinitePostQuery.data?.totalPage || 0
 
   return (
     <Layout>
@@ -28,11 +25,11 @@ const Home: NextPage = () => {
         <HomeBanner />
         <CategorySlider />
         <ProductTitle>새로운 상품</ProductTitle>
-        {POSTS_COUNTS_MOCK > 0 ? (
+        {postCount > 0 ? (
           <ProductList
-            fetchNextPage={fetchNextPage}
-            hasNextPage={hasNextPage}
-            postData={postList?.pages}
+            fetchNextPage={getInfinitePostQuery.fetchNextPage}
+            hasNextPage={getInfinitePostQuery.hasNextPage}
+            postList={getInfinitePostQuery.data?.pages}
           />
         ) : (
           <Placeholder>

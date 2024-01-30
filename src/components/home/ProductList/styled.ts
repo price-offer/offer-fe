@@ -1,20 +1,20 @@
 import styled from '@emotion/styled'
 
 const ProductListWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: start;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 30px;
 
   margin-top: 20px;
 
   ${({ theme }): string => theme.mediaQuery.tablet} {
-    gap: 18px 20px;
+    gap: 20px 15px;
 
     margin-top: 20px;
   }
   ${({ theme }): string => theme.mediaQuery.mobile} {
-    gap: 8px 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 8px;
 
     margin-top: 16px;
   }

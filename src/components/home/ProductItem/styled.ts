@@ -3,17 +3,7 @@ import styled from '@emotion/styled'
 import { Image, ToggleButton } from '@offer-ui/react'
 
 const Container = styled.div`
-  flex: 1 0 22%;
-
-  max-width: 25%;
-
   cursor: pointer;
-
-  ${({ theme }) => theme.mediaQuery.mobile} {
-    flex: 1 0 44%;
-
-    max-width: 48%;
-  }
 `
 
 const ProductImg = styled(Image)`

@@ -8,7 +8,7 @@ import { ProfileBox } from '../ProfileBox'
 import { Tabs } from '@components/common'
 import { pageTabs, tabList } from '@components/shop/pageTabs'
 import { useGetProfileQuery, useUpdateMyProfileMutation } from '@apis'
-import { useModal } from '@hooks'
+import { useAuth, useModal } from '@hooks'
 import type { TradeActivityCodes } from '@types'
 import { isNumber } from '@utils'
 
@@ -22,6 +22,7 @@ export const ShopPageLayout = ({
 }: ShopPageLayoutProps) => {
   const defaultTabIndex = tabList.findIndex(tab => tab === currentTab)
   const [currentPage, setCurrentPage] = useState<TradeActivityCodes>(currentTab)
+  const { refetch: userRefetch } = useAuth()
 
   const profile = useGetProfileQuery(memberId)
   const updateMyProfile = useUpdateMyProfileMutation()
@@ -43,7 +44,10 @@ export const ShopPageLayout = ({
       nickname: profileForm.nickname,
       profileImageUrl: profileForm.image.url
     })
+    // MEMO: 동일한 api를 다른 상태로 다루고 있어서 Header의 유저 정보 업데이트를 위해 두번 리패치해야하는 이슈가 있습니다.
+    // TODO: 추후에 Header와 동일한 유저 정보를 사용하도록 구조적인 변경이 필요합니다.
     await profile.refetch()
+    await userRefetch()
   }
 
   return (

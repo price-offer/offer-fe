@@ -25,6 +25,7 @@ export const useAuth = () => {
     isLogin,
     isLoading: getMyProfileQuery.isLoading,
     handleLogout,
-    user: getMyProfileQuery.data
+    user: getMyProfileQuery.data,
+    refetch: getMyProfileQuery.refetch
   }
 }

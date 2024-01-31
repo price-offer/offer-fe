@@ -33,14 +33,12 @@ export const EditProfileModal = ({
   onClose,
   onConfirm
 }: EditProfileModalProps): ReactElement => {
-  const validateNickname = useValidateNickname()
-
   const [profileForm, setProfileForm] = useState<EditProfileForm>(profile)
   const [nickNameValidate, setNickNameValidate] = useState(
     initialNickNameValidate
   )
+  const validateNickname = useValidateNickname()
   const createUploadImage = useCreateUploadImagesMutation()
-  const canEdit = nickNameValidate.isSuccess || profileForm.image.file
 
   const handleChangeProfileImage = async (
     image: EditProfileForm['image']
@@ -60,8 +58,10 @@ export const EditProfileModal = ({
   }
 
   const { uploaderRef, openUploader, changeImage } = useImageUploader({
-    onChange: async image => handleChangeProfileImage(image)
+    onChange: handleChangeProfileImage
   })
+
+  const canEdit = nickNameValidate.isSuccess || profileForm.image.file
 
   const handleChangeNickname: ChangeEventHandler<HTMLInputElement> = e => {
     setProfileForm({ ...profileForm, nickname: e.target.value })

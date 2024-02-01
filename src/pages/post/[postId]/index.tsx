@@ -48,6 +48,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
 
   const router = useRouter()
   const [tradeStatus, setTradeStatus] = useState<TradeStatusCodes>()
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
   const tradeStatusDialog = useModal()
   const deleteModal = useModal()
@@ -84,14 +85,14 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     <>
       <Layout>
         <Main>
-          <div onClick={imageModal.openModal}>
-            <Carousel
-              images={postImages}
-              isArrow
-              name="post-carousel"
-              selectedIndex={0}
-            />
-          </div>
+          <Carousel
+            images={postImages}
+            isArrow
+            name="post-carousel"
+            selectedIndex={0}
+            onChangeIndicator={idx => setSelectedImageIndex(idx)}
+            onClickImage={imageModal.openModal}
+          />
           <Content>
             <div>
               <ProductCondition>
@@ -179,6 +180,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
         images={postImages}
         isOpen={imageModal.isOpen}
         name="post-detail"
+        selectedIndex={selectedImageIndex}
         onClose={imageModal.closeModal}
       />
       <CommonModal

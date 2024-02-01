@@ -13,10 +13,6 @@ import { ResultHeader, PostSection } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
 import { toQueryString, removeNullish } from '@utils'
 
-const DEFAULT_PER_PAGE = 8
-// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-const POST_COUNT_MOCK = 10
-
 type ResultPageProps = {
   keyword?: string
   category?: string | null
@@ -47,11 +43,13 @@ const ResultPage: NextPage = ({
   tradeType
 }: ResultPageProps) => {
   const router = useRouter()
-  const searchKeyword = useAtomValue(searchKeywordAtom)
   const [searchOptions, setSearchOptions] = useState<SearchOptionsState>({
     sort: 'CREATED_DATE_DESC',
     priceRange: {}
   })
+
+  const searchKeyword = useAtomValue(searchKeywordAtom)
+
   const currentKeyword = searchKeyword ?? keyword
   const searchParams = removeNullish({
     category: searchOptions?.category ?? category,
@@ -62,11 +60,12 @@ const ResultPage: NextPage = ({
     searchKeyword: currentKeyword
   })
 
-  const infinitePosts = useGetInfinitePostsQuery({
+  const getInfinitePostsQuery = useGetInfinitePostsQuery({
     lastId: null,
-    limit: DEFAULT_PER_PAGE,
     ...searchParams
   })
+
+  const postCount = getInfinitePostsQuery.data?.totalPage || 0
 
   const searchByResult = ({ priceRange, ...params }: SearchOptionsState) => {
     router.push(
@@ -92,16 +91,16 @@ const ResultPage: NextPage = ({
     <Layout>
       <ResultWrapper>
         <ResultHeader
-          postsCount={POST_COUNT_MOCK}
+          postsCount={postCount}
           resultMessage={`"${currentKeyword}"의 검색결과`}
         />
         <PostSection
           infinitePosts={{
-            fetchNextPage: infinitePosts?.fetchNextPage,
-            hasNextPage: infinitePosts?.hasNextPage,
-            postData: infinitePosts.data?.pages
+            fetchNextPage: getInfinitePostsQuery?.fetchNextPage,
+            hasNextPage: getInfinitePostsQuery?.hasNextPage,
+            postList: getInfinitePostsQuery.data?.pages
           }}
-          postsCount={POST_COUNT_MOCK}
+          postsCount={postCount}
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />

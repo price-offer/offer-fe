@@ -1,3 +1,4 @@
+import type { InfiniteData, DefaultError } from '@tanstack/react-query'
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import {
   getPost,
@@ -16,6 +17,7 @@ import type {
   UpdatePostReq,
   UpdateTradeStatusReq
 } from './types'
+import type { PostSummaries } from '@types'
 
 export const useCreatePostMutation = () =>
   useMutation({
@@ -81,15 +83,25 @@ export const useGetPostsQuery = (searchOptions: GetPostsReq) =>
     enabled: typeof searchOptions.sellerId === 'number'
   })
 
-export const useGetInfinitePostsQuery = (params: GetPostsReq) =>
-  useInfiniteQuery<GetPostsRes>({
-    queryKey: ['infinitePosts', params],
-    queryFn: () => getPosts(params),
+export const useGetInfinitePostsQuery = ({
+  limit = 8,
+  ...params
+}: GetPostsReq) =>
+  useInfiniteQuery<
+    GetPostsRes,
+    DefaultError,
+    InfiniteData<PostSummaries, unknown> & { totalPage: number }
+  >({
+    queryKey: ['getInfinitePosts', params],
+    queryFn: ({ pageParam }) =>
+      getPosts({ ...params, limit, lastId: pageParam as number }),
     initialPageParam: null,
     getNextPageParam: lastPage =>
-      lastPage?.hasNext
-        ? lastPage.posts[lastPage.posts.length - 1].id
-        : undefined
+      lastPage?.hasNext ? lastPage.posts.at(-1)?.id : undefined,
+    select: data => ({
+      ...data,
+      totalPage: data.pages[0].totalCount || 0
+    })
   })
 
 export const useUpdateTradeStatusMutation = () =>

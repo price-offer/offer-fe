@@ -57,6 +57,7 @@ export type PostSummary = {
   hasReview: boolean
 }
 export type PostSummaries = {
+  totalCount: number
   posts: PostSummary[]
   hasNext: boolean
 }

@@ -11,10 +11,6 @@ import { PostSection, ResultHeader } from '@components'
 import type { SortOptionCodes, TradeTypeCodes } from '@types'
 import { find, removeNullish, toQueryString } from '@utils'
 
-const DEFAULT_PER_PAGE = 8
-// TODO: 포스트 전체 갯수 내려달라고 요청해놓았습니다
-const POSTS_COUNT_MOCK = 10
-
 type CategoriesProps = {
   category?: string
   sort?: SortOptionCodes
@@ -62,11 +58,12 @@ const Categories: NextPage = ({
     getCategoriesQuery.data?.map(({ code, name }) => ({ code, name })) || []
   const currentCategory = find(categories, { code: searchOptions.category })
 
-  const infinitePosts = useGetInfinitePostsQuery({
+  const getInfinitePostsQuery = useGetInfinitePostsQuery({
     lastId: null,
-    limit: DEFAULT_PER_PAGE,
     ...searchParams
   })
+
+  const postCount = getInfinitePostsQuery.data?.totalPage || 0
 
   const searchByCategory = ({
     category,
@@ -96,16 +93,16 @@ const Categories: NextPage = ({
     <Layout>
       <ResultWrapper>
         <ResultHeader
-          postsCount={POSTS_COUNT_MOCK}
+          postsCount={postCount}
           resultMessage={currentCategory?.name || '전체'}
         />
         <PostSection
           infinitePosts={{
-            fetchNextPage: infinitePosts?.fetchNextPage,
-            hasNextPage: infinitePosts?.hasNextPage,
-            postData: infinitePosts.data?.pages
+            fetchNextPage: getInfinitePostsQuery?.fetchNextPage,
+            hasNextPage: getInfinitePostsQuery?.hasNextPage,
+            postList: getInfinitePostsQuery.data?.pages
           }}
-          postsCount={POSTS_COUNT_MOCK}
+          postsCount={postCount}
           searchOptions={searchOptions}
           onChangeSearchOption={handleChangeSearchOptions}
         />

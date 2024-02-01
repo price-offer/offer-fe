@@ -85,7 +85,12 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
       <Layout>
         <Main>
           <div onClick={imageModal.openModal}>
-            <Carousel images={postImages || []} isArrow name="post-carousel" />
+            <Carousel
+              images={postImages}
+              isArrow
+              name="post-carousel"
+              selectedIndex={0}
+            />
           </div>
           <Content>
             <div>

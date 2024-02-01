@@ -60,11 +60,11 @@ export const useGetPostQuery = (id: number) =>
       postImages: [
         {
           id: 0,
-          src: data.thumbnailImageUrl || ''
+          url: data.thumbnailImageUrl || ''
         },
         ...(data.imageUrls.map((url, idx) => ({
           id: idx + 1,
-          src: url
+          url
         })) || [])
       ]
     })

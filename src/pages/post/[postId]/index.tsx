@@ -81,6 +81,10 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
     return <></>
   }
 
+  const handleChangeIndicator = (idx: number) => {
+    setSelectedImageIndex(idx)
+  }
+
   return (
     <>
       <Layout>
@@ -90,7 +94,7 @@ const PostDetailPage = ({ postId }: Props): ReactElement => {
             isArrow
             name="post-carousel"
             selectedIndex={0}
-            onChangeIndicator={idx => setSelectedImageIndex(idx)}
+            onChangeIndicator={handleChangeIndicator}
             onClickImage={imageModal.openModal}
           />
           <Content>

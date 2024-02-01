@@ -5,12 +5,15 @@ import {
   Button,
   Text,
   Icon,
-  useImageUploader
+  useImageUploader,
+  Input
 } from '@offer-ui/react'
 import type { ChangeEventHandler, ReactElement } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Styled } from './styled'
 import type { EditProfileForm, EditProfileModalProps } from './types'
+import { useValidateNickname } from '@hooks/useValidateNickname'
+import { useCreateUploadImagesMutation } from '@apis'
 
 const NICK_NAME_MAX_LENGTH = 20
 
@@ -19,29 +22,57 @@ const initialProfileForm = {
   nickname: ''
 }
 
+const initialNickNameValidate = {
+  isSuccess: false,
+  message: ''
+}
+
 export const EditProfileModal = ({
   isOpen,
-  validate,
-  onValidateNickname,
+  profile,
   onClose,
-  onConfirm,
-  onChangeImage
+  onConfirm
 }: EditProfileModalProps): ReactElement => {
-  const [profileForm, setProfileForm] =
-    useState<EditProfileForm>(initialProfileForm)
-  const { uploaderRef, openUploader, changeImage } = useImageUploader({
-    onChange: async image => {
-      const uploadedImage = await onChangeImage(image)
-      setProfileForm({ ...profileForm, image: uploadedImage })
+  const [profileForm, setProfileForm] = useState<EditProfileForm>(profile)
+  const [nickNameValidate, setNickNameValidate] = useState(
+    initialNickNameValidate
+  )
+  const validateNickname = useValidateNickname()
+  const createUploadImage = useCreateUploadImagesMutation()
+
+  const handleChangeProfileImage = async (
+    image: EditProfileForm['image']
+  ): Promise<void> => {
+    if (!image.file) {
+      return
     }
+
+    const imageFormData = new FormData()
+    imageFormData.append('files', image.file)
+    const { imageUrls } = await createUploadImage.mutateAsync(imageFormData)
+
+    setProfileForm(prev => ({
+      ...prev,
+      image: { id: image.id, file: image.file, url: imageUrls[0] }
+    }))
+  }
+
+  const { uploaderRef, openUploader, changeImage } = useImageUploader({
+    onChange: handleChangeProfileImage
   })
+
+  const canEdit = nickNameValidate.isSuccess || profileForm.image.file
 
   const handleChangeNickname: ChangeEventHandler<HTMLInputElement> = e => {
     setProfileForm({ ...profileForm, nickname: e.target.value })
   }
-  const handleClickDuplicateButton = () => {
-    onValidateNickname(profileForm.nickname.trim())
+
+  const handleClickDuplicateButton = async () => {
+    const validate = await validateNickname(profileForm.nickname.trim())
+
+    setNickNameValidate(validate)
   }
+
   const handleConfirm = () => {
     onConfirm(profileForm)
   }
@@ -49,7 +80,12 @@ export const EditProfileModal = ({
   const handleClose = () => {
     onClose?.()
     setProfileForm(initialProfileForm)
+    setNickNameValidate(initialNickNameValidate)
   }
+
+  useEffect(() => {
+    setProfileForm(profile)
+  }, [profile])
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
@@ -83,7 +119,7 @@ export const EditProfileModal = ({
           <Text color="grayScale70" styleType="body01M" tag="p">
             닉네임
           </Text>
-          <input
+          <Input
             maxLength={NICK_NAME_MAX_LENGTH}
             placeholder="닉네임을 입력해 주세요."
             value={profileForm.nickname}
@@ -92,11 +128,11 @@ export const EditProfileModal = ({
           <Text color="grayScale50" styleType="caption01M" tag="p">
             {profileForm.nickname.length}/{NICK_NAME_MAX_LENGTH}
           </Text>
-          {!!validate.message && (
+          {!!nickNameValidate.message && (
             <Text
-              color={validate.isSuccess ? 'actSuccess' : 'actError'}
+              color={nickNameValidate.isSuccess ? 'actSuccess' : 'actError'}
               styleType="caption01M">
-              {validate.message}
+              {nickNameValidate.message}
             </Text>
           )}
           <Styled.DuplicateButton
@@ -108,10 +144,7 @@ export const EditProfileModal = ({
         </Styled.EditNickName>
       </Styled.Body>
       <div>
-        <Button
-          disabled={!validate.isSuccess}
-          size="large"
-          onClick={handleConfirm}>
+        <Button disabled={!canEdit} size="large" onClick={handleConfirm}>
           저장
         </Button>
       </div>

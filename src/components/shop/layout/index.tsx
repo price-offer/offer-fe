@@ -7,20 +7,10 @@ import type { EditProfileForm } from '../EditProfileModal/types'
 import { ProfileBox } from '../ProfileBox'
 import { Tabs } from '@components/common'
 import { pageTabs, tabList } from '@components/shop/pageTabs'
-import { useValidateNickname } from '@hooks/useValidateNickname'
-import {
-  useCreateUploadImagesMutation,
-  useGetProfileQuery,
-  useUpdateMyProfileMutation
-} from '@apis'
-import { useModal } from '@hooks'
+import { useGetProfileQuery, useUpdateMyProfileMutation } from '@apis'
+import { useAuth, useModal } from '@hooks'
 import type { TradeActivityCodes } from '@types'
 import { isNumber } from '@utils'
-
-const initialEditProfileValidate = {
-  isSuccess: false,
-  message: ''
-}
 
 type ShopPageLayoutProps = {
   memberId: number | null
@@ -32,53 +22,32 @@ export const ShopPageLayout = ({
 }: ShopPageLayoutProps) => {
   const defaultTabIndex = tabList.findIndex(tab => tab === currentTab)
   const [currentPage, setCurrentPage] = useState<TradeActivityCodes>(currentTab)
-  const [editProfileValidate, setEditProfileValidate] = useState(
-    initialEditProfileValidate
-  )
+  const { refetch: userRefetch } = useAuth()
 
   const profile = useGetProfileQuery(memberId)
-  const createUploadImage = useCreateUploadImagesMutation()
   const updateMyProfile = useUpdateMyProfileMutation()
 
   const isLogin = !isNumber(memberId)
   const profileModal = useModal()
   const router = useRouter()
-  const validateNickname = useValidateNickname()
 
   const handleChangePage = (code: TradeActivityCodes) => (): void => {
     router.push(`${router.pathname}?tab=${code}`)
     setCurrentPage(code)
   }
 
-  const handleValidateNickname = async (nickname: string) => {
-    const validate = await validateNickname(nickname)
-    setEditProfileValidate(validate)
-  }
-  const handleChangeProfileImage = async (image: EditProfileForm['image']) => {
-    if (!image.file) {
-      return image
-    }
-
-    const imageFormData = new FormData()
-    imageFormData.append('files', image.file)
-    const { imageUrls } = await createUploadImage.mutateAsync(imageFormData)
-
-    return { id: image.id, file: image.file, url: imageUrls[0] }
-  }
-
-  const handleCloseEditProfileModal = () => {
-    setEditProfileValidate(initialEditProfileValidate)
-    profileModal.closeModal()
-  }
   const handleConfirmEditProfile = async (profileForm: EditProfileForm) => {
+    profileModal.closeModal()
+
     await updateMyProfile.mutateAsync({
       memberId: profile.data.id,
       nickname: profileForm.nickname,
       profileImageUrl: profileForm.image.url
     })
+    // MEMO: 동일한 api를 다른 상태로 다루고 있어서 Header의 유저 정보 업데이트를 위해 두번 리패치해야하는 이슈가 있습니다.
+    // TODO: 추후에 Header와 동일한 유저 정보를 사용하도록 구조적인 변경이 필요합니다.
     await profile.refetch()
-
-    handleCloseEditProfileModal()
+    await userRefetch()
   }
 
   return (
@@ -123,11 +92,15 @@ export const ShopPageLayout = ({
       <Divider />
       <EditProfileModal
         isOpen={profileModal.isOpen}
-        validate={editProfileValidate}
-        onChangeImage={handleChangeProfileImage}
-        onClose={handleCloseEditProfileModal}
+        profile={{
+          nickname: profile.data.nickname,
+          image: {
+            id: String(profile.data.id),
+            url: profile.data.profileImageUrl
+          }
+        }}
+        onClose={profileModal.closeModal}
         onConfirm={handleConfirmEditProfile}
-        onValidateNickname={handleValidateNickname}
       />
     </div>
   )

@@ -189,7 +189,7 @@ const PostPage = ({ type, editPostId }: Props): ReactElement => {
               onChange={e => handleUpdatePostForm('title', e.target.value)}
             />
             <StyledTitleLength styleType="subtitle01M">
-              {postForm.title?.length}/40
+              {postForm.title?.length || 0}/40
             </StyledTitleLength>
           </StyledTitleWrapper>
           <div>

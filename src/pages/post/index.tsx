@@ -383,6 +383,10 @@ const StyledPostPage = styled.div`
   margin: 0 auto;
   padding-top: 42px;
 
+  input:focus-visible {
+    outline: none;
+  }
+
   ${({ theme }) => css`
     ${theme.mediaQuery.tablet} {
       margin: 0;
